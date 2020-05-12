@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="fbuch" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="fbuch" phpdoc-subpackage="" version="1.1">
+    <object class="fbuchFahrt" table="fbuch_fahrten" extends="xPDOSimpleObject">
+        <field key="date" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="date_end" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="boot_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="date_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="km" dbtype="decimal" precision="8,1" phptype="float" null="false" default="0" index="index" />
+        <field key="kmstand_start" dbtype="decimal" precision="8,1" phptype="float" null="false" default="0" index="index" />
+        <field key="kmstand_end" dbtype="decimal" precision="8,1" phptype="float" null="false" default="0" index="index" />
+        <field key="purpose" dbtype="varchar" phptype="string" precision="50" null="false" default="" />
+        <field key="wfahrt" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="note" dbtype="text" phptype="string" null="false" default="" />
+        <field key="direction" dbtype="varchar" phptype="string" precision="20" null="false" default="" />
+        <field key="start_time" dbtype="varchar" phptype="string" precision="20" null="false" default="" />
+        <field key="end_time" dbtype="varchar" phptype="string" precision="20" null="false" default="" />
+        <field key="fahrtid_old" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="bootid_old" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="lock_password" dbtype="varchar" phptype="string" precision="50" null="false" default="" />
+        <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="editedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="editedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="deleted" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="deletedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="deletedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <aggregate alias="Boot" class="fbuchBoot" local="boot_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Date" class="fbuchDate" local="date_id" foreign="id" cardinality="one" owner="foreign" />
+        <composite alias="Names" class="fbuchFahrtNames" local="id" foreign="fahrt_id" cardinality="many" owner="local" />
+    </object>
+    <object class="fbuchDate" table="fbuch_dates" extends="xPDOSimpleObject">
+        <field key="date" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="date_end" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="title" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
+        <field key="type" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
+        <field key="description" dbtype="text" phptype="string" null="false" default="" />
+        <field key="max_reservations" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="autoduplicate" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="autoduplicated" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="autoduplicate_invited" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="autoduplicate_names" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="riot_room_id" dbtype="text" phptype="string" null="false" default="" />
+        <field key="last_matrix_start_token" dbtype="text" phptype="string" null="false" default="" />
+        <field key="start_time" dbtype="varchar" phptype="string" precision="20" null="false" default="" />
+        <field key="end_time" dbtype="varchar" phptype="string" precision="20" null="false" default="" />
+        <field key="instructor_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="mailinglist_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="lock_password" dbtype="varchar" phptype="string" precision="50" null="false" default="" />
+        <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="editedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="editedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="deleted" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="deletedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="deletedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <aggregate alias="Name" class="fbuchNames" local="instructor_id" foreign="id" cardinality="one" owner="foreign" />
+        <composite alias="Names" class="fbuchDateNames" local="id" foreign="date_id" cardinality="many" owner="local" />
+        <composite alias="Invited" class="fbuchDateInvited" local="id" foreign="date_id" cardinality="many" owner="local" />
+        <composite alias="Comments" class="fbuchDateComment" local="id" foreign="date_id" cardinality="many" owner="local" />
+        <composite alias="Mailinglist" class="fbuchMailinglist" local="mailinglist_id" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+    <object class="fbuchDateNames" table="fbuch_date_names" extends="xPDOSimpleObject">
+        <field key="name_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="date_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="guestname" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
+        <field key="guestemail" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
+        <field key="registeredby" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <aggregate alias="Date" class="fbuchDate" local="date_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Name" class="fbuchNames" local="name_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Registeredby" class="fbuchNames" local="registeredby" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Fahrtname" class="fbuchFahrtNames" local="id" foreign="datenames_id" cardinality="one" owner="local" />
+    </object>
+    <object class="fbuchDateInvited" table="fbuch_date_invited" extends="xPDOSimpleObject">
+        <field key="name_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="date_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="canceled" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
+        <field key="invited" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
+        <field key="riot_state" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
+        <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <aggregate alias="Date" class="fbuchDate" local="date_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Name" class="fbuchNames" local="name_id" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+    <object class="fbuchDateComment" table="fbuch_date_comments" extends="xPDOSimpleObject">
+        <field key="name_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="date_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="comment" dbtype="text" phptype="string" null="false" default="" />
+        <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="riot_event_id" dbtype="text" phptype="string" null="false" default="" />
+        <field key="riot_user_id" dbtype="text" phptype="string" null="false" default="" />
+        <aggregate alias="Date" class="fbuchDate" local="date_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Name" class="fbuchNames" local="name_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="User" class="modUser" local="createdby" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+    <object class="fbuchNames" table="fbuch_names" extends="xPDOSimpleObject">
+        <field key="birth_date" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="firstname" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <field key="lastname" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <field key="gender" dbtype="varchar" phptype="string" precision="1" null="false" default="" />
+        <field key="guest" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="namid_old" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="phone" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <field key="email" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <field key="member_status" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <field key="mv_member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="modx_user_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="riot_user_id" dbtype="text" phptype="string" null="false" default="" />
+        <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="editedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="editedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="deleted" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="deletedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="deletedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <composite alias="Fahrten" class="fbuchFahrtNames" local="id" foreign="name_id" cardinality="many" owner="local" />
+        <composite alias="Mailinglists" class="fbuchMailinglistNames" local="id" foreign="name_id" cardinality="many" owner="local" />
+    </object>
+    <object class="fbuchFahrtNames" table="fbuch_fahrt_names" extends="xPDOSimpleObject">
+        <field key="name_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="fahrt_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="guestname" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
+        <field key="guestemail" dbtype="varchar" phptype="string" precision="255" null="false" default="" />        
+        <field key="pos" dbtype="int" precision="3" phptype="integer" null="false" default="0" index="index" />
+        <field key="obmann" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="cox" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="nameid_old" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="fahrtid_old" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="datenames_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <aggregate alias="Fahrt" class="fbuchFahrt" local="fahrt_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Name" class="fbuchNames" local="name_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Datename" class="fbuchDateNames" local="datename_id" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+    <object class="fbuchBoot" table="fbuch_boote" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <field key="gattung" dbtype="varchar" phptype="string" precision="10" null="false" default="" />
+        <field key="seats" dbtype="tinyint" precision="2" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="bootid_old" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="gewichtsklasse" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
+        <field key="nutzergruppe" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="nutzernamen" dbtype="text" phptype="string" null="false" default="" />
+        <field key="riggerung" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <field key="gesperrt" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
+        <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="editedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="editedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="deleted" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="deletedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="deletedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <aggregate alias="Fahrten" class="fbuchFahrt" local="id" foreign="boot_id" cardinality="many" owner="local" />
+        <aggregate alias="Gattung" class="fbuchBootsGattung" local="gattung" foreign="link_key" cardinality="one" owner="local" />
+        <aggregate alias="Nutzergruppe" class="fbuchBootsNutzergruppe" local="nutzergruppe" foreign="id" cardinality="one" owner="local" />
+    </object>
+    <object class="fbuchBootAllowedNames" table="fbuch_boot_allowed_names" extends="xPDOSimpleObject">
+        <field key="name_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="boot_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="note" dbtype="text" phptype="string" null="false" default="" />
+        <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="allowedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="allowedon" dbtype="datetime" phptype="datetime" null="true" />
+        <aggregate alias="Boot" class="fbuchBoot" local="boot_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Name" class="fbuchNames" local="name_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="User" class="modUser" local="createdby" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Allower" class="fbuchNames" local="allowedby" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+    <object class="fbuchBootComment" table="fbuch_boot_comments" extends="xPDOSimpleObject">
+        <field key="name_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="boot_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="comment" dbtype="text" phptype="string" null="false" default="" />
+        <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="done" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="doneby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="doneon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="name" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
+        <field key="doneby_name" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
+        <aggregate alias="Boot" class="fbuchBoot" local="boot_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Name" class="fbuchNames" local="name_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="User" class="modUser" local="createdby" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Finisher" class="fbuchNames" local="doneby" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+    <object class="fbuchBootSetting" table="fbuch_boot_settings" extends="xPDOSimpleObject">
+        <field key="boot_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="riggerung" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
+        <field key="names" dbtype="text" phptype="string" null="false" default="" />
+        <field key="settings" dbtype="text" phptype="string" null="false" default="" />
+        <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <aggregate alias="Boot" class="fbuchBoot" local="boot_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="User" class="modUser" local="createdby" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+    <object class="fbuchBootsGattung" table="fbuch_bootsgattungen" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <field key="link_key" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <aggregate alias="Boote" class="fbuchBoot" local="link_key" foreign="gattung" cardinality="many" owner="local" />
+    </object>
+    <object class="fbuchBootsNutzergruppe" table="fbuch_bootsnutzergruppen" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <field key="color" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
+        <field key="description" dbtype="text" phptype="string" null="false" default="" />
+        <aggregate alias="Boote" class="fbuchBoot" local="id" foreign="nutzergruppe" cardinality="many" owner="local" />
+    </object>
+    <object class="fbuchMailinglist" table="fbuch_mailinglists" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <field key="target_group" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <field key="type" dbtype="varchar" phptype="string" precision="255" null="false" default="" /> 
+        <field key="general" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />       
+        <field key="description" dbtype="text" phptype="string" null="false" default="" />
+        <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="editedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="editedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="deleted" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="deletedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="deletedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <aggregate alias="Names" class="fbuchMailinglistNames" local="id" foreign="list_id" cardinality="many" owner="local" />
+        <composite alias="Dates" class="fbuchDate" local="id" foreign="mailinglist_id" cardinality="many" owner="local" />        
+    </object>
+    <object class="fbuchMailinglistNames" table="fbuch_mailinglist_names" extends="xPDOSimpleObject">
+        <field key="name_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="list_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="unsubscribed" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
+        <field key="subscribed" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
+        <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="unsubscribedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="subscribedon" dbtype="datetime" phptype="datetime" null="true" />        
+        <aggregate alias="Mailinglist" class="fbuchMailinglist" local="list_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Name" class="fbuchNames" local="name_id" foreign="id" cardinality="one" owner="foreign" />
+    </object> 
+      
+</model>

@@ -1,0 +1,52 @@
+<div class="col-sm-6">
+<div class="panel panel-default">
+  <div class="panel-heading">
+  <h2>[[+title]]</h2><br>
+  <strong>[[+date:strtotime:date=`%a, %d.%m.%Y`]] [[+start_time]]</strong>
+  </div>
+  <div class="panel-body">
+
+<form method="post">
+
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchNames`
+&where=`{"id":"[[+name_id]]"}`
+&tpl=`fbuchPersonenAnmeldenDatesRowForm`
+]]
+
+<hr>
+
+</form>  
+</div>
+</div>
+</div>
+
+<div class="col-sm-6">
+<div class="panel panel-default">
+  <div class="panel-heading">
+  <h2>Deine Anmeldungen</h2><br>
+  </div>
+  <div class="panel-body">
+
+<form method="post">
+
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchDateNames`
+&joins=`[{"alias":"Name"}]`
+&where=`{"date_id":"[[+id]]","registeredby":"[[+name_id]]"}`
+&tpl=`fbuchPersonenAnmeldenDateNamesRow`
+]]
+<br>
+<button type="submit" name="process" value="add_persons" class="btn btn-primary ">Markierte entfernen</button>
+</form>  
+</div>
+</div>
+</div>
+
+
+
+
+
+

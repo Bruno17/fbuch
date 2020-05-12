@@ -1,0 +1,59 @@
+<div class="row fahrten " data-type="dragdrop" >
+<div class="col-sm-4" id="groups-container" >
+<h3>Zusagen</h3>
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchDate`
+&where=`{"id":"[[!#request.fahrt_id:isnot=``:then=`[[!#request.fahrt_id]]`:else=`9999999`]]"}`
+&tpl=`fbuchFahrtenDragdropDatesRow`
+&debug=`0`
+&limit=`100`
+]]
+
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchDateInvited`
+&joins=`[{"alias":"Name"}]`
+&where=`{"date_id":"[[!#request.fahrt_id:isnot=``:then=`[[!#request.fahrt_id]]`:else=`9999999`]]","canceled":"1"}`
+&tpl=`fbuchAnmeldenDateNamesRow`
+&wrapperTpl=`@CODE:
+<h3>Absagen</h3>
+<div class="panel panel-primary">
+<ul style="min-height:50px;" data-id="[[+id]]" class="list-group ">
+[[+output]]
+  </ul>
+</div>
+`
+&debug=`0`
+&placeholdersKeyField=``
+]]
+
+
+</div>
+<div class="col-sm-4" id="invited-container" >
+<h3>Einladungen</h3>
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchDate`
+&where=`{"id":"[[!#request.fahrt_id:isnot=``:then=`[[!#request.fahrt_id]]`:else=`9999999`]]"}`
+&tpl=`fbuchRuderterminInvitedRow`
+&debug=`0`
+&limit=`100`
+]]
+
+</div>
+<div class="col-sm-4" id="comments-container" >
+<h3>Kommentare</h3>
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchDate`
+&where=`{"id":"[[!#request.fahrt_id:isnot=``:then=`[[!#request.fahrt_id]]`:else=`9999999`]]"}`
+&tpl=`fbuchRuderterminCommentsRow`
+&debug=`0`
+&limit=`100`
+]]
+
+</div>
+
+</div>
+</div>

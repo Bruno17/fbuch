@@ -1,0 +1,65 @@
+<div id="date-[[+id]]" class="panel panel-primary">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+<div class="btn-group pull-right">
+[[!hasPermission:is=`yes`:then=`
+<button type="button" data-process="riotinvite_invites" data-id="[[+id]]" class="btn btn-default mail_invites" aria-label="In Riot-Raum einladen">
+<span style="font-weight:bold;">R</span>
+</button>  
+<button type="button" data-process="mail_invites" data-id="[[+id]]" class="btn btn-default mail_invites" aria-label="Einladungen mailen">
+<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+</button> 
+`:else=``? &permission=`fbuch_create_termin`]]
+</div>
+  <strong>[[+title]]</strong><br>
+  [[+date:strtotime:date=`%a,%d.%m.%Y`]] [[+start_time]]
+  </div>
+  <div class="panel-body">
+  
+  </div>
+<ul style="min-height:50px;" data-id="[[+id]]" class="list-group dates-drag-drop">
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchDateInvited`
+&joins=`[{"alias":"Name"},
+{"alias":"Zusagen","classname":"fbuchDateNames","on":"Zusagen.date_id=fbuchDateInvited.date_id AND Zusagen.name_id=fbuchDateInvited.name_id"}]`
+&where=`{"date_id":"[[+id]]"}`
+&tpl=`fbuchRuderterminInvitedNamesRow`
+&debug=`0`
+&placeholdersKeyField=``
+]]
+  </ul>
+
+<ul class="list-group">
+</ul>
+<li class="list-group-item ">
+<button type="button" class="btn btn-default">
+<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+</button> = Einladung(en) mailen
+</li>
+<li class="list-group-item ">
+<button type="button" class="btn btn-default invite">
+<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+</button> = Einladung per Mail verschickt
+</li>
+<li class="list-group-item ">
+<button type="button"class="btn btn-default mail_invite" >
+<span style="font-weight:bold;">R</span></span>
+</button> = In Riot-Chat-Raum einladen
+</li>
+<li class="list-group-item ">
+<button type="button"class="btn btn-default mail_invite invite" >
+<span style="font-weight:bold;">R</span></span>
+</button> = In Riot-Chat-Raum eingeladen
+</li>
+<li class="list-group-item ">
+<button type="button"class="btn btn-default mail_invite join" >
+<span style="font-weight:bold;">R</span></span>
+</button> = In Riot-Chat-Raum eingetreten
+</li>
+<li class="list-group-item ">
+<button type="button"class="btn btn-default mail_invite leave" >
+<span style="font-weight:bold;">R</span></span>
+</button> = Hat Riot-Chat-Raum verlassen
+</li>
+</div>

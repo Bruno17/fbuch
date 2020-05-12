@@ -1,0 +1,23 @@
+<li data-fahrtnames_id="[[+id]]" data-datenames_id="[[+datenames_id]]" class="list-group-item">
+<span class="glyphicon glyphicon-menu-hamburger drag-handle" aria-hidden="true"></span>
+<div class="btn-group pull-right"> 
+<button type="button" data-id="[[+id]]" class="btn btn-default set_obmann" aria-label="Obmann setzen">
+<span class="glyphicon glyphicon-king" aria-hidden="true"></span>
+</button> 
+<button type="button" data-id="[[+id]]" class="btn btn-default set_cox" aria-label="Steuermann setzen" style="padding: 5px;padding-left: 10px;padding-right: 8px;">
+  <img src="style/img/noun_78924_cc.svg" style="width: 17px;">  
+</button> 
+</div>
+[[+idx]] [[+Name_firstname]] [[+Name_lastname]] [[+Name_member_status:isnot=`Mitglied`:then=`([[+Name_member_status]])`:else=``]]
+[[+cox:is=`1`:then=`<img src="style/img/noun_78924_cc.svg" style="width: 17px;">`:else=`
+  [[!hasPermission:is=`yes`:then=`
+([[!mv_berechne_alter? 
+&birthdate=`[[+Name_birth_date]]`
+&when=`[[+property.date:strtotime:date=`%Y-12-31 23:59:59`]]`
+]])  
+  `:else=``?
+  &permission=`fbuch_view_birthdate`
+  ]]
+`]]
+[[+has_obmann_[[+fahrt_id]]:is=`1`:then=`[[+obmann:is=`1`:then=`<span class="glyphicon glyphicon-king"></span>`:else=``]]`:else=`[[+_first:is=`1`:then=`<span class="glyphicon glyphicon-king"></span>`:else=``]]`]]
+</li>

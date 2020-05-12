@@ -1,0 +1,15 @@
+[[+gesperrt:isnot=`0`:then=`
+<div class="alert alert-danger" role="alert">Boot ist für die Benutzung gesperrt!</div>
+`:else=`
+<div class="alert alert-info" role="alert"> [[+Nutzergruppe_description]] [[+gewichtsklasse]]
+[[!migxLoopCollection? 
+&packageName=`fbuch`
+&classname=`fbuchBootAllowedNames`
+&joins=`[{"alias":"Name"}]`
+&where=`{"boot_id":"[[+id]]"}`
+&tpl=`@CODE:[[+Name_firstname]] [[+Name_lastname]]`
+&outputSeparator=`, `
+&wrapperTpl=`@CODE:<br>([[+output]])`
+]]
+</div>
+`]]

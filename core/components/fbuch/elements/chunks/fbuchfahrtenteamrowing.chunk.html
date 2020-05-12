@@ -1,0 +1,206 @@
+        [[!fbuchSetGridPlaceholders? &defaultDir=`ASC` &mode=`nextdate` &grid_id=`[[+grid_id]]`]]
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`fbuchDate`
+            &tpl=`@CODE:[[+date]]`
+            &limit=`1`
+            &totalVar=`dates_total`
+            &where=`[{"deleted":"0",[[+where]]},[[+nextdate_where]] ]`
+            &sortConfig=`[{"sortby":"date","sortdir":"[[+nextdate_dir]]"}]`
+            &toPlaceholder=`nextDate`
+            &debug=`0`
+        ]]
+        
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`fbuchFahrt`
+            &tpl=`@CODE:[[+date]]`
+            &joins=`[{"alias":"Boot"}]`
+            &limit=`1`
+            &totalVar=`fahrten_total`
+            &where=`[{"deleted":"0","Boot.gattung":"ergometer","km:!=":"0"},[[+nextdate_where]] ]`
+            &sortConfig=`[{"sortby":"date","sortdir":"[[+nextdate_dir]]"}]`
+            &toPlaceholder=`nextFahrt`
+        ]]
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`fbuchDate`
+            &tpl=`@CODE:[[+date]]`
+            &limit=`1`
+            &where=`{"deleted":"0",[[+where]]}`
+            &sortConfig=`[{"sortby":"date","sortdir":"DESC"}]`
+            &toPlaceholder=`lastDate`
+        ]]
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`fbuchFahrt`
+            &joins=`[{"alias":"Boot"}]`
+            &tpl=`@CODE:[[+date]]`
+            &limit=`1`
+            &where=`{"deleted":"0","Boot.gattung":"ergometer","km:!=":"0"}`
+            &sortConfig=`[{"sortby":"date","sortdir":"DESC"}]`
+            &toPlaceholder=`lastFahrt`
+        ]]
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`fbuchDate`
+            &tpl=`@CODE:[[+date]]`
+            &limit=`1`
+            &where=`{"deleted":"0",[[+where]]}`
+            &sortConfig=`[{"sortby":"date","sortdir":"ASC"}]`
+            &toPlaceholder=`firstDate`
+        ]]
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`fbuchFahrt`
+            &joins=`[{"alias":"Boot"}]`
+            &tpl=`@CODE:[[+date]]`
+            &limit=`1`
+            &where=`{"deleted":"0","Boot.gattung":"ergometer","km:!=":"0"}`
+            &sortConfig=`[{"sortby":"date","sortdir":"ASC"}]`
+            &toPlaceholder=`firstFahrt`
+        ]]
+        
+        [[!fbuchSetGridPlaceholders? 
+            &mode=`date` 
+            &nextDate=`[[+nextDate]],[[+nextFahrt]]`
+            &lastDate=`[[+lastDate]],[[+lastFahrt]]` 
+            &firstDate=`[[+firstDate]],[[+firstFahrt]]` 
+            &grid_id=`[[+grid_id]]` 
+            &limit=`[[+limit]]` 
+            &total=`[[!+dates_total]],[[!+fahrten_total]]`
+         ]]
+    
+<nav>
+  <ul class="pager">
+    <li><a id="prev_items" href="#">&larr; Älter</a></li>
+    <li><a id="current_items" href="#">Heutige Einträge</a></li>
+    <li><a id="next_items" href="#">Neuer &rarr;</a></li>
+  </ul>
+</nav>
+
+<h2>[[+[[+grid_id]]_offset:strtotime:date=`%a,%d.%m.%Y`]]</h2>
+
+<div class="row fahrten [[+[[+grid_id]]_firstlast_offset]]" data-type="dragdrop" data-offset="[[+[[+grid_id]]_offset]]">
+<div class="col-sm-4" id="groups-container" >
+<div class="panel panel-default toppanel">
+  <div class="panel-heading">
+    <h3>Teamrowingstunden</h3>
+  </div>
+  <div class="panel-body">
+[[!hasPermission:is=`yes`:then=`
+<button data-type="Rudern" data-ajax_url="[[~51? &grid_id=`Ergotermine`]]" class="create create_fahrt btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+`:else=``? &permission=`fbuch_create_termin`]]
+
+    <a class="btn btn-default" href="[[~69]]" >Zur Terminübersicht</a>
+  </div>
+</div>
+
+<div id="groups">
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchDate`
+&where=`[{"deleted":"0",[[+where]]},[[+date_where]]]`
+&tpl=`fbuchFahrtenDragdropDatesRow`
+&sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
+&debug=`0`
+&limit=`100`
+]]
+</div>
+</div>
+
+<div class="col-sm-4">
+<div class="panel panel-default toppanel">
+  <div class="panel-heading">
+    <h3>einzelne Ergofahrten (offen)</h3>
+  </div>
+  <div class="panel-body">
+    <button data-type="dragdrop" class="create create_fahrt btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></button>
+  </div>
+</div>
+
+        <div id="fahrtenoffen">
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`fbuchFahrt`
+            &joins=`[{"alias":"Boot"}]`
+            &tpl=`fbuchFahrtenDragdropRow`
+            &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
+            &limit=`99`
+            &emptyTpl=`@CODE:
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    Zur Zeit sind keine offenen Fahrten eingetragen
+  </div>
+</div>
+`
+            &where=`[
+                {"deleted":"0","Boot.gattung":"ergometer","km":"0"},
+                [
+                    {"date:<=":"[[!now:date=`%Y-%m-%d 23:59:59`]]","start_time:<=":"[[!now:date=`%H:%M`]]"},
+                    {"OR:date:<":"[[!now:date=`%Y-%m-%d 00:00:00`]]"}
+                ]
+            ]`
+            &grid_id=`[[+grid_id]]`
+            
+        ]]
+
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`fbuchFahrt`
+            &joins=`[{"alias":"Boot"}]`
+            &tpl=`fbuchFahrtenDragdropRow`
+            &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
+            &where=`[
+                {"deleted":"0","Boot.gattung":"ergometer","km":"0"},
+                [
+                    {"date:>=":"[[!now:date=`%Y-%m-%d 00:00:00`]]","start_time:>":"[[!now:date=`%H:%M`]]"},
+                    {"OR:date:>":"[[!now:date=`%Y-%m-%d 23:59:00`]]"}
+                ]
+            ]`
+            &grid_id=`[[+grid_id]]`
+            &limit=`99`
+            &debug=`0`
+            &wrapperTpl=`@CODE:<hr><h3>geplante Ergofahrten</h3>[[+output]]`
+
+        ]]
+
+
+</div>
+</div>
+
+<div class="col-sm-4">
+<div class="panel panel-default toppanel">
+  <div class="panel-heading">
+    <h3>abgeschlossene Ergofahrten</h3>
+  </div>
+  <div class="panel-body">
+
+  </div>
+</div>
+
+
+
+        <div id="fahrtenclosed">
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`fbuchFahrt`
+            &joins=`[{"alias":"Boot"}]`
+            &tpl=`fbuchClosedFahrtenDragdropRow`
+            &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
+            &where=`[{"deleted":"0","Boot.gattung":"ergometer","km:!=":"0"},[[+date_where]] ]`
+            &grid_id=`[[+grid_id]]`
+            &limit=`99`
+            &emptyTpl=`@CODE:
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    keine abgeschlossenen Fahrten am [[+[[+grid_id]]_offset:strtotime:date=`%a,%d.%m.%Y`]]
+  </div>
+</div>`            
+        ]]
+</div>
+</div>
+
+
+
+</div>

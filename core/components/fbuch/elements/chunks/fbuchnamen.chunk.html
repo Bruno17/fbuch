@@ -1,0 +1,37 @@
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`[[+classname]]`
+            &tpl=`@CODE:<div></div>`
+            &limit=`1`
+            &totalVar=`[[+grid_id]]_total`
+            &where=`{"deleted":"0","lastname:LIKE":"[[+atoz_char]]%"}`
+        ]]
+
+<ul class="nav nav-atoz">[[!getAtoZLinks? &tpl=`tplAtoZLink`]]</ul>
+
+        [[!fbuchSetGridPlaceholders?
+            &mode=`char`
+            &charfield=`lastname` 
+            &grid_id=`[[+grid_id]]` 
+            &limit=`[[+limit]]` 
+            &total=`[[!+[[+grid_id]]_total]]`
+            &currentChar=`[[+atoz_char]]`
+        ]]
+
+[[$fbuch[[+grid_id]]Buttons]]
+    <table class="fahrten table table-striped table-hover [[+[[+grid_id]]_firstlast_offset]]" data-offset="[[+[[+grid_id]]_offset]]">
+<thead>
+[[$fbuch[[+grid_id]]Head]]
+</thead>
+<tbody>
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`[[+classname]]`
+            &tpl=`fbuch[[+grid_id]]Row`
+            &sortConfig=`[{"sortby":"lastname","sortdir":"ASC"},{"sortby":"firstname","sortdir":"ASC"}]`
+            &where=`{"deleted":"0","lastname:LIKE":"[[+atoz_char]]%"}`
+            &grid_id=`[[+grid_id]]`
+        ]]
+</tbody>
+    </table>
+

@@ -1,0 +1,24 @@
+[[+_groupfirst:is=`1`:then=`
+[[+registeredby:isnot=`0`:then=`
+<li class="list-group-item">
+Anmeldungen von [[+Registeredby_firstname]] [[+Registeredby_lastname]]:
+</li>
+`:else=``]]
+`:else=``]]
+<li data-datenames_id="[[+id]]" class="list-group-item [[+Fahrt_id:isnot=``:then=`hasfahrt`:else=``]]">
+<span class="glyphicon glyphicon-menu-hamburger drag-handle" aria-hidden="true"></span>
+<div class="btn-group pull-right">
+[[+property.type:is=`Teamrowing`:then=`
+<button type="button" data-type="dragdrop" data-id="[[+id]]" class="btn btn-default close_datefahrt" aria-label="Fahrt abschliessen">
+<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+</button>
+</button> 
+`:else=``]] 
+<button type="button" data-id="[[+id]]" class="btn btn-default remove_name" aria-label="Namen entfernen">
+<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+</button> 
+</div>
+[[+createdon:strtotime:date=`%d.%m.%Y %H:%M`]]<br>
+[[+idx]] [[+guestname:isnot=``:then=`[[+guestname]]`:else=`[[+Name_firstname]] [[+Name_lastname]]`]] [[+Name_member_status:isnot=`Mitglied`:then=`([[+Name_member_status]])`:else=``]]
+
+</li>

@@ -1,0 +1,165 @@
+[[!FormIt?
+&preHooks=`fbuchGetFormValues`
+&hooks=`fbuchUpdate`
+&classname=`fbuchFahrt`
+&submitVar=`fahrt_submit`
+&successMessage=`<script>fahrten_form_success();</script>`
+]]
+
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">
+        [[!#request.object_id:is=`0`:then=`Neue Fahrt`:else=`[[!#request.process:is=`delete`:then=`Diese Fahrt löschen`:else=`Fahrt bearbeiten`]]`]]        
+        </h4>
+      </div>
+[[!+fbucherror]]
+<form id="anmelden_form" action="[[~[[*id]]? &grid_id=`[[+grid_id]]`]]" method="post" class="form">
+      <div id="fbuchModalBody" class="modal-body">
+    <input type="hidden" name="nospam:blank" value="" />
+    <input type="hidden" name="fahrt_submit" value="1" />
+    <input type="hidden" name="object_id" value="[[!+fi.object_id]]" />
+    <input type="hidden" id="name_id" name="name_id" value="[[!+fi.name_id]]" />
+    <input type="hidden" id="datenames_id" name="datenames_id" value="[[!+fi.datenames_id]]" />
+    [[!#request.process:is=`delete`:then=`
+    <input type="hidden" name="deleted" value="1" />    
+    `:else=``]]    
+    <div class="row">
+    <div class="form-group col-sm-3">
+    <label for="add_person">
+        Name:
+    </label>
+    <input autocomplete="off" class="form-control" id="add_person" name="name" value="[[!+fi.name]]" />
+    </div>
+    <div class="form-group col-sm-3">
+    <label for="boot">
+        Ergometer:
+    </label>
+    <select class="form-control" name="boot_id">
+    [[!migxLoopCollection?
+    &classname=`fbuchBoot`
+    &sortConfig=`[{"sortby":"name"}]`
+    &tpl=`@CODE:<option value="[[+id]]" [[!+fi.selected_boot_[[+id]]]]>[[+name]]</option>`
+    &where=`{"gattung":"ergometer"}`
+    ]]    
+    </select>
+    </div>
+    <div class="form-group col-sm-3">
+    <label for="date">
+        Datum:
+    </label>
+    <div class="input-group date">
+        <input name="date" id="date" type="text" class="form-control" value="[[!+fi.date]]"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>    </span>
+    </div>
+    </div>
+
+    <div class="form-group col-sm-3">
+    <label for="start_time">
+        Startzeit:
+    </label>
+    <input type="text" class="form-control" name="start_time" id="start-time" value="[[!+fi.start_time]]" /> 
+    <span class="error">[[!+fi.error.start_time]]</span>
+    
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="form-group col-sm-3">
+    <label for="km">
+        km:
+    </label>
+    <input type="text" id="km" class="form-control" name="km" id="km" value="[[!+fi.km]]">
+    </div>
+    <div class="form-group col-sm-3">
+    <label for="end_time">
+        Ende:
+    </label>
+    <input name="end_time" id="end_time" type="text" class="form-control" value="[[!+fi.end_time]]">
+    </div>
+
+    </div>
+ 
+      </div>
+      <div class="modal-footer">
+    [[!#request.process:is=`delete`:then=`
+    <button id="btn_anmelden" type="submit" class="btn btn-default">Löschen</button>    
+    `:else=`
+    <button id="btn_anmelden" type="submit" class="btn btn-default">Speichern</button>    
+    `]]          
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+</form>
+    </div>
+
+  </div>
+
+<script>
+var fahrten_form_success = function(){
+    $('#fbuchModal').modal('hide');
+    var success_object_id='[[!+success_object_id]]';
+    fbuch_getfahrten('none',success_object_id,formdata);       
+}
+</script>
+[[!+fi.successMessage]]
+
+<script>
+var formdata = [];
+
+var input = $('#add_person');
+var hidden_input = $('#name_id');
+input.typeahead({source:[
+    [[!migxLoopCollection?
+    &classname=`fbuchNames`
+    &sortConfig=`[{"sortby":"lastname"}]`
+    &tpl=`@CODE:{id:"[[+id]]",name:"[[+lastname]] [[+firstname]]"}`
+    &where=`{"member_status:IN":["Gast","Mitglied","VHS"],"deleted":"0"}`
+    &outputSeparator=`,`
+    &debug=`0`
+    ]]
+    ],items:15
+     ,autoSelect: false
+     ,afterSelect: function(item){
+         //console.log(item);
+         hidden_input.val(item.id);
+        }
+    });
+
+$( "#anmelden_form" ).on( "submit", function( event ) {
+  event.preventDefault();
+  formdata = $( this ).serializeArray();
+  var $form = $( this );
+  var url = $form.attr( "action" );  
+  var posting = $.post( url, formdata );
+  posting.done(function( data ) {
+    $( "#fbuchModal" ).empty().append( data );
+  });
+});
+
+$( ".remove_anmeldung" ).on( "click", function( event ) {
+  event.preventDefault();
+  var data = {
+    'fullname':'x'
+  };
+  var url = '[[~[[*id]]]]';
+  var posting = $.post( url, data );
+  posting.done(function( data ) {
+    $( "#fbuchModal_body" ).empty().append( data );
+  });
+});
+
+$('.input-group.date').datepicker({
+    format: "dd.mm.yyyy",
+    todayBtn: "linked",
+    language: "de",
+    autoclose: true,
+    todayHighlight: true
+});
+
+$('#fbuchModal').on('shown.bs.modal', function () {
+  $('#add_person').focus().select();
+});
+
+</script>

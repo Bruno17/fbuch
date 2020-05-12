@@ -1,0 +1,37 @@
+[[!setlocale]]
+Hallo [[+firstname]] [[+lastname]],<br><br>
+
+Du bist eingeladen zur Teilnahme am RGM - Termin:<br>
+[[+title]]<br>
+am [[+date:strtotime:date=`%a, %d.%m.%Y`]] [[+start_time]]
+<br>
+<br>
+[[+status:is=`invited`:then=`Wir bedanken uns für eine Zu- oder Absage.`:else=``]]
+[[+status:is=`accepted`:then=`Du hast verbindlich zugesagt. Vielen Dank! Falls Du doch verhindert sein solltest, denke bitte daran rechtzeitig abzusagen!`:else=``]]
+[[+status:is=`canceled`:then=`Vielen Dank für Deine Rückmeldung! Du hast abgesagt. Falls Du es Dir doch noch anders überlegst, kannst Du jederzeit noch zusagen.`:else=``]]
+<br><br>
+[[+comment:isnot=``:then=`
+<strong>Kommentar</strong> von [[+Comment_name]]:<br>
+[[+comment:nl2br]]
+<br><br>
+`:else=``]]
+
+Du kannst jederzeit <a href="[[~87? &iid=`[[+iid]]`&code=`[[+code]]`&scheme=`full`]]">hier</a> mit einem Klick den Termin zu- oder absagen oder einen Kommentar hinterlassen. Dafür benötigst Du keine speziellen Zugangsdaten.
+<br><br> 
+----&gt; <a href="[[~87? &iid=`[[+iid]]`&code=`[[+code]]`&scheme=`full`]]">Hier klicken!</a>&lt;--- 
+<br><br>
+Falls der Link zur Anmeldeseite nicht funktioniert, hier nochmal der gesamte Link zum Kopieren und Einfügen in den Browser:
+<br>
+[[~87? &iid=`[[+iid]]`&code=`[[+code]]`&scheme=`full`]]
+<br><br>
+
+<hr>
+Zur einfacheren terminbezogenen Kommunikation <a href="[[~100? &scheme=`full`]]#bei-riot-registrieren">registriere Dich im Riot-Messenger</a>
+<hr>
+
+<span style="color:#AAA;">
+Rudergesellschaft Marktheidenfeld e.V.<br/>
+Georg-Mayr-Str. 25<br/>
+<a href="http://www.rgmarktheidenfeld.de">www.rgmarktheidenfeld.de</a> 
+</span>
+

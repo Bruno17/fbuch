@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <title>[[++site_name]] - [[+pagetitle]]</title>
+    <base href="[[++site_url]]" />    
+    
+    <link rel="shortcut icon" href="/assets/ico/favicon.ico">
+  
+  
+<!-- Load required Bootstrap and BootstrapVue CSS -->
+<link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
+
+
+
+<link href="assets/components/fbuchvue/css/style.css" rel="stylesheet">
+
+<!-- Load polyfills to support older browsers -->
+<script src="//polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script>
+
+<!-- Load Vue followed by BootstrapVue -->
+<script src="//unpkg.com/vue@latest/dist/vue.min.js"></script>
+<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>  
+
+
+
+</head>
+<body>
+
+
+    
+        <a name="oben" id="oben"></a>
+
+    <!-- Wrap all page content here -->
+    <div id="wrap" >
+    
+      <!-- Fixed navbar -->
+      <div class="container">
+      <b-navbar toggleable="lg" >
+          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+          <b-navbar-brand href="[[++site_url]]"><img src="style/img/rgmlogo0307.png" style="margin-right: 10px; margin-top: 6px; margin-left: 6px; height: 60px;"></b-navbar-brand>
+          <b-collapse id="nav-collapse" is-nav>
+         [[!pdoMenu? 
+            &startId=`0` 
+            &level=`2`
+            &outerClass=`nav navbar-nav`
+            &checkPermissions=`list`
+            &tpl=`@INLINE <b-nav-item href="[[+link]]">[[+menutitle]]</b-nav-item>`
+            &tplParentRow=`@INLINE <b-nav-item-dropdown text="[[+menutitle]]" [[+classes]]>[[+wrapper]]</b-nav-item-dropdown>`
+            &tplInner=`@INLINE [[+wrapper]]`
+            &tplInnerRow=`@INLINE <b-dropdown-item href="[[+link]]" [[+classes]]>[[+menutitle]]</b-dropdown-item>`
+         ]]         
+
+          </b-collapse>
+      </b-navbar>
+      
+        <div class="page-header">
+          <h1>[[*longtitle:isnot=``:then=`[[*longtitle]]`:else=`[[*pagetitle]]`]]</h1>
+        </div> 
+        
+
+        <v-app>
+        <b-button v-b-modal.modal-1>Neue Fahrt eintragen</b-button>
+        <br>
+        {{ startdate }}<br>
+        {{ enddate }}
+
+        
+        <b-modal id="modal-1" title="Neue Fahrt">
+        <h3>Start</h3>
+        <datepicker v-bind:date = "startdate" v-on:changedate="startdate = $event"></datepicker>
+        <h3>Ende</h3>
+        <datepicker v-bind:date = "enddate" v-on:changedate="enddate = $event"></datepicker>            
+        </b-modal>
+        
+      
+        <b-table striped hover :items="fahrten" :fields="fields"></b-table>
+        </v-app>
+      </div>
+      
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>    
+    
+    
+    <script>
+    
+
+Vue.component('datepicker', {
+    data: vm => ({
+      date: new Date().toISOString().substr(0, 10),
+      dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
+      dateFormatted: vm.formatDate(vm.date),
+      menu: false,
+    }),
+    props: ['date'],
+    computed: {
+      computedDateFormatted () {
+        return this.formatDate(this.date)
+      },
+    },
+
+    watch: {
+      date (val) {
+        this.dateFormatted = this.formatDate(this.date);
+        this.$emit('changedate',this.date);
+      },
+    },
+
+    methods: {
+      formatDate (date) {
+        if (!date) return null
+
+        const [year, month, day] = date.split('-')
+        return `${day}.${month}.${year}`
+      },
+      parseDate (date) {
+        if (!date) return null
+
+        const [ day, month, year] = date.split('.')
+        return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+      },
+    },   
+  template:`
+  <div class="v-application">
+        <v-menu
+          ref="menu"
+          v-model="menu"
+          :close-on-content-click="false"
+          transition="scale-transition"
+          offset-y
+          max-width="290px"
+          min-width="290px"
+        >
+          <template v-slot:activator="{ on }">
+            <v-text-field
+              readonly = "true"
+              v-model="dateFormatted"
+              label="Datum"
+              hint="Format: DD.MM.YYYY"
+              persistent-hint
+              prepend-icon="event"
+              @blur="date = parseDate(dateFormatted)"
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-date-picker v-model="date" no-title @input="menu = false"></v-date-picker>
+        </v-menu>
+        {{ date }}
+        </div>`
+})    
+    
+    
+    Vue.use(BootstrapVue);
+window.onload = () => {    
+    var app = new Vue({
+      el: '#wrap',
+      vuetify: new Vuetify(),      
+      methods: {
+        loadFahrten(){
+            var self = this;
+            
+            var ajaxUrl = 'rest/fbuch/Fahrten';
+            axios.get(ajaxUrl)
+            .then(function (response) {
+                self.fahrten = response.data.results; 
+            
+var reformattedArray = self.fahrten.map(obj => {
+   var rObj = {};
+ 
+ var test = self.fields.map(field => {
+   rObj[field.key] = obj[field.key];
+   
+   return '';
+}); 
+
+console.log(rObj);   
+   
+   return rObj;
+});                
+                
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+        },           
+          
+      },
+      
+      data() {
+          return {
+              startdate: null,
+              enddate: null,
+              fahrten: [],
+              fields: [
+                  {
+                      key:'date',
+                      label: 'Start'
+                  },
+                  {
+                      key:'date_end',
+                      label:'Ende'
+                  }, 
+                  {
+                      key:'kmstand_start',
+                  },
+                  {
+                      key:'kmstand_end'
+                  }                  
+              ]
+          }          
+      },
+      mounted: function () {
+          this.loadFahrten();
+      }      
+    });
+    
+}    
+    </script>
+</body>
+</html>

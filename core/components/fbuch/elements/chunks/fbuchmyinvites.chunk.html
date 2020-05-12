@@ -1,0 +1,25 @@
+[[$bei-riot-registrieren]]<br><br>
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchNames`
+&where=`{"modx_user_id":"[[!+modx.user.id]]"}`
+&tpl=`@CODE:[[+id]]`
+&toPlaceholder=`fbuch_user_id`
+]]
+
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchDateInvited`
+&joins=`[{"alias":"Date"},{"alias":"Zusagen","classname":"fbuchDateNames","on":"Zusagen.date_id=Date.id AND Zusagen.name_id=[[!+fbuch_user_id]]"}]`
+&where=`{"canceled":"0","Zusagen.id":null,"name_id":"[[!+fbuch_user_id]]","Date.date:>=":"[[!now:date=`%Y-%m-%d 00:00:00`]]"}`
+&sortConfig=`[{"sortby":"Date.date"},{"sortby":"Date.start_time"}]`
+&tpl=`fbuchMyInvitesRow`
+&wrapperTpl=`@CODE:
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    <h3 class="panel-title">Du hast unbeantwortete Einladungen</h3>
+  </div>
+<div class="table-responsive"><table class="table">[[+output]]</table></div>
+</div>`
+
+]]

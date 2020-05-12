@@ -1,0 +1,156 @@
+[[!FormIt?
+&preHooks=`fbuchGetFormValues`
+&hooks=`fbuchUpdate`
+&classname=`fbuchNames`
+&submitVar=`fahrt_submit`
+&successMessage=`<script>fahrten_form_success();</script>`
+]]
+
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">[[!#request.object_id:is=`0`:then=`Neue Fahrt`:else=`Fahrt bearbeiten`]]</h4>
+      </div>
+[[!+fbucherror]]
+<form id="anmelden_form" action="[[~[[*id]]? &grid_id=`[[+grid_id]]`]]" method="post" class="form">
+      <div id="fbuchModalBody" class="modal-body">
+    <input type="hidden" name="nospam:blank" value="" />
+    <input type="hidden" name="fahrt_submit" value="1" />
+    <input type="hidden" name="object_id" value="[[!#request.object_id]]" />
+    <input type="hidden" id="name_id" name="name_id" value="[[!+fi.name_id]]" />
+    <div class="row">
+    <div class="form-group col-sm-3">
+    <label for="firstname">
+        Vorname:
+    </label>
+    <input class="form-control" id="firstname" name="firstname" value="[[!+fi.firstname]]" />
+    </div>
+    <div class="form-group col-sm-3">
+    <label for="lastname">
+        Nachname:
+    </label>
+    <input class="form-control" id="lastname" name="lastname" value="[[!+fi.lastname]]" />
+    </div>
+    <div class="form-group col-sm-3">
+    <label for="status">
+        Mitglied Status:
+    </label>
+    <select class="form-control" name="member_status">
+    <option value="" >Unbekannt</option>
+    <option value="Mitglied" [[!+fi.member_status:FormitIsSelected=`Mitglied`]]>Mitglied</option>
+    <option value="Gast" [[!+fi.member_status:FormitIsSelected=`Gast`]]>Gast</option>
+    <option value="VHS" [[!+fi.member_status:FormitIsSelected=`VHS`]]>VHS</option>
+    </select>
+    </div>
+    <div class="form-group col-sm-3">
+    <label for="birth_date">
+        Geburtsdatum:
+    </label>
+    <div class="input-group date">
+        <input name="birth_date" id="birth_date" type="text" class="form-control" value="[[!+fi.birth_date]]"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>    </span>
+    </div>
+    </div>
+
+    </div>
+    <div class="row">
+    <div class="form-group col-sm-3">
+    <label for="gender">
+        Geschlecht:
+    </label>
+    <select class="form-control" name="gender">
+    <option value="M" [[!+fi.gender:FormitIsSelected=`M`]]>M</option>
+    <option value="W" [[!+fi.gender:FormitIsSelected=`W`]]>W</option>
+    </select>
+    </div>
+
+    <div class="form-group col-sm-3">
+    <label for="email">
+        Email:
+    </label>
+    <input type="text" id="email" class="form-control" name="email" value="[[!+fi.email]]">
+    </div>
+    </div>
+
+    <div class="form-group">
+    <label for="phone">
+        Telefon:
+    </label>
+    <input type="text" id="phone" class="form-control" name="phone" value="[[!+fi.phone]]">
+    </div>
+
+      </div>
+      <div class="modal-footer">
+        <button id="btn_anmelden" type="submit" class="btn btn-default">Speichern</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+</form>
+    </div>
+
+  </div>
+
+<script>
+var fahrten_form_success = function(){
+    $('#fbuchModal').modal('hide');
+    var success_object_id='[[!+success_object_id]]';
+    fbuch_getfahrten('none',success_object_id,formdata);       
+}
+
+</script>
+[[!+fi.successMessage]]
+
+
+<script>
+var formdata = [];
+
+var input = $('#add_person');
+var hidden_input = $('#name_id');
+input.typeahead({source:[
+    [[!migxLoopCollection?
+    &classname=`fbuchNames`
+    &sortConfig=`[{"sortby":"lastname"}]`
+    &tpl=`@CODE:{id:"[[+id]]",name:"[[+lastname]] [[+firstname]]"}`
+    &outputSeparator=`,`
+    ]]
+    ],items:15
+     ,autoSelect: false
+     ,afterSelect: function(item){
+         //console.log(item);
+         hidden_input.val(item.id);
+        }
+    });
+
+$( "#anmelden_form" ).on( "submit", function( event ) {
+  event.preventDefault();
+  formdata = $( this ).serializeArray();
+  var $form = $( this );
+  var url = $form.attr( "action" );  
+  var posting = $.post( url, formdata );
+  posting.done(function( data ) {
+    $( "#fbuchModal" ).empty().append( data );
+  });
+});
+
+$( ".remove_anmeldung" ).on( "click", function( event ) {
+  event.preventDefault();
+  var data = {
+    'fullname':'x'
+  };
+  var url = '[[~[[*id]]]]';
+  var posting = $.post( url, data );
+  posting.done(function( data ) {
+    $( "#fbuchModal_body" ).empty().append( data );
+  });
+});
+
+$('.input-group.date').datepicker({
+    format: "dd.mm.yyyy",
+    todayBtn: "linked",
+    language: "de",
+    autoclose: true,
+    todayHighlight: true
+});
+
+</script>

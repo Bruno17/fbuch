@@ -1,0 +1,186 @@
+<script>
+[[$fbuchComponentNameselect]]
+[[$fbuchComponentDatepicker]]
+</script>    
+
+<script>
+    // start the UI; assumes you have a <div id="q-app"></div> in your <body>
+    new Vue({
+      el: '#q-app',
+      methods: {
+          filterFn (val, update, abort) {
+              update(() => {
+                  const needle = val.toLowerCase();
+                  this.filtered_options = this.namesoptions.filter(v => v.label.toLowerCase().indexOf(needle) > -1)
+              })
+          },
+          
+        updateFahrt(item){
+            
+        for (let key in this.form) {
+            this.form[key].value = item[key];
+        } 
+        this.modal_title = 'Fahrt bearbeiten';
+        this.basic_modal = true; 
+        },
+        createFahrt(){
+            
+        for (let key in this.form) {
+            this.form[key].value = this.form[key].default;
+        } 
+        this.modal_title = 'Neue Fahrt';
+        this.basic_modal = true;    
+ 
+        },
+        loadAllFahrten(){
+          this.loadFahrten({"returntype":"finished"});
+          this.loadFahrten({"returntype":"sheduled"});
+          this.loadFahrten({"returntype":"open"});                    
+        },
+        loadFahrten(params){
+            var params = params || {};
+            var self = this;
+            var ajaxUrl = 'rest/fbuch/Fahrten';
+            params['gattung'] = 'fahrzeug';
+            axios.get(ajaxUrl,{params:params})
+            .then(function (response) {
+                self.$set(self.fahrten,params.returntype,response.data.results);
+                //make sure, the model gets updated, nested properties, which are not defined in the data, are not watched
+                //self.$forceUpdate();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+        },
+        saveFahrt(){
+            var self = this;
+            var data = {};
+            for (let key in this.form) {
+                data[key] = this.form[key].value;
+            }  
+
+            if (data.id == 0){
+                var ajaxUrl = 'rest/fbuch/Fahrten';
+                axios.post(ajaxUrl,data)
+                .then(function (response) {
+                    self.basic_modal = false;
+                    self.loadAllFahrten();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            } else {
+                var ajaxUrl = 'rest/fbuch/Fahrten';
+                axios.put(ajaxUrl,data)
+                .then(function (response) {
+                    self.basic_modal = false;
+                    self.loadAllFahrten()();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });                
+            }
+        },        
+        
+        loadNames(){
+            var self = this;
+            
+            var ajaxUrl = 'rest/fbuch/Names?limit=100000&returntype=options';
+            axios.get(ajaxUrl)
+            .then(function (response) {
+                self.namesoptions = response.data.results;
+                self.filtered_options = response.data.results;                 
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+        },
+                loadBoote(){
+            var self = this;
+            
+            var ajaxUrl = 'rest/fbuch/Boote?limit=100000&returntype=options';
+            axios.get(ajaxUrl)
+            .then(function (response) {
+                self.booteoptions = response.data.results;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+        },
+          
+      },
+      
+      data() {
+          return {
+              form:{
+                id:{value:0,default:0} ,  
+                date:{value:null,default:null} ,
+                start_time:{value:'00:00',default:'00:00'} ,
+                date_end:{value:null,default:null} ,
+                end_time:{value:'00:00',default:'00:00'} ,
+                kmstand_start:{value:'',default:''} ,
+                kmstand_end:{value:'',default:''} ,
+                Name_id:{value:'',default:''} ,
+                boot_id:{value:'',default:''} ,
+                note:{value:'',default:''} ,
+              },
+              table_view:'open',
+              filtered_options:[],
+              namesoptions: [],
+              booteoptions: [],
+              modal_title: '',
+              fahrten: {
+
+              },
+              
+              fields: [
+                  {
+                      name:'actions',
+                      label:'Aktionen'
+                  },
+                  {
+                      name:'Boot_name',
+                      field:'Boot_name',
+                      label: 'Fahrzeug'
+                  },
+                  {
+                      name:'Name_fullname',
+                      field:'Name_fullname',
+                      label: 'Fahrer'
+                  },      
+                  {
+                      name:'date',
+                      field:'date',
+                      label: 'Start'
+                  },
+                  {
+                      name:'date_end',
+                      field:'date_end',
+                      label:'Ende'
+                  }, 
+                  {
+                      name:'kmstand_start',
+                      field:'kmstand_start',
+                      label:'Start kmstand',
+                  },
+                  {
+                      name:'kmstand_end',                      
+                      field:'kmstand_end',
+                      label:'Ende kmstand',
+                  }                  
+              ],
+              basic_modal: false,
+              
+      pagination: {
+        page: 1,
+        rowsPerPage: 0
+      },              
+          }          
+      },
+      mounted: function () {
+          this.loadAllFahrten();
+          this.loadNames();
+          this.loadBoote();
+      }           
+    })
+</script>      

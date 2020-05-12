@@ -1,0 +1,89 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">[[+name]]</h2>
+  </div>
+<table class="table table-bordered table-striped">
+<colgroup> <col class="col-xs-1"> <col class="col-xs-7"> </colgroup>
+<tr><td><strong>Bootsgattung</strong></td><td>[[+Gattung_name]]</td></tr>
+<tr><td><strong>Gewichtsklasse</strong></td><td>[[+gewichtsklasse]]</td></tr>
+<tr><td>
+    <strong>Freigegeben für</strong>
+    </td><td>
+        [[+Nutzergruppe_name]]
+[[!migxLoopCollection? 
+&packageName=`fbuch`
+&classname=`fbuchBootAllowedNames`
+&joins=`[{"alias":"Name"}]`
+&where=`{"boot_id":"[[+id]]"}`
+&tpl=`@CODE:[[+Name_firstname]] [[+Name_lastname]]`
+&outputSeparator=`, `
+&wrapperTpl=`@CODE:<br>([[+output]])`
+]]        
+    </td></tr>
+<tr><td><strong>Riggerung</strong></td><td>[[+riggerung]]</td></tr>
+</table>
+</div>
+
+<div class="row">
+<div class="col-sm-4">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Schäden/Mängel</h2>
+  </div>
+  <div class="panel-body">
+    <a class="btn btn-default" href="[[~91? &boot_id=`[[+id]]`]]">Schaden/Mangel melden</a>
+  </div>   
+</div>
+
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchBootComment`
+&where=`{"boot_id":"[[+id]]"}`
+&sortConfig=`[{"sortby":"createdon","sortdir":"DESC"}]`
+&tpl=`fbuchBootCommentRow`
+]]
+
+
+</div>
+
+<div class="col-sm-4">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Einstellungen</h2>
+  </div>
+  <div class="panel-body">
+    <a class="btn btn-default" href="[[~93? &boot_id=`[[+id]]`]]">neue Einstellung</a>
+  </div>   
+</div>
+
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchBootSetting`
+&where=`{"boot_id":"[[+id]]"}`
+&sortConfig=`[{"sortby":"createdon","sortdir":"DESC"}]`
+&tpl=`fbuchBootSettingRow`
+]]
+
+</div>
+
+<div id="boot-details-fahrten" class="col-sm-4">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Letzte Fahrten</h2>
+  </div>
+  <div class="panel-body">
+    <a class="btn btn-default" href="[[~68]]">Km - Auswertungen</a>
+  </div>   
+</div>
+
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`fbuchFahrt`
+            &joins=`[{"alias":"Boot"}]`
+            &tpl=`fbuchClosedFahrtenDragdropRow`
+            &sortConfig=`[{"sortby":"date","sortdir":"DESC"},{"sortby":"start_time","sortdir":"DESC"}]`
+            &where=`{"deleted":"0","boot_id":"[[+id]]"}`
+            &limit=`15`
+        ]]
+
+</div>

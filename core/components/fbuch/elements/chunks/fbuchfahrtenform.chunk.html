@@ -1,0 +1,274 @@
+[[!FormIt?
+&preHooks=`fbuchGetFormValues`
+&hooks=`fbuchUpdate`
+&classname=`fbuchFahrt`
+&submitVar=`fahrt_submit`
+&successMessage=`<script>fahrten_form_success();</script>`
+[[!#request.object_id:is=`0`:then=`
+[[!#request.type:is=`dragdrop`:then=`
+&validate=`boot_id:required,submit_form:required`
+`:else=`
+&validate=`name_ids:required,boot_id:required,submit_form:required`
+`]]
+`:else=``]]
+]]
+
+
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">
+        [[!#request.object_id:is=`0`:then=`Neue Fahrt`:else=`[[!#request.process:is=`delete`:then=`Diese Fahrt löschen`:else=`Fahrt bearbeiten`]]`]]
+        </h4>
+      </div>
+[[!+fbucherror]]
+
+<form [[!+hideform:is=`1`:then=`style="display:none;"`:else=``]] id="anmelden_form" action="[[~[[*id]]? &grid_id=`[[+grid_id]]`]]" method="post" class="form">
+      <div id="fbuchModalBody" class="modal-body">
+    <input type="hidden" name="nospam:blank" value="" />
+    <input type="hidden" name="fahrt_submit" value="1" />
+    <input type="hidden" name="submit_form" value="1" />
+    <input type="hidden" name="type" value="[[!#request.type]]" />
+    <input type="hidden" name="object_id" value="[[!#request.object_id]]" />
+    [[!#request.process:is=`delete`:then=`
+    <input type="hidden" name="deleted" value="1" />    
+    `:else=``]]
+
+    [[!#request.process:is=`close`:then=`
+    <input name="date" id="date" type="hidden" value="[[!+fi.date]]" />
+    `:else=`
+    <div class="row">
+    <div class="form-group col-sm-3">
+    <label for="boot_id">
+        Boot:
+        [[!+fi.error.boot_id:!empty=`
+        <span class="error"><br>Bitte ein Boot auswählen!</span>
+        `]]
+    </label>
+    <select class="form-control" name="boot_id" id="boot_id">
+    <option value=""></option>
+    [[!migxLoopCollection?
+    &classname=`fbuchBoot`
+    &where=`{"deleted":"0"}`
+    &sortConfig=`[{"sortby":"name"}]`
+    &tpl=`fbuchFahrtenFormBootOption`
+    ]]    
+    </select>
+    </div>
+    <div class="form-group col-sm-3">
+    <label for="date">
+        Datum:
+    </label>
+    <div class="input-group date">
+        <input name="date" id="date" type="text" class="form-control" value="[[!+fi.date]]"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>    </span>
+    </div>
+    </div>
+    <div class="form-group col-sm-3">
+    <label for="direction">
+        Fahrtrichtung:
+    </label>
+    <select class="form-control" name="direction" id="direction">
+    <option value="flußauf" [[!+fi.selected_direction_flußauf]]>flußauf</option>
+    <option value="flußab" [[!+fi.selected_direction_flußab]]>flußab</option>
+    </select>
+   
+    </div>
+    
+
+    <div class="form-group col-sm-3">
+    <label for="start_time">
+        Startzeit:
+    </label>
+    <input type="text" class="form-control" name="start_time" id="start-time" value="[[!+fi.start_time]]" /> 
+    <span class="error">[[!+fi.error.start_time]]</span>
+    
+    </div>
+    </div>
+
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchBoot`
+&joins=`[{"alias":"Nutzergruppe"}]`
+&where=`{"id":"[[!+fi.boot_id]]"}`
+&tpl=`fbuchFahrtenFormBootinfo`
+]]
+
+
+    <div class="row">
+    <div class="form-group col-sm-3">
+    <label for="wfahrt">
+        Wanderfahrt:
+    </label>
+    <select class="form-control" name="wfahrt" id="wfahrt">
+    <option value="0" [[!+fi.wfahrt:FormItIsSelected=`0`]]>nein</option>
+    <option value="1" [[!+fi.wfahrt:FormItIsSelected=`1`]]>ja</option>
+    </select>
+   
+    </div>
+    <div class="form-group col-sm-3">
+    <label for="date_end">
+        Datum bis:
+    </label>
+    <div class="input-group date">
+        <input name="date_end" id="date_end" type="text" class="form-control" value="[[!+fi.date_end]]"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>    </span>
+    </div>
+    </div>
+
+    </div>
+    `]]
+
+  <div class="form-group">
+    <label for="comment">Kommentar (optional)</label>
+    <textarea class="form-control" rows="3" name="note" id="comment">[[!+fi.note]]</textarea>
+  </div>
+
+[[!#request.object_id:is=`0`:then=`
+<h3>Mannschaft</h3>
+
+<div class="row">    
+    <div class="form-group col-sm-3">
+    <label for="add_person">
+        Person hinzufügen:
+        [[!+fi.error.name_ids:!empty=`
+        <span class="error"><br>Bitte eine Person auswählen!</span>
+        `]]
+       
+    </label>
+    <input autocomplete="off" class="form-control" id="add_person" name="name" />
+    </div>
+</div>
+
+<div id="teamwrapper">
+<input type="hidden" name="name_ids" id="name_ids" value="[[!+fi.name_ids]]">
+</div>
+
+`:else=``]]
+
+    [[!#request.process:is=`close`:then=`
+    <div class="row">
+    <div class="form-group col-sm-3">
+    <label for="km">
+        km:
+    </label>
+    <input type="text" id="km" class="form-control" name="km" id="km" value="[[!+fi.km]]">
+    </div>
+    <div class="form-group col-sm-3">
+    <label for="end_time">
+        Ankunft:
+    </label>
+    <input name="end_time" id="end_time" type="text" class="form-control" value="[[!+fi.end_time]]">
+    </div>
+    </div>
+    `:else=``]]
+ 
+      </div>
+      <div class="modal-footer">
+    [[!#request.process:is=`delete`:then=`
+    <button id="btn_anmelden" type="submit" class="btn btn-default">Löschen</button>    
+    `:else=`
+    <button id="btn_anmelden" type="submit" class="btn btn-default">Speichern</button>    
+    `]]
+        
+        <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen (Esc)</button>
+      </div>
+</form>
+
+
+    </div>
+
+  </div>
+
+<script>
+var fahrten_form_success = function(){
+    $('#fbuchModal').modal('hide');
+    var success_object_id='[[!+success_object_id]]';
+    fbuch_getfahrten('none',success_object_id,formdata);       
+}
+</script>
+[[!+fi.successMessage]]
+
+<script>
+var formdata = [];
+
+$( "#boot_id" ).on( "change", function( event ) {
+  formdata = $("#anmelden_form").serializeArray();
+  var $form = $("#anmelden_form");
+  var url = $form.attr( "action" );
+  for (var i=0;i<formdata.length;i++){
+      if (formdata[i].name == 'submit_form'){
+          formdata[i].value = '';
+      }
+  }
+  var posting = $.post( url, formdata );
+  posting.done(function( data ) {
+    $( "#fbuchModal" ).empty().append( data );
+  });
+});
+
+$( "#anmelden_form" ).on( "submit", function( event ) {
+  event.preventDefault();
+  formdata = $( this ).serializeArray();
+  var $form = $( this );
+  var url = $form.attr( "action" );
+  var posting = $.post( url, formdata );
+  posting.done(function( data ) {
+    $( "#fbuchModal" ).empty().append( data );
+  });
+});
+
+var input = $('#add_person');
+input.typeahead({source:[
+    [[!migxLoopCollection?
+    &classname=`fbuchNames`
+    &sortConfig=`[{"sortby":"lastname"}]`
+    &tpl=`@CODE:{id:"[[+id]]",name:"[[+lastname]] [[+firstname]]"}`
+    &where=`{"member_status:IN":["Gast","Mitglied","VHS"],"deleted":"0"}`
+    &outputSeparator=`,`
+    &debug=`0`
+    ]]
+    ],items:15
+     ,autoSelect: false
+     ,afterSelect: function(item){
+         //console.log(item);
+         input.val('');
+         var name_ids = $('#name_ids').val();
+         $( "#teamwrapper" ).load( getneufahrtnamen_ajax_url,{"fahrt_id":"[[!#request.fahrt_id]]","name_ids":name_ids,"name_id":item.id,"processaction":"add"}, function(){
+             $('#add_person').focus();
+             //fbuch_getteam();
+         });
+        }
+    }); 
+
+$( ".remove_anmeldung" ).on( "click", function( event ) {
+  event.preventDefault();
+  var data = {
+    'fullname':'x'
+  };
+  var url = '[[~[[*id]]]]';
+  var posting = $.post( url, data );
+  posting.done(function( data ) {
+    $( "#fbuchModal_body" ).empty().append( data );
+  });
+});
+
+$('.input-group.date').datepicker({
+    format: "dd.mm.yyyy",
+    todayBtn: "linked",
+    language: "de",
+    autoclose: true,
+    todayHighlight: true
+});
+
+[[!#request.process:is=`close`:then=`
+$('#fbuchModal').on('shown.bs.modal', function () {
+  $('#km').focus().select();
+});
+`:else=`
+$('#fbuchModal').on('shown.bs.modal', function () {
+  $('#boot_id').focus().select();
+});
+`]]
+</script>

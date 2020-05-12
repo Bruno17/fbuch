@@ -1,0 +1,30 @@
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            [[+property.type:is=`Rudern`:then=`
+                &classname=`fbuchDateNames`
+                &where=`{"date_id":"[[+id]]"}`
+            `:else=`
+                &classname=`fbuchFahrt`
+                &where=`{"deleted":"0","date_id":"[[+id]]"}`
+            `]]
+            
+            &tpl=`@CODE:[[+id]]`
+            
+            &totalVar=`reservations_total` 
+            &toPlaceholder=`reservations`
+        ]]
+<tr class="datarow [[!#request.active_id:is=`[[+id]]`:then=`active`:else=``]]" data-id="[[+id]]">
+[[+idx:is=`1`:then=`<td class="dayname" rowspan="[[+property.daytotal]]">[[+date:strtotime:date=`%a`]]</td>`:else=``]]
+<td class="dropdown">
+<div class="dropdown-toggle" data-toggle="dropdown">[[+date:strtotime:date=`%d.%m.%Y`]]<span class="caret"></span>
+</div>
+<ul class="dropdown-menu">
+[[$fbuchErgotermineDropdownButtons? &date_id=`[[+id]]` &date=`[[+date]]`]]
+</ul>
+</td>
+<td>[[+start_time:fbuchValidateTime]]</td>
+<td>[[+end_time:fbuchValidateTime]]</td>
+<td>[[+Name_firstname]] [[+Name_lastname]]</td>
+<td>[[+title]]</td>
+<td>[[+reservations_total]]/[[+max_reservations]]</td>
+</tr>

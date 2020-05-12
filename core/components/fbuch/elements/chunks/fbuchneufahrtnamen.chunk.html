@@ -1,0 +1,14 @@
+[[!fbuchBuildTeam]]
+
+<input type="hidden" name="name_ids" id="name_ids" value="[[!+name_ids]]">
+
+<table class="table">
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`fbuchNames`
+            &limit=`10`
+            &where=`{"id:IN":[ [[!+name_ids]] ]}`
+            &tpl=`fbuchFahrtnamRow`
+            &sortConfig=`[{"sortby":"FIELD(fbuchNames.id, [[!+name_ids]])"}]`
+        ]]
+</table>

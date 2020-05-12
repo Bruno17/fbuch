@@ -1,0 +1,24 @@
+<li data-datenames_id="[[+id]]" class="list-group-item [[+canceled:!empty=`list-group-item-danger`]] [[+Zusagen_id:isnot=``:then=`list-group-item-success`:else=``]] ]]">
+</span>[[+idx]] [[+Name_firstname]] [[+Name_lastname]]
+<div class="btn-group pull-right">
+[[!hasPermission:is=`yes`:then=` 
+
+[[+Name_riot_user_id:isnot=``:then=`
+<button type="button" data-process="riotinvite_invite" data-id="[[+id]]" class="btn btn-default mail_invite [[+riot_state]]" aria-label="Einladung mailen">
+<span style="font-weight:bold;">R</span></span>
+</button>
+`:else=``]]
+
+[[+Name_id:fbuchGetNameEmail:isnot=`no`:then=`
+<button type="button" data-process="mail_invite" data-id="[[+id]]" class="btn btn-default mail_invite [[+invited:is=`1`:then=`invite`:else=``]]" aria-label="Einladung mailen">
+<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+</button>
+
+
+`:else=``]]
+<button type="button" data-process="remove_invite" data-id="[[+id]]" class="btn btn-default remove_name" aria-label="Namen entfernen">
+`:else=``? &permission=`fbuch_create_termin`]]
+<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+</button> 
+</div>
+</li>

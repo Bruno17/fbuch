@@ -1,0 +1,49 @@
+
+<h3>[[+firstname]] [[+lastname]],</h3>
+Nachfolgend kannst Du für diesen Termin weitere Personen anmelden<br><br>
+
+<input type="hidden" name="iid" value="[[!#request.iid]]"/>
+<input type="hidden" name="code" value="[[!#request.code]]"/>
+<input type="hidden" name="date_id" value="[[+date_id]]"/>
+
+<h3>Personen anmelden</h3>
+<ul style="display:none;" id="persons_tpl">
+    <li><span></span>
+        <input type="hidden" name="person[]"/>
+    </li>
+</ul>    
+
+<ul id="persons">
+    
+</ul>
+<div class="row">
+    <div class="form-group col-sm-6">
+    <label for="add_person">
+        Namen auswählen:
+    </label>
+    <input autocomplete="off" class="form-control" id="add_person" name="name" value="[[!+fi.name]]" />
+    </div>
+</div>    
+<h3>Weitere Gäste anmelden</h3>
+<div id="guests_tpl" style="display:none;">
+<div class="row">
+    <div class="form-group col-sm-6">
+    <label for="add_person">
+        Name:
+    </label>
+    <input autocomplete="off" class="form-control" name="guestname[]" />
+    </div>
+    <div class="form-group col-sm-6">
+    <label for="add_person">
+        Email (falls bekannt):
+    </label>
+    <input autocomplete="off" class="form-control" name="guestemail[]" />
+    </div>    
+</div>
+</div>  
+<div id="guests">
+    
+</div>
+<button type="button" id="add_guest" class="btn btn-primary ">+</button>
+<br><br>
+<button type="submit" name="process" value="add_persons" class="btn btn-primary ">Angegebene Personen jetzt anmelden</button>

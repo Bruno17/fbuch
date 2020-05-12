@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <title>[[++site_name]] - [[+pagetitle]]</title>
+    <base href="[[++site_url]]" />    
+    
+    <link rel="shortcut icon" href="/assets/ico/favicon.ico">
+    
+<!-- Load required Bootstrap and BootstrapVue CSS -->
+<link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />    
+<link href="assets/components/fbuchvue/css/style.css" rel="stylesheet">    
+    
+  <!-- Do you need Material Icons? -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
+
+  <!-- Do you need Fontawesome? -->
+  <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+
+  <!-- Do you need Ionicons? -->
+  <link href="https://cdn.jsdelivr.net/npm/ionicons@^4.0.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <!-- Do you need MDI? -->
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@^3.0.0/css/materialdesignicons.min.css" rel="stylesheet">
+
+  <!-- Do you need all animations? -->
+  <link href="https://cdn.jsdelivr.net/npm/animate.css@^3.5.2/animate.min.css" rel="stylesheet">
+
+
+  <!--
+    Finally, add Quasar's CSS:
+    Replace version below (1.0.3) with your desired version of Quasar.
+    Add ".rtl" for the RTL support (example: quasar.rtl.min.css).
+  -->
+  <link href="https://cdn.jsdelivr.net/npm/quasar@^1.0.3/dist/quasar.min.css" rel="stylesheet" type="text/css">
+  
+
+
+
+  
+  
+</head>
+
+<body>
+    
+<div id="q-app">  
+
+
+  <q-layout view="hHh lpR fFf">
+
+    <q-header class="bg-white text-black">
+    <div class="container">    
+      <b-navbar toggleable="lg" >
+          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+          <b-navbar-brand href="[[++site_url]]"><img src="style/img/rgmlogo0307.png" style="margin-right: 10px; margin-top: 6px; margin-left: 6px; height: 60px;"></b-navbar-brand>
+          <b-collapse id="nav-collapse" is-nav>
+         [[!pdoMenu? 
+            &startId=`0` 
+            &level=`2`
+            &outerClass=`nav navbar-nav`
+            &checkPermissions=`list`
+            &tpl=`@INLINE <b-nav-item href="[[+link]]">[[+menutitle]]</b-nav-item>`
+            &tplParentRow=`@INLINE <b-nav-item-dropdown text="[[+menutitle]]" [[+classes]]>[[+wrapper]]</b-nav-item-dropdown>`
+            &tplInner=`@INLINE [[+wrapper]]`
+            &tplInnerRow=`@INLINE <b-dropdown-item href="[[+link]]" [[+classes]]>[[+menutitle]]</b-dropdown-item>`
+         ]]         
+
+          </b-collapse>
+      </b-navbar> 
+      </div>
+    </q-header>
+
+<div class="container">
+    <q-page-container>
+        <div class="page-header">
+          <h2>[[*longtitle:isnot=``:then=`[[*longtitle]]`:else=`[[*pagetitle]]`]]</h2>
+        </div>         
+
+        [[*content]]   
+      
+
+
+        
+    </q-page-container>
+
+  </q-layout>    
+</div>
+</div>  
+
+<!-- Load Vue followed by BootstrapVue -->
+
+  <!-- Do you want IE support? Replace "1.0.3" with your desired Quasar version -->
+  <script src="https://cdn.jsdelivr.net/npm/quasar@^1.0.3/dist/quasar.ie.polyfills.umd.min.js"></script>
+
+  <!-- You need Vue too -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.min.js"></script>
+
+  <!--
+    Add Quasar's JS:
+    Replace version below (1.0.3) with your desired version of Quasar.
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/quasar@^1.0.3/dist/quasar.umd.min.js"></script>
+
+  <!--
+    If you want to add a Quasar Language pack (other than "en-us").
+    Notice "pt-br" in "i18n.pt-br.umd.min.js" for Brazilian Portuguese language pack.
+    Replace version below (1.0.0-beta.0) with your desired version of Quasar.
+    Also check final <script> tag below to enable the language
+    Language pack list: https://github.com/quasarframework/quasar/tree/dev/ui/lang
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/quasar@^1.0.3/dist/lang/de.umd.min.js"></script>
+
+  <!--
+    If you want to make Quasar components (not your own) use a specific set of icons (unless you're using Material Icons already).
+    Replace version below (1.0.3) with your desired version of Quasar.
+    Icon sets list: https://github.com/quasarframework/quasar/tree/dev/ui/icon-set
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/quasar@^1.0.3/dist/icon-set/fontawesome-v5.umd.min.js"></script>
+  
+  <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script> 
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script>
+  
+    Vue.use(BootstrapVue);  
+  
+  
+    // if using a Quasar language pack other than the default "en-us";
+    // requires the language pack style tag from above
+    Quasar.lang.set(Quasar.lang.de) // notice camel-case "ptBr"
+
+    // if you want Quasar components to use a specific icon library
+    // other than the default Material Icons;
+    // requires the icon set style tag from above
+    Quasar.iconSet.set(Quasar.iconSet.fontawesomeV5) // fontawesomeV5 is just an example
+
+    /*
+      Example kicking off the UI.
+      Obviously, adapt this to your specific needs.
+     */
+
+Vue.component('nameselect', {
+  data () {
+    return {
+      options: [],
+      alloptions: [],
+      label:''
+    }
+  },
+  props: ['alloptions','label','value'],  
+  methods: {
+    filterFn (val, update, abort) {
+      update(() => {
+        const needle = val.toLowerCase();
+        this.options = this.alloptions.filter(v => v.label.toLowerCase().indexOf(needle) > -1)
+      })
+    }
+  },
+  template:`
+      <q-select
+        outlined
+        use-input
+        hide-selected
+        fill-input
+        map-options
+        input-debounce="0"
+        :options="options"
+        @filter="filterFn"
+        v-bind:label="label"
+        v-bind:value="value"
+        v-on:input="$emit('input', $event.value)"        
+      >
+        <template v-slot:no-option>
+          <q-item>
+            <q-item-section class="text-grey">
+              No results
+            </q-item-section>
+          </q-item>
+        </template>
+      </q-select>
+  `
+})  
+
+    
+    
+Vue.component('datepicker', {
+    data: vm => ({
+      date: new Date().toISOString().substr(0, 10),
+      dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
+      dateFormatted: vm.formatDate(vm.date),
+      menu: false,
+    }),
+    props: ['date'],
+    computed: {
+      computedDateFormatted () {
+        return this.formatDate(this.date)
+      },
+    },
+
+    watch: {
+      date (val) {
+        this.dateFormatted = this.formatDate(this.date);
+        this.$emit('changedate',this.date);
+      },
+    },
+
+    methods: {
+      formatDate (date) {
+        if (!date) return null
+
+        const [year, month, day] = date.split('-')
+        return `${day}.${month}.${year}`
+      },
+      parseDate (date) {
+        if (!date) return null
+
+        const [ day, month, year] = date.split('.')
+        return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+      },
+    },   
+  template:`
+    <q-input v-model="dateFormatted" readonly outlined label="Datum" >          
+    <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+            <q-date v-model="date" mask="YYYY-MM-DD" @input="() => $refs.qDateProxy.hide()" />
+          </q-popup-proxy>
+      <template v-slot:append>
+        <q-icon name="event" class="cursor-pointer">
+
+        </q-icon>
+      </template>
+    </q-input>`
+})       
+
+    // start the UI; assumes you have a <div id="q-app"></div> in your <body>
+    new Vue({
+      el: '#q-app',
+      methods: {
+          filterFn (val, update, abort) {
+              update(() => {
+                  const needle = val.toLowerCase();
+                  this.filtered_options = this.namesoptions.filter(v => v.label.toLowerCase().indexOf(needle) > -1)
+              })
+          },
+          
+        updateFahrt(item){
+            
+        for (let key in this.form) {
+            this.form[key].value = item[key];
+        } 
+        this.modal_title = 'Fahrt bearbeiten';
+        this.basic_modal = true; 
+        },
+        createFahrt(){
+            
+        for (let key in this.form) {
+            this.form[key].value = this.form[key].default;
+        } 
+        this.modal_title = 'Neue Fahrt';
+        this.basic_modal = true;    
+ 
+        },
+        loadAllFahrten(){
+          this.loadFahrten({"returntype":"finished"});
+          this.loadFahrten({"returntype":"sheduled"});
+          this.loadFahrten({"returntype":"open"});                    
+        },
+        loadFahrten(params){
+            var params = params || {};
+            var self = this;
+            var ajaxUrl = 'rest/fbuch/Fahrten';
+            params['gattung'] = 'fahrzeug';
+            axios.get(ajaxUrl,{params:params})
+            .then(function (response) {
+                self.$set(self.fahrten,params.returntype,response.data.results);
+                //make sure, the model gets updated, nested properties, which are not defined in the data, are not watched
+                //self.$forceUpdate();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+        },
+        saveFahrt(){
+            var self = this;
+            var data = {};
+            for (let key in this.form) {
+                data[key] = this.form[key].value;
+            }  
+
+            if (data.id == 0){
+                var ajaxUrl = 'rest/fbuch/Fahrten';
+                axios.post(ajaxUrl,data)
+                .then(function (response) {
+                    self.basic_modal = false;
+                    self.loadAllFahrten();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            } else {
+                var ajaxUrl = 'rest/fbuch/Fahrten';
+                axios.put(ajaxUrl,data)
+                .then(function (response) {
+                    self.basic_modal = false;
+                    self.loadAllFahrten()();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });                
+            }
+        },        
+        
+        loadNames(){
+            var self = this;
+            
+            var ajaxUrl = 'rest/fbuch/Names?limit=100000&returntype=options';
+            axios.get(ajaxUrl)
+            .then(function (response) {
+                self.namesoptions = response.data.results;
+                self.filtered_options = response.data.results;                 
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+        },
+                loadBoote(){
+            var self = this;
+            
+            var ajaxUrl = 'rest/fbuch/Boote?limit=100000&returntype=options';
+            axios.get(ajaxUrl)
+            .then(function (response) {
+                self.booteoptions = response.data.results;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+        },
+          
+      },
+      
+      data() {
+          return {
+              form:{
+                id:{value:0,default:0} ,  
+                date:{value:null,default:null} ,
+                start_time:{value:'00:00',default:'00:00'} ,
+                date_end:{value:null,default:null} ,
+                end_time:{value:'00:00',default:'00:00'} ,
+                kmstand_start:{value:'',default:''} ,
+                kmstand_end:{value:'',default:''} ,
+                Name_id:{value:'',default:''} ,
+                boot_id:{value:'',default:''} ,
+                note:{value:'',default:''} ,
+              },
+              table_view:'open',
+              filtered_options:[],
+              namesoptions: [],
+              booteoptions: [],
+              modal_title: '',
+              fahrten: {
+
+              },
+              
+              fields: [
+                  {
+                      name:'actions',
+                      label:'Aktionen'
+                  },
+                  {
+                      name:'Boot_name',
+                      field:'Boot_name',
+                      label: 'Fahrzeug'
+                  },
+                  {
+                      name:'Name_fullname',
+                      field:'Name_fullname',
+                      label: 'Fahrer'
+                  },      
+                  {
+                      name:'date',
+                      field:'date',
+                      label: 'Start'
+                  },
+                  {
+                      name:'date_end',
+                      field:'date_end',
+                      label:'Ende'
+                  }, 
+                  {
+                      name:'kmstand_start',
+                      field:'kmstand_start',
+                      label:'Start kmstand',
+                  },
+                  {
+                      name:'kmstand_end',                      
+                      field:'kmstand_end',
+                      label:'Ende kmstand',
+                  }                  
+              ],
+              basic_modal: false,
+              
+      pagination: {
+        page: 1,
+        rowsPerPage: 0
+      },              
+          }          
+      },
+      mounted: function () {
+          this.loadAllFahrten();
+          this.loadNames();
+          this.loadBoote();
+      }           
+    })
+  </script>
+</body>
+</html>

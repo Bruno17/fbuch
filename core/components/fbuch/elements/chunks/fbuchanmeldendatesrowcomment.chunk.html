@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <form>
+      <input type="hidden" name="iid" value="[[!#request.iid]]"/>
+      <input type="hidden" name="code" value="[[!#request.code]]"/>
+      <input type="hidden" name="remove_comment" value="[[+id]]"/>
+      <input type="hidden" name="date_id" value="[[+date_id]]"/>
+      <button type="submit" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </form>
+      [[+createdon:strtotime:date=`%d.%m.%Y %H:%M`]]<br>
+      [[+createdby:is=`0`:then=`[[+Name_firstname]] [[+Name_lastname]]`:else=`[[+createdby:userinfo=`fullname`]]`]]  [[+riot_user_id]]
+         
+  </div>
+  <div class="panel-body">
+    [[+comment:nl2br]]
+  </div>
+</div>

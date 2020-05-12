@@ -1,0 +1,248 @@
+[[!FormIt?
+&preHooks=`fbuchGetFormValues`
+&hooks=`fbuchUpdate`
+&classname=`fbuchDate`
+&submitVar=`fahrt_submit`
+&successMessage=`<script>fahrten_form_success();</script>`
+]]
+
+
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">[[!#request.object_id:is=`0`:then=`Termin erstellen`:else=`Termin bearbeiten`]]</h4>
+      </div>
+[[!+fbucherror]]
+<form id="anmelden_form" action="[[~[[*id]]? &grid_id=`[[+grid_id]]`]]" method="post" class="form">
+      <div id="fbuchModalBody" class="modal-body">
+    <input type="hidden" name="nospam:blank" value="" />
+    <input type="hidden" name="fahrt_submit" value="1" />
+    <input type="hidden" name="object_id" value="[[!#request.object_id]]" />
+    <input type="hidden" id="instructor_id" name="instructor_id" value="[[!+fi.instructor_id]]" />
+    <input type="hidden" name="type" value="[[+fi.type]]" />
+    <input type="hidden" name="autoduplicate" value="0" />
+    <input type="hidden" name="autoduplicate_names" value="0" />
+    <input type="hidden" name="autoduplicate_invited" value="0" />
+    <input type="hidden" name="autoduplicated" value="0" />
+
+    <div class="row">
+
+    <div class="form-group col-sm-3">
+    <label for="add_person">
+        Betreuer:
+    </label>
+    <input autocomplete="off" class="form-control" id="add_person" name="instructor_name" value="[[!+fi.instructor_name]]" />
+    </div>
+    </div>
+    
+    <div class="row">
+
+    <div class="form-group col-sm-3">
+    <label for="date">
+        Datum:
+    </label>
+    <div class="input-group date">
+        <input name="date" id="date" type="text" class="form-control" value="[[!+fi.date]]"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>    </span>
+    </div>
+    </div>
+    
+    <div class="form-group col-sm-3">
+    <label for="date_end">
+        Datum bis:
+    </label>
+    <div class="input-group date">
+        <input name="date_end" id="date_end" type="text" class="form-control" value="[[!+fi.date_end]]"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>    </span>
+    </div>
+    </div>    
+
+    <div class="form-group col-sm-3">
+    <label for="start_time">
+        Startzeit:
+    </label>
+    <input type="text" class="form-control" name="start_time" id="start-time" value="[[!+fi.start_time]]" /> 
+    <span class="error">[[!+fi.error.start_time]]</span>
+    
+    </div>
+    <div class="form-group col-sm-3">
+    <label for="end_time">
+        Zeit bis:
+    </label>
+    <input type="text" class="form-control" name="end_time" id="end-time" value="[[!+fi.end_time]]" /> 
+    <span class="error">[[!+fi.error.end_time]]</span>
+    
+    </div>
+    </div>
+    <div class="row">
+
+    <div class="form-group col-sm-3">
+    <label for="max_reservations">
+        Plätze max:
+    </label>
+    <input type="text" class="form-control" name="max_reservations" id="max_reservations" value="[[!+fi.max_reservations]]" /> 
+    
+    </div>
+    
+    <div class="form-group col-sm-3">
+    <label for="type">
+        Termin Art:
+    </label>
+    <select class="form-control" name="type" id="type" > 
+    <option [[!+fi.type:FormItIsSelected=`Rudern`]] value="Rudern">Rudern</option>
+    <option [[!+fi.type:FormItIsSelected=`Teamrowing`]] value="Teamrowing">Teamrowing</option>
+    <option [[!+fi.type:FormItIsSelected=`Kraftraum`]] value="Kraftraum">Kraftraum</option>
+    <option [[!+fi.type:FormItIsSelected=`Regatta`]] value="Regatta">Regatta</option>
+    <option [[!+fi.type:FormItIsSelected=`Wanderruderer`]] value="Wanderruderer">Wanderruderer</option>
+    <option [[!+fi.type:FormItIsSelected=`Bootshausbelegung`]] value="Bootshaus Belegung">Bootshausbelegung</option>    
+    <option [[!+fi.type:FormItIsSelected=`Sonstiges`]] value="Sonstiges">Sonstige Veranstaltung</option>
+    </select>
+    </div>    
+
+    <div class="form-group col-sm-6">
+    <label for="title">
+        Gruppe/Ziel:
+    </label>
+    <input type="text" class="form-control" name="title" id="title" value="[[!+fi.title]]" /> 
+    
+    </div>
+    </div>
+    
+   <div class="row">
+   <div class="form-group col-sm-12">       
+     <label for="description">
+        Beschreibung:
+     </label>    
+     <textarea id="description" name="description"  class="form-control" rows="3">[[+fi.description]]</textarea>    
+   </div>
+   </div>
+<hr>
+[[!#request.object_id:is=`0`:then=``:else=`<h4 class="modal-title">Termin duplizieren</h4>
+<hr>
+<div class="row">
+  <div class="form-group col-sm-3">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="duplicate" value="1"> Terminkopie erstellen
+    </label>
+  </div>
+  </div>
+  <div class="form-group col-sm-3">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="duplicate_names" value="1"> Alle Namen mitkopieren
+    </label>
+  </div>
+  </div>
+  <div class="form-group col-sm-3">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="duplicate_invited" value="1"> Alle Eingeladenen mitkopieren
+    </label>
+  </div>
+  </div>
+</div>
+`]]
+
+<h4 class="modal-title">Automatisch wöchentlich duplizieren</h4>
+<hr>
+<div class="row">
+  <div class="form-group col-sm-3">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="autoduplicate" value="1" [[!+fi.autoduplicate:FormitIsChecked=`1`]]> Wöchentlich duplizieren 
+    </label>
+  </div>
+  </div>
+  <div class="form-group col-sm-3">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="autoduplicate_names" value="1" [[!+fi.autoduplicate_names:FormitIsChecked=`1`]]> Jeweils alle Namen weiterkopieren
+    </label>
+  </div>
+  </div>
+  <div class="form-group col-sm-3">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="autoduplicate_invited" value="1" [[!+fi.autoduplicate_invited:FormitIsChecked=`1`]]> Jeweils alle Eingeladenen weiterkopieren
+    </label>
+  </div>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="form-group col-sm-3">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="autoduplicated" value="1" [[!+fi.autoduplicated:FormitIsChecked=`1`]]> Autokopieren erledigt
+    </label>
+  </div>
+  </div>
+</div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button id="btn_anmelden" type="submit" class="btn btn-default">Speichern</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+</form>
+    </div>
+
+  </div>
+
+<script>
+var fahrten_form_success = function(){
+    $('#fbuchModal').modal('hide');
+    var success_object_id='[[!+success_object_id]]';
+    fbuch_getfahrten('none',success_object_id,formdata);       
+}
+</script>
+[[!+fi.successMessage]]
+
+<script>
+var formdata = [];
+
+$( "#anmelden_form" ).on( "submit", function( event ) {
+  event.preventDefault();
+  formdata = $( this ).serializeArray();
+  var $form = $( this );
+  var url = $form.attr( "action" );
+  var posting = $.post( url, formdata );
+  posting.done(function( data ) {
+    $( "#fbuchModal" ).empty().append( data );
+  });
+});
+
+var input = $('#add_person');
+var hidden_input = $('#instructor_id');
+input.typeahead({source:[
+    [[!migxLoopCollection?
+    &classname=`fbuchNames`
+    &sortConfig=`[{"sortby":"lastname"}]`
+    &tpl=`@CODE:{id:"[[+id]]",name:"[[+lastname]] [[+firstname]]"}`
+    &where=`{"member_status:IN":["Gast","Mitglied","VHS"],"deleted":"0"}`
+    &outputSeparator=`,`
+    &debug=`0`
+    ]]
+    ],items:15
+     ,autoSelect: false
+     //,appendTo: $('#fbuchModalBody')
+     ,afterSelect: function(item){
+         //console.log(item);
+         hidden_input.val(item.id);
+        }
+    });
+
+
+$('.input-group.date').datepicker({
+    format: "dd.mm.yyyy",
+    todayBtn: "linked",
+    language: "de",
+    autoclose: true,
+    todayHighlight: true
+});
+
+</script>

@@ -1,0 +1,17 @@
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`fbuchFahrt`
+            &tpl=`@CODE:[[+id]]`
+            &where=`{"deleted":"0","date_id":"[[+id]]"}`
+            &totalVar=`reservations_total` 
+            &toPlaceholder=`reservations`
+        ]]
+
+<tr class="datarow [[+Fahrten_[[+id]]_active]] [[+_last:!empty=`last [[+Fahrten_lastactive]]`]] [[+_first:!empty=`first [[+Fahrten_firstactive]]`]]" data-id="[[+id]]">
+<td>[[+date:strtotime:date=`%a,%d.%m.%Y`]]</td>
+<td>[[+start_time:fbuchValidateTime]]</td>
+<td>[[+end_time:fbuchValidateTime]]</td>
+<td>[[+Name_firstname]] [[+Name_lastname]]</td>
+<td>[[+title]]</td>
+<td>[[+reservations_total]]/[[+max_reservations]]</td>
+</tr>

@@ -1,0 +1,59 @@
+[
+  {
+    "id":9,
+    "source":0,
+    "property_preprocess":false,
+    "templatename":"fahrtenbuch",
+    "description":"",
+    "editor_type":0,
+    "category":0,
+    "icon":"",
+    "template_type":0,
+    "locked":false,
+    "properties":[
+      
+    ],
+    "static":false,
+    "static_file":"",
+    "filename":"fahrtenbuch.template.html",
+    "category_name":"fbuch"
+  },
+  {
+    "id":14,
+    "source":0,
+    "property_preprocess":false,
+    "templatename":"fbuch BootstrapVue",
+    "description":"",
+    "editor_type":0,
+    "category":0,
+    "icon":"",
+    "template_type":0,
+    "locked":false,
+    "properties":[
+      
+    ],
+    "static":false,
+    "static_file":"",
+    "filename":"fbuch bootstrapvue.template.html",
+    "category_name":"fbuch"
+  },
+  {
+    "id":15,
+    "source":0,
+    "property_preprocess":false,
+    "templatename":"fbuch Quasar",
+    "description":"",
+    "editor_type":0,
+    "category":0,
+    "icon":"",
+    "template_type":0,
+    "locked":false,
+    "properties":[
+      
+    ],
+    "static":false,
+    "static_file":"",
+    "filename":"fbuch quasar.template.html",
+    "category_name":"fbuch"
+  }
+]

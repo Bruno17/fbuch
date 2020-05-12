@@ -1,0 +1,70 @@
+        [[!fbuchSetGridPlaceholders? &mode=`nextdate` &grid_id=`[[+grid_id]]`]]
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`[[+classname]]`
+            &joins=`[{"alias":"Boot"}]`
+            &tpl=`@CODE:[[+date]]`
+            &limit=`1`
+            &totalVar=`[[+grid_id]]_total`
+            &where=`[{"deleted":"0",[[+where]]},[[+nextdate_where]] ]`
+            &sortConfig=`[{"sortby":"date","sortdir":"[[+nextdate_dir]]"}]`
+            &toPlaceholder=`nextDate`
+        ]]
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`[[+classname]]`
+            &joins=`[{"alias":"Boot"}]`
+            &tpl=`@CODE:[[+date]]`
+            &limit=`1`
+            &totalVar=`[[+grid_id]]_total`
+            &where=`{"deleted":"0",[[+where]]}`
+            &sortConfig=`[{"sortby":"date","sortdir":"DESC"}]`
+            &toPlaceholder=`lastDate`
+        ]]
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`[[+classname]]`
+            &joins=`[{"alias":"Boot"}]`
+            &tpl=`@CODE:[[+date]]`
+            &limit=`1`
+            &totalVar=`[[+grid_id]]_total`
+            &where=`{"deleted":"0",[[+where]]}`
+            &sortConfig=`[{"sortby":"date","sortdir":"ASC"}]`
+            &toPlaceholder=`firstDate`
+        ]]
+        [[!fbuchSetGridPlaceholders? 
+            &mode=`date` 
+            &nextDate=`[[+nextDate]]`
+            &lastDate=`[[+lastDate]]` 
+            &firstDate=`[[+firstDate]]` 
+            &grid_id=`[[+grid_id]]` 
+            &limit=`[[+limit]]` 
+            &total=`[[!+[[+grid_id]]_total]]`
+         ]]
+        
+<nav>
+  <ul class="pager">
+    <li><a id="prev_items" href="#">&larr; Älter</a></li>
+    <li><a id="current_items" href="#">Aktuelle Einträge</a></li>
+    <li><a id="next_items" href="#">Neuer &rarr;</a></li>
+  </ul>
+</nav>
+[[$fbuch[[+grid_id]]Buttons]]
+    <table class="fahrten table table-striped table-hover [[+[[+grid_id]]_firstlast_offset]]" data-offset="[[+[[+grid_id]]_offset]]" data-type="[[+type]]">
+<thead>
+[[$fbuch[[+grid_id]]Head]]
+</thead>
+<tbody>
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`[[+classname]]`
+            &joins=`[{"alias":"Boot"},{"alias":"Names"},{"alias":"Name","classname":"fbuchNames","on":"Name.id=Names.name_id"}]`
+            &tpl=`fbuch[[+grid_id]]Row`
+            &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
+            &where=`[{"deleted":"0",[[+where]]},[[+date_where]]]`
+            &grid_id=`[[+grid_id]]`
+            &groupby=`fbuchFahrt.id`
+        ]]
+</tbody>
+    </table>
+

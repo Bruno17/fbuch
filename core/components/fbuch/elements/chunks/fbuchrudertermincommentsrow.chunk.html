@@ -1,0 +1,28 @@
+<div id="date-[[+id]]" class="panel panel-primary">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+
+<div class="btn-group pull-right">
+<form action="[[~87]]">
+<input type="hidden" name="date_id" value="[[+id]]">
+<button type="submit" data-process="add_comment" data-id="[[+id]]" class="btn btn-default add_comment" aria-label="Kommentar erstellen">
+<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+</button> 
+</form>
+</div>
+
+  <strong>[[+title]]</strong><br>
+  [[+date:strtotime:date=`%a,%d.%m.%Y`]] [[+start_time]]
+  </div>
+  <div class="panel-body">
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchDateComment`
+&joins=`[{"alias":"Name"}]`
+&where=`{"date_id":"[[+id]]"}`
+&tpl=`fbuchAnmeldenDatesRowComment`
+&sortConfig=`[{"sortby":"createdon","sortdir":"DESC"}]`
+&debug=`0`
+]]
+</div>
+</div>

@@ -1,0 +1,32 @@
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`[[+classname]]`
+            &joins=`[{"alias":"Boot"}]`
+            &tpl=`@CODE:<div></div>`
+            &limit=`1`
+            &totalVar=`[[+grid_id]]_total`
+            &where=`{"deleted":"0",[[+where]]}`
+        ]]
+        [[!fbuchSetGridPlaceholders? &grid_id=`[[+grid_id]]` &limit=`[[+limit]]` &total=`[[!+[[+grid_id]]_total]]`]]
+
+[[$fbuch[[+grid_id]]Buttons]]
+    <table class="fahrten table table-striped table-hover [[+[[+grid_id]]_firstlast_offset]]" data-offset="[[+[[+grid_id]]_offset]]">
+<thead>
+[[$fbuch[[+grid_id]]Head]]
+</thead>
+<tbody>
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`[[+classname]]`
+            &joins=`[{"alias":"Boot"},{"alias":"Names"},{"alias":"Name","classname":"fbuchNames","on":"Name.id=Names.name_id"}]`
+            &tpl=`fbuch[[+grid_id]]Row`
+            &limit=`[[+limit]]`
+            &offset=`[[+[[+grid_id]]_offset]]`
+            &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
+            &where=`{"deleted":"0",[[+where]]}`
+            &grid_id=`[[+grid_id]]`
+            &groupby=`fbuchFahrt.id`
+        ]]
+</tbody>
+    </table>
+

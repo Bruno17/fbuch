@@ -1,0 +1,11 @@
+<tr id="datarow-buttons-[[+id]]" class="datarow-buttons" data-id="[[+id]]" style="display:none;">
+<td colspan="6">[[$fbuch[[+property.grid_id]]Buttons]]</td>
+</tr>
+<tr class="datarow [[+Ergofahrten_[[+id]]_active]] [[+_last:!empty=`last [[+Ergofahrten_lastactive]]`]] [[+_first:!empty=`first [[+Ergofahrten_firstactive]]`]]" data-id="[[+id]]">
+<td>[[+date:strtotime:date=`%d.%m.%Y`]]</td>
+<td>[[+Boot_name]]</td>
+<td>[[+Name_firstname]] [[+Name_lastname]]</td>
+<td>[[+start_time:fbuchValidateTime]]</td>
+<td>[[+end_time:fbuchValidateTime]]</td>
+<td>[[+km:replace=`.==,`]]</td>
+</tr>

@@ -1,0 +1,20 @@
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`fbuchFahrtNames`
+            &joins=`[{"alias":"Name"}]`
+            &limit=`1`
+            &where=`{"obmann":"1","fahrt_id":"[[!#request.fahrt_id]]"}`
+            &tpl=`@CODE:1`
+            &toPlaceholder=`has_obmann`
+        ]]
+
+<table class="table">
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`fbuchFahrtNames`
+            &joins=`[{"alias":"Name"}]`
+            &limit=`10`
+            &where=`{"fahrt_id":"[[!#request.fahrt_id]]"}`
+            &tpl=`fbuchFahrtnamRow`
+        ]]
+</table>

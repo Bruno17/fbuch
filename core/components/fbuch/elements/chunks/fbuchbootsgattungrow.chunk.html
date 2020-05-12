@@ -1,0 +1,20 @@
+<h3>[[+name]]</h3>
+
+<div class="table-responsive">
+    <table class="fahrten table table-striped table-hover [[+[[+grid_id]]_firstlast_offset]]" data-offset="[[+[[+grid_id]]_offset]]">
+<thead>
+[[$fbuch[[+property.grid_id]]Head]]
+</thead>
+<tbody>
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`fbuchBoot`
+            &joins=`[{"alias":"Nutzergruppe"}]`
+            &tpl=`fbuchBooteRow`
+            &where=`{"deleted":"0","gattung":"[[+link_key]]"}`
+            &sortConfig=`[{"sortby":"name","sortdir":"ASC"}]`
+            &grid_id=`[[+property.grid_id]]`
+        ]]
+</tbody>
+    </table>
+</div>

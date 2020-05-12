@@ -1,0 +1,20 @@
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`[[+classname]]`
+            &tpl=`@CODE:<div></div>`
+            &limit=`1`
+            &totalVar=`[[+grid_id]]_total`
+            &where=`{"deleted":"0","lastname:LIKE":"[[+atoz_char]]%"}`
+        ]]
+
+[[$fbuch[[+grid_id]]Buttons]]
+
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`fbuchBootsGattung`
+            &tpl=`fbuchBootsgattungRow`
+            &sortConfig=`[{"sortby":"link_key","sortdir":"ASC"}]`
+            &grid_id=`[[+grid_id]]`
+        ]]
+
+

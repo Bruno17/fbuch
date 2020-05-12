@@ -1,0 +1,111 @@
+<div class="col-sm-6">
+<div class="panel panel-default">
+  <div class="panel-heading">
+  <h2>[[+title]]</h2><br>
+  <strong>[[+date:strtotime:date=`%a, %d.%m.%Y`]] [[+start_time]]</strong>
+  </div>
+  <div class="panel-body">
+
+<form method="post">
+
+[[!today:date=`%Y-%m-%d`:gt=`[[+date:strtotime:date=`%Y-%m-%d`]]`:then=`
+<strong>Der Termin liegt in der Vergangenheit.<br> 
+Du kannst dich nicht für einen vergangenen Termin anmelden!</strong>
+`:else=`
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchNames`
+&where=`{"id":"[[+name_id]]"}`
+&tpl=`fbuchAnmeldenDatesRowForm`
+]]
+`]]
+
+
+
+
+
+
+<hr>
+
+<h3>Bisherige Zusagen</h3>
+
+<ul style="min-height:50px;" data-id="[[+id]]" class="list-group ">
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchDateNames`
+&joins=`[{"alias":"Name"},{"alias":"Registeredby"},
+{"alias":"Zusagen","classname":"fbuchDateNames","on":"Zusagen.date_id=fbuchDateNames.date_id AND Zusagen.name_id=fbuchDateNames.name_id"}]`
+&where=`{"date_id":"[[+id]]"}`
+&sortConfig=`[{"sortby":"registeredby"}]`
+&groupingField=`registeredby`
+&groupby=`fbuchDateNames.id`
+&tpl=`fbuchAnmeldenDateNamesRow`
+&debug=`0`
+&placeholdersKeyField=``
+]]
+
+  </ul>
+<hr>
+
+<div class="panel-body">
+<h3>Bisherige Absagen</h3>
+</div>
+<ul style="min-height:50px;" data-id="[[+id]]" class="list-group ">
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchDateInvited`
+&joins=`[{"alias":"Name"}]`
+&where=`{"date_id":"[[+id]]","canceled":"1"}`
+&tpl=`fbuchAnmeldenDateNamesRow`
+&debug=`0`
+&placeholdersKeyField=``
+]]
+
+  </ul>
+<hr>
+
+<div class="panel-body">
+<h3>Einladungen</h3>
+</div>
+<ul style="min-height:50px;" data-id="[[+id]]" class="list-group ">
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchDateInvited`
+&joins=`[{"alias":"Name"},
+{"alias":"Zusagen","classname":"fbuchDateNames","on":"Zusagen.date_id=fbuchDateInvited.date_id AND Zusagen.name_id=fbuchDateInvited.name_id"}]`
+&where=`{"date_id":"[[+id]]"}`
+&tpl=`fbuchAnmeldenDateNamesRow`
+&debug=`0`
+&placeholdersKeyField=``
+]]
+
+  </ul>
+</form>  
+</div>
+</div>
+</div>
+
+
+<div class="col-sm-6">
+<div class="panel panel-default">
+  <div class="panel-heading">
+  <h2>Kommentare</h2>
+  </div>
+  <div class="panel-body">
+
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchDateComment`
+&joins=`[{"alias":"Name"}]`
+&where=`{"date_id":"[[+id]]"}`
+&tpl=`fbuchAnmeldenDatesRowComment`
+&sortConfig=`[{"sortby":"createdon","sortdir":"DESC"}]`
+&debug=`0`
+]]
+  
+</div>
+
+</div>
+</div>
+
+

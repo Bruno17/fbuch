@@ -1,0 +1,87 @@
+[[!FormIt?
+&preHooks=`fbuchGetFormValues`
+&hooks=`fbuchUpdate`
+[[!#request.process:is=`remove_datename`:then=`
+&classname=`fbuchDateNames`
+`:else=``]]
+[[!#request.process:is=`remove_invite`:then=`
+&classname=`fbuchDateInvited`
+`:else=``]]
+&submitVar=`fahrt_submit`
+&successMessage=`<script>fahrten_form_success();</script>`
+&validate=`name:required`
+]]
+
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Person aus Termin entfernen </h4>
+      </div>
+[[!+fbucherror]]
+<form [[!+hideform:is=`1`:then=`style="display:none;"`:else=``]] id="anmelden_form" action="[[~[[*id]]? &grid_id=`[[+grid_id]]`]]" method="post" class="form">
+
+ <div id="fbuchModalBody" class="modal-body">
+    <input type="hidden" name="nospam:blank" value="" />
+    <input type="hidden" name="fahrt_submit" value="1" />
+    <input type="hidden" name="object_id" value="[[!#request.object_id]]" />
+    <input type="hidden" name="process" value="[[!#request.process]]" />
+    <input type="hidden" name="processaction" value="[[!#request.process]]" />
+    <input type="hidden" name="Name_firstname" value="[[+fi.Name_firstname]]" />
+    <input type="hidden" name="Name_lastname" value="[[+fi.Name_lastname]]" />
+    
+Person aus Termin entfernen:<strong> [[+fi.Name_firstname]] [[+fi.Name_lastname]]</strong><br><br>
+Person wird unwiederbringlich aus dem Termin entfernt!
+
+<div class="row" style="display:none;">    
+
+    <div class="form-group col-sm-12">
+    <label for="remove_person">
+        Bitte Namen zur Bestätigung eingeben:
+    </label>
+    <input autocomplete="off" class="form-control" id="remove_person" name="name" />
+    </div>  
+</div>
+</div>
+
+      <input type="hidden" name="name" value="[[+fi.Name_firstname]] [[+fi.Name_lastname]]" />
+      <div class="modal-footer">
+        <button id="btn_anmelden" type="submit" class="btn btn-default">Person entfernen</button> 
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+</form>
+
+    </div>
+
+  </div>
+
+<script>
+var fahrten_form_success = function(){
+    $('#fbuchModal').modal('hide');
+    var success_object_id='[[!+success_object_id]]';
+    fbuch_getfahrten('none',success_object_id,formdata);       
+}
+</script>
+[[!+fi.successMessage]]
+
+<script>
+var formdata = [];
+
+$( "#anmelden_form" ).on( "submit", function( event ) {
+  event.preventDefault();
+  formdata = $( this ).serializeArray();
+  var $form = $( this );
+  var url = $form.attr( "action" );
+  var posting = $.post( url, formdata );
+  posting.done(function( data ) {
+    $( "#fbuchModal" ).empty().append( data );
+  });
+});
+
+$('#fbuchModal').on('shown.bs.modal', function () {
+  $('#remove_person').focus().select();
+}); 
+
+    </script>

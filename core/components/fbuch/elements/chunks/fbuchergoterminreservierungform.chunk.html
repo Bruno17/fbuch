@@ -1,0 +1,85 @@
+[[!fbuchUpdate? &classname=`ErgoterminReservierung`]]
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Plätze reservieren</h4>
+      </div>
+ <div id="fbuchModalBody" class="modal-body">
+[[!+fbucherror]]
+<div class="row">    
+    <div class="form-group col-sm-3">
+    <label for="add_person">
+        Person hinzufügen:
+    </label>
+    <input autocomplete="off" class="form-control" id="add_person" name="name" />
+    </div>
+</div>
+
+[[!+reservation_names]]
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+
+    <script>
+
+var input = $('#add_person');
+input.typeahead({source:[
+    [[!migxLoopCollection?
+    &classname=`fbuchNames`
+    &sortConfig=`[{"sortby":"lastname"}]`
+    &tpl=`@CODE:{id:"[[+id]]",name:"[[+lastname]] [[+firstname]]"}`
+    &where=`{"member_status:IN":["Gast","Mitglied","VHS"],"deleted":"0"}`
+    &outputSeparator=`,`
+    &debug=`0`
+    ]]
+    ],items:15
+     ,autoSelect: false
+     ,afterSelect: function(item){
+         //console.log(item);
+         //input.val('');
+         var ajax_url = typeof(updatedatepersons_ajax_url)=='undefined' ? updateteam_ajax_url : updatedatepersons_ajax_url;
+         $( "#fbuchModal" ).load( ajax_url,{"fahrt_id":"[[!#request.fahrt_id]]","name_id":item.id,"processaction":"add"}, function(){
+             $('#add_person').focus();
+             //fbuch_getteam();
+             var fahrt_id = $('.fahrten').find('.active').data('id');
+             fbuch_getfahrten('none',fahrt_id);
+         });
+        }
+    }); 
+
+var input2 = $('#remove_person');
+input2.typeahead({source:[
+    [[!migxLoopCollection?
+    &classname=`fbuchNames`
+    &sortConfig=`[{"sortby":"lastname"}]`
+    &tpl=`@CODE:{id:"[[+id]]",name:"[[+lastname]] [[+firstname]]"}`
+    &where=`{"member_status:IN":["Gast","Mitglied","VHS"],"deleted":"0"}`
+    &outputSeparator=`,`
+    &debug=`0`
+    ]]
+    ],items:15
+     ,autoSelect: false
+     ,afterSelect: function(item){
+         //console.log(item);
+         //input.val('');
+var ajax_url = typeof(updatedatepersons_ajax_url)=='undefined' ? updateteam_ajax_url : updatedatepersons_ajax_url;
+         $( "#fbuchModal" ).load( ajax_url,{"fahrt_id":"[[!#request.fahrt_id]]","name_id":item.id,"processaction":"remove"}, function(){
+             $('#remove_person').focus();
+             fbuch_getfahrten('none');
+         });
+        }
+    }); 
+
+$('#fbuchModal').on('shown.bs.modal', function () {
+  $('#add_person').focus().select();
+}); 
+
+    </script>

@@ -1,0 +1,19 @@
+[[$fbuch[[+grid_id]]Buttons]]
+    <table class="fahrten table table-striped table-hover [[+[[+grid_id]]_firstlast_offset]]" data-offset="[[+[[+grid_id]]_offset]]">
+<thead>
+[[$fbuch[[+grid_id]]Head]]
+</thead>
+<tbody>
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`[[+classname]]`
+            &joins=`[{"alias":"Name"}]`
+            &tpl=`fbuch[[+grid_id]]Row`
+            &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
+            &where=`{"deleted":"0","date:>=":"[[!now:date=`%Y-%m-%d 00:00:00`]]"}`
+            &grid_id=`[[+grid_id]]`
+            &groupbyXXX=`fbuchFahrt.id`
+        ]]
+</tbody>
+    </table>
+
