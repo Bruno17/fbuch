@@ -1,4 +1,13 @@
-<button id="create_fahrt">Termin erstellen</button>
-<button id="duplicate_fahrt">Termin duplizieren</button>
-<button id="update_fahrt">Termin bearbeiten</button>
-<button id="update_team">Plätze reservieren</button>   
+[[+property.type:is=`Rudern`:then=`
+<a class="btn btn-default" href="[[~87? &date_id=`[[+id]]`]]">Selbst Zusagen/Absagen</a>
+<a class="btn btn-default" href="[[~78? &offset=`[[+date]]`&type=`dragdrop`&dir=`none`]]">Zum Termin im Fahrtenbuch</a>
+`:else=``]]
+
+[[!hasPermission:is=`yes`:then=`
+<button data-type="[[+type]]" class="btn btn-default create create_fahrt">Termin erstellen</button>
+<button class="btn btn-default update update_fahrt">Termin bearbeiten</button>
+<button class="btn btn-default update invite_persons">Personen einladen</button>   
+`:else=``? &permission=`fbuch_create_termin`]]
+
+<button class="btn btn-default update update_team">Weitere Personen anmelden</button>
+  

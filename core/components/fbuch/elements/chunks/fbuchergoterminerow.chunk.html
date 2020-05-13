@@ -1,16 +1,27 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
-            &classname=`fbuchFahrt`
+            &classname=`fbuchDateNames`
+            &where=`{"date_id":"[[+id]]"}`
             &tpl=`@CODE:[[+id]]`
-            &where=`{"deleted":"0","date_id":"[[+id]]"}`
             &totalVar=`reservations_total` 
             &toPlaceholder=`reservations`
         ]]
 
-<tr class="datarow [[+Fahrten_[[+id]]_active]] [[+_last:!empty=`last [[+Fahrten_lastactive]]`]] [[+_first:!empty=`first [[+Fahrten_firstactive]]`]]" data-id="[[+id]]">
-<td>[[+date:strtotime:date=`%a,%d.%m.%Y`]]</td>
+<tr class="datarow [[!#request.active_id:is=`[[+id]]`:then=`active`:else=``]]" data-id="[[+id]]">
+[[+_groupidx:is=`1`:then=`<td class="dayname" rowspan="[[+_groupcount]]">[[+date:strtotime:date=`%a`]]<br><span class="date">[[+date:strtotime:date=`%d.%m.%Y`]]</td>`:else=``]]</span>
+<td>
+<div class="dropdown">
+<button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-option-horizontal"></span>
+ <span class="glyphicon glyphicon-menu-down"></span>
+</button>
+<ul class="dropdown-menu">
+[[$fbuchErgotermineDropdownButtons? &date_id=`[[+id]]` &date=`[[+date]]`]]
+</ul>
+</div>
+</td>
 <td>[[+start_time:fbuchValidateTime]]</td>
 <td>[[+end_time:fbuchValidateTime]]</td>
+<td>[[+type]]</td>
 <td>[[+Name_firstname]] [[+Name_lastname]]</td>
 <td>[[+title]]</td>
 <td>[[+reservations_total]]/[[+max_reservations]]</td>

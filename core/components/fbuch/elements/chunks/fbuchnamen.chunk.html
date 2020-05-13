@@ -29,7 +29,7 @@
             &classname=`[[+classname]]`
             &tpl=`fbuch[[+grid_id]]Row`
             &sortConfig=`[{"sortby":"lastname","sortdir":"ASC"},{"sortby":"firstname","sortdir":"ASC"}]`
-            &where=`{"deleted":"0","lastname:LIKE":"[[+atoz_char]]%"}`
+            &where=`{"member_status:IN":["Mitglied","Gast","VHS"],"deleted":"0","lastname:LIKE":"[[+atoz_char]]%"}`
             &grid_id=`[[+grid_id]]`
         ]]
 </tbody>

@@ -1,5 +1,24 @@
-[[$fbuch[[+grid_id]]Buttons]]
-    <table class="fahrten table table-striped table-hover [[+[[+grid_id]]_firstlast_offset]]" data-offset="[[+[[+grid_id]]_offset]]">
+<ul class="nav nav-pills weektabs">
+  <li role="presentation" data-tab="thisweek" class="[[!#request.week_tab:empty=`active`]] [[!#request.week_tab:is=`thisweek`:then=`active`:else=``]]">
+      <a data-toggle="pill" href="[[~[[*id]]]]#thisweek">Diese Woche</a>
+  </li>
+  <li role="presentation" data-tab="nextweek" class="[[!#request.week_tab:is=`nextweek`:then=`active`:else=``]]">
+      <a data-toggle="pill" href="[[~[[*id]]]]#nextweek">Nächste Woche</a>
+  </li>
+  <li role="presentation" data-tab="moreweeks" class="[[!#request.week_tab:is=`moreweeks`:then=`active`:else=``]]">
+      <a data-toggle="pill" href="[[~[[*id]]]]#moreweeks">Weitere Termine</a>
+  </li>
+</ul>
+<div class="tab-content">
+<div class="panel panel-default tab-pane [[!#request.week_tab:empty=`active`]] [[!#request.week_tab:is=`thisweek`:then=`active`:else=``]]" id="thisweek">
+  <!-- Default panel contents -->
+
+  <div class="panel-heading"><h3>Termine dieser Woche</h3>ab [[!fbuch_strtotime:date=`%d.%m.%Y`? &input=`this week`]] </div>
+  <div class="panel-body">
+[[$fbuch[[+grid_id]]Buttons? &type=`[[+type]]`]]
+  </div>
+<div class="fahrten-wrapper table-responsive">
+    <table class="fahrten table table-striped table-hover [[+[[+grid_id]]_firstlast_offset]]" data-offset="[[+[[+grid_id]]_offset]]" data-type="[[+type]]">
 <thead>
 [[$fbuch[[+grid_id]]Head]]
 </thead>
@@ -10,10 +29,86 @@
             &joins=`[{"alias":"Name"}]`
             &tpl=`fbuch[[+grid_id]]Row`
             &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
-            &where=`{"deleted":"0","date:>=":"[[!now:date=`%Y-%m-%d 00:00:00`]]"}`
+            &where=`{"type:IN":[ "Wanderruderer","Rudern","Teamrowing","Kraftraum","Regatta","Sonstiges","Bootshausbelegung" ],"deleted":"0",
+                "date:>=":"[[!fbuch_strtotime:date=`%Y-%m-%d 00:00:00`? &input=`this week`]]",
+                "date:<=":"[[!fbuch_strtotime:date=`%Y-%m-%d 23:59:59`? &input=`this week + 6 day`]]"
+            }`
             &grid_id=`[[+grid_id]]`
+            &type=`[[+type]]`
+            &groupingField=`date`
             &groupbyXXX=`fbuchFahrt.id`
+            &debug=`0`
         ]]
 </tbody>
     </table>
+</div>
+</div>
+
+<div class="panel panel-default tab-pane [[!#request.week_tab:is=`nextweek`:then=`active`:else=``]]" id="nextweek">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h3>Termine nächste Woche</h3>ab [[!fbuch_strtotime:date=`%d.%m.%Y`? &input=`next week`]] </div>
+  <div class="panel-body">
+[[$fbuch[[+grid_id]]Buttons? &type=`[[+type]]`]]
+  </div>
+<div class="fahrten-wrapper table-responsive">
+    <table class="fahrten table table-striped table-hover [[+[[+grid_id]]_firstlast_offset]]" data-offset="[[+[[+grid_id]]_offset]]" data-type="[[+type]]">
+<thead>
+[[$fbuch[[+grid_id]]Head]]
+</thead>
+<tbody>
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`[[+classname]]`
+            &joins=`[{"alias":"Name"}]`
+            &tpl=`fbuch[[+grid_id]]Row`
+            &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
+            &where=`{"type:IN":[ "Wanderruderer","Rudern","Teamrowing","Kraftraum","Regatta","Sonstiges","Bootshausbelegung" ],"deleted":"0",
+                "date:>=":"[[!fbuch_strtotime:date=`%Y-%m-%d 00:00:00`? &input=`next week`]]",
+                "date:<=":"[[!fbuch_strtotime:date=`%Y-%m-%d 23:59:59`? &input=`next week + 6 day`]]"
+            }`
+            &grid_id=`[[+grid_id]]`
+            &type=`[[+type]]`
+            &groupingField=`date`
+            &groupbyXXX=`fbuchFahrt.id`
+            &debug=`0`
+        ]]
+</tbody>
+    </table>
+</div>
+</div>
+
+<div class="panel panel-default tab-pane [[!#request.week_tab:is=`moreweeks`:then=`active`:else=``]]" id="moreweeks">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h3>Weitere Termine</h3>ab [[!fbuch_strtotime:date=`%d.%m.%Y`? &input=`next week + 1 week`]] </div>
+  <div class="panel-body">
+[[$fbuch[[+grid_id]]Buttons? &type=`[[+type]]`]]
+  </div>
+<div class="fahrten-wrapper table-responsive">
+    <table class="fahrten table table-striped table-hover [[+[[+grid_id]]_firstlast_offset]]" data-offset="[[+[[+grid_id]]_offset]]" data-type="[[+type]]">
+<thead>
+[[$fbuch[[+grid_id]]Head]]
+</thead>
+<tbody>
+        [[!migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`[[+classname]]`
+            &joins=`[{"alias":"Name"}]`
+            &tpl=`fbuch[[+grid_id]]Row`
+            &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
+            &where=`{"type:IN":[ "Wanderruderer","Rudern","Teamrowing","Kraftraum","Regatta","Sonstiges","Bootshausbelegung" ],"deleted":"0",
+                "date:>=":"[[!fbuch_strtotime:date=`%Y-%m-%d 00:00:00`? &input=`next week + 1 week`]]"
+            }`
+            &grid_id=`[[+grid_id]]`
+            &type=`[[+type]]`
+            &groupingField=`date`
+            &groupbyXXX=`fbuchFahrt.id`
+            &debug=`0`
+        ]]
+</tbody>
+    </table>
+</div>
+</div>
+</div>
+
+
 
