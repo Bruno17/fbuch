@@ -66,6 +66,7 @@ class Fbuch {
             'connectorUrl' => $assetsUrl . 'connector.php'), $options);
 
         $this->modx->addPackage('fbuch', $this->getOption('modelPath'));
+        $this->getClientConfigOptions();
     }
 
     /**
@@ -90,6 +91,30 @@ class Fbuch {
         }
         return $option;
     }
+    
+    public function getClientConfigOptions(){
+        $modx = &$this->modx;
+        $path = $modx->getOption('clientconfig.core_path', null, $modx->getOption('core_path') . 'components/clientconfig/');
+        $path .= 'model/clientconfig/';
+        $clientConfig = $modx->getService('clientconfig','ClientConfig', $path);
+
+        /* If we got the class (gotta be careful of failed migrations), grab settings and go! */
+        if ($clientConfig instanceof ClientConfig) {
+            $contextKey = $modx->context instanceof modContext ? $modx->context->get('key') : 'web';
+            $settings = $clientConfig->getSettings($contextKey);
+            
+            //print_r($settings);die();
+
+            /* Make settings available as [[++tags]] */
+            $modx->setPlaceholders($settings, '+');
+
+            /* Make settings available for $modx->getOption() */
+            foreach ($settings as $key => $value) {
+                $modx->setOption($key, $value);
+            }
+        }        
+    }
+    
 
     public function checkPermission($permission, $properties = array()) {
         $modx = &$this->modx;
@@ -643,7 +668,7 @@ class Fbuch {
                     if ($object = $modx->getObject($classname, $object_id)) {
                         $comment_name = '[[+modx.user.id:userinfo=`fullname`]]';
                         if ($action == 'mail_invite') {
-                            $this->sendInviteMail($object, $comment, $comment_name, true, 'RGM Einladung');
+                            $this->sendInviteMail($object, $comment, $comment_name, true);
                         }
                         if ($action == 'mail_invite' || $action == 'riotinvite_invite') {
                             $name_o = $object->getOne('Name');
@@ -1378,8 +1403,11 @@ class Fbuch {
         }
     }
 
-    public function sendInviteMail(&$object, $comment = '', $comment_name = '', $add_datecomment = false, $subj_prefix = 'RGM Einladung') {
+    public function sendInviteMail(&$object, $comment = '', $comment_name = '', $add_datecomment = false, $subj_prefix = '') {
         $modx = &$this->modx;
+        
+        $subj_prefix = empty($subj_prefix) ? $modx->getOption('invite_subject_prefix') : $subj_prefix;
+        
         $modx->runSnippet('setlocale');
         $name_o = $object->getOne('Name');
         $date_o = $object->getOne('Date');
@@ -1410,10 +1438,10 @@ class Fbuch {
             $properties['comment'] = $comment;
             $properties['iid'] = $object->get('id');
             $properties['email'] = $email;
-            $properties['tpl'] = 'fbuch_invite_mail_tpl';
+            $properties['tpl'] = $modx->getOption('invite_mail_tpl');
             $properties['subject'] = $subj_prefix . ': ' . $date_o->get('title') . ' ' . strftime('%a, %d.%m.%Y ',strtotime($date_o->get('date'))) . $date_o->get('start_time');
             $properties['code'] = md5($properties['date_id'] . $properties['email'] . $properties['iid']);
-            //print_r($properties);
+            //print_r($properties);die();
             //$values = $hook->getValues();
             $this->sendMail($properties);
             $object->set('invited', 1);

@@ -498,7 +498,7 @@
     "source":0,
     "property_preprocess":false,
     "name":"fbuch_invite_mail_tpl",
-    "description":"",
+    "description":"Templatevorlage f\u00fcr Einladungsmails. Diesen Chunk bitte nicht bearbeiten, da er bei einem Upgrade \u00fcberschrieben wird.\nBesser einen eigenen Chunk erstellen anhand dieser Vorlage und den Chunknamen unter Extras->Konfiguration angeben.",
     "editor_type":0,
     "category":0,
     "cache_type":0,
@@ -593,6 +593,92 @@
     "static":false,
     "static_file":"",
     "filename":"fbuch_mailinglist_inputoptions.chunk.html",
+    "category_name":"fbuch"
+  },
+  {
+    "id":190,
+    "source":0,
+    "property_preprocess":false,
+    "name":"fbuchComponentNameselect",
+    "description":"",
+    "editor_type":0,
+    "category":0,
+    "cache_type":0,
+    "locked":false,
+    "properties":null,
+    "static":false,
+    "static_file":"",
+    "filename":"fbuchcomponentnameselect.chunk.html",
+    "category_name":"fbuch"
+  },
+  {
+    "id":191,
+    "source":0,
+    "property_preprocess":false,
+    "name":"fbuchComponentDatepicker",
+    "description":"",
+    "editor_type":0,
+    "category":0,
+    "cache_type":0,
+    "locked":false,
+    "properties":null,
+    "static":false,
+    "static_file":"",
+    "filename":"fbuchcomponentdatepicker.chunk.html",
+    "category_name":"fbuch"
+  },
+  {
+    "id":192,
+    "source":0,
+    "property_preprocess":false,
+    "name":"fbuchAppFuhrpark",
+    "description":"",
+    "editor_type":0,
+    "category":0,
+    "cache_type":0,
+    "locked":false,
+    "properties":[
+      
+    ],
+    "static":false,
+    "static_file":"",
+    "filename":"fbuchappfuhrpark.chunk.html",
+    "category_name":"fbuch"
+  },
+  {
+    "id":193,
+    "source":0,
+    "property_preprocess":false,
+    "name":"fbuchAppMailinggruppen",
+    "description":"",
+    "editor_type":0,
+    "category":0,
+    "cache_type":0,
+    "locked":false,
+    "properties":[
+      
+    ],
+    "static":false,
+    "static_file":"",
+    "filename":"fbuchappmailinggruppen.chunk.html",
+    "category_name":"fbuch"
+  },
+  {
+    "id":195,
+    "source":0,
+    "property_preprocess":false,
+    "name":"fbuchPegel",
+    "description":"",
+    "editor_type":0,
+    "category":0,
+    "cache_type":0,
+    "locked":false,
+    "properties":[
+      
+    ],
+    "static":false,
+    "static_file":"",
+    "filename":"fbuchpegel.chunk.html",
     "category_name":"fbuch"
   }
 ]

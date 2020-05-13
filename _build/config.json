@@ -705,7 +705,7 @@
         {
           "source":0,
           "property_preprocess":false,
-          "description":"",
+          "description":"Templatevorlage f\u00fcr Einladungsmails. Diesen Chunk bitte nicht bearbeiten, da er bei einem Upgrade \u00fcberschrieben wird.\nBesser einen eigenen Chunk erstellen anhand dieser Vorlage und den Chunknamen unter Extras->Konfiguration angeben.",
           "editor_type":0,
           "cache_type":0,
           "locked":false,

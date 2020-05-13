@@ -1,12 +1,33 @@
 <?php
 
-class MyControllerNames extends modRestController {
+include 'BaseController.php';
+
+class MyControllerNames extends BaseController {
     public $classKey = 'fbuchNames';
     public $defaultSortField = 'lastname';
     public $defaultSortDirection = 'ASC';
 
     public function beforeDelete() {
         throw new Exception('Unauthorized', 401);
+    }
+
+    public function get() {
+
+        $id = $this->getProperty($this->primaryKeyField);
+        if ($id == 'me') {
+
+            if ($fbuchUser = $this->getCurrentFbuchUser()) {
+                $id = $fbuchUser->get('id');
+            }
+
+            if (!empty($id)) {
+                $this->setProperty('id', $id);
+            } else {
+                throw new Exception('Not logged in', 405);
+            }
+
+        }
+        return parent::get();
     }
 
     public function beforePut() {
@@ -39,6 +60,12 @@ class MyControllerNames extends modRestController {
     }
 
     public function verifyAuthentication() {
+
+        $id = $this->getProperty($this->primaryKeyField);
+        if ($id == 'me' && $fbuchUser = $this->getCurrentFbuchUser()) {
+            return true;
+        }
+        
         if (!$this->modx->hasPermission('fbuch_view_names')) {
             return false;
         }

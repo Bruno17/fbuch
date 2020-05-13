@@ -1,6 +1,8 @@
 <?php
 
-class MyControllerMailinglists extends modRestController {
+include 'BaseController.php';
+
+class MyControllerMailinglists extends BaseController {
     public $classKey = 'fbuchMailinglist';
     public $defaultSortField = 'name';
     public $defaultSortDirection = 'ASC';
@@ -81,10 +83,10 @@ class MyControllerMailinglists extends modRestController {
     }    
 
     public function verifyAuthentication() {
-        if (!$this->modx->hasPermission('fbuch_view_fahrten')){
-            return false;
+        if ($fbuchUser = $this->getCurrentFbuchUser()){
+            return true;
         }
-        return true;
+        return false;
     }
     
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
@@ -116,9 +118,11 @@ class MyControllerMailinglists extends modRestController {
                 break;                
         } 
         */
-               
+            if ($fbuchUser = $this->getCurrentFbuchUser()) {
+                $joins = '[{"alias":"Names","on":"list_id=fbuchMailinglist.id and name_id='.$fbuchUser->get('id').'"}]';
+            }               
                 
-        $joins = '[{"alias":"Names","on":"list_id=fbuchMailinglist.id and name_id=129"}]';
+        
         
         $this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);
         
