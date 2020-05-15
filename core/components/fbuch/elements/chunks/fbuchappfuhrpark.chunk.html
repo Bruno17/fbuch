@@ -40,7 +40,7 @@
         loadFahrten(params){
             var params = params || {};
             var self = this;
-            var ajaxUrl = 'rest/fbuch/Fahrten';
+            var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Fahrten';
             params['gattung'] = 'fahrzeug';
             axios.get(ajaxUrl,{params:params})
             .then(function (response) {
@@ -60,7 +60,7 @@
             }  
 
             if (data.id == 0){
-                var ajaxUrl = 'rest/fbuch/Fahrten';
+                var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Fahrten';
                 axios.post(ajaxUrl,data)
                 .then(function (response) {
                     self.basic_modal = false;
@@ -70,7 +70,7 @@
                     console.log(error);
                 });
             } else {
-                var ajaxUrl = 'rest/fbuch/Fahrten';
+                var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Fahrten';
                 axios.put(ajaxUrl,data)
                 .then(function (response) {
                     self.basic_modal = false;
@@ -85,7 +85,7 @@
         loadNames(){
             var self = this;
             
-            var ajaxUrl = 'rest/fbuch/Names?limit=100000&returntype=options';
+            var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Names?limit=100000&returntype=options';
             axios.get(ajaxUrl)
             .then(function (response) {
                 self.namesoptions = response.data.results;
@@ -98,7 +98,7 @@
                 loadBoote(){
             var self = this;
             
-            var ajaxUrl = 'rest/fbuch/Boote?limit=100000&returntype=options';
+            var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Boote?limit=100000&returntype=options';
             axios.get(ajaxUrl)
             .then(function (response) {
                 self.booteoptions = response.data.results;

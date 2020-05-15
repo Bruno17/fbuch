@@ -13,7 +13,7 @@
         loadCurrentFbuchUser(){
             var data = {};
             var self = this;
-            var ajaxUrl = 'rest/fbuch/Names/me';
+            var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Names/me';
             data.iid = this.$route.query.iid;
             data.code = this.$route.query.code;
             data.id = 'me';
@@ -31,7 +31,7 @@
         loadMailinglists(){
             var data = {};
             var self = this;
-            var ajaxUrl = 'rest/fbuch/Mailinglists';
+            var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Mailinglists';
             data.iid = this.$route.query.iid;
             data.code = this.$route.query.code;            
             axios.get(ajaxUrl,{params:data})
@@ -55,7 +55,7 @@
             data.code = this.$route.query.code;             
 
             if (mailinglist.Names_active){
-                var ajaxUrl = 'rest/fbuch/Mailinglistnames';
+                var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Mailinglistnames';
                 axios.put(ajaxUrl,data)
                 .then(function (response) {
                     self.loadMailinglists();
@@ -64,7 +64,7 @@
                     console.log(error);
                 });
             } else {
-                var ajaxUrl = 'rest/fbuch/Mailinglistnames';
+                var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Mailinglistnames';
                 axios.post(ajaxUrl,data)
                 .then(function (response) {
                     self.loadMailinglists();
