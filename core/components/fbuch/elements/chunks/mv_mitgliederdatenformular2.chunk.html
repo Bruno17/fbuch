@@ -1,0 +1,149 @@
+
+<p>
+Wir bitten Sie, Ihre Daten zu überprüfen. Bitte Änderungen und Ergänzungen in folgendes Formular eintragen.<br/>
+<br/>
+</p>
+<h3>Ihre Daten:</h3>
+
+[[+wrong_email:isnot=``:then=`
+Uns liegt scheinbar eine falsche email-adresse vor.<br />
+Sie lautet: [[+wrong_email]]<br />
+Bitte ein gültige email-Adresse mitteilen!<br />
+`:else=``]]
+
+<form method="post" class="form-horizontal">
+  <div class="form-group">
+    <label for="firstname" class="col-sm-2 control-label">Vorname</label>
+    <div class="col-sm-10">
+      <input type="" name="firstname" class="form-control" id="firstname" placeholder="Vorname" value="[[+firstname]]">
+      <input type="hidden" name="firstname_old" value="[[+firstname]]">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Nachname</label>
+    <div class="col-sm-10">
+      <input type="" class="form-control" name="name" id="name" placeholder="Nachname" value="[[+name]]">
+      <input type="hidden" name="name_old" value="[[+name]]">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="street" class="col-sm-2 control-label">Straße</label>
+    <div class="col-sm-10">
+      <input type="" name="street" class="form-control" id="street" placeholder="Straße" value="[[+street]]">
+      <input type="hidden" name="street_old" value="[[+street]]">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="zip" class="col-sm-2 control-label">PLZ</label>
+    <div class="col-sm-10">
+      <input type="" name="zip" class="form-control" id="zip" placeholder="PLZ" value="[[+zip]]">
+      <input type="hidden" name="zip_old" value="[[+zip]]">      
+    </div>
+  </div>  
+  <div class="form-group">
+    <label for="city" class="col-sm-2 control-label">Ort</label>
+    <div class="col-sm-10">
+      <input type="" name="city" class="form-control" id="city" placeholder="Ort" value="[[+city]]">
+      <input type="hidden" name="city_old" value="[[+city]]">      
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email" class="col-sm-2 control-label">Email</label>
+    <div class="col-sm-10">
+      <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="[[+email]]">
+      <input type="hidden" name="email_old" value="[[+email]]">      
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="phone" class="col-sm-2 control-label">Telefon</label>
+    <div class="col-sm-10">
+      <input type="" name="phone" class="form-control" id="phone" placeholder="Telefon" value="[[+phone]]">
+      <input type="hidden" name="phone_old" value="[[+phone]]">      
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="business_phone" class="col-sm-2 control-label">Tel. gesch.</label>
+    <div class="col-sm-10">
+      <input type="" name="business_phone" class="form-control" id="business_phone" placeholder="Tel. gesch." value="[[+business_phone]]">
+      <input type="hidden" name="business_phone_old" value="[[+business_phone]]">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="mobile" class="col-sm-2 control-label">Handy</label>
+    <div class="col-sm-10">
+      <input type="" name="mobile" class="form-control" id="mobile" placeholder="Handy" value="[[+mobile]]">
+      <input type="hidden" name="mobile_old" value="[[+mobile]]"> 
+    </div>
+  </div> 
+  <div class="form-group">
+    <label for="bank1" class="col-sm-2 control-label">Bank</label>
+    <div class="col-sm-10">
+      <input type="" name="bank1" class="form-control" id="bank1" placeholder="Bank" value="[[+bank1]]">
+      <input type="hidden" name="bank1_old" value="[[+bank1]]">
+    </div>
+  </div>  
+  <div class="form-group">
+    <label for="bic" class="col-sm-2 control-label">BIC</label>
+    <div class="col-sm-10">
+      <input type="" name="bic" class="form-control" id="bic" placeholder="BIC" value="[[+bic]]">
+      <input type="hidden" name="bic_old" value="[[+bic]]">
+    </div>
+  </div>         
+  <div class="form-group">
+    <label for="iban" class="col-sm-2 control-label">IBAN</label>
+    <div class="col-sm-10">
+      <input type="" name="iban" class="form-control" id="iban" placeholder="IBAN" value="[[+iban]]">
+      <input type="hidden" name="iban_old" value="[[+iban]]">
+    </div>
+  </div>    
+[[migxLoopCollection? 
+&packageName=`fbuch`
+&classname=`mvMember`
+&joins=`[{"alias":"Family"}]`
+&where=`{"family_id":"[[+family_id]]","family_id:!=":"0"}`
+&tpl=`mv_mitgliederDatenFormular_familymember`
+&outputSeparator=`, `
+&toPlaceholder=`family`
+]]
+  <div class="form-group">
+    <label for="family_members" class="col-sm-2 control-label">Familienmitglieder</label>
+    <div class="col-sm-10">
+      <textarea name="family_members" class="form-control" id="family_members" placeholder="bei Familienmitgliedschaft Namen der Familienmitglieder" >[[+family]]</textarea> 
+      <input type="hidden" name="family_members_old" value="[[+family]]">     
+    </div>
+  </div> 
+
+[[migxLoopCollection? 
+&packageName=`fbuch`
+&classname=`mvFamily`
+&joins=`[{"alias":"Zahler"}]`
+&where=`{"mvFamily.id":"[[+family_id]]"}`
+&tpl=`@CODE:[[+Zahler_firstname]] [[+Zahler_name]]`
+&toPlaceholder=`zahler`
+]]  
+   
+  <div class="form-group">
+    <label for="zahler" class="col-sm-2 control-label">Zahler Familienmitgliedschaft</label>
+    <div class="col-sm-10">
+      <input type="" name="zahler" class="form-control" id="zahler" placeholder="bei Familienmitgliedschaft Name des Zahlers" value="[[+zahler]]">
+      <input type="hidden" name="zahler_old" value="[[+zahler]]">  
+    </div>
+  </div> 
+  
+  <div class="form-group">
+    <label for="message" class="col-sm-2 control-label">Sonstige Mitteilung</label>
+    <div class="col-sm-10">
+      <textarea name="message" class="form-control" id="message" placeholder="Sonstige Mitteilung" >
+
+      </textarea>      
+    </div>
+  </div>      
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Absenden</button>
+    </div>
+  </div>
+  <input type="hidden" name="code" value="[[+code]]">
+  <input type="hidden" name="datenerfassung" value="1">
+</form>

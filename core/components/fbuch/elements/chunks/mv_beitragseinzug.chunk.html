@@ -1,0 +1,42 @@
+<h3>Aktuelle Einstellungen</h3> 
+Einzugsdatum: [[+collect_date:strtotime:date=`%d.%m.%Y`]]<br>
+letztes Einzugsdatum: [[+last_collect_date:strtotime:date=`%d.%m.%Y`]]<br>
+Belegtext: [[+beleg_text]]<br><br>
+Einstellungen bearbeiten im Manager auf <a href="https://mv.rgmarktheidenfeld.de/manager/?a=resource/update&id=24">manager/?a=resource/update&id=24</a> unter Template Variablen
+<br><br>
+
+<table class="table">
+<tr>
+<th>Nr</th>
+<th>ID</th>
+<th>Name</th>
+<th>Geburtstag</th>
+<th>Alter in [[+collect_date:strtotime:date=`%Y`]]</th>
+<th>Zahlweise</th><th>Beitragstyp</th>
+<th>Beitrag</th>
+<th>Iban</th>
+<th>Bic</th>
+<th></th>
+</tr>
+[[migxLoopCollection?
+&packageName=`fbuch`
+&classname=`mvMember`
+&joins=`[{"alias":"Beitragstyp"},{"alias":"Family","on":"Family.member_id=mvMember.id"}]`
+&tpl=`mv_tpl_beitragseinzug`
+&sortConfig=`[{"sortby":"name"},{"sortby":"firstname"}]`
+&where=`{"deleted":"0","zahlweise":"lastschrift","inactive":"0","Beitragstyp.name":"Familienmitgliedschaft","Family.id:!=":""}`
+&collect_date=`[[+collect_date]]`
+]]
+[[migxLoopCollection?
+&packageName=`fbuch`
+&classname=`mvMember`
+&joins=`[{"alias":"Beitragstyp"},{"alias":"Family"}]`
+&tpl=`mv_tpl_beitragseinzug`
+&sortConfig=`[{"sortby":"name"},{"sortby":"firstname"}]`
+&where=`{"deleted":"0","zahlweise":"lastschrift","inactive":"0","Beitragstyp.name:!=":"Familienmitgliedschaft","Beitragstyp.beitrag:!=":"0"}`
+&collect_date=`[[+collect_date]]`
+]]
+</table>
+
+[[$mv_detailsmodal]]
+

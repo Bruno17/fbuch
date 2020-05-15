@@ -1,0 +1,8 @@
+<tr><td colspan="2"><h3>Monat [[+birthdate:strtotime:date=`%m`]]</h3></td><td></td><td></td></tr>
+[[migxLoopCollection?
+&packageName=`mv`
+&classname=`mvMember`
+&tpl=`mv_tpl_geburtstagsliste`
+&sortConfig=`[{"sortby":"day(birthdate)"}]`
+&where=`{"MONTH(birthdate)":"[[+birthdate:strtotime:date=`%m`]]","inactive":"0","deleted":"0"}`
+]]

@@ -1,0 +1,8 @@
+<tr>
+<td>[[+name]] [[+firstname]]</td>
+<td>[[+birthdate:strtotime:date=`%d.%m.%Y`]]</td>
+<td>[[mv_berechne_alter? &when=`thisyear` &birthdate=`[[+birthdate]]`]]</td>
+<td>[[+zahlweise]]</td>
+<td>[[+Beitragstyp_name]]</td>
+<td>[[+Family_member_id:is=`[[+id]]`:then=`X`:else=``]]</td>
+</tr>

@@ -1,0 +1,65 @@
+<div style="height:30mm;">
+<img src="style/img/rgmlogo0307.png" style="margin-right: 0; margin-top: 0; height: 15mm;">
+</div>
+<div style="height:35mm;">
+<div style="font-size:2.5mm;">
+RGM &bull; Georg-Mayr-Str. 25 &bull; 97828 Marktheidenfeld <br /><br />
+</div>
+[[+firstname]] [[+name]]<br />
+[[+street]]<br />
+[[+zip]] [[+city]]
+</div>
+
+<p>
+Wir bitten Sie, Ihre Daten zu überprüfen. Bitte Änderungen in folgendem Formular eintragen und im Briefkasten der RGM einwerfen.<br/>
+Alternativ besteht auch die Möglichkeit Datenänderungen direkt auf unserem dafür bereitgestellten Formular einzutragen.<br/>
+<strong>https://www.mv.rgmarktheidenfeld.de/mitglieder-datenerfassung.html</strong><br/>
+Zum Einloggen bitte folgendes Passwort verwenden:
+<strong> [[+id]]-[[!md5:limit=`5`? &input=`[[+id]][[+firstname]][[+id]]`]]</strong>
+
+<br/><br/>
+
+</p>
+<h3>Ihre Daten:</h3>
+
+[[+wrong_email:isnot=``:then=`
+Uns liegt scheinbar eine falsche email-adresse vor.<br />
+Sie lautet: [[+wrong_email]]<br />
+Bitte ein gültige email-Adresse mitteilen!<br />
+`:else=``]]
+<table>
+<tr><td>Name:</td> <td>[[+firstname]] [[+name]]</td><td style="border:1px solid #999999;width:100mm;height:8mm;"></td></tr>
+<tr><td>Straße:</td> <td>[[+street]]</td><td style="border:1px solid #999999;width:100mm;height:7mm;"></td></tr>
+<tr><td>Plz/Ort:</td> <td>[[+zip]] [[+city]]</td><td style="border:1px solid #999999;width:100mm;height:8mm;"></td></tr>
+<tr><td>Telefon:</td> <td>[[+phone]]</td><td style="border:1px solid #999999;width:100mm;height:7mm;"></td></tr>
+<tr><td>Tel. gesch.:</td> <td>[[+business_phone]]</td><td style="border:1px solid #999999;width:100mm;height:8mm;"></td></tr>
+<tr><td>Handy:</td> <td>[[+mobile]]</td><td style="border:1px solid #999999;width:100mm;height:7mm;"></td></tr>
+<tr><td>Email:</td> <td>[[+email]]</td><td style="border:1px solid #999999;width:100mm;height:7mm;"></td></tr>
+<tr><td>Bank:</td> <td>[[+bank1]]</td><td style="border:1px solid #999999;width:100mm;height:7mm;"></td></tr>
+<tr><td>BIC:</td> <td>[[+bic]]</td><td style="border:1px solid #999999;width:100mm;height:7mm;"></td></tr>
+<tr><td>IBAN:</td> <td>[[+iban]]</td><td style="border:1px solid #999999;width:100mm;height:7mm;"></td></tr>
+<tr><td style="vertical-align:top;">Familien-<br />mitglieder:</td> 
+<td style="vertical-align:top;">
+[[migxLoopCollection? 
+&packageName=`fbuch`
+&classname=`mvMember`
+&joins=`[{"alias":"Family"}]`
+&where=`{"family_id":"[[+family_id]]","family_id:!=":"0"}`
+&tpl=`mv_mitgliederDatenFormular_familymember`
+&outputSeparator=`<br />`
+]]
+</td><td style="border:1px solid #999999;width:100mm;height:35mm;"></td></tr>
+<tr><td style="vertical-align:top;">Zahler<br />Familien-<br />mitgliedschaft:</td> 
+<td style="vertical-align:top;">
+[[migxLoopCollection? 
+&packageName=`fbuch`
+&classname=`mvFamily`
+&joins=`[{"alias":"Zahler"}]`
+&where=`{"mvFamily.id":"[[+family_id]]"}`
+&tpl=`@CODE:[[+Zahler_firstname]] [[+Zahler_name]]`
+]]
+</td><td style="border:1px solid #999999;width:100mm;height:8mm;"></td></tr>
+</table>
+
+
+<pagebreak>

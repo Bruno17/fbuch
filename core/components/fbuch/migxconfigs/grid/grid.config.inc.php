@@ -41,10 +41,10 @@ $gridactionbuttons['syncmembers']['scope'] = 'this';
 $gridactionbuttons['syncmembers']['standalone'] = '1';
 
 
-$gridactionbuttons['sendmails']['text'] = "'Mailversand'";
-$gridactionbuttons['sendmails']['handler'] = 'this.sendmails';
-$gridactionbuttons['sendmails']['scope'] = 'this';
-$gridactionbuttons['sendmails']['standalone'] = '1';
+$gridactionbuttons['fb_sendmails']['text'] = "'Mailversand'";
+$gridactionbuttons['fb_sendmails']['handler'] = 'this.fb_sendmails';
+$gridactionbuttons['fb_sendmails']['scope'] = 'this';
+$gridactionbuttons['fb_sendmails']['standalone'] = '1';
 
 $winbuttons['send']['text'] = "'Rundmail senden'";
 $winbuttons['send']['handler'] = 'this.submit';
@@ -104,8 +104,8 @@ pull: function(btn,e,task) {
 
 
 
-$gridfunctions['this.sendmails'] = "
-sendmails: function(btn,e) {
+$gridfunctions['this.fb_sendmails'] = "
+fb_sendmails: function(btn,e) {
 		this.loadWin(btn,e,'a');
 	}
 ";
@@ -212,4 +212,114 @@ emptytable: function(btn,e) {
     }),this;           
     return true;
 }
+";
+
+
+//ab hier aus mv importiert
+
+$gridcontextmenus['sendmails']['code']="
+        m.push({
+            className : 'sendmails', 
+            text: 'Serienmail senden',
+            handler: 'this.sendmails'
+        });
+        m.push('-');
+";
+$gridcontextmenus['sendmails']['handler'] = 'this.sendmails';
+
+$gridfunctions['this.sendmails'] = "
+sendmails: function(btn,e) {
+      params = {
+          sendmails: '1'
+      }          
+      this.loadWin(btn,e,'d',Ext.util.JSON.encode(params));
+    }
+";
+
+$gridcontextmenus['sendsinglemail']['code']="
+        m.push({
+            className : 'sendsinglemail', 
+            text: 'Einzelmail senden',
+            handler: 'this.sendsinglemail'
+        });
+        m.push('-');
+";
+$gridcontextmenus['sendsinglemail']['handler'] = 'this.sendsinglemail';
+
+$gridfunctions['this.sendsinglemail'] = "
+sendsinglemail: function(btn,e) {
+		var s = this.getStore();
+		var code, type, category, study_type, ebs_state;
+		var box = Ext.MessageBox.wait('Preparing ...', 'Mail wird erstellt');
+        var params = s.baseParams;
+        var o_action = params.action || '';
+        var o_processaction = params.processaction || '';
+        var configs = this.config.configs;
+        
+        params.action = 'mgr/migxdb/process';
+        params.processaction = 'sendmails';
+        params.singlemail = '1';
+        params.configs = this.config.configs;
+        params.resource_id = '[[+config.resource_id]]'; 
+        params.member_id = this.menu.record.id;    
+
+		MODx.Ajax.request({
+			url : this.config.url,
+			params: params,
+			listeners: {
+				'success': {fn:function(r) {
+					 box.hide();
+				},scope:this}
+				,'failure': {fn:function(r) {
+					 box.hide();
+				},scope:this}                
+			}
+		});
+        
+        params.action = o_action;
+        params.processaction = o_processaction;
+        
+		return true;
+    }
+";
+
+
+$gridactionbuttons['do_sendmails']['text'] = "'Serienmails senden'";
+$gridactionbuttons['do_sendmails']['handler'] = 'this.doSendmails';
+$gridactionbuttons['do_sendmails']['scope'] = 'this';
+$gridactionbuttons['do_sendmails']['enableToggle'] = 'true';
+
+$gridfunctions['this.doSendmails'] = "
+	doSendmails: function(btn,e) {
+		var s = this.getStore();
+		var code, type, category, study_type, ebs_state;
+		var box = Ext.MessageBox.wait('Preparing ...', 'Serienmails werden erstellt');
+        var params = s.baseParams;
+        var o_action = params.action || '';
+        var o_processaction = params.processaction || '';
+        var configs = this.config.configs;
+        
+        params.action = 'mgr/migxdb/process';
+        params.processaction = 'sendmails';
+        params.configs = this.config.configs;
+        params.resource_id = '[[+config.resource_id]]';     
+
+		MODx.Ajax.request({
+			url : this.config.url,
+			params: params,
+			listeners: {
+				'success': {fn:function(r) {
+					 box.hide();
+				},scope:this}
+				,'failure': {fn:function(r) {
+					 box.hide();
+				},scope:this}                
+			}
+		});
+        
+        params.action = o_action;
+        params.processaction = o_processaction;
+        
+		return true;
+	}
 ";

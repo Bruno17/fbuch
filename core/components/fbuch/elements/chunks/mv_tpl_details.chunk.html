@@ -1,0 +1,19 @@
+[[+firstname]] [[+name]]<br/>
+[[+street]]<br/>
+[[+zip]] [[+city]]<br/>
+<table class="table">
+<tr><td>Tel.</td><td>[[+phone]]</td></tr>
+<tr><td>Tel.gesch.</td><td>[[+business_phone]]</td></tr>
+<tr><td>Mobile</td><td>[[+mobile]]</td></tr>
+<tr><td>Email</td><td>[[+email]]</td></tr>
+<tr><td>Geburtsdatum</td><td>[[+birthdate:strtotime:date=`%d.%m.%Y`]]</td></tr>
+<tr><td>Eintittsdatum</td><td>[[+eintritt:strtotime:date=`%d.%m.%Y`]]</td></tr>
+</table>
+
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`mvMember`
+&where=`{"family_id":"[[+family_id]]","family_id:>":0}`
+&tpl=`mv_tpl_details_familymember`
+&wrapperTpl=`@CODE:<h3>Familienmitglieder</h3><table class="table">[[+output]]</table>`
+]]

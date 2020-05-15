@@ -237,5 +237,186 @@
         <aggregate alias="Mailinglist" class="fbuchMailinglist" local="list_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Name" class="fbuchNames" local="name_id" foreign="id" cardinality="one" owner="foreign" />
     </object> 
+    
+    <object class="mvMember" table="mv_members" extends="xPDOSimpleObject">
+    	<field key="vorwahl" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="firstname" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="business_phone" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="phone" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="street" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="status" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="nationality" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="zip" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="city" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="name" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="mobile" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="matchcode" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="mandat_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="country" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="konto3" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="konto2" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="konto1" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="kennung4" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="kennung3" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="kennung2" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="kennung1" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="iban" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="gender" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="birthdate" dbtype="datetime" phptype="datetime" null="false" />
+        <field key="funktion" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="company" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="fax" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="familienstand" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="email" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="wrong_email" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="eintritt" dbtype="datetime" phptype="datetime" null="false" />
+        <field key="ehrungen" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="briefanrede" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="blz3" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="zahlweise" dbtype="varchar" phptype="string" precision="100" null="false" default="lastschrift" />
+        <field key="blz2" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="blz1" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="bic" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="beruf" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="bank3" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="bank2" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="bank1" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="austritt" dbtype="datetime" phptype="datetime" null="false" />
+        <field key="anredetitel" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="anrede" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="adr_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="abteilung" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="family_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="beitragstyp_id" dbtype="int" precision="10" phptype="integer" null="false" default="1" index="index" />
+        <field key="notizen" dbtype="text" phptype="string" null="false" default="" />
+
+        <field key="extended" dbtype="text" phptype="json" null="false" default="" />
+		<field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />	
+    	<field key="createdon" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="editedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+		<field key="editedon" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="deleted" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+		<field key="deletedon" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="deletedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="inactive" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+        <field key="inactive_reason" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        
+        <field key="modx_user_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        
+        <aggregate alias="Beitragstyp" class="mvBeitragstyp" foreign="id" local="beitragstyp_id" cardinality="one" owner="foreign" /> 
+        <composite alias="RoleLinks" class="mvMemberRoleLink" local="id" foreign="member_id" cardinality="many" owner="local" />
+        <composite alias="FamilyLinks" class="mvMemberFamilyLink" local="id" foreign="member_id" cardinality="many" owner="local" /> 
+        <aggregate alias="Family" class="mvFamily" local="family_id" foreign="id" cardinality="one" owner="foreign" />
+    
+        <aggregate alias="DoorAccesscode" class="mvDoorAccesscode" local="id" foreign="member_id" cardinality="one" owner="local" />
+    
+    </object>
+    
+    <object class="mvRole" table="mv_roles" extends="xPDOSimpleObject">
+    	<field key="name" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="group" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="group_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        
+        <aggregate alias="Group" class="mvMemberGroup" local="group_id" foreign="id" cardinality="one" owner="foreign" /> 
+        <composite alias="MemberLinks" class="mvMemberRoleLink" local="id" foreign="role_id" cardinality="many" owner="local" />
+    </object> 
+    
+    <object class="mvMemberGroup" table="mv_membergroups" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        
+        <aggregate alias="Roles" class="mvRole" local="id" foreign="group_id" cardinality="many" owner="local" /> 
+    </object>
+     
+    <object class="mvMemberRoleLink" table="mv_member_role_links" extends="xPDOSimpleObject">
+        <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="role_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        
+        <aggregate alias="Member" class="mvMember" local="member_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Role" class="mvRole" local="role_id" foreign="id" cardinality="one" owner="foreign" />  
+    </object> 
+    
+    <object class="mvMemberFilter" table="mv_member_filters" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="where" dbtype="text" phptype="string" null="false" default="" />
+    </object> 
+    
+    <object class="mvExportFilter" table="mv_export_filters" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="where" dbtype="text" phptype="string" null="false" default="" />
+        <field key="joins" dbtype="text" phptype="string" null="false" default="" />
+        <field key="columns" dbtype="text" phptype="string" null="false" default="" />
+    </object>         
+
+    <object class="mvMail" table="mv_mails" extends="xPDOSimpleObject">
+        <field key="subject" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="message" dbtype="text" phptype="string" null="false" default="" />
+        <field key="documents" dbtype="text" phptype="string" null="false" default="" />
+        <field key="images" dbtype="text" phptype="string" null="false" default="" />
+        <field key="hash" dbtype="varchar" phptype="string" precision="100" null="false" default="" index="index" />
+
+		<field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />	
+    	<field key="createdon" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="editedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+		<field key="editedon" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="deleted" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+		<field key="deletedon" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="deletedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+    </object> 
+    
+    <object class="mvFamily" table="mv_families" extends="xPDOSimpleObject">
+    	<field key="name" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+      
+        <aggregate alias="Members" class="mvMember" local="id" foreign="family_id" cardinality="many" owner="local" />
+        <aggregate alias="Zahler" class="mvMember" local="member_id" foreign="id" cardinality="one" owner="foreign" /> 
+    </object> 
+    
+    <object class="mvBeitragstyp" table="mv_beitragstypen" extends="xPDOSimpleObject">
+    	<field key="name" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="selectable" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="1" />
+        <field key="beitrag" dbtype="varchar" phptype="string" precision="10" null="false" default="" />
+        <field key="max_age" dbtype="int" precision="2" phptype="integer" null="false" default="0" />
+      
+        <aggregate alias="Members" class="mvMember" local="id" foreign="beitragstyp_id" cardinality="many" owner="local" /> 
+    </object>            
+    
+    <object class="mvMailLog" table="mv_mail_log" extends="xPDOSimpleObject">
+        <field key="count" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="mail_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="filter_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+
+		<field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />	
+    	<field key="createdon" dbtype="datetime" phptype="datetime" null="false" />
+    </object> 
+    <object class="mvMailLogRecipient" table="mv_mail_log_recipients" extends="xPDOSimpleObject">
+        <field key="log_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+
+		<field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />	
+    	<field key="createdon" dbtype="datetime" phptype="datetime" null="false" />
+    </object>
+    
+    <object class="mvMimeType" table="mv_mime_types" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+        <field key="description" dbtype="tinytext" phptype="string" null="true" />
+        <field key="mime_type" dbtype="tinytext" phptype="string" />
+        <field key="file_extensions" dbtype="tinytext" phptype="string" />
+        <field key="headers" dbtype="mediumtext" phptype="array" />
+        <field key="binary" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
+
+    </object>  
+    
+    <object class="mvDoorAccesscode" table="mv_door_accesscodes" extends="xPDOSimpleObject">
+    	<field key="code" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="other_person" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+		<field key="assignedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />	
+    	<field key="assignedon" dbtype="datetime" phptype="datetime" null="false" />
+        <field key="blocked" dbtype="int" precision="1" phptype="integer" null="false" default="0" />        
+                
+        <aggregate alias="Member" class="mvMember" local="member_id" foreign="id" cardinality="one" owner="foreign" /> 
+
+    </object>     
       
 </model>

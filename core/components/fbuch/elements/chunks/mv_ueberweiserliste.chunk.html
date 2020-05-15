@@ -1,0 +1,34 @@
+<table class="table">
+<tr>
+<th>ID</th>
+<th>Anrede</th>
+<th>Name</th>
+<th>Straße</th>
+<th>PLZ</th>
+<th>Ort</th>
+<th>Geburtstag</th>
+<th>Alter in [[now:date=`%Y`]]</th>
+<th>Zahlweise</th><th>Beitragstyp</th>
+<th>Beitrag</th>
+</tr>
+[[migxLoopCollection?
+&packageName=`fbuch`
+&classname=`mvMember`
+&joins=`[{"alias":"Beitragstyp"},{"alias":"Family","on":"Family.member_id=mvMember.id"}]`
+&tpl=`mv_tpl_ueberweiserliste`
+&sortConfig=`[{"sortby":"name"},{"sortby":"firstname"}]`
+&where=`{"deleted":"0","zahlweise":"überweisung","inactive":"0","Beitragstyp.name":"Familienmitgliedschaft","Family.id:!=":""}`
+&collect_date=`[[+collect_date]]`
+]]
+[[migxLoopCollection?
+&packageName=`fbuch`
+&classname=`mvMember`
+&joins=`[{"alias":"Beitragstyp"},{"alias":"Family"}]`
+&tpl=`mv_tpl_ueberweiserliste`
+&sortConfig=`[{"sortby":"name"},{"sortby":"firstname"}]`
+&where=`{"deleted":"0","zahlweise":"überweisung","inactive":"0","Beitragstyp.name:!=":"Familienmitgliedschaft","Beitragstyp.beitrag:!=":"0"}`
+&collect_date=`[[+collect_date]]`
+]]
+</table>
+
+[[$mv_detailsmodal]]

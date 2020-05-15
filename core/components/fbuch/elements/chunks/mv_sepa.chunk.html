@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.008.003.02" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:iso:std:iso:20022:tech:xsd:pain.008.003.02 pain.008.003.02.xsd">
+  <CstmrDrctDbtInitn>
+    <GrpHdr>
+      <MsgId>RGM[[+time:date=`%Y%m%d%H%M%S`]]</MsgId>
+      <CreDtTm>[[+time:date=`%Y-%m-%d`]]T[[+time:date=`%H:%M:%S`]]Z</CreDtTm>
+      <NbOfTxs>[[+transactions_count]]</NbOfTxs>
+      <CtrlSum>[[+sum]].00</CtrlSum>
+      <InitgPty>
+        <Nm>Rudergesellschaft Marktheidenfeld</Nm>
+      </InitgPty>
+    </GrpHdr>
+[[mv_get_sepa?
+&packageName=`fbuch`
+&classname=`mvMember`
+&joins=`[{"alias":"Beitragstyp"},{"alias":"Family","on":"Family.member_id=mvMember.id"}]`
+&wrapperTpl=`mv_tpl_xml_lastschrift_transaction_groups`
+&tpl=`mv_tpl_xml_lastschrift_transactions`
+&sortConfig=`[{"sortby":"name"},{"sortby":"firstname"}]`
+&beleg_text=`[[+beleg_text]]`
+&collect_date=`[[+collect_date]]`
+&last_collect_date=`[[+last_collect_date]]`
+&getFamily=`1`
+&getOthers=`1`
+&offsetx=`50`
+&limitx=`200`
+
+]]
+  </CstmrDrctDbtInitn>
+</Document>
