@@ -1,0 +1,219 @@
+    <q-btn label="Eintrag erstellen" color="primary" @click="createFahrt" ></q-btn>
+    <br>
+    <br>
+
+
+    <q-dialog v-model="basic_modal" transition-show="jump-down" transition-hide="jump-up">
+      <q-card>
+        <q-card-section>
+          <div class="text-h5">{{ modal_title }}</div>
+        </q-card-section>
+
+        <q-card-section>
+        <h6>Fahrt Daten:</h6>    
+      <div class="row q-col-gutter-sm" >
+      <div class="col col-xs-12 col-sm-6">
+      <q-select
+        outlined
+        fill-input
+        emit-value
+        map-options
+        :options="booteoptions"
+        label="Fahrzeug auswählen"
+        v-model="form.boot_id.value"
+      >
+      </q-select>     
+      </div>
+      <div class="col col-xs-12 col-sm-6">
+      <q-select
+        outlined
+        use-input
+        hide-selected
+        fill-input
+        emit-value
+        map-options
+        input-debounce="0"
+        :options="filtered_options"
+        @filter="filterFn"
+        label="Fahrer auswählen"
+        v-model="form.Name_id.value"
+      >
+        <template v-slot:no-option>
+          <q-item>
+            <q-item-section class="text-grey">
+              Nichts gefunden
+            </q-item-section>
+          </q-item>
+        </template>
+      </q-select>        
+      </div> 
+      </div>
+      
+      <h6>Start:</h6>
+      <div class="row q-col-gutter-sm" >
+      <div class="col col-xs-12 col-sm-6">        
+        
+        <datepicker v-bind:date = "form.date.value" v-on:changedate="form.date.value = $event" ></datepicker>
+      </div>
+      <div class="col col-xs-12 col-sm-6">     
+      <q-input readonly outlined v-model="form.start_time.value" mask="time" >
+           <q-popup-proxy transition-show="scale" transition-hide="scale">
+              <q-time v-model="form.start_time.value" />
+            </q-popup-proxy>        
+        <template v-slot:append>
+          <q-icon name="access_time" class="cursor-pointer">
+ 
+          </q-icon>
+        </template>
+      </q-input>        
+    </div> 
+    </div>  
+        <q-input v-model="form.kmstand_start.value" label="Kilometer Stand" ></q-input>
+        
+        <h6>Ende:</h6>
+        
+      <div class="row q-col-gutter-sm" >
+      <div class="col col-xs-12 col-sm-6">
+        <datepicker v-bind:date = "form.date_end.value" v-on:changedate="form.date_end.value = $event" ></datepicker>
+      </div>
+      <div class="col col-xs-12 col-sm-6"> 
+      <q-input readonly outlined v-model="form.end_time.value" mask="time" >
+           <q-popup-proxy transition-show="scale" transition-hide="scale">
+              <q-time v-model="form.end_time.value" />
+            </q-popup-proxy>        
+        <template v-slot:append>
+          <q-icon name="access_time" class="cursor-pointer">
+ 
+          </q-icon>
+        </template>
+      </q-input>         
+     </div>
+     </div>
+        <q-input v-model="form.kmstand_end.value" label="Kilometer Stand" ></q-input>
+        
+        <h6>Zweck der Fahrt / Kommentar:</h6>
+
+    <q-input
+      v-model="form.note.value"
+      outlined
+      type="textarea"
+    />
+        
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn flat label="Abbrechen" color="primary" v-close-popup ></q-btn>
+          <q-btn flat label="Speichern" color="primary" @click="saveFahrt" ></q-btn>
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
+      <q-tabs
+        v-model="table_view"
+        align="left"
+      >
+        <q-tab name="open" label="Offen" ></q-tab>
+        <q-tab name="sheduled" label="Geplant" ></q-tab>
+        <q-tab name="finished" label="Abgeschlossen" ></q-tab>
+      </q-tabs> 
+      
+        <q-tab-panels v-model="table_view" animated>
+          <q-tab-panel name="open">
+    <q-table
+      title="Fahrten (offen)"
+      :data="fahrten.open"
+      :columns="fields"
+      :pagination="pagination"
+      row-key="id"> 
+      
+      <template v-slot:body="props">
+        <q-tr :props="props">
+          <q-td key="actions" rowspan="2">
+              <q-btn dense round flat icon="edit" @click="updateFahrt(props.row)" ></q-btn>
+          </q-td>          
+          <q-td key="Boot_name" :props="props">{{ props.row.Boot_name }}</q-td>
+          <q-td key="Name_fullname" :props="props">{{ props.row.Name_fullname }}</q-td>          
+          <q-td key="date" :props="props">{{ props.row.date }} {{ props.row.start_time }}</q-td> 
+          <q-td key="date_end" :props="props">{{ props.row.date_end }} {{ props.row.end_time }}</q-td>
+          <q-td key="kmstand_start" :props="props">{{ props.row.kmstand_start }}</q-td>
+          <q-td key="kmstand_end" :props="props">{{ props.row.kmstand_end }}</q-td>          
+
+        </q-tr>
+        <q-tr :props="props">
+          <q-td colspan="100%">
+            <div class="text-left">{{ props.row.note }}</div>
+          </q-td>
+        </q-tr>
+      </template>      
+      <template v-slot:bottom>
+
+      </template>        
+      </q-table>
+          </q-tab-panel>
+
+          <q-tab-panel name="sheduled">
+    <q-table
+      title="Fahrten (geplant)"
+      :data="fahrten.sheduled"
+      :columns="fields"
+      :pagination="pagination"
+      row-key="id"> 
+      
+      <template v-slot:body="props">
+        <q-tr :props="props">
+          <q-td key="actions" rowspan="2">
+              <q-btn dense round flat icon="edit" @click="updateFahrt(props.row)" ></q-btn>
+          </q-td>          
+          <q-td key="Boot_name" :props="props">{{ props.row.Boot_name }}</q-td>
+          <q-td key="Name_fullname" :props="props">{{ props.row.Name_fullname }}</q-td>          
+          <q-td key="date" :props="props">{{ props.row.date }} {{ props.row.start_time }}</q-td> 
+          <q-td key="date_end" :props="props">{{ props.row.date_end }} {{ props.row.end_time }}</q-td>
+          <q-td key="kmstand_start" :props="props">{{ props.row.kmstand_start }}</q-td>
+          <q-td key="kmstand_end" :props="props">{{ props.row.kmstand_end }}</q-td>          
+
+        </q-tr>
+        <q-tr :props="props">
+          <q-td colspan="100%">
+            <div class="text-left">{{ props.row.note }}</div>
+          </q-td>
+        </q-tr>
+      </template>      
+      <template v-slot:bottom>
+
+      </template>        
+      </q-table>
+          </q-tab-panel>
+
+          <q-tab-panel name="finished">
+    <q-table
+      title="Fahrten (abgeschlossen)"
+      :data="fahrten.finished"
+      :columns="fields"
+      :pagination="pagination"
+      row-key="id"> 
+      
+      <template v-slot:body="props">
+        <q-tr :props="props">
+          <q-td key="actions" rowspan="2">
+              <q-btn dense round flat icon="edit" @click="updateFahrt(props.row)" ></q-btn>
+          </q-td>          
+          <q-td key="Boot_name" :props="props">{{ props.row.Boot_name }}</q-td>
+          <q-td key="Name_fullname" :props="props">{{ props.row.Name_fullname }}</q-td>          
+          <q-td key="date" :props="props">{{ props.row.date }} {{ props.row.start_time }}</q-td> 
+          <q-td key="date_end" :props="props">{{ props.row.date_end }} {{ props.row.end_time }}</q-td>
+          <q-td key="kmstand_start" :props="props">{{ props.row.kmstand_start }}</q-td>
+          <q-td key="kmstand_end" :props="props">{{ props.row.kmstand_end }}</q-td>          
+
+        </q-tr>
+        <q-tr :props="props">
+          <q-td colspan="100%">
+            <div class="text-left">{{ props.row.note }}</div>
+          </q-td>
+        </q-tr>
+      </template>      
+      <template v-slot:bottom>
+
+      </template>        
+      </q-table>
+          </q-tab-panel>
+        </q-tab-panels>   

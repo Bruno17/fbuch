@@ -1,0 +1,18 @@
+
+[[!fbuchUpdate? &classname=`fbuchDate`&processproperty=`cancel_accept`&redirect=`87` ]]
+
+<div class="row" style="position:relative;" >
+
+[[[[!+fbucherror:is=``:then=`
+!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchDate`
+&joinsx=`[{"alias":"Invited"}]`
+&where=`{"id":"[[!+date_id]]"}`
+&tpl=`fbuchPersonenAnmeldenDatesRow`
+&debug=`0`
+`:else=`
+!+fbucherror
+`]]]]
+</div>
+

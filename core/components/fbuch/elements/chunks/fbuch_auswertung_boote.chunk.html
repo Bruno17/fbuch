@@ -1,0 +1,81 @@
+    <div class="row">
+    <input type="hidden" id="group" name="group" />
+    <div class="form-group col-sm-3">
+    <label for="year">
+        Jahr:
+    </label>
+    <select class="form-control" name="year" id="year">
+[[!migxLoopCollection? 
+&packageName=`fbuch`
+&classname=`fbuchFahrt`
+&groupby = `year(date)`
+&tpl=`fbuchYearOption`
+&sortConfig=`[{"sortby":"date","sortdir":"DESC"}]`
+]]
+    </select>
+   
+    </div>
+
+    <div class="form-group col-sm-3">
+    <label for="Gerät">
+        Gerät:
+    </label>
+    <select class="form-control" name="boot_type" id="boot_type">
+    <option value="Rudern" >Rudern</option>
+    <option value="Ergometer" >Ergometer</option>
+    <option value="Motorboot" >Motorboot</option>
+    </select>
+    </div>
+
+    <div class="form-group col-sm-3">
+    <label for="zeitraum">
+        Zeitraum:
+    </label>
+    <select class="form-control" name="zeitraum" id="zeitraum">
+    <option value="ganz" >Ganzes Jahr</option>
+    <option value="halb_1" >1. Halbjahr</option>
+    <option value="halb_2" >2. Halbjahr</option>
+    </select>
+    </div>
+
+    </div>
+
+[[!setYearPlaceholder]]
+
+<div id="auswertung">
+
+<table class="table table-striped">
+[[!fbuchQuery? 
+&query=`
+SELECT b1.id as id,  b1.name as Name, SUM(f4.km) as km
+FROM  modx_fbuch_boote b1
+left join modx_fbuch_fahrten f4 on b1.id=f4.boot_id 
+WHERE year(f4.date)=[[+year]]
+[[!fbuchSwitchByReqParam?
+&name=`zeitraum`
+&default=`ganz`
+&options=`{
+"ganz":"",
+"halb_1":"AND month(f4.date)<=6",
+"halb_2":"AND month(f4.date)>=7"
+}`
+]]
+[[!fbuchSwitchByReqParam?
+&name=`boot_type`
+&default=`Rudern`
+&options=`{
+"Rudern":"AND b1.gattung != 'Ergometer' AND b1.gattung != 'Motorboot'",
+"Ergometer":"AND b1.gattung = 'Ergometer'",
+"Motorboot":"AND b1.gattung = 'Motorboot'"
+}`
+]]
+GROUP BY  b1.id,b1.name 
+ORDER BY  km DESC
+`
+]]
+
+</table>
+
+<div id="summe">Summe: [[+km_total]]</div>
+</div>
+

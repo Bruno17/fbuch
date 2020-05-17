@@ -1,0 +1,50 @@
+[[!fbuchUpdate? &processaction=`updateBootSetting`]]
+
+[[!FormIt?
+&preHooks=`fbuchGetFormValues`
+&hooks=`fbuchUpdate,redirect`
+&classname=`fbuchBootSetting`
+&redirectTo=`88`
+&redirectParams=`{"boot_id":"[[!#request.boot_id]]"}`
+&validate=`names:required,createdon:required,boot_id:required,riggerung:required`
+]]
+
+
+<form method="post">
+<input type="hidden" name="boot_id" value="[[!#request.boot_id]]">
+<input type="hidden" name="object_id" value="[[!#request.object_id]]">
+<input type="hidden" name="done" value="0">
+
+<div class="row">
+  <div class="form-group col-sm-4">
+    <label for="createdon">Datum</label>
+    <div class="input-group date">
+        <input name="createdon" id="createdon" type="text" class="form-control" value="[[!+fi.createdon:strtotime:date=`%d.%m.%Y`]]"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>    </span>
+    </div><span class="error">[[!+fi.error.createdon]]</span>
+  </div>
+  <div class="form-group col-sm-8">
+    <label for="names">Team</label>
+    <input type="text" class="form-control" name="names" id="names" value="[[!+fi.names]]">
+<span class="error">[[!+fi.error.names]]</span>
+  </div>
+</div> 
+
+  <div class="form-group ">
+    <label for="riggerung">Riggerung</label>
+    <input type="text" class="form-control" name="riggerung" id="riggerung" value="[[!+fi.riggerung]]">
+<span class="error">[[!+fi.error.riggerung]]</span>
+  </div>
+
+[[!getImageList?
+&value=`[[!+fi.settings]]`
+&tpl=`fbuchBootSettingFormTpl`
+]]
+   
+
+<textarea style="display:none;" id="settings" name="settings" class="form-control" rows="6">[[!+fi.settings]]</textarea>
+
+
+  <button type="submit" class="btn btn-default">Speichern</button>
+  <a class="btn btn-default" href="[[!~88? &boot_id=`[[!#request.boot_id]]`]]">Abbrechen</a>
+</form>
+

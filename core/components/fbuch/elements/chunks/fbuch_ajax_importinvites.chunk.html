@@ -1,0 +1,42 @@
+  [[!fbuchUpdate? &processaction=`import_invites`]]
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Einladungsliste aus Termin importieren</h4>
+      </div>
+ <div id="fbuchModalBody" class="modal-body">
+<table class="table">
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchDate`
+&sortConfig=`[{"sortby":"date","sortdir":"DESC"}]`
+&limit=`200`
+&tpl=`@CODE:<tr><td><button type="button" data-id="{{+id}}" class="btn btn-default btn-import_invites">Importieren</button></td><td>{{+date:strtotime:date=`%a %d.%m.%Y`}} {{+start_time}}</td><td>{{+type}}</td><td>{{+title}}</td></tr>`
+]]
+</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+
+    <script>
+    $('.btn-import_invites').click(function(){
+        var data = {};
+        data.object_id=$(this).data('id');
+        data.date_id='[[!#post.date_id]]';
+        var ajax_url = '[[~[[*id]]]]';
+        $( "#fbuchModal" ).load( ajax_url,data, function(){
+            fbuch_getfahrten('none',data.date_id);
+            $('#fbuchModal').modal('hide');
+        });
+        
+    });
+ 
+
+    </script>

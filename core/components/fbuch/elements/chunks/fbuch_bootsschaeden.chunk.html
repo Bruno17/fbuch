@@ -1,0 +1,10 @@
+<a href="[[~63]]" class="btn btn-default">Melden von Bootschäden</a>
+<br><br>
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchBootComment`
+&joins=`[{"alias":"Boot"}]`
+&where=`{"done":"0"}`
+&sortConfig=`[{"sortby":"createdon","sortdir":"DESC"}]`
+&tpl=`fbuchBootCommentRow`
+]]

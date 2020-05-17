@@ -1,0 +1,16 @@
+<p>[[!xxxmoc_test]]</p>
+
+[[!today]]
+
+[[!xxxmigxLoopCollection? 
+&classname=`modUser` 
+&joins=`[{"alias":"Profile"},{"alias":"UserGroupMembers"}]`
+&where=`{"Profile.dob":"[[!today]]","UserGroupMembers.user_group":"5"}`
+&tpl=`tplUsertest`
+]]
+
+[[!migxLoopCollection? 
+&classname=`fbuchDate` 
+&packageName=`fbuch`
+&where=`{"date:>=":"2016-01-01 00:00:00","date:<=":"2016-12-31 23:59:59"}`
+]]

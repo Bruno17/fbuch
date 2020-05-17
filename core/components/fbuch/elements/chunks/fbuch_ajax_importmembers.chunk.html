@@ -1,0 +1,36 @@
+  [[!fbuchUpdate? &processaction=`import_members`]]
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">RGM Mitglieder in Einladungsliste importieren</h4>
+      </div>
+ <div id="fbuchModalBody" class="modal-body">
+<table class="table">
+<tr><td><button type="button" class="btn btn-default btn-import_members">Importieren</button></td><td>Alle RGM Mitglieder importieren</td></tr>
+</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+
+    <script>
+    $('.btn-import_members').click(function(){
+        var data = {};
+        data.process='invite_members';
+        data.date_id='[[!#post.date_id]]';
+        var ajax_url = '[[~[[*id]]]]';
+        $( "#fbuchModal" ).load( ajax_url,data, function(){
+            fbuch_getfahrten('none',data.date_id);
+            $('#fbuchModal').modal('hide');
+        });
+        
+    });
+ 
+
+    </script>
