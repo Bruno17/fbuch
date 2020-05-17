@@ -11,6 +11,7 @@ $xpdo_meta_map['fbuchBootAllowedNames']= array (
   'fields' => 
   array (
     'name_id' => 0,
+    'member_id' => 0,
     'boot_id' => 0,
     'note' => '',
     'createdby' => 0,
@@ -21,6 +22,15 @@ $xpdo_meta_map['fbuchBootAllowedNames']= array (
   'fieldMeta' => 
   array (
     'name_id' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'member_id' => 
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -88,6 +98,14 @@ $xpdo_meta_map['fbuchBootAllowedNames']= array (
     array (
       'class' => 'fbuchNames',
       'local' => 'name_id',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'Member' => 
+    array (
+      'class' => 'mvMember',
+      'local' => 'member_id',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',

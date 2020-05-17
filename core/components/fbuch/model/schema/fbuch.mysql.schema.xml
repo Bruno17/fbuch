@@ -63,19 +63,24 @@
     </object>
     <object class="fbuchDateNames" table="fbuch_date_names" extends="xPDOSimpleObject">
         <field key="name_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="date_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="guestname" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
         <field key="guestemail" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
         <field key="registeredby" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="registeredby_member" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <aggregate alias="Date" class="fbuchDate" local="date_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Name" class="fbuchNames" local="name_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Member" class="mvMember" local="member_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Registeredby" class="fbuchNames" local="registeredby" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="RegisteredbyMember" class="mvMember" local="registeredby_member" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Fahrtname" class="fbuchFahrtNames" local="id" foreign="datenames_id" cardinality="one" owner="local" />
     </object>
     <object class="fbuchDateInvited" table="fbuch_date_invited" extends="xPDOSimpleObject">
         <field key="name_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />        
         <field key="date_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="canceled" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
         <field key="invited" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
@@ -84,9 +89,11 @@
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
         <aggregate alias="Date" class="fbuchDate" local="date_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Name" class="fbuchNames" local="name_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Member" class="mvMember" local="member_id" foreign="id" cardinality="one" owner="foreign" />
     </object>
     <object class="fbuchDateComment" table="fbuch_date_comments" extends="xPDOSimpleObject">
         <field key="name_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />        
         <field key="date_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="comment" dbtype="text" phptype="string" null="false" default="" />
         <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
@@ -95,6 +102,7 @@
         <field key="riot_user_id" dbtype="text" phptype="string" null="false" default="" />
         <aggregate alias="Date" class="fbuchDate" local="date_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Name" class="fbuchNames" local="name_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Member" class="mvMember" local="member_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="User" class="modUser" local="createdby" foreign="id" cardinality="one" owner="foreign" />
     </object>
     <object class="fbuchNames" table="fbuch_names" extends="xPDOSimpleObject">
@@ -123,6 +131,7 @@
     </object>
     <object class="fbuchFahrtNames" table="fbuch_fahrt_names" extends="xPDOSimpleObject">
         <field key="name_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />        
         <field key="fahrt_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="guestname" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
         <field key="guestemail" dbtype="varchar" phptype="string" precision="255" null="false" default="" />        
@@ -136,7 +145,8 @@
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
         <aggregate alias="Fahrt" class="fbuchFahrt" local="fahrt_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Name" class="fbuchNames" local="name_id" foreign="id" cardinality="one" owner="foreign" />
-        <aggregate alias="Datename" class="fbuchDateNames" local="datename_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Member" class="mvMember" local="member_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Datename" class="fbuchDateNames" local="datenames_id" foreign="id" cardinality="one" owner="foreign" />
     </object>
     <object class="fbuchBoot" table="fbuch_boote" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
@@ -161,6 +171,7 @@
     </object>
     <object class="fbuchBootAllowedNames" table="fbuch_boot_allowed_names" extends="xPDOSimpleObject">
         <field key="name_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />        
         <field key="boot_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="note" dbtype="text" phptype="string" null="false" default="" />
         <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
@@ -169,11 +180,13 @@
         <field key="allowedon" dbtype="datetime" phptype="datetime" null="true" />
         <aggregate alias="Boot" class="fbuchBoot" local="boot_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Name" class="fbuchNames" local="name_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Member" class="mvMember" local="member_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="User" class="modUser" local="createdby" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Allower" class="fbuchNames" local="allowedby" foreign="id" cardinality="one" owner="foreign" />
     </object>
     <object class="fbuchBootComment" table="fbuch_boot_comments" extends="xPDOSimpleObject">
         <field key="name_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />        
         <field key="boot_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="comment" dbtype="text" phptype="string" null="false" default="" />
         <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
@@ -185,6 +198,7 @@
         <field key="doneby_name" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
         <aggregate alias="Boot" class="fbuchBoot" local="boot_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Name" class="fbuchNames" local="name_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Member" class="mvMember" local="member_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="User" class="modUser" local="createdby" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Finisher" class="fbuchNames" local="doneby" foreign="id" cardinality="one" owner="foreign" />
     </object>
@@ -227,6 +241,7 @@
     </object>
     <object class="fbuchMailinglistNames" table="fbuch_mailinglist_names" extends="xPDOSimpleObject">
         <field key="name_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />        
         <field key="list_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="unsubscribed" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
         <field key="subscribed" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
@@ -236,6 +251,7 @@
         <field key="subscribedon" dbtype="datetime" phptype="datetime" null="true" />        
         <aggregate alias="Mailinglist" class="fbuchMailinglist" local="list_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Name" class="fbuchNames" local="name_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Member" class="mvMember" local="member_id" foreign="id" cardinality="one" owner="foreign" />
     </object> 
     
     <object class="mvMember" table="mv_members" extends="xPDOSimpleObject">
@@ -290,7 +306,6 @@
         <field key="family_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="beitragstyp_id" dbtype="int" precision="10" phptype="integer" null="false" default="1" index="index" />
         <field key="notizen" dbtype="text" phptype="string" null="false" default="" />
-
         <field key="extended" dbtype="text" phptype="json" null="false" default="" />
 		<field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />	
     	<field key="createdon" dbtype="datetime" phptype="datetime" null="false" />
@@ -303,6 +318,15 @@
         <field key="inactive_reason" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         
         <field key="modx_user_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+
+        <field key="lastname" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <field key="member_status" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <field key="riot_user_id" dbtype="text" phptype="string" null="false" default="" />
+
+        <field key="fbuch_name_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+
+        <composite alias="Fahrten" class="fbuchFahrtNames" local="id" foreign="member_id" cardinality="many" owner="local" />
+        <composite alias="Mailinglists" class="fbuchMailinglistNames" local="id" foreign="member_id" cardinality="many" owner="local" />
         
         <aggregate alias="Beitragstyp" class="mvBeitragstyp" foreign="id" local="beitragstyp_id" cardinality="one" owner="foreign" /> 
         <composite alias="RoleLinks" class="mvMemberRoleLink" local="id" foreign="member_id" cardinality="many" owner="local" />

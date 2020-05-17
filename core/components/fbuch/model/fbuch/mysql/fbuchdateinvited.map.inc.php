@@ -11,6 +11,7 @@ $xpdo_meta_map['fbuchDateInvited']= array (
   'fields' => 
   array (
     'name_id' => 0,
+    'member_id' => 0,
     'date_id' => 0,
     'canceled' => 0,
     'invited' => 0,
@@ -21,6 +22,15 @@ $xpdo_meta_map['fbuchDateInvited']= array (
   'fieldMeta' => 
   array (
     'name_id' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'member_id' => 
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -91,6 +101,14 @@ $xpdo_meta_map['fbuchDateInvited']= array (
     array (
       'class' => 'fbuchNames',
       'local' => 'name_id',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'Member' => 
+    array (
+      'class' => 'mvMember',
+      'local' => 'member_id',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',

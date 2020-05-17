@@ -11,16 +11,27 @@ $xpdo_meta_map['fbuchDateNames']= array (
   'fields' => 
   array (
     'name_id' => 0,
+    'member_id' => 0,
     'date_id' => 0,
     'createdby' => 0,
     'createdon' => NULL,
     'guestname' => '',
     'guestemail' => '',
     'registeredby' => 0,
+    'registeredby_member' => 0,
   ),
   'fieldMeta' => 
   array (
     'name_id' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'member_id' => 
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -77,6 +88,15 @@ $xpdo_meta_map['fbuchDateNames']= array (
       'default' => 0,
       'index' => 'index',
     ),
+    'registeredby_member' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
   ),
   'aggregates' => 
   array (
@@ -96,10 +116,26 @@ $xpdo_meta_map['fbuchDateNames']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
+    'Member' => 
+    array (
+      'class' => 'mvMember',
+      'local' => 'member_id',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
     'Registeredby' => 
     array (
       'class' => 'fbuchNames',
       'local' => 'registeredby',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'RegisteredbyMember' => 
+    array (
+      'class' => 'mvMember',
+      'local' => 'registeredby_member',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',

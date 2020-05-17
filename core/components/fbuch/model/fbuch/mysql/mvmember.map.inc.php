@@ -72,6 +72,10 @@ $xpdo_meta_map['mvMember']= array (
     'inactive' => 0,
     'inactive_reason' => '',
     'modx_user_id' => 0,
+    'lastname' => '',
+    'member_status' => '',
+    'riot_user_id' => '',
+    'fbuch_name_id' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -566,9 +570,59 @@ $xpdo_meta_map['mvMember']= array (
       'default' => 0,
       'index' => 'index',
     ),
+    'lastname' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+      'index' => 'index',
+    ),
+    'member_status' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+      'index' => 'index',
+    ),
+    'riot_user_id' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'fbuch_name_id' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
   ),
   'composites' => 
   array (
+    'Fahrten' => 
+    array (
+      'class' => 'fbuchFahrtNames',
+      'local' => 'id',
+      'foreign' => 'member_id',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'Mailinglists' => 
+    array (
+      'class' => 'fbuchMailinglistNames',
+      'local' => 'id',
+      'foreign' => 'member_id',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
     'RoleLinks' => 
     array (
       'class' => 'mvMemberRoleLink',

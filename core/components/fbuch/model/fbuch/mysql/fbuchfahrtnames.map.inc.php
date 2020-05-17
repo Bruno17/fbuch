@@ -11,6 +11,7 @@ $xpdo_meta_map['fbuchFahrtNames']= array (
   'fields' => 
   array (
     'name_id' => 0,
+    'member_id' => 0,
     'fahrt_id' => 0,
     'guestname' => '',
     'guestemail' => '',
@@ -26,6 +27,15 @@ $xpdo_meta_map['fbuchFahrtNames']= array (
   'fieldMeta' => 
   array (
     'name_id' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'member_id' => 
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -146,10 +156,18 @@ $xpdo_meta_map['fbuchFahrtNames']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
+    'Member' => 
+    array (
+      'class' => 'mvMember',
+      'local' => 'member_id',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
     'Datename' => 
     array (
       'class' => 'fbuchDateNames',
-      'local' => 'datename_id',
+      'local' => 'datenames_id',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
