@@ -1,7 +1,7 @@
 [[+_groupfirst:is=`1`:then=`
 [[+registeredby:isnot=`0`:then=`
 <li class="list-group-item">
-Anmeldungen von [[+Registeredby_firstname]] [[+Registeredby_lastname]]:
+Anmeldungen von [[+RegisteredbyMember_firstname]] [[+RegisteredbyMember_name]]:
 </li>
 `:else=``]]
 `:else=``]]
@@ -9,7 +9,7 @@ Anmeldungen von [[+Registeredby_firstname]] [[+Registeredby_lastname]]:
 <li data-datenames_id="[[+id]]" class="list-group-item [[+canceled:!empty=`list-group-item-danger`]] [[+Zusagen_id:isnot=``:then=`list-group-item-success`:else=``]] ]]" >
       <div class="checkbox">
         <label>
-          <input type="checkbox" name="mailto[]" value="[[+name_id]]"> [[+idx]] [[+guestname:isnot=``:then=`[[+guestname]] (Gast)`:else=`[[+Name_firstname]] [[+Name_lastname]]`]] 
+          <input type="checkbox" name="mailto[]" value="[[+name_id]]"> [[+idx]] [[+guestname:isnot=``:then=`[[+guestname]] (Gast)`:else=`[[+Member_firstname]] [[+Member_name]]`]] 
         </label>
       </div>
 

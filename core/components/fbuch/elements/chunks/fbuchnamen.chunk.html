@@ -4,14 +4,14 @@
             &tpl=`@CODE:<div></div>`
             &limit=`1`
             &totalVar=`[[+grid_id]]_total`
-            &where=`{"deleted":"0","lastname:LIKE":"[[+atoz_char]]%"}`
+            &where=`{"deleted":"0","name:LIKE":"[[+atoz_char]]%"}`
         ]]
 
 <ul class="nav nav-atoz">[[!getAtoZLinks? &tpl=`tplAtoZLink`]]</ul>
 
         [[!fbuchSetGridPlaceholders?
             &mode=`char`
-            &charfield=`lastname` 
+            &charfield=`name` 
             &grid_id=`[[+grid_id]]` 
             &limit=`[[+limit]]` 
             &total=`[[!+[[+grid_id]]_total]]`
@@ -28,8 +28,8 @@
             &packageName=`fbuch`
             &classname=`[[+classname]]`
             &tpl=`fbuch[[+grid_id]]Row`
-            &sortConfig=`[{"sortby":"lastname","sortdir":"ASC"},{"sortby":"firstname","sortdir":"ASC"}]`
-            &where=`{"member_status:IN":["Mitglied","Gast","VHS"],"deleted":"0","lastname:LIKE":"[[+atoz_char]]%"}`
+            &sortConfig=`[{"sortby":"name","sortdir":"ASC"},{"sortby":"firstname","sortdir":"ASC"}]`
+            &where=`{"member_status:IN":["Mitglied","Gast","VHS"],"deleted":"0","name:LIKE":"[[+atoz_char]]%"}`
             &grid_id=`[[+grid_id]]`
         ]]
 </tbody>

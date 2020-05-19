@@ -1,7 +1,7 @@
 [[+_groupfirst:is=`1`:then=`
 [[+registeredby:isnot=`0`:then=`
 <li class="list-group-item">
-Anmeldungen von [[+Registeredby_firstname]] [[+Registeredby_lastname]]:
+Anmeldungen von [[+RegisteredbyMember_firstname]] [[+RegisteredbyMember_name]]:
 </li>
 `:else=``]]
 `:else=``]]
@@ -19,6 +19,6 @@ Anmeldungen von [[+Registeredby_firstname]] [[+Registeredby_lastname]]:
 </button> 
 </div>
 [[+createdon:strtotime:date=`%d.%m.%Y %H:%M`]]<br>
-[[+idx]] [[+guestname:isnot=``:then=`[[+guestname]]`:else=`[[+Name_firstname]] [[+Name_lastname]]`]] [[+Name_member_status:isnot=`Mitglied`:then=`([[+Name_member_status]])`:else=``]]
+[[+idx]] [[+guestname:isnot=``:then=`[[+guestname]]`:else=`[[+Member_firstname]] [[+Member_name]]`]] [[+Member_member_status:isnot=`Mitglied`:then=`([[+Member_member_status]])`:else=``]]
 
 </li>

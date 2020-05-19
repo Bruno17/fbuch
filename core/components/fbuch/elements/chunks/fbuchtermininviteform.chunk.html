@@ -33,9 +33,9 @@
 var input = $('#add_person');
 input.typeahead({source:[
     [[!migxLoopCollection?
-    &classname=`fbuchNames`
-    &sortConfig=`[{"sortby":"lastname"}]`
-    &tpl=`@CODE:{id:"[[+id]]",name:"[[+lastname]] [[+firstname]]"}`
+    &classname=`mvMember`
+    &sortConfig=`[{"sortby":"name"}]`
+    &tpl=`@CODE:{id:"[[+id]]",name:"[[+name]] [[+firstname]]"}`
     &where=`{"member_status:IN":["Gast","Mitglied","VHS"],"deleted":"0"}`
     &outputSeparator=`,`
     &debug=`0`
@@ -46,7 +46,7 @@ input.typeahead({source:[
          //console.log(item);
          //input.val('');
          var ajax_url = invite_ajax_url;
-         $( "#fbuchModal" ).load( ajax_url,{"fahrt_id":"[[!#request.fahrt_id]]","name_id":item.id,"processaction":"add"}, function(){
+         $( "#fbuchModal" ).load( ajax_url,{"fahrt_id":"[[!#request.fahrt_id]]","member_id":item.id,"processaction":"add"}, function(){
              $('#add_person').focus();
              //fbuch_getteam();
              var fahrt_id = $('.fahrten').find('.active').data('id');
@@ -58,9 +58,9 @@ input.typeahead({source:[
 var input2 = $('#remove_person');
 input2.typeahead({source:[
     [[!migxLoopCollection?
-    &classname=`fbuchNames`
-    &sortConfig=`[{"sortby":"lastname"}]`
-    &tpl=`@CODE:{id:"[[+id]]",name:"[[+lastname]] [[+firstname]]"}`
+    &classname=`mvMember`
+    &sortConfig=`[{"sortby":"name"}]`
+    &tpl=`@CODE:{id:"[[+id]]",name:"[[+name]] [[+firstname]]"}`
     &where=`{"member_status:IN":["Gast","Mitglied","VHS"],"deleted":"0"}`
     &outputSeparator=`,`
     &debug=`0`
@@ -71,7 +71,7 @@ input2.typeahead({source:[
          //console.log(item);
          //input.val('');
 var ajax_url = typeof(updatedatepersons_ajax_url)=='undefined' ? updateteam_ajax_url : updatedatepersons_ajax_url;
-         $( "#fbuchModal" ).load( ajax_url,{"fahrt_id":"[[!#request.fahrt_id]]","name_id":item.id,"processaction":"remove"}, function(){
+         $( "#fbuchModal" ).load( ajax_url,{"fahrt_id":"[[!#request.fahrt_id]]","member_id":item.id,"processaction":"remove"}, function(){
              $('#remove_person').focus();
              fbuch_getfahrten('none');
          });

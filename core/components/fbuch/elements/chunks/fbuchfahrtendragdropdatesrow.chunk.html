@@ -25,7 +25,7 @@
 [[!migxLoopCollection?
 &packageName=`fbuch`
 &classname=`fbuchDateNames`
-&joins=`[{"alias":"Name"},{"alias":"Registeredby"},{"alias":"Fahrtname"},{"alias":"Fahrt","classname":"fbuchFahrt","on":"Fahrt.id=Fahrtname.fahrt_id and Fahrt.deleted=0"}]`
+&joins=`[{"alias":"Member"},{"alias":"RegisteredbyMember"},{"alias":"Fahrtname"},{"alias":"Fahrt","classname":"fbuchFahrt","on":"Fahrt.id=Fahrtname.fahrt_id and Fahrt.deleted=0"}]`
 &where=`{"date_id":"[[+id]]","Fahrt.id":null}`
 &type=`[[+type]]`
 &tpl=`fbuchFahrtenDragdropDateNamesRow`
@@ -37,7 +37,7 @@
 [[!migxLoopCollection?
 &packageName=`fbuch`
 &classname=`fbuchDateNames`
-&joins=`[{"alias":"Name"},{"alias":"Fahrtname"},{"alias":"Fahrt","classname":"fbuchFahrt","on":"Fahrt.id=Fahrtname.fahrt_id and Fahrt.deleted=0"}]`
+&joins=`[{"alias":"Member"},{"alias":"Fahrtname"},{"alias":"Fahrt","classname":"fbuchFahrt","on":"Fahrt.id=Fahrtname.fahrt_id and Fahrt.deleted=0"}]`
 &where=`{"date_id":"[[+id]]","Fahrtname.fahrt_id:!=":"0"}`
 &tpl=`fbuchFahrtenDragdropDateNamesRow`
 &sortConfig=`[{"sortby":"createdon"}]`

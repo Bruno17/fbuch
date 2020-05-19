@@ -45,6 +45,7 @@
         <field key="start_time" dbtype="varchar" phptype="string" precision="20" null="false" default="" />
         <field key="end_time" dbtype="varchar" phptype="string" precision="20" null="false" default="" />
         <field key="instructor_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="instructor_member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="mailinglist_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="lock_password" dbtype="varchar" phptype="string" precision="50" null="false" default="" />
@@ -56,6 +57,7 @@
         <field key="deletedon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="deletedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <aggregate alias="Name" class="fbuchNames" local="instructor_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Instructor" class="mvMember" local="instructor_member_id" foreign="id" cardinality="one" owner="foreign" />
         <composite alias="Names" class="fbuchDateNames" local="id" foreign="date_id" cardinality="many" owner="local" />
         <composite alias="Invited" class="fbuchDateInvited" local="id" foreign="date_id" cardinality="many" owner="local" />
         <composite alias="Comments" class="fbuchDateComment" local="id" foreign="date_id" cardinality="many" owner="local" />

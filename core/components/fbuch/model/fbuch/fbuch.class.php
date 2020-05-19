@@ -671,7 +671,7 @@ class Fbuch {
                             $this->sendInviteMail($object, $comment, $comment_name, true);
                         }
                         if ($action == 'mail_invite' || $action == 'riotinvite_invite') {
-                            $name_o = $object->getOne('Name');
+                            $name_o = $object->getOne('Member');
                             $date_o = $object->getOne('Date');
                             $scriptProperties = array(
                                 'action' => 'invite',
@@ -717,7 +717,7 @@ class Fbuch {
 
             case 'ErgoterminReservierung':
                 $fields['date_id'] = $modx->getOption('fahrt_id', $_REQUEST, '');
-                $fields['name_id'] = $modx->getOption('name_id', $_REQUEST, '');
+                $fields['member_id'] = $modx->getOption('member_id', $_REQUEST, '');
                 $this->updateTeamrowReservations($fields, $action, $classname);
                 if (!empty($action)) {
 
@@ -758,8 +758,8 @@ class Fbuch {
                         $object_id = $hook->getValue('object_id');
                         if ($object = $modx->getObject($classname, $object_id)) {
 
-                            if ($name_o = $object->getOne('Name')) {
-                                $name = $name_o->get('firstname') . ' ' . $name_o->get('lastname');
+                            if ($name_o = $object->getOne('Member')) {
+                                $name = $name_o->get('firstname') . ' ' . $name_o->get('name');
                                 //check if input-name is the correct one
                                 if ($name == $hook->getValue('name')) {
                                     $object->remove();
@@ -797,6 +797,7 @@ class Fbuch {
 
             default:
                 $object_id = $hook->getValue('object_id');
+                
                 $values = $hook->getValues();
                 $duplicate = !empty($values['duplicate']) ? true : false;
                 $duplicate_names = !empty($values['duplicate_names']) ? true : false;
@@ -805,7 +806,7 @@ class Fbuch {
                 if (!$duplicate && !empty($object_id) && $object = $modx->getObject($classname, $object_id)) {
 
                     switch ($classname) {
-                        case 'fbuchNames':
+                        case 'mvMember':
                             if (!$this->checkPermission('fbuch_edit_names')) {
                                 return false;
                             }
@@ -815,16 +816,19 @@ class Fbuch {
                 } else {
 
                     switch ($classname) {
-                        case 'fbuchNames':
+                        case 'mvMember':
                             $firstname = $values['firstname'];
-                            $lastname = $values['lastname'];
+                            $lastname = $values['name'];
 
-                            if ($object = $modx->getObject($classname, array('firstname' => $firstname, 'lastname' => $lastname))) {
+                            if ($object = $modx->getObject($classname, array('firstname' => $firstname, 'name' => $lastname))) {
                                 $modx->setPlaceholder('error_message', 'Ein Eintrag mit diesem Namen und dem Mitgliederstatus ' . $object->get('member_status') . ' existiert bereits in unserer Datenbank und kann nicht nochmal neu erstellt werden.');
                                 return false;
                             }
                             if (!empty($firstname) & !empty($lastname)) {
                                 $object = $modx->newObject($classname);
+                                $values['inactive'] = 1;
+                                $values['inactive_reason'] = 'ist kein Mitglied';
+                                
                             } else {
                                 return false;
                             }
@@ -896,16 +900,16 @@ class Fbuch {
             $names = array();
             if ($collection = $modx->getCollection($classname, $c)) {
                 foreach ($collection as $object) {
-                    $name_o = $object->getOne('Name');
+                    $name_o = $object->getOne('Member');
                     if ($name_o) {
                         if ($process == 'mail_invites') {
-                            $email = $this->getNameEmail($name_o);
+                            $email = $name_o->get('email');
                         }
                         if ($process == 'riotinvite_invites') {
-                            $email = $this->getNameRiotUserId($name_o);
+                            $email = $name_o->get('riot_user_id') ;
                         }
                         if (!empty($email)) {
-                            $names[] = $name_o->get('firstname') . ' ' . $name_o->get('lastname');
+                            $names[] = $name_o->get('firstname') . ' ' . $name_o->get('name');
                         }
                     }
                 }
@@ -934,13 +938,13 @@ class Fbuch {
                         }
                     }
                     break;
-                case 'fbuchNames':
-                    $this->checkPermission('fbuch_edit_names', array('classname' => 'fbuchFahrt', 'object_id' => $object_id));
+                case 'mvMember':
+                    $this->checkPermission('fbuch_edit_names', array('classname' => 'mvMember', 'object_id' => $object_id));
                     break;
                 case 'fbuchDate':
                     //$this->checkPermission('edit_old_fbuchentries',array('classname'=>'fbuchFahrt', 'object_id'=>$object_id));
-                    if ($name = $object->getOne('Name')) {
-                        $values['instructor_name'] = $name->get('lastname') . ' ' . $name->get('firstname');
+                    if ($name = $object->getOne('Member')) {
+                        $values['instructor_name'] = $name->get('lastname') . ' ' . $name->get('name');
                         //$values['name_id'] = $name->get('id');
                     }
 
@@ -949,9 +953,9 @@ class Fbuch {
                 case 'fbuchDateNames':
                     //$this->checkPermission('fbuch_edit_names', array('classname' => 'fbuchFahrt', 'object_id' => $object_id));
                     if ($process == 'closedatefahrt') {
-                        if ($name = $object->getOne('Name')) {
-                            $values['name'] = $name->get('lastname') . ' ' . $name->get('firstname');
-                            $values['name_id'] = $name->get('id');
+                        if ($name = $object->getOne('Member')) {
+                            $values['name'] = $name->get('name') . ' ' . $name->get('firstname');
+                            $values['member_id'] = $name->get('id');
                         }
                         if ($dateo = $object->getOne('Date')) {
                             $values['date'] = $dateo->get('date');
@@ -960,7 +964,7 @@ class Fbuch {
                         $values['object_id'] = 0;
                         $values['datenames_id'] = $object_id;
                     } else {
-                        if ($name = $object->getOne('Name')) {
+                        if ($name = $object->getOne('Member')) {
                             $name_values = $name->toArray();
                             foreach ($name_values as $key => $value) {
                                 $values['Name_' . $key] = $value;
@@ -1095,7 +1099,7 @@ class Fbuch {
 
     public function isguest($name_id) {
         $isguest = false;
-        if ($name_o = $this->modx->getObject('fbuchNames', $name_id)) {
+        if ($name_o = $this->modx->getObject('mvMember', $name_id)) {
             if ($name_o->get('lastname') == 'Gast') {
                 $isguest = true;
             }
@@ -1155,7 +1159,7 @@ class Fbuch {
                 $classname = $classname == 'ErgoterminReservierung' ? 'fbuchDateNames' : $classname;
 
                 $c = $modx->newQuery($classname);
-                $c->where(array('name_id' => $fields['name_id'], 'date_id' => $fields['date_id']));
+                $c->where(array('member_id' => $fields['member_id'], 'date_id' => $fields['date_id']));
 
                 switch ($action) {
                     case 'add':
@@ -1163,10 +1167,10 @@ class Fbuch {
                             //Eintrag mit dieser Person existiert bereits
                         }
                         //Termin mit einer Person verknüpfen
-                        if (!$object || $this->isguest($fields['name_id'])) {
+                        if (!$object || $this->isguest($fields['member_id'])) {
                             $object = $modx->newObject($classname);
                             $object->set('date_id', $fields['date_id']);
-                            $object->set('name_id', $fields['name_id']);
+                            $object->set('member_id', $fields['member_id']);
                             $object->set('createdby', $modx->user->get('id'));
                             $object->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
                             $object->save();
@@ -1409,9 +1413,9 @@ class Fbuch {
         $subj_prefix = empty($subj_prefix) ? $modx->getOption('invite_subject_prefix') : $subj_prefix;
         
         $modx->runSnippet('setlocale');
-        $name_o = $object->getOne('Name');
+        $name_o = $object->getOne('Member');
         $date_o = $object->getOne('Date');
-        $email = $this->getNameEmail($name_o);
+        $email = $name_o->get('email');
 
         if ($add_datecomment && !empty($comment)) {
             $comment_o = $modx->newObject('fbuchDateComment');
@@ -1431,7 +1435,7 @@ class Fbuch {
                 $properties['status'] = 'canceled';
             }
 
-            if ($modx->getObject('fbuchDateNames', array('date_id' => $properties['date_id'], 'name_id' => $properties['name_id']))) {
+            if ($modx->getObject('fbuchDateNames', array('date_id' => $properties['date_id'], 'member_id' => $properties['member_id']))) {
                 $properties['status'] = 'accepted';
             }
 

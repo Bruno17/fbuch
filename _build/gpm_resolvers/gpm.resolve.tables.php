@@ -39,6 +39,19 @@ if ($object->xpdo) {
             $manager->createObjectContainer('fbuchBootsNutzergruppe');
             $manager->createObjectContainer('fbuchMailinglist');
             $manager->createObjectContainer('fbuchMailinglistNames');
+            $manager->createObjectContainer('mvMember');
+            $manager->createObjectContainer('mvRole');
+            $manager->createObjectContainer('mvMemberGroup');
+            $manager->createObjectContainer('mvMemberRoleLink');
+            $manager->createObjectContainer('mvMemberFilter');
+            $manager->createObjectContainer('mvExportFilter');
+            $manager->createObjectContainer('mvMail');
+            $manager->createObjectContainer('mvFamily');
+            $manager->createObjectContainer('mvBeitragstyp');
+            $manager->createObjectContainer('mvMailLog');
+            $manager->createObjectContainer('mvMailLogRecipient');
+            $manager->createObjectContainer('mvMimeType');
+            $manager->createObjectContainer('mvDoorAccesscode');
 
             break;
     }

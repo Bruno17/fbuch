@@ -25,6 +25,7 @@ $xpdo_meta_map['fbuchDate']= array (
     'start_time' => '',
     'end_time' => '',
     'instructor_id' => 0,
+    'instructor_member_id' => 0,
     'mailinglist_id' => 0,
     'locked' => 0,
     'lock_password' => '',
@@ -155,6 +156,14 @@ $xpdo_meta_map['fbuchDate']= array (
       'null' => false,
       'default' => 0,
     ),
+    'instructor_member_id' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
     'mailinglist_id' => 
     array (
       'dbtype' => 'int',
@@ -273,6 +282,14 @@ $xpdo_meta_map['fbuchDate']= array (
     array (
       'class' => 'fbuchNames',
       'local' => 'instructor_id',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'Instructor' => 
+    array (
+      'class' => 'mvMember',
+      'local' => 'instructor_member_id',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',

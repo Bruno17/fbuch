@@ -1,15 +1,15 @@
 <li data-datenames_id="[[+id]]" class="list-group-item [[+canceled:!empty=`list-group-item-danger`]] [[+Zusagen_id:isnot=``:then=`list-group-item-success`:else=``]] ]]">
-</span>[[+idx]] [[+Name_firstname]] [[+Name_lastname]]
+</span>[[+idx]] [[+Member_firstname]] [[+Member_name]]
 <div class="btn-group pull-right">
 [[!hasPermission:is=`yes`:then=` 
 
-[[+Name_riot_user_id:isnot=``:then=`
+[[+Member_riot_user_id:isnot=``:then=`
 <button type="button" data-process="riotinvite_invite" data-id="[[+id]]" class="btn btn-default mail_invite [[+riot_state]]" aria-label="Einladung mailen">
 <span style="font-weight:bold;">R</span></span>
 </button>
 `:else=``]]
 
-[[+Name_id:fbuchGetNameEmail:isnot=`no`:then=`
+[[+Member_email:isnot=``:then=`
 <button type="button" data-process="mail_invite" data-id="[[+id]]" class="btn btn-default mail_invite [[+invited:is=`1`:then=`invite`:else=``]]" aria-label="Einladung mailen">
 <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
 </button>

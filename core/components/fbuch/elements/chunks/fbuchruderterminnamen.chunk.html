@@ -13,7 +13,7 @@
 [[!migxLoopCollection?
 &packageName=`fbuch`
 &classname=`fbuchDateInvited`
-&joins=`[{"alias":"Name"}]`
+&joins=`[{"alias":"Member"}]`
 &where=`{"date_id":"[[!#request.fahrt_id:isnot=``:then=`[[!#request.fahrt_id]]`:else=`9999999`]]","canceled":"1"}`
 &tpl=`fbuchAnmeldenDateNamesRow`
 &wrapperTpl=`@CODE:

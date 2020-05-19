@@ -21,8 +21,8 @@
 [[!migxLoopCollection?
 &packageName=`fbuch`
 &classname=`fbuchDateInvited`
-&joins=`[{"alias":"Name"},
-{"alias":"Zusagen","classname":"fbuchDateNames","on":"Zusagen.date_id=fbuchDateInvited.date_id AND Zusagen.name_id=fbuchDateInvited.name_id"}]`
+&joins=`[{"alias":"Member"},
+{"alias":"Zusagen","classname":"fbuchDateNames","on":"Zusagen.date_id=fbuchDateInvited.date_id AND Zusagen.member_id=fbuchDateInvited.member_id"}]`
 &where=`{"date_id":"[[+id]]"}`
 &tpl=`fbuchRuderterminInvitedNamesRow`
 &debug=`0`

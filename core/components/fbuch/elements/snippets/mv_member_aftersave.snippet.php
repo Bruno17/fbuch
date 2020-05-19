@@ -15,6 +15,14 @@ switch ($configs) {
             'postfield' => 'roles');
         $modx->migx->handleRelatedLinks($object, $postvalues, $config);
 
+        if ($object->get('member_status') == 'Mitglied'){
+            $object->set('inactive',0);
+        } else {
+            $object->set('inactive',1); 
+        }
+        $object->save();
+
+
         /*
         $config = array(
             'id_field' => 'system_id',
