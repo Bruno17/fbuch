@@ -34,7 +34,7 @@ Den Status <strong>Mitglied</strong> bitte nur vergeben, wenn zuverlÃ¤ssig geklÃ
     <input type="hidden" name="nospam:blank" value="" />
     <input type="hidden" name="fahrt_submit" value="1" />
     <input type="hidden" name="object_id" value="[[!#request.object_id]]" />
-    <input type="hidden" id="name_id" name="name_id" value="[[!+fi.name_id]]" />
+    <input type="hidden" id="member_id" name="member_id" value="[[!+fi.member_id]]" />
     <div class="row">
     <div class="form-group col-sm-3">
     <label for="firstname">
@@ -128,7 +128,7 @@ var fahrten_form_success = function(){
 var formdata = [];
 
 var input = $('#add_person');
-var hidden_input = $('#name_id');
+var hidden_input = $('#member_id');
 input.typeahead({source:[
     [[!migxLoopCollection?
     &classname=`mvMember`

@@ -65,7 +65,7 @@ select n3.name as Nachname,n3.firstname as Vorname,sum(f4.km) as km,count(n3.nam
 [[!hasPermission:is=`yes`:then=`, year(n3.birth_date) as Jahrgang`:else=``? &permission=`fbuch_view_birthdate`]]
 from modx_fbuch_fahrt_names f8,modx_fbuch_fahrten f4,modx_fbuch_names n3,modx_fbuch_boote b1
 WHERE  f8.fahrt_id=f4.id 
-AND f8.name_id=n3.id 
+AND f8.member_id=n3.id 
 AND b1.id=f4.boot_id
 [[!fbuchSwitchByReqParam?
 &name=`zeitraum`

@@ -40,7 +40,7 @@ class MyControllerMailinglistnames extends BaseController {
     public function subscribe() {
 
         if ($fbuchUser = $this->getCurrentFbuchUser()) {
-            $this->object->set('name_id', $fbuchUser->get('id'));
+            $this->object->set('member_id', $fbuchUser->get('id'));
             $this->object->set('subscribed', 1);
             $this->object->set('unsubscribed', 0);
             $this->object->set('subscribedon', strftime('%Y-%m-%d %H:%M:%S'));
@@ -56,7 +56,7 @@ class MyControllerMailinglistnames extends BaseController {
     public function unsubscribe() {
 
         if ($fbuchUser = $this->getCurrentFbuchUser()) {
-            $this->object->set('name_id', $fbuchUser->get('id'));
+            $this->object->set('member_id', $fbuchUser->get('id'));
             $this->object->set('subscribed', 0);
             $this->object->set('unsubscribed', 1);
             $this->object->set('unsubscribedon', strftime('%Y-%m-%d %H:%M:%S'));
@@ -133,7 +133,7 @@ class MyControllerMailinglistnames extends BaseController {
         */
 
 
-        $joins = '[{"alias":"Names","on":"list_id=fbuchMailinglist.id and name_id=129"}]';
+        $joins = '[{"alias":"Members","on":"list_id=fbuchMailinglist.id and member_id=129"}]';
 
         $this->modx->migx->prepareJoins($this->classKey, json_decode($joins, 1), $c);
 
@@ -148,13 +148,13 @@ class MyControllerMailinglistnames extends BaseController {
     protected function prepareListObject(xPDOObject $object) {
 
         $objectArray = $object->toArray();
-        $name_id = $object->get('Names_id');
-        $name_subscribed = $object->get('Names_subscribed');
-        $name_unsubscribed = $object->get('Names_unsubscribed');
+        $member_id = $object->get('Members_id');
+        $name_subscribed = $object->get('Members_subscribed');
+        $name_unsubscribed = $object->get('Members_unsubscribed');
 
-        $objectArray['Names_active'] = empty($name_id) ? false : true;
-        $objectArray['Names_subscribed'] = empty($name_subscribed) ? false : true;
-        $objectArray['Names_unsubscribed'] = empty($name_unsubscribed) ? false : true;
+        $objectArray['Members_active'] = empty($member_id) ? false : true;
+        $objectArray['Members_subscribed'] = empty($name_subscribed) ? false : true;
+        $objectArray['Members_unsubscribed'] = empty($name_unsubscribed) ? false : true;
 
 
         return $objectArray;

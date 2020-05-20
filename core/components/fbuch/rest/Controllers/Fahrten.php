@@ -24,7 +24,7 @@ class MyControllerFahrten extends modRestController {
     public function afterPut(array &$objectArray) {
         //remove old, unused name(s)
         $fields = array();
-        $fields['name_id'] = $this->getProperty('Name_id');
+        $fields['member_id'] = $this->getProperty('Name_id');
         $fields['fahrt_id'] = isset($objectArray['id']) ? $objectArray['id'] : 0;
 
         $c = $this->modx->newQuery('fbuchFahrtNames');
@@ -54,7 +54,7 @@ class MyControllerFahrten extends modRestController {
     
     public function afterPost(array &$objectArray) {
         $fields = array();
-        $fields['name_id'] = $this->getProperty('Name_id');
+        $fields['member_id'] = $this->getProperty('Name_id');
         $fields['fahrt_id'] = isset($objectArray['id']) ? $objectArray['id'] : 0;
         $this->afterSave($fields);
        

@@ -1,10 +1,10 @@
 <?php
-$name_id = isset($_REQUEST['name_id']) ? $_REQUEST['name_id'] : '';
-$name_ids = isset($_REQUEST['name_ids']) ? $_REQUEST['name_ids'] : '';
-$name_ids = !empty($name_ids) ? explode(',',$name_ids) : array();
-if (!in_array($name_id,$name_ids)){
-    $name_ids[] = $name_id;
+$member_id = isset($_REQUEST['member_id']) ? $_REQUEST['member_id'] : '';
+$member_ids = isset($_REQUEST['member_ids']) ? $_REQUEST['member_ids'] : '';
+$member_ids = !empty($member_ids) ? explode(',',$member_ids) : array();
+if (!in_array($member_id,$member_ids)){
+    $member_ids[] = $member_id;
 }
 
-$modx->setPlaceholder('name_ids',implode(',',$name_ids));
+$modx->setPlaceholder('member_ids',implode(',',$member_ids));
 return '';

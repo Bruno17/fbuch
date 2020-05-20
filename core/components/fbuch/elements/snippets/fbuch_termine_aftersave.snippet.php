@@ -17,21 +17,21 @@ if ($docopy && $names = $object->getMany('Invited')){
             if (empty($subscribed) && empty($unsubscribed)){
                 $ml_name->remove();    
             } else {
-                $existing[] = $ml_name->get('name_id');
+                $existing[] = $ml_name->get('member_id');
             }
             
         }
     }
     
     foreach ($names as $name){
-        $name_id = $name->get('name_id');
-        if (in_array($name_id,$existing)){
+        $member_id = $name->get('member_id');
+        if (in_array($member_id,$existing)){
             continue;
         }
         
         $new_object = $modx->newObject($classname);
         $new_object->set('list_id',$list_id);
-        $new_object->set('name_id',$name_id);
+        $new_object->set('member_id',$member_id);
         $new_object->save();
     }
 }

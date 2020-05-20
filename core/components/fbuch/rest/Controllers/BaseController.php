@@ -15,7 +15,7 @@ class BaseController extends modRestController {
         //try to get fbuch User by invite - mail - link
         if ($invite_o = $modx->getObject('fbuchDateInvited', $iid)) {
             $date_id = $invite_o->get('date_id');
-            $name_id = $invite_o->get('member_id');
+            $member_id = $invite_o->get('member_id');
             if ($name_o = $invite_o->getOne('Member')) {
                 $email = $this->getNameEmail($name_o);
             }

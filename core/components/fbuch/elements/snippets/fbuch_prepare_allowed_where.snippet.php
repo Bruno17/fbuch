@@ -11,7 +11,7 @@ if (!empty($allowed)) {
 
     if ($collection = $modx->getCollection('fbuchBootAllowedNames', $c)) {
         foreach ($collection as $object) {
-            $ids[] = $object->get('name_id');
+            $ids[] = $object->get('member_id');
         }
         $where = array();
         $where['id:IN'] = $ids;

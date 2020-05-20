@@ -49,13 +49,13 @@ if (empty($col)) {
 
 $modx->migx->loadConfigs();
 
-$name_id = $modx->getOption('object_id',$scriptProperties,'');
+$member_id = $modx->getOption('object_id',$scriptProperties,'');
 $boot_id = $modx->getOption('co_id',$scriptProperties,''); 
 
 
 switch ($col) {
     case 'allowed':
-        if ($object = $modx->getObject('fbuchBootAllowedNames',array('name_id'=>$name_id,'boot_id'=>$boot_id))){
+        if ($object = $modx->getObject('fbuchBootAllowedNames',array('member_id'=>$member_id,'boot_id'=>$boot_id))){
             
         }
         
@@ -64,7 +64,7 @@ switch ($col) {
                 
             }else{
                 $object = $modx->newObject('fbuchBootAllowedNames');
-                $object->set('name_id',$name_id);
+                $object->set('member_id',$member_id);
                 $object->set('boot_id',$boot_id);
                 $object->save();
             }
