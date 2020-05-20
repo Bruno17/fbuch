@@ -1,4 +1,5 @@
 <?php
+
 $birthdate = strtotime($modx->getOption('birthdate', $scriptProperties, 0));
 $when = $modx->getOption('when', $scriptProperties, '');
 $alter = '';

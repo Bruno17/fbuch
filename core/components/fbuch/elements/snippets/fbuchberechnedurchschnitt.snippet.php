@@ -1,4 +1,5 @@
 <?php
+
 $values = explode(',',$input);
 $sum = 0;
 $output = 0;

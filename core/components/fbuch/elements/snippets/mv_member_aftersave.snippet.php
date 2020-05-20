@@ -1,4 +1,5 @@
 <?php
+
 $object = & $modx->getOption('object',$scriptProperties,null);
 $properties = $modx->getOption('scriptProperties',$scriptProperties,array());
 $postvalues = $modx->getOption('postvalues',$scriptProperties,array());

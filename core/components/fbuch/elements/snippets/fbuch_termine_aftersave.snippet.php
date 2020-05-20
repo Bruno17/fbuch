@@ -1,4 +1,5 @@
 <?php
+
 $object = & $modx->getOption('object',$scriptProperties);
 $docopy = $object->get(copy_names_to_mailinglist);
 if ($docopy && $names = $object->getMany('Invited')){

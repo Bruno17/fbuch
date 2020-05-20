@@ -1,4 +1,5 @@
 <?php
+
 $object = & $modx->getOption('object',$scriptProperties,null);
 
 if ($object){

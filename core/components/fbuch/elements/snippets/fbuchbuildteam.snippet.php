@@ -1,4 +1,5 @@
 <?php
+
 $member_id = isset($_REQUEST['member_id']) ? $_REQUEST['member_id'] : '';
 $member_ids = isset($_REQUEST['member_ids']) ? $_REQUEST['member_ids'] : '';
 $member_ids = !empty($member_ids) ? explode(',',$member_ids) : array();

@@ -1,4 +1,5 @@
 <?php
+
 $revers = $modx->getOption('revers', $scriptProperties, '');
 $tempparams = $modx->fromJson($modx->getOption('tempParams', $_REQUEST, ''));
 $sendmails = $modx->getOption('sendmails', $tempparams, '');

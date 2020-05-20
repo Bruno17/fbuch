@@ -1,4 +1,5 @@
 <?php
+
 $packageName = 'fbuch';
 $packagepath = $modx->getOption('core_path') . 'components/' . $packageName . '/';
 $modelpath = $packagepath . 'model/';

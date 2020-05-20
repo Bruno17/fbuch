@@ -1,4 +1,5 @@
 <?php
+
 $total = $modx->getOption('total',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,0);
 $grid_id = $modx->getOption('grid_id',$scriptProperties,'');

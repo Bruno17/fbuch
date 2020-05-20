@@ -1,4 +1,5 @@
 <?php
+
 $modx->setPlaceholder('year',strftime('%Y'));
 
 if (isset($_REQUEST['year'])){
