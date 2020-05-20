@@ -33,11 +33,11 @@ Du kannst dich nicht für einen vergangenen Termin anmelden!</strong>
 [[!migxLoopCollection?
 &packageName=`fbuch`
 &classname=`fbuchDateNames`
-&joins=`[{"alias":"Member"},{"alias":"Registeredby"},
+&joins=`[{"alias":"Member"},{"alias":"RegisteredbyMember"},
 {"alias":"Zusagen","classname":"fbuchDateNames","on":"Zusagen.date_id=fbuchDateNames.date_id AND Zusagen.member_id=fbuchDateNames.member_id"}]`
 &where=`{"date_id":"[[+id]]"}`
-&sortConfig=`[{"sortby":"registeredby"}]`
-&groupingField=`registeredby`
+&sortConfig=`[{"sortby":"registeredby_member"}]`
+&groupingField=`registeredby_member`
 &groupby=`fbuchDateNames.id`
 &tpl=`fbuchAnmeldenDateNamesRow`
 &debug=`0`

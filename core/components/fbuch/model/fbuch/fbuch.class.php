@@ -224,7 +224,7 @@ class Fbuch {
                             $datename_o->set('date_id', $date_id);
                             $datename_o->set('member_id', $person);
                             $datename_o->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
-                            $datename_o->set('registeredby', $member_id);
+                            $datename_o->set('registeredby_member', $member_id);
                             $datename_o->save();
                         }
                     }
@@ -247,7 +247,7 @@ class Fbuch {
                             $datename_o->set('guestname', $guestname);
                             $datename_o->set('guestemail', $guestemails[$key]);
                             $datename_o->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
-                            $datename_o->set('registeredby', $member_id);
+                            $datename_o->set('registeredby_member', $member_id);
                             $datename_o->save();
                         }
                     }
@@ -700,7 +700,7 @@ class Fbuch {
                                 $this->sendInviteMail($object, $comment, $comment_name, $add_datecomment, 'RGM Einladung');
                             }
                             if ($action == 'mail_invites' || $action == 'riotinvite_invites') {
-                                $name_o = $object->getOne('Name');
+                                $name_o = $object->getOne('Member');
                                 $date_o = $object->getOne('Date');
                                 $scriptProperties = array(
                                     'action' => 'invite',
@@ -1350,7 +1350,7 @@ class Fbuch {
             case 'add':
                 $name = '';
                 if ($object = $modx->getObject($classname, $fields)) {
-                    if ($name_o = $object->getOne('Name')) {
+                    if ($name_o = $object->getOne('Member')) {
                         $name = $name_o->get('name');
                     }
                 }
