@@ -18,7 +18,7 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`[[+classname]]`
-            &joins=`[{"alias":"Boot"},{"alias":"Names"},{"alias":"Name","classname":"fbuchNames","on":"Name.id=Names.name_id"}]`
+            &joins=`[{"alias":"Boot"},{"alias":"Members"},{"alias":"Member","classname":"mvMember","on":"Member.id=Members.name_id"}]`
             &tpl=`fbuch[[+grid_id]]Row`
             &limit=`[[+limit]]`
             &offset=`[[+[[+grid_id]]_offset]]`

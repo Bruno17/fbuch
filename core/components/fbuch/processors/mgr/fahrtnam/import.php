@@ -68,8 +68,8 @@ if (($handle = fopen($uploadpath . $filename, "r")) !== false) {
             $data = array();
             $data['nameid_old'] = $row['namid'];
             $data['fahrtid_old'] = $row['fahrtid'];
-            if ($nam_o = $modx->getObject('fbuchNames',array('namid_old' => $row['namid']))){
-                $data['name_id'] = $nam_o->get('id');    
+            if ($nam_o = $modx->getObject('mvMember',array('namid_old' => $row['namid']))){
+                $data['member_id'] = $nam_o->get('id');    
             }
             if ($fahrt_o = $modx->getObject('fbuchFahrt',array('fahrtid_old' => $row['fahrtid']))){
                 $data['fahrt_id'] = $fahrt_o->get('id');    

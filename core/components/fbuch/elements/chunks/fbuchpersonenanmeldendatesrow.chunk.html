@@ -10,8 +10,8 @@
 
 [[!migxLoopCollection?
 &packageName=`fbuch`
-&classname=`fbuchNames`
-&where=`{"id":"[[+name_id]]"}`
+&classname=`mvMember`
+&where=`{"id":"[[+member_id]]"}`
 &tpl=`fbuchPersonenAnmeldenDatesRowForm`
 ]]
 
@@ -34,8 +34,8 @@
 [[!migxLoopCollection?
 &packageName=`fbuch`
 &classname=`fbuchDateNames`
-&joins=`[{"alias":"Name"}]`
-&where=`{"date_id":"[[+id]]","registeredby":"[[+name_id]]"}`
+&joins=`[{"alias":"Member"}]`
+&where=`{"date_id":"[[+id]]","registeredby":"[[+member_id]]"}`
 &tpl=`fbuchPersonenAnmeldenDateNamesRow`
 ]]
 <br>

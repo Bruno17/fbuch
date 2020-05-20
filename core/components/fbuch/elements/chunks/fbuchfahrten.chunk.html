@@ -58,7 +58,7 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`[[+classname]]`
-            &joins=`[{"alias":"Boot"},{"alias":"Names"},{"alias":"Name","classname":"fbuchNames","on":"Name.id=Names.name_id"}]`
+            &joins=`[{"alias":"Boot"},{"alias":"Members"},{"alias":"Member","classname":"mvMember","on":"Member.id=Members.member_id"}]`
             &tpl=`fbuch[[+grid_id]]Row`
             &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
             &where=`[{"deleted":"0",[[+where]]},[[+date_where]]]`

@@ -1,7 +1,7 @@
 [[$bei-riot-registrieren]]<br><br>
 [[!migxLoopCollection?
 &packageName=`fbuch`
-&classname=`fbuchNames`
+&classname=`mvMember`
 &where=`{"modx_user_id":"[[!+modx.user.id]]"}`
 &tpl=`@CODE:[[+id]]`
 &toPlaceholder=`fbuch_user_id`
@@ -10,8 +10,8 @@
 [[!migxLoopCollection?
 &packageName=`fbuch`
 &classname=`fbuchDateInvited`
-&joins=`[{"alias":"Date"},{"alias":"Zusagen","classname":"fbuchDateNames","on":"Zusagen.date_id=Date.id AND Zusagen.name_id=[[!+fbuch_user_id]]"}]`
-&where=`{"canceled":"0","Zusagen.id":null,"name_id":"[[!+fbuch_user_id]]","Date.date:>=":"[[!now:date=`%Y-%m-%d 00:00:00`]]"}`
+&joins=`[{"alias":"Date"},{"alias":"Zusagen","classname":"fbuchDateNames","on":"Zusagen.date_id=Date.id AND Zusagen.member_id=[[!+fbuch_user_id]]"}]`
+&where=`{"canceled":"0","Zusagen.id":null,"member_id":"[[!+fbuch_user_id]]","Date.date:>=":"[[!now:date=`%Y-%m-%d 00:00:00`]]"}`
 &sortConfig=`[{"sortby":"Date.date"},{"sortby":"Date.start_time"}]`
 &tpl=`fbuchMyInvitesRow`
 &wrapperTpl=`@CODE:

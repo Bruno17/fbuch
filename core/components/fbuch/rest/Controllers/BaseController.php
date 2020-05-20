@@ -15,8 +15,8 @@ class BaseController extends modRestController {
         //try to get fbuch User by invite - mail - link
         if ($invite_o = $modx->getObject('fbuchDateInvited', $iid)) {
             $date_id = $invite_o->get('date_id');
-            $name_id = $invite_o->get('name_id');
-            if ($name_o = $invite_o->getOne('Name')) {
+            $name_id = $invite_o->get('member_id');
+            if ($name_o = $invite_o->getOne('Member')) {
                 $email = $this->getNameEmail($name_o);
             }
         }
@@ -26,7 +26,7 @@ class BaseController extends modRestController {
             $fbuchUser = $name_o;    
         } else if (!empty($user_id)){
             //try to get fbuch User by logged in MODX User
-            $fbuchUser = $this->modx->getObject('fbuchNames', array('modx_user_id' => $user_id));    
+            $fbuchUser = $this->modx->getObject('mvMember', array('modx_user_id' => $user_id));    
         }
 
         return $fbuchUser;
@@ -39,10 +39,12 @@ class BaseController extends modRestController {
             $email = $object->get('email');
             //try to get email from MV
 
+            /*
             $member_id = $object->get('mv_member_id');
             if ($member = $this->modx->getObject('mvMember', $member_id)) {
                 $email = $member->get('email');
             }
+            */
         }
         return $email;
     }    
