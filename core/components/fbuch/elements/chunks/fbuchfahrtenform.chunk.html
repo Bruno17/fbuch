@@ -223,8 +223,8 @@ var input = $('#add_person');
 input.typeahead({source:[
     [[!migxLoopCollection?
     &classname=`mvMember`
-    &sortConfig=`[{"sortby":"Member_"}]`
-    &tpl=`@CODE:{id:"[[+id]]",name:"[[+Member_]] [[+firstname]]"}`
+    &sortConfig=`[{"sortby":"name"}]`
+    &tpl=`@CODE:{id:"[[+id]]",name:"[[+name]] [[+firstname]]"}`
     &where=`{"member_status:IN":["Gast","Mitglied","VHS"],"deleted":"0"}`
     &outputSeparator=`,`
     &debug=`0`

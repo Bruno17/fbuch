@@ -2,7 +2,7 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`fbuchDateNames`
-            &joins=`[{"alias":"Name"}]`
+            &joins=`[{"alias":"Member"}]`
             &limit=`100`
             &where=`{"date_id":"[[!#request.fahrt_id:isnot=``:then=`[[!#request.fahrt_id]]`:else=`9999999`]]"}`
             &tpl=`fbuchDateNamenRow`

@@ -20,7 +20,7 @@ Altersschnitt:
 [[!migxLoopCollection:fbuchBerechneDurchschnitt?
 &packageName=`fbuch`
 &classname=`fbuchFahrtNames`
-&joins=`[{"alias":"Name"}]`
+&joins=`[{"alias":"Member"}]`
 &where=`{"fahrt_id":"[[+id]]","cox":"0"}`
 &date=`[[+date]]`
 &tpl=`fbuchFahrtenDragdropFahrtNamesAlter`
@@ -39,7 +39,7 @@ Altersschnitt:
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`fbuchFahrtNames`
-            &joins=`[{"alias":"Name"}]`
+            &joins=`[{"alias":"Member"}]`
             &limit=`1`
             &where=`{"obmann":"1","fahrt_id":"[[+id]]"}`
             &tpl=`@CODE:1`
@@ -51,7 +51,7 @@ Altersschnitt:
 [[!migxLoopCollection?
 &packageName=`fbuch`
 &classname=`fbuchFahrtNames`
-&joins=`[{"alias":"Name"}]`
+&joins=`[{"alias":"Member"}]`
 &where=`{"fahrt_id":"[[+id]]"}`
 &tpl=`fbuchFahrtenDragdropFahrtNamesRow`
 &date=`[[+date]]`

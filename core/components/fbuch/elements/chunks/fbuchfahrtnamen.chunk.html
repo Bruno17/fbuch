@@ -1,7 +1,7 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`fbuchFahrtNames`
-            &joins=`[{"alias":"Name"}]`
+            &joins=`[{"alias":"Member"}]`
             &limit=`1`
             &where=`{"obmann":"1","fahrt_id":"[[!#request.fahrt_id]]"}`
             &tpl=`@CODE:1`
@@ -12,7 +12,7 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`fbuchFahrtNames`
-            &joins=`[{"alias":"Name"}]`
+            &joins=`[{"alias":"Member"}]`
             &limit=`10`
             &where=`{"fahrt_id":"[[!#request.fahrt_id]]"}`
             &tpl=`fbuchFahrtnamRow`
