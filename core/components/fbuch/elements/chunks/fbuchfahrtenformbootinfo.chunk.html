@@ -5,9 +5,9 @@
 [[!migxLoopCollection? 
 &packageName=`fbuch`
 &classname=`fbuchBootAllowedNames`
-&joins=`[{"alias":"Name"}]`
+&joins=`[{"alias":"Member"}]`
 &where=`{"boot_id":"[[+id]]"}`
-&tpl=`@CODE:[[+Name_firstname]] [[+Name_lastname]]`
+&tpl=`@CODE:[[+Member_firstname]] [[+Member_name]]`
 &outputSeparator=`, `
 &wrapperTpl=`@CODE:<br>([[+output]])`
 ]]

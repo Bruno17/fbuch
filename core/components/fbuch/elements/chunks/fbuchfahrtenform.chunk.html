@@ -8,7 +8,7 @@
 [[!#request.type:is=`dragdrop`:then=`
 &validate=`boot_id:required,submit_form:required`
 `:else=`
-&validate=`name_ids:required,boot_id:required,submit_form:required`
+&validate=`member_ids:required,boot_id:required,submit_form:required`
 `]]
 `:else=``]]
 ]]
@@ -132,7 +132,7 @@
     <div class="form-group col-sm-3">
     <label for="add_person">
         Person hinzufügen:
-        [[!+fi.error.name_ids:!empty=`
+        [[!+fi.error.member_ids:!empty=`
         <span class="error"><br>Bitte eine Person auswählen!</span>
         `]]
        
@@ -142,7 +142,7 @@
 </div>
 
 <div id="teamwrapper">
-<input type="hidden" name="name_ids" id="name_ids" value="[[!+fi.name_ids]]">
+<input type="hidden" name="member_ids" id="member_ids" value="[[!+fi.member_ids]]">
 </div>
 
 `:else=``]]
@@ -222,9 +222,9 @@ $( "#anmelden_form" ).on( "submit", function( event ) {
 var input = $('#add_person');
 input.typeahead({source:[
     [[!migxLoopCollection?
-    &classname=`fbuchNames`
-    &sortConfig=`[{"sortby":"lastname"}]`
-    &tpl=`@CODE:{id:"[[+id]]",name:"[[+lastname]] [[+firstname]]"}`
+    &classname=`mvMember`
+    &sortConfig=`[{"sortby":"Member_"}]`
+    &tpl=`@CODE:{id:"[[+id]]",name:"[[+Member_]] [[+firstname]]"}`
     &where=`{"member_status:IN":["Gast","Mitglied","VHS"],"deleted":"0"}`
     &outputSeparator=`,`
     &debug=`0`
@@ -234,8 +234,8 @@ input.typeahead({source:[
      ,afterSelect: function(item){
          //console.log(item);
          input.val('');
-         var name_ids = $('#name_ids').val();
-         $( "#teamwrapper" ).load( getneufahrtnamen_ajax_url,{"fahrt_id":"[[!#request.fahrt_id]]","name_ids":name_ids,"name_id":item.id,"processaction":"add"}, function(){
+         var member_ids = $('#member_ids').val();
+         $( "#teamwrapper" ).load( getneufahrtnamen_ajax_url,{"fahrt_id":"[[!#request.fahrt_id]]","member_ids":member_ids,"member_id":item.id,"processaction":"add"}, function(){
              $('#add_person').focus();
              //fbuch_getteam();
          });

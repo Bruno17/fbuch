@@ -33,9 +33,9 @@
 var input = $('#add_person');
 input.typeahead({source:[
     [[!migxLoopCollection?
-    &classname=`fbuchNames`
-    &sortConfig=`[{"sortby":"lastname"}]`
-    &tpl=`@CODE:{id:"[[+id]]",name:"[[+lastname]] [[+firstname]]"}`
+    &classname=`mvMember`
+    &sortConfig=`[{"sortby":"name"}]`
+    &tpl=`@CODE:{id:"[[+id]]",name:"[[+name]] [[+firstname]]"}`
     &where=`{"member_status:IN":["Gast","Mitglied","VHS"],"deleted":"0"}`
     &outputSeparator=`,`
     &debug=`0`
@@ -58,9 +58,9 @@ input.typeahead({source:[
 var input2 = $('#remove_person');
 input2.typeahead({source:[
     [[!migxLoopCollection?
-    &classname=`fbuchNames`
-    &sortConfig=`[{"sortby":"lastname"}]`
-    &tpl=`@CODE:{id:"[[+id]]",name:"[[+lastname]] [[+firstname]]"}`
+    &classname=`mvMember`
+    &sortConfig=`[{"sortby":"name"}]`
+    &tpl=`@CODE:{id:"[[+id]]",name:"[[+name]] [[+firstname]]"}`
     &where=`{"member_status:IN":["Gast","Mitglied","VHS"],"deleted":"0"}`
     &outputSeparator=`,`
     &debug=`0`

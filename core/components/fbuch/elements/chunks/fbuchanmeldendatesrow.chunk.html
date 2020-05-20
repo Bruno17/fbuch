@@ -14,8 +14,8 @@ Du kannst dich nicht für einen vergangenen Termin anmelden!</strong>
 `:else=`
 [[!migxLoopCollection?
 &packageName=`fbuch`
-&classname=`fbuchNames`
-&where=`{"id":"[[+name_id]]"}`
+&classname=`mvMember`
+&where=`{"id":"[[+member_id]]"}`
 &tpl=`fbuchAnmeldenDatesRowForm`
 ]]
 `]]
@@ -33,8 +33,8 @@ Du kannst dich nicht für einen vergangenen Termin anmelden!</strong>
 [[!migxLoopCollection?
 &packageName=`fbuch`
 &classname=`fbuchDateNames`
-&joins=`[{"alias":"Name"},{"alias":"Registeredby"},
-{"alias":"Zusagen","classname":"fbuchDateNames","on":"Zusagen.date_id=fbuchDateNames.date_id AND Zusagen.name_id=fbuchDateNames.name_id"}]`
+&joins=`[{"alias":"Member"},{"alias":"Registeredby"},
+{"alias":"Zusagen","classname":"fbuchDateNames","on":"Zusagen.date_id=fbuchDateNames.date_id AND Zusagen.member_id=fbuchDateNames.member_id"}]`
 &where=`{"date_id":"[[+id]]"}`
 &sortConfig=`[{"sortby":"registeredby"}]`
 &groupingField=`registeredby`
@@ -71,8 +71,8 @@ Du kannst dich nicht für einen vergangenen Termin anmelden!</strong>
 [[!migxLoopCollection?
 &packageName=`fbuch`
 &classname=`fbuchDateInvited`
-&joins=`[{"alias":"Name"},
-{"alias":"Zusagen","classname":"fbuchDateNames","on":"Zusagen.date_id=fbuchDateInvited.date_id AND Zusagen.name_id=fbuchDateInvited.name_id"}]`
+&joins=`[{"alias":"Member"},
+{"alias":"Zusagen","classname":"fbuchDateNames","on":"Zusagen.date_id=fbuchDateInvited.date_id AND Zusagen.member_id=fbuchDateInvited.member_id"}]`
 &where=`{"date_id":"[[+id]]"}`
 &tpl=`fbuchAnmeldenDateNamesRow`
 &debug=`0`
@@ -96,7 +96,7 @@ Du kannst dich nicht für einen vergangenen Termin anmelden!</strong>
 [[!migxLoopCollection?
 &packageName=`fbuch`
 &classname=`fbuchDateComment`
-&joins=`[{"alias":"Name"}]`
+&joins=`[{"alias":"Member"}]`
 &where=`{"date_id":"[[+id]]"}`
 &tpl=`fbuchAnmeldenDatesRowComment`
 &sortConfig=`[{"sortby":"createdon","sortdir":"DESC"}]`

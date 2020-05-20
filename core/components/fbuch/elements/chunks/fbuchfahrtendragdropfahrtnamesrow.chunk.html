@@ -8,11 +8,11 @@
   <img src="style/img/noun_78924_cc.svg" style="width: 17px;">  
 </button> 
 </div>
-[[+idx]] [[+Name_firstname]] [[+Name_lastname]] [[+Name_member_status:isnot=`Mitglied`:then=`([[+Name_member_status]])`:else=``]]
+[[+idx]] [[+Member_firstname]] [[+Member_name]] [[+Member_member_status:isnot=`Mitglied`:then=`([[+Member_member_status]])`:else=``]]
 [[+cox:is=`1`:then=`<img src="style/img/noun_78924_cc.svg" style="width: 17px;">`:else=`
   [[!hasPermission:is=`yes`:then=`
 ([[!mv_berechne_alter? 
-&birthdate=`[[+Name_birth_date]]`
+&birthdate=`[[+Member_birthdate]]`
 &when=`[[+property.date:strtotime:date=`%Y-12-31 23:59:59`]]`
 ]])  
   `:else=``?
