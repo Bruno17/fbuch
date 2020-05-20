@@ -944,8 +944,8 @@ class Fbuch {
                     break;
                 case 'fbuchDate':
                     //$this->checkPermission('edit_old_fbuchentries',array('classname'=>'fbuchFahrt', 'object_id'=>$object_id));
-                    if ($name = $object->getOne('Member')) {
-                        $values['instructor_name'] = $name->get('name') . ' ' . $name->get('name');
+                    if ($name = $object->getOne('Instructor')) {
+                        $values['instructor_name'] = $name->get('name') . ' ' . $name->get('firstname');
                         //$values['member_id'] = $name->get('id');
                     }
 

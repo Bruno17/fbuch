@@ -21,7 +21,7 @@
     <input type="hidden" name="nospam:blank" value="" />
     <input type="hidden" name="fahrt_submit" value="1" />
     <input type="hidden" name="object_id" value="[[!#request.object_id]]" />
-    <input type="hidden" id="instructor_id" name="instructor_id" value="[[!+fi.instructor_id]]" />
+    <input type="hidden" id="instructor_member_id" name="instructor_member_id" value="[[!+fi.instructor_member_id]]" />
     <input type="hidden" name="type" value="[[+fi.type]]" />
     <input type="hidden" name="autoduplicate" value="0" />
     <input type="hidden" name="autoduplicate_names" value="0" />
@@ -217,7 +217,7 @@ $( "#anmelden_form" ).on( "submit", function( event ) {
 });
 
 var input = $('#add_person');
-var hidden_input = $('#instructor_id');
+var hidden_input = $('#instructor_member_id');
 input.typeahead({source:[
     [[!migxLoopCollection?
     &classname=`mvMember`
