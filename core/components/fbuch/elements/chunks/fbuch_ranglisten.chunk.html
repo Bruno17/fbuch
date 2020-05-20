@@ -63,7 +63,7 @@
 &query=`
 select n3.name as Nachname,n3.firstname as Vorname,sum(f4.km) as km,count(n3.name) as Fahrten 
 [[!hasPermission:is=`yes`:then=`, year(n3.birthdate) as Jahrgang`:else=``? &permission=`fbuch_view_birthdate`]]
-from modx_fbuch_fahrt_names f8,modx_fbuch_fahrten f4,modx_fbuch_names n3,modx_fbuch_boote b1
+from modx_fbuch_fahrt_names f8,modx_fbuch_fahrten f4,modx_mv_members n3,modx_fbuch_boote b1
 WHERE  f8.fahrt_id=f4.id 
 AND f8.member_id=n3.id 
 AND b1.id=f4.boot_id
@@ -90,12 +90,12 @@ AND b1.id=f4.boot_id
 &name=`group`
 &default=`SF`
 &options=`{
-"SM":"AND [[+year]]-year(n3.birthdate)>18 AND n3.gender = 'M' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
-"SF":"AND [[+year]]-year(n3.birthdate)>18 AND n3.gender = 'W' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
-"JM":"AND [[+year]]-year(n3.birthdate)<=18 AND [[+year]]-year(n3.birthdate)>=15 AND n3.gender = 'M' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
-"JF":"AND [[+year]]-year(n3.birthdate)<=18 AND [[+year]]-year(n3.birthdate)>=15 AND n3.gender = 'W' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
-"Jung":"AND [[+year]]-year(n3.birthdate)<=14 AND n3.gender = 'M' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
-"Maed":"AND [[+year]]-year(n3.birthdate)<=14 AND n3.gender = 'W' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
+"SM":"AND [[+year]]-year(n3.birthdate)>18 AND n3.gender = 'männlich' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
+"SF":"AND [[+year]]-year(n3.birthdate)>18 AND n3.gender = 'weiblich' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
+"JM":"AND [[+year]]-year(n3.birthdate)<=18 AND [[+year]]-year(n3.birthdate)>=15 AND n3.gender = 'männlich' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
+"JF":"AND [[+year]]-year(n3.birthdate)<=18 AND [[+year]]-year(n3.birthdate)>=15 AND n3.gender = 'weiblich' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
+"Jung":"AND [[+year]]-year(n3.birthdate)<=14 AND n3.gender = 'männlich' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
+"Maed":"AND [[+year]]-year(n3.birthdate)<=14 AND n3.gender = 'weiblich' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
 "Gast":"AND n3.member_status = 'Gast'",
 "VHS":"AND n3.member_status = 'VHS'"
 }`
