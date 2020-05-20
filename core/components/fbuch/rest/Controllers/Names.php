@@ -3,8 +3,8 @@
 include 'BaseController.php';
 
 class MyControllerNames extends BaseController {
-    public $classKey = 'fbuchNames';
-    public $defaultSortField = 'lastname';
+    public $classKey = 'mvMember';
+    public $defaultSortField = 'name';
     public $defaultSortDirection = 'ASC';
 
     public function beforeDelete() {
@@ -92,7 +92,7 @@ class MyControllerNames extends BaseController {
         $c->select(array(
             'id',
             'firstname',
-            'lastname',
+            'name',
             'member_status'));
 
         //$c->prepare();echo $c->toSql();
@@ -107,7 +107,7 @@ class MyControllerNames extends BaseController {
         switch ($returntype) {
             case 'options':
                 $output = array();
-                $output['label'] = $object->get('lastname') . ' ' . $object->get('firstname');
+                $output['label'] = $object->get('name') . ' ' . $object->get('firstname');
                 if ($object->get('member_status') != 'Mitglied') {
                     $output['label'] .= ' (' . $object->get('member_status') . ')';
                 }

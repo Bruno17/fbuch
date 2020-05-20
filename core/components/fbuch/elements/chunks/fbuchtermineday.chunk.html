@@ -1,7 +1,7 @@
           [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`[[+classname]]`
-            &joins=`[{"alias":"Name"}]`
+            &joins=`[{"alias":"Member"}]`
             &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
             &where=`{"type":"[[+type]]","deleted":"0",
                 "date:>=":"[[!fbuch_strtotime:date=`%Y-%m-%d 00:00:00`? &input=`[[+week]] +[[+dayidx]] day`]]",

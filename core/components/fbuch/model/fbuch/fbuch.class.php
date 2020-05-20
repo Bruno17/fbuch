@@ -184,11 +184,12 @@ class Fbuch {
         if ($object) {
             $email = $object->get('email');
             //try to get email from MV
-
+            /*
             $member_id = $object->get('mv_member_id');
             if ($member = $this->modx->getObject('mvMember', $member_id)) {
                 $email = $member->get('email');
             }
+            */
         }
         return $email;
     }
@@ -197,7 +198,7 @@ class Fbuch {
         $modx = &$this->modx;
         $date_id = $modx->getOption('date_id', $properties, '');
         $redirect = $modx->getOption('redirect', $properties, 0);
-        $name_id = $modx->getOption('name_id', $properties, '');
+        $member_id = $modx->getOption('member_id', $properties, '');
         $persons = $modx->getOption('person', $properties, '');
         $guestnames = $modx->getOption('guestname', $properties, '');
         $removepersons = $modx->getOption('remove_person', $properties, '');
@@ -205,7 +206,7 @@ class Fbuch {
         $code = $modx->getOption('code', $_REQUEST, '');
         $iid = $modx->getOption('iid', $_REQUEST, '');
 
-        if (!empty($name_id) && !empty($date_id)) {
+        if (!empty($member_id) && !empty($date_id)) {
             if (is_array($removepersons)) {
                 foreach ($removepersons as $person) {
                     if ($datename_o = $modx->getObject('fbuchDateNames', $person)) {
@@ -215,15 +216,15 @@ class Fbuch {
             }
             if (is_array($persons)) {
                 foreach ($persons as $person) {
-                    if (!empty($person) && $name_o = $modx->getObject('fbuchNames', $person)) {
-                        if ($datename_o = $modx->getObject('fbuchDateNames', array('date_id' => $date_id, 'name_id' => $person))) {
+                    if (!empty($person) && $name_o = $modx->getObject('mvMember', $person)) {
+                        if ($datename_o = $modx->getObject('fbuchDateNames', array('date_id' => $date_id, 'member_id' => $person))) {
 
                         } else {
                             $datename_o = $modx->newObject('fbuchDateNames');
                             $datename_o->set('date_id', $date_id);
-                            $datename_o->set('name_id', $person);
+                            $datename_o->set('member_id', $person);
                             $datename_o->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
-                            $datename_o->set('registeredby', $name_id);
+                            $datename_o->set('registeredby', $member_id);
                             $datename_o->save();
                         }
                     }
@@ -231,7 +232,7 @@ class Fbuch {
             }
             if (is_array($guestnames)) {
                 $gast_id = 0;
-                if ($gast_o = $modx->getObject('fbuchNames', array('lastname' => 'Gast'))) {
+                if ($gast_o = $modx->getObject('mvMember', array('name' => 'Gast'))) {
                     $gast_id = $gast_o->get('id');
                 }
 
@@ -242,11 +243,11 @@ class Fbuch {
                         } else {
                             $datename_o = $modx->newObject('fbuchDateNames');
                             $datename_o->set('date_id', $date_id);
-                            $datename_o->set('name_id', $gast_id);
+                            $datename_o->set('member_id', $gast_id);
                             $datename_o->set('guestname', $guestname);
                             $datename_o->set('guestemail', $guestemails[$key]);
                             $datename_o->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
-                            $datename_o->set('registeredby', $name_id);
+                            $datename_o->set('registeredby', $member_id);
                             $datename_o->save();
                         }
                     }
@@ -278,24 +279,24 @@ class Fbuch {
 
         if ($invite_o = $modx->getObject('fbuchDateInvited', $iid)) {
             $date_id = $invite_o->get('date_id');
-            $name_id = $invite_o->get('name_id');
-            if ($name_o = $invite_o->getOne('Name')) {
+            $member_id = $invite_o->get('member_id');
+            if ($name_o = $invite_o->getOne('Member')) {
                 $email = $this->getNameEmail($name_o);
             }
         }
 
         //try to get invite of the current user or create an invite for him, if he is calling this page
-        if ($date_id && empty($name_id)) {
+        if ($date_id && empty($member_id)) {
             if ($modx->user->ismember('fbuch')) {
-                if ($modx->user->Profile->get('fullname') != 'rgm' && $name_o = $modx->getObject('fbuchNames', array('modx_user_id' => $modx->user->get('id')))) {
-                    $name_id = $name_o->get('id');
+                if ($modx->user->Profile->get('fullname') != 'rgm' && $name_o = $modx->getObject('mvMember', array('modx_user_id' => $modx->user->get('id')))) {
+                    $member_id = $name_o->get('id');
                     $email = $this->getNameEmail($name_o);
-                    if ($invite_o = $modx->getObject('fbuchDateInvited', array('date_id' => $date_id, 'name_id' => $name_id))) {
+                    if ($invite_o = $modx->getObject('fbuchDateInvited', array('date_id' => $date_id, 'member_id' => $member_id))) {
 
                     } else {
                         $invite_o = $modx->newObject('fbuchDateInvited');
                         $invite_o->set('date_id', $date_id);
-                        $invite_o->set('name_id', $name_id);
+                        $invite_o->set('member_id', $member_id);
                         //$invite_o->save();
                     }
                     $_REQUEST['iid'] = $iid = $invite_o->get('id');
@@ -304,7 +305,7 @@ class Fbuch {
             }
         }
 
-        $modx->setPlaceholder('name_id', $name_id);
+        $modx->setPlaceholder('member_id', $member_id);
         $modx->setPlaceholder('date_id', $date_id);
 
         if ($action) {
@@ -322,7 +323,7 @@ class Fbuch {
                 case 'add_persons':
                     $properties = $_REQUEST;
                     $properties['date_id'] = $date_id;
-                    $properties['name_id'] = $name_id;
+                    $properties['member_id'] = $member_id;
                     $properties['redirect'] = $redirect;
                     $this->addPersonsToDate($properties);
                     break;
@@ -343,7 +344,7 @@ class Fbuch {
                 case 'remove_comment':
                     if ($comment_o = $modx->getObject('fbuchDateComment', $remove_comment)) {
                         $createdby = $comment_o->get('createdby');
-                        if ((!empty($createdby) && $modx->user->get('id') == $createdby) || $name_id == $comment_o->get('name_id')) {
+                        if ((!empty($createdby) && $modx->user->get('id') == $createdby) || $member_id == $comment_o->get('member_id')) {
                             $comment_o->remove();
                         }
                     }
@@ -353,7 +354,7 @@ class Fbuch {
             if (!empty($comment)) {
                 $comment_o = $modx->newObject('fbuchDateComment');
                 $comment_o->set('date_id', $date_id);
-                $comment_o->set('name_id', $name_id);
+                $comment_o->set('member_id', $member_id);
                 $comment_o->set('comment', $comment);
                 $comment_o->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
                 $comment_o->save();
@@ -364,7 +365,7 @@ class Fbuch {
 
                 $this->sendCommentMails($comment, $mail_comment, $name_o, $date_id);
 
-                $name_o = $invite_o->getOne('Name');
+                $name_o = $invite_o->getOne('Member');
                 $date_o = $invite_o->getOne('Date');
 
                 if (!empty($send_riot)) {
@@ -407,24 +408,24 @@ class Fbuch {
     public function sendCommentMails($comment, $mail_comment, $name_o, $date_id) {
         $modx = &$this->modx;
         $classname = '';
-        $comment_name = $name_o->get('firstname') . ' ' . $name_o->get('lastname');
+        $comment_name = $name_o->get('firstname') . ' ' . $name_o->get('name');
         $send_self = false;
 
         switch ($mail_comment) {
             case 'accepted':
                 $classname = 'fbuchDateNames';
                 $where = array('date_id' => $date_id);
-                $id_field = 'name_id';
+                $id_field = 'member_id';
                 break;
             case 'invited':
                 $classname = 'fbuchDateInvited';
                 $where = array('date_id' => $date_id);
-                $id_field = 'name_id';
+                $id_field = 'member_id';
                 break;
         }
 
         if (is_array($mail_comment)) {
-            $classname = 'fbuchNames';
+            $classname = 'mvMember';
             $where = array('id:IN' => $mail_comment);
             $id_field = 'id';
             $send_self = true;
@@ -435,16 +436,16 @@ class Fbuch {
             $c->where($where);
             if ($collection = $modx->getCollection($classname, $c)) {
                 foreach ($collection as $object) {
-                    $name_id = $object->get($id_field);
-                    if ($invite_o = $modx->getObject('fbuchDateInvited', array('date_id' => $date_id, 'name_id' => $name_id))) {
+                    $member_id = $object->get($id_field);
+                    if ($invite_o = $modx->getObject('fbuchDateInvited', array('date_id' => $date_id, 'member_id' => $member_id))) {
 
                     } else {
                         $invite_o = $modx->newObject('fbuchDateInvited');
-                        $invite_o->set('name_id', $name_id);
+                        $invite_o->set('member_id', $member_id);
                         $invite_o->set('date_id', $date_id);
                         $invite_o->save();
                     }
-                    if ($send_self || $name_id != $name_o->get('id')) {
+                    if ($send_self || $member_id != $name_o->get('id')) {
                         $this->sendInviteMail($invite_o, $comment, $comment_name, false, 'Neuer Kommentar');
                     }
 
@@ -536,7 +537,7 @@ class Fbuch {
 
     public function duplicateDateNames(&$old_object, &$object) {
         $modx = &$this->modx;
-        if ($names = $old_object->getMany('Names')) {
+        if ($names = $old_object->getMany('Members')) {
             foreach ($names as $name) {
                 $new_name = $modx->newObject('fbuchDateNames');
                 $new_name->fromArray($name->toArray());
@@ -551,9 +552,9 @@ class Fbuch {
         $modx = &$this->modx;
         if ($names = $old_object->getMany('Invited')) {
             foreach ($names as $name) {
-                $name_id = $name->get('name_id');
+                $member_id = $name->get('member_id');
                 $date_id = $object->get('id');
-                if ($new_name = $modx->getObject('fbuchDateInvited', array('name_id' => $name_id, 'date_id' => $date_id))) {
+                if ($new_name = $modx->getObject('fbuchDateInvited', array('member_id' => $member_id, 'date_id' => $date_id))) {
 
                 } else {
                     $new_name = $modx->newObject('fbuchDateInvited');
@@ -570,20 +571,20 @@ class Fbuch {
 
     public function importMembersAsInvited($object) {
         $modx = &$this->modx;
-        $c = $modx->newQuery('fbuchNames');
+        $c = $modx->newQuery('mvMember');
         $c->where(array('member_status' => 'Mitglied'));
-        $c->sortby('lastname');
+        $c->sortby('name');
         $c->sortby('firstname');
-        if ($names = $modx->getCollection('fbuchNames', $c)) {
+        if ($names = $modx->getCollection('mvMember', $c)) {
             foreach ($names as $name) {
                 //echo '<pre>' . print_r($name->toArray(),1) . '</pre>';
-                $name_id = $name->get('id');
+                $member_id = $name->get('id');
                 $date_id = $object->get('id');
-                if ($new_name = $modx->getObject('fbuchDateInvited', array('name_id' => $name_id, 'date_id' => $date_id))) {
+                if ($new_name = $modx->getObject('fbuchDateInvited', array('member_id' => $member_id, 'date_id' => $date_id))) {
 
                 } else {
                     $new_name = $modx->newObject('fbuchDateInvited');
-                    $new_name->set('name_id', $name_id);
+                    $new_name->set('member_id', $member_id);
                     $new_name->set('canceled', 0);
                     $new_name->set('invited', 0);
                     $new_name->set('riot_state', 0);
@@ -728,7 +729,7 @@ class Fbuch {
             case 'fbuchFahrtNames':
 
                 $fields['fahrt_id'] = $modx->getOption('fahrt_id', $_REQUEST, '');
-                $fields['name_id'] = $modx->getOption('name_id', $_REQUEST, '');
+                $fields['member_id'] = $modx->getOption('member_id', $_REQUEST, '');
                 $fields['id'] = $modx->getOption('fahrtnames_id', $_REQUEST, '');
 
                 if (!$this->checkPermission('fbuch_edit_old_entries', array('classname' => 'fbuchFahrt', 'object_id' => $fields['fahrt_id']))) {
@@ -818,13 +819,13 @@ class Fbuch {
                     switch ($classname) {
                         case 'mvMember':
                             $firstname = $values['firstname'];
-                            $lastname = $values['name'];
+                            $name = $values['name'];
 
-                            if ($object = $modx->getObject($classname, array('firstname' => $firstname, 'name' => $lastname))) {
+                            if ($object = $modx->getObject($classname, array('firstname' => $firstname, 'name' => $name))) {
                                 $modx->setPlaceholder('error_message', 'Ein Eintrag mit diesem Namen und dem Mitgliederstatus ' . $object->get('member_status') . ' existiert bereits in unserer Datenbank und kann nicht nochmal neu erstellt werden.');
                                 return false;
                             }
-                            if (!empty($firstname) & !empty($lastname)) {
+                            if (!empty($firstname) & !empty($name)) {
                                 $object = $modx->newObject($classname);
                                 $values['inactive'] = 1;
                                 $values['inactive_reason'] = 'ist kein Mitglied';
@@ -932,9 +933,9 @@ class Fbuch {
                 case 'fbuchFahrt':
                     $this->checkPermission('fbuch_edit_old_entries', array('classname' => 'fbuchFahrt', 'object_id' => $object_id));
                     if ($fahrtname = $modx->getObject('fbuchFahrtNames', array('fahrt_id' => $values['id']))) {
-                        if ($name = $fahrtname->getOne('Name')) {
-                            $values['name'] = $name->get('lastname') . ' ' . $name->get('firstname');
-                            $values['name_id'] = $name->get('id');
+                        if ($name = $fahrtname->getOne('Member')) {
+                            $values['name'] = $name->get('name') . ' ' . $name->get('firstname');
+                            $values['member_id'] = $name->get('id');
                         }
                     }
                     break;
@@ -944,8 +945,8 @@ class Fbuch {
                 case 'fbuchDate':
                     //$this->checkPermission('edit_old_fbuchentries',array('classname'=>'fbuchFahrt', 'object_id'=>$object_id));
                     if ($name = $object->getOne('Member')) {
-                        $values['instructor_name'] = $name->get('lastname') . ' ' . $name->get('name');
-                        //$values['name_id'] = $name->get('id');
+                        $values['instructor_name'] = $name->get('name') . ' ' . $name->get('name');
+                        //$values['member_id'] = $name->get('id');
                     }
 
                     break;
@@ -967,7 +968,7 @@ class Fbuch {
                         if ($name = $object->getOne('Member')) {
                             $name_values = $name->toArray();
                             foreach ($name_values as $key => $value) {
-                                $values['Name_' . $key] = $value;
+                                $values['Member_' . $key] = $value;
                             }
                         }
                     }
@@ -1068,24 +1069,24 @@ class Fbuch {
         $object->fromArray($values);
         $object->save();
 
-        if (isset($values['name_ids'])) {
-            $name_ids = explode(',', $values['name_ids']);
-            foreach ($name_ids as $key => $name_id) {
-                if (!empty($name_id)) {
+        if (isset($values['member_ids'])) {
+            $member_ids = explode(',', $values['member_ids']);
+            foreach ($member_ids as $key => $member_id) {
+                if (!empty($member_id)) {
                     $fahrtnam = $modx->newObject('fbuchFahrtNames');
-                    $fahrtnam->set('name_id', $name_id);
+                    $fahrtnam->set('member_id', $member_id);
                     $fahrtnam->set('fahrt_id', $object->get('id'));
                     $fahrtnam->save();
                 }
             }
         }
 
-        if ($grid_id == 'Ergofahrten' && !empty($values['name_id'])) {
+        if ($grid_id == 'Ergofahrten' && !empty($values['member_id'])) {
             if ($fahrtnam = $modx->getObject('fbuchFahrtNames', array('fahrt_id' => $object->get('id')))) {
-                $fahrtnam->set('name_id', $values['name_id']);
+                $fahrtnam->set('member_id', $values['member_id']);
             } else {
                 $fahrtnam = $modx->newObject('fbuchFahrtNames');
-                $fahrtnam->set('name_id', $values['name_id']);
+                $fahrtnam->set('member_id', $values['member_id']);
                 if (!empty($values['datenames_id'])) {
                     $fahrtnam->set('datenames_id', $values['datenames_id']);
                 }
@@ -1097,10 +1098,10 @@ class Fbuch {
         return $object;
     }
 
-    public function isguest($name_id) {
+    public function isguest($member_id) {
         $isguest = false;
-        if ($name_o = $this->modx->getObject('mvMember', $name_id)) {
-            if ($name_o->get('lastname') == 'Gast') {
+        if ($name_o = $this->modx->getObject('mvMember', $member_id)) {
+            if ($name_o->get('name') == 'Gast') {
                 $isguest = true;
             }
         }
@@ -1117,8 +1118,8 @@ class Fbuch {
             if ($type == 'TeamrowingXXX') {
                 $classname = 'fbuchFahrt';
                 $c = $modx->newQuery($classname);
-                $c->leftjoin('fbuchFahrtNames', 'Names');
-                $c->where(array('Names.name_id' => $fields['name_id'], 'date_id' => $fields['date_id']));
+                $c->leftjoin('fbuchFahrtNames', 'Members');
+                $c->where(array('Names.member_id' => $fields['member_id'], 'date_id' => $fields['date_id']));
 
                 switch ($action) {
                     case 'add':
@@ -1139,7 +1140,7 @@ class Fbuch {
                             }
                             $object->save();
                             $fahrtnam = $modx->newObject('fbuchFahrtNames');
-                            $fahrtnam->set('name_id', $fields['name_id']);
+                            $fahrtnam->set('member_id', $fields['member_id']);
                             $fahrtnam->set('fahrt_id', $object->get('id'));
 
                             $fahrtnam->save();
@@ -1208,7 +1209,7 @@ class Fbuch {
         switch ($source) {
             case 'dates':
                 if (!empty($datenames_id) && $object = $modx->getObject('fbuchDateNames', $datenames_id)) {
-                    $name_id = $object->get('name_id');
+                    $member_id = $object->get('member_id');
                     if ($date_o = $object->getOne('Date')) {
                         $source_date = $date_o->get('date');
                     }
@@ -1216,7 +1217,7 @@ class Fbuch {
                 break;
             case 'fahrten':
                 if (!empty($fahrtnames_id) && $object = $modx->getObject('fbuchFahrtNames', $fahrtnames_id)) {
-                    $name_id = $object->get('name_id');
+                    $member_id = $object->get('member_id');
                     if ($fahrt_o = $object->getOne('Fahrt')) {
                         $source_date = $fahrt_o->get('date');
                         $source_locked = $fahrt_o->get('locked');
@@ -1255,7 +1256,7 @@ class Fbuch {
                 if ($target_date == $source_date) {
                     switch ($source) {
                         case 'fahrten':
-                            if (!$this->isguest($name_id) && $object = $modx->getObject($classname, array('fahrt_id' => $target_id, 'name_id' => $name_id))) {
+                            if (!$this->isguest($member_id) && $object = $modx->getObject($classname, array('fahrt_id' => $target_id, 'member_id' => $member_id))) {
                                 //name exists allready in fahrt, do nothing
                             } else {
                                 if ($object = $modx->getObject($classname, $fahrtnames_id)) {
@@ -1267,12 +1268,12 @@ class Fbuch {
                             break;
                             break;
                         case 'dates':
-                            if (!$this->isguest($name_id) && $object = $modx->getObject($classname, array('fahrt_id' => $target_id, 'name_id' => $name_id))) {
+                            if (!$this->isguest($member_id) && $object = $modx->getObject($classname, array('fahrt_id' => $target_id, 'member_id' => $member_id))) {
                                 //name exists allready in fahrt, do nothing
                             } else {
                                 $object = $modx->newObject($classname);
                                 $object->set('fahrt_id', $target_id);
-                                $object->set('name_id', $name_id);
+                                $object->set('member_id', $member_id);
                                 $object->set('pos', $pos);
                                 $object->set('datenames_id', $datenames_id);
                                 $object->set('createdby', $modx->user->get('id'));
@@ -1297,12 +1298,12 @@ class Fbuch {
                                 $object->set('date_id', $target_id);
                                 $object->save();
                             } else {
-                                if (!$this->isguest($name_id) && $object = $modx->getObject($classname, array('date_id' => $target_id, 'name_id' => $name_id))) {
+                                if (!$this->isguest($member_id) && $object = $modx->getObject($classname, array('date_id' => $target_id, 'member_id' => $member_id))) {
 
                                 } else {
                                     $object = $modx->newObject($classname);
                                     $object->set('date_id', $target_id);
-                                    $object->set('name_id', $name_id);
+                                    $object->set('member_id', $member_id);
                                     $object->set('createdby', $modx->user->get('id'));
                                     $object->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
                                     $object->save();
@@ -1315,7 +1316,7 @@ class Fbuch {
 
                             break;
                         case 'dates':
-                            if (!$this->isguest($name_id) && $object = $modx->getObject($classname, array('date_id' => $target_id, 'name_id' => $name_id))) {
+                            if (!$this->isguest($member_id) && $object = $modx->getObject($classname, array('date_id' => $target_id, 'member_id' => $member_id))) {
 
                             } else {
                                 if ($object = $modx->getObject($classname, $datenames_id)) {
@@ -1347,13 +1348,13 @@ class Fbuch {
         }
         switch ($action) {
             case 'add':
-                $lastname = '';
+                $name = '';
                 if ($object = $modx->getObject($classname, $fields)) {
                     if ($name_o = $object->getOne('Name')) {
-                        $lastname = $name_o->get('lastname');
+                        $name = $name_o->get('name');
                     }
                 }
-                if (!$object || $lastname == 'Gast') {
+                if (!$object || $name == 'Gast') {
                     $object = $modx->newObject($classname);
                     $object->fromArray($fields);
                     $object->save();

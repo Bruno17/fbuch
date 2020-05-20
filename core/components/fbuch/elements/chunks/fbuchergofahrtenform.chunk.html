@@ -22,7 +22,7 @@
     <input type="hidden" name="nospam:blank" value="" />
     <input type="hidden" name="fahrt_submit" value="1" />
     <input type="hidden" name="object_id" value="[[!+fi.object_id]]" />
-    <input type="hidden" id="name_id" name="name_id" value="[[!+fi.name_id]]" />
+    <input type="hidden" id="member_id" name="member_id" value="[[!+fi.member_id]]" />
     <input type="hidden" id="datenames_id" name="datenames_id" value="[[!+fi.datenames_id]]" />
     [[!#request.process:is=`delete`:then=`
     <input type="hidden" name="deleted" value="1" />    
@@ -109,12 +109,12 @@ var fahrten_form_success = function(){
 var formdata = [];
 
 var input = $('#add_person');
-var hidden_input = $('#name_id');
+var hidden_input = $('#member_id');
 input.typeahead({source:[
     [[!migxLoopCollection?
-    &classname=`fbuchNames`
-    &sortConfig=`[{"sortby":"lastname"}]`
-    &tpl=`@CODE:{id:"[[+id]]",name:"[[+lastname]] [[+firstname]]"}`
+    &classname=`mvMember`
+    &sortConfig=`[{"sortby":"name"}]`
+    &tpl=`@CODE:{id:"[[+id]]",name:"[[+name]] [[+firstname]]"}`
     &where=`{"member_status:IN":["Gast","Mitglied","VHS"],"deleted":"0"}`
     &outputSeparator=`,`
     &debug=`0`

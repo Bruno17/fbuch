@@ -61,7 +61,7 @@
 <table class="table table-striped">
 [[!fbuchQuery? 
 &query=`
-select n3.lastname as Nachname,n3.firstname as Vorname,sum(f4.km) as km,count(n3.lastname) as Fahrten 
+select n3.name as Nachname,n3.firstname as Vorname,sum(f4.km) as km,count(n3.name) as Fahrten 
 [[!hasPermission:is=`yes`:then=`, year(n3.birth_date) as Jahrgang`:else=``? &permission=`fbuch_view_birthdate`]]
 from modx_fbuch_fahrt_names f8,modx_fbuch_fahrten f4,modx_fbuch_names n3,modx_fbuch_boote b1
 WHERE  f8.fahrt_id=f4.id 
@@ -102,8 +102,8 @@ AND b1.id=f4.boot_id
 ]]
 AND km is not null
 AND km > 0
-AND n3.lastname != ''
-group by n3.lastname,n3.firstname
+AND n3.name != ''
+group by n3.name,n3.firstname
 order by km desc
 `
 ]]

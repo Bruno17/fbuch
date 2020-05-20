@@ -45,9 +45,9 @@
 var input = $('#add_person');
 input.typeahead({source:[
     [[!migxLoopCollection?
-    &classname=`fbuchNames`
-    &sortConfig=`[{"sortby":"lastname"}]`
-    &tpl=`@CODE:{id:"[[+id]]",name:"[[+lastname]] [[+firstname]]"}`
+    &classname=`mvMember`
+    &sortConfig=`[{"sortby":"name"}]`
+    &tpl=`@CODE:{id:"[[+id]]",name:"[[+name]] [[+firstname]]"}`
     &outputSeparator=`,`
     ]]
     ],items:15
@@ -55,7 +55,7 @@ input.typeahead({source:[
      ,afterSelect: function(item){
          //console.log(item);
          //input.val('');
-         $( "#fbuchModal" ).load( updateteam_ajax_url,{"fahrt_id":"[[!#request.fahrt_id]]","name_id":item.id,"processaction":"add"}, function(){
+         $( "#fbuchModal" ).load( updateteam_ajax_url,{"fahrt_id":"[[!#request.fahrt_id]]","member_id":item.id,"processaction":"add"}, function(){
              $('#add_person').focus();
              fbuch_getteam();
          });
@@ -65,9 +65,9 @@ input.typeahead({source:[
 var input2 = $('#remove_person');
 input2.typeahead({source:[
     [[!migxLoopCollection?
-    &classname=`fbuchNames`
-    &sortConfig=`[{"sortby":"lastname"}]`
-    &tpl=`@CODE:{id:"[[+id]]",name:"[[+lastname]] [[+firstname]]"}`
+    &classname=`mvMember`
+    &sortConfig=`[{"sortby":"name"}]`
+    &tpl=`@CODE:{id:"[[+id]]",name:"[[+name]] [[+firstname]]"}`
     &outputSeparator=`,`
     ]]
     ],items:15
@@ -75,7 +75,7 @@ input2.typeahead({source:[
      ,afterSelect: function(item){
          //console.log(item);
          //input.val('');
-         $( "#fbuchModal" ).load( updateteam_ajax_url,{"fahrt_id":"[[!#request.fahrt_id]]","name_id":item.id,"processaction":"remove"}, function(){
+         $( "#fbuchModal" ).load( updateteam_ajax_url,{"fahrt_id":"[[!#request.fahrt_id]]","member_id":item.id,"processaction":"remove"}, function(){
              $('#remove_person').focus();
              fbuch_getteam();
          });
@@ -85,9 +85,9 @@ input2.typeahead({source:[
 var input3 = $('#set_obmann');
 input3.typeahead({source:[
     [[!migxLoopCollection?
-    &classname=`fbuchNames`
-    &sortConfig=`[{"sortby":"lastname"}]`
-    &tpl=`@CODE:{id:"[[+id]]",name:"[[+lastname]] [[+firstname]]"}`
+    &classname=`mvMember`
+    &sortConfig=`[{"sortby":"name"}]`
+    &tpl=`@CODE:{id:"[[+id]]",name:"[[+name]] [[+firstname]]"}`
     &outputSeparator=`,`
     ]]
     ],items:15
@@ -95,7 +95,7 @@ input3.typeahead({source:[
      ,afterSelect: function(item){
          //console.log(item);
          //input.val('');
-         $( "#fbuchModal" ).load( updateteam_ajax_url,{"fahrt_id":"[[!#request.fahrt_id]]","name_id":item.id,"processaction":"setobmann"}, function(){
+         $( "#fbuchModal" ).load( updateteam_ajax_url,{"fahrt_id":"[[!#request.fahrt_id]]","member_id":item.id,"processaction":"setobmann"}, function(){
              $('#add_person').focus();
              fbuch_getteam();
          });

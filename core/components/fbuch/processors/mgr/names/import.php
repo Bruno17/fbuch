@@ -67,8 +67,8 @@ if (($handle = fopen($uploadpath . $filename, "r")) !== false) {
             
             $data = array();
             $data['firstname'] = $row['VORNAME'];
-            $data['lastname'] = $row['NAME'];
-            $data['birth_date'] = $row['GEBURTSTAG'];
+            $data['name'] = $row['NAME'];
+            $data['birthdate'] = $row['GEBURTSTAG'];
             $data['gender'] = $row['GESCHLECHT'];
 
             $data['namid_old'] = $row['namid'];
