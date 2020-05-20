@@ -26,7 +26,7 @@ class MyControllerMailinglists extends BaseController {
     public function afterPut(array &$objectArray) {
         //remove old, unused name(s)
         $fields = array();
-        $fields['member_id'] = $this->getProperty('Name_id');
+        $fields['member_id'] = $this->getProperty('Member_id');
         $fields['fahrt_id'] = isset($objectArray['id']) ? $objectArray['id'] : 0;
 
         $c = $this->modx->newQuery('fbuchFahrtNames');
@@ -56,7 +56,7 @@ class MyControllerMailinglists extends BaseController {
     
     public function afterPost(array &$objectArray) {
         $fields = array();
-        $fields['member_id'] = $this->getProperty('Name_id');
+        $fields['member_id'] = $this->getProperty('Member_id');
         $fields['fahrt_id'] = isset($objectArray['id']) ? $objectArray['id'] : 0;
         $this->afterSave($fields);
        

@@ -36,7 +36,7 @@
         :options="filtered_options"
         @filter="filterFn"
         label="Fahrer auswählen"
-        v-model="form.Name_id.value"
+        v-model="form.Member_id.value"
       >
         <template v-slot:no-option>
           <q-item>
@@ -132,7 +132,7 @@
               <q-btn dense round flat icon="edit" @click="updateFahrt(props.row)" ></q-btn>
           </q-td>          
           <q-td key="Boot_name" :props="props">{{ props.row.Boot_name }}</q-td>
-          <q-td key="Name_fullname" :props="props">{{ props.row.Name_fullname }}</q-td>          
+          <q-td key="Member_fullname" :props="props">{{ props.row.Member_fullname }}</q-td>          
           <q-td key="date" :props="props">{{ props.row.date }} {{ props.row.start_time }}</q-td> 
           <q-td key="date_end" :props="props">{{ props.row.date_end }} {{ props.row.end_time }}</q-td>
           <q-td key="kmstand_start" :props="props">{{ props.row.kmstand_start }}</q-td>
@@ -165,7 +165,7 @@
               <q-btn dense round flat icon="edit" @click="updateFahrt(props.row)" ></q-btn>
           </q-td>          
           <q-td key="Boot_name" :props="props">{{ props.row.Boot_name }}</q-td>
-          <q-td key="Name_fullname" :props="props">{{ props.row.Name_fullname }}</q-td>          
+          <q-td key="Member_fullname" :props="props">{{ props.row.Member_fullname }}</q-td>          
           <q-td key="date" :props="props">{{ props.row.date }} {{ props.row.start_time }}</q-td> 
           <q-td key="date_end" :props="props">{{ props.row.date_end }} {{ props.row.end_time }}</q-td>
           <q-td key="kmstand_start" :props="props">{{ props.row.kmstand_start }}</q-td>
@@ -198,7 +198,7 @@
               <q-btn dense round flat icon="edit" @click="updateFahrt(props.row)" ></q-btn>
           </q-td>          
           <q-td key="Boot_name" :props="props">{{ props.row.Boot_name }}</q-td>
-          <q-td key="Name_fullname" :props="props">{{ props.row.Name_fullname }}</q-td>          
+          <q-td key="Member_fullname" :props="props">{{ props.row.Member_fullname }}</q-td>          
           <q-td key="date" :props="props">{{ props.row.date }} {{ props.row.start_time }}</q-td> 
           <q-td key="date_end" :props="props">{{ props.row.date_end }} {{ props.row.end_time }}</q-td>
           <q-td key="kmstand_start" :props="props">{{ props.row.kmstand_start }}</q-td>
