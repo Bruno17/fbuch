@@ -1,5 +1,6 @@
 <?php
 
+
 $name = $modx->getOption('name',$scriptProperties,'');
 $default = $modx->getOption('default',$scriptProperties,'');
 $options = $modx->getOption('options',$scriptProperties,'');

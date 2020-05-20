@@ -1,0 +1,35 @@
+<script>
+var input = $('#add_person');
+var hidden_input = $('#name_id');
+var names_count = 0;
+input.typeahead({source:[
+    [[!migxLoopCollection?
+    &classname=`fbuchNames`
+    &sortConfig=`[{"sortby":"lastname"}]`
+    &tpl=`@CODE:{id:"[[+id]]",name:"[[+lastname]] [[+firstname]]"}`
+    &where=`{"member_status:IN":["Gast","Mitglied","VHS"],"deleted":"0"}`
+    &outputSeparator=`,`
+    &debug=`0`
+    ]]
+    ],items:15
+     ,autoSelect: false
+     ,afterSelect: function(item){
+         var html = $('#persons_tpl').html();
+         $('#persons').append(html);         
+         var input = $('#persons input:last');
+         input.val(item.id);
+         var span = $('#persons span:last');
+         span.html(item.name);
+         names_count = names_count + 1;
+         $('#add_person').val('');
+        }
+    });
+    $(function() {
+    $('#add_guest').click(function(){
+        var html = $('#guests_tpl').html();
+        $('#guests').append(html); 
+    }); 
+    });
+
+
+    </script>

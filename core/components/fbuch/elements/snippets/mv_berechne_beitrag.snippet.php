@@ -1,5 +1,6 @@
 <?php
 
+
 $alter = $modx->runSnippet('mv_berechne_alter', $scriptProperties);
 $typ = $modx->getOption('typ', $scriptProperties, '');
 $output = $modx->getOption('default', $scriptProperties, '');

@@ -1,5 +1,6 @@
 <?php
 
+
 $mode = $modx->getOption('mode', $scriptProperties, 'offset_ltf');
 $total = explode(',', $modx->getOption('total', $scriptProperties, 0));
 $limit = $modx->getOption('limit', $scriptProperties, 0);

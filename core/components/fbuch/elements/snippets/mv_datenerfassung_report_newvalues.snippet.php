@@ -1,5 +1,6 @@
 <?php
 
+
 $output = array();
 
 $output[] = '<table>';

@@ -1,5 +1,6 @@
 <?php
 
+
 $boot_id = $modx->getOption('object_id', $_REQUEST, 0);
 $req_configs = $modx->getOption('reqConfigs', $_REQUEST, 0);
 $member_id = $modx->getOption('member_id', $scriptProperties, 0);

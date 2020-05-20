@@ -1,5 +1,6 @@
 <?php
 
+
 $properties = $modx->getOption('scriptProperties',$scriptProperties);
 $data = $modx->getOption('data',$properties);
 
