@@ -264,7 +264,7 @@
       "renderer":"this.renderChunk",
       "clickaction":"",
       "selectorconfig":"",
-      "renderchunktpl":"[[setlocale]]\n<strong style=\"font-size:18px;\">[[+date:strtotime:date=`%a `]]<\/strong>\n[[+date:strtotime:date=`%d.%m.%Y`]]",
+      "renderchunktpl":"\n<strong style=\"font-size:18px;\">[[+date:strtotime:date=`%a `]]<\/strong>\n[[+date:strtotime:date=`%d.%m.%Y`]]",
       "renderoptions":"",
       "editor":""
     },
@@ -327,12 +327,17 @@
       "renderchunktpl":"",
       "renderoptions":"",
       "editor":""
+    },
+    {
+      "MIGX_id":10,
+      "dataIndex":"type",
+      "header":"type"
     }
   ],
   "createdby":1,
   "createdon":"2018-04-18 21:16:14",
   "editedby":1,
-  "editedon":"2020-01-19 20:06:40",
+  "editedon":"2020-01-29 17:03:31",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

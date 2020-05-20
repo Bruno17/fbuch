@@ -93,7 +93,7 @@
     "getlistwhere":"",
     "joins":[
       {
-        "alias":"Name"
+        "alias":"Member"
       },
       {
         "alias":"Date"
@@ -141,13 +141,33 @@
     },
     {
       "MIGX_id":7,
-      "dataIndex":"Name_firstname",
-      "header":"Name_firstname"
+      "header":"Member_firstname",
+      "dataIndex":"Member_firstname",
+      "width":"",
+      "sortable":true,
+      "show_in_grid":1,
+      "customrenderer":"",
+      "renderer":"",
+      "clickaction":"",
+      "selectorconfig":"",
+      "renderchunktpl":"",
+      "renderoptions":"",
+      "editor":""
     },
     {
       "MIGX_id":8,
-      "dataIndex":"Name_lastname",
-      "header":"Name_lastname"
+      "header":"Member_name",
+      "dataIndex":"Member_name",
+      "width":"",
+      "sortable":true,
+      "show_in_grid":1,
+      "customrenderer":"",
+      "renderer":"",
+      "clickaction":"",
+      "selectorconfig":"",
+      "renderchunktpl":"",
+      "renderoptions":"",
+      "editor":""
     },
     {
       "MIGX_id":9,
@@ -158,7 +178,7 @@
   "createdby":1,
   "createdon":"2018-01-24 14:02:59",
   "editedby":1,
-  "editedon":"2018-01-24 15:17:37",
+  "editedon":"2020-05-18 13:18:01",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,
