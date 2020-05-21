@@ -3092,7 +3092,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"1.1.0-beta",
+  "version":"1.2.0-beta",
   "database":{
     "tables":[
       "fbuchFahrt",
