@@ -43,7 +43,7 @@
     "getlistwhere":"{\"list_id\":\"[[migxLoopCollection? &packageName=`fbuch` &classname=`fbuchDate` &where=`{\"id\":\"[[+object_id]]\"}` &tpl=`@CODE:[[+mailinglist_id]]`]]\"}",
     "joins":[
       {
-        "alias":"Name"
+        "alias":"Member"
       }
     ],
     "hooksnippets":"",
@@ -58,13 +58,13 @@
   "columns":[
     {
       "MIGX_id":7,
-      "dataIndex":"Name_lastname",
-      "header":"Name_lastname"
+      "dataIndex":"Member_name",
+      "header":"Member_name"
     },
     {
       "MIGX_id":8,
-      "dataIndex":"Name_firstname",
-      "header":"Name_firstname"
+      "dataIndex":"Member_firstname",
+      "header":"Member_firstname"
     },
     {
       "MIGX_id":10,

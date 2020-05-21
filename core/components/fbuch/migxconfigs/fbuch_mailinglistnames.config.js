@@ -28,7 +28,7 @@
     "packageName":"fbuch",
     "classname":"fbuchMailinglistNames",
     "task":"",
-    "getlistsort":"lastname",
+    "getlistsort":"Member.name",
     "getlistsortdir":"",
     "sortconfig":"",
     "gridpagesize":"",
@@ -43,7 +43,7 @@
     "getlistwhere":"",
     "joins":[
       {
-        "alias":"Name"
+        "alias":"Member"
       }
     ],
     "hooksnippets":"",
@@ -58,13 +58,13 @@
   "columns":[
     {
       "MIGX_id":3,
-      "dataIndex":"Name_lastname",
-      "header":"Name_lastname"
+      "dataIndex":"Member_name",
+      "header":"Member_name"
     },
     {
       "MIGX_id":2,
-      "dataIndex":"Name_firstname",
-      "header":"Name_firstname"
+      "dataIndex":"Member_firstname",
+      "header":"Member_firstname"
     },
     {
       "MIGX_id":4,

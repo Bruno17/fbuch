@@ -162,7 +162,7 @@
     },
     {
       "MIGX_id":18,
-      "header":"Member_lastname",
+      "header":"Member_name",
       "dataIndex":"Member_name",
       "width":30,
       "sortable":true,

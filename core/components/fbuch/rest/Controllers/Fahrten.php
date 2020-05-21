@@ -138,7 +138,7 @@ class MyControllerFahrten extends modRestController {
     protected function prepareListObject(xPDOObject $object) {
         
         $names_array = array();
-        if ($fahrt_names = $object->getMany('Members')){
+        if ($fahrt_names = $object->getMany('Names')){
             foreach ($fahrt_names as $fahrt_name){
 
                 if ($name = $fahrt_name->getOne('Member')){

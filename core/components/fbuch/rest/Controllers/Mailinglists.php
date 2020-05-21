@@ -119,7 +119,7 @@ class MyControllerMailinglists extends BaseController {
         } 
         */
             if ($fbuchUser = $this->getCurrentFbuchUser()) {
-                $joins = '[{"alias":"Members","on":"list_id=fbuchMailinglist.id and member_id='.$fbuchUser->get('id').'"}]';
+                $joins = '[{"alias":"Names","on":"list_id=fbuchMailinglist.id and member_id='.$fbuchUser->get('id').'"}]';
             }               
                 
         
@@ -137,13 +137,13 @@ class MyControllerMailinglists extends BaseController {
     protected function prepareListObject(xPDOObject $object) {
 
         $objectArray = $object->toArray();
-        $member_id = $object->get('Members_id');
-        $name_subscribed = $object->get('Members_subscribed');
-        $name_unsubscribed = $object->get('Members_unsubscribed');
+        $member_id = $object->get('Names_id');
+        $name_subscribed = $object->get('Names_subscribed');
+        $name_unsubscribed = $object->get('Names_unsubscribed');
 
-        $objectArray['Members_active'] = empty($member_id) ? false : true; 
-        $objectArray['Members_subscribed'] = empty($name_subscribed) ? false : true;
-        $objectArray['Members_unsubscribed'] = empty($name_unsubscribed) ? false : true;
+        $objectArray['Names_active'] = empty($member_id) ? false : true; 
+        $objectArray['Names_subscribed'] = empty($name_subscribed) ? false : true;
+        $objectArray['Names_unsubscribed'] = empty($name_unsubscribed) ? false : true;
         
 
         return $objectArray; 

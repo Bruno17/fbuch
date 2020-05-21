@@ -1,6 +1,4 @@
 {
-  "id":27,
-  "name":"fbuch_bootnames",
   "formtabs":"",
   "contextmenus":"",
   "actionbuttons":"",
@@ -14,7 +12,7 @@
       "type":"textbox",
       "getlistwhere":{
         "firstname:LIKE":"%[[+bootnames_search]]%",
-        "OR:lastname:LIKE":"%[[+bootnames_search]]%"
+        "OR:name:LIKE":"%[[+bootnames_search]]%"
       },
       "getcomboprocessor":"",
       "combotextfield":"",
@@ -68,13 +66,13 @@
     "extrahandlers":"this.handleColumnSwitch",
     "filtersperrow":4,
     "packageName":"fbuch",
-    "classname":"fbuchNames",
+    "classname":"mvMember",
     "task":"fbuch_bootnames",
     "getlistsort":"",
     "getlistsortdir":"",
     "sortconfig":[
       {
-        "sortby":"lastname"
+        "sortby":"name"
       }
     ],
     "gridpagesize":"",
@@ -124,7 +122,7 @@
       "renderer":"this.renderChunk",
       "clickaction":"",
       "selectorconfig":"",
-      "renderchunktpl":"[[+firstname]] [[+lastname]]",
+      "renderchunktpl":"[[+firstname]] [[+name]]",
       "renderoptions":"",
       "editor":""
     },
@@ -139,7 +137,7 @@
       "renderer":"this.renderChunk",
       "clickaction":"",
       "selectorconfig":"",
-      "renderchunktpl":"[[fbuch_rendercolumn_bootnutzer_checkbox? &name_id=`[[+id]]`]]",
+      "renderchunktpl":"[[fbuch_rendercolumn_bootnutzer_checkbox? &member_id=`[[+id]]`]]",
       "renderoptions":"",
       "editor":""
     },
@@ -187,15 +185,5 @@
       "editor":""
     }
   ],
-  "createdby":1,
-  "createdon":"2017-07-07 17:07:02",
-  "editedby":1,
-  "editedon":"2017-07-08 10:00:49",
-  "deleted":0,
-  "deletedon":"-1-11-30 00:00:00",
-  "deletedby":0,
-  "published":1,
-  "publishedon":"-1-11-30 00:00:00",
-  "publishedby":0,
   "category":""
 }

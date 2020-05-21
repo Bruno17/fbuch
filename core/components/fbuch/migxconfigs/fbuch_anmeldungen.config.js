@@ -13,10 +13,10 @@
       "emptytext":"Nachname",
       "type":"combobox",
       "getlistwhere":{
-        "Name.lastname":"[[+anmeldung_lastname]]"
+        "Member.name":"[[+anmeldung_lastname]]"
       },
       "getcomboprocessor":"getcombo",
-      "combotextfield":"Name.lastname",
+      "combotextfield":"Member.name",
       "comboidfield":"",
       "combowhere":"",
       "comboclassname":"",
@@ -34,13 +34,13 @@
       "emptytext":"Vorname",
       "type":"combobox",
       "getlistwhere":{
-        "Name.firstname":"[[+anmeldung_firstname]]"
+        "Member.firstname":"[[+anmeldung_firstname]]"
       },
       "getcomboprocessor":"getcombo",
-      "combotextfield":"Name.firstname",
+      "combotextfield":"Member.firstname",
       "comboidfield":"",
       "combowhere":{
-        "Name.lastname":"[[+anmeldung_lastname]]"
+        "Member.name":"[[+anmeldung_lastname]]"
       },
       "comboclassname":"",
       "combopackagename":"",
