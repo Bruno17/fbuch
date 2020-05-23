@@ -1,6 +1,4 @@
 <?php
-
-
 $boot_id = $modx->getOption('object_id', $_REQUEST, '');
 $allowed = $modx->getOption('bootnames_allowed', $_REQUEST, '');
 $where = '';

@@ -47,8 +47,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/fbuchsetgridplaceholders.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"fbuchSetGridPlaceholders",
           "file":"fbuchsetgridplaceholders.snippet.php"
         },
@@ -63,8 +63,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/fbuchupdate.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"fbuchUpdate",
           "file":"fbuchupdate.snippet.php"
         },
@@ -79,8 +79,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/fbuchgetformvalues.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"fbuchGetFormValues",
           "file":"fbuchgetformvalues.snippet.php"
         },
@@ -95,8 +95,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/fbuchvalidatetime.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"fbuchValidateTime",
           "file":"fbuchvalidatetime.snippet.php"
         },
@@ -111,8 +111,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/fbuchsetdateplaceholders.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"fbuchSetDatePlaceholders",
           "file":"fbuchsetdateplaceholders.snippet.php"
         },
@@ -127,8 +127,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/fbuchgetgridoffset.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"fbuchGetGridOffset",
           "file":"fbuchgetgridoffset.snippet.php"
         },
@@ -143,8 +143,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/fbuchquery.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"fbuchQuery",
           "file":"fbuchquery.snippet.php"
         },
@@ -159,8 +159,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/fbuchswitchbyreqparam.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"fbuchSwitchByReqParam",
           "file":"fbuchswitchbyreqparam.snippet.php"
         },
@@ -175,8 +175,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/setyearplaceholder.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"setYearPlaceholder",
           "file":"setyearplaceholder.snippet.php"
         },
@@ -191,8 +191,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/fbuch_strtotime.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_strtotime",
           "file":"fbuch_strtotime.snippet.php"
         },
@@ -207,8 +207,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/fbuchloopweekdays.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"fbuchLoopWeekDays",
           "file":"fbuchloopweekdays.snippet.php"
         },
@@ -223,8 +223,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/fbuchbuildteam.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"fbuchBuildTeam",
           "file":"fbuchbuildteam.snippet.php"
         },
@@ -239,8 +239,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/fbuchgetnameemail.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"fbuchGetNameEmail",
           "file":"fbuchgetnameemail.snippet.php"
         },
@@ -255,8 +255,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/fbuch_rendercolumn_bootnutzer_checkbox.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_rendercolumn_bootnutzer_checkbox",
           "file":"fbuch_rendercolumn_bootnutzer_checkbox.snippet.php"
         },
@@ -271,8 +271,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/fbuch_prepare_allowed_where.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_prepare_allowed_where",
           "file":"fbuch_prepare_allowed_where.snippet.php"
         },
@@ -287,8 +287,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/fbuchberechnedurchschnitt.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"fbuchBerechneDurchschnitt",
           "file":"fbuchberechnedurchschnitt.snippet.php"
         },
@@ -303,8 +303,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/fbuch_termine_aftersave.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_termine_aftersave",
           "file":"fbuch_termine_aftersave.snippet.php"
         },
@@ -319,8 +319,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/fbuch_getpegel.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_getPegel",
           "file":"fbuch_getpegel.snippet.php"
         },
@@ -335,8 +335,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/mv_member_aftersave.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"mv_member_aftersave",
           "file":"mv_member_aftersave.snippet.php",
           "category":"mv"
@@ -352,8 +352,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/mv_member_aftergetfields.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"mv_member_aftergetfields",
           "file":"mv_member_aftergetfields.snippet.php",
           "category":"mv"
@@ -369,8 +369,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/check_sendmails.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"check_sendmails",
           "file":"check_sendmails.snippet.php",
           "category":"mv"
@@ -386,8 +386,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/mv_preparememberwhere.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"mv_prepareMemberWhere",
           "file":"mv_preparememberwhere.snippet.php",
           "category":"mv"
@@ -403,8 +403,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/add_mediasourcepath.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"add_mediasourcepath",
           "file":"add_mediasourcepath.snippet.php",
           "category":"mv"
@@ -420,8 +420,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/mv_rendercolumn_family_checkbox.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"mv_rendercolumn_family_checkbox",
           "file":"mv_rendercolumn_family_checkbox.snippet.php",
           "category":"mv"
@@ -437,8 +437,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/mv_rendercolumn_payer_checkbox.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"mv_rendercolumn_payer_checkbox",
           "file":"mv_rendercolumn_payer_checkbox.snippet.php",
           "category":"mv"
@@ -454,8 +454,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/mv_getcombo_family_id.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"mv_getcombo_family_id",
           "file":"mv_getcombo_family_id.snippet.php",
           "category":"mv"
@@ -471,8 +471,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/mv_berechne_alter.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"mv_berechne_alter",
           "file":"mv_berechne_alter.snippet.php",
           "category":"mv"
@@ -488,8 +488,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/mv_serienmails_aftersave.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"mv_serienmails_aftersave",
           "file":"mv_serienmails_aftersave.snippet.php",
           "category":"mv"
@@ -505,8 +505,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/mv_berechne_beitrag.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"mv_berechne_beitrag",
           "file":"mv_berechne_beitrag.snippet.php",
           "category":"mv"
@@ -522,8 +522,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/mv_get_sepa.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"mv_get_sepa",
           "file":"mv_get_sepa.snippet.php",
           "category":"mv"
@@ -539,8 +539,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/authorize_member.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"authorize_member",
           "file":"authorize_member.snippet.php",
           "category":"mv"
@@ -556,8 +556,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/mv_datenerfassung_report_newvalues.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"mv_datenerfassung_report_newvalues",
           "file":"mv_datenerfassung_report_newvalues.snippet.php",
           "category":"mv"
@@ -573,8 +573,8 @@
             
           ],
           "moduleguid":"",
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/snippets\/mv_dooraccesscode_beforesave.snippet.php",
+          "static":false,
+          "static_file":"",
           "name":"mv_dooraccesscode_beforesave",
           "file":"mv_dooraccesscode_beforesave.snippet.php",
           "category":"mv"
@@ -591,8 +591,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_rudern_und_gruppentraining.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_Rudern_und_Gruppentraining",
           "file":"fbuch_rudern_und_gruppentraining.chunk.html",
           "category":"fbuch_content_chunks"
@@ -607,8 +607,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_ergometer_fahrtenliste.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_Ergometer_Fahrtenliste",
           "file":"fbuch_ergometer_fahrtenliste.chunk.html",
           "category":"fbuch_content_chunks"
@@ -623,8 +623,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_rudern_fahrtenliste.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_Rudern_Fahrtenliste",
           "file":"fbuch_rudern_fahrtenliste.chunk.html",
           "category":"fbuch_content_chunks"
@@ -639,8 +639,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_fuhrpark.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_Fuhrpark",
           "file":"fbuch_fuhrpark.chunk.html",
           "category":"fbuch_content_chunks"
@@ -655,8 +655,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_termine_und_reservierungen.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_Termine_und_Reservierungen",
           "file":"fbuch_termine_und_reservierungen.chunk.html",
           "category":"fbuch_content_chunks"
@@ -671,8 +671,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_teilnehmeruebersicht.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_Teilnehmeruebersicht",
           "file":"fbuch_teilnehmeruebersicht.chunk.html",
           "category":"fbuch_content_chunks"
@@ -687,8 +687,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_personen_anmelden.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_Personen_anmelden",
           "file":"fbuch_personen_anmelden.chunk.html",
           "category":"fbuch_content_chunks"
@@ -703,8 +703,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_persoenliche_mailinggruppen.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_Persoenliche_Mailinggruppen",
           "file":"fbuch_persoenliche_mailinggruppen.chunk.html",
           "category":"fbuch_content_chunks"
@@ -719,8 +719,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_namensliste.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_Namensliste",
           "file":"fbuch_namensliste.chunk.html",
           "category":"fbuch_content_chunks"
@@ -735,8 +735,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_bootsliste.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_Bootsliste",
           "file":"fbuch_bootsliste.chunk.html",
           "category":"fbuch_content_chunks"
@@ -751,8 +751,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_boots details.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_Boots Details",
           "file":"fbuch_boots details.chunk.html",
           "category":"fbuch_content_chunks"
@@ -767,8 +767,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_schaden_mangel_bearbeiten.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_Schaden_Mangel_bearbeiten",
           "file":"fbuch_schaden_mangel_bearbeiten.chunk.html",
           "category":"fbuch_content_chunks"
@@ -783,8 +783,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_bootseinstellung_bearbeiten.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_Bootseinstellung_bearbeiten",
           "file":"fbuch_bootseinstellung_bearbeiten.chunk.html",
           "category":"fbuch_content_chunks"
@@ -799,8 +799,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_bootsschaeden.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_Bootsschaeden",
           "file":"fbuch_bootsschaeden.chunk.html",
           "category":"fbuch_content_chunks"
@@ -815,8 +815,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_ranglisten.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_Ranglisten",
           "file":"fbuch_ranglisten.chunk.html",
           "category":"fbuch_content_chunks"
@@ -831,8 +831,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_auswertung_boote.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_auswertung_boote",
           "file":"fbuch_auswertung_boote.chunk.html",
           "category":"fbuch_content_chunks"
@@ -847,8 +847,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_ajax_getfahrten.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_ajax_getFahrten",
           "file":"fbuch_ajax_getfahrten.chunk.html",
           "category":"fbuch_content_chunks"
@@ -863,8 +863,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_ajax_getfahrtnamen.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_ajax_getFahrtNamen",
           "file":"fbuch_ajax_getfahrtnamen.chunk.html",
           "category":"fbuch_content_chunks"
@@ -879,8 +879,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_ajax_getnamen.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_ajax_getNamen",
           "file":"fbuch_ajax_getnamen.chunk.html",
           "category":"fbuch_content_chunks"
@@ -895,8 +895,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_ajax_gettermine.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_ajax_getTermine",
           "file":"fbuch_ajax_gettermine.chunk.html",
           "category":"fbuch_content_chunks"
@@ -911,8 +911,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_ajax_getfahrtendragdrop.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_ajax_getFahrtenDragdrop",
           "file":"fbuch_ajax_getfahrtendragdrop.chunk.html",
           "category":"fbuch_content_chunks"
@@ -927,8 +927,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_ajax_getfahrtenteamrowing.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_ajax_getFahrtenTeamrowing",
           "file":"fbuch_ajax_getfahrtenteamrowing.chunk.html",
           "category":"fbuch_content_chunks"
@@ -943,8 +943,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_ajax_updatefahrt.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_ajax_updateFahrt",
           "file":"fbuch_ajax_updatefahrt.chunk.html",
           "category":"fbuch_content_chunks"
@@ -959,8 +959,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_ajax_updateteam.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_ajax_updateTeam",
           "file":"fbuch_ajax_updateteam.chunk.html",
           "category":"fbuch_content_chunks"
@@ -975,8 +975,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_ajax_getergofahrten.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_ajax_getErgoFahrten",
           "file":"fbuch_ajax_getergofahrten.chunk.html",
           "category":"fbuch_content_chunks"
@@ -991,8 +991,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_ajax_matrixorg_test.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_ajax_matrixorg_test",
           "file":"fbuch_ajax_matrixorg_test.chunk.html",
           "category":"fbuch_content_chunks"
@@ -1007,8 +1007,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_ajax_autoduplicate_dates.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_ajax_autoduplicate_dates",
           "file":"fbuch_ajax_autoduplicate_dates.chunk.html",
           "category":"fbuch_content_chunks"
@@ -1023,8 +1023,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_ajax_collectmatrixmessages.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_ajax_collectMatrixMessages",
           "file":"fbuch_ajax_collectmatrixmessages.chunk.html",
           "category":"fbuch_content_chunks"
@@ -1039,8 +1039,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_ajax_importinvites.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_ajax_importInvites",
           "file":"fbuch_ajax_importinvites.chunk.html",
           "category":"fbuch_content_chunks"
@@ -1055,8 +1055,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_ajax_importmembers.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_ajax_importmembers",
           "file":"fbuch_ajax_importmembers.chunk.html",
           "category":"fbuch_content_chunks"
@@ -1071,8 +1071,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_listen_zubehoer.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_listen_zubehoer",
           "file":"fbuch_listen_zubehoer.chunk.html",
           "category":"fbuch_content_chunks"
@@ -1087,8 +1087,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchfahrten.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchFahrten",
           "file":"fbuchfahrten.chunk.html"
         },
@@ -1102,8 +1102,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchfahrtenrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchFahrtenRow",
           "file":"fbuchfahrtenrow.chunk.html"
         },
@@ -1117,8 +1117,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchfahrtenform.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchFahrtenForm",
           "file":"fbuchfahrtenform.chunk.html"
         },
@@ -1132,8 +1132,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchfahrtnamen.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchFahrtNamen",
           "file":"fbuchfahrtnamen.chunk.html"
         },
@@ -1147,8 +1147,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchfahrtnamrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchFahrtnamRow",
           "file":"fbuchfahrtnamrow.chunk.html"
         },
@@ -1162,8 +1162,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchteamform.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchTeamForm",
           "file":"fbuchteamform.chunk.html"
         },
@@ -1177,8 +1177,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchfahrtenhead.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchFahrtenHead",
           "file":"fbuchfahrtenhead.chunk.html"
         },
@@ -1192,8 +1192,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchergofahrtenhead.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchErgofahrtenHead",
           "file":"fbuchergofahrtenhead.chunk.html"
         },
@@ -1207,8 +1207,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchergofahrtenrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchErgofahrtenRow",
           "file":"fbuchergofahrtenrow.chunk.html"
         },
@@ -1222,8 +1222,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchfahrtenbuttons.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchFahrtenButtons",
           "file":"fbuchfahrtenbuttons.chunk.html"
         },
@@ -1237,8 +1237,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchergofahrtenbuttons.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchErgofahrtenButtons",
           "file":"fbuchergofahrtenbuttons.chunk.html"
         },
@@ -1252,8 +1252,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchergofahrtenform.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchErgofahrtenForm",
           "file":"fbuchergofahrtenform.chunk.html"
         },
@@ -1267,8 +1267,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchfahrten_v1.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchFahrten_v1",
           "file":"fbuchfahrten_v1.chunk.html"
         },
@@ -1282,8 +1282,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchtermine.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchTermine",
           "file":"fbuchtermine.chunk.html"
         },
@@ -1297,8 +1297,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchterminebuttons.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchTermineButtons",
           "file":"fbuchterminebuttons.chunk.html"
         },
@@ -1312,8 +1312,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchtermineform.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchTermineForm",
           "file":"fbuchtermineform.chunk.html"
         },
@@ -1327,8 +1327,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchterminerow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchTermineRow",
           "file":"fbuchterminerow.chunk.html"
         },
@@ -1342,8 +1342,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchyearoption.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchYearOption",
           "file":"fbuchyearoption.chunk.html"
         },
@@ -1357,8 +1357,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchergotermineform.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchErgotermineForm",
           "file":"fbuchergotermineform.chunk.html"
         },
@@ -1372,8 +1372,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchergoterminreservierungform.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchErgoterminReservierungForm",
           "file":"fbuchergoterminreservierungform.chunk.html"
         },
@@ -1387,8 +1387,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchergoterminnamen.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchErgoterminNamen",
           "file":"fbuchergoterminnamen.chunk.html"
         },
@@ -1402,8 +1402,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchergoterminnamenrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchErgoterminNamenRow",
           "file":"fbuchergoterminnamenrow.chunk.html"
         },
@@ -1417,8 +1417,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchneufahrtnamen.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchNeuFahrtNamen",
           "file":"fbuchneufahrtnamen.chunk.html"
         },
@@ -1432,8 +1432,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchdatenamen.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchDateNamen",
           "file":"fbuchdatenamen.chunk.html"
         },
@@ -1447,8 +1447,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchdatenamenrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchDateNamenRow",
           "file":"fbuchdatenamenrow.chunk.html"
         },
@@ -1462,8 +1462,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchergoterminremovereservierungform.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchErgoterminRemoveReservierungForm",
           "file":"fbuchergoterminremovereservierungform.chunk.html"
         },
@@ -1477,8 +1477,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchtermininviteform.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchTerminInviteForm",
           "file":"fbuchtermininviteform.chunk.html"
         },
@@ -1492,8 +1492,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchmailinviteform.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchMailInviteForm",
           "file":"fbuchmailinviteform.chunk.html"
         },
@@ -1507,8 +1507,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_invite_mail_tpl.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_invite_mail_tpl",
           "file":"fbuch_invite_mail_tpl.chunk.html"
         },
@@ -1522,8 +1522,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchmyinvitesrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchMyInvitesRow",
           "file":"fbuchmyinvitesrow.chunk.html"
         },
@@ -1537,8 +1537,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchmyinvites.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchMyInvites",
           "file":"fbuchmyinvites.chunk.html"
         },
@@ -1552,8 +1552,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchfahrtenformbootoption.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchFahrtenFormBootOption",
           "file":"fbuchfahrtenformbootoption.chunk.html"
         },
@@ -1567,8 +1567,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchfahrtenformbootinfo.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchFahrtenFormBootinfo",
           "file":"fbuchfahrtenformbootinfo.chunk.html"
         },
@@ -1582,8 +1582,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuch_mailinglist_inputoptions.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_mailinglist_inputoptions",
           "file":"fbuch_mailinglist_inputoptions.chunk.html"
         },
@@ -1597,8 +1597,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchcomponentnameselect.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchComponentNameselect",
           "file":"fbuchcomponentnameselect.chunk.html"
         },
@@ -1612,8 +1612,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchcomponentdatepicker.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchComponentDatepicker",
           "file":"fbuchcomponentdatepicker.chunk.html"
         },
@@ -1627,8 +1627,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchappfuhrpark.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchAppFuhrpark",
           "file":"fbuchappfuhrpark.chunk.html"
         },
@@ -1642,8 +1642,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchappmailinggruppen.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchAppMailinggruppen",
           "file":"fbuchappmailinggruppen.chunk.html"
         },
@@ -1657,8 +1657,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchpegel.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchPegel",
           "file":"fbuchpegel.chunk.html"
         },
@@ -1669,7 +1669,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuchAppRudern_und_gruppentraining",
@@ -1682,7 +1684,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuchAppErgometer_fahrtenliste",
@@ -1695,7 +1699,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuchAppRudern_fahrtenliste",
@@ -1708,7 +1714,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuchAppTermine_und_reservierungen",
@@ -1721,7 +1729,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuchAppPersonen_anmelden",
@@ -1734,7 +1744,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuchAppNamensliste",
@@ -1747,7 +1759,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuchAppSchaden_mangel_bearbeiten",
@@ -1760,7 +1774,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuchAppBootseinstellung_bearbeiten",
@@ -1776,8 +1792,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchboote.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchBoote",
           "file":"fbuchboote.chunk.html",
           "category":"fbuch_boote"
@@ -1792,8 +1808,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchbooterow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchBooteRow",
           "file":"fbuchbooterow.chunk.html",
           "category":"fbuch_boote"
@@ -1808,8 +1824,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchbootsgattungrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"FbuchBootsgattungRow",
           "file":"fbuchbootsgattungrow.chunk.html",
           "category":"fbuch_boote"
@@ -1824,8 +1840,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchbootehead.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchBooteHead",
           "file":"fbuchbootehead.chunk.html",
           "category":"fbuch_boote"
@@ -1840,8 +1856,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchbootebuttons.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchBooteButtons",
           "file":"fbuchbootebuttons.chunk.html",
           "category":"fbuch_boote"
@@ -1856,8 +1872,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchboot.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchBoot",
           "file":"fbuchboot.chunk.html",
           "category":"fbuch_boote"
@@ -1872,8 +1888,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchbootsettingformtpl.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchBootSettingFormTpl",
           "file":"fbuchbootsettingformtpl.chunk.html",
           "category":"fbuch_boote"
@@ -1888,8 +1904,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchbootcommentrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchBootCommentRow",
           "file":"fbuchbootcommentrow.chunk.html",
           "category":"fbuch_boote"
@@ -1904,8 +1920,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchbootsettingrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchBootSettingRow",
           "file":"fbuchbootsettingrow.chunk.html",
           "category":"fbuch_boote"
@@ -1920,8 +1936,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchbootseatsettingrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchBootSeatSettingRow",
           "file":"fbuchbootseatsettingrow.chunk.html",
           "category":"fbuch_boote"
@@ -1936,8 +1952,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchanmeldendatesrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchAnmeldenDatesRow",
           "file":"fbuchanmeldendatesrow.chunk.html",
           "category":"fbuch_termin_zu_absagen"
@@ -1952,8 +1968,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchanmeldendatenamesrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchAnmeldenDateNamesRow",
           "file":"fbuchanmeldendatenamesrow.chunk.html",
           "category":"fbuch_termin_zu_absagen"
@@ -1968,8 +1984,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchanmeldendatesrowform.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchAnmeldenDatesRowForm",
           "file":"fbuchanmeldendatesrowform.chunk.html",
           "category":"fbuch_termin_zu_absagen"
@@ -1984,8 +2000,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchanmeldendatesrowcomment.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchAnmeldenDatesRowComment",
           "file":"fbuchanmeldendatesrowcomment.chunk.html",
           "category":"fbuch_termin_zu_absagen"
@@ -2000,8 +2016,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchpersonenanmeldendatesrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchPersonenAnmeldenDatesRow",
           "file":"fbuchpersonenanmeldendatesrow.chunk.html",
           "category":"fbuch_termin_zu_absagen"
@@ -2016,8 +2032,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchpersonenanmeldendatesrowform.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchPersonenAnmeldenDatesRowForm",
           "file":"fbuchpersonenanmeldendatesrowform.chunk.html",
           "category":"fbuch_termin_zu_absagen"
@@ -2032,8 +2048,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchpersonenanmeldendatenamesrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchPersonenAnmeldenDateNamesRow",
           "file":"fbuchpersonenanmeldendatenamesrow.chunk.html",
           "category":"fbuch_termin_zu_absagen"
@@ -2048,8 +2064,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchergoterminehead.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchErgotermineHead",
           "file":"fbuchergoterminehead.chunk.html",
           "category":"fbuch_termine"
@@ -2064,8 +2080,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchergotermine.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchErgotermine",
           "file":"fbuchergotermine.chunk.html",
           "category":"fbuch_termine"
@@ -2080,8 +2096,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchergoterminebuttons.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchErgotermineButtons",
           "file":"fbuchergoterminebuttons.chunk.html",
           "category":"fbuch_termine"
@@ -2096,8 +2112,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchergoterminerow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchErgotermineRow",
           "file":"fbuchergoterminerow.chunk.html",
           "category":"fbuch_termine"
@@ -2112,8 +2128,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchruderterminnamen.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchRuderterminNamen",
           "file":"fbuchruderterminnamen.chunk.html",
           "category":"fbuch_termine"
@@ -2128,8 +2144,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchrudertermininvitedrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchRuderterminInvitedRow",
           "file":"fbuchrudertermininvitedrow.chunk.html",
           "category":"fbuch_termine"
@@ -2144,8 +2160,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchrudertermincommentsrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchRuderterminCommentsRow",
           "file":"fbuchrudertermincommentsrow.chunk.html",
           "category":"fbuch_termine"
@@ -2160,8 +2176,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchrudertermininvitednamesrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchRuderterminInvitedNamesRow",
           "file":"fbuchrudertermininvitednamesrow.chunk.html",
           "category":"fbuch_termine"
@@ -2176,8 +2192,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchtermindayrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchTerminDayRow",
           "file":"fbuchtermindayrow.chunk.html",
           "category":"fbuch_termine"
@@ -2192,8 +2208,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchtermineday.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchTermineDay",
           "file":"fbuchtermineday.chunk.html",
           "category":"fbuch_termine"
@@ -2208,8 +2224,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchergoterminedropdownbuttons.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchErgotermineDropdownButtons",
           "file":"fbuchergoterminedropdownbuttons.chunk.html",
           "category":"fbuch_termine"
@@ -2224,8 +2240,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchfahrtendragdrop.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchFahrtenDragdrop",
           "file":"fbuchfahrtendragdrop.chunk.html",
           "category":"fbuch_fahrtenbuch_rudern"
@@ -2240,8 +2256,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchfahrtendragdroprow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchFahrtenDragdropRow",
           "file":"fbuchfahrtendragdroprow.chunk.html",
           "category":"fbuch_fahrtenbuch_rudern"
@@ -2256,8 +2272,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchfahrtendragdropdatesrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchFahrtenDragdropDatesRow",
           "file":"fbuchfahrtendragdropdatesrow.chunk.html",
           "category":"fbuch_fahrtenbuch_rudern"
@@ -2272,8 +2288,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchfahrtendragdropdatenamesrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchFahrtenDragdropDateNamesRow",
           "file":"fbuchfahrtendragdropdatenamesrow.chunk.html",
           "category":"fbuch_fahrtenbuch_rudern"
@@ -2288,8 +2304,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchfahrtendragdropfahrtnamesrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchFahrtenDragdropFahrtNamesRow",
           "file":"fbuchfahrtendragdropfahrtnamesrow.chunk.html",
           "category":"fbuch_fahrtenbuch_rudern"
@@ -2304,8 +2320,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchclosedfahrtendragdroprow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchClosedFahrtenDragdropRow",
           "file":"fbuchclosedfahrtendragdroprow.chunk.html",
           "category":"fbuch_fahrtenbuch_rudern"
@@ -2320,8 +2336,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchfahrtendragdropfahrtnamesalter.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchFahrtenDragdropFahrtNamesAlter",
           "file":"fbuchfahrtendragdropfahrtnamesalter.chunk.html",
           "category":"fbuch_fahrtenbuch_rudern"
@@ -2336,8 +2352,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchfahrtenteamrowing.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchFahrtenTeamrowing",
           "file":"fbuchfahrtenteamrowing.chunk.html",
           "category":"fbuch_fahrtenbuch_rudern"
@@ -2352,8 +2368,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchnamen.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchNamen",
           "file":"fbuchnamen.chunk.html",
           "category":"fbuch_namen"
@@ -2368,8 +2384,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchnamenrow.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchNamenRow",
           "file":"fbuchnamenrow.chunk.html",
           "category":"fbuch_namen"
@@ -2384,8 +2400,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchnamenbuttons.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchNamenButtons",
           "file":"fbuchnamenbuttons.chunk.html",
           "category":"fbuch_namen"
@@ -2400,8 +2416,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchnamenhead.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchNamenHead",
           "file":"fbuchnamenhead.chunk.html",
           "category":"fbuch_namen"
@@ -2416,8 +2432,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchnamenform.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchNamenForm",
           "file":"fbuchnamenform.chunk.html",
           "category":"fbuch_namen"
@@ -2432,8 +2448,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchnamenformupdate.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchNamenFormUpdate",
           "file":"fbuchnamenformupdate.chunk.html",
           "category":"fbuch_namen"
@@ -2448,8 +2464,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/fbuchnamenformcreate.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuchNamenFormCreate",
           "file":"fbuchnamenformcreate.chunk.html",
           "category":"fbuch_namen"
@@ -2464,8 +2480,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/input_options_group.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"input_options_group",
           "file":"input_options_group.chunk.html",
           "category":"mv"
@@ -2480,8 +2496,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/input_options_roles.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"input_options_roles",
           "file":"input_options_roles.chunk.html",
           "category":"mv"
@@ -2496,8 +2512,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_mail_tpl.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_mail_tpl",
           "file":"mv_mail_tpl.chunk.html",
           "category":"mv"
@@ -2512,8 +2528,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_mail_documents_wrapper.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_mail_documents_wrapper",
           "file":"mv_mail_documents_wrapper.chunk.html",
           "category":"mv"
@@ -2528,8 +2544,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_maildownload_page.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_maildownload_page",
           "file":"mv_maildownload_page.chunk.html",
           "category":"mv"
@@ -2544,8 +2560,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_maildownload_document.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_maildownload_document",
           "file":"mv_maildownload_document.chunk.html",
           "category":"mv"
@@ -2560,8 +2576,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_maildownload_documents_wrapper.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_maildownload_documents_wrapper",
           "file":"mv_maildownload_documents_wrapper.chunk.html",
           "category":"mv"
@@ -2576,8 +2592,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_mail_document_tpl.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_mail_document_tpl",
           "file":"mv_mail_document_tpl.chunk.html",
           "category":"mv"
@@ -2592,8 +2608,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/input_options_beitragstyp.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"input_options_beitragstyp",
           "file":"input_options_beitragstyp.chunk.html",
           "category":"mv"
@@ -2608,8 +2624,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_mitgliederdatenformular.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_mitgliederDatenFormular",
           "file":"mv_mitgliederdatenformular.chunk.html",
           "category":"mv"
@@ -2624,8 +2640,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_mitgliederdatenformular_familymember.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_mitgliederDatenFormular_familymember",
           "file":"mv_mitgliederdatenformular_familymember.chunk.html",
           "category":"mv"
@@ -2640,8 +2656,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_mitgliederdatenformular2.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_mitgliederDatenFormular2",
           "file":"mv_mitgliederdatenformular2.chunk.html",
           "category":"mv"
@@ -2656,8 +2672,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_mitgliederloginformular.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_mitgliederLoginFormular",
           "file":"mv_mitgliederloginformular.chunk.html",
           "category":"mv"
@@ -2672,8 +2688,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_datenerfassung_emailtpl.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_datenerfassung_emailTpl",
           "file":"mv_datenerfassung_emailtpl.chunk.html",
           "category":"mv"
@@ -2688,8 +2704,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/input_options_members.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"input_options_members",
           "file":"input_options_members.chunk.html",
           "category":"mv"
@@ -2704,8 +2720,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_tpl_geburtstagsliste.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_tpl_geburtstagsliste",
           "file":"mv_tpl_geburtstagsliste.chunk.html",
           "category":"mv_export"
@@ -2720,8 +2736,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_tpl_adressliste.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_tpl_adressliste",
           "file":"mv_tpl_adressliste.chunk.html",
           "category":"mv_export"
@@ -2736,8 +2752,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_tpl_geburtstagsliste_month.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_tpl_geburtstagsliste_month",
           "file":"mv_tpl_geburtstagsliste_month.chunk.html",
           "category":"mv_export"
@@ -2752,8 +2768,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_tpl_mitgliederbeitragstypen.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_tpl_mitgliederbeitragstypen",
           "file":"mv_tpl_mitgliederbeitragstypen.chunk.html",
           "category":"mv_export"
@@ -2768,8 +2784,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_tpl_beitragseinzug.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_tpl_beitragseinzug",
           "file":"mv_tpl_beitragseinzug.chunk.html",
           "category":"mv_export"
@@ -2784,8 +2800,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_tpl_xml_erst_lastschrift.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_tpl_xml_erst_lastschrift",
           "file":"mv_tpl_xml_erst_lastschrift.chunk.html",
           "category":"mv_export"
@@ -2800,8 +2816,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_tpl_xml_folge_lastschrift.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_tpl_xml_folge_lastschrift",
           "file":"mv_tpl_xml_folge_lastschrift.chunk.html",
           "category":"mv_export"
@@ -2816,8 +2832,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_tpl_ueberweiserliste.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_tpl_ueberweiserliste",
           "file":"mv_tpl_ueberweiserliste.chunk.html",
           "category":"mv_export"
@@ -2832,8 +2848,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_tpl_xml_lastschrift_transaction_groups.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_tpl_xml_lastschrift_transaction_groups",
           "file":"mv_tpl_xml_lastschrift_transaction_groups.chunk.html",
           "category":"mv_export"
@@ -2848,8 +2864,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_tpl_xml_lastschrift_transactions.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_tpl_xml_lastschrift_transactions",
           "file":"mv_tpl_xml_lastschrift_transactions.chunk.html",
           "category":"mv_export"
@@ -2864,8 +2880,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_beitragseinzug.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_beitragseinzug",
           "file":"mv_beitragseinzug.chunk.html",
           "category":"mv_export"
@@ -2880,8 +2896,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_sepa.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_sepa",
           "file":"mv_sepa.chunk.html",
           "category":"mv_export"
@@ -2896,8 +2912,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_ueberweiserliste.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_ueberweiserliste",
           "file":"mv_ueberweiserliste.chunk.html",
           "category":"mv_export"
@@ -2912,8 +2928,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_tpl_details.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_tpl_details",
           "file":"mv_tpl_details.chunk.html",
           "category":"mv_export"
@@ -2928,8 +2944,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/scriptdetailmodal.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"scriptdetailModal",
           "file":"scriptdetailmodal.chunk.html",
           "category":"mv_export"
@@ -2944,8 +2960,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_detailsmodal.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_detailsmodal",
           "file":"mv_detailsmodal.chunk.html",
           "category":"mv_export"
@@ -2960,8 +2976,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_tpl_details_familymember.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_tpl_details_familymember",
           "file":"mv_tpl_details_familymember.chunk.html",
           "category":"mv_export"
@@ -2976,8 +2992,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_tpl_eintrittsdatum.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_tpl_eintrittsdatum",
           "file":"mv_tpl_eintrittsdatum.chunk.html",
           "category":"mv_export"
@@ -2992,8 +3008,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/chunks\/mv_tpl_austrittsdatum.chunk.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_tpl_austrittsdatum",
           "file":"mv_tpl_austrittsdatum.chunk.html",
           "category":"mv_export"
@@ -3011,8 +3027,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/templates\/fahrtenbuch.template.html",
+          "static":false,
+          "static_file":"",
           "name":"fahrtenbuch",
           "file":"fahrtenbuch.template.html"
         },
@@ -3027,8 +3043,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/templates\/fbuch bootstrapvue.template.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch BootstrapVue",
           "file":"fbuch bootstrapvue.template.html"
         },
@@ -3043,8 +3059,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/templates\/fbuch quasar.template.html",
+          "static":false,
+          "static_file":"",
           "name":"fbuch Quasar",
           "file":"fbuch quasar.template.html"
         },
@@ -3059,8 +3075,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/templates\/mv_base_template.template.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_base_template",
           "file":"mv_base_template.template.html",
           "category":"mv"
@@ -3076,8 +3092,8 @@
           "properties":[
             
           ],
-          "static":true,
-          "static_file":"[[++fbuch.core_path]]elements\/templates\/mv_sepa.template.html",
+          "static":false,
+          "static_file":"",
           "name":"mv_sepa",
           "file":"mv_sepa.template.html",
           "category":"mv"

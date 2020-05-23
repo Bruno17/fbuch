@@ -1,6 +1,4 @@
 <?php
-
-
 $filter_id = $modx->getOption('filtermailmember', $_REQUEST, '');
 $member_id = $modx->getOption('member_id', $_REQUEST, '');
 $singlemail = $modx->getOption('singlemail', $_REQUEST, '');

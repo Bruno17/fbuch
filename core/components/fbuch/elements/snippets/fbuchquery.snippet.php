@@ -1,6 +1,4 @@
 <?php
-
-
 $query = $modx->getOption('query', $scriptProperties, '');
 $results = $modx->query($query);
 $i = 1;

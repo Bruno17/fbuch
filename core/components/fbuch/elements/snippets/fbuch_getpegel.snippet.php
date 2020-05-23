@@ -1,6 +1,4 @@
 <?php
-
-
 $url = 'https://www.pegelonline.wsv.de/webservices/rest-api/v2/stations/steinbach/W.json?includeCurrentMeasurement=true';
 
 $show_pegel = $modx->getOption('show_pegel');

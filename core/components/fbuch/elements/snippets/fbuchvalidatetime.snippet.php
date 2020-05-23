@@ -1,6 +1,4 @@
 <?php
-
-
 $input = explode(':',str_replace('.',':',$input));
 $output = '';
 if (!empty($input[0])){
