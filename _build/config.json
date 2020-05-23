@@ -33,6 +33,10 @@
         {
           "name":"mv_export",
           "rank":0
+        },
+        {
+          "name":"fbuch_input_options",
+          "rank":0
         }
       ],
       "snippets":[
@@ -3013,6 +3017,62 @@
           "name":"mv_tpl_austrittsdatum",
           "file":"mv_tpl_austrittsdatum.chunk.html",
           "category":"mv_export"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"input_options_gattung",
+          "file":"input_options_gattung.chunk.html",
+          "category":"fbuch_input_options"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"input_options_bootsnutzergruppen",
+          "file":"input_options_bootsnutzergruppen.chunk.html",
+          "category":"fbuch_input_options"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"input_options_gattung_id",
+          "file":"input_options_gattung_id.chunk.html",
+          "category":"fbuch_input_options"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"input_options_gattung_ids",
+          "file":"input_options_gattung_ids.chunk.html",
+          "category":"fbuch_input_options"
         }
       ],
       "templates":[

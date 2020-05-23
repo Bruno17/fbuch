@@ -153,6 +153,26 @@
     <object class="fbuchBoot" table="fbuch_boote" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
         <field key="gattung" dbtype="varchar" phptype="string" precision="10" null="false" default="" />
+        <field key="gattung" dbtype="varchar" phptype="string" precision="10" null="false" default="" /> 
+        <field key="gattung_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="gattung_ids" dbtype="varchar" phptype="string" precision="100" null="false" default="" /> 
+        <field key="owner" dbtype="varchar" phptype="string" precision="255" null="false" default="" /> 
+        <field key="serial_no" dbtype="varchar" phptype="string" precision="255" null="false" default="" />  
+        <field key="manufacturer" dbtype="varchar" phptype="string" precision="255" null="false" default="" /> 
+        <field key="model" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
+        <field key="manufaction_year" dbtype="varchar" phptype="string" precision="255" null="false" default="" /> 
+        <field key="purchase_date" dbtype="varchar" phptype="string" precision="255" null="false" default="" /> #
+        <field key="purchase_price" dbtype="varchar" phptype="string" precision="255" null="false" default="" />         
+        <field key="versicherungs_summe" dbtype="varchar" phptype="string" precision="255" null="false" default="" /> 
+        <field key="versicherungs_nummer" dbtype="varchar" phptype="string" precision="255" null="false" default="" />         
+        <field key="efa_id" dbtype="varchar" phptype="string" precision="255" null="false" default="" /> 
+        <field key="type" dbtype="varchar" phptype="string" precision="255" null="false" default="" /> 
+         
+        <field key="import_typevariant" dbtype="varchar" phptype="string" precision="255" null="false" default="" /> 
+        <field key="import_lastvariant" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
+        <field key="import_gruppe" dbtype="varchar" phptype="string" precision="255" null="false" default="" /> 
+        <field key="import_farbe" dbtype="varchar" phptype="string" precision="255" null="false" default="" />                                                                                                                                
+        
         <field key="seats" dbtype="tinyint" precision="2" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="bootid_old" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="gewichtsklasse" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
@@ -160,6 +180,9 @@
         <field key="nutzernamen" dbtype="text" phptype="string" null="false" default="" />
         <field key="riggerung" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
         <field key="gesperrt" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
+        
+        
+        
         <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="editedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
@@ -216,12 +239,15 @@
     </object>
     <object class="fbuchBootsGattung" table="fbuch_bootsgattungen" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <field key="shortname" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" /> 
+        <field key="longname" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />               
         <field key="link_key" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
         <aggregate alias="Boote" class="fbuchBoot" local="link_key" foreign="gattung" cardinality="many" owner="local" />
     </object>
     <object class="fbuchBootsNutzergruppe" table="fbuch_bootsnutzergruppen" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
         <field key="color" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
+        <field key="color_name" dbtype="varchar" phptype="string" precision="255" null="false" default="" />        
         <field key="description" dbtype="text" phptype="string" null="false" default="" />
         <aggregate alias="Boote" class="fbuchBoot" local="id" foreign="nutzergruppe" cardinality="many" owner="local" />
     </object>
@@ -318,6 +344,11 @@
 		<field key="deletedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="inactive" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         <field key="inactive_reason" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="efa_id" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index"/>
+        <field key="drv_nr" dbtype="varchar" phptype="string" precision="50" null="false" default="" index="index"/>
+        <field key="startberechtigt" dbtype="varchar" phptype="string" precision="10" null="false" default="" />
+        <field key="erlaubnis" dbtype="varchar" phptype="string" precision="50" null="false" default="" index="index"/>
+        
         
         <field key="modx_user_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
 

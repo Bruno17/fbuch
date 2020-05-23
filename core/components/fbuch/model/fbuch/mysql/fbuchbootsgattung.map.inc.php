@@ -11,11 +11,31 @@ $xpdo_meta_map['fbuchBootsGattung']= array (
   'fields' => 
   array (
     'name' => '',
+    'shortname' => '',
+    'longname' => '',
     'link_key' => '',
   ),
   'fieldMeta' => 
   array (
     'name' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+      'index' => 'index',
+    ),
+    'shortname' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+      'index' => 'index',
+    ),
+    'longname' => 
     array (
       'dbtype' => 'varchar',
       'phptype' => 'string',

@@ -12,6 +12,23 @@ $xpdo_meta_map['fbuchBoot']= array (
   array (
     'name' => '',
     'gattung' => '',
+    'gattung_id' => 0,
+    'gattung_ids' => '',
+    'owner' => '',
+    'serial_no' => '',
+    'manufacturer' => '',
+    'model' => '',
+    'manufaction_year' => '',
+    'purchase_date' => '',
+    'purchase_price' => '',
+    'versicherungs_summe' => '',
+    'versicherungs_nummer' => '',
+    'efa_id' => '',
+    'type' => '',
+    'import_typevariant' => '',
+    'import_lastvariant' => '',
+    'import_gruppe' => '',
+    'import_farbe' => '',
     'seats' => 0,
     'bootid_old' => 0,
     'gewichtsklasse' => '',
@@ -43,6 +60,143 @@ $xpdo_meta_map['fbuchBoot']= array (
       'dbtype' => 'varchar',
       'phptype' => 'string',
       'precision' => '10',
+      'null' => false,
+      'default' => '',
+    ),
+    'gattung_id' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'gattung_ids' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '100',
+      'null' => false,
+      'default' => '',
+    ),
+    'owner' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+    ),
+    'serial_no' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+    ),
+    'manufacturer' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+    ),
+    'model' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+    ),
+    'manufaction_year' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+    ),
+    'purchase_date' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+    ),
+    'purchase_price' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+    ),
+    'versicherungs_summe' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+    ),
+    'versicherungs_nummer' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+    ),
+    'efa_id' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+    ),
+    'type' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+    ),
+    'import_typevariant' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+    ),
+    'import_lastvariant' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+    ),
+    'import_gruppe' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+    ),
+    'import_farbe' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
       'null' => false,
       'default' => '',
     ),

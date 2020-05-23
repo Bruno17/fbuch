@@ -12,6 +12,7 @@ $xpdo_meta_map['fbuchBootsNutzergruppe']= array (
   array (
     'name' => '',
     'color' => '',
+    'color_name' => '',
     'description' => '',
   ),
   'fieldMeta' => 
@@ -26,6 +27,14 @@ $xpdo_meta_map['fbuchBootsNutzergruppe']= array (
       'index' => 'index',
     ),
     'color' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+    ),
+    'color_name' => 
     array (
       'dbtype' => 'varchar',
       'phptype' => 'string',

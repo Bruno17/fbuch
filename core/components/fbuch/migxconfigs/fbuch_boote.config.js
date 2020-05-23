@@ -1,14 +1,14 @@
 {
-  "id":16,
+  "id":61,
   "name":"fbuch_boote",
   "formtabs":[
     {
-      "MIGX_id":29,
+      "MIGX_id":89,
       "caption":"Boot",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":130,
+          "MIGX_id":379,
           "field":"name",
           "caption":"Name",
           "description":"",
@@ -27,7 +27,7 @@
           "pos":1
         },
         {
-          "MIGX_id":131,
+          "MIGX_id":380,
           "field":"gattung",
           "caption":"Gattung",
           "description":"",
@@ -46,7 +46,7 @@
           "pos":2
         },
         {
-          "MIGX_id":132,
+          "MIGX_id":381,
           "field":"seats",
           "caption":"Pl\u00e4tze",
           "description":"",
@@ -65,7 +65,7 @@
           "pos":3
         },
         {
-          "MIGX_id":147,
+          "MIGX_id":382,
           "field":"gewichtsklasse",
           "caption":"Gewichtsklasse",
           "description":"",
@@ -84,7 +84,7 @@
           "pos":4
         },
         {
-          "MIGX_id":148,
+          "MIGX_id":383,
           "field":"nutzergruppe",
           "caption":"Nutzergruppe",
           "description":"",
@@ -103,7 +103,7 @@
           "pos":5
         },
         {
-          "MIGX_id":157,
+          "MIGX_id":384,
           "field":"gesperrt",
           "caption":"Boot sperren",
           "description":"",
@@ -122,7 +122,7 @@
           "pos":6
         },
         {
-          "MIGX_id":156,
+          "MIGX_id":385,
           "field":"riggerung",
           "caption":"Riggerung",
           "description":"",
@@ -141,7 +141,7 @@
           "pos":7
         },
         {
-          "MIGX_id":149,
+          "MIGX_id":386,
           "field":"nutzernamen",
           "caption":"Benutzer Namen, falls nur bestimmte Benutzer",
           "description":"",
@@ -160,26 +160,7 @@
           "pos":8
         },
         {
-          "MIGX_id":201,
-          "field":"buy-date",
-          "caption":"Baujahr",
-          "description":"",
-          "description_is_code":"0",
-          "inputTV":"",
-          "inputTVtype":"year",
-          "validation":"",
-          "configs":"",
-          "restrictive_condition":"",
-          "display":"",
-          "sourceFrom":"config",
-          "sources":"",
-          "inputOptionValues":"",
-          "default":"",
-          "useDefaultIfEmpty":"0",
-          "pos":9
-        },
-        {
-          "MIGX_id":204,
+          "MIGX_id":388,
           "field":"date of purchase",
           "caption":"Kaufdatum",
           "description":"Wenn Kaufdatum nicht ermittelt werden kann, Jahr des Kaufes angeben",
@@ -195,12 +176,31 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
+          "pos":9
+        },
+        {
+          "MIGX_id":389,
+          "field":"purchase price",
+          "caption":"Kaufpreis",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
           "pos":10
         },
         {
-          "MIGX_id":203,
-          "field":"purchase price",
-          "caption":"Kaufpreis",
+          "MIGX_id":390,
+          "field":"insurance-number",
+          "caption":"Versicherungsnummer",
           "description":"",
           "description_is_code":"0",
           "inputTV":"",
@@ -217,9 +217,47 @@
           "pos":11
         },
         {
-          "MIGX_id":202,
-          "field":"insurance-number",
-          "caption":"Versicherungsnummer",
+          "MIGX_id":407,
+          "field":"gattung_id",
+          "caption":"gattung_id",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"listbox",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"@CHUNK input_options_gattung_id",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":12
+        },
+        {
+          "MIGX_id":408,
+          "field":"gattung_ids",
+          "caption":"gattung_ids",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"listbox-multiple",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"@CHUNK input_options_gattung_ids",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":13
+        },
+        {
+          "MIGX_id":409,
+          "field":"manufaction_year",
+          "caption":"Baujahr",
           "description":"",
           "description_is_code":"0",
           "inputTV":"",
@@ -233,18 +271,137 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":12
+          "pos":14
+        },
+        {
+          "MIGX_id":410,
+          "field":"manufacturer",
+          "caption":"Hersteller",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":15
+        },
+        {
+          "MIGX_id":411,
+          "field":"model",
+          "caption":"model",
+          "pos":16
+        },
+        {
+          "MIGX_id":412,
+          "field":"owner",
+          "caption":"Besitzer",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":17
+        },
+        {
+          "MIGX_id":413,
+          "field":"purchase_date",
+          "caption":"Kaufdatum",
+          "description":"Wenn Kaufdatum nicht ermittelt werden kann, Jahr des Kaufes angeben",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":18
+        },
+        {
+          "MIGX_id":418,
+          "field":"purchase_price",
+          "caption":"Kaufpreis",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":19
+        },
+        {
+          "MIGX_id":414,
+          "field":"serial_no",
+          "caption":"serial_no",
+          "pos":20
+        },
+        {
+          "MIGX_id":415,
+          "field":"type",
+          "caption":"Bootstyp",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":21
+        },
+        {
+          "MIGX_id":416,
+          "field":"versicherungs_nummer",
+          "caption":"versicherungs_nummer",
+          "pos":22
+        },
+        {
+          "MIGX_id":417,
+          "field":"versicherungs_summe",
+          "caption":"versicherungs_summe",
+          "pos":23
         }
       ],
       "pos":1
     },
     {
-      "MIGX_id":40,
+      "MIGX_id":90,
       "caption":"Erlaubte Benutzer",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":165,
+          "MIGX_id":391,
           "field":"allowednutzer",
           "caption":"Benutzer Namen, welche Erlaubnis haben, dieses Boot zu benutzen",
           "description":"",
@@ -401,8 +558,8 @@
   ],
   "createdby":1,
   "createdon":"2016-09-10 13:32:23",
-  "editedby":4,
-  "editedon":"2019-03-05 17:47:22",
+  "editedby":1,
+  "editedon":"2020-05-23 16:43:56",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

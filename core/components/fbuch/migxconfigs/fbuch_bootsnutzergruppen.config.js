@@ -1,14 +1,14 @@
 {
-  "id":21,
+  "id":54,
   "name":"fbuch_bootsnutzergruppen",
   "formtabs":[
     {
-      "MIGX_id":34,
+      "MIGX_id":81,
       "caption":"",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":145,
+          "MIGX_id":337,
           "field":"name",
           "caption":"Benutzergruppen Bezeichnung",
           "description":"",
@@ -27,7 +27,32 @@
           "pos":1
         },
         {
-          "MIGX_id":146,
+          "MIGX_id":403,
+          "field":"color_name",
+          "caption":"color_name",
+          "pos":2
+        },
+        {
+          "MIGX_id":404,
+          "field":"color",
+          "caption":"color",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"colorpicker",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":3
+        },
+        {
+          "MIGX_id":338,
           "field":"description",
           "caption":"Beschreibung",
           "description":"",
@@ -43,7 +68,7 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":2
+          "pos":4
         }
       ],
       "pos":1
@@ -51,7 +76,7 @@
   ],
   "contextmenus":"",
   "actionbuttons":"addItem",
-  "columnbuttons":"update||remove",
+  "columnbuttons":"update||duplicate||remove",
   "filters":"",
   "extended":{
     "migx_add":"Nutzergruppe erstellen",
@@ -128,12 +153,32 @@
       "renderchunktpl":"",
       "renderoptions":"",
       "editor":""
+    },
+    {
+      "MIGX_id":4,
+      "dataIndex":"color_name",
+      "header":"color_name"
+    },
+    {
+      "MIGX_id":5,
+      "header":"color",
+      "dataIndex":"color",
+      "width":"",
+      "sortable":true,
+      "show_in_grid":1,
+      "customrenderer":"",
+      "renderer":"this.renderChunk",
+      "clickaction":"",
+      "selectorconfig":"",
+      "renderchunktpl":"<div style=\"background-color:#[[+color]];width:20px;height:20px;\"><\/div>",
+      "renderoptions":"",
+      "editor":""
     }
   ],
   "createdby":1,
   "createdon":"2017-04-08 11:40:02",
   "editedby":1,
-  "editedon":"2017-04-08 11:53:36",
+  "editedon":"2020-05-23 15:58:47",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

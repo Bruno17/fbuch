@@ -1,14 +1,14 @@
 {
-  "id":1,
+  "id":43,
   "name":"mv_mitglieder",
   "formtabs":[
     {
-      "MIGX_id":1,
+      "MIGX_id":60,
       "caption":"Stammdaten",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":1,
+          "MIGX_id":235,
           "field":"anrede",
           "caption":"Anrede",
           "description":"",
@@ -32,7 +32,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":4,
+          "MIGX_id":236,
           "field":"anredetitel",
           "caption":"Titel",
           "description":"",
@@ -56,7 +56,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":2,
+          "MIGX_id":237,
           "field":"firstname",
           "caption":"Vorname",
           "description":"",
@@ -80,7 +80,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":3,
+          "MIGX_id":238,
           "field":"name",
           "caption":"Nachname",
           "description":"",
@@ -104,7 +104,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":5,
+          "MIGX_id":239,
           "field":"briefanrede",
           "caption":"Briefanrede",
           "description":"wird automatisch erstellt, wenn leer.",
@@ -128,7 +128,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":7,
+          "MIGX_id":240,
           "field":"gender",
           "caption":"Geschlecht",
           "description":"",
@@ -152,7 +152,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":9,
+          "MIGX_id":241,
           "field":"nationality",
           "caption":"Nationalit\u00e4t",
           "description":"",
@@ -176,7 +176,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":78,
+          "MIGX_id":242,
           "field":"birthdate",
           "caption":"Geburtstag",
           "description":"",
@@ -200,7 +200,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":18,
+          "MIGX_id":243,
           "field":"eintritt",
           "caption":"Eintritt",
           "description":"",
@@ -224,7 +224,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":19,
+          "MIGX_id":244,
           "field":"austritt",
           "caption":"Austritt",
           "description":"",
@@ -248,7 +248,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":219,
+          "MIGX_id":245,
           "field":"member_status",
           "caption":"Mitglieds Status",
           "description":"Bei Austritt bitte immer Status anpassen. Im Fahrtenbuch k\u00f6nnen nur Namen mit Status Mitglied,VHS,Gast eingetragen werden.",
@@ -267,7 +267,7 @@
           "pos":11
         },
         {
-          "MIGX_id":164,
+          "MIGX_id":246,
           "field":"inactive_reason",
           "caption":"Austritts Grund",
           "description":"",
@@ -284,17 +284,29 @@
           "default":"",
           "useDefaultIfEmpty":"0",
           "pos":12
+        },
+        {
+          "MIGX_id":419,
+          "field":"drv_nr",
+          "caption":"drv_nr",
+          "pos":13
+        },
+        {
+          "MIGX_id":420,
+          "field":"startberechtigt",
+          "caption":"startberechtigt",
+          "pos":14
         }
       ],
       "pos":1
     },
     {
-      "MIGX_id":2,
+      "MIGX_id":61,
       "caption":"Kontaktdaten",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":10,
+          "MIGX_id":247,
           "field":"email",
           "caption":"Email",
           "description":"",
@@ -318,7 +330,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":118,
+          "MIGX_id":248,
           "field":"wrong_email",
           "caption":"ung\u00fcltige Email ",
           "description":"falls email ung\u00fcltig (zur\u00fcckgekommen), email-feld leeren und hier die ung\u00fcltige email eintragen!",
@@ -342,7 +354,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":11,
+          "MIGX_id":249,
           "field":"street",
           "caption":"Stra\u00dfe und Hausnummer",
           "description":"Sta\u00dfe und Hausnummer. Schribweise ohne Komma",
@@ -361,7 +373,7 @@
           "pos":3
         },
         {
-          "MIGX_id":12,
+          "MIGX_id":250,
           "field":"zip",
           "caption":"PLZ",
           "description":"",
@@ -385,7 +397,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":13,
+          "MIGX_id":251,
           "field":"city",
           "caption":"Stadt",
           "description":"",
@@ -409,7 +421,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":14,
+          "MIGX_id":252,
           "field":"phone",
           "caption":"Telefon",
           "description":"",
@@ -433,7 +445,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":15,
+          "MIGX_id":253,
           "field":"business_phone",
           "caption":"Telefon Gesch\u00e4ft",
           "description":"",
@@ -457,7 +469,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":16,
+          "MIGX_id":254,
           "field":"mobile",
           "caption":"Handy",
           "description":"",
@@ -484,12 +496,12 @@
       "pos":2
     },
     {
-      "MIGX_id":3,
+      "MIGX_id":62,
       "caption":"Bankdaten",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":79,
+          "MIGX_id":255,
           "field":"zahlweise",
           "caption":"Zahlweise",
           "description":"",
@@ -513,7 +525,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":84,
+          "MIGX_id":256,
           "field":"beitragstyp_id",
           "caption":"Beitragstyp",
           "description":"Zuordung zum Beitragstyp. Kinder und Jugendliche Einzelmitglieder als 'Einzelmitglied - aktiv' ausw\u00e4hlen, Beitrag berechnet sich dann automatisch nach Alter. Nur im Bedarfsfall 'Auszubildende, Studenten' w\u00e4hlen!  ",
@@ -537,7 +549,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":21,
+          "MIGX_id":257,
           "field":"bank1",
           "caption":"Kreditinstitut Name",
           "description":"",
@@ -561,7 +573,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":23,
+          "MIGX_id":258,
           "field":"bic",
           "caption":"BIC",
           "description":"",
@@ -585,7 +597,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":24,
+          "MIGX_id":259,
           "field":"iban",
           "caption":"IBAN",
           "description":"",
@@ -612,7 +624,7 @@
       "pos":3
     },
     {
-      "MIGX_id":15,
+      "MIGX_id":63,
       "caption":"Familienmitglieder",
       "print_before_tabs":"0",
       "pos":4,
@@ -620,7 +632,7 @@
       "MIGXtyperender":"<h3>formtab<\/h3>",
       "fields":[
         {
-          "MIGX_id":70,
+          "MIGX_id":260,
           "field":"familymembers",
           "caption":"Familienmitglieder",
           "description":"",
@@ -646,12 +658,12 @@
       ]
     },
     {
-      "MIGX_id":47,
+      "MIGX_id":64,
       "caption":"Berechtigungen",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":183,
+          "MIGX_id":261,
           "field":"Zugangscode_Date",
           "caption":"Zugangscode vergeben am:",
           "description":"",
@@ -670,7 +682,7 @@
           "pos":1
         },
         {
-          "MIGX_id":185,
+          "MIGX_id":262,
           "field":"Zugangscode-number",
           "caption":"Zugangscode:",
           "description":"",
@@ -689,7 +701,7 @@
           "pos":2
         },
         {
-          "MIGX_id":186,
+          "MIGX_id":263,
           "field":"Schl\u00fcssel-Date",
           "caption":"Schl\u00fcssel ausgegeben am:",
           "description":"",
@@ -708,7 +720,7 @@
           "pos":3
         },
         {
-          "MIGX_id":187,
+          "MIGX_id":264,
           "field":"Schl\u00fcssel-from",
           "caption":"Schl\u00fcssel ausgegeben von:",
           "description":"",
@@ -727,7 +739,7 @@
           "pos":4
         },
         {
-          "MIGX_id":188,
+          "MIGX_id":265,
           "field":"Schl\u00fcssel-authorization",
           "caption":"Schl\u00fcssel Nr.:",
           "description":"",
@@ -746,7 +758,7 @@
           "pos":5
         },
         {
-          "MIGX_id":189,
+          "MIGX_id":266,
           "field":"Spint-date",
           "caption":"Spint vergeben am:",
           "description":"Datum eintragen an dem der Spintschl\u00fcssel \u00fcbergeben wurde und die Kaution gezahlt wurde. ",
@@ -765,7 +777,7 @@
           "pos":6
         },
         {
-          "MIGX_id":191,
+          "MIGX_id":267,
           "field":"Spint-from",
           "caption":"Spint vergeben von: ",
           "description":"",
@@ -784,7 +796,7 @@
           "pos":7
         },
         {
-          "MIGX_id":190,
+          "MIGX_id":268,
           "field":"Spint-number",
           "caption":"Spintnummer:",
           "description":"",
@@ -803,7 +815,7 @@
           "pos":8
         },
         {
-          "MIGX_id":192,
+          "MIGX_id":269,
           "field":"deposit",
           "caption":"Kaution i.H.v. ",
           "description":"",
@@ -825,12 +837,12 @@
       "pos":5
     },
     {
-      "MIGX_id":46,
+      "MIGX_id":65,
       "caption":"Datenschutz",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":182,
+          "MIGX_id":270,
           "field":"Datenschutzerkl\u00e4rung",
           "caption":"Datenschutzerkl\u00e4rung abgegeben:",
           "description":"",
@@ -849,7 +861,7 @@
           "pos":1
         },
         {
-          "MIGX_id":193,
+          "MIGX_id":271,
           "field":"Datenschutzerkl\u00e4rug-date",
           "caption":"Datenschutzerkl\u00e4rung abgegeben am:",
           "description":"",
@@ -871,12 +883,12 @@
       "pos":6
     },
     {
-      "MIGX_id":48,
+      "MIGX_id":66,
       "caption":"Historie",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":195,
+          "MIGX_id":272,
           "field":"Geruderte Kilometer",
           "caption":"Geruderte Kilometer",
           "description":"",
@@ -895,7 +907,7 @@
           "pos":1
         },
         {
-          "MIGX_id":196,
+          "MIGX_id":273,
           "field":"siege-year",
           "caption":"Siege",
           "description":"",
@@ -914,7 +926,7 @@
           "pos":2
         },
         {
-          "MIGX_id":197,
+          "MIGX_id":274,
           "field":"siege-number",
           "caption":"Anzahl Siege",
           "description":"",
@@ -933,7 +945,7 @@
           "pos":3
         },
         {
-          "MIGX_id":198,
+          "MIGX_id":275,
           "field":"siege",
           "caption":"Siege",
           "description":"",
@@ -952,7 +964,7 @@
           "pos":4
         },
         {
-          "MIGX_id":199,
+          "MIGX_id":276,
           "field":"siege",
           "caption":"Siege",
           "description":"",
@@ -971,7 +983,7 @@
           "pos":5
         },
         {
-          "MIGX_id":200,
+          "MIGX_id":277,
           "field":"siege",
           "caption":"Siege",
           "description":"",
@@ -993,7 +1005,7 @@
       "pos":7
     },
     {
-      "MIGX_id":4,
+      "MIGX_id":67,
       "caption":"Weiteres",
       "print_before_tabs":"0",
       "pos":8,
@@ -1001,7 +1013,7 @@
       "MIGXtyperender":"<h3>formtab<\/h3>",
       "fields":[
         {
-          "MIGX_id":32,
+          "MIGX_id":278,
           "field":"roles",
           "caption":"Rollen",
           "description":"Zuordnung zu Gruppen \u00fcber Rollen",
@@ -1025,7 +1037,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":25,
+          "MIGX_id":279,
           "field":"ehrungen",
           "caption":"Ehrungen",
           "description":"",
@@ -1049,7 +1061,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":26,
+          "MIGX_id":280,
           "field":"kennung1",
           "caption":"Benutzerdefiniert 1",
           "description":"",
@@ -1073,7 +1085,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":119,
+          "MIGX_id":281,
           "field":"notizen",
           "caption":"Notizen",
           "description":"z.b. Notizen zu anstehenden Vertrags\u00e4nderungen",
@@ -1280,7 +1292,7 @@
   "createdby":1,
   "createdon":"2015-02-25 22:37:51",
   "editedby":1,
-  "editedon":"2020-05-18 12:25:26",
+  "editedon":"2020-05-23 17:04:09",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

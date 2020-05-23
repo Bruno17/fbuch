@@ -1,14 +1,14 @@
 {
-  "id":20,
+  "id":38,
   "name":"fbuch_bootsgattungen",
   "formtabs":[
     {
-      "MIGX_id":33,
+      "MIGX_id":56,
       "caption":"Gattung",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":143,
+          "MIGX_id":225,
           "field":"name",
           "caption":"Bootsgattung",
           "description":"",
@@ -27,7 +27,19 @@
           "pos":1
         },
         {
-          "MIGX_id":144,
+          "MIGX_id":405,
+          "field":"shortname",
+          "caption":"shortname",
+          "pos":2
+        },
+        {
+          "MIGX_id":406,
+          "field":"longname",
+          "caption":"longname",
+          "pos":3
+        },
+        {
+          "MIGX_id":226,
           "field":"link_key",
           "caption":"Link Schl\u00fcssel",
           "description":"",
@@ -43,7 +55,7 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":2
+          "pos":4
         }
       ],
       "pos":1
@@ -51,7 +63,7 @@
   ],
   "contextmenus":"",
   "actionbuttons":"addItem",
-  "columnbuttons":"update||remove",
+  "columnbuttons":"update||duplicate||remove",
   "filters":"",
   "extended":{
     "migx_add":"Gattung erstellen",
@@ -143,12 +155,22 @@
       "renderchunktpl":"",
       "renderoptions":"",
       "editor":""
+    },
+    {
+      "MIGX_id":5,
+      "dataIndex":"shortname",
+      "header":"shortname"
+    },
+    {
+      "MIGX_id":6,
+      "dataIndex":"longname",
+      "header":"longname"
     }
   ],
   "createdby":1,
   "createdon":"2017-04-08 10:21:35",
   "editedby":1,
-  "editedon":"2017-04-08 11:49:40",
+  "editedon":"2020-05-23 16:07:07",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

@@ -71,6 +71,10 @@ $xpdo_meta_map['mvMember']= array (
     'deletedby' => 0,
     'inactive' => 0,
     'inactive_reason' => '',
+    'efa_id' => '',
+    'drv_nr' => '',
+    'startberechtigt' => '',
+    'erlaubnis' => '',
     'modx_user_id' => 0,
     'lastname' => '',
     'member_status' => '',
@@ -560,6 +564,41 @@ $xpdo_meta_map['mvMember']= array (
       'precision' => '100',
       'null' => false,
       'default' => '',
+    ),
+    'efa_id' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+      'index' => 'index',
+    ),
+    'drv_nr' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '50',
+      'null' => false,
+      'default' => '',
+      'index' => 'index',
+    ),
+    'startberechtigt' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '10',
+      'null' => false,
+      'default' => '',
+    ),
+    'erlaubnis' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '50',
+      'null' => false,
+      'default' => '',
+      'index' => 'index',
     ),
     'modx_user_id' => 
     array (
