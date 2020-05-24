@@ -329,6 +329,14 @@ $xpdo_meta_map['fbuchBoot']= array (
       'cardinality' => 'one',
       'owner' => 'local',
     ),
+    'Bootsgattung' => 
+    array (
+      'class' => 'fbuchBootsGattung',
+      'local' => 'gattung_id',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'local',
+    ),
     'Nutzergruppe' => 
     array (
       'class' => 'fbuchBootsNutzergruppe',

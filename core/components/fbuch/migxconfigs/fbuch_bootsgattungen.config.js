@@ -8,7 +8,7 @@
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":225,
+          "MIGX_id":226,
           "field":"name",
           "caption":"Bootsgattung",
           "description":"",
@@ -27,19 +27,19 @@
           "pos":1
         },
         {
-          "MIGX_id":405,
+          "MIGX_id":471,
           "field":"shortname",
           "caption":"shortname",
           "pos":2
         },
         {
-          "MIGX_id":406,
+          "MIGX_id":472,
           "field":"longname",
           "caption":"longname",
           "pos":3
         },
         {
-          "MIGX_id":226,
+          "MIGX_id":473,
           "field":"link_key",
           "caption":"Link Schl\u00fcssel",
           "description":"",
@@ -170,7 +170,7 @@
   "createdby":1,
   "createdon":"2017-04-08 10:21:35",
   "editedby":1,
-  "editedon":"2020-05-23 16:07:07",
+  "editedon":"2020-05-24 19:23:29",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

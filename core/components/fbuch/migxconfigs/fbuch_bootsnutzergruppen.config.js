@@ -8,7 +8,7 @@
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":337,
+          "MIGX_id":474,
           "field":"name",
           "caption":"Benutzergruppen Bezeichnung",
           "description":"",
@@ -27,13 +27,13 @@
           "pos":1
         },
         {
-          "MIGX_id":403,
+          "MIGX_id":475,
           "field":"color_name",
           "caption":"color_name",
           "pos":2
         },
         {
-          "MIGX_id":404,
+          "MIGX_id":476,
           "field":"color",
           "caption":"color",
           "description":"",
@@ -52,7 +52,7 @@
           "pos":3
         },
         {
-          "MIGX_id":338,
+          "MIGX_id":477,
           "field":"description",
           "caption":"Beschreibung",
           "description":"",
@@ -178,7 +178,7 @@
   "createdby":1,
   "createdon":"2017-04-08 11:40:02",
   "editedby":1,
-  "editedon":"2020-05-23 15:58:47",
+  "editedon":"2020-05-24 19:24:39",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

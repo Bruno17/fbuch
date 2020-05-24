@@ -3168,7 +3168,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"1.2.0-beta",
+  "version":"1.3.0-beta",
   "database":{
     "tables":[
       "fbuchFahrt",
@@ -3184,6 +3184,7 @@
       "fbuchBootSetting",
       "fbuchBootsGattung",
       "fbuchBootsNutzergruppe",
+      "fbuchBootsNutzergruppenMembers",
       "fbuchMailinglist",
       "fbuchMailinglistNames",
       "mvMember",
@@ -3200,5 +3201,11 @@
       "mvMimeType",
       "mvDoorAccesscode"
     ]
-  }
+  },
+  "dependencies":[
+    {
+      "name":"colorpicker",
+      "version":">=1.0.4"
+    }
+  ]
 }

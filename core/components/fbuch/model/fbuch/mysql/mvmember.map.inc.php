@@ -678,6 +678,14 @@ $xpdo_meta_map['mvMember']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
+    'Nutzergruppen' => 
+    array (
+      'class' => 'fbuchBootsNutzergruppenMembers',
+      'local' => 'id',
+      'foreign' => 'member_id',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
   ),
   'aggregates' => 
   array (

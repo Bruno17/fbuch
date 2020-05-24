@@ -153,7 +153,6 @@
     <object class="fbuchBoot" table="fbuch_boote" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
         <field key="gattung" dbtype="varchar" phptype="string" precision="10" null="false" default="" />
-        <field key="gattung" dbtype="varchar" phptype="string" precision="10" null="false" default="" /> 
         <field key="gattung_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="gattung_ids" dbtype="varchar" phptype="string" precision="100" null="false" default="" /> 
         <field key="owner" dbtype="varchar" phptype="string" precision="255" null="false" default="" /> 
@@ -161,7 +160,7 @@
         <field key="manufacturer" dbtype="varchar" phptype="string" precision="255" null="false" default="" /> 
         <field key="model" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
         <field key="manufaction_year" dbtype="varchar" phptype="string" precision="255" null="false" default="" /> 
-        <field key="purchase_date" dbtype="varchar" phptype="string" precision="255" null="false" default="" /> #
+        <field key="purchase_date" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
         <field key="purchase_price" dbtype="varchar" phptype="string" precision="255" null="false" default="" />         
         <field key="versicherungs_summe" dbtype="varchar" phptype="string" precision="255" null="false" default="" /> 
         <field key="versicherungs_nummer" dbtype="varchar" phptype="string" precision="255" null="false" default="" />         
@@ -192,6 +191,7 @@
         <field key="deletedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <aggregate alias="Fahrten" class="fbuchFahrt" local="id" foreign="boot_id" cardinality="many" owner="local" />
         <aggregate alias="Gattung" class="fbuchBootsGattung" local="gattung" foreign="link_key" cardinality="one" owner="local" />
+        <aggregate alias="Bootsgattung" class="fbuchBootsGattung" local="gattung_id" foreign="id" cardinality="one" owner="local" />        
         <aggregate alias="Nutzergruppe" class="fbuchBootsNutzergruppe" local="nutzergruppe" foreign="id" cardinality="one" owner="local" />
     </object>
     <object class="fbuchBootAllowedNames" table="fbuch_boot_allowed_names" extends="xPDOSimpleObject">
@@ -250,7 +250,15 @@
         <field key="color_name" dbtype="varchar" phptype="string" precision="255" null="false" default="" />        
         <field key="description" dbtype="text" phptype="string" null="false" default="" />
         <aggregate alias="Boote" class="fbuchBoot" local="id" foreign="nutzergruppe" cardinality="many" owner="local" />
+        <composite alias="Members" class="fbuchBootsNutzergruppenMembers" local="id" foreign="group_id" cardinality="many" owner="local" />
     </object>
+    <object class="fbuchBootsNutzergruppenMembers" table="fbuch_bootsnutzergruppen_members" extends="xPDOSimpleObject">
+        <field key="group_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />   
+        <aggregate alias="Group" class="fbuchBootsNutzergruppe" local="group_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Member" class="mvMember" local="member_id" foreign="id" cardinality="one" owner="foreign" />
+    </object>    
+    
     <object class="fbuchMailinglist" table="fbuch_mailinglists" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
         <field key="target_group" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
@@ -367,7 +375,7 @@
         <aggregate alias="Family" class="mvFamily" local="family_id" foreign="id" cardinality="one" owner="foreign" />
     
         <aggregate alias="DoorAccesscode" class="mvDoorAccesscode" local="id" foreign="member_id" cardinality="one" owner="local" />
-    
+        <composite alias="Nutzergruppen" class="fbuchBootsNutzergruppenMembers" local="id" foreign="member_id" cardinality="many" owner="local" />
     </object>
     
     <object class="mvRole" table="mv_roles" extends="xPDOSimpleObject">

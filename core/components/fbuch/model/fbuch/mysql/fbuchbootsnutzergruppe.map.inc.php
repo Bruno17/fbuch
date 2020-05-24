@@ -50,6 +50,17 @@ $xpdo_meta_map['fbuchBootsNutzergruppe']= array (
       'default' => '',
     ),
   ),
+  'composites' => 
+  array (
+    'Members' => 
+    array (
+      'class' => 'fbuchBootsNutzergruppenMembers',
+      'local' => 'id',
+      'foreign' => 'group_id',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+  ),
   'aggregates' => 
   array (
     'Boote' => 

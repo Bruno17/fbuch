@@ -8,7 +8,7 @@
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":235,
+          "MIGX_id":238,
           "field":"anrede",
           "caption":"Anrede",
           "description":"",
@@ -32,7 +32,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":236,
+          "MIGX_id":239,
           "field":"anredetitel",
           "caption":"Titel",
           "description":"",
@@ -56,7 +56,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":237,
+          "MIGX_id":240,
           "field":"firstname",
           "caption":"Vorname",
           "description":"",
@@ -80,7 +80,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":238,
+          "MIGX_id":241,
           "field":"name",
           "caption":"Nachname",
           "description":"",
@@ -104,7 +104,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":239,
+          "MIGX_id":242,
           "field":"briefanrede",
           "caption":"Briefanrede",
           "description":"wird automatisch erstellt, wenn leer.",
@@ -128,7 +128,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":240,
+          "MIGX_id":243,
           "field":"gender",
           "caption":"Geschlecht",
           "description":"",
@@ -152,7 +152,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":241,
+          "MIGX_id":244,
           "field":"nationality",
           "caption":"Nationalit\u00e4t",
           "description":"",
@@ -176,7 +176,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":242,
+          "MIGX_id":245,
           "field":"birthdate",
           "caption":"Geburtstag",
           "description":"",
@@ -200,7 +200,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":243,
+          "MIGX_id":246,
           "field":"eintritt",
           "caption":"Eintritt",
           "description":"",
@@ -224,7 +224,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":244,
+          "MIGX_id":421,
           "field":"austritt",
           "caption":"Austritt",
           "description":"",
@@ -248,7 +248,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":245,
+          "MIGX_id":422,
           "field":"member_status",
           "caption":"Mitglieds Status",
           "description":"Bei Austritt bitte immer Status anpassen. Im Fahrtenbuch k\u00f6nnen nur Namen mit Status Mitglied,VHS,Gast eingetragen werden.",
@@ -267,7 +267,7 @@
           "pos":11
         },
         {
-          "MIGX_id":246,
+          "MIGX_id":423,
           "field":"inactive_reason",
           "caption":"Austritts Grund",
           "description":"",
@@ -286,13 +286,13 @@
           "pos":12
         },
         {
-          "MIGX_id":419,
+          "MIGX_id":424,
           "field":"drv_nr",
           "caption":"drv_nr",
           "pos":13
         },
         {
-          "MIGX_id":420,
+          "MIGX_id":425,
           "field":"startberechtigt",
           "caption":"startberechtigt",
           "pos":14
@@ -306,7 +306,7 @@
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":247,
+          "MIGX_id":252,
           "field":"email",
           "caption":"Email",
           "description":"",
@@ -330,7 +330,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":248,
+          "MIGX_id":253,
           "field":"wrong_email",
           "caption":"ung\u00fcltige Email ",
           "description":"falls email ung\u00fcltig (zur\u00fcckgekommen), email-feld leeren und hier die ung\u00fcltige email eintragen!",
@@ -354,7 +354,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":249,
+          "MIGX_id":254,
           "field":"street",
           "caption":"Stra\u00dfe und Hausnummer",
           "description":"Sta\u00dfe und Hausnummer. Schribweise ohne Komma",
@@ -373,7 +373,7 @@
           "pos":3
         },
         {
-          "MIGX_id":250,
+          "MIGX_id":426,
           "field":"zip",
           "caption":"PLZ",
           "description":"",
@@ -397,7 +397,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":251,
+          "MIGX_id":427,
           "field":"city",
           "caption":"Stadt",
           "description":"",
@@ -421,7 +421,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":252,
+          "MIGX_id":428,
           "field":"phone",
           "caption":"Telefon",
           "description":"",
@@ -445,7 +445,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":253,
+          "MIGX_id":429,
           "field":"business_phone",
           "caption":"Telefon Gesch\u00e4ft",
           "description":"",
@@ -469,7 +469,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":254,
+          "MIGX_id":430,
           "field":"mobile",
           "caption":"Handy",
           "description":"",
@@ -501,7 +501,7 @@
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":255,
+          "MIGX_id":431,
           "field":"zahlweise",
           "caption":"Zahlweise",
           "description":"",
@@ -525,7 +525,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":256,
+          "MIGX_id":432,
           "field":"beitragstyp_id",
           "caption":"Beitragstyp",
           "description":"Zuordung zum Beitragstyp. Kinder und Jugendliche Einzelmitglieder als 'Einzelmitglied - aktiv' ausw\u00e4hlen, Beitrag berechnet sich dann automatisch nach Alter. Nur im Bedarfsfall 'Auszubildende, Studenten' w\u00e4hlen!  ",
@@ -549,7 +549,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":257,
+          "MIGX_id":433,
           "field":"bank1",
           "caption":"Kreditinstitut Name",
           "description":"",
@@ -573,7 +573,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":258,
+          "MIGX_id":434,
           "field":"bic",
           "caption":"BIC",
           "description":"",
@@ -597,7 +597,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":259,
+          "MIGX_id":435,
           "field":"iban",
           "caption":"IBAN",
           "description":"",
@@ -632,7 +632,7 @@
       "MIGXtyperender":"<h3>formtab<\/h3>",
       "fields":[
         {
-          "MIGX_id":260,
+          "MIGX_id":436,
           "field":"familymembers",
           "caption":"Familienmitglieder",
           "description":"",
@@ -663,7 +663,7 @@
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":261,
+          "MIGX_id":266,
           "field":"Zugangscode_Date",
           "caption":"Zugangscode vergeben am:",
           "description":"",
@@ -682,7 +682,7 @@
           "pos":1
         },
         {
-          "MIGX_id":262,
+          "MIGX_id":267,
           "field":"Zugangscode-number",
           "caption":"Zugangscode:",
           "description":"",
@@ -701,7 +701,7 @@
           "pos":2
         },
         {
-          "MIGX_id":263,
+          "MIGX_id":268,
           "field":"Schl\u00fcssel-Date",
           "caption":"Schl\u00fcssel ausgegeben am:",
           "description":"",
@@ -720,7 +720,7 @@
           "pos":3
         },
         {
-          "MIGX_id":264,
+          "MIGX_id":269,
           "field":"Schl\u00fcssel-from",
           "caption":"Schl\u00fcssel ausgegeben von:",
           "description":"",
@@ -739,7 +739,7 @@
           "pos":4
         },
         {
-          "MIGX_id":265,
+          "MIGX_id":437,
           "field":"Schl\u00fcssel-authorization",
           "caption":"Schl\u00fcssel Nr.:",
           "description":"",
@@ -758,7 +758,7 @@
           "pos":5
         },
         {
-          "MIGX_id":266,
+          "MIGX_id":438,
           "field":"Spint-date",
           "caption":"Spint vergeben am:",
           "description":"Datum eintragen an dem der Spintschl\u00fcssel \u00fcbergeben wurde und die Kaution gezahlt wurde. ",
@@ -777,7 +777,7 @@
           "pos":6
         },
         {
-          "MIGX_id":267,
+          "MIGX_id":439,
           "field":"Spint-from",
           "caption":"Spint vergeben von: ",
           "description":"",
@@ -796,7 +796,7 @@
           "pos":7
         },
         {
-          "MIGX_id":268,
+          "MIGX_id":440,
           "field":"Spint-number",
           "caption":"Spintnummer:",
           "description":"",
@@ -815,7 +815,7 @@
           "pos":8
         },
         {
-          "MIGX_id":269,
+          "MIGX_id":441,
           "field":"deposit",
           "caption":"Kaution i.H.v. ",
           "description":"",
@@ -842,7 +842,7 @@
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":270,
+          "MIGX_id":442,
           "field":"Datenschutzerkl\u00e4rung",
           "caption":"Datenschutzerkl\u00e4rung abgegeben:",
           "description":"",
@@ -861,7 +861,7 @@
           "pos":1
         },
         {
-          "MIGX_id":271,
+          "MIGX_id":443,
           "field":"Datenschutzerkl\u00e4rug-date",
           "caption":"Datenschutzerkl\u00e4rung abgegeben am:",
           "description":"",
@@ -888,7 +888,7 @@
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":272,
+          "MIGX_id":277,
           "field":"Geruderte Kilometer",
           "caption":"Geruderte Kilometer",
           "description":"",
@@ -907,7 +907,7 @@
           "pos":1
         },
         {
-          "MIGX_id":273,
+          "MIGX_id":444,
           "field":"siege-year",
           "caption":"Siege",
           "description":"",
@@ -926,7 +926,7 @@
           "pos":2
         },
         {
-          "MIGX_id":274,
+          "MIGX_id":445,
           "field":"siege-number",
           "caption":"Anzahl Siege",
           "description":"",
@@ -945,7 +945,7 @@
           "pos":3
         },
         {
-          "MIGX_id":275,
+          "MIGX_id":446,
           "field":"siege",
           "caption":"Siege",
           "description":"",
@@ -964,7 +964,7 @@
           "pos":4
         },
         {
-          "MIGX_id":276,
+          "MIGX_id":447,
           "field":"siege",
           "caption":"Siege",
           "description":"",
@@ -983,7 +983,7 @@
           "pos":5
         },
         {
-          "MIGX_id":277,
+          "MIGX_id":448,
           "field":"siege",
           "caption":"Siege",
           "description":"",
@@ -1013,7 +1013,7 @@
       "MIGXtyperender":"<h3>formtab<\/h3>",
       "fields":[
         {
-          "MIGX_id":278,
+          "MIGX_id":449,
           "field":"roles",
           "caption":"Rollen",
           "description":"Zuordnung zu Gruppen \u00fcber Rollen",
@@ -1037,7 +1037,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":279,
+          "MIGX_id":450,
           "field":"ehrungen",
           "caption":"Ehrungen",
           "description":"",
@@ -1061,7 +1061,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":280,
+          "MIGX_id":451,
           "field":"kennung1",
           "caption":"Benutzerdefiniert 1",
           "description":"",
@@ -1085,7 +1085,7 @@
           "MIGXcolumnwidth":0
         },
         {
-          "MIGX_id":281,
+          "MIGX_id":452,
           "field":"notizen",
           "caption":"Notizen",
           "description":"z.b. Notizen zu anstehenden Vertrags\u00e4nderungen",
@@ -1112,7 +1112,7 @@
     }
   ],
   "contextmenus":"",
-  "actionbuttons":"addItem||toggletrash",
+  "actionbuttons":"addItem||toggletrash||importusers",
   "columnbuttons":"update||recall_remove_delete",
   "filters":[
     {
@@ -1175,7 +1175,7 @@
     "filtersperrow":4,
     "packageName":"fbuch",
     "classname":"mvMember",
-    "task":"",
+    "task":"members",
     "getlistsort":"",
     "getlistsortdir":"",
     "sortconfig":"",
@@ -1292,7 +1292,7 @@
   "createdby":1,
   "createdon":"2015-02-25 22:37:51",
   "editedby":1,
-  "editedon":"2020-05-23 17:04:09",
+  "editedon":"2020-05-24 19:19:57",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,
