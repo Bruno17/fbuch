@@ -74,6 +74,8 @@ $xpdo_meta_map['mvMember']= array (
     'efa_id' => '',
     'drv_nr' => '',
     'startberechtigt' => '',
+    'privacy_policy_submitted' => 0,
+    'privacy_policy_submittedon' => NULL,
     'erlaubnis' => '',
     'modx_user_id' => 0,
     'lastname' => '',
@@ -591,6 +593,21 @@ $xpdo_meta_map['mvMember']= array (
       'null' => false,
       'default' => '',
     ),
+    'privacy_policy_submitted' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'privacy_policy_submittedon' => 
+    array (
+      'dbtype' => 'datetime',
+      'phptype' => 'datetime',
+      'null' => true,
+    ),
     'erlaubnis' => 
     array (
       'dbtype' => 'varchar',
@@ -702,6 +719,14 @@ $xpdo_meta_map['mvMember']= array (
       'class' => 'mvFamily',
       'local' => 'family_id',
       'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'User' => 
+    array (
+      'class' => 'modUser',
+      'foreign' => 'id',
+      'local' => 'modx_user_id',
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),

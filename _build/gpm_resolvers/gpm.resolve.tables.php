@@ -37,6 +37,7 @@ if ($object->xpdo) {
             $manager->createObjectContainer('fbuchBootSetting');
             $manager->createObjectContainer('fbuchBootsGattung');
             $manager->createObjectContainer('fbuchBootsNutzergruppe');
+            $manager->createObjectContainer('fbuchBootsNutzergruppenMembers');
             $manager->createObjectContainer('fbuchMailinglist');
             $manager->createObjectContainer('fbuchMailinglistNames');
             $manager->createObjectContainer('mvMember');

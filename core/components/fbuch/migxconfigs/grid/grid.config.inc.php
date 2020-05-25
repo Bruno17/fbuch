@@ -323,3 +323,41 @@ $gridfunctions['this.doSendmails'] = "
 		return true;
 	}
 ";
+
+
+$gridfunctions['this.createUser'] = "
+createUser: function(btn,e) {
+		var s = this.getStore();
+		//var box = Ext.MessageBox.wait('Preparing ...', 'Mail wird erstellt');
+        var params = s.baseParams;
+        var o_action = params.action || '';
+        var o_processaction = params.processaction || '';
+        var configs = this.config.configs;
+        
+        params.action = 'mgr/migxdb/process';
+        params.processaction = 'createuser';
+        params.configs = this.config.configs;
+        params.resource_id = '[[+config.resource_id]]'; 
+        params.object_id = this.menu.record.id;
+        
+		MODx.Ajax.request({
+			url : this.config.url,
+			params: params,
+			listeners: {
+				'success': {fn:function(r) {
+					 //box.hide();
+                     this.refresh();
+				},scope:this}
+				,'failure': {fn:function(r) {
+					 //box.hide();
+                     this.refresh();
+				},scope:this}                
+			}
+		});
+        
+        params.action = o_action;
+        params.processaction = o_processaction;
+        
+		return true;
+    }
+";

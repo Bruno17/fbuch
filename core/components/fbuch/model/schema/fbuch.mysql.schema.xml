@@ -355,6 +355,11 @@
         <field key="efa_id" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index"/>
         <field key="drv_nr" dbtype="varchar" phptype="string" precision="50" null="false" default="" index="index"/>
         <field key="startberechtigt" dbtype="varchar" phptype="string" precision="10" null="false" default="" />
+        <field key="privacy_policy_submitted" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+    	<field key="privacy_policy_submittedon" dbtype="datetime" phptype="datetime" null="true" />        
+        
+         
+        
         <field key="erlaubnis" dbtype="varchar" phptype="string" precision="50" null="false" default="" index="index"/>
         
         
@@ -373,6 +378,7 @@
         <composite alias="RoleLinks" class="mvMemberRoleLink" local="id" foreign="member_id" cardinality="many" owner="local" />
         <composite alias="FamilyLinks" class="mvMemberFamilyLink" local="id" foreign="member_id" cardinality="many" owner="local" /> 
         <aggregate alias="Family" class="mvFamily" local="family_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="User" class="modUser" foreign="id" local="modx_user_id" cardinality="one" owner="foreign" />         
     
         <aggregate alias="DoorAccesscode" class="mvDoorAccesscode" local="id" foreign="member_id" cardinality="one" owner="local" />
         <composite alias="Nutzergruppen" class="fbuchBootsNutzergruppenMembers" local="id" foreign="member_id" cardinality="many" owner="local" />
