@@ -47,11 +47,11 @@ class MyControllerBoote extends modRestController {
 
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
 
-        //$joins = '[{"alias":"Boot"}]';
+        $joins = '[{"alias":"Bootsgattung"}]';
 
-        //$this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);
+        $this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);
 
-        $c->where(array('deleted' => 0, 'gattung' => 'fahrzeug'));
+        $c->where(array('deleted' => 0, 'Bootsgattung.name' => 'Fuhrpark'));
 
         return $c;
     }

@@ -119,12 +119,12 @@ class MyControllerFahrten extends modRestController {
         
         
                 
-        $joins = '[{"alias":"Boot"}]';
+        $joins = '[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]';
         
         $this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);
         
         if ($gattung = $this->getProperty('gattung')){
-            $where['Boot.gattung'] = $gattung;
+            $where['Gattung.name'] = $gattung;
         }
         $w = array();
         $w[] = $where;

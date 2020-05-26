@@ -41,7 +41,7 @@
             var params = params || {};
             var self = this;
             var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Fahrten';
-            params['gattung'] = 'fahrzeug';
+            params['gattung'] = 'Fuhrpark';
             axios.get(ajaxUrl,{params:params})
             .then(function (response) {
                 self.$set(self.fahrten,params.returntype,response.data.results);
