@@ -12,9 +12,14 @@
 <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
 </a> 
 </div>
-  <strong>[[+Boot_name]]</strong><br>
-  [[+date:strtotime:date=`%a,%d.%m.%Y`]] [[+start_time]]<br>
-  [[+km]] km Ankunft: [[+end_time]]<br>
+  <strong>[[+Boot_name]] </strong>[[+Gattung_shortname]]<br>
+  [[!fbuchFormatDate?
+    &start_date=`[[+date]]`
+    &start_time=`[[+start_time]]`
+    &end_date=`[[+date_end]]`
+    &end_time=`[[+end_time]]`
+  ]]<br>
+  [[+km]] km <br>
   [[!hasPermission:is=`yes`:then=`
 Altersschnitt:
 [[!migxLoopCollection:fbuchBerechneDurchschnitt?
@@ -32,8 +37,9 @@ Altersschnitt:
   ]]
 
 </div>
+<div style="background-color:#[[+Nutzergruppe_color]];margin-bottom:3px;width:100%;height:20px;" role="alert"></div>  
   <div class="panel-body">
-  
+  [[+note]]  
   </div>
 
         [[!migxLoopCollection?
@@ -51,7 +57,8 @@ Altersschnitt:
 [[!migxLoopCollection?
 &packageName=`fbuch`
 &classname=`fbuchFahrtNames`
-&joins=`[{"alias":"Member"}]`
+&joins=`[{"alias":"Member"},
+        {"alias":"NgMember","classname":"fbuchBootsNutzergruppenMembers","on":"NgMember.member_id=Member.id and NgMember.group_id=[[+Nutzergruppe_id]]"}]`
 &where=`{"fahrt_id":"[[+id]]"}`
 &tpl=`fbuchFahrtenDragdropFahrtNamesRow`
 &date=`[[+date]]`

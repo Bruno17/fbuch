@@ -123,7 +123,9 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`fbuchFahrt`
-            &joins=`[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]`
+            &joins=`[{"alias":"Boot"},
+            {"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"},
+            {"alias":"Nutzergruppe","classname":"fbuchBootsNutzergruppe","on":"Nutzergruppe.id=Boot.nutzergruppe"}]`
             &tpl=`fbuchFahrtenDragdropRow`
             &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
             &limit=`99`
@@ -152,7 +154,8 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`fbuchFahrt`
-            &joins=`[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]`
+            &joins=`[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"},
+            {"alias":"Nutzergruppe","classname":"fbuchBootsNutzergruppe","on":"Nutzergruppe.id=Boot.nutzergruppe"}]`
             &tpl=`fbuchFahrtenDragdropRow`
             &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
             &where=`[
@@ -192,7 +195,8 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`fbuchFahrt`
-            &joins=`[{"alias":"Boot"}]`
+            &joins=`[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"},
+            {"alias":"Nutzergruppe","classname":"fbuchBootsNutzergruppe","on":"Nutzergruppe.id=Boot.nutzergruppe"}]`
             &tpl=`fbuchClosedFahrtenDragdropRow`
             &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
             &where=`[{"deleted":"0"},
