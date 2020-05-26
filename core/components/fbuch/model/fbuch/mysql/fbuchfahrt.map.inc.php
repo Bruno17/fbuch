@@ -26,6 +26,7 @@ $xpdo_meta_map['fbuchFahrt']= array (
     'fahrtid_old' => 0,
     'bootid_old' => 0,
     'locked' => 0,
+    'finished' => 0,
     'lock_password' => '',
     'createdby' => 0,
     'createdon' => NULL,
@@ -161,6 +162,15 @@ $xpdo_meta_map['fbuchFahrt']= array (
       'index' => 'index',
     ),
     'locked' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'finished' => 
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',

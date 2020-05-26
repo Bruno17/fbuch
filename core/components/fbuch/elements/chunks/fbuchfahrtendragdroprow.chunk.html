@@ -31,7 +31,13 @@
 `]]
 
   <strong>[[+Boot_name]]</strong><br>
-  [[+date:strtotime:date=`%a,%d.%m.%Y`]] [[+start_time]]<br>
+  [[!fbuchFormatDate?
+    &start_date=`[[+date]]`
+    &start_time=`[[+start_time]]`
+    &end_date=`[[+date_end]]`
+    &end_time=`[[+end_time]]`
+  ]]
+  <br>
   [[+direction]]<br>
   [[!hasPermission:is=`yes`:then=`
 Altersschnitt:

@@ -14,6 +14,7 @@ $xpdo_meta_map['fbuchBootsGattung']= array (
     'shortname' => '',
     'longname' => '',
     'link_key' => '',
+    'show_in_offen' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -52,6 +53,15 @@ $xpdo_meta_map['fbuchBootsGattung']= array (
       'null' => false,
       'default' => '',
       'index' => 'index',
+    ),
+    'show_in_offen' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
     ),
   ),
   'aggregates' => 

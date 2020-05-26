@@ -286,10 +286,29 @@
           "pos":12
         },
         {
+          "MIGX_id":482,
+          "field":"User_active",
+          "caption":"Benutzer Login",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"option",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"Aktivieren==1||Deaktivieren==0",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":13
+        },
+        {
           "MIGX_id":424,
           "field":"drv_nr",
           "caption":"drv_nr",
-          "pos":13
+          "pos":14
         },
         {
           "MIGX_id":425,
@@ -308,7 +327,7 @@
           "inputOptionValues":"Ja==ja||Nein==nein",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":14
+          "pos":15
         }
       ],
       "pos":1
@@ -322,7 +341,7 @@
           "MIGX_id":252,
           "field":"email",
           "caption":"Email",
-          "description":"",
+          "description":"\u00c4nderung dieser Email Adresse bewirkt auch eine \u00c4nderung mit der zugeh\u00f6rigen Benutzer Email Adresse",
           "description_is_code":"0",
           "inputTV":"",
           "inputTVtype":"",
@@ -335,12 +354,7 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":1,
-          "MIGXtype":"field",
-          "MIGXtyperender":"<h3>...field<\/h3>",
-          "MIGXlayoutid":0,
-          "MIGXcolumnid":0,
-          "MIGXcolumnwidth":0
+          "pos":1
         },
         {
           "MIGX_id":253,
@@ -1278,7 +1292,7 @@
       "renderer":"this.renderChunk",
       "clickaction":"",
       "selectorconfig":"",
-      "renderchunktpl":"<div class=\"migx-actions-column\"><h3 class=\"main-column\">[[+User_username]]([[+User_id]])<\/h3>\n<ul class=\"actions\">\n[[+User_id:is=``:then=`\n<li><a href=\"#\" class=\"controlBtn updateUser this.createUser\">Modx Benutzer erstellen<\/a><\/li>\n`:else=`\n<li><a href=\"?a=security\/user\/update&id=[[+User_id]]\" class=\"updateUser \" target=\"_blank\">Modx Benutzer bearbeiten<\/a><\/li>\n`]]\n<\/ul>\n<\/div>",
+      "renderchunktpl":"<div class=\"migx-actions-column\"><h3 class=\"main-column [[+User_active:is=`1`:then=``:else=`grid-row-inactive`]] \">[[+User_username]]([[+User_id]])<\/h3>\n<ul class=\"actions\">\n[[+User_id:is=``:then=`\n<li><a href=\"#\" class=\"controlBtn updateUser this.createUser\">Modx Benutzer erstellen<\/a><\/li>\n`:else=`\n<li><a href=\"?a=security\/user\/update&id=[[+User_id]]\" class=\"updateUser \" target=\"_blank\">Modx Benutzer bearbeiten<\/a><\/li>\n`]]\n<\/ul>\n<\/div>",
       "renderoptions":"",
       "editor":""
     }
@@ -1286,7 +1300,7 @@
   "createdby":1,
   "createdon":"2015-02-25 22:37:51",
   "editedby":1,
-  "editedon":"2020-05-25 10:52:30",
+  "editedon":"2020-05-25 13:48:14",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

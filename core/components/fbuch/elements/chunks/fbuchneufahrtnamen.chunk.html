@@ -1,14 +1,7 @@
-[[!fbuchBuildTeam]]
+[[!fbuchBuildTeam? &tpl=`fbuchFahrtnamRow`]]
 
 <input type="hidden" name="member_ids" id="member_ids" value="[[!+member_ids]]">
 
 <table class="table">
-        [[!migxLoopCollection?
-            &packageName=`fbuch`
-            &classname=`mvMember`
-            &limit=`10`
-            &where=`{"id:IN":[ [[!+member_ids]] ]}`
-            &tpl=`fbuchFahrtnamRow`
-            &sortConfig=`[{"sortby":"FIELD(mvMember.id, [[!+member_ids]])"}]`
-        ]]
+[[+team_output]]
 </table>

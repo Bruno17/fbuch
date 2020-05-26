@@ -10,7 +10,12 @@
 `:else=`
 &validate=`member_ids:required,boot_id:required,submit_form:required`
 `]]
-`:else=``]]
+`:else=`
+[[!#request.changeboot:is=`1`:then=`
+&validate=`xx:required`
+`:else=``
+`]]
+`]]
 ]]
 
 
@@ -41,6 +46,7 @@
     <input name="date" id="date" type="hidden" value="[[!+fi.date]]" />
     `:else=`
     <div class="row">
+    
     <div class="form-group col-sm-3">
     <label for="boot_id">
         Boot:
@@ -57,7 +63,17 @@
     &tpl=`fbuchFahrtenFormBootOption`
     ]]    
     </select>
-    </div>
+    </div>    
+    
+    <div class="form-group col-sm-3">
+    <label for="start_time">
+        Startzeit:
+    </label>
+    <input type="text" class="form-control" name="start_time" id="start-time" value="[[!+fi.start_time]]" /> 
+    <span class="error">[[!+fi.error.start_time]]</span>
+    
+    </div>   
+    
     <div class="form-group col-sm-3">
     <label for="date">
         Datum:
@@ -65,7 +81,9 @@
     <div class="input-group date">
         <input name="date" id="date" type="text" class="form-control" value="[[!+fi.date]]"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>    </span>
     </div>
-    </div>
+    </div>    
+    
+
     <div class="form-group col-sm-3">
     <label for="direction">
         Fahrtrichtung:
@@ -78,26 +96,45 @@
     </div>
     
 
+
+    </div>
+`]]
+<div class="row">
+
     <div class="form-group col-sm-3">
-    <label for="start_time">
-        Startzeit:
+    <label for="km">
+        km:
     </label>
-    <input type="text" class="form-control" name="start_time" id="start-time" value="[[!+fi.start_time]]" /> 
-    <span class="error">[[!+fi.error.start_time]]</span>
+    <input type="text" id="km" class="form-control" name="km" id="km" value="[[!+fi.km]]">
+    </div>    
     
+    <div class="form-group col-sm-3">
+    <label for="end_time">
+        Ende:
+    </label>
+    <input name="end_time" id="end_time" type="text" class="form-control" value="[[!+fi.end_time]]">
+    </div>    
+
+    <div class="form-group col-sm-3">
+    <label for="date_end">
+        Datum bis:
+    </label>
+    <div class="input-group date">
+        <input name="date_end" id="date_end" type="text" class="form-control" value="[[!+fi.date_end]]"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>    </span>
     </div>
     </div>
-
-[[!migxLoopCollection?
-&packageName=`fbuch`
-&classname=`fbuchBoot`
-&joins=`[{"alias":"Nutzergruppe"}]`
-&where=`{"id":"[[!+fi.boot_id]]"}`
-&tpl=`fbuchFahrtenFormBootinfo`
-]]
-
-
-    <div class="row">
+    [[!#request.process:is=`close`:then=`
+    <div class="form-group col-sm-3">
+    <label for="finished">
+        Abgeschlossen:
+    </label>
+    <select class="form-control" name="finished" id="finished">
+    <option value="0" [[!+fi.finished:FormItIsSelected=`0`]]>nein</option>
+    <option value="1" [[!+fi.finished:FormItIsSelected=`1`]]>ja</option>
+    </select>
+   
+    </div>       
+    `:else=`
     <div class="form-group col-sm-3">
     <label for="wfahrt">
         Wanderfahrt:
@@ -107,27 +144,28 @@
     <option value="1" [[!+fi.wfahrt:FormItIsSelected=`1`]]>ja</option>
     </select>
    
-    </div>
-    <div class="form-group col-sm-3">
-    <label for="date_end">
-        Datum bis:
-    </label>
-    <div class="input-group date">
-        <input name="date_end" id="date_end" type="text" class="form-control" value="[[!+fi.date_end]]"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>    </span>
-    </div>
-    </div>
+    </div>      
+    `]]
+  
 
     </div>
-    `]]
+    
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchBoot`
+&joins=`[{"alias":"Nutzergruppe"},{"alias":"Bootsgattung"}]`
+&where=`{"id":"[[!+fi.boot_id]]"}`
+&tpl=`fbuchFahrtenFormBootinfo`
+]]    
+    
+
 
   <div class="form-group">
     <label for="comment">Kommentar (optional)</label>
     <textarea class="form-control" rows="3" name="note" id="comment">[[!+fi.note]]</textarea>
   </div>
 
-[[!#request.object_id:is=`0`:then=`
-<h3>Mannschaft</h3>
-
+[[!#request.process:is=`close`:then=``:else=`
 <div class="row">    
     <div class="form-group col-sm-3">
     <label for="add_person">
@@ -140,30 +178,15 @@
     <input autocomplete="off" class="form-control" id="add_person" name="name" />
     </div>
 </div>
+`]]
+
 
 <div id="teamwrapper">
 <input type="hidden" name="member_ids" id="member_ids" value="[[!+fi.member_ids]]">
 </div>
 
-`:else=``]]
 
-    [[!#request.process:is=`close`:then=`
-    <div class="row">
-    <div class="form-group col-sm-3">
-    <label for="km">
-        km:
-    </label>
-    <input type="text" id="km" class="form-control" name="km" id="km" value="[[!+fi.km]]">
-    </div>
-    <div class="form-group col-sm-3">
-    <label for="end_time">
-        Ankunft:
-    </label>
-    <input name="end_time" id="end_time" type="text" class="form-control" value="[[!+fi.end_time]]">
-    </div>
-    </div>
-    `:else=``]]
- 
+
       </div>
       <div class="modal-footer">
     [[!#request.process:is=`delete`:then=`
@@ -198,10 +221,11 @@ $( "#boot_id" ).on( "change", function( event ) {
   var $form = $("#anmelden_form");
   var url = $form.attr( "action" );
   for (var i=0;i<formdata.length;i++){
-      if (formdata[i].name == 'submit_form'){
+      if (formdata[i].name == 'submit_form' ){
           formdata[i].value = '';
       }
   }
+  formdata.push({"name":"changeboot","value":"1"});
   var posting = $.post( url, formdata );
   posting.done(function( data ) {
     $( "#fbuchModal" ).empty().append( data );

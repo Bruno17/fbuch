@@ -17,6 +17,7 @@
         <field key="fahrtid_old" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="bootid_old" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="finished" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />        
         <field key="lock_password" dbtype="varchar" phptype="string" precision="50" null="false" default="" />
         <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
@@ -242,6 +243,7 @@
         <field key="shortname" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" /> 
         <field key="longname" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />               
         <field key="link_key" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <field key="show_in_offen" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" /> 
         <aggregate alias="Boote" class="fbuchBoot" local="link_key" foreign="gattung" cardinality="many" owner="local" />
     </object>
     <object class="fbuchBootsNutzergruppe" table="fbuch_bootsnutzergruppen" extends="xPDOSimpleObject">

@@ -2,7 +2,7 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`[[+classname]]`
-            &joins=`[{"alias":"Boot"}]`
+            &joins=`[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]`
             &tpl=`@CODE:[[+date]]`
             &limit=`1`
             &totalVar=`[[+grid_id]]_total`
@@ -13,7 +13,7 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`[[+classname]]`
-            &joins=`[{"alias":"Boot"}]`
+            &joins=`[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]`
             &tpl=`@CODE:[[+date]]`
             &limit=`1`
             &totalVar=`[[+grid_id]]_total`
@@ -24,7 +24,7 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`[[+classname]]`
-            &joins=`[{"alias":"Boot"}]`
+            &joins=`[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]`
             &tpl=`@CODE:[[+date]]`
             &limit=`1`
             &totalVar=`[[+grid_id]]_total`
@@ -58,7 +58,7 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`[[+classname]]`
-            &joins=`[{"alias":"Boot"},{"alias":"Names"},{"alias":"Member","classname":"mvMember","on":"Member.id=Names.member_id"}]`
+            &joins=`[{"alias":"Boot"},{"alias":"Names"},{"alias":"Member","classname":"mvMember","on":"Member.id=Names.member_id"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]`
             &tpl=`fbuch[[+grid_id]]Row`
             &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
             &where=`[{"deleted":"0",[[+where]]},[[+date_where]]]`

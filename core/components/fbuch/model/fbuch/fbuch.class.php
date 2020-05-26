@@ -91,18 +91,18 @@ class Fbuch {
         }
         return $option;
     }
-    
-    public function getClientConfigOptions(){
+
+    public function getClientConfigOptions() {
         $modx = &$this->modx;
         $path = $modx->getOption('clientconfig.core_path', null, $modx->getOption('core_path') . 'components/clientconfig/');
         $path .= 'model/clientconfig/';
-        $clientConfig = $modx->getService('clientconfig','ClientConfig', $path);
+        $clientConfig = $modx->getService('clientconfig', 'ClientConfig', $path);
 
         /* If we got the class (gotta be careful of failed migrations), grab settings and go! */
         if ($clientConfig instanceof ClientConfig) {
             $contextKey = $modx->context instanceof modContext ? $modx->context->get('key') : 'web';
             $settings = $clientConfig->getSettings($contextKey);
-            
+
             //print_r($settings);die();
 
             /* Make settings available as [[++tags]] */
@@ -112,9 +112,9 @@ class Fbuch {
             foreach ($settings as $key => $value) {
                 $modx->setOption($key, $value);
             }
-        }        
+        }
     }
-    
+
 
     public function checkPermission($permission, $properties = array()) {
         $modx = &$this->modx;
@@ -187,7 +187,7 @@ class Fbuch {
             /*
             $member_id = $object->get('mv_member_id');
             if ($member = $this->modx->getObject('mvMember', $member_id)) {
-                $email = $member->get('email');
+            $email = $member->get('email');
             }
             */
         }
@@ -232,7 +232,7 @@ class Fbuch {
             }
             if (is_array($guestnames)) {
                 $gast_id = 0;
-                if ($gast_o = $modx->getObject('mvMember', array('name' => 'Gast'))) {
+                if ($gast_o = $modx->getObject('mvMember', array('firstname' => '', 'name' => 'Gast'))) {
                     $gast_id = $gast_o->get('id');
                 }
 
@@ -798,7 +798,7 @@ class Fbuch {
 
             default:
                 $object_id = $hook->getValue('object_id');
-                
+
                 $values = $hook->getValues();
                 $duplicate = !empty($values['duplicate']) ? true : false;
                 $duplicate_names = !empty($values['duplicate_names']) ? true : false;
@@ -829,7 +829,7 @@ class Fbuch {
                                 $object = $modx->newObject($classname);
                                 $values['inactive'] = 1;
                                 $values['inactive_reason'] = 'ist kein Mitglied';
-                                
+
                             } else {
                                 return false;
                             }
@@ -907,7 +907,7 @@ class Fbuch {
                             $email = $name_o->get('email');
                         }
                         if ($process == 'riotinvite_invites') {
-                            $email = $name_o->get('riot_user_id') ;
+                            $email = $name_o->get('riot_user_id');
                         }
                         if (!empty($email)) {
                             $names[] = $name_o->get('firstname') . ' ' . $name_o->get('name');
@@ -937,6 +937,13 @@ class Fbuch {
                             $values['name'] = $name->get('name') . ' ' . $name->get('firstname');
                             $values['member_id'] = $name->get('id');
                         }
+                    }
+                    if ($fahrtnames = $modx->getCollection('fbuchFahrtNames', array('fahrt_id' => $values['id']))) {
+                        $member_ids = array();
+                        foreach ($fahrtnames as $fahrtname) {
+                            $member_ids[] = $fahrtname->get('member_id');
+                        }
+                        $values['member_ids'] = implode(',', $member_ids);
                     }
                     break;
                 case 'mvMember':
@@ -1071,12 +1078,24 @@ class Fbuch {
 
         if (isset($values['member_ids'])) {
             $member_ids = explode(',', $values['member_ids']);
+            //first remove all Guests
+            if ($members = $object->getMany('Names')){
+                foreach ($members as $member){
+                    if ($this->isguest($member->get('member_id'))){
+                        $member->remove();
+                    }
+                }
+            }
+            
             foreach ($member_ids as $key => $member_id) {
-                if (!empty($member_id)) {
-                    $fahrtnam = $modx->newObject('fbuchFahrtNames');
+                if (!$this->isguest($member_id) && $fahrtnam = $modx->getObject('fbuchFahrtNames', array('fahrt_id' =>$object->get('id'), 'member_id' => $member_id))) {
+                    //name exists allready in fahrt, do nothing
+                } else {
+                    if ($fahrtnam = $modx->newObject('fbuchFahrtNames')) {
                     $fahrtnam->set('member_id', $member_id);
                     $fahrtnam->set('fahrt_id', $object->get('id'));
                     $fahrtnam->save();
+                    }
                 }
             }
         }
@@ -1101,7 +1120,7 @@ class Fbuch {
     public function isguest($member_id) {
         $isguest = false;
         if ($name_o = $this->modx->getObject('mvMember', $member_id)) {
-            if ($name_o->get('name') == 'Gast') {
+            if ($name_o->get('name') == 'Gast' && $name_o->get('firstname') == '') {
                 $isguest = true;
             }
         }
@@ -1247,7 +1266,7 @@ class Fbuch {
                 $c->sortby('pos', 'DESC');
                 $c->limit('1');
                 $c->prepare();
-                echo $c->toSql();
+                //echo $c->toSql();
                 if ($object = $modx->getObject($classname, $c)) {
                     $pos = $object->get('pos');
                 }
@@ -1265,7 +1284,6 @@ class Fbuch {
                                     $object->save();
                                 }
                             }
-                            break;
                             break;
                         case 'dates':
                             if (!$this->isguest($member_id) && $object = $modx->getObject($classname, array('fahrt_id' => $target_id, 'member_id' => $member_id))) {
@@ -1351,7 +1369,7 @@ class Fbuch {
                 $name = '';
                 if ($object = $modx->getObject($classname, $fields)) {
                     if ($name_o = $object->getOne('Member')) {
-                        $name = $name_o->get('name');
+                        $name = $name_o->get('name') . $name_o->get('firstname');
                     }
                 }
                 if (!$object || $name == 'Gast') {
@@ -1410,9 +1428,9 @@ class Fbuch {
 
     public function sendInviteMail(&$object, $comment = '', $comment_name = '', $add_datecomment = false, $subj_prefix = '') {
         $modx = &$this->modx;
-        
+
         $subj_prefix = empty($subj_prefix) ? $modx->getOption('invite_subject_prefix') : $subj_prefix;
-        
+
         $modx->runSnippet('setlocale');
         $name_o = $object->getOne('Member');
         $date_o = $object->getOne('Date');
@@ -1444,7 +1462,7 @@ class Fbuch {
             $properties['iid'] = $object->get('id');
             $properties['email'] = $email;
             $properties['tpl'] = $modx->getOption('invite_mail_tpl');
-            $properties['subject'] = $subj_prefix . ': ' . $date_o->get('title') . ' ' . strftime('%a, %d.%m.%Y ',strtotime($date_o->get('date'))) . $date_o->get('start_time');
+            $properties['subject'] = $subj_prefix . ': ' . $date_o->get('title') . ' ' . strftime('%a, %d.%m.%Y ', strtotime($date_o->get('date'))) . $date_o->get('start_time');
             $properties['code'] = md5($properties['date_id'] . $properties['email'] . $properties['iid']);
             //print_r($properties);die();
             //$values = $hook->getValues();

@@ -27,9 +27,9 @@
           "pos":1
         },
         {
-          "MIGX_id":453,
-          "field":"gattung",
-          "caption":"Gattung",
+          "MIGX_id":460,
+          "field":"gattung_id",
+          "caption":"Aktuelle Riggerung",
           "description":"",
           "description_is_code":"0",
           "inputTV":"",
@@ -40,10 +40,48 @@
           "display":"",
           "sourceFrom":"config",
           "sources":"",
-          "inputOptionValues":"@CHUNK input_options_gattung",
+          "inputOptionValues":"@CHUNK input_options_gattung_id",
           "default":"",
           "useDefaultIfEmpty":"0",
           "pos":2
+        },
+        {
+          "MIGX_id":461,
+          "field":"gattung_ids",
+          "caption":"M\u00f6gliche Riggerungen",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"listbox-multiple",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"@CHUNK input_options_gattung_ids",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":3
+        },
+        {
+          "MIGX_id":469,
+          "field":"type",
+          "caption":"Bootstyp",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"listbox",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"Typ w\u00e4hlen==||RACING||AGIG||CGIG||TRIMMY||OTHER",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":4
         },
         {
           "MIGX_id":388,
@@ -62,7 +100,7 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":3
+          "pos":5
         },
         {
           "MIGX_id":389,
@@ -81,7 +119,7 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":4
+          "pos":6
         },
         {
           "MIGX_id":390,
@@ -100,7 +138,7 @@
           "inputOptionValues":"@CHUNK input_options_bootsnutzergruppen",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":5
+          "pos":7
         },
         {
           "MIGX_id":454,
@@ -119,140 +157,7 @@
           "inputOptionValues":"sperren==1",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":6
-        },
-        {
-          "MIGX_id":455,
-          "field":"riggerung",
-          "caption":"Riggerung",
-          "description":"",
-          "description_is_code":"0",
-          "inputTV":"",
-          "inputTVtype":"",
-          "validation":"",
-          "configs":"",
-          "restrictive_condition":"",
-          "display":"",
-          "sourceFrom":"config",
-          "sources":"",
-          "inputOptionValues":"",
-          "default":"",
-          "useDefaultIfEmpty":"0",
-          "pos":7
-        },
-        {
-          "MIGX_id":456,
-          "field":"nutzernamen",
-          "caption":"Benutzer Namen, falls nur bestimmte Benutzer",
-          "description":"",
-          "description_is_code":"0",
-          "inputTV":"",
-          "inputTVtype":"textarea",
-          "validation":"",
-          "configs":"",
-          "restrictive_condition":"",
-          "display":"none",
-          "sourceFrom":"config",
-          "sources":"",
-          "inputOptionValues":"",
-          "default":"",
-          "useDefaultIfEmpty":"0",
           "pos":8
-        },
-        {
-          "MIGX_id":457,
-          "field":"date of purchase",
-          "caption":"Kaufdatum",
-          "description":"Wenn Kaufdatum nicht ermittelt werden kann, Jahr des Kaufes angeben",
-          "description_is_code":"0",
-          "inputTV":"",
-          "inputTVtype":"",
-          "validation":"",
-          "configs":"",
-          "restrictive_condition":"",
-          "display":"",
-          "sourceFrom":"config",
-          "sources":"",
-          "inputOptionValues":"",
-          "default":"",
-          "useDefaultIfEmpty":"0",
-          "pos":9
-        },
-        {
-          "MIGX_id":458,
-          "field":"purchase price",
-          "caption":"Kaufpreis",
-          "description":"",
-          "description_is_code":"0",
-          "inputTV":"",
-          "inputTVtype":"",
-          "validation":"",
-          "configs":"",
-          "restrictive_condition":"",
-          "display":"",
-          "sourceFrom":"config",
-          "sources":"",
-          "inputOptionValues":"",
-          "default":"",
-          "useDefaultIfEmpty":"0",
-          "pos":10
-        },
-        {
-          "MIGX_id":459,
-          "field":"insurance-number",
-          "caption":"Versicherungsnummer",
-          "description":"",
-          "description_is_code":"0",
-          "inputTV":"",
-          "inputTVtype":"",
-          "validation":"",
-          "configs":"",
-          "restrictive_condition":"",
-          "display":"",
-          "sourceFrom":"config",
-          "sources":"",
-          "inputOptionValues":"",
-          "default":"",
-          "useDefaultIfEmpty":"0",
-          "pos":11
-        },
-        {
-          "MIGX_id":460,
-          "field":"gattung_id",
-          "caption":"gattung_id",
-          "description":"",
-          "description_is_code":"0",
-          "inputTV":"",
-          "inputTVtype":"listbox",
-          "validation":"",
-          "configs":"",
-          "restrictive_condition":"",
-          "display":"",
-          "sourceFrom":"config",
-          "sources":"",
-          "inputOptionValues":"@CHUNK input_options_gattung_id",
-          "default":"",
-          "useDefaultIfEmpty":"0",
-          "pos":12
-        },
-        {
-          "MIGX_id":461,
-          "field":"gattung_ids",
-          "caption":"gattung_ids",
-          "description":"",
-          "description_is_code":"0",
-          "inputTV":"",
-          "inputTVtype":"listbox-multiple",
-          "validation":"",
-          "configs":"",
-          "restrictive_condition":"",
-          "display":"",
-          "sourceFrom":"config",
-          "sources":"",
-          "inputOptionValues":"@CHUNK input_options_gattung_ids",
-          "default":"",
-          "useDefaultIfEmpty":"0",
-          "pos":13
         },
         {
           "MIGX_id":462,
@@ -271,7 +176,7 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":14
+          "pos":9
         },
         {
           "MIGX_id":463,
@@ -290,13 +195,26 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":15
+          "pos":10
         },
         {
           "MIGX_id":464,
           "field":"model",
-          "caption":"model",
-          "pos":16
+          "caption":"Model",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":11
         },
         {
           "MIGX_id":465,
@@ -315,7 +233,7 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":17
+          "pos":12
         },
         {
           "MIGX_id":466,
@@ -334,7 +252,7 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":18
+          "pos":13
         },
         {
           "MIGX_id":467,
@@ -353,18 +271,12 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":19
+          "pos":14
         },
         {
           "MIGX_id":468,
           "field":"serial_no",
-          "caption":"serial_no",
-          "pos":20
-        },
-        {
-          "MIGX_id":469,
-          "field":"type",
-          "caption":"Bootstyp",
+          "caption":"Serien Nummer",
           "description":"",
           "description_is_code":"0",
           "inputTV":"",
@@ -378,19 +290,45 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":21
+          "pos":15
         },
         {
           "MIGX_id":407,
           "field":"versicherungs_nummer",
-          "caption":"versicherungs_nummer",
-          "pos":22
+          "caption":"Versicherungsnummer",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":16
         },
         {
           "MIGX_id":408,
           "field":"versicherungs_summe",
-          "caption":"versicherungs_summe",
-          "pos":23
+          "caption":"Versicherungssumme",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":17
         }
       ],
       "pos":1
@@ -424,9 +362,52 @@
     }
   ],
   "contextmenus":"update||recall_remove_delete",
-  "actionbuttons":"addItem||toggletrash||importusers",
+  "actionbuttons":"addItem||toggletrash",
   "columnbuttons":"",
-  "filters":"",
+  "filters":[
+    {
+      "MIGX_id":1,
+      "name":"boot_search",
+      "label":"Suche",
+      "emptytext":"",
+      "type":"textbox",
+      "getlistwhere":{
+        "name:LIKE":"%[[+boot_search]]%"
+      },
+      "getcomboprocessor":"",
+      "combotextfield":"",
+      "comboidfield":"",
+      "combowhere":"",
+      "comboclassname":"",
+      "combopackagename":"",
+      "combo_use_custom_prefix":"0",
+      "comboprefix":"",
+      "combojoins":"",
+      "comboparent":"",
+      "default":""
+    },
+    {
+      "MIGX_id":2,
+      "name":"filter_bootsgattung",
+      "label":"FilterBootsgattung",
+      "emptytext":"Gattung filtern",
+      "type":"combobox",
+      "getlistwhere":{
+        "Bootsgattung.name":"[[+filter_bootsgattung]]"
+      },
+      "getcomboprocessor":"getcombo",
+      "combotextfield":"Bootsgattung.name",
+      "comboidfield":"",
+      "combowhere":"",
+      "comboclassname":"",
+      "combopackagename":"",
+      "combo_use_custom_prefix":"0",
+      "comboprefix":"",
+      "combojoins":"",
+      "comboparent":"",
+      "default":""
+    }
+  ],
   "extended":{
     "migx_add":"Boot erstellen",
     "disable_add_item":"",
@@ -534,20 +515,40 @@
     },
     {
       "MIGX_id":12,
+      "header":"Bootsgattung_shortname",
       "dataIndex":"Bootsgattung_shortname",
-      "header":"Bootsgattung_shortname"
+      "width":10,
+      "sortable":true,
+      "show_in_grid":1,
+      "customrenderer":"",
+      "renderer":"",
+      "clickaction":"",
+      "selectorconfig":"",
+      "renderchunktpl":"",
+      "renderoptions":"",
+      "editor":""
     },
     {
       "MIGX_id":14,
+      "header":"Nutzergruppe_name",
       "dataIndex":"Nutzergruppe_name",
-      "header":"Nutzergruppe_name"
+      "width":20,
+      "sortable":true,
+      "show_in_grid":1,
+      "customrenderer":"",
+      "renderer":"",
+      "clickaction":"",
+      "selectorconfig":"",
+      "renderchunktpl":"",
+      "renderoptions":"",
+      "editor":""
     },
     {
       "MIGX_id":15,
       "header":"Nutzergruppe_color",
       "dataIndex":"Nutzergruppe_color",
-      "width":"",
-      "sortable":true,
+      "width":10,
+      "sortable":1,
       "show_in_grid":1,
       "customrenderer":"",
       "renderer":"this.renderChunk",
@@ -561,7 +562,7 @@
   "createdby":1,
   "createdon":"2016-09-10 13:32:23",
   "editedby":1,
-  "editedon":"2020-05-24 19:21:19",
+  "editedon":"2020-05-25 14:35:35",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

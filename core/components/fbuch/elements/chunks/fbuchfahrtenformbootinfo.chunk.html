@@ -1,12 +1,25 @@
 [[+gesperrt:isnot=`0`:then=`
 <div class="alert alert-danger" role="alert">Boot ist für die Benutzung gesperrt!</div>
 `:else=`
-<div class="alert alert-info" role="alert"> [[+Nutzergruppe_description]] [[+gewichtsklasse]]
+<div class="alert" style="background-color:#[[+Nutzergruppe_color]]" role="alert"></div>
+<div class="alert alert-info" role="alert"> 
+Riggerung: [[+Bootsgattung_shortname]]<br>
+Gruppe: <strong>[[+Nutzergruppe_name]]</strong><br>
+[[+Nutzergruppe_description]] [[+gewichtsklasse]]
 [[!migxLoopCollection? 
 &packageName=`fbuch`
 &classname=`fbuchBootAllowedNames`
 &joins=`[{"alias":"Member"}]`
 &where=`{"boot_id":"[[+id]]"}`
+&tpl=`@CODE:[[+Member_firstname]] [[+Member_name]]`
+&outputSeparator=`, `
+&wrapperTpl=`@CODE:<br>([[+output]])`
+]]
+[[!migxLoopCollection? 
+&packageName=`fbuch`
+&classname=`fbuchBootsNutzergruppenMembers`
+&joins=`[{"alias":"Member"}]`
+&where=`{"group_id":"[[+Nutzergruppe_id]]"}`
 &tpl=`@CODE:[[+Member_firstname]] [[+Member_name]]`
 &outputSeparator=`, `
 &wrapperTpl=`@CODE:<br>([[+output]])`

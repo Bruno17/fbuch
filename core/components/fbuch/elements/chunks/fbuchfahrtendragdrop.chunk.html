@@ -15,10 +15,10 @@
             &packageName=`fbuch`
             &classname=`fbuchFahrt`
             &tpl=`@CODE:[[+date]]`
-            &joins=`[{"alias":"Boot"}]`
+            &joins=`[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]`
             &limit=`1`
             &totalVar=`fahrten_total`
-            &where=`[{"deleted":"0","Boot.gattung:!=":"ergometer","km:!=":"0"},[[+nextdate_where]] ]`
+            &where=`[{"deleted":"0","Gattung.name:!=":"Ergometer","km:!=":"0"},[[+nextdate_where]] ]`
             &sortConfig=`[{"sortby":"date","sortdir":"[[+nextdate_dir]]"}]`
             &toPlaceholder=`nextFahrt`
         ]]
@@ -34,10 +34,10 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`fbuchFahrt`
-            &joins=`[{"alias":"Boot"}]`
+            &joins=`[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]`
             &tpl=`@CODE:[[+date]]`
             &limit=`1`
-            &where=`{"deleted":"0","Boot.gattung:!=":"ergometer","km:!=":"0"}`
+            &where=`{"deleted":"0","Gattung.name:!=":"Ergometer","km:!=":"0"}`
             &sortConfig=`[{"sortby":"date","sortdir":"DESC"}]`
             &toPlaceholder=`lastFahrt`
         ]]
@@ -53,10 +53,10 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`fbuchFahrt`
-            &joins=`[{"alias":"Boot"}]`
+            &joins=`[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]`
             &tpl=`@CODE:[[+date]]`
             &limit=`1`
-            &where=`{"deleted":"0","Boot.gattung:!=":"ergometer","km:!=":"0"}`
+            &where=`{"deleted":"0","Gattung.name:!=":"Ergometer","km:!=":"0"}`
             &sortConfig=`[{"sortby":"date","sortdir":"ASC"}]`
             &toPlaceholder=`firstFahrt`
         ]]
@@ -123,7 +123,7 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`fbuchFahrt`
-            &joins=`[{"alias":"Boot"}]`
+            &joins=`[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]`
             &tpl=`fbuchFahrtenDragdropRow`
             &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
             &limit=`99`
@@ -135,7 +135,10 @@
 </div>
 `
             &where=`[
-                {"deleted":"0","Boot.gattung:!=":"ergometer","km":"0"},
+                {"deleted":"0","Gattung.name:!=":"Ergometer"},
+                [
+                    {"km":"0","AND:finished:=":"0"}
+                ],
                 [
                     {"date:<=":"[[!now:date=`%Y-%m-%d 23:59:59`]]","start_time:<=":"[[!now:date=`%H:%M`]]"},
                     {"OR:date:<":"[[!now:date=`%Y-%m-%d 00:00:00`]]"}
@@ -148,11 +151,14 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`fbuchFahrt`
-            &joins=`[{"alias":"Boot"}]`
+            &joins=`[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]`
             &tpl=`fbuchFahrtenDragdropRow`
             &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
             &where=`[
-                {"deleted":"0","Boot.gattung:!=":"ergometer","km":"0"},
+                {"deleted":"0","Gattung.name:!=":"Ergometer"},
+                [
+                    {"km":"0","AND:finished:=":"0"}
+                ],                
                 [
                     {"date:>=":"[[!now:date=`%Y-%m-%d 00:00:00`]]","start_time:>":"[[!now:date=`%H:%M`]]"},
                     {"OR:date:>":"[[!now:date=`%Y-%m-%d 23:59:00`]]"}
@@ -188,7 +194,11 @@
             &joins=`[{"alias":"Boot"}]`
             &tpl=`fbuchClosedFahrtenDragdropRow`
             &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
-            &where=`[{"deleted":"0","km:!=":"0"},[[+date_where]] ]`
+            &where=`[{"deleted":"0"},
+                [
+                    {"km:!=":"0","OR:finished:=":"1"}
+                ],            
+                [[+date_where]] ]`
             &grid_id=`[[+grid_id]]`
             &limit=`99`
             &emptyTpl=`@CODE:

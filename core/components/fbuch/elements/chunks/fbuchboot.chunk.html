@@ -4,7 +4,14 @@
   </div>
 <table class="table table-bordered table-striped">
 <colgroup> <col class="col-xs-1"> <col class="col-xs-7"> </colgroup>
-<tr><td><strong>Bootsgattung</strong></td><td>[[+Gattung_name]]</td></tr>
+<tr><td><strong>Bootsgattungen</strong></td><td>
+    [[!migxLoopCollection?
+    &classname=`fbuchBootsGattung`
+    &tpl=`@CODE:{{+shortname}}`
+    &where=`{"id:IN":[ [[+gattung_ids:replace=`||==,`]] ]}`
+    &outputSeparator=`,`
+    ]]
+    </td></tr>
 <tr><td><strong>Gewichtsklasse</strong></td><td>[[+gewichtsklasse]]</td></tr>
 <tr><td>
     <strong>Freigegeben für</strong>
@@ -20,7 +27,7 @@
 &wrapperTpl=`@CODE:<br>([[+output]])`
 ]]        
     </td></tr>
-<tr><td><strong>Riggerung</strong></td><td>[[+riggerung]]</td></tr>
+<tr><td><strong>Riggerung</strong></td><td>[[+Bootsgattung_shortname]]</td></tr>
 </table>
 </div>
 

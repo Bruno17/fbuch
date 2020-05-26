@@ -1,4 +1,4 @@
-<h3>[[+name]]</h3>
+<h3>[[+longname]]([[+shortname]])</h3>
 
 <div class="table-responsive">
     <table class="fahrten table table-striped table-hover [[+[[+grid_id]]_firstlast_offset]]" data-offset="[[+[[+grid_id]]_offset]]">
@@ -9,9 +9,9 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`fbuchBoot`
-            &joins=`[{"alias":"Nutzergruppe"}]`
+            &joins=`[{"alias":"Nutzergruppe"},{"alias":"Bootsgattung"}]`
             &tpl=`fbuchBooteRow`
-            &where=`{"deleted":"0","gattung":"[[+link_key]]"}`
+            &where=`{"deleted":"0","gattung_id":"[[+id]]"}`
             &sortConfig=`[{"sortby":"name","sortdir":"ASC"}]`
             &grid_id=`[[+property.grid_id]]`
         ]]

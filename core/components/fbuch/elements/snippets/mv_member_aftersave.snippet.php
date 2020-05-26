@@ -21,6 +21,18 @@ switch ($configs) {
             $object->set('inactive',1); 
         }
         $object->save();
+        
+        if ($user = $modx->getObject('modUser',array('id'=>$object->get('modx_user_id')))){
+            $user->set('active',$object->get('User_active'));
+            $user->save();
+            $profile = $user->getOne('Profile');
+            $email = $object->get('email');
+            if (!empty($email)){
+                $profile->set('email',$email);
+                $profile->save();
+            }
+
+        }
 
 
         /*

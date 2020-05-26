@@ -41,9 +41,10 @@
     <select class="form-control" name="boot_id">
     [[!migxLoopCollection?
     &classname=`fbuchBoot`
+    &joins=`[{"alias":"Bootsgattung"}]`
     &sortConfig=`[{"sortby":"name"}]`
     &tpl=`@CODE:<option value="[[+id]]" [[!+fi.selected_boot_[[+id]]]]>[[+name]]</option>`
-    &where=`{"gattung":"ergometer"}`
+    &where=`{"Bootsgattung.name":"Ergometer"}`
     ]]    
     </select>
     </div>

@@ -341,6 +341,22 @@
           "moduleguid":"",
           "static":false,
           "static_file":"",
+          "name":"fbuchFormatDate",
+          "file":"fbuchformatdate.snippet.php"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "moduleguid":"",
+          "static":false,
+          "static_file":"",
           "name":"mv_member_aftersave",
           "file":"mv_member_aftersave.snippet.php",
           "category":"mv"

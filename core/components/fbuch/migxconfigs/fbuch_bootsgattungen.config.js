@@ -39,20 +39,20 @@
           "pos":3
         },
         {
-          "MIGX_id":473,
-          "field":"link_key",
-          "caption":"Link Schl\u00fcssel",
+          "MIGX_id":483,
+          "field":"show_in_offen",
+          "caption":"In Offene Fahrten anzeigen",
           "description":"",
           "description_is_code":"0",
           "inputTV":"",
-          "inputTVtype":"",
+          "inputTVtype":"checkbox",
           "validation":"",
           "configs":"",
           "restrictive_condition":"",
           "display":"",
           "sourceFrom":"config",
           "sources":"",
-          "inputOptionValues":"",
+          "inputOptionValues":"Ja==1",
           "default":"",
           "useDefaultIfEmpty":"0",
           "pos":4
@@ -142,21 +142,6 @@
       "editor":""
     },
     {
-      "MIGX_id":3,
-      "header":"Link Schl\u00fcssel",
-      "dataIndex":"link_key",
-      "width":10,
-      "sortable":"false",
-      "show_in_grid":1,
-      "customrenderer":"",
-      "renderer":"",
-      "clickaction":"",
-      "selectorconfig":"",
-      "renderchunktpl":"",
-      "renderoptions":"",
-      "editor":""
-    },
-    {
       "MIGX_id":5,
       "dataIndex":"shortname",
       "header":"shortname"
@@ -165,12 +150,17 @@
       "MIGX_id":6,
       "dataIndex":"longname",
       "header":"longname"
+    },
+    {
+      "MIGX_id":8,
+      "dataIndex":"show_in_offen",
+      "header":"show_in_offen"
     }
   ],
   "createdby":1,
   "createdon":"2017-04-08 10:21:35",
   "editedby":1,
-  "editedon":"2020-05-24 19:23:29",
+  "editedon":"2020-05-25 17:49:52",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,
