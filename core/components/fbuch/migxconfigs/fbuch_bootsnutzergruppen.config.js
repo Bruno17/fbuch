@@ -4,7 +4,7 @@
   "formtabs":[
     {
       "MIGX_id":81,
-      "caption":"",
+      "caption":"Allgemein",
       "print_before_tabs":"0",
       "fields":[
         {
@@ -72,6 +72,33 @@
         }
       ],
       "pos":1
+    },
+    {
+      "MIGX_id":95,
+      "caption":"Personen zuweisen",
+      "print_before_tabs":"0",
+      "fields":[
+        {
+          "MIGX_id":484,
+          "field":"members",
+          "caption":"Personen zuweisen",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"migxdb",
+          "validation":"",
+          "configs":"fbuch_nutzergruppenmembers",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":1
+        }
+      ],
+      "pos":2
     }
   ],
   "contextmenus":"",
@@ -178,7 +205,7 @@
   "createdby":1,
   "createdon":"2017-04-08 11:40:02",
   "editedby":1,
-  "editedon":"2020-05-24 19:24:39",
+  "editedon":"2020-05-26 17:24:29",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

@@ -357,6 +357,38 @@
           "moduleguid":"",
           "static":false,
           "static_file":"",
+          "name":"fbuch_prepare_ngm_where",
+          "file":"fbuch_prepare_ngm_where.snippet.php"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "moduleguid":"",
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_rendercolumn_ngm_checkbox",
+          "file":"fbuch_rendercolumn_ngm_checkbox.snippet.php"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "moduleguid":"",
+          "static":false,
+          "static_file":"",
           "name":"mv_member_aftersave",
           "file":"mv_member_aftersave.snippet.php",
           "category":"mv"
@@ -2728,6 +2760,22 @@
           "static_file":"",
           "name":"input_options_members",
           "file":"input_options_members.chunk.html",
+          "category":"mv"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
+          "name":"input_options_nutzergruppen",
+          "file":"input_options_nutzergruppen.chunk.html",
           "category":"mv"
         },
         {

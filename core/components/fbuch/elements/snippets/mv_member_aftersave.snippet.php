@@ -14,6 +14,14 @@ switch ($configs) {
             'link_alias' => 'RoleLinks',
             'postfield' => 'roles');
         $modx->migx->handleRelatedLinks($object, $postvalues, $config);
+        
+        $config = array(
+            'id_field' => 'member_id',
+            'link_field' => 'group_id',
+            'link_classname' => 'fbuchBootsNutzergruppenMembers',
+            'link_alias' => 'Nutzergruppen',
+            'postfield' => 'nutzergruppen');
+        $modx->migx->handleRelatedLinks($object, $postvalues, $config);        
 
         if ($object->get('member_status') == 'Mitglied'){
             $object->set('inactive',0);

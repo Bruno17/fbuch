@@ -760,6 +760,25 @@
           "MIGXcolumnwidth":0
         },
         {
+          "MIGX_id":485,
+          "field":"nutzergruppen",
+          "caption":"Nutzergruppen",
+          "description":"Zuordnung zu Nutzergruppen",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"listbox-multiple",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"@CHUNK input_options_nutzergruppen",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":2
+        },
+        {
           "MIGX_id":452,
           "field":"notizen",
           "caption":"Notizen",
@@ -776,7 +795,7 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":2,
+          "pos":3,
           "MIGXtype":"field",
           "MIGXtyperender":"<h3>...field<\/h3>",
           "MIGXlayoutid":0,
@@ -787,7 +806,7 @@
           "MIGX_id":478,
           "field":"modx_user_id",
           "caption":"modx_user_id",
-          "pos":3
+          "pos":4
         }
       ],
       "pos":6
@@ -1300,7 +1319,7 @@
   "createdby":1,
   "createdon":"2015-02-25 22:37:51",
   "editedby":1,
-  "editedon":"2020-05-25 13:48:14",
+  "editedon":"2020-05-26 18:31:06",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

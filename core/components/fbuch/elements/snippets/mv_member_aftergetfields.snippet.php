@@ -13,6 +13,14 @@ switch ($configs) {
             }
         }
         $record['roles'] = implode('||',$role_ids);
+        
+        $group_ids = array();
+        if ($groups = $object->getMany('Nutzergruppen')) {
+            foreach ($groups as $g_object) {
+                $group_ids[] = $g_object->get('group_id');
+            }
+        }
+        $record['nutzergruppen'] = implode('||',$group_ids);        
         $object->set('record_fields',$record);
         break;
 }
