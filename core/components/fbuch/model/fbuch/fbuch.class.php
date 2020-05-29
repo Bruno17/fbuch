@@ -795,11 +795,20 @@ class Fbuch {
                     $this->cancelAcceptInvite($scriptProperties);
                     return '';
                 }
+                
+            case 'fbuchBootRiggerung': 
+                //$values = $hook->getValues();
+                if ($boot = $modx->getObject('fbuchBoot',$hook->getValue('boot_id'))){
+                    $boot->set('gattung_id',$hook->getValue('gattung_id'));
+                    $boot->save();
+                }
+                                                        
 
             default:
                 $object_id = $hook->getValue('object_id');
 
                 $values = $hook->getValues();
+
                 $duplicate = !empty($values['duplicate']) ? true : false;
                 $duplicate_names = !empty($values['duplicate_names']) ? true : false;
                 $duplicate_invited = !empty($values['duplicate_invited']) ? true : false;
@@ -1000,7 +1009,7 @@ class Fbuch {
             }
 
             $hook->setValues($values);
-        }
+        } 
 
         if (empty($object_id)) {
             $values['object_id'] = 0;
@@ -1014,6 +1023,16 @@ class Fbuch {
             if (isset($_REQUEST['type'])) {
                 $values['type'] = $_REQUEST['type'];
             }
+
+            switch ($classname) {
+                case 'fbuchBootRiggerung':
+                    $boot_id = $modx->getOption('boot_id', $_REQUEST, '');
+                    if ($boot_o = $modx->getObject('fbuchBoot', $boot_id)) {
+                        $values['gattung_id'] = $boot_o->get('gattung_id');
+                    }
+                    break;                
+            }
+
 
             $hook->setValues($values);
         }
@@ -1079,22 +1098,22 @@ class Fbuch {
         if (isset($values['member_ids'])) {
             $member_ids = explode(',', $values['member_ids']);
             //first remove all Guests
-            if ($members = $object->getMany('Names')){
-                foreach ($members as $member){
-                    if ($this->isguest($member->get('member_id'))){
+            if ($members = $object->getMany('Names')) {
+                foreach ($members as $member) {
+                    if ($this->isguest($member->get('member_id'))) {
                         $member->remove();
                     }
                 }
             }
-            
+
             foreach ($member_ids as $key => $member_id) {
-                if (!$this->isguest($member_id) && $fahrtnam = $modx->getObject('fbuchFahrtNames', array('fahrt_id' =>$object->get('id'), 'member_id' => $member_id))) {
+                if (!$this->isguest($member_id) && $fahrtnam = $modx->getObject('fbuchFahrtNames', array('fahrt_id' => $object->get('id'), 'member_id' => $member_id))) {
                     //name exists allready in fahrt, do nothing
                 } else {
                     if ($fahrtnam = $modx->newObject('fbuchFahrtNames')) {
-                    $fahrtnam->set('member_id', $member_id);
-                    $fahrtnam->set('fahrt_id', $object->get('id'));
-                    $fahrtnam->save();
+                        $fahrtnam->set('member_id', $member_id);
+                        $fahrtnam->set('fahrt_id', $object->get('id'));
+                        $fahrtnam->save();
                     }
                 }
             }

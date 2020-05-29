@@ -54,6 +54,26 @@
 </div>
 
 <div class="col-sm-4">
+    
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Riggerungen</h2>
+  </div>
+  <div class="panel-body">
+    <a class="btn btn-default" href="[[~151? &boot_id=`[[+id]]`]]">Umriggerung eintragen</a>
+  </div>   
+</div>
+
+[[!migxLoopCollection?
+&packageName=`fbuch`
+&classname=`fbuchBootRiggerung`
+&joins=`[{"alias":"Bootsgattung"}]`
+&where=`{"boot_id":"[[+id]]"}`
+&sortConfig=`[{"sortby":"createdon","sortdir":"DESC"},{"sortby":"id","sortdir":"DESC"}]`
+&tpl=`fbuchBootRiggerungRow`
+&limit=`5`
+]]    
+    
 <div class="panel panel-default">
   <div class="panel-heading">
     <h2 class="panel-title">Einstellungen</h2>
@@ -70,6 +90,8 @@
 &sortConfig=`[{"sortby":"createdon","sortdir":"DESC"}]`
 &tpl=`fbuchBootSettingRow`
 ]]
+
+
 
 </div>
 

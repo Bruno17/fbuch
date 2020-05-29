@@ -1141,6 +1141,22 @@
           ],
           "static":false,
           "static_file":"",
+          "name":"fbuch_riggerung_eintragen",
+          "file":"fbuch_riggerung_eintragen.chunk.html",
+          "category":"fbuch_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
           "name":"fbuchFahrten",
           "file":"fbuchfahrten.chunk.html"
         },
@@ -1846,6 +1862,21 @@
           ],
           "static":false,
           "static_file":"",
+          "name":"fbuchAppRiggerung_eintragen",
+          "file":"fbuchappriggerung_eintragen.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
           "name":"fbuchBoote",
           "file":"fbuchboote.chunk.html",
           "category":"fbuch_boote"
@@ -1992,6 +2023,38 @@
           "static_file":"",
           "name":"fbuchBootSeatSettingRow",
           "file":"fbuchbootseatsettingrow.chunk.html",
+          "category":"fbuch_boote"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
+          "name":"fbuchBootRiggerungRow",
+          "file":"fbuchbootriggerungrow.chunk.html",
+          "category":"fbuch_boote"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
+          "name":"FbuchRiggerungEintragenForm",
+          "file":"fbuchriggerungeintragenform.chunk.html",
           "category":"fbuch_boote"
         },
         {
@@ -3245,6 +3308,7 @@
       "fbuchBoot",
       "fbuchBootAllowedNames",
       "fbuchBootComment",
+      "fbuchBootRiggerung",
       "fbuchBootSetting",
       "fbuchBootsGattung",
       "fbuchBootsNutzergruppe",

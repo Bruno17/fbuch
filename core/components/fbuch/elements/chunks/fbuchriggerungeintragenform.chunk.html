@@ -1,0 +1,51 @@
+<h2>[[+name]]</h2>
+
+<form method="post">
+<input type="hidden" name="boot_id" value="[[!#request.boot_id]]">
+<input type="hidden" name="object_id" value="[[!#request.object_id]]">
+<input type="hidden" name="done" value="0">
+
+<div class="row">
+  <div class="form-group col-sm-4">
+    <label for="createdon">Datum</label>
+    <div class="input-group date">
+        <input name="createdon" id="createdon" type="text" class="form-control" value="[[!+fi.createdon:strtotime:date=`%d.%m.%Y`]]"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>    </span>
+    </div><span class="error">[[!+fi.error.createdon]]</span>
+  </div>
+  <div class="form-group col-sm-4">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" name="name" id="name" value="[[!+fi.name]]">
+<span class="error">[[!+fi.error.name]]</span>
+  </div>
+</div> 
+
+[[+fi.gattung_id]]
+
+<div class="row">
+    <div class="form-group col-sm-4">
+    <label for="gattung_id">
+        Riggerung auswählen:
+    </label>
+    <select class="form-control" name="gattung_id" id="gattung_id">
+    [[!migxLoopCollection?
+    &classname=`fbuchBootsGattung`
+    &tpl=`@CODE:<option value="{{+id}}" {{!+fi.gattung_id:FormItIsSelected=`{{+id}}`}} >{{+shortname}}</option>`
+    &where=`{"id:IN":[ [[+gattung_ids:replace=`||==,`]] ]}`
+    ]]
+    </select>
+    Falls eine möglich Riggerung fehlt, bitte über das Kontaktformular melden und unter Bemerkung eintragen!
+    </div>
+</div>
+    
+    
+
+<div class="row">
+  <div class="form-group col-sm-8">
+    <label for="comment">Grund der Umriggerung/Bemerkung</label>
+<textarea id="comment" name="comment" class="form-control" rows="6">[[!+fi.comment]]</textarea>
+<span class="error">[[!+fi.error.comment]]</span>
+</div>
+</div>
+  <button type="submit" class="btn btn-default">Speichern</button>
+  <a class="btn btn-default" href="[[!~88? &boot_id=`[[!#request.boot_id]]`]]">Abbrechen</a>
+</form>
