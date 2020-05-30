@@ -58,8 +58,9 @@
     <option value=""></option>
     [[!migxLoopCollection?
     &classname=`fbuchBoot`
+    &joins=`[{"alias":"Bootsgattung"},{"alias":"Nutzergruppe"}]`
     &where=`{"deleted":"0"}`
-    &sortConfig=`[{"sortby":"name"}]`
+    &sortConfig=`[{"sortby":"Bootsgattung.shortname"},{"sortby":"name"}]`
     &tpl=`fbuchFahrtenFormBootOption`
     ]]    
     </select>

@@ -15,10 +15,10 @@
             &packageName=`fbuch`
             &classname=`fbuchFahrt`
             &tpl=`@CODE:[[+date]]`
-            &joins=`[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]`
+            &joins_xxx=`[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]`
             &limit=`1`
             &totalVar=`fahrten_total`
-            &where=`[{"deleted":"0","Gattung.name:!=":"Ergometer","km:!=":"0"},[[+nextdate_where]] ]`
+            &where=`[{"deleted":"0"},[[+nextdate_where]],[{"km:!=":"0"},{"OR:finished:=":"1"}] ]`
             &sortConfig=`[{"sortby":"date","sortdir":"[[+nextdate_dir]]"}]`
             &toPlaceholder=`nextFahrt`
         ]]
@@ -34,12 +34,13 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`fbuchFahrt`
-            &joins=`[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]`
+            &joins_xxx=`[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]`
             &tpl=`@CODE:[[+date]]`
             &limit=`1`
-            &where=`{"deleted":"0","Gattung.name:!=":"Ergometer","km:!=":"0"}`
+            &where=`[{"deleted":"0"},[{"km:!=":"0"},{"OR:finished:=":"1"}] ]`
             &sortConfig=`[{"sortby":"date","sortdir":"DESC"}]`
             &toPlaceholder=`lastFahrt`
+            &debug=`0`
         ]]
         [[!migxLoopCollection?
             &packageName=`fbuch`
@@ -53,10 +54,10 @@
         [[!migxLoopCollection?
             &packageName=`fbuch`
             &classname=`fbuchFahrt`
-            &joins=`[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]`
+            &joins_xx=`[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]`
             &tpl=`@CODE:[[+date]]`
             &limit=`1`
-            &where=`{"deleted":"0","Gattung.name:!=":"Ergometer","km:!=":"0"}`
+            &where=`[{"deleted":"0"},[{"km:!=":"0"},{"OR:finished:=":"1"}] ]`
             &sortConfig=`[{"sortby":"date","sortdir":"ASC"}]`
             &toPlaceholder=`firstFahrt`
         ]]

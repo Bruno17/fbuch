@@ -34,6 +34,7 @@ if ($object->xpdo) {
             $manager->createObjectContainer('fbuchBoot');
             $manager->createObjectContainer('fbuchBootAllowedNames');
             $manager->createObjectContainer('fbuchBootComment');
+            $manager->createObjectContainer('fbuchBootRiggerung');
             $manager->createObjectContainer('fbuchBootSetting');
             $manager->createObjectContainer('fbuchBootsGattung');
             $manager->createObjectContainer('fbuchBootsNutzergruppe');
