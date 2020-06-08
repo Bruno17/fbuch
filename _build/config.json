@@ -389,6 +389,22 @@
           "moduleguid":"",
           "static":false,
           "static_file":"",
+          "name":"fbuchSendInviteMail",
+          "file":"fbuchsendinvitemail.snippet.php"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "moduleguid":"",
+          "static":false,
+          "static_file":"",
           "name":"mv_member_aftersave",
           "file":"mv_member_aftersave.snippet.php",
           "category":"mv"
@@ -3152,7 +3168,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"input_options_gattung",
@@ -3166,7 +3184,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"input_options_bootsnutzergruppen",
@@ -3299,7 +3319,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"1.3.2-beta",
+  "version":"1.3.4-beta",
   "database":{
     "tables":[
       "fbuchFahrt",

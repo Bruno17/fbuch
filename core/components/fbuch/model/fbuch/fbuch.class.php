@@ -331,14 +331,32 @@ class Fbuch {
                     $invite_o->set('canceled', 0);
                     $invite_o->save();
                     $this->updateTeamrowReservations($fields, 'add');
-                    $this->sendInviteMail($invite_o, '', '', false, 'Deine Zusage');
+
+                    $iproperties = array();
+                    $iproperties['invite_id'] = $invite_o->get('id');
+                    $iproperties['comment'] = '';
+                    $iproperties['add_datecomment'] = false;
+                    $iproperties['subject_prefix'] = 'Deine Zusage';
+
+                    $this->scheduleInviteMail($iproperties);
+
+                    //$this->sendInviteMail($invite_o->get('id'), '', '', false, 'Deine Zusage');
                     $comment = empty($comment) ? 'Zusage' : $comment;
                     break;
                 case 'cancel':
                     $invite_o->set('canceled', 1);
                     $invite_o->save();
                     $this->updateTeamrowReservations($fields, 'remove');
-                    $this->sendInviteMail($invite_o, '', '', false, 'Deine Absage');
+
+                    $iproperties = array();
+                    $iproperties['invite_id'] = $invite_o->get('id');
+                    $iproperties['comment'] = '';
+                    $iproperties['add_datecomment'] = false;
+                    $iproperties['subject_prefix'] = 'Deine Absage';
+
+                    $this->scheduleInviteMail($iproperties);
+
+                    //$this->sendInviteMail($invite_o->get('id'), '', '', false, 'Deine Absage');
                     $comment = empty($comment) ? 'Absage' : $comment;
                     break;
                 case 'remove_comment':
@@ -371,10 +389,14 @@ class Fbuch {
                 if (!empty($send_riot)) {
                     $properties = array(
                         'action' => 'send',
-                        'date_object' => &$date_o,
-                        'name_object' => &$name_o,
+                        'date_id' => $date_o->get('id'),
+                        'name_id' => $name_o->get('id'),
                         'comment' => $comment);
-                    $this->modx->runSnippet('moc_hooks', $properties);
+                    
+                    $reference = 'web/schedule/sendcomment';
+                    $this->createSchedulerTask('matrixorgclient', array('snippet' => $reference));
+                    $this->createSchedulerTaskRun($reference, 'matrixorgclient', $properties); 
+                    //$this->modx->runSnippet('moc_hooks', $properties);                   
                 }
 
                 if ($action == 'accept' || $action == 'cancel') {
@@ -382,9 +404,15 @@ class Fbuch {
 
                     $properties = array(
                         'action' => 'invite',
-                        'date_object' => &$date_o,
-                        'name_object' => &$name_o);
-                    $this->modx->runSnippet('moc_hooks', $properties);
+                        'invite_action' => $action,
+                        'date_id' => $date_o->get('id'),
+                        'name_id' => $name_o->get('id'));
+                    //$this->modx->runSnippet('moc_hooks', $scriptProperties);
+                    $reference = 'web/schedule/invite';
+                    $this->createSchedulerTask('matrixorgclient', array('snippet' => $reference));
+                    $this->createSchedulerTaskRun($reference, 'matrixorgclient', $properties);
+
+                    //$this->modx->runSnippet('moc_hooks', $properties);
                 }
                 if (!empty($redirect)) {
                     $modx->sendRedirect($modx->makeUrl($modx->resource->get('id'), '', array(
@@ -446,7 +474,17 @@ class Fbuch {
                         $invite_o->save();
                     }
                     if ($send_self || $member_id != $name_o->get('id')) {
-                        $this->sendInviteMail($invite_o, $comment, $comment_name, false, 'Neuer Kommentar');
+
+                        $iproperties = array();
+                        $iproperties['invite_id'] = $invite_o->get('id');
+                        $iproperties['comment'] = $comment;
+                        $iproperties['comment_name'] = $comment_name;
+                        $iproperties['add_datecomment'] = false;
+                        $iproperties['subject_prefix'] = 'Neuer Kommentar';
+
+                        $this->scheduleInviteMail($iproperties);
+
+                        //$this->sendInviteMail($invite_o->get('id'), $comment, $comment_name, false, 'Neuer Kommentar');
                     }
 
                 }
@@ -473,8 +511,17 @@ class Fbuch {
     }
 
     public function afterCreateDate(&$date_object) {
-        $scriptProperties = array('action' => 'createDateRoom', 'date_object' => &$date_object);
-        $this->modx->runSnippet('moc_hooks', $scriptProperties);
+        $scriptProperties = array('action' => 'createDateRoom', 'date_id' => $date_object->get('id'));
+        $reference = 'web/schedule/createdateroom';
+        $this->createSchedulerTask('matrixorgclient', array('snippet' => 'web/schedule/createdateroom'));
+        $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties);
+
+        $scriptProperties = array('action' => 'addRoomToGroup', 'date_id' => $date_object->get('id'));
+        $reference = 'web/schedule/addroomtogroup';
+        $this->createSchedulerTask('matrixorgclient', array('snippet' => 'web/schedule/addroomtogroup'));
+        $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties);
+
+        //$this->modx->runSnippet('moc_hooks', $scriptProperties);
         return true;
     }
 
@@ -595,6 +642,63 @@ class Fbuch {
         }
     }
 
+    public function createSchedulerTask($namespace, $properties) {
+        $modx = &$this->modx;
+
+        $task_type = 'sProcessorTask';
+
+        $snippet = $modx->getOption('snippet', $properties, '');
+        $path = $modx->getOption('scheduler.core_path', null, $modx->getOption('core_path') . 'components/scheduler/');
+        $scheduler = $modx->getService('scheduler', 'Scheduler', $path . 'model/scheduler/');
+
+        if ($task = $modx->getObject($task_type, array('reference' => $snippet))) {
+
+        } else {
+            $task = $modx->newObject($task_type);
+            $task->fromArray(array(
+                'class_key' => $task_type,
+                'content' => $snippet,
+                'namespace' => $namespace,
+                'reference' => $snippet,
+                'description' => ''));
+            if (!$task->save()) {
+                return 'Error saving Task';
+            }
+        }
+
+
+    }
+
+    public function createSchedulerTaskRun($reference, $namespace, $properties = array()) {
+        $modx = &$this->modx;
+
+        // Load the Scheduler service class
+        $path = $modx->getOption('scheduler.core_path', null, $modx->getOption('core_path') . 'components/scheduler/');
+        $scheduler = $modx->getService('scheduler', 'Scheduler', $path . 'model/scheduler/');
+        if (!($scheduler instanceof Scheduler)) {
+            return 'Oops, could not get Scheduler service.';
+        }
+
+        /**
+         * Get the task with reference "dosomething" in the "mycmp" namespace.
+         * This task should have been added earlier via a build or the component. 
+         */
+        $task = $scheduler->getTask($namespace, $reference);
+        if ($task instanceof sTask) {
+            // Schedule a run in 10 minutes from now
+            // We're passing along an array of data; in this case a client ID.
+            $task->schedule('+1 minutes', $properties);
+        }
+
+
+    }
+
+    public function scheduleInviteMail($properties) {
+        $reference = 'web/schedule/sendinvitemail';
+        $this->createSchedulerTask('fbuch', array('snippet' => $reference));
+        $this->createSchedulerTaskRun($reference, 'fbuch', $properties);
+    }
+
     public function update(&$hook, $scriptProperties) {
         $modx = &$this->modx;
 
@@ -669,17 +773,32 @@ class Fbuch {
                     if ($object = $modx->getObject($classname, $object_id)) {
                         $comment_name = '[[+modx.user.id:userinfo=`fullname`]]';
                         if ($action == 'mail_invite') {
-                            $this->sendInviteMail($object, $comment, $comment_name, true);
+
+                            $iproperties = array();
+                            $iproperties['invite_id'] = $object->get('id');
+                            $iproperties['comment'] = $comment;
+                            $iproperties['comment_name'] = $comment_name;
+                            $iproperties['add_datecomment'] = true;
+                            $iproperties['subject_prefix'] = '';
+
+                            $this->scheduleInviteMail($iproperties);
+
+                            //$this->sendInviteMail($object->get('id'), $comment, $comment_name, true);
                         }
                         if ($action == 'mail_invite' || $action == 'riotinvite_invite') {
                             $name_o = $object->getOne('Member');
                             $date_o = $object->getOne('Date');
+
                             $scriptProperties = array(
                                 'action' => 'invite',
                                 'invite_action' => $action,
-                                'date_object' => &$date_o,
-                                'name_object' => &$name_o);
-                            $this->modx->runSnippet('moc_hooks', $scriptProperties);
+                                'date_id' => $date_o->get('id'),
+                                'name_id' => $name_o->get('id'));
+                            //$this->modx->runSnippet('moc_hooks', $scriptProperties);
+                            $reference = 'web/schedule/invite';
+                            $this->createSchedulerTask('matrixorgclient', array('snippet' => $reference));
+                            $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties);
+
                         }
                         $modx->setPlaceholder('success_object_id', $object->get('date_id'));
                     }
@@ -697,7 +816,14 @@ class Fbuch {
                         foreach ($collection as $object) {
                             $comment_name = '[[+modx.user.id:userinfo=`fullname`]]';
                             if ($action == 'mail_invites') {
-                                $this->sendInviteMail($object, $comment, $comment_name, $add_datecomment, 'RGM Einladung');
+                                $properties = array();
+                                $properties['invite_id'] = $object->get('id');
+                                $properties['comment'] = $comment;
+                                $properties['add_datecomment'] = $add_datecomment;
+                                $properties['subject_prefix'] = '';
+
+                                $this->scheduleInviteMail($properties);
+                                //$this->sendInviteMail($object, $comment, $comment_name, $add_datecomment, 'RGM Einladung');
                             }
                             if ($action == 'mail_invites' || $action == 'riotinvite_invites') {
                                 $name_o = $object->getOne('Member');
@@ -705,9 +831,12 @@ class Fbuch {
                                 $scriptProperties = array(
                                     'action' => 'invite',
                                     'invite_action' => $action,
-                                    'date_object' => &$date_o,
-                                    'name_object' => &$name_o);
-                                $this->modx->runSnippet('moc_hooks', $scriptProperties);
+                                    'date_id' => $date_o->get('id'),
+                                    'name_id' => $name_o->get('id'));
+                                //$this->modx->runSnippet('moc_hooks', $scriptProperties);
+                                $reference = 'web/schedule/invite';
+                                $this->createSchedulerTask('matrixorgclient', array('snippet' => $reference));
+                                $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties);
                             }
                             $add_datecomment = false;
                         }
@@ -795,14 +924,14 @@ class Fbuch {
                     $this->cancelAcceptInvite($scriptProperties);
                     return '';
                 }
-                
-            case 'fbuchBootRiggerung': 
+
+            case 'fbuchBootRiggerung':
                 //$values = $hook->getValues();
-                if ($boot = $modx->getObject('fbuchBoot',$hook->getValue('boot_id'))){
-                    $boot->set('gattung_id',$hook->getValue('gattung_id'));
+                if ($boot = $modx->getObject('fbuchBoot', $hook->getValue('boot_id'))) {
+                    $boot->set('gattung_id', $hook->getValue('gattung_id'));
                     $boot->save();
                 }
-                                                        
+
 
             default:
                 $object_id = $hook->getValue('object_id');
@@ -1009,7 +1138,7 @@ class Fbuch {
             }
 
             $hook->setValues($values);
-        } 
+        }
 
         if (empty($object_id)) {
             $values['object_id'] = 0;
@@ -1030,7 +1159,7 @@ class Fbuch {
                     if ($boot_o = $modx->getObject('fbuchBoot', $boot_id)) {
                         $values['gattung_id'] = $boot_o->get('gattung_id');
                     }
-                    break;                
+                    break;
             }
 
 
@@ -1445,8 +1574,14 @@ class Fbuch {
         }
     }
 
-    public function sendInviteMail(&$object, $comment = '', $comment_name = '', $add_datecomment = false, $subj_prefix = '') {
+    public function sendInviteMail($invite_id, $comment = '', $comment_name = '', $add_datecomment = false, $subj_prefix = '') {
         $modx = &$this->modx;
+
+        if ($object = $modx->getObject('fbuchDateInvited', array('id' => $invite_id))) {
+
+        } else {
+            return '';
+        }
 
         $subj_prefix = empty($subj_prefix) ? $modx->getOption('invite_subject_prefix') : $subj_prefix;
 
@@ -1485,9 +1620,12 @@ class Fbuch {
             $properties['code'] = md5($properties['date_id'] . $properties['email'] . $properties['iid']);
             //print_r($properties);die();
             //$values = $hook->getValues();
-            $this->sendMail($properties);
-            $object->set('invited', 1);
-            $object->save();
+            $success = $this->sendMail($properties);
+            if ($success) {
+                $object->set('invited', 1);
+                $object->save();
+            }
+            return $success;
 
         }
 
@@ -1541,7 +1679,7 @@ class Fbuch {
 
         $modx->mail->reset();
 
-
+        return $success;
     }
 
 }
