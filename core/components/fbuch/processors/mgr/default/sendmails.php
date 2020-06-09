@@ -33,14 +33,19 @@ $object_id = $modx->getOption('object_id', $scriptProperties, 0);
 $filter_id = $modx->getOption('filtermailmember', $scriptProperties, 0);
 $classname = 'mvMail';
 
+$fbuchCorePath = realpath($modx->getOption('fbuch.core_path', null, $modx->getOption('core_path') . 'components/fbuch')) . '/';
+$fbuch = $modx->getService('fbuch', 'Fbuch', $fbuchCorePath . 'model/fbuch/');
+
 if (!empty($object_id) && $object = $xpdo->getObject($classname, $object_id)) {
 
-    $classname = 'mvMember';
-    $where = $modx->fromJson($modx->runSnippet('mv_prepareMemberWhere'));
+    $where_json = $modx->runSnippet('mv_prepareMemberWhere');
+    $where = $modx->fromJson($where_json);
     if (is_array($where) && !empty($where)) {
+
+        $classname = 'mvMember';
         $c = $modx->newQuery($classname);
         $c->where($where);
-        $count = $modx->getCount($classname,$c);
+        $count = $modx->getCount($classname, $c);
         if ($collection = $modx->getIterator($classname, $c)) {
             $log = $modx->newObject('mvMailLog');
             $log->set('count', $count);
@@ -53,6 +58,17 @@ if (!empty($object_id) && $object = $xpdo->getObject($classname, $object_id)) {
             }
 
             foreach ($collection as $recipient) {
+
+                $properties = array();
+                $properties['mail_id'] = $object->get('id');
+                $properties['member_id'] = $recipient->get('id');
+                $properties['log_id'] = $log_id;
+
+                $reference = 'web/schedule/sendmail';
+                $fbuch->createSchedulerTask('fbuch', array('snippet' => $reference));
+                $fbuch->createSchedulerTaskRun($reference, 'fbuch', $properties);
+
+                /*
                 $object->sendMail($recipient);
                 $log = $modx->newObject('mvMailLogRecipient');
                 $log->set('member_id', $recipient->get('id'));
@@ -62,6 +78,8 @@ if (!empty($object_id) && $object = $xpdo->getObject($classname, $object_id)) {
                 if ($log->save()) {
 
                 }
+                */
+
             }
         }
     } else {
