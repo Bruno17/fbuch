@@ -36,6 +36,15 @@
     </label>
     <input autocomplete="off" class="form-control" id="add_person" name="instructor_name" value="[[!+fi.instructor_name]]" />
     </div>
+    
+    <div class="form-group col-sm-9">
+    <label for="title">
+        Gruppe/Ziel:
+    </label>
+    <input type="text" class="form-control" name="title" id="title" value="[[!+fi.title]]" /> 
+    
+    </div>    
+    
     </div>
     
     <div class="row">
@@ -98,15 +107,25 @@
     <option [[!+fi.type:FormItIsSelected=`Bootshausbelegung`]] value="Bootshausbelegung">Bootshausbelegung</option>    
     <option [[!+fi.type:FormItIsSelected=`Sonstiges`]] value="Sonstiges">Sonstige Veranstaltung</option>
     </select>
-    </div>    
-
-    <div class="form-group col-sm-6">
-    <label for="title">
-        Gruppe/Ziel:
-    </label>
-    <input type="text" class="form-control" name="title" id="title" value="[[!+fi.title]]" /> 
-    
     </div>
+    
+
+    
+    <div class="form-group col-sm-6">
+    <label for="mailinglist_id">
+        Einladungs Liste:
+    </label>
+    <select class="form-control" name="mailinglist_id" id="mailinglist_id" > 
+    <option value="0">Einladungsliste wählen</option>
+    [[!migxLoopCollection?
+    &packageName=`fbuch`
+    &classname=`fbuchMailinglist`
+    &tpl=`@CODE:<option {{!+fi.mailinglist_id:FormItIsSelected=`{{+id}}`}} value="{{+id}}">{{+name}}</option>`
+    ]]
+    </select>
+    </div>      
+
+
     </div>
     
    <div class="row">

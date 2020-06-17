@@ -1311,7 +1311,7 @@
       "renderer":"this.renderChunk",
       "clickaction":"",
       "selectorconfig":"",
-      "renderchunktpl":"<div class=\"migx-actions-column\"><h3 class=\"main-column [[+User_active:is=`1`:then=``:else=`grid-row-inactive`]] \">[[+User_username]]([[+User_id]])<\/h3>\n<ul class=\"actions\">\n[[+User_id:is=``:then=`\n<li><a href=\"#\" class=\"controlBtn updateUser this.createUser\">Modx Benutzer erstellen<\/a><\/li>\n`:else=`\n<li><a href=\"?a=security\/user\/update&id=[[+User_id]]\" class=\"updateUser \" target=\"_blank\">Modx Benutzer bearbeiten<\/a><\/li>\n`]]\n<\/ul>\n<\/div>",
+      "renderchunktpl":"<div class=\"migx-actions-column\">\n\n\n[[+User_id:is=``:then=``:else=`\n<h3 class=\"main-column [[+User_active:is=`1`:then=``:else=`grid-row-inactive`]] \">[[+User_username]]([[+User_id]])<\/h3>\n`]]\n\n<ul class=\"actions\">\n\n[[+User_id:is=``:then=`\n<li><a href=\"#\" class=\"controlBtn updateUser this.createUser\">Modx Benutzer erstellen<\/a><\/li>\n`:else=`\n<li><a href=\"?a=security\/user\/update&id=[[+User_id:default=`0`]]\" class=\"updateUser \" target=\"_blank\">Modx Benutzer bearbeiten<\/a><\/li>\n`]]\n<\/ul>\n<\/div>",
       "renderoptions":"",
       "editor":""
     }
@@ -1319,7 +1319,7 @@
   "createdby":1,
   "createdon":"2015-02-25 22:37:51",
   "editedby":1,
-  "editedon":"2020-05-26 18:31:06",
+  "editedon":"2020-06-11 14:02:44",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

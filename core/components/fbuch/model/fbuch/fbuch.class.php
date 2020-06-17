@@ -392,11 +392,11 @@ class Fbuch {
                         'date_id' => $date_o->get('id'),
                         'name_id' => $name_o->get('id'),
                         'comment' => $comment);
-                    
+
                     $reference = 'web/schedule/sendcomment';
                     $this->createSchedulerTask('matrixorgclient', array('snippet' => $reference));
-                    $this->createSchedulerTaskRun($reference, 'matrixorgclient', $properties); 
-                    //$this->modx->runSnippet('moc_hooks', $properties);                   
+                    $this->createSchedulerTaskRun($reference, 'matrixorgclient', $properties);
+                    //$this->modx->runSnippet('moc_hooks', $properties);
                 }
 
                 if ($action == 'accept' || $action == 'cancel') {
@@ -771,7 +771,8 @@ class Fbuch {
                     $object_id = $hook->getValue('object_id');
                     $comment = $hook->getValue('comment');
                     if ($object = $modx->getObject($classname, $object_id)) {
-                        $comment_name = '[[+modx.user.id:userinfo=`fullname`]]';
+                        $profile = $modx->user->getOne('Profile');
+                        $comment_name = $profile->get('fullname');
                         if ($action == 'mail_invite') {
 
                             $iproperties = array();
@@ -814,24 +815,26 @@ class Fbuch {
                     $add_datecomment = true;
                     if ($collection = $modx->getCollection($classname, $c)) {
                         foreach ($collection as $object) {
-                            $comment_name = '[[+modx.user.id:userinfo=`fullname`]]';
+                            $profile = $modx->user->getOne('Profile');
+                            $comment_name = $profile->get('fullname');
                             if ($action == 'mail_invites') {
-                                $properties = array();
-                                $properties['invite_id'] = $object->get('id');
-                                $properties['comment'] = $comment;
-                                $properties['add_datecomment'] = $add_datecomment;
-                                $properties['subject_prefix'] = '';
+                                $iproperties = array();
+                                $iproperties['invite_id'] = $object->get('id');
+                                $iproperties['comment'] = $comment;
+                                $iproperties['comment_name'] = $comment_name;
+                                $iproperties['add_datecomment'] = $add_datecomment;
+                                $iproperties['subject_prefix'] = '';
 
-                                $this->scheduleInviteMail($properties);
+                                $this->scheduleInviteMail($iproperties);
                                 //$this->sendInviteMail($object, $comment, $comment_name, $add_datecomment, 'RGM Einladung');
                             }
                             if ($action == 'mail_invites' || $action == 'riotinvite_invites') {
                                 $name_o = $object->getOne('Member');
-                                $date_o = $object->getOne('Date');
+                                //$date_o = $object->getOne('Date');
                                 $scriptProperties = array(
                                     'action' => 'invite',
                                     'invite_action' => $action,
-                                    'date_id' => $date_o->get('id'),
+                                    'date_id' => $object_id,
                                     'name_id' => $name_o->get('id'));
                                 //$this->modx->runSnippet('moc_hooks', $scriptProperties);
                                 $reference = 'web/schedule/invite';
@@ -1239,7 +1242,7 @@ class Fbuch {
                 if (!$this->isguest($member_id) && $fahrtnam = $modx->getObject('fbuchFahrtNames', array('fahrt_id' => $object->get('id'), 'member_id' => $member_id))) {
                     //name exists allready in fahrt, do nothing
                 } else {
-                    if ($fahrtnam = $modx->newObject('fbuchFahrtNames')) {
+                    if (!empty($member_id) && $fahrtnam = $modx->newObject('fbuchFahrtNames')) {
                         $fahrtnam->set('member_id', $member_id);
                         $fahrtnam->set('fahrt_id', $object->get('id'));
                         $fahrtnam->save();
