@@ -54,7 +54,7 @@ if ($object = $modx->getObject($classname, array('id' => $object_id))) {
         $user->set('active', 0);
         $profile = $modx->newObject('modUserProfile');
         $user->addOne($profile);
-        $profile->set('fullname', $vorname . ' ' . $row['Nachname']);
+        $profile->set('fullname', $vorname . ' ' . $lastname);
         $profile->set('email', $object->get('email'));
         $user->save();
 

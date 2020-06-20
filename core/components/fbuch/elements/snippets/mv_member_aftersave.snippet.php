@@ -30,8 +30,12 @@ switch ($configs) {
         }
         $object->save();
         
+        $user_active = $object->get('User_active');
+
         if ($user = $modx->getObject('modUser',array('id'=>$object->get('modx_user_id')))){
-            $user->set('active',$object->get('User_active'));
+            if ($user_active != ''){
+                $user->set('active',$user_active);    
+            }
             $user->save();
             $profile = $user->getOne('Profile');
             $email = $object->get('email');
