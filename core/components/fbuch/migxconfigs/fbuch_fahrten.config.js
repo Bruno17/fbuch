@@ -1,14 +1,14 @@
 {
-  "id":15,
+  "id":42,
   "name":"fbuch_fahrten",
   "formtabs":[
     {
-      "MIGX_id":28,
+      "MIGX_id":59,
       "caption":"Fahrt",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":126,
+          "MIGX_id":232,
           "field":"date",
           "caption":"Datum",
           "description":"",
@@ -27,7 +27,7 @@
           "pos":1
         },
         {
-          "MIGX_id":127,
+          "MIGX_id":233,
           "field":"km",
           "caption":"km",
           "description":"",
@@ -46,7 +46,7 @@
           "pos":2
         },
         {
-          "MIGX_id":128,
+          "MIGX_id":234,
           "field":"direction",
           "caption":"Richtung",
           "description":"",
@@ -241,12 +241,42 @@
       "renderchunktpl":"",
       "renderoptions":"",
       "editor":""
+    },
+    {
+      "MIGX_id":11,
+      "header":"createdon",
+      "dataIndex":"createdon",
+      "width":15,
+      "sortable":true,
+      "show_in_grid":1,
+      "customrenderer":"",
+      "renderer":"",
+      "clickaction":"",
+      "selectorconfig":"",
+      "renderchunktpl":"",
+      "renderoptions":"",
+      "editor":""
+    },
+    {
+      "MIGX_id":12,
+      "header":"createdby",
+      "dataIndex":"createdby",
+      "width":10,
+      "sortable":true,
+      "show_in_grid":1,
+      "customrenderer":"",
+      "renderer":"",
+      "clickaction":"",
+      "selectorconfig":"",
+      "renderchunktpl":"",
+      "renderoptions":"",
+      "editor":""
     }
   ],
   "createdby":1,
   "createdon":"2016-09-10 10:28:54",
   "editedby":1,
-  "editedon":"2017-10-30 08:44:28",
+  "editedon":"2020-06-20 17:22:25",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

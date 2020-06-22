@@ -56,6 +56,25 @@
           "default":"",
           "useDefaultIfEmpty":"0",
           "pos":4
+        },
+        {
+          "MIGX_id":486,
+          "field":"check_availability",
+          "caption":"Verf\u00fcgbarkeit pr\u00fcfen",
+          "description":"Pr\u00fcft auf Verf\u00fcgbarkeit beim Eintrag einer Fahrt ins Fahrtenbuch",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"checkbox",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"Ja==1",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":5
         }
       ],
       "pos":1
@@ -160,7 +179,7 @@
   "createdby":1,
   "createdon":"2017-04-08 10:21:35",
   "editedby":1,
-  "editedon":"2020-05-25 17:49:52",
+  "editedon":"2020-06-22 07:57:53",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

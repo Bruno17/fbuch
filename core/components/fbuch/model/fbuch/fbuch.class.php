@@ -919,6 +919,8 @@ class Fbuch {
                 $object = $this->updateFahrt($object_id, $values, $grid_id);
                 if ($object) {
                     $modx->setPlaceholder('success_object_id', $object->get('id'));
+                } else {
+                    return false;
                 }
                 break;
 
@@ -1204,15 +1206,20 @@ class Fbuch {
                 $this->error('Diese Fahrt ist gesperrt und kann nicht bearbeitet werden');
                 return false;
             }
+            $values['editedby'] = $modx->user->get('id');
+            $values['editedon'] = strftime('%Y-%m-%d %H:%M:%S');
 
         } else {
             $object = $modx->newObject($classname);
+            $values['createdby'] = $modx->user->get('id');
+            $values['createdon'] = strftime('%Y-%m-%d %H:%M:%S');
         }
 
         if (isset($values['km'])) {
             $values['km'] = str_replace(',', '.', $values['km']);
         }
 
+        $start = '';
         if (isset($values['start_time'])) {
             $start_time = str_replace('.', ':', $values['start_time']);
             $time_parts = explode(':', $start_time);
@@ -1222,6 +1229,54 @@ class Fbuch {
             $min = $min < 10 ? '0' . $min : $min;
 
             $values['start_time'] = $hour . ':' . $min;
+
+            if (isset($values['date'])) {
+                $start = $values['date'] . ' ' . $values['start_time'];
+                $start = strtotime($start);
+
+                $this->error(strftime('%d.%m.%Y %H:%M:%S', $start));
+                //return false;
+
+            }
+
+        }
+
+
+        if (isset($values['end_time'])) {
+
+            $start_time = str_replace('.', ':', $values['end_time']);
+            $time_parts = explode(':', $start_time);
+            $hour = (int)$time_parts[0];
+            $hour = $hour < 10 ? '0' . $hour : $hour;
+            $min = isset($time_parts[1]) ? (int)$time_parts[1] : 0;
+            $min = $min < 10 ? '0' . $min : $min;
+
+            $values['end_time'] = $hour . ':' . $min;
+
+            if (isset($values['date_end'])) {
+                if (empty($values['date_end'])) {
+                    $values['date_end'] = $values['date'];
+                }
+
+                $end = $values['date_end'] . ' ' . $values['end_time'];
+                $this->error($end);
+                $end = strtotime($end);
+
+                if ($end < $start) {
+                    $this->error('Bitte gib ein gültiges (voraussichtliches) Trainingsende ein. Es muß nach der Startzeit liegen');
+                    return false;
+                } else {
+                    if ($this->checkBoatAvailability($values['boot_id'], $start, $end, $object_id)) {
+
+                    } else {
+                        $this->error('Dieses Boot ist bereits belegt<br>von ' . $this->errorstart . '<br>bis ' . $this->errorend);
+                        //$this->error($this->error);
+                        return false;
+                    }
+                }
+
+
+            }
         }
 
         $object->fromArray($values);
@@ -1266,6 +1321,87 @@ class Fbuch {
         }
 
         return $object;
+    }
+    
+    public function checkBoatAvailability($boot_id, $start, $end, $current_id){
+        $modx = &$this->modx;
+        
+        if ($boot = $modx->getObject('fbuchBoot',array('id'=>$boot_id))){
+            if ($gattung = $boot->getOne('Gattung')){
+                $check = $gattung->get('check_availability');
+                if (empty($check)){
+                    return true;
+                }
+            } else{
+                return true;
+            }
+        } else {
+            return true;
+        }
+
+       
+        $result = true;
+        $startdate = strftime('%Y-%m-%d 00:00:00',$start);
+        $starttime = strftime('%H:%M',$start);
+        $enddate = strftime('%Y-%m-%d 23:59:59',$end);
+        $endtime = strftime('%H:%M',$end);
+        
+        $unixstart = strtotime(strftime('%Y-%m-%d ' . $starttime . ':00',$start));
+        $unixend = strtotime(strftime('%Y-%m-%d ' . $endtime . ':00',$end));
+        
+        $this->error = $unixstart;
+        //return false;
+        
+        $classname = 'fbuchFahrt';
+        //startet eine Einheit zwischen Beginn und Ende?
+        $c = $modx->newQuery($classname);
+        $c->where(array('deleted'=>0,'boot_id'=>$boot_id,'id:!='=>$current_id));
+        $c->where('UNIX_TIMESTAMP(CONCAT(date(date), " ", start_time)) >= ' . $unixstart);
+        $c->where('UNIX_TIMESTAMP(CONCAT(date(date), " ", start_time)) <= ' . $unixend);
+
+        $c->prepare();
+        $this->error = $c->toSql();
+     
+        if ($object = $modx->getObject($classname,$c)){
+           $this->errorstart = strftime('%d.%m.%Y ' . $object->get('start_time'),strtotime($object->get('date'))); 
+           $this->errorend = strftime('%d.%m.%Y ' . $object->get('end_time'),strtotime($object->get('date_end'))); 
+           return false;
+        } 
+        
+        //endet eine Einheit zwischen Beginn und Ende?
+        $c = $modx->newQuery($classname);
+        $c->where(array('deleted'=>0,'boot_id'=>$boot_id,'id:!='=>$current_id));
+        $c->where('UNIX_TIMESTAMP(CONCAT(date(date_end), " ", end_time)) >= ' . $unixstart);
+        $c->where('UNIX_TIMESTAMP(CONCAT(date(date_end), " ", end_time)) <= ' . $unixend);
+
+        $c->prepare();
+        $this->error = $c->toSql();
+       
+        if ($object = $modx->getObject($classname,$c)){
+            $this->errorstart = strftime('%d.%m.%Y ' . $object->get('start_time'),strtotime($object->get('date'))); 
+            $this->errorend = strftime('%d.%m.%Y ' . $object->get('end_time'),strtotime($object->get('date_end')));
+            return false;
+        }  
+        
+        //startet eine Einheit vor Beginn und endet nach Ende
+        $c = $modx->newQuery($classname);
+        $c->where(array('deleted'=>0,'boot_id'=>$boot_id,'id:!='=>$current_id));
+        $c->where('UNIX_TIMESTAMP(CONCAT(date(date), " ", start_time)) < ' . $unixstart);
+        $c->where('UNIX_TIMESTAMP(CONCAT(date(date_end), " ", end_time)) > ' . $unixend);
+
+        $c->prepare();
+        $this->error = $c->toSql();
+     
+        if ($object = $modx->getObject($classname,$c)){
+            $this->errorstart = strftime('%d.%m.%Y ' . $object->get('start_time'),strtotime($object->get('date'))); 
+            $this->errorend = strftime('%d.%m.%Y ' . $object->get('end_time'),strtotime($object->get('date_end')));
+            return false;
+        }                             
+        
+       
+        
+        return true;
+        
     }
 
     public function isguest($member_id) {

@@ -39,6 +39,7 @@
     <input type="hidden" name="fahrt_submit" value="1" />
     <input type="hidden" name="submit_form" value="1" />
     <input type="hidden" name="type" value="[[!#request.type]]" />
+    <input type="hidden" name="process" value="[[!#request.process]]" />
     <input type="hidden" name="object_id" value="[[!#request.object_id]]" />
     [[!#request.process:is=`delete`:then=`
     <input type="hidden" name="deleted" value="1" />    
@@ -46,6 +47,8 @@
 
     [[!#request.process:is=`close`:then=`
     <input name="date" id="date" type="hidden" value="[[!+fi.date]]" />
+    <input name="start_time" type="hidden" value="[[!+fi.start_time]]" />
+    <input name="boot_id" type="hidden" value="[[!+fi.boot_id]]" />
     `:else=`
     <div class="row">
     

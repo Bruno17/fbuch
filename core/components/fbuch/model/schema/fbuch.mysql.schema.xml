@@ -258,6 +258,7 @@
         <field key="longname" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />               
         <field key="link_key" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
         <field key="show_in_offen" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" /> 
+        <field key="check_availability" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />         
         <aggregate alias="Boote" class="fbuchBoot" local="link_key" foreign="gattung" cardinality="many" owner="local" />
     </object>
     <object class="fbuchBootsNutzergruppe" table="fbuch_bootsnutzergruppen" extends="xPDOSimpleObject">
