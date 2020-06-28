@@ -1248,7 +1248,6 @@ class Fbuch {
         } 
         if (!empty($values['finished'])) {
             $is_closed = true;
-            return false;
         }               
         
         $closetext = '<strong>Wichtig für eine ordnungsgemäße Dokumentation der Einheiten.</strong><br> Bitte zum Abschluß das Trainingsende prüfen und Richtigkeit bestätigen!';
@@ -1293,7 +1292,7 @@ class Fbuch {
                          </label>
                          </div>');
                             //$this->error($this->error);
-                            return false;
+                            return false; 
                         }
 
                     }
