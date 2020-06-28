@@ -6,6 +6,9 @@
 <button type="button" data-type="dragdrop" data-id="[[+id]]" class="btn btn-default lock_fahrt [[+locked:is=`1`:then=`locked`:else=``]]" aria-label="Fahrt sperren">
 <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
 </button> 
+<button style="display:none;" type="button" data-type="dragdrop" data-id="[[+id]]" class="btn btn-default mail_to_team" aria-label="Nachricht an Team">
+<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+</button>
 </div>
 
 [[+locked:is=`1`:then=``:else=`
@@ -26,6 +29,7 @@
 <button type="button" data-type="dragdrop" data-id="[[+id]]" class="btn btn-default close_fahrt" aria-label="Fahrt abschliessen">
 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 </button>
+
 </div>
 
 `]]

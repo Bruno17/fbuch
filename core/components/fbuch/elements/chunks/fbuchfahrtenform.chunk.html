@@ -31,16 +31,19 @@
         [[!#request.object_id:is=`0`:then=`Neue Fahrt`:else=`[[!#request.process:is=`delete`:then=`Diese Fahrt löschen`:else=`Fahrt bearbeiten`]]`]]
         </h4>
       </div>
-[[!+fbucherror]]
+
 
 <form [[!+hideform:is=`1`:then=`style="display:none;"`:else=``]] id="anmelden_form" action="[[~[[*id]]? &grid_id=`[[+grid_id]]`]]" method="post" class="form">
-      <div id="fbuchModalBody" class="modal-body">
+    <div id="fbuchModalBody" class="modal-body">
     <input type="hidden" name="nospam:blank" value="" />
     <input type="hidden" name="fahrt_submit" value="1" />
     <input type="hidden" name="submit_form" value="1" />
     <input type="hidden" name="type" value="[[!#request.type]]" />
     <input type="hidden" name="process" value="[[!#request.process]]" />
     <input type="hidden" name="object_id" value="[[!#request.object_id]]" />
+    
+[[!+fbucherror]]    
+    
     [[!#request.process:is=`delete`:then=`
     <input type="hidden" name="deleted" value="1" />    
     `:else=``]]
@@ -155,6 +158,16 @@
   
 
     </div>
+    
+    <div class="row">
+        <div class="form-group col-sm-12">
+        <div class="checkbox">
+            <label>
+            <input name="endtime_checked" type="checkbox" value="1" [[!+fi.endtime_checked:FormitIsChecked=`1`]]> Ich bestätige vor Abschluß des Trainings die Korrektheit der Trainingsende Zeit
+            </label>
+        </div>
+        </div>
+    </div>    
     
 [[!migxLoopCollection?
 &packageName=`fbuch`

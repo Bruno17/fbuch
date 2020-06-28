@@ -1240,6 +1240,22 @@ class Fbuch {
             }
 
         }
+        $is_closed = false;
+        if (isset($values['km'])) {
+            if ($values['km'] > 0) {
+                $is_closed = true;
+            }
+        } 
+        if (!empty($values['finished'])) {
+            $is_closed = true;
+            return false;
+        }               
+        
+        $closetext = '<strong>Wichtig für eine ordnungsgemäße Dokumentation der Einheiten.</strong><br> Bitte zum Abschluß das Trainingsende prüfen und Richtigkeit bestätigen!';
+        if ($is_closed && empty($values['endtime_checked'])) {
+            $this->error($closetext);
+            return false;
+        }        
 
 
         if (isset($values['end_time'])) {
@@ -1265,19 +1281,28 @@ class Fbuch {
                 if ($end < $start) {
                     $this->error('Bitte gib ein gültiges (voraussichtliches) Trainingsende ein. Es muß nach der Startzeit liegen');
                     return false;
-                } else {
+                } elseif (!$is_closed) {
                     if ($this->checkBoatAvailability($values['boot_id'], $start, $end, $object_id)) {
 
                     } else {
-                        $this->error('Dieses Boot ist bereits belegt<br>von ' . $this->errorstart . '<br>bis ' . $this->errorend);
-                        //$this->error($this->error);
-                        return false;
+                        if (empty($values['force_entry'])) {
+                            $this->error('Dieses Boot ist bereits belegt<br>von ' . $this->errorstart . '<br>bis ' . $this->errorend . '<br> 
+                         <div class="checkbox">
+                         <label>
+                         <input name="force_entry" type="checkbox" value="1" > Eintrag trotzdem erzwingen. (Nur in dringenden, berechtigten Fällen!)
+                         </label>
+                         </div>');
+                            //$this->error($this->error);
+                            return false;
+                        }
+
                     }
                 }
 
 
             }
         }
+
 
         $object->fromArray($values);
         $object->save();
@@ -1322,86 +1347,94 @@ class Fbuch {
 
         return $object;
     }
-    
-    public function checkBoatAvailability($boot_id, $start, $end, $current_id){
+
+    public function checkBoatAvailability($boot_id, $start, $end, $current_id) {
         $modx = &$this->modx;
-        
-        if ($boot = $modx->getObject('fbuchBoot',array('id'=>$boot_id))){
-            if ($gattung = $boot->getOne('Gattung')){
+
+        if ($boot = $modx->getObject('fbuchBoot', array('id' => $boot_id))) {
+            if ($gattung = $boot->getOne('Gattung')) {
                 $check = $gattung->get('check_availability');
-                if (empty($check)){
+                if (empty($check)) {
                     return true;
                 }
-            } else{
+            } else {
                 return true;
             }
         } else {
             return true;
         }
 
-       
+
         $result = true;
-        $startdate = strftime('%Y-%m-%d 00:00:00',$start);
-        $starttime = strftime('%H:%M',$start);
-        $enddate = strftime('%Y-%m-%d 23:59:59',$end);
-        $endtime = strftime('%H:%M',$end);
-        
-        $unixstart = strtotime(strftime('%Y-%m-%d ' . $starttime . ':00',$start));
-        $unixend = strtotime(strftime('%Y-%m-%d ' . $endtime . ':00',$end));
-        
+        $startdate = strftime('%Y-%m-%d 00:00:00', $start);
+        $starttime = strftime('%H:%M', $start);
+        $enddate = strftime('%Y-%m-%d 23:59:59', $end);
+        $endtime = strftime('%H:%M', $end);
+
+        $unixstart = strtotime(strftime('%Y-%m-%d ' . $starttime . ':00', $start));
+        $unixend = strtotime(strftime('%Y-%m-%d ' . $endtime . ':00', $end));
+
         $this->error = $unixstart;
         //return false;
-        
+
         $classname = 'fbuchFahrt';
         //startet eine Einheit zwischen Beginn und Ende?
         $c = $modx->newQuery($classname);
-        $c->where(array('deleted'=>0,'boot_id'=>$boot_id,'id:!='=>$current_id));
+        $c->where(array(
+            'deleted' => 0,
+            'boot_id' => $boot_id,
+            'id:!=' => $current_id));
         $c->where('UNIX_TIMESTAMP(CONCAT(date(date), " ", start_time)) >= ' . $unixstart);
         $c->where('UNIX_TIMESTAMP(CONCAT(date(date), " ", start_time)) <= ' . $unixend);
 
         $c->prepare();
         $this->error = $c->toSql();
-     
-        if ($object = $modx->getObject($classname,$c)){
-           $this->errorstart = strftime('%d.%m.%Y ' . $object->get('start_time'),strtotime($object->get('date'))); 
-           $this->errorend = strftime('%d.%m.%Y ' . $object->get('end_time'),strtotime($object->get('date_end'))); 
-           return false;
-        } 
-        
+
+        if ($object = $modx->getObject($classname, $c)) {
+            $this->errorstart = strftime('%d.%m.%Y ' . $object->get('start_time'), strtotime($object->get('date')));
+            $this->errorend = strftime('%d.%m.%Y ' . $object->get('end_time'), strtotime($object->get('date_end')));
+            return false;
+        }
+
         //endet eine Einheit zwischen Beginn und Ende?
         $c = $modx->newQuery($classname);
-        $c->where(array('deleted'=>0,'boot_id'=>$boot_id,'id:!='=>$current_id));
+        $c->where(array(
+            'deleted' => 0,
+            'boot_id' => $boot_id,
+            'id:!=' => $current_id));
         $c->where('UNIX_TIMESTAMP(CONCAT(date(date_end), " ", end_time)) >= ' . $unixstart);
         $c->where('UNIX_TIMESTAMP(CONCAT(date(date_end), " ", end_time)) <= ' . $unixend);
 
         $c->prepare();
         $this->error = $c->toSql();
-       
-        if ($object = $modx->getObject($classname,$c)){
-            $this->errorstart = strftime('%d.%m.%Y ' . $object->get('start_time'),strtotime($object->get('date'))); 
-            $this->errorend = strftime('%d.%m.%Y ' . $object->get('end_time'),strtotime($object->get('date_end')));
+
+        if ($object = $modx->getObject($classname, $c)) {
+            $this->errorstart = strftime('%d.%m.%Y ' . $object->get('start_time'), strtotime($object->get('date')));
+            $this->errorend = strftime('%d.%m.%Y ' . $object->get('end_time'), strtotime($object->get('date_end')));
             return false;
-        }  
-        
+        }
+
         //startet eine Einheit vor Beginn und endet nach Ende
         $c = $modx->newQuery($classname);
-        $c->where(array('deleted'=>0,'boot_id'=>$boot_id,'id:!='=>$current_id));
+        $c->where(array(
+            'deleted' => 0,
+            'boot_id' => $boot_id,
+            'id:!=' => $current_id));
         $c->where('UNIX_TIMESTAMP(CONCAT(date(date), " ", start_time)) < ' . $unixstart);
         $c->where('UNIX_TIMESTAMP(CONCAT(date(date_end), " ", end_time)) > ' . $unixend);
 
         $c->prepare();
         $this->error = $c->toSql();
-     
-        if ($object = $modx->getObject($classname,$c)){
-            $this->errorstart = strftime('%d.%m.%Y ' . $object->get('start_time'),strtotime($object->get('date'))); 
-            $this->errorend = strftime('%d.%m.%Y ' . $object->get('end_time'),strtotime($object->get('date_end')));
+
+        if ($object = $modx->getObject($classname, $c)) {
+            $this->errorstart = strftime('%d.%m.%Y ' . $object->get('start_time'), strtotime($object->get('date')));
+            $this->errorend = strftime('%d.%m.%Y ' . $object->get('end_time'), strtotime($object->get('date_end')));
             return false;
-        }                             
-        
-       
-        
+        }
+
+
         return true;
-        
+
     }
 
     public function isguest($member_id) {
