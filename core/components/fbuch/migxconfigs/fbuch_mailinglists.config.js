@@ -1,32 +1,32 @@
 {
-  "id":32,
+  "id":63,
   "name":"fbuch_mailinglists",
   "formtabs":[
     {
-      "MIGX_id":44,
+      "MIGX_id":92,
       "caption":"Mailinglist",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":176,
+          "MIGX_id":396,
           "field":"name",
           "caption":"name",
           "pos":1
         },
         {
-          "MIGX_id":178,
+          "MIGX_id":397,
           "field":"target_group",
           "caption":"target_group",
           "pos":2
         },
         {
-          "MIGX_id":179,
+          "MIGX_id":398,
           "field":"type",
-          "caption":"Typ",
+          "caption":"Sportart",
           "description":"",
           "description_is_code":"0",
           "inputTV":"",
-          "inputTVtype":"listbox",
+          "inputTVtype":"",
           "validation":"",
           "configs":"",
           "restrictive_condition":"",
@@ -39,26 +39,7 @@
           "pos":3
         },
         {
-          "MIGX_id":180,
-          "field":"general",
-          "caption":"\u00dcbergeordnete Einstellung",
-          "description":"",
-          "description_is_code":"0",
-          "inputTV":"",
-          "inputTVtype":"checkbox",
-          "validation":"",
-          "configs":"",
-          "restrictive_condition":"",
-          "display":"",
-          "sourceFrom":"config",
-          "sources":"",
-          "inputOptionValues":"\u00fcbergeordnet==1",
-          "default":"",
-          "useDefaultIfEmpty":"0",
-          "pos":4
-        },
-        {
-          "MIGX_id":177,
+          "MIGX_id":400,
           "field":"description",
           "caption":"description",
           "description":"",
@@ -74,18 +55,87 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
+          "pos":4
+        },
+        {
+          "MIGX_id":487,
+          "field":"weekday",
+          "caption":"weekday",
           "pos":5
+        },
+        {
+          "MIGX_id":488,
+          "field":"time",
+          "caption":"time",
+          "pos":6
+        },
+        {
+          "MIGX_id":489,
+          "field":"member_filter_id",
+          "caption":"Mail Filter",
+          "description":"Mail Filter verwenden zum importieren der gefilterten Mitglieder in Einladungsliste",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"listbox",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"@CHUNK input_options_mailfilter",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":7
+        },
+        {
+          "MIGX_id":490,
+          "field":"restrict_member_filter_id",
+          "caption":"Zugangsbeschr\u00e4nkung",
+          "description":"Liste nur f\u00fcr hiermit gefilterte Mitglieder zug\u00e4nglich machen",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"listbox",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"@CHUNK input_options_mailfilter",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":8
+        },
+        {
+          "MIGX_id":491,
+          "field":"hidden",
+          "caption":"Auf Subscribe Seite verbergen",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"checkbox",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"verbergen==1",
+          "default":"0",
+          "useDefaultIfEmpty":"0",
+          "pos":9
         }
       ],
       "pos":1
     },
     {
-      "MIGX_id":45,
+      "MIGX_id":93,
       "caption":"Empf\u00e4nger",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":181,
+          "MIGX_id":401,
           "field":"names",
           "caption":"Empf\u00e4nger",
           "description":"",
@@ -135,7 +185,14 @@
     "task":"",
     "getlistsort":"",
     "getlistsortdir":"",
-    "sortconfig":"",
+    "sortconfig":[
+      {
+        "sortby":"weekday"
+      },
+      {
+        "sortby":"time"
+      }
+    ],
     "gridpagesize":"",
     "use_custom_prefix":"0",
     "prefix":"",
@@ -201,12 +258,57 @@
       "renderchunktpl":"",
       "renderoptions":"",
       "editor":""
+    },
+    {
+      "MIGX_id":7,
+      "header":"weekday",
+      "dataIndex":"weekday",
+      "width":30,
+      "sortable":true,
+      "show_in_grid":1,
+      "customrenderer":"",
+      "renderer":"",
+      "clickaction":"",
+      "selectorconfig":"",
+      "renderchunktpl":"",
+      "renderoptions":"",
+      "editor":""
+    },
+    {
+      "MIGX_id":8,
+      "header":"time",
+      "dataIndex":"time",
+      "width":30,
+      "sortable":true,
+      "show_in_grid":1,
+      "customrenderer":"",
+      "renderer":"",
+      "clickaction":"",
+      "selectorconfig":"",
+      "renderchunktpl":"",
+      "renderoptions":"",
+      "editor":""
+    },
+    {
+      "MIGX_id":10,
+      "header":"Sportart",
+      "dataIndex":"type",
+      "width":30,
+      "sortable":true,
+      "show_in_grid":1,
+      "customrenderer":"",
+      "renderer":"",
+      "clickaction":"",
+      "selectorconfig":"",
+      "renderchunktpl":"",
+      "renderoptions":"",
+      "editor":""
     }
   ],
   "createdby":1,
   "createdon":"2018-05-28 17:06:30",
   "editedby":1,
-  "editedon":"2018-06-04 06:29:56",
+  "editedon":"2020-06-30 10:23:33",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

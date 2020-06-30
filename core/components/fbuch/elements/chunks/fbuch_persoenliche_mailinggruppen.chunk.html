@@ -1,7 +1,17 @@
 
   <div class="text-h5">für {{ fbuchuser.firstname }} {{ fbuchuser.name }}</div>
+  
+          <q-tabs
+          v-model="tab"
+          align="left"
+        >
+          <q-tab v-for="mailinglisttype in mailinglisttypes" v-bind="mailinglisttype" ></q-tab>
+        </q-tabs>
 
-  <div v-for="mailinglist in mailinglists" >
+<q-tab-panels v-model="tab" animated>
+  <q-tab-panel v-for="mailinglisttype in mailinglisttypes" v-bind="mailinglisttype"> 
+
+  <div v-for="mailinglist in mailinglists[mailinglisttype.label]" >
 
    <div class="q-pa-sm">
     <div class="q-gutter-sm">
@@ -67,4 +77,7 @@
  
     
   </div>
+  </q-tab-panel>
+</q-tab-panels>  
+
 

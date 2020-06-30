@@ -18,17 +18,7 @@
   
   </div>
 <ul style="min-height:50px;" data-id="[[+id]]" class="list-group dates-drag-drop">
-[[!migxLoopCollection?
-&packageName=`fbuch`
-&classname=`fbuchMailinglistNames`
-&joins=`[{"alias":"Member"},
-{"alias":"Zusagen","classname":"fbuchDateNames","on":"Zusagen.date_id=[[+id]] AND Zusagen.member_id=fbuchMailinglistNames.member_id"}]`
-&where=`{"list_id":"[[+mailinglist_id]]"}`
-&tpl=`fbuchRuderterminInvitedNamesRow`
-&debug=`0`
-&placeholdersKeyField=``
-]]    
-    
+
 [[!migxLoopCollection?
 &packageName=`fbuch`
 &classname=`fbuchDateInvited`

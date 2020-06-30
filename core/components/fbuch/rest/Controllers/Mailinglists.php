@@ -129,10 +129,48 @@ class MyControllerMailinglists extends BaseController {
         $w = array();
         $w[] = $where;
         $c->where($w);
+        $c->sortby('type');
+        $c->sortby('weekday');
+        $c->sortby('time');
         
         //$c->prepare();echo $c->toSql();
         return $c;
     }
+    
+    public function getList() {
+        $this->getProperties();
+        $returntype = $this->getProperty('returntype');
+        $c = $this->modx->newQuery($this->classKey);
+        //$c = $this->addSearchQuery($c);
+        $c = $this->prepareListQueryBeforeCount($c);
+        $total = $this->modx->getCount($this->classKey,$c);
+        $alias = !empty($this->classAlias) ? $this->classAlias : $this->classKey;
+        $c->select($this->modx->getSelectColumns($this->classKey,$alias));
+        //$c->select(array('id','type'));
+        $c = $this->prepareListQueryAfterCount($c);
+        //$c->sortby('type');
+        $c->sortby($this->getProperty($this->getOption('propertySort','sort'),$this->defaultSortField),$this->getProperty($this->getOption('propertySortDir','dir'),$this->defaultSortDirection));
+        $limit = $this->getProperty($this->getOption('propertyLimit','limit'),$this->defaultLimit);
+        if (empty($limit)) $limit = $this->defaultLimit;
+        $c->limit($limit,$this->getProperty($this->getOption('propertyOffset','start'),$this->defaultOffset));
+        $objects = $this->modx->getCollection($this->classKey,$c);
+        if (empty($objects)) $objects = array();
+        $list = array();
+        /** @var xPDOObject $object */
+        foreach ($objects as $object) {
+            switch ($returntype) {
+                case 'grouped_by_type':
+                $list[$object->get('type')][] = $this->prepareListObject($object);
+                break;
+                default:
+                $list[] = $this->prepareListObject($object);
+                break;
+            }
+            
+            
+        }
+        return $this->collection($list,$total);
+    }        
     
     protected function prepareListObject(xPDOObject $object) {
 

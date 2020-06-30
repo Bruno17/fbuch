@@ -85,6 +85,7 @@
         <field key="name_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />        
         <field key="date_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="mailinglist_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="canceled" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
         <field key="invited" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
         <field key="riot_state" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
@@ -180,9 +181,7 @@
         <field key="nutzernamen" dbtype="text" phptype="string" null="false" default="" />
         <field key="riggerung" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
         <field key="gesperrt" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
-        
-        
-        
+       
         <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="editedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
@@ -282,6 +281,11 @@
         <field key="type" dbtype="varchar" phptype="string" precision="255" null="false" default="" /> 
         <field key="general" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />       
         <field key="description" dbtype="text" phptype="string" null="false" default="" />
+        <field key="weekday" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="time" dbtype="varchar" phptype="string" precision="10" null="false" default="" index="index" />
+        <field key="member_filter_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="restrict_member_filter_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="hidden" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="editedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />

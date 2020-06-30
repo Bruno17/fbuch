@@ -3,6 +3,10 @@ $filter_id = $modx->getOption('filtermailmember', $_REQUEST, '');
 $member_id = $modx->getOption('member_id', $_REQUEST, '');
 $singlemail = $modx->getOption('singlemail', $_REQUEST, '');
 
+$filter_id = $modx->getOption('filter_id', $scriptProperties, $filter_id);
+$member_id = $modx->getOption('member_id', $scriptProperties, $member_id);
+$singlemail = $modx->getOption('singlemail', $scriptProperties, $singlemail);
+
 $classname = 'mvMemberFilter';
 
 if ($filter_id != 'all' && !empty($filter_id) && $object = $modx->getObject($classname, $filter_id)) {

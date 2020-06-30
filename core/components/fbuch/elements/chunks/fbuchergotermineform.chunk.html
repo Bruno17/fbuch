@@ -120,6 +120,7 @@
     [[!migxLoopCollection?
     &packageName=`fbuch`
     &classname=`fbuchMailinglist`
+    &sortConfig=`[{"sortby":"type"},[{"sortby":"weekday"},[{"sortby":"time"}]`
     &tpl=`@CODE:<option {{!+fi.mailinglist_id:FormItIsSelected=`{{+id}}`}} value="{{+id}}">{{+name}}</option>`
     ]]
     </select>
@@ -154,13 +155,7 @@
     </label>
   </div>
   </div>
-  <div class="form-group col-sm-3">
-  <div class="checkbox">
-    <label>
-      <input type="checkbox" name="duplicate_invited" value="1"> Alle Eingeladenen mitkopieren
-    </label>
-  </div>
-  </div>
+
 </div>
 `]]
 
@@ -170,7 +165,7 @@
   <div class="form-group col-sm-3">
   <div class="checkbox">
     <label>
-      <input type="checkbox" name="autoduplicate" value="1" [[!+fi.autoduplicate:FormitIsChecked=`1`]]> Wöchentlich duplizieren 
+      <input type="checkbox" name="autoduplicate" value="1" [[!+fi.autoduplicate:FormitIsChecked=`1`]]> Termin automatisch wöchentlich weiter kopieren 
     </label>
   </div>
   </div>
@@ -181,21 +176,15 @@
     </label>
   </div>
   </div>
-  <div class="form-group col-sm-3">
-  <div class="checkbox">
-    <label>
-      <input type="checkbox" name="autoduplicate_invited" value="1" [[!+fi.autoduplicate_invited:FormitIsChecked=`1`]]> Jeweils alle Eingeladenen weiterkopieren
-    </label>
-  </div>
-  </div>
+
 </div>
 
 <div class="row">
 
-  <div class="form-group col-sm-3">
+  <div class="form-group col-sm-6">
   <div class="checkbox">
     <label>
-      <input type="checkbox" name="autoduplicated" value="1" [[!+fi.autoduplicated:FormitIsChecked=`1`]]> Autokopieren erledigt
+      <input type="checkbox" name="autoduplicated" value="1" [[!+fi.autoduplicated:FormitIsChecked=`1`]]> Autokopieren wurde automatisch durchgeführt
     </label>
   </div>
   </div>

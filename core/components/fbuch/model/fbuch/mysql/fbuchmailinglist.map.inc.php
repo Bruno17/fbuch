@@ -15,6 +15,11 @@ $xpdo_meta_map['fbuchMailinglist']= array (
     'type' => '',
     'general' => 0,
     'description' => '',
+    'weekday' => 0,
+    'time' => '',
+    'member_filter_id' => 0,
+    'restrict_member_filter_id' => 0,
+    'hidden' => 0,
     'createdby' => 0,
     'createdon' => NULL,
     'editedby' => 0,
@@ -66,6 +71,48 @@ $xpdo_meta_map['fbuchMailinglist']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
+    ),
+    'weekday' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'time' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '10',
+      'null' => false,
+      'default' => '',
+      'index' => 'index',
+    ),
+    'member_filter_id' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'restrict_member_filter_id' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'hidden' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
     ),
     'createdby' => 
     array (

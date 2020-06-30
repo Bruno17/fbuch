@@ -13,6 +13,7 @@ $xpdo_meta_map['fbuchDateInvited']= array (
     'name_id' => 0,
     'member_id' => 0,
     'date_id' => 0,
+    'mailinglist_id' => 0,
     'canceled' => 0,
     'invited' => 0,
     'riot_state' => '',
@@ -40,6 +41,15 @@ $xpdo_meta_map['fbuchDateInvited']= array (
       'index' => 'index',
     ),
     'date_id' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'mailinglist_id' => 
     array (
       'dbtype' => 'int',
       'precision' => '10',

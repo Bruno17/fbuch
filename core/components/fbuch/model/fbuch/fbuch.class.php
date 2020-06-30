@@ -568,6 +568,7 @@ class Fbuch {
                 $object->set('last_matrix_start_token', '');
                 $object->set('locked', 0);
                 $object->save();
+                $this->checkDateMailinglistNames($object->get('id'));
                 $this->afterCreateDate($object);
                 echo '<pre>' . print_r($object->toArray(), 1) . '</pre>';
                 if ($old_object->get('autoduplicate_invited') == 1) {
@@ -1000,6 +1001,8 @@ class Fbuch {
                 $object->save();
 
                 if ($classname = 'fbuchDate') {
+
+                    $this->checkDateMailinglistNames($object->get('id'));
                     $this->afterCreateDate($object);
 
                     if ($type == 'Rudern' && $duplicate && $duplicate_names) {
@@ -1022,6 +1025,124 @@ class Fbuch {
 
 
         return true;
+    }
+
+    public function updateDatesMailinglistNames($list_id) {
+        $modx = &$this->modx;
+
+        $date = strftime('%Y-%m-%d 00:00:00', strtotime('-2 weeks'));
+        $c = $modx->newQuery('fbuchDate');
+        $c->where(array('date:>' => $date, 'mailinglist_id' => $list_id));
+        if ($dates = $modx->getCollection('fbuchDate', $c)) {
+            foreach ($dates as $date) {
+                $this->checkDateMailinglistNames($date->get('id'));
+            }
+        }
+
+    }
+
+    public function getMembersByFilter($filter_id) {
+        $modx = &$this->modx;
+        $where_json = $modx->runSnippet('mv_prepareMemberWhere', array('filter_id' => $filter_id));
+        $where = $modx->fromJson($where_json);
+        $collection = null;
+        if (is_array($where) && !empty($where)) {
+
+            $classname = 'mvMember';
+            $c = $modx->newQuery($classname);
+            $c->where($where);
+            $count = $modx->getCount($classname, $c);
+            $collection = $modx->getIterator($classname, $c);
+        }
+        return $collection;
+    }
+
+    public function checkDateMailinglistNames($date_id) {
+        $modx = &$this->modx;
+        if (!empty($date_id) && $object = $modx->getObject('fbuchDate', array('id' => $date_id))) {
+            $mailinglist_id = $object->get('mailinglist_id');
+            if (!empty($mailinglist_id)) {
+                $member_filter_id = 0;
+                if ($mailinglist = $modx->getObject('fbuchMailinglist', array('id' => $mailinglist_id))) {
+                    $member_filter_id = $mailinglist->get('member_filter_id');
+                    if ($names = $this->getMembersByFilter($member_filter_id)){
+                        foreach ($names as $name) {
+                            $member_id = $name->get('id');
+                            //$unsubscribed = $name->get('unsubscribed');
+                            $unsubscribed = 0;
+                            if ($invite_o = $modx->getObject('fbuchDateInvited', array('date_id' => $date_id, 'member_id' => $member_id))) {
+                                if (!empty($unsubscribed)) {
+                                    $invite_o->remove();
+                                } else {
+                                    $invite_o->set('mailinglist_id', $mailinglist_id);
+                                    $invite_o->save();
+                                }
+                            } else {
+                                $invite_o = $modx->newObject('fbuchDateInvited');
+                                if (!empty($unsubscribed)) {
+                                    //$invite_o->remove();
+                                } else {
+                                    $invite_o->set('mailinglist_id', $mailinglist_id);
+                                    $invite_o->set('date_id', $date_id);
+                                    $invite_o->set('member_id', $member_id);
+                                    $invite_o->save();
+                                }
+                            }
+                        }                        
+                    }
+                }
+                if (empty($member_filter_id)) {
+                    $c = $modx->newQuery('fbuchMailinglistNames');
+                    $c->where(array('list_id' => $mailinglist_id));
+                    if ($names = $modx->getCollection('fbuchMailinglistNames', $c)) {
+                        foreach ($names as $name) {
+                            $member_id = $name->get('member_id');
+                            $unsubscribed = $name->get('unsubscribed');
+                            if ($invite_o = $modx->getObject('fbuchDateInvited', array('date_id' => $date_id, 'member_id' => $member_id))) {
+                                if (!empty($unsubscribed)) {
+                                    $invite_o->remove();
+                                } else {
+                                    $invite_o->set('mailinglist_id', $mailinglist_id);
+                                    $invite_o->save();
+                                }
+                            } else {
+                                if (!empty($unsubscribed)) {
+                                    //$invite_o->remove();
+                                } else {
+                                    $invite_o = $modx->newObject('fbuchDateInvited');
+                                    $invite_o->set('mailinglist_id', $mailinglist_id);
+                                    $invite_o->set('date_id', $date_id);
+                                    $invite_o->set('member_id', $member_id);
+                                    $invite_o->save();
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //remove evtl. remaining from other list
+                $c = $modx->newQuery('fbuchDateInvited');
+                $c->where(array(
+                    'date_id' => $date_id,
+                    'mailinglist_id:>' => 0,
+                    'mailinglist_id:!=' => $mailinglist_id));
+                //$c->prepare();echo $c->toSql();die();
+                if ($invite_c = $modx->getCollection('fbuchDateInvited', $c)) {
+                    foreach ($invite_c as $invite_o) {
+                        $invite_o->remove();
+                    }
+                }
+            } else {
+                //remove evtl. remaining from other list
+                $c = $modx->newQuery('fbuchDateInvited');
+                $c->where(array('date_id' => $date_id, 'mailinglist_id:>' => 0));
+                if ($invite_c = $modx->getCollection('fbuchDateInvited', $c)) {
+                    foreach ($invite_c as $invite_o) {
+                        $invite_o->remove();
+                    }
+                }
+            }
+        }
     }
 
     public function getFormValues(&$hook, $scriptProperties) {
@@ -1245,16 +1366,16 @@ class Fbuch {
             if ($values['km'] > 0) {
                 $is_closed = true;
             }
-        } 
+        }
         if (!empty($values['finished'])) {
             $is_closed = true;
-        }               
-        
+        }
+
         $closetext = '<strong>Wichtig für eine ordnungsgemäße Dokumentation der Einheiten.</strong><br> Bitte zum Abschluß das Trainingsende prüfen und Richtigkeit bestätigen!';
         if ($is_closed && empty($values['endtime_checked'])) {
             $this->error($closetext);
             return false;
-        }        
+        }
 
 
         if (isset($values['end_time'])) {
@@ -1292,7 +1413,7 @@ class Fbuch {
                          </label>
                          </div>');
                             //$this->error($this->error);
-                            return false; 
+                            return false;
                         }
 
                     }
@@ -1351,7 +1472,7 @@ class Fbuch {
         $modx = &$this->modx;
 
         if ($boot = $modx->getObject('fbuchBoot', array('id' => $boot_id))) {
-            if ($gattung = $boot->getOne('Gattung')) {
+            if ($gattung = $boot->getOne('Bootsgattung')) {
                 $check = $gattung->get('check_availability');
                 if (empty($check)) {
                     return true;

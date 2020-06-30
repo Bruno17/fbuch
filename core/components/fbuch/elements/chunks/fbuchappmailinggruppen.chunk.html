@@ -27,13 +27,30 @@
             .catch(function (error) {
                 console.log(error);
             });            
-        },      
+        },
+        loadMailinglistTypes(){
+            var data = {};
+            var self = this;
+            var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Mailinglisttypes';
+            data.iid = this.$route.query.iid;
+            data.code = this.$route.query.code;            
+            axios.get(ajaxUrl,{params:data})
+            .then(function (response) {
+                self.mailinglisttypes = response.data.results;
+                //make sure, the model gets updated, nested properties, which are not defined in the data, are not watched
+                //self.$forceUpdate();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+        },        
         loadMailinglists(){
             var data = {};
             var self = this;
             var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Mailinglists';
             data.iid = this.$route.query.iid;
-            data.code = this.$route.query.code;            
+            data.code = this.$route.query.code; 
+            data.returntype = 'grouped_by_type';
             axios.get(ajaxUrl,{params:data})
             .then(function (response) {
                 self.mailinglists = response.data.results;
@@ -81,11 +98,14 @@
       
       data() {
           return {
+              tab: '',
               mailinglists: [],
+              mailinglisttypes: [],
               fbuchuser: {}
           }      
       },
       mounted: function () {
+          this.loadMailinglistTypes();
           this.loadMailinglists();
           this.loadCurrentFbuchUser();
           

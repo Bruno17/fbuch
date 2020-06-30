@@ -9,9 +9,7 @@
 <li><a class="update update_team"><span class="glyphicon glyphicon-user"></span> Weitere Personen anmelden</a></li> 
 [[!hasPermission:is=`yes`:then=`
 <li><a class="update update_fahrt"><span class="glyphicon glyphicon-pencil"></span> Termin bearbeiten/duplizieren</a></li>
-<li><a class="update invite_persons"><span class="glyphicon glyphicon-user"></span> Einladungsliste erweitern</a></li>   
-<li><a class="update import_invites"><span class="glyphicon glyphicon-user"></span> Einladungsliste aus Termin importieren</a></li>
-<li><a class="update import_members"><span class="glyphicon glyphicon-user"></span> Mitglieder in Einladungsliste importieren</a></li>
+<li><a class="update invite_persons"><span class="glyphicon glyphicon-user"></span> Weitere Personen einladen</a></li>   
 `:else=``? &permission=`fbuch_create_termin`]]
 [[+riot_room_id:!empty=`
 <li><a href="https://riot.im/app/#/room/[[+riot_room_id]]" target="_blank">Zum Riot Chat-Raum</a></li> 

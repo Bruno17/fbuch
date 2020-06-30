@@ -10,6 +10,23 @@ class MyControllerMailinglistnames extends BaseController {
     public function beforeDelete() {
         throw new Exception('Unauthorized', 401);
     }
+    
+    public function afterPut(){
+        $this->updateDatesMailinglistNames();    
+    }
+    
+    public function afterPost(){
+        $this->updateDatesMailinglistNames();       
+    }
+
+    public function updateDatesMailinglistNames(){
+        $action = $this->getProperty('action');
+        switch ($action) {
+            case 'subscribe':
+            case 'unsubscribe':
+                $this->modx->fbuch->updateDatesMailinglistNames($this->getProperty('list_id'));
+        }        
+    }
 
     public function beforePut() {
 
@@ -48,7 +65,6 @@ class MyControllerMailinglistnames extends BaseController {
         } else {
             throw new Exception('Unauthorized', 401);
         }
-
         return !$this->hasErrors();
 
     }
@@ -96,7 +112,7 @@ class MyControllerMailinglistnames extends BaseController {
 
 
     public function verifyAuthentication() {
-        if ($fbuchUser = $this->getCurrentFbuchUser()){
+        if ($fbuchUser = $this->getCurrentFbuchUser()) {
             return true;
         }
         return false;
