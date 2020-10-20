@@ -1,6 +1,8 @@
 <?php
 
 class BaseController extends modRestController {
+    
+    public $defaultLimit = 0;
 
     public function getCurrentFbuchUser() {
         $modx = &$this->modx;

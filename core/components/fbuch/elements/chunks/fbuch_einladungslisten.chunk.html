@@ -1,0 +1,177 @@
+   <q-dialog  v-model="addnames_modal" transition-show="jump-down" transition-hide="jump-up" 
+   @hide="new_name_ids=null"
+   @show="$refs.namesselect.focus();"
+   >
+      <q-card style="width: 700px; max-width: 80vw;">
+        <q-card-section>
+          <div class="text-h5">Personen hinzufügen</div>
+        </q-card-section>
+
+        <q-card-section>
+      <div class="row q-col-gutter-sm" >
+      <div class="col col-xs-12 ">
+      <q-select
+        ref="namesselect"
+        outlined
+        use-input
+        use-chips
+        fill-input
+        emit-value
+        map-options
+        multiple
+        input-debounce="0"
+        :options="filtered_options"
+        @filter="filterFn"
+        @input="hideNamesPopup"
+        label="Personen auswählen"
+        v-model="new_name_ids"
+      >
+        <template v-slot:no-option>
+          <q-item>
+            <q-item-section class="text-grey">
+              Nichts gefunden
+            </q-item-section>
+          </q-item>
+        </template>
+      </q-select>
+
+   
+      </div>
+
+      </div>
+
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn flat label="Abbrechen" color="primary" v-close-popup ></q-btn>
+          <q-btn flat label="Ausgewählte Personen hinzufügen" color="primary" @click="addNames()" ></q-btn>
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
+
+   <q-dialog  v-model="mailinglist_modal" transition-show="jump-down" transition-hide="jump-up" 
+   @show="$refs.mailinglistnameinput.focus();"
+   >
+      
+      <q-card style="width: 700px; max-width: 80vw;">
+        <q-card-section>
+          <div class="text-h5">{{ mailinglist_modal_title }}</div>
+        </q-card-section>
+
+        <q-card-section>
+            
+      <div class="row q-col-gutter-md" >
+        <div class="col col-xs-12 ">
+          <q-input v-model="mailinglist_form.name.value" label="Name der Liste" outlined autocomplete="none" ref="mailinglistnameinput" ></q-input>
+        </div>
+      </div>
+      <div class="row q-col-gutter-md" >
+        <div class="col col-xs-12 ">
+          <q-input v-model="mailinglist_form.target_group.value" label="Zielgruppe" outlined autocomplete="none" ></q-input>
+        </div>
+      </div>       
+      <div class="row q-col-gutter-md" >
+        <div class="col col-xs-12 ">
+          <q-input v-model="mailinglist_form.type.value" label="Sportart" outlined autocomplete="none" ></q-input>
+        </div>
+      </div> 
+      <div class="row q-col-gutter-md" >
+        <div class="col col-xs-12 ">
+          <q-select
+        outlined
+        v-model="mailinglist_form.weekday.value"
+        :options="weekday_options"
+        label="Wochentag"
+        emit-value
+      ></q-select>
+        </div>
+      </div> 
+      <div class="row q-col-gutter-md" >
+        <div class="col col-xs-12 ">
+          <q-input v-model="mailinglist_form.time.value" label="Zeit" type="time" outlined autocomplete="none" stack-label ></q-input>
+        </div>
+      </div>  
+      <div class="row q-col-gutter-md" >
+        <div class="col col-xs-12 ">
+          <q-checkbox v-model="mailinglist_form.hidden.value" label="Auf Subscribe/Unsubscribe Seite verbergen" 
+          true-value="1"
+          false-value="0"          
+          ></q-checkbox>
+        </div>
+      </div>
+      <div class="row q-col-gutter-md" >
+        <div class="col col-xs-12 ">
+          <q-input type="textarea" v-model="mailinglist_form.description.value" label="Beschreibung" outlined autocomplete="none" ></q-input>
+        </div>
+      </div>        
+
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn flat label="Abbrechen" color="primary" v-close-popup ></q-btn>
+          <q-btn flat label="Speichern" color="primary" @click="saveMailinglist()" ></q-btn>
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
+
+
+<p>
+Hier können Übungsleiter Einladungslisten erstellen und bearbeiten, sowie weitere Personen hinzufügen.<br>
+Listen löschen oder Personen aus Listen entfernen ist für Euch nicht möglich.<br> 
+Falls dies nötig ist, bitte eine entsprechende Mail über das Kontakformular an den Admin senden.
+</p>
+
+<q-btn label="Einladungsliste erstellen" color="primary" @click="createMailinglist();" ></q-btn>
+
+<q-tabs
+  v-model="tab"
+  align="left"
+>
+  <q-tab v-for="mailinglisttype in mailinglisttypes" v-bind="mailinglisttype" ></q-tab>
+</q-tabs>
+
+<q-tab-panels v-model="tab" animated>
+  <q-tab-panel v-for="mailinglisttype in mailinglisttypes" v-bind="mailinglisttype"> 
+      
+
+  <q-list bordered separator class="rounded-borders">
+      <q-expansion-item v-for="mailinglist in mailinglists[mailinglisttype.label]"
+        group="mailinglists"
+        switch-toggle-side
+        expand-separator
+        v-bind:label="mailinglist.name"
+        @show="loadMailinglistNames(mailinglist.id)"
+      >
+        <q-card>
+          <q-card-section>
+              
+
+           <q-btn label="Personen hinzufügen" color="primary" @click="addnames_modal=true;current_list_id=mailinglist.id;" ></q-btn>
+           <q-btn label="Liste bearbeiten" color="primary" @click="updateMailinglist(mailinglist);" ></q-btn>
+           <br>
+           <br>
+           <div class="q-markup-table q-table__container q-table__card q-table--horizontal-separator q-table--no-wrap">
+              <table class="q-table" >
+                <thead><tr><th class="text-left">Name</th><th class="text-left">Eintrag bestätigt</th><th class="text-left">Ausgetragen</th></tr></thead> 
+                <tbody>
+                    <template v-for="member in mailinglistnames[mailinglist.id]">
+                    <tr>
+                        <td class="text-left">{{member.Member_firstname}} {{member.Member_name}}</td>
+                        <td class="text-left"><q-icon v-if="member.subscribed" name="check_box" style="color: green; font-size: 32px;" ></q-icon><q-icon v-else name="check_box_outline_blank" style="font-size: 32px;" ></q-icon> </td>
+                        <td class="text-left"><q-icon v-if="member.unsubscribed" name="check_box" style="color: red; font-size: 32px;" ></q-icon><q-icon v-else name="check_box_outline_blank" style="font-size: 32px;" ></q-icon> </td>
+                    </tr>
+                    </template>
+                </tbody> 
+              </table>      
+              </div>
+          </q-card-section>
+        </q-card>
+      </q-expansion-item>
+   </q-list>
+  
+  </q-tab-panel>
+</q-tab-panels>  
+
+

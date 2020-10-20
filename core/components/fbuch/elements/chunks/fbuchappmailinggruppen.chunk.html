@@ -37,6 +37,9 @@
             axios.get(ajaxUrl,{params:data})
             .then(function (response) {
                 self.mailinglisttypes = response.data.results;
+                if (typeof self.mailinglisttypes[0] != "undefined") {
+                    self.tab = self.mailinglisttypes[0]['name'];   
+                }                
                 //make sure, the model gets updated, nested properties, which are not defined in the data, are not watched
                 //self.$forceUpdate();
             })

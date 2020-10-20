@@ -58,7 +58,11 @@
       <div class="col col-xs-12 col-sm-6">     
       <q-input readonly outlined v-model="form.start_time.value" mask="time" >
            <q-popup-proxy transition-show="scale" transition-hide="scale">
-              <q-time v-model="form.start_time.value" />
+              <q-time v-model="form.start_time.value" >
+                <div class="row items-center justify-end q-gutter-sm">
+                   <q-btn label="OK" color="primary" flat v-close-popup />
+                </div>              
+              </q-time>
             </q-popup-proxy>        
         <template v-slot:append>
           <q-icon name="access_time" class="cursor-pointer">
@@ -79,7 +83,11 @@
       <div class="col col-xs-12 col-sm-6"> 
       <q-input readonly outlined v-model="form.end_time.value" mask="time" >
            <q-popup-proxy transition-show="scale" transition-hide="scale">
-              <q-time v-model="form.end_time.value" />
+              <q-time v-model="form.end_time.value">
+                <div class="row items-center justify-end q-gutter-sm">
+                   <q-btn label="OK" color="primary" flat v-close-popup />
+                </div>          
+              </q-time>      
             </q-popup-proxy>        
         <template v-slot:append>
           <q-icon name="access_time" class="cursor-pointer">

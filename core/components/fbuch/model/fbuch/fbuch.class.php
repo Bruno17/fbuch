@@ -1027,6 +1027,31 @@ class Fbuch {
         return true;
     }
 
+    public function checkMemberMailinglists($member_id) {
+        $modx = &$this->modx;
+        //remove person from fbuchMailinglist, if not longer Mitglied,Gast,VHS
+        if ($object = $modx->getObject('mvMember', $member_id)) {
+            $member_status = $object->get('member_status');
+            $deleted = $object->get('deleted');
+            $member_status = !empty($deleted) ? 'deleted' : $member_status;
+            if (!in_array($member_status, array(
+                'Mitglied',
+                'Gast',
+                'VHS'))) {
+                $c = $modx->newQuery('fbuchMailinglistNames');
+                $c->where(array('member_id' => $member_id));
+                if ($collection = $modx->getCollection('fbuchMailinglistNames', $c)) {
+                    foreach ($collection as $name) {
+                        $list_id = $name->get('list_id');
+                        $name->remove();
+                        $this->updateDatesMailinglistNames($list_id);
+                        //$name->remove();
+                    }
+                }
+            }
+        }
+    }
+
     public function updateDatesMailinglistNames($list_id) {
         $modx = &$this->modx;
 
@@ -1038,7 +1063,6 @@ class Fbuch {
                 $this->checkDateMailinglistNames($date->get('id'));
             }
         }
-
     }
 
     public function getMembersByFilter($filter_id) {
@@ -1061,11 +1085,26 @@ class Fbuch {
         $modx = &$this->modx;
         if (!empty($date_id) && $object = $modx->getObject('fbuchDate', array('id' => $date_id))) {
             $mailinglist_id = $object->get('mailinglist_id');
+
+            //get all existing invited names
+            $c = $modx->newQuery('fbuchDateInvited');
+            $c->where(array('date_id' => $date_id));
+            //$c->prepare();echo $c->toSql();die();
+            $existing = array();
+            if ($invite_c = $modx->getCollection('fbuchDateInvited', $c)) {
+                foreach ($invite_c as $invite_o) {
+                    $member_id = $invite_o->get('member_id');
+                    $existing[$member_id] = $member_id;
+                }
+            }
+            
+            print_r($existing);
+
             if (!empty($mailinglist_id)) {
                 $member_filter_id = 0;
                 if ($mailinglist = $modx->getObject('fbuchMailinglist', array('id' => $mailinglist_id))) {
                     $member_filter_id = $mailinglist->get('member_filter_id');
-                    if ($names = $this->getMembersByFilter($member_filter_id)){
+                    if ($names = $this->getMembersByFilter($member_filter_id)) {
                         foreach ($names as $name) {
                             $member_id = $name->get('id');
                             //$unsubscribed = $name->get('unsubscribed');
@@ -1088,7 +1127,8 @@ class Fbuch {
                                     $invite_o->save();
                                 }
                             }
-                        }                        
+                            unset($existing[$member_id]);
+                        }
                     }
                 }
                 if (empty($member_filter_id)) {
@@ -1098,6 +1138,7 @@ class Fbuch {
                         foreach ($names as $name) {
                             $member_id = $name->get('member_id');
                             $unsubscribed = $name->get('unsubscribed');
+
                             if ($invite_o = $modx->getObject('fbuchDateInvited', array('date_id' => $date_id, 'member_id' => $member_id))) {
                                 if (!empty($unsubscribed)) {
                                     $invite_o->remove();
@@ -1116,30 +1157,19 @@ class Fbuch {
                                     $invite_o->save();
                                 }
                             }
+                            unset($existing[$member_id]);
                         }
                     }
                 }
 
-                //remove evtl. remaining from other list
-                $c = $modx->newQuery('fbuchDateInvited');
-                $c->where(array(
-                    'date_id' => $date_id,
-                    'mailinglist_id:>' => 0,
-                    'mailinglist_id:!=' => $mailinglist_id));
-                //$c->prepare();echo $c->toSql();die();
-                if ($invite_c = $modx->getCollection('fbuchDateInvited', $c)) {
-                    foreach ($invite_c as $invite_o) {
-                        $invite_o->remove();
-                    }
-                }
-            } else {
-                //remove evtl. remaining from other list
-                $c = $modx->newQuery('fbuchDateInvited');
-                $c->where(array('date_id' => $date_id, 'mailinglist_id:>' => 0));
-                if ($invite_c = $modx->getCollection('fbuchDateInvited', $c)) {
-                    foreach ($invite_c as $invite_o) {
-                        $invite_o->remove();
-                    }
+            }
+            //remove evtl. remaining
+            $c = $modx->newQuery('fbuchDateInvited');
+            $c->where(array('date_id' => $date_id, 'member_id:IN' => $existing));
+            //$c->prepare();echo $c->toSql();die();
+            if ($invite_c = $modx->getCollection('fbuchDateInvited', $c)) {
+                foreach ($invite_c as $invite_o) {
+                    $invite_o->remove();
                 }
             }
         }

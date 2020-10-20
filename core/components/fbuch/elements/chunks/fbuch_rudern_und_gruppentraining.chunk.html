@@ -3,7 +3,16 @@
 [[$fbuchMyInvites]]
 
 <div id="fahrten">
-[[$fbuchFahrtenDragdrop? &limit=`100` &grid_id=`FahrtenDragdrop` &where=`"type:IN":["Rudern","Teamrowing","Kraftraum"]` &classname=`fbuchDate`]]
+    [[migxLoopCollection? 
+    &packageName=`fbuch` 
+    &classname=`fbuchDateType` 
+    &where=`{"show_at_rowinglogbook_page":"1"}`
+    &tpl=`@CODE:"{{+name}}"`
+    &outputSeparator=`,`
+    &toPlaceholder=`datetypes`
+    ]]
+    
+[[$fbuchFahrtenDragdrop? &limit=`100` &grid_id=`FahrtenDragdrop` &where=`"type:IN":[ [[+datetypes]] ]` &classname=`fbuchDate`]]
 </div>
 
 <!-- Modal -->

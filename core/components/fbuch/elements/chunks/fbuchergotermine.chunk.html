@@ -29,7 +29,7 @@
             &joins=`[{"alias":"Instructor"}]`
             &tpl=`fbuch[[+grid_id]]Row`
             &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
-            &where=`{"type:IN":[ "Wanderruderer","Rudern","Teamrowing","Kraftraum","Regatta","Sonstiges","Bootshausbelegung" ],"deleted":"0",
+            &where=`{"deleted":"0",
                 "date:>=":"[[!fbuch_strtotime:date=`%Y-%m-%d 00:00:00`? &input=`this week`]]",
                 "date:<=":"[[!fbuch_strtotime:date=`%Y-%m-%d 23:59:59`? &input=`this week + 6 day`]]"
             }`
@@ -62,7 +62,7 @@
             &joins=`[{"alias":"Member"}]`
             &tpl=`fbuch[[+grid_id]]Row`
             &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
-            &where=`{"type:IN":[ "Wanderruderer","Rudern","Teamrowing","Kraftraum","Regatta","Sonstiges","Bootshausbelegung" ],"deleted":"0",
+            &where=`{"deleted":"0",
                 "date:>=":"[[!fbuch_strtotime:date=`%Y-%m-%d 00:00:00`? &input=`next week`]]",
                 "date:<=":"[[!fbuch_strtotime:date=`%Y-%m-%d 23:59:59`? &input=`next week + 6 day`]]"
             }`
@@ -95,7 +95,7 @@
             &joins=`[{"alias":"Member"}]`
             &tpl=`fbuch[[+grid_id]]Row`
             &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
-            &where=`{"type:IN":[ "Wanderruderer","Rudern","Teamrowing","Kraftraum","Regatta","Sonstiges","Bootshausbelegung" ],"deleted":"0",
+            &where=`{"deleted":"0",
                 "date:>=":"[[!fbuch_strtotime:date=`%Y-%m-%d 00:00:00`? &input=`next week + 1 week`]]"
             }`
             &grid_id=`[[+grid_id]]`

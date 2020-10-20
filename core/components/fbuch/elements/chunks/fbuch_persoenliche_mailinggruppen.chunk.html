@@ -1,10 +1,8 @@
 
-  <div class="text-h5">für {{ fbuchuser.firstname }} {{ fbuchuser.name }}</div>
-  
           <q-tabs
           v-model="tab"
           align="left"
-        >
+          >
           <q-tab v-for="mailinglisttype in mailinglisttypes" v-bind="mailinglisttype" ></q-tab>
         </q-tabs>
 

@@ -311,6 +311,12 @@
         <aggregate alias="Member" class="mvMember" local="member_id" foreign="id" cardinality="one" owner="foreign" />
     </object> 
     
+    <object class="fbuchDateType" table="fbuch_date_types" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="description" dbtype="text" phptype="string" null="false" default="" /> 
+        <field key="show_at_rowinglogbook_page" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />    
+    </object>     
+    
     <object class="mvMember" table="mv_members" extends="xPDOSimpleObject">
     	<field key="vorwahl" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="firstname" dbtype="varchar" phptype="string" precision="100" null="false" default="" />

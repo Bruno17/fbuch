@@ -405,6 +405,22 @@
           "moduleguid":"",
           "static":false,
           "static_file":"",
+          "name":"fbuch_mailinglistnames_aftersave",
+          "file":"fbuch_mailinglistnames_aftersave.snippet.php"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "moduleguid":"",
+          "static":false,
+          "static_file":"",
           "name":"mv_member_aftersave",
           "file":"mv_member_aftersave.snippet.php",
           "category":"mv"
@@ -649,6 +665,22 @@
         }
       ],
       "chunks":[
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_Einladungslisten",
+          "file":"fbuch_einladungslisten.chunk.html",
+          "category":"fbuch_content_chunks"
+        },
         {
           "source":0,
           "property_preprocess":false,
@@ -1894,6 +1926,21 @@
           "static_file":"",
           "name":"fbuchAppRiggerung_eintragen",
           "file":"fbuchappriggerung_eintragen.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
+          "name":"fbuchAppEinladungslisten",
+          "file":"fbuchappeinladungslisten.chunk.html"
         },
         {
           "source":0,
@@ -3367,7 +3414,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"1.3.9-beta",
+  "version":"1.4.1-beta",
   "database":{
     "tables":[
       "fbuchFahrt",
@@ -3387,6 +3434,7 @@
       "fbuchBootsNutzergruppenMembers",
       "fbuchMailinglist",
       "fbuchMailinglistNames",
+      "fbuchDateType",
       "mvMember",
       "mvRole",
       "mvMemberGroup",

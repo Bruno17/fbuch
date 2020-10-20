@@ -1,8 +1,8 @@
 {
-  "id":33,
+  "id":60,
   "name":"fbuch_mailinglistnames",
   "formtabs":"",
-  "contextmenus":"",
+  "contextmenus":"remove",
   "actionbuttons":"",
   "columnbuttons":"",
   "filters":"",
@@ -27,7 +27,7 @@
     "filtersperrow":4,
     "packageName":"fbuch",
     "classname":"fbuchMailinglistNames",
-    "task":"",
+    "task":"mailinglistnames",
     "getlistsort":"Member.name",
     "getlistsortdir":"",
     "sortconfig":"",
@@ -46,7 +46,9 @@
         "alias":"Member"
       }
     ],
-    "hooksnippets":"",
+    "hooksnippets":{
+      "aftersave":"fbuch_mailinglistnames_aftersave"
+    },
     "cmpmaincaption":"",
     "cmptabcaption":"",
     "cmptabdescription":"",
@@ -85,7 +87,7 @@
   "createdby":1,
   "createdon":"2018-06-03 20:42:50",
   "editedby":1,
-  "editedon":"2018-06-04 06:24:51",
+  "editedon":"2020-10-17 19:09:40",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

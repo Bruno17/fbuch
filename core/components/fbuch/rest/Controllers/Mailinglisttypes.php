@@ -53,9 +53,22 @@ class MyControllerMailinglisttypes extends BaseController {
 
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
         $returntype = $this->getProperty('returntype');
-        $where = array('deleted' => 0,'hidden' => 0);
-
+        $show_hidden = $this->getProperty('show_hidden');
+        $which_page = $this->getProperty('which_page');
+        
+        if($show_hidden){
+            $where = array('deleted' => 0);
+        }else{
+            $where = array('deleted' => 0,'hidden' => 0);    
+        }
         $w = array();
+        switch ($which_page){
+            case 'edit_mailinglists':
+            $w[] = array('member_filter_id' => 0);
+            break;
+        }
+        
+        
         $w[] = $where;
         $c->where($w);
         

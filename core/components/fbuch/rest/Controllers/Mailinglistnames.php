@@ -6,6 +6,7 @@ class MyControllerMailinglistnames extends BaseController {
     public $classKey = 'fbuchMailinglistNames';
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'ASC';
+    
 
     public function beforeDelete() {
         throw new Exception('Unauthorized', 401);
@@ -120,7 +121,8 @@ class MyControllerMailinglistnames extends BaseController {
 
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
         $returntype = $this->getProperty('returntype');
-        $where = array('deleted' => 0);
+        $list_id = $this->getProperty('list_id');
+        $where = array('list_id' => $list_id);
         /*
         $datewhere = array();
         switch ($returntype) {
@@ -149,7 +151,7 @@ class MyControllerMailinglistnames extends BaseController {
         */
 
 
-        $joins = '[{"alias":"Members","on":"list_id=fbuchMailinglist.id and member_id=129"}]';
+        $joins = '[{"alias":"Member","selectfields":"id,name,firstname,member_status"}]';
 
         $this->modx->migx->prepareJoins($this->classKey, json_decode($joins, 1), $c);
 
@@ -164,14 +166,6 @@ class MyControllerMailinglistnames extends BaseController {
     protected function prepareListObject(xPDOObject $object) {
 
         $objectArray = $object->toArray();
-        $member_id = $object->get('Members_id');
-        $name_subscribed = $object->get('Members_subscribed');
-        $name_unsubscribed = $object->get('Members_unsubscribed');
-
-        $objectArray['Members_active'] = empty($member_id) ? false : true;
-        $objectArray['Members_subscribed'] = empty($name_subscribed) ? false : true;
-        $objectArray['Members_unsubscribed'] = empty($name_unsubscribed) ? false : true;
-
 
         return $objectArray;
     }

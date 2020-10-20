@@ -99,17 +99,14 @@
         Termin Art:
     </label>
     <select class="form-control" name="type" id="type" > 
-    <option [[!+fi.type:FormItIsSelected=`Rudern`]] value="Rudern">Rudern</option>
-    <option [[!+fi.type:FormItIsSelected=`Teamrowing`]] value="Teamrowing">Teamrowing</option>
-    <option [[!+fi.type:FormItIsSelected=`Kraftraum`]] value="Kraftraum">Kraftraum</option>
-    <option [[!+fi.type:FormItIsSelected=`Regatta`]] value="Regatta">Regatta</option>
-    <option [[!+fi.type:FormItIsSelected=`Wanderruderer`]] value="Wanderruderer">Wanderruderer</option>
-    <option [[!+fi.type:FormItIsSelected=`Bootshausbelegung`]] value="Bootshausbelegung">Bootshausbelegung</option>    
-    <option [[!+fi.type:FormItIsSelected=`Sonstiges`]] value="Sonstiges">Sonstige Veranstaltung</option>
+    <option value="">Bitte Terminart wählen!</option>
+    [[!migxLoopCollection? 
+    &packageName=`fbuch` 
+    &classname=`fbuchDateType` 
+    &tpl=`@CODE:<option {{!+fi.type:FormItIsSelected=`{{+name}}`}} value="{{+name}}">{{+name}}</option>`
+    ]]    
     </select>
     </div>
-    
-
     
     <div class="form-group col-sm-6">
     <label for="mailinglist_id">

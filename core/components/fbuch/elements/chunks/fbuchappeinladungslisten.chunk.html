@@ -1,0 +1,244 @@
+<script>
+    // start the UI; assumes you have a <div id="q-app"></div> in your <body
+  var router = new VueRouter({
+    mode: 'history',
+    routes: []
+  });    
+    
+    
+    new Vue({
+      router,
+      el: '#q-app',
+      methods: {
+          filterFn (val, update, abort) {
+              update(() => {
+                  const needle = val.toLowerCase();
+                  this.filtered_options = this.namesoptions.filter(v => v.label.toLowerCase().indexOf(needle) > -1)
+              })
+          },      
+        loadCurrentFbuchUser(){
+            var data = {};
+            var self = this;
+            var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Names/me';
+            data.iid = this.$route.query.iid;
+            data.code = this.$route.query.code;
+            data.id = 'me';
+            axios.get(ajaxUrl,{params:data})
+            .then(function (response) {
+                //console.log(response);
+                self.fbuchuser = response.data.object;
+                //make sure, the model gets updated, nested properties, which are not defined in the data, are not watched
+                //self.$forceUpdate();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+        },
+        loadMailinglistTypes(){
+            var data = {};
+            var self = this;
+            var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Mailinglisttypes';
+            data.iid = this.$route.query.iid;
+            data.code = this.$route.query.code;  
+            data.show_hidden = 1;
+            data.which_page = 'edit_mailinglists';
+            axios.get(ajaxUrl,{params:data})
+            .then(function (response) {
+                self.mailinglisttypes = response.data.results;
+                if (typeof self.mailinglisttypes[0] != "undefined") {
+                    self.tab = self.mailinglisttypes[0]['name'];   
+                }                
+                //make sure, the model gets updated, nested properties, which are not defined in the data, are not watched
+                //self.$forceUpdate();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+        },
+        loadMailinglistNames(list_id) {
+            var data = {};
+            var self = this;
+            var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Mailinglistnames';
+            data.list_id = list_id;
+            //data.code = this.$route.query.code; 
+            //data.returntype = 'grouped_by_type';
+            axios.get(ajaxUrl,{params:data})
+            .then(function (response) {
+                self.new_name_id = null;
+                self.mailinglistnames[list_id] = response.data.results;
+                //make sure, the model gets updated, nested properties, which are not defined in the data, are not watched
+                self.$forceUpdate();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });  
+        },
+        addNames(){
+            if (this.new_name_ids == null){
+                this.addnames_modal = false;
+                return;
+            }
+        
+            console.log(this.new_name_ids); 
+            console.log(this.current_list_id);
+            
+            var self = this;
+            var data = {};
+            
+            data.id = this.current_list_id;
+            data.action = 'add_members';
+            data.member_ids = this.new_name_ids;              
+
+            var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Mailinglists';
+            axios.put(ajaxUrl,data)
+            .then(function (response) {
+                self.loadMailinglistNames(self.current_list_id);
+                self.addnames_modal = false;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        },
+        
+        updateMailinglist(item){
+            
+        for (let key in this.mailinglist_form) {
+            this.mailinglist_form[key].value = item[key];
+        } 
+        //convert number to string for checkbox
+        this.mailinglist_form['hidden'].value = this.mailinglist_form['hidden'].value == 0 ? '0' : '1';
+        
+        this.mailinglist_modal_title = 'Mailingliste bearbeiten';
+        this.mailinglist_modal=true;  
+        },
+         createMailinglist(){
+            
+        for (let key in this.mailinglist_form) {
+            this.mailinglist_form[key].value = this.mailinglist_form[key].default;
+        } 
+        this.mailinglist_modal_title = 'Mailingliste erstellen';
+        this.mailinglist_modal=true;  
+ 
+        },        
+        
+        saveMailinglist(){
+
+            var self = this;
+            var data = {};
+            
+            var data = {};
+            for (let key in this.mailinglist_form) {
+                data[key] = this.mailinglist_form[key].value;
+            }  
+            if (data.id == 0){
+                var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Mailinglists';
+                axios.post(ajaxUrl,data)
+                .then(function (response) {
+                    self.mailinglist_modal = false;
+                    self.loadMailinglistTypes();
+                    self.loadMailinglists();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            } else {
+                var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Mailinglists';
+                axios.put(ajaxUrl,data)
+                .then(function (response) {
+                    self.mailinglist_modal = false;
+                    self.loadMailinglistTypes();
+                    self.loadMailinglists();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });                
+            }
+
+        },        
+        
+        loadMailinglists(){
+            var data = {};
+            var self = this;
+            var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Mailinglists';
+            data.iid = this.$route.query.iid;
+            data.code = this.$route.query.code; 
+            data.returntype = 'grouped_by_type';
+            data.which_page = 'edit_mailinglists';
+            axios.get(ajaxUrl,{params:data})
+            .then(function (response) {
+                self.mailinglists = response.data.results;
+                //make sure, the model gets updated, nested properties, which are not defined in the data, are not watched
+                //self.$forceUpdate();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+        },        
+        loadNames(){
+            var self = this;
+            
+            var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Names?limit=100000&returntype=options';
+            axios.get(ajaxUrl)
+            .then(function (response) {
+                self.namesoptions = response.data.results;
+                self.filtered_options = response.data.results;                 
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+        },
+        hideNamesPopup(){
+           //this.$refs.namesselect.updateInputValue('');
+           this.$refs.namesselect.hidePopup();
+           
+        }
+
+          
+      },
+      
+      data() {
+          return {
+              tab: '',
+              mailinglists: [],
+              mailinglisttypes: [],
+              mailinglistnames: [],
+              filtered_options:[],
+              namesoptions: [],
+              fbuchuser: {},
+              new_name_ids: null,
+              current_list_id: null,
+              addnames_modal: false,
+              mailinglist_modal: false,
+              mailinglist_modal_title: 'Einladungsliste erstellen',
+              mailinglist_form:{
+                id:{value:0,default:0} , 
+                name:{value:'',default:''} ,
+                type:{value:'',default:''} ,
+                target_group:{value:'',default:''} ,
+                description:{value:'',default:''} ,
+                weekday:{value:'',default:''} ,
+                time:{value:'',default:''} ,
+                hidden:{value:'',default:'0'} ,
+              },
+              weekday_options:[
+                  {label:'Bitte Wochentag wählen',value:''},
+                  {label:'Mo',value:'1'}, 
+                  {label:'Di',value:'2'}, 
+                  {label:'Mi',value:'3'}, 
+                  {label:'Do',value:'4'}, 
+                  {label:'Fr',value:'5'}, 
+                  {label:'Sa',value:'6'}, 
+                  {label:'So',value:'7'}, 
+              ],
+              
+          }      
+      },
+      mounted: function () {
+          this.loadNames();
+          this.loadMailinglistTypes();
+          this.loadMailinglists();
+          this.loadCurrentFbuchUser();
+      }           
+    })
+</script>      
