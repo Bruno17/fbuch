@@ -1,5 +1,40 @@
 <?php
 
+$gridactionbuttons['bulk']['menu'][3]['text'] = "'my custom action'";
+$gridactionbuttons['bulk']['menu'][3]['handler'] = 'this.customAction';
+$gridactionbuttons['bulk']['menu'][3]['scope'] = 'this';
+
+$gridfunctions['this.customAction'] = "
+customAction: function(btn,e) {
+        var cs = this.getSelectedAsList();
+        if (cs === false) return false;
+        
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'mgr/migxdb/process'
+                ,processaction: 'customaction'                     
+				,configs: this.config.configs
+                ,resource_id: this.config.resource_id
+                ,co_id: '[[+config.connected_object_id]]'                
+				,task: 'customaction'
+                ,objects: cs
+                ,reqConfigs: '[[+config.req_configs]]'
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.getSelectionModel().clearSelections(true);
+                    this.refresh();
+                },scope:this}
+            }
+        });
+        return true;
+    }
+";
+
+
+
+
 $gridactionbuttons['pullmvids']['text'] = "'Ausgewählte, MV ID holen'";
 $gridactionbuttons['pullmvids']['handler'] = 'this.pullmvids,this.pull';
 $gridactionbuttons['pullmvids']['scope'] = 'this';

@@ -5,12 +5,12 @@
 <span class="glyphicon glyphicon-king" aria-hidden="true"></span>
 </button> 
 <button type="button" data-id="[[+id]]" class="btn btn-default set_cox" aria-label="Steuermann setzen" style="padding: 5px;padding-left: 10px;padding-right: 8px;">
-  <img src="style/img/noun_78924_cc.svg" style="width: 17px;">  
+  <img src="assets/components/fbuch/img/noun_78924_cc.svg" style="width: 17px;">  
 </button> 
 </div>
 [[+idx]] <div style="background-color:[[+NgMember_member_id:is=`[[+member_id]]`:then=`#[[+Nutzergruppe_color]]`:else=`#fff`]];height:12px;width:12px;display:inline-block;margin-bottom: -2px;border: 1px solid;">
 </div> [[+Member_firstname]] [[+Member_name]] [[+Member_member_status:isnot=`Mitglied`:then=`([[+Member_member_status]])`:else=``]]
-[[+cox:is=`1`:then=`<img src="style/img/noun_78924_cc.svg" style="width: 17px;">`:else=`
+[[+cox:is=`1`:then=`<img src="assets/components/fbuch/img/noun_78924_cc.svg" style="width: 17px;">`:else=`
   [[!hasPermission:is=`yes`:then=`
 ([[!mv_berechne_alter? 
 &birthdate=`[[+Member_birthdate]]`

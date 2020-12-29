@@ -1,0 +1,130 @@
+<script>
+    // start the UI; assumes you have a <div id="q-app"></div> in your <body>
+    new Vue({
+      el: '#q-app',
+      methods: {
+        startTimer(){
+            this.stopTimer();
+            this.TimerObj = window.setInterval(this.timerTick, 1000);
+            //this.timerFormat();
+        },
+		stopTimer(){
+            clearInterval(this.TimerObj);
+		},
+        timerTick(){
+            //this.getPlayingTrack(); 
+            
+            let timeStamp = Date.now();
+            this.time = Quasar.date.formatDate(timeStamp, 'HH:mm:ss');
+            this.saveTracking();
+            
+        },
+        startTracking(params){
+            var params = params || {};
+            var self = this;
+            var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Ergotrack';
+            axios.get(ajaxUrl,{params:params})
+            .then(function (response) {
+                //self.$set(self.fahrten,params.returntype,response.data.results);
+                //make sure, the model gets updated, nested properties, which are not defined in the data, are not watched
+                //self.$forceUpdate();
+                self.startTimer()
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+        },
+        saveTracking(){
+            var self = this;
+            var data = {time:this.time};
+            
+                var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Ergotrack';
+                axios.post(ajaxUrl,data)
+                .then(function (response) {
+                    //self.basic_modal = false;
+                    //self.loadAllFahrten();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });            
+
+
+        },        
+        
+
+      },
+      
+      data() {
+          return {
+              TimerObj:null,
+              time:'',
+              form:{
+                id:{value:0,default:0} ,  
+                date:{value:null,default:null} ,
+                start_time:{value:'00:00',default:'00:00'} ,
+                date_end:{value:null,default:null} ,
+                end_time:{value:'00:00',default:'00:00'} ,
+                kmstand_start:{value:'',default:''} ,
+                kmstand_end:{value:'',default:''} ,
+                Member_id:{value:'',default:''} ,
+                boot_id:{value:'',default:''} ,
+                note:{value:'',default:''} ,
+              },
+              table_view:'open',
+              filtered_options:[],
+              namesoptions: [],
+              booteoptions: [],
+              modal_title: '',
+              fahrten: {
+
+              },
+              
+              fields: [
+                  {
+                      name:'actions',
+                      label:'Aktionen'
+                  },
+                  {
+                      name:'Boot_name',
+                      field:'Boot_name',
+                      label: 'Fahrzeug'
+                  },
+                  {
+                      name:'Member_fullname',
+                      field:'Member_fullname',
+                      label: 'Fahrer'
+                  },      
+                  {
+                      name:'date',
+                      field:'date',
+                      label: 'Start'
+                  },
+                  {
+                      name:'date_end',
+                      field:'date_end',
+                      label:'Ende'
+                  }, 
+                  {
+                      name:'kmstand_start',
+                      field:'kmstand_start',
+                      label:'Start kmstand',
+                  },
+                  {
+                      name:'kmstand_end',                      
+                      field:'kmstand_end',
+                      label:'Ende kmstand',
+                  }                  
+              ],
+              basic_modal: false,
+              
+      pagination: {
+        page: 1,
+        rowsPerPage: 0
+      },              
+          }          
+      },
+      mounted: function () {
+          this.startTracking();
+      }           
+    })
+</script>      

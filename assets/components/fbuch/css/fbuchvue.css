@@ -1,0 +1,12 @@
+.row {
+margin:0;
+}
+.col {
+padding:0;
+}
+
+@media (min-width: 1500px){
+    .container {
+        max-width: 1450px;
+    }
+}

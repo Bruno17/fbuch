@@ -677,6 +677,22 @@
           ],
           "static":false,
           "static_file":"",
+          "name":"fbuch_Ergotrack",
+          "file":"fbuch_ergotrack.chunk.html",
+          "category":"fbuch_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
           "name":"fbuch_Einladungslisten",
           "file":"fbuch_einladungslisten.chunk.html",
           "category":"fbuch_content_chunks"
@@ -1236,6 +1252,21 @@
           "static_file":"",
           "name":"fbuchFahrtenRow",
           "file":"fbuchfahrtenrow.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
+          "name":"fbuchAppErgotrack",
+          "file":"fbuchappergotrack.chunk.html"
         },
         {
           "source":0,
