@@ -3043,38 +3043,6 @@
           ],
           "static":false,
           "static_file":"",
-          "name":"mv_tpl_xml_erst_lastschrift",
-          "file":"mv_tpl_xml_erst_lastschrift.chunk.html",
-          "category":"mv_export"
-        },
-        {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "static":false,
-          "static_file":"",
-          "name":"mv_tpl_xml_folge_lastschrift",
-          "file":"mv_tpl_xml_folge_lastschrift.chunk.html",
-          "category":"mv_export"
-        },
-        {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "static":false,
-          "static_file":"",
           "name":"mv_tpl_ueberweiserliste",
           "file":"mv_tpl_ueberweiserliste.chunk.html",
           "category":"mv_export"
@@ -3449,7 +3417,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"1.4.4-beta",
+  "version":"1.4.5-beta",
   "database":{
     "tables":[
       "fbuchFahrt",

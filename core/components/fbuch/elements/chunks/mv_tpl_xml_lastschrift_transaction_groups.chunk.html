@@ -1,5 +1,5 @@
     <PmtInf>
-      <PmtInfId>RGM[[+time:date=`%Y%m%d%H%M%S`]]</PmtInfId>
+      <PmtInfId>[[++mv_sepa_msgid]][[+time:date=`%Y%m%d%H%M%S`]]</PmtInfId>
       <PmtMtd>DD</PmtMtd>
       <BtchBookg>true</BtchBookg>
       <NbOfTxs>[[+transactions_count]]</NbOfTxs>
@@ -15,16 +15,16 @@
       </PmtTpInf>
       <ReqdColltnDt>[[+property.collect_date]]</ReqdColltnDt>
       <Cdtr>
-        <Nm>Rudergesellschaft Marktheidenfeld e.V.</Nm>
+        <Nm>[[++mv_sepa_nm]]</Nm>
       </Cdtr>
       <CdtrAcct>
         <Id>
-          <IBAN>DE07790500000240001198</IBAN>
+          <IBAN>[[++mv_sepa_iban]]</IBAN>
         </Id>
       </CdtrAcct>
       <CdtrAgt>
         <FinInstnId>
-          <BIC>BYLADEM1SWU</BIC>
+          <BIC>[[++mv_sepa_bic]]</BIC>
         </FinInstnId>
       </CdtrAgt>
       <ChrgBr>SLEV</ChrgBr>

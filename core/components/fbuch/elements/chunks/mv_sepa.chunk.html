@@ -2,12 +2,12 @@
 <Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.008.003.02" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:iso:std:iso:20022:tech:xsd:pain.008.003.02 pain.008.003.02.xsd">
   <CstmrDrctDbtInitn>
     <GrpHdr>
-      <MsgId>RGM[[+time:date=`%Y%m%d%H%M%S`]]</MsgId>
+      <MsgId>[[++mv_sepa_msgid]][[+time:date=`%Y%m%d%H%M%S`]]</MsgId>
       <CreDtTm>[[+time:date=`%Y-%m-%d`]]T[[+time:date=`%H:%M:%S`]]Z</CreDtTm>
       <NbOfTxs>[[+transactions_count]]</NbOfTxs>
       <CtrlSum>[[+sum]].00</CtrlSum>
       <InitgPty>
-        <Nm>Rudergesellschaft Marktheidenfeld</Nm>
+        <Nm>[[++mv_sepa_nm]]</Nm>
       </InitgPty>
     </GrpHdr>
 [[mv_get_sepa?
