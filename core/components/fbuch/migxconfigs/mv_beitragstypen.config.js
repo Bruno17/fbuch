@@ -1,14 +1,14 @@
 {
-  "id":12,
+  "id":62,
   "name":"mv_beitragstypen",
   "formtabs":[
     {
-      "MIGX_id":19,
+      "MIGX_id":91,
       "caption":"Beitragstyp",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":80,
+          "MIGX_id":392,
           "field":"name",
           "caption":"Beitragstyp",
           "description":"",
@@ -27,7 +27,7 @@
           "pos":1
         },
         {
-          "MIGX_id":81,
+          "MIGX_id":393,
           "field":"beitrag",
           "caption":"Jahresbeitrag",
           "description":"",
@@ -46,7 +46,7 @@
           "pos":2
         },
         {
-          "MIGX_id":82,
+          "MIGX_id":394,
           "field":"selectable",
           "caption":"ausw\u00e4hlbar",
           "description":"",
@@ -65,7 +65,7 @@
           "pos":3
         },
         {
-          "MIGX_id":83,
+          "MIGX_id":395,
           "field":"max_age",
           "caption":"Alter bis",
           "description":"",
@@ -88,7 +88,7 @@
     }
   ],
   "contextmenus":"",
-  "actionbuttons":"addItem",
+  "actionbuttons":"addItem||importcsvmigxdb||exportcsvmigxdb",
   "columnbuttons":"update||remove",
   "filters":"",
   "extended":{
@@ -183,7 +183,7 @@
   "createdby":1,
   "createdon":"2015-03-19 12:36:24",
   "editedby":1,
-  "editedon":"2020-05-15 15:58:17",
+  "editedon":"2021-01-11 21:38:12",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

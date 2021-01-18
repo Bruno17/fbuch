@@ -278,14 +278,6 @@ $xpdo_meta_map['fbuchDate']= array (
   ),
   'aggregates' => 
   array (
-    'Name' => 
-    array (
-      'class' => 'fbuchNames',
-      'local' => 'instructor_id',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
     'Instructor' => 
     array (
       'class' => 'mvMember',

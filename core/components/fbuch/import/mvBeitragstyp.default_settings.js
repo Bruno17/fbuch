@@ -1,0 +1,1 @@
+{"file":"core\/components\/fbuch\/import\/mvBeitragstyp.csv","matchfields":"","settings":["empty","preserve_keys"]}

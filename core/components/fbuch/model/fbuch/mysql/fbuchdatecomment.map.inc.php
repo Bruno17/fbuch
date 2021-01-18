@@ -10,7 +10,6 @@ $xpdo_meta_map['fbuchDateComment']= array (
   ),
   'fields' => 
   array (
-    'name_id' => 0,
     'member_id' => 0,
     'date_id' => 0,
     'comment' => '',
@@ -21,15 +20,6 @@ $xpdo_meta_map['fbuchDateComment']= array (
   ),
   'fieldMeta' => 
   array (
-    'name_id' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'phptype' => 'integer',
-      'null' => false,
-      'default' => 0,
-      'index' => 'index',
-    ),
     'member_id' => 
     array (
       'dbtype' => 'int',
@@ -90,14 +80,6 @@ $xpdo_meta_map['fbuchDateComment']= array (
     array (
       'class' => 'fbuchDate',
       'local' => 'date_id',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-    'Name' => 
-    array (
-      'class' => 'fbuchNames',
-      'local' => 'name_id',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',

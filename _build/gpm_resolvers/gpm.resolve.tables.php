@@ -29,7 +29,6 @@ if ($object->xpdo) {
             $manager->createObjectContainer('fbuchDateNames');
             $manager->createObjectContainer('fbuchDateInvited');
             $manager->createObjectContainer('fbuchDateComment');
-            $manager->createObjectContainer('fbuchNames');
             $manager->createObjectContainer('fbuchFahrtNames');
             $manager->createObjectContainer('fbuchBoot');
             $manager->createObjectContainer('fbuchBootAllowedNames');

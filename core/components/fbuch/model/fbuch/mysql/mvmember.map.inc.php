@@ -10,18 +10,16 @@ $xpdo_meta_map['mvMember']= array (
   ),
   'fields' => 
   array (
-    'vorwahl' => '',
     'firstname' => '',
     'business_phone' => '',
     'phone' => '',
     'street' => '',
-    'status' => '',
     'nationality' => '',
     'zip' => '',
     'city' => '',
     'name' => '',
     'mobile' => '',
-    'member_id' => 0,
+    'external_member_id' => 0,
     'matchcode' => '',
     'mandat_id' => 0,
     'country' => '',
@@ -36,9 +34,7 @@ $xpdo_meta_map['mvMember']= array (
     'gender' => '',
     'birthdate' => NULL,
     'funktion' => '',
-    'company' => '',
     'fax' => '',
-    'familienstand' => '',
     'email' => '',
     'wrong_email' => '',
     'eintritt' => NULL,
@@ -49,14 +45,12 @@ $xpdo_meta_map['mvMember']= array (
     'blz2' => '',
     'blz1' => '',
     'bic' => '',
-    'beruf' => '',
     'bank3' => '',
     'bank2' => '',
     'bank1' => '',
     'austritt' => NULL,
     'anredetitel' => '',
     'anrede' => '',
-    'adr_id' => 0,
     'abteilung' => '',
     'family_id' => 0,
     'beitragstyp_id' => 1,
@@ -74,25 +68,16 @@ $xpdo_meta_map['mvMember']= array (
     'efa_id' => '',
     'drv_nr' => '',
     'startberechtigt' => '',
+    'regatta_start_eligibility' => 0,
     'privacy_policy_submitted' => 0,
     'privacy_policy_submittedon' => NULL,
     'erlaubnis' => '',
     'modx_user_id' => 0,
-    'lastname' => '',
     'member_status' => '',
     'riot_user_id' => '',
-    'fbuch_name_id' => 0,
   ),
   'fieldMeta' => 
   array (
-    'vorwahl' => 
-    array (
-      'dbtype' => 'varchar',
-      'phptype' => 'string',
-      'precision' => '100',
-      'null' => false,
-      'default' => '',
-    ),
     'firstname' => 
     array (
       'dbtype' => 'varchar',
@@ -118,14 +103,6 @@ $xpdo_meta_map['mvMember']= array (
       'default' => '',
     ),
     'street' => 
-    array (
-      'dbtype' => 'varchar',
-      'phptype' => 'string',
-      'precision' => '100',
-      'null' => false,
-      'default' => '',
-    ),
-    'status' => 
     array (
       'dbtype' => 'varchar',
       'phptype' => 'string',
@@ -173,7 +150,7 @@ $xpdo_meta_map['mvMember']= array (
       'null' => false,
       'default' => '',
     ),
-    'member_id' => 
+    'external_member_id' => 
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -293,23 +270,7 @@ $xpdo_meta_map['mvMember']= array (
       'null' => false,
       'default' => '',
     ),
-    'company' => 
-    array (
-      'dbtype' => 'varchar',
-      'phptype' => 'string',
-      'precision' => '100',
-      'null' => false,
-      'default' => '',
-    ),
     'fax' => 
-    array (
-      'dbtype' => 'varchar',
-      'phptype' => 'string',
-      'precision' => '100',
-      'null' => false,
-      'default' => '',
-    ),
-    'familienstand' => 
     array (
       'dbtype' => 'varchar',
       'phptype' => 'string',
@@ -395,14 +356,6 @@ $xpdo_meta_map['mvMember']= array (
       'null' => false,
       'default' => '',
     ),
-    'beruf' => 
-    array (
-      'dbtype' => 'varchar',
-      'phptype' => 'string',
-      'precision' => '100',
-      'null' => false,
-      'default' => '',
-    ),
     'bank3' => 
     array (
       'dbtype' => 'varchar',
@@ -448,15 +401,6 @@ $xpdo_meta_map['mvMember']= array (
       'precision' => '100',
       'null' => false,
       'default' => '',
-    ),
-    'adr_id' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'phptype' => 'integer',
-      'null' => false,
-      'default' => 0,
-      'index' => 'index',
     ),
     'abteilung' => 
     array (
@@ -593,6 +537,15 @@ $xpdo_meta_map['mvMember']= array (
       'null' => false,
       'default' => '',
     ),
+    'regatta_start_eligibility' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
     'privacy_policy_submitted' => 
     array (
       'dbtype' => 'tinyint',
@@ -626,15 +579,6 @@ $xpdo_meta_map['mvMember']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'lastname' => 
-    array (
-      'dbtype' => 'varchar',
-      'phptype' => 'string',
-      'precision' => '255',
-      'null' => false,
-      'default' => '',
-      'index' => 'index',
-    ),
     'member_status' => 
     array (
       'dbtype' => 'varchar',
@@ -650,15 +594,6 @@ $xpdo_meta_map['mvMember']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
-    ),
-    'fbuch_name_id' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'phptype' => 'integer',
-      'null' => false,
-      'default' => 0,
-      'index' => 'index',
     ),
   ),
   'composites' => 
@@ -682,14 +617,6 @@ $xpdo_meta_map['mvMember']= array (
     'RoleLinks' => 
     array (
       'class' => 'mvMemberRoleLink',
-      'local' => 'id',
-      'foreign' => 'member_id',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-    'FamilyLinks' => 
-    array (
-      'class' => 'mvMemberFamilyLink',
       'local' => 'id',
       'foreign' => 'member_id',
       'cardinality' => 'many',

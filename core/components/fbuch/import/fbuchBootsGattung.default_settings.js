@@ -1,0 +1,1 @@
+{"file":"core\/components\/fbuch\/import\/fbuchBootsGattung.csv","matchfields":"","settings":["empty","preserve_keys"]}

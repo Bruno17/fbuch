@@ -50,7 +50,7 @@
     }
   ],
   "contextmenus":"update||remove",
-  "actionbuttons":"addItem",
+  "actionbuttons":"addItem||importcsvmigxdb||exportcsvmigxdb",
   "columnbuttons":"",
   "filters":"",
   "extended":{
@@ -148,7 +148,7 @@
   "createdby":1,
   "createdon":"2020-10-14 09:38:13",
   "editedby":1,
-  "editedon":"2020-10-14 22:03:27",
+  "editedon":"2021-01-11 21:32:22",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,
