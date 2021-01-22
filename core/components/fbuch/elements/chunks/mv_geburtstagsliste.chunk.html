@@ -1,0 +1,16 @@
+<table class="table">
+<tbody>
+<tr>
+<td>Name</td>
+<td>Geburtstag</td>
+<td>Alter in [[now:date=`%Y`]]</td>
+<td>Geschlecht</td>
+</tr>
+</tbody>
+[[migxLoopCollection? 
+&packageName=`mv` 
+&classname=`mvMember` 
+&tpl=`mv_tpl_geburtstagsliste` 
+&sortConfig=`[{"sortby":"birthdate"}]` 
+&where=`{"deleted":"0","inactive":"0"}` ]]
+</table>

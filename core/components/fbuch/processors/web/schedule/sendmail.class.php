@@ -26,7 +26,7 @@ class fbuchSendMailProcessor extends fbuchScheduleBaseProcessor {
             if ($member = $modx->getObject('mvMember', array('id' => $member_id))) {
                 $properties = $mail->toArray();
                 $properties['email'] = $member->get('email');
-                $properties['tpl'] = $modx->getOption('mv_mail_tpl');
+                $properties['tpl'] = $modx->fbuch->getChunkName('mv_mail_tpl');
                 $properties['subject'] = $mail->get('subject');
                 $success = $this->fbuch->sendMail($properties);
                 if ($success) {

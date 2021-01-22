@@ -1,5 +1,5 @@
 {
-  "id":30,
+  "id":56,
   "name":"fbuch_anmeldungen",
   "formtabs":"",
   "contextmenus":"",

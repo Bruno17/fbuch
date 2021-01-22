@@ -1,0 +1,12 @@
+<table class="table">
+<tbody>
+<tr><th>Name</th><th>Email</th><th>Ungültige Email</th></tr>
+[[migxLoopCollection? 
+&packageName=`mv` 
+&classname=`mvMember` 
+&joins=`[{"alias":"Beitragstyp"},{"alias":"Family"}]` 
+&tpl=`@CODE:<tr><td>[[+name]] [[+firstname]]</td><td>[[+email]]</td><td>[[+wrong_email]]</td></tr>`
+&sortConfig=`[{"sortby":"name"},{"sortby":"firstname"}]` 
+&where=`{"inactive":"0","wrong_email:!=":""}` ]]
+</tbody>
+</table>

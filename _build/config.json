@@ -37,9 +37,49 @@
         {
           "name":"fbuch_input_options",
           "rank":0
+        },
+        {
+          "name":"mv_sepa",
+          "rank":0
+        },
+        {
+          "name":"mv_content_chunks",
+          "rank":0
         }
       ],
       "snippets":[
+        {
+          "source":1,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "moduleguid":"",
+          "static":false,
+          "static_file":"",
+          "name":"fbuchGetChunk",
+          "file":"fbuchgetchunk.snippet.php"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "moduleguid":"",
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_customchunks_aftergetfields",
+          "file":"fbuch_customchunks_aftergetfields.snippet.php"
+        },
         {
           "source":0,
           "property_preprocess":false,
@@ -688,6 +728,36 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_Login",
+          "file":"fbuch_login.chunk.html",
+          "category":"fbuch_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_Passwort_vergessen",
+          "file":"fbuch_passwort_vergessen.chunk.html",
+          "category":"fbuch_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
           "properties":[
             
           ],
@@ -1247,6 +1317,71 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuchButtonBeiElementRegistrieren",
+          "file":"fbuchbuttonbeielementregistrieren.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"\u00dcberschrift der Mitglieder Message",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuchMitgliederMessage_1_heading",
+          "file":"fbuchmitgliedermessage_1_heading.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"\u00dcberschrift der Mitglieder Message",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuchMitgliederMessage_2_einleitung",
+          "file":"fbuchmitgliedermessage_2_einleitung.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"Text unter der Mitglieder Message",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuchMitgliederMessage_4_schluss",
+          "file":"fbuchmitgliedermessage_4_schluss.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"Eigentlicher Inhalt der Mitglieder Message",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuchMitgliederMessage_3_body",
+          "file":"fbuchmitgliedermessage_3_body.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
           "properties":[
             
           ],
@@ -1269,6 +1404,84 @@
           "static_file":"",
           "name":"fbuchAppErgotrack",
           "file":"fbuchappergotrack.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"Beginn des Betreffs f\u00fcr Einladungsmails",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_invite_subject_prefix",
+          "file":"fbuch_invite_subject_prefix.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"Pagetitel der Login Seite",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_login_pagetitle",
+          "file":"fbuch_login_pagetitle.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"Seiten Logo",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_site_logo",
+          "file":"fbuch_site_logo.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"Ausw\u00e4hlbare Betreff Optionen auf Kontaktformular Seite",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_contact_subject_options",
+          "file":"fbuch_contact_subject_options.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"Email Empf\u00e4nger f\u00fcr Anfragen aus Kontaktformular",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_contact_email",
+          "file":"fbuch_contact_email.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_Passwort_aendern",
+          "file":"fbuch_passwort_aendern.chunk.html"
         },
         {
           "source":0,
@@ -1618,6 +1831,36 @@
         {
           "source":0,
           "property_preprocess":false,
+          "description":"Email f\u00fcr Passwort vergessen - Funktion",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_lgnForgotPassEmail",
+          "file":"fbuch_lgnforgotpassemail.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_lgnForgotPassTpl",
+          "file":"fbuch_lgnforgotpasstpl.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
           "description":"",
           "editor_type":0,
           "cache_type":0,
@@ -1734,6 +1977,21 @@
           "static_file":"",
           "name":"fbuchFahrtenFormBootinfo",
           "file":"fbuchfahrtenformbootinfo.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
+          "name":"fbuchMitgliederMessage",
+          "file":"fbuchmitgliedermessage.chunk.html"
         },
         {
           "source":0,
@@ -2842,6 +3100,20 @@
         {
           "source":0,
           "property_preprocess":false,
+          "description":"Email Adressen f\u00fcr Datenerfassungs Mail",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_datenerfassung_email",
+          "file":"mv_datenerfassung_email.chunk.html",
+          "category":"mv"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
           "description":"",
           "editor_type":0,
           "cache_type":0,
@@ -3230,6 +3502,20 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_tpl_adressliste2",
+          "file":"mv_tpl_adressliste2.chunk.html",
+          "category":"mv_export"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
           "properties":[
             
           ],
@@ -3302,6 +3588,300 @@
           "name":"input_options_mailfilter",
           "file":"input_options_mailfilter.chunk.html",
           "category":"fbuch_input_options"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"Sepa Bic",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_sepa_bic",
+          "file":"mv_sepa_bic.chunk.html",
+          "category":"mv_sepa"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"Sepa Iban",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_sepa_iban",
+          "file":"mv_sepa_iban.chunk.html",
+          "category":"mv_sepa"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"Konto Inhaber (Verein)",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_sepa_nm",
+          "file":"mv_sepa_nm.chunk.html",
+          "category":"mv_sepa"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"SEPA Gl\u00e4ubiger ID",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_sepa_ creditor_id",
+          "file":"mv_sepa_ creditor_id.chunk.html",
+          "category":"mv_sepa"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"Sepa Vereinsk\u00fcrzel",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_sepa_msgid",
+          "file":"mv_sepa_msgid.chunk.html",
+          "category":"mv_sepa"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_Ueberweiserliste_content",
+          "file":"mv_ueberweiserliste_content.chunk.html",
+          "category":"mv_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_Mitglieder_Beitragstypen",
+          "file":"mv_mitglieder_beitragstypen.chunk.html",
+          "category":"mv_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_Geburtstagsliste",
+          "file":"mv_geburtstagsliste.chunk.html",
+          "category":"mv_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"Email Template f\u00fcr Daten\u00fcbermittlung Mitglieder Datenabgleich",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_Datenerfassung",
+          "file":"mv_datenerfassung.chunk.html",
+          "category":"mv_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_Mail_Downloads",
+          "file":"mv_mail_downloads.chunk.html",
+          "category":"mv_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_Geburtstagsliste_sortiert_nach_Geburtstag",
+          "file":"mv_geburtstagsliste_sortiert_nach_geburtstag.chunk.html",
+          "category":"mv_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_Adressen_der_Jugendlichen",
+          "file":"mv_adressen_der_jugendlichen.chunk.html",
+          "category":"mv_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_Beitragseinzug_content",
+          "file":"mv_beitragseinzug_content.chunk.html",
+          "category":"mv_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_Sepa_Anzeige",
+          "file":"mv_sepa_anzeige.chunk.html",
+          "category":"mv_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_Download_Sepa_Export",
+          "file":"mv_download_sepa_export.chunk.html",
+          "category":"mv_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_Ungueltige_Email_Adressen",
+          "file":"mv_ungueltige_email_adressen.chunk.html",
+          "category":"mv_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_mitgliedernotizen",
+          "file":"mv_mitgliedernotizen.chunk.html",
+          "category":"mv_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_eintrittsdatum",
+          "file":"mv_eintrittsdatum.chunk.html",
+          "category":"mv_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_Ausgetreten",
+          "file":"mv_ausgetreten.chunk.html",
+          "category":"mv_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_Adressliste_Nach_Adresse",
+          "file":"mv_adressliste_nach_adresse.chunk.html",
+          "category":"mv_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_Adressliste_nach_Namen",
+          "file":"mv_adressliste_nach_namen.chunk.html",
+          "category":"mv_content_chunks"
         }
       ],
       "templates":[
@@ -3409,6 +3989,28 @@
             "OnPageNotFound"
           ],
           "file":"prepare_download.plugin.php"
+        },
+        {
+          "source":1,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "disabled":false,
+          "moduleguid":"",
+          "static":false,
+          "static_file":"",
+          "name":"fbuchGetChunk",
+          "events":[
+            "OnChunkFormSave",
+            "OnChunkSave",
+            "OnElementNotFound"
+          ],
+          "file":"fbuchgetchunk.plugin.php"
         }
       ]
     }

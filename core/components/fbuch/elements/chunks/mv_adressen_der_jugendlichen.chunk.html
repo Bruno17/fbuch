@@ -1,0 +1,37 @@
+<table class="table">
+<tbody>
+<tr>
+<td>Name</td>
+<td>Geburtstag</td>
+<td>Alter in [[now:date=`%Y`]]</td>
+<td>Geschlecht</td>
+<td>PLZ</td>
+<td>Ort</td>
+<td>Straße</td>
+<td>Name</td>
+<td>Email</td>
+<td>Telefon</td>
+</tr>
+</tbody>
+[[!migxLoopCollection? 
+&packageName=`mv` 
+&classname=`mvMember` 
+&tpl=`@CODE:
+<tr>
+<td>{{+name}} {{+firstname}}</td>
+<td>{{+birthdate:strtotime:date=`%d.%m.%Y`}}</td>
+<td>{{mv_berechne_alter? &when=`thisyear` &birthdate=`{{+birthdate}}`}}</td>
+<td>{{+gender:is=`weiblich`:then=`w`:else=`m`}}</td>
+<td>[[+zip]]</td>
+<td>[[+city]]</td>
+<td>[[+street]]</td>
+<td>[[+name]] [[+firstname]]</td>
+<td>[[+email]]</td>
+<td>[[+mobile]]<br>[[+business_phone]]<br>[[+phone]]
+</td>
+</tr>
+` 
+&sortConfig=`[{"sortby":"birthdate"}]` 
+&where=`{"deleted":"0","inactive":"0","birthdate:>=":"[[!now:date=`%Y`:decr=`18`]]-01-01 00:00:00"}` ]]
+</table>
+

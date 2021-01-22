@@ -362,7 +362,7 @@
     }
   ],
   "contextmenus":"update||recall_remove_delete",
-  "actionbuttons":"addItem||toggletrash",
+  "actionbuttons":"addItem||toggletrash||exportview",
   "columnbuttons":"",
   "filters":[
     {
@@ -562,7 +562,7 @@
   "createdby":1,
   "createdon":"2016-09-10 13:32:23",
   "editedby":1,
-  "editedon":"2020-05-25 14:35:35",
+  "editedon":"2021-01-04 15:51:48",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

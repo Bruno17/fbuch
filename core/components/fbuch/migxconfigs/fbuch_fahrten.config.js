@@ -69,7 +69,7 @@
     }
   ],
   "contextmenus":"update||recall_remove_delete",
-  "actionbuttons":"addItem||toggletrash",
+  "actionbuttons":"addItem||bulk||toggletrash",
   "columnbuttons":"",
   "filters":"",
   "extended":{
@@ -276,7 +276,7 @@
   "createdby":1,
   "createdon":"2016-09-10 10:28:54",
   "editedby":1,
-  "editedon":"2020-06-20 17:22:25",
+  "editedon":"2020-12-07 11:33:34",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

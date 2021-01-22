@@ -1,9 +1,9 @@
 {
-  "id":31,
+  "id":37,
   "name":"fbuch_termine",
   "formtabs":[
     {
-      "MIGX_id":49,
+      "MIGX_id":53,
       "caption":"Termin",
       "print_before_tabs":"0",
       "pos":1,
@@ -11,7 +11,7 @@
       "MIGXtyperender":"<h3>formtab<\/h3>",
       "fields":[
         {
-          "MIGX_id":205,
+          "MIGX_id":219,
           "field":"title",
           "caption":"title",
           "pos":1,
@@ -27,7 +27,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":206,
+          "MIGX_id":220,
           "field":"date",
           "caption":"date",
           "description":"",
@@ -58,7 +58,7 @@
       ]
     },
     {
-      "MIGX_id":50,
+      "MIGX_id":54,
       "caption":"Einladungsliste",
       "print_before_tabs":"0",
       "pos":2,
@@ -66,7 +66,7 @@
       "MIGXtyperender":"<h3>formtab<\/h3>",
       "fields":[
         {
-          "MIGX_id":208,
+          "MIGX_id":221,
           "field":"invites",
           "caption":"",
           "description":"",
@@ -97,12 +97,12 @@
       ]
     },
     {
-      "MIGX_id":51,
+      "MIGX_id":55,
       "caption":"Mailingliste",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":210,
+          "MIGX_id":222,
           "field":"mailinglist_id",
           "caption":"Mailing List",
           "description":"",
@@ -131,7 +131,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":211,
+          "MIGX_id":223,
           "field":"copy_names_to_mailinglist",
           "caption":"Namen der Einladungsliste in ausgew\u00e4hlte Mailingliste kopieren",
           "description":"",
@@ -150,7 +150,7 @@
           "pos":2
         },
         {
-          "MIGX_id":209,
+          "MIGX_id":224,
           "field":"mailinglist",
           "caption":"",
           "description":"",

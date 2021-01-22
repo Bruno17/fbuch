@@ -1,4 +1,6 @@
 {
+  "id":48,
+  "name":"fbuch_bootnames",
   "formtabs":"",
   "contextmenus":"",
   "actionbuttons":"",
@@ -185,5 +187,15 @@
       "editor":""
     }
   ],
+  "createdby":0,
+  "createdon":"-1-11-30 00:00:00",
+  "editedby":0,
+  "editedon":"-1-11-30 00:00:00",
+  "deleted":0,
+  "deletedon":"-1-11-30 00:00:00",
+  "deletedby":0,
+  "published":0,
+  "publishedon":"-1-11-30 00:00:00",
+  "publishedby":0,
   "category":""
 }

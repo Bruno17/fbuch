@@ -1905,7 +1905,7 @@ class Fbuch {
             return '';
         }
 
-        $subj_prefix = empty($subj_prefix) ? $modx->getOption('invite_subject_prefix') : $subj_prefix;
+        $subj_prefix = empty($subj_prefix) ? $this->getChunk('fbuch_invite_subject_prefix') : $subj_prefix;
 
         $modx->runSnippet('setlocale');
         $name_o = $object->getOne('Member');
@@ -1937,7 +1937,7 @@ class Fbuch {
             $properties['comment'] = $comment;
             $properties['iid'] = $object->get('id');
             $properties['email'] = $email;
-            $properties['tpl'] = $modx->getOption('invite_mail_tpl');
+            $properties['tpl'] = $this->getChunkName('fbuch_invite_mail_tpl');
             $properties['subject'] = $subj_prefix . ': ' . $date_o->get('title') . ' ' . strftime('%a, %d.%m.%Y ', strtotime($date_o->get('date'))) . $date_o->get('start_time');
             $properties['code'] = md5($properties['date_id'] . $properties['email'] . $properties['iid']);
             //print_r($properties);die();
@@ -1951,6 +1951,19 @@ class Fbuch {
 
         }
 
+    }
+    
+    public function getChunk($name,$properties = array()){
+        return $this->modx->getChunk($this->getChunkName($name),$properties);
+    }
+    
+    public function getChunkName($name){
+        $custom_name ='custom_' . $name;
+        if ($this->modx->getObject('modChunk',array('name'=>$custom_name))){
+            $name = $custom_name;
+        }
+
+        return $name;        
     }
 
     public function sendMails($recipients, $properties = array()) {

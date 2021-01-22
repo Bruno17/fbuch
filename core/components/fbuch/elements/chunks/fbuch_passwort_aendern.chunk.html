@@ -1,0 +1,39 @@
+<h2>Passwort ändern</h2>
+[[!ChangePassword?
+   &submitVar=`change-password`
+   &placeholderPrefix=`cp.`
+   &validateOldPassword=`1`
+   &validate=`nospam:blank`
+   &reloadOnSuccess=``
+   &successMessage=`Dein Passwort wurde erfolgreich geändert.`
+]]
+
+<div class="updprof-error">[[!+cp.error_message]]</div>
+[[!+cp.successMessage:is=``:then=`
+<form class="form" action="[[~[[*id]]]]" method="post">
+    <input type="hidden" name="nospam" value="" />
+    <div class="ff">
+        <label for="password_old">Dein bisheriges Passwort
+            <span class="error">[[!+cp.error.password_old]]</span>
+        </label>
+        <input type="password" name="password_old" id="password_old" value="[[+cp.password_old]]" />
+    </div>
+    <div class="ff">
+        <label for="password_new">Dein neues Passwort
+            <span class="error">[[!+cp.error.password_new]]</span>
+        </label>
+        <input type="password" name="password_new" id="password_new" value="[[+cp.password_new]]" />
+    </div>
+    <div class="ff">
+        <label for="password_new_confirm">Neues Passwort bestätigen
+            <span class="error">[[!+cp.error.password_new_confirm]]</span>
+        </label>
+        <input type="password" name="password_new_confirm" id="password_new_confirm" value="[[+cp.password_new_confirm]]" />
+    </div>
+    <div class="ff">
+        <input type="submit" name="change-password" value="Passwort ändern" />
+    </div>
+</form>
+`:else=`
+[[!+cp.successMessage]]
+`]]

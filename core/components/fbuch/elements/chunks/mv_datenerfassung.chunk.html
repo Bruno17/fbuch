@@ -1,0 +1,14 @@
+[[!authorize_member]]
+[[!FormIt?
+   &hooks=`spam,email`
+   &emailTpl=`mv_datenerfassung_emailTpl`
+   &emailTo=`[[$$mv_datenerfassung_email]]`
+   &submitVar=`datenerfassung`
+   &emailSubject=`Mitgliederverwaltung - Datenübermittlung`
+   &successMessage=`
+   <div class="alert alert-success" role="alert">
+   Vielen Dank für die Datenübermittlung. Wir werden die Daten nach einer Überprüfung in unsere Mitgliederdatenbank übernehmen.
+</div>
+  ` 
+]]
+[[+fi.successMessage]] 

@@ -1,14 +1,14 @@
 {
-  "id":23,
+  "id":40,
   "name":"fbuch_moduserabgleich",
   "formtabs":[
     {
-      "MIGX_id":36,
+      "MIGX_id":57,
       "caption":"Abgleich",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":153,
+          "MIGX_id":227,
           "field":"member_status",
           "caption":"Status",
           "description":"",
@@ -27,7 +27,7 @@
           "pos":1
         },
         {
-          "MIGX_id":154,
+          "MIGX_id":228,
           "field":"mv_member_id",
           "caption":"Mitglieds ID",
           "description":"",
@@ -46,7 +46,7 @@
           "pos":2
         },
         {
-          "MIGX_id":155,
+          "MIGX_id":229,
           "field":"modx_user_id",
           "caption":"Benutzer ID",
           "description":"",

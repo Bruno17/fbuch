@@ -1,20 +1,20 @@
 {
-  "id":52,
-  "name":"fbuch_fahrtnamen",
+  "id":69,
+  "name":"fbuch_customchunks",
   "formtabs":[
     {
-      "MIGX_id":79,
-      "caption":"Fahrt",
+      "MIGX_id":98,
+      "caption":"Inhalt",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":332,
-          "field":"name",
-          "caption":"Name",
-          "description":"",
+          "MIGX_id":495,
+          "field":"snippet",
+          "caption":"Chunk Inhalt",
+          "description":"\u00c4nderungen werden gespeichert",
           "description_is_code":"0",
           "inputTV":"",
-          "inputTVtype":"",
+          "inputTVtype":"textarea",
           "validation":"",
           "configs":"",
           "restrictive_condition":"",
@@ -27,13 +27,13 @@
           "pos":1
         },
         {
-          "MIGX_id":333,
-          "field":"gattung",
-          "caption":"Gattung",
-          "description":"1,2,3,4,8",
+          "MIGX_id":496,
+          "field":"original_snippet",
+          "caption":"Original Chunk",
+          "description":"\u00c4nderungen werden nicht gespeichert",
           "description_is_code":"0",
           "inputTV":"",
-          "inputTVtype":"",
+          "inputTVtype":"textarea",
           "validation":"",
           "configs":"",
           "restrictive_condition":"",
@@ -44,13 +44,21 @@
           "default":"",
           "useDefaultIfEmpty":"0",
           "pos":2
-        },
+        }
+      ],
+      "pos":1
+    },
+    {
+      "MIGX_id":99,
+      "caption":"Differenz",
+      "print_before_tabs":"0",
+      "fields":[
         {
-          "MIGX_id":334,
-          "field":"seats",
-          "caption":"Pl\u00e4tze",
-          "description":"",
-          "description_is_code":"0",
+          "MIGX_id":498,
+          "field":"",
+          "caption":"",
+          "description":" \n       [[!phpdiff? &type=`5` &oldChunk=`[[+original_name]]` &newChunk=`[[+name]]`]]   \n        <style type=\"text\/css\">\n            html {\n                font-size: 13px;\n            }\n            .token.coord {\n                color: #6cf;\n            }\n            .token.diff.bold {\n                color: #fb0;\n                font-weight: normal;\n            }\n\n            \n            [[+phpdiff_style]]\n        <\/style>        \n\n        [[+phpdiff_output]]",
+          "description_is_code":1,
           "inputTV":"",
           "inputTVtype":"",
           "validation":"",
@@ -62,23 +70,23 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":3
+          "pos":1
         }
       ],
-      "pos":1
+      "pos":2
     }
   ],
-  "contextmenus":"update",
-  "actionbuttons":"addItem",
-  "columnbuttons":"",
+  "contextmenus":"",
+  "actionbuttons":"",
+  "columnbuttons":"update",
   "filters":"",
   "extended":{
-    "migx_add":"Namen erstellen",
+    "migx_add":"",
     "disable_add_item":"",
     "add_items_directly":"",
     "formcaption":"",
     "update_win_title":"",
-    "win_id":"fbuch_fahrtnamen",
+    "win_id":"fbuch_customchunks",
     "maxRecords":"",
     "addNewItemAt":"bottom",
     "media_source_id":"",
@@ -92,11 +100,15 @@
     "extrahandlers":"",
     "filtersperrow":4,
     "packageName":"fbuch",
-    "classname":"fbuchFahrtNames",
-    "task":"fahrtnam",
+    "classname":"modChunk",
+    "task":"",
     "getlistsort":"",
     "getlistsortdir":"",
-    "sortconfig":"",
+    "sortconfig":[
+      {
+        "sortby":"name"
+      }
+    ],
     "gridpagesize":"",
     "use_custom_prefix":"0",
     "prefix":"",
@@ -106,24 +118,16 @@
     "check_resid_TV":"",
     "join_alias":"",
     "has_jointable":"yes",
-    "getlistwhere":"",
-    "joins":[
-      {
-        "alias":"Fahrt"
-      },
-      {
-        "alias":"Member"
-      },
-      {
-        "alias":"Boot",
-        "classname":"fbuchBoot",
-        "on":"Boot.id = Fahrt.boot_id"
-      }
-    ],
-    "hooksnippets":"",
+    "getlistwhere":{
+      "name:LIKE":"custom_%"
+    },
+    "joins":"",
+    "hooksnippets":{
+      "aftergetfields":"fbuch_customchunks_aftergetfields"
+    },
     "cmpmaincaption":"",
-    "cmptabcaption":"FahrtNamen",
-    "cmptabdescription":"",
+    "cmptabcaption":"Custom Chunks",
+    "cmptabdescription":"Bearbeiten und Vergleichen der Custom Chunk Inhalte mit den Original Chunks",
     "cmptabcontroller":"",
     "winbuttons":"",
     "onsubmitsuccess":"",
@@ -132,7 +136,7 @@
   "columns":[
     {
       "MIGX_id":2,
-      "header":"ID",
+      "header":"id",
       "dataIndex":"id",
       "width":10,
       "sortable":true,
@@ -146,14 +150,14 @@
       "editor":""
     },
     {
-      "MIGX_id":17,
-      "header":"Member_firstname",
-      "dataIndex":"Member_firstname",
-      "width":30,
+      "MIGX_id":3,
+      "header":"name",
+      "dataIndex":"name",
+      "width":40,
       "sortable":true,
       "show_in_grid":1,
       "customrenderer":"",
-      "renderer":"",
+      "renderer":"this.renderRowActions",
       "clickaction":"",
       "selectorconfig":"",
       "renderchunktpl":"",
@@ -161,70 +165,10 @@
       "editor":""
     },
     {
-      "MIGX_id":18,
-      "header":"Member_name",
-      "dataIndex":"Member_name",
-      "width":30,
-      "sortable":true,
-      "show_in_grid":1,
-      "customrenderer":"",
-      "renderer":"",
-      "clickaction":"",
-      "selectorconfig":"",
-      "renderchunktpl":"",
-      "renderoptions":"",
-      "editor":""
-    },
-    {
-      "MIGX_id":16,
-      "header":"Fahrt_date",
-      "dataIndex":"Fahrt_date",
-      "width":20,
-      "sortable":true,
-      "show_in_grid":1,
-      "customrenderer":"",
-      "renderer":"",
-      "clickaction":"",
-      "selectorconfig":"",
-      "renderchunktpl":"",
-      "renderoptions":"",
-      "editor":""
-    },
-    {
-      "MIGX_id":22,
-      "header":"Fahrt_start_time",
-      "dataIndex":"Fahrt_start_time",
-      "width":15,
-      "sortable":true,
-      "show_in_grid":1,
-      "customrenderer":"",
-      "renderer":"",
-      "clickaction":"",
-      "selectorconfig":"",
-      "renderchunktpl":"",
-      "renderoptions":"",
-      "editor":""
-    },
-    {
-      "MIGX_id":20,
-      "header":"Boot_name",
-      "dataIndex":"Boot_name",
-      "width":30,
-      "sortable":true,
-      "show_in_grid":1,
-      "customrenderer":"",
-      "renderer":"",
-      "clickaction":"",
-      "selectorconfig":"",
-      "renderchunktpl":"",
-      "renderoptions":"",
-      "editor":""
-    },
-    {
-      "MIGX_id":15,
-      "header":"Fahrt_km",
-      "dataIndex":"Fahrt_km",
-      "width":15,
+      "MIGX_id":5,
+      "header":"description",
+      "dataIndex":"description",
+      "width":40,
       "sortable":true,
       "show_in_grid":1,
       "customrenderer":"",
@@ -237,9 +181,9 @@
     }
   ],
   "createdby":1,
-  "createdon":"2016-09-19 06:14:41",
+  "createdon":"2021-01-20 17:52:20",
   "editedby":1,
-  "editedon":"2020-05-18 13:11:20",
+  "editedon":"2021-01-22 09:41:04",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

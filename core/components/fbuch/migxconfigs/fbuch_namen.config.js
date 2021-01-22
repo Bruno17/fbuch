@@ -1,32 +1,32 @@
 {
-  "id":17,
+  "id":59,
   "name":"fbuch_namen",
   "formtabs":[
     {
-      "MIGX_id":30,
+      "MIGX_id":88,
       "caption":"Eintrag",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":168,
+          "MIGX_id":371,
           "field":"lastname",
           "caption":"lastname",
           "pos":1
         },
         {
-          "MIGX_id":169,
+          "MIGX_id":372,
           "field":"firstname",
           "caption":"firstname",
           "pos":2
         },
         {
-          "MIGX_id":170,
+          "MIGX_id":373,
           "field":"gender",
           "caption":"gender",
           "pos":3
         },
         {
-          "MIGX_id":171,
+          "MIGX_id":374,
           "field":"birth_date",
           "caption":"birth_date",
           "description":"",
@@ -45,7 +45,7 @@
           "pos":4
         },
         {
-          "MIGX_id":172,
+          "MIGX_id":375,
           "field":"member_status",
           "caption":"member_status",
           "description":"",
@@ -64,19 +64,19 @@
           "pos":5
         },
         {
-          "MIGX_id":173,
+          "MIGX_id":376,
           "field":"riot_user_id",
           "caption":"riot_user_id",
           "pos":6
         },
         {
-          "MIGX_id":174,
+          "MIGX_id":377,
           "field":"email",
           "caption":"email",
           "pos":7
         },
         {
-          "MIGX_id":175,
+          "MIGX_id":378,
           "field":"phone",
           "caption":"phone",
           "pos":8

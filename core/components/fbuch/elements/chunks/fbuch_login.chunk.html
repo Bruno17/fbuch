@@ -1,0 +1,43 @@
+
+[[$fbuchMyInvites]]
+
+[[!+modx.user.id:is=`0`:then=``:else=`
+Du bist angemeldet als <strong>[[!+modx.user.username]]</strong><br>
+Dein Passwort kannst Du bei Bedarf <a href="[[~85]]">hier</a> ändern.
+`]] 
+[[!Login? &logoutTpl=`fbuchLogoutTpl`&loginResourceId=`78`]]
+
+[[!+modx.user.id:is=`0`:then=`<hr>
+Falls Du Dein Passwort nicht weißt, oder nicht weißt, ob Du bereits einen Login hast,<br>
+versuche es <a href="[[~83]]">hier</a>.<br>
+`:else=`
+`]] 
+
+<hr>
+<p>
+[[!FormIt? &hooks=`spam,email,redirect` 
+&emailTpl=`emailKontakt` 
+&emailTo=`[[$$fbuch_contact_email]]` 
+&emailUseFieldForSubject=`1` 
+&redirectTo=`82` 
+&validate=`name:required, email:email:required, subject:required` ]] 
+[[!+fi.error_message:notempty=`</p>
+<p>[[!+fi.error_message]]</p>
+<p>`]]</p>
+<p>Zugangsdaten können über folgendes Formular angefordert werden. Ebenso können Fragen gesendet werden.</p>
+<form class="form uk-form uk-form-stacked" action="[[~[[*id]]]]" method="post"><input name="nospam:blank" type="hidden" value="" />
+<div class="form-group uk-form-row"><label class="uk-form-label" for="name"> Vor- und Nachname: </label> <input id="name" class="uk-width-1-1 form-control" name="name" type="text" value="[[!+fi.name]]" /> <span class="error">[[!+fi.error.name]]</span></div>
+
+<div class="form-group uk-form-row"><label class="uk-form-label" for="email"> Email: </label> <input id="email" class="uk-width-1-1 form-control" name="email" type="text" value="[[!+fi.email]]" /> <span class="error">[[!+fi.error.email]]</span></div>
+
+<div class="form-group uk-form-row"><label class="uk-form-label" for="subject"> Betreff: </label> 
+<select id="subject" class="uk-width-1-1 form-control" name="subject" >
+[[$$fbuch_contact_subject_options]]
+</select> 
+
+<span class="error">[[!+fi.error.subject]]</span></div>
+
+<div class="form-group uk-form-row"><label class="uk-form-label" for="text"> Nachricht: </label> <textarea id="text" class="uk-width-1-1 form-control" name="text" rows="7">[[!+fi.text]]</textarea> <span class="error">[[!+fi.error.text]]</span></div>
+
+<div class="uk-form-row form-buttons"><button class="uk-button btn btn-default" type="submit">Anfrage senden</button></div>
+</form>
