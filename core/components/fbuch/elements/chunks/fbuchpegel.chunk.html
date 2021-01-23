@@ -1,17 +1,16 @@
-Aktueller Pegel Steinbach: [[!+gp_current_pegel]]cm <br><br>
+Aktueller Pegel [[+station_name]]: [[!+gp_current_pegel]]cm <br><br>
 
 <div style="height: calc(100% - 80px);width: 10px;position: fixed;top: 72px;">
   <div style="height: 100%;width: 14px;position: absolute;top: 0;left: -15px;">
-    <div style="height: [[!+gp_pegel_uk_warnschild_percent]]%;width:14px;position:absolute;background-color:orange;bottom:0;">
+    <div style="height: 100%;width:14px;position:absolute;background-color:#CE003A;bottom:0;">
     </div>
-    <div style="height: 50%;width:14px;position:absolute;background-color:green;bottom:0;">
+    <div style="height: [[!+gp_pegel_danger_percent]]%;width:14px;position:absolute;background-color:orange;bottom:0;">
     </div>
- 
-    <div style="height: 40%;width:14px;position:absolute;background-color:#CE003A;bottom:[[!+gp_pegel_uk_warnschild_percent]]%;">
-    </div>    
+    <div style="height: [[!+gp_max_pegel_ok_percent]]%;width:14px;position:absolute;background-color:green;bottom:0;">
+    </div>
+    <div style="height: 100%;width:7px;position:absolute;background-color:white;bottom:0;border-left: 1px solid #ccc;">
+    </div> 
     <div style="height: [[!+gp_pegel_percent]]%;width:7px;position:absolute;background-color:#337ab7;bottom:0;border-right: 1px solid white;">
     </div>
-    <div style="height: [[!+gp_pegel_percent_rest]]%;width:7px;position:absolute;background-color:white;bottom:[[!+gp_pegel_percent]]%;border-left: 1px solid #ccc;">
-    </div>    
   </div>    
 </div>

@@ -2236,6 +2236,21 @@
         {
           "source":0,
           "property_preprocess":false,
+          "description":"Einstellungen f\u00fcr die Flusspegelanzeige",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
+          "name":"fbuchPegelWrapper",
+          "file":"fbuchpegelwrapper.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
           "description":"",
           "editor_type":0,
           "cache_type":0,
