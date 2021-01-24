@@ -46,6 +46,11 @@ $gridactionbuttons['fb_sendmails']['handler'] = 'this.fb_sendmails';
 $gridactionbuttons['fb_sendmails']['scope'] = 'this';
 $gridactionbuttons['fb_sendmails']['standalone'] = '1';
 
+$gridactionbuttons['customchunks_tojson']['text'] = "'Custom Chunks to Json'";
+$gridactionbuttons['customchunks_tojson']['handler'] = 'this.customchunks_tojson';
+$gridactionbuttons['customchunks_tojson']['scope'] = 'this';
+$gridactionbuttons['customchunks_tojson']['standalone'] = '1';
+
 $winbuttons['send']['text'] = "'Rundmail senden'";
 $winbuttons['send']['handler'] = 'this.submit';
 $winbuttons['send']['scope'] = 'this';
@@ -340,6 +345,42 @@ createUser: function(btn,e) {
         params.resource_id = '[[+config.resource_id]]'; 
         params.object_id = this.menu.record.id;
         
+		MODx.Ajax.request({
+			url : this.config.url,
+			params: params,
+			listeners: {
+				'success': {fn:function(r) {
+					 //box.hide();
+                     this.refresh();
+				},scope:this}
+				,'failure': {fn:function(r) {
+					 //box.hide();
+                     this.refresh();
+				},scope:this}                
+			}
+		});
+        
+        params.action = o_action;
+        params.processaction = o_processaction;
+        
+		return true;
+    }
+";
+
+$gridfunctions['this.customchunks_tojson'] = "
+customchunks_tojson: function(btn,e) {
+		var s = this.getStore();
+		//var box = Ext.MessageBox.wait('Preparing ...', 'Mail wird erstellt');
+        var params = s.baseParams;
+        var o_action = params.action || '';
+        var o_processaction = params.processaction || '';
+        var configs = this.config.configs;
+        
+        params.action = 'mgr/migxdb/process';
+        params.processaction = 'customChunksToJson';
+        params.configs = this.config.configs;
+        params.resource_id = '[[+config.resource_id]]'; 
+                
 		MODx.Ajax.request({
 			url : this.config.url,
 			params: params,

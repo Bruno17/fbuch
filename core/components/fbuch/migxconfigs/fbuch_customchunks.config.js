@@ -77,7 +77,7 @@
     }
   ],
   "contextmenus":"",
-  "actionbuttons":"",
+  "actionbuttons":"customchunks_tojson",
   "columnbuttons":"update",
   "filters":"",
   "extended":{
@@ -183,7 +183,7 @@
   "createdby":1,
   "createdon":"2021-01-20 17:52:20",
   "editedby":1,
-  "editedon":"2021-01-22 09:41:04",
+  "editedon":"2021-01-24 11:39:03",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,
