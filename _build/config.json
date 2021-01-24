@@ -3,7 +3,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"1.5.4-beta",
+  "version":"1.5.3-beta",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",
@@ -144,7 +144,7 @@
       ],
       "snippets":[
         {
-          "source":1,
+          "source":0,
           "property_preprocess":false,
           "description":"",
           "editor_type":0,
@@ -823,7 +823,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuch_Login",
@@ -1412,7 +1414,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuchButtonBeiElementRegistrieren",
@@ -1425,7 +1429,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuchMitgliederMessage_1_heading",
@@ -1438,7 +1444,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuchMitgliederMessage_2_einleitung",
@@ -1451,7 +1459,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuchMitgliederMessage_4_schluss",
@@ -1464,7 +1474,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuchMitgliederMessage_3_body",
@@ -1507,7 +1519,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuch_invite_subject_prefix",
@@ -1520,7 +1534,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuch_login_pagetitle",
@@ -1533,7 +1549,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuch_site_logo",
@@ -1546,7 +1564,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuch_contact_subject_options",
@@ -1559,7 +1579,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuch_contact_email",
@@ -1572,7 +1594,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuch_Passwort_aendern",
@@ -3214,7 +3238,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_datenerfassung_email",
@@ -3612,7 +3638,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_tpl_adressliste2",
@@ -3706,7 +3734,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_sepa_bic",
@@ -3720,7 +3750,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_sepa_iban",
@@ -3734,7 +3766,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_sepa_nm",
@@ -3748,7 +3782,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_sepa_ creditor_id",
@@ -3762,7 +3798,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_sepa_msgid",
@@ -3776,7 +3814,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_Ueberweiserliste_content",
@@ -3790,7 +3830,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_Mitglieder_Beitragstypen",
@@ -3804,7 +3846,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_Geburtstagsliste",
@@ -3818,7 +3862,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_Datenerfassung",
@@ -3832,7 +3878,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_Mail_Downloads",
@@ -3846,7 +3894,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_Geburtstagsliste_sortiert_nach_Geburtstag",
@@ -3860,7 +3910,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_Adressen_der_Jugendlichen",
@@ -3874,7 +3926,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_Beitragseinzug_content",
@@ -3888,7 +3942,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_Sepa_Anzeige",
@@ -3902,7 +3958,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_Download_Sepa_Export",
@@ -3916,7 +3974,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_Ungueltige_Email_Adressen",
@@ -3930,7 +3990,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_mitgliedernotizen",
@@ -3944,7 +4006,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_eintrittsdatum",
@@ -3958,7 +4022,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_Ausgetreten",
@@ -3972,7 +4038,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_Adressliste_Nach_Adresse",
@@ -3986,7 +4054,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_Adressliste_nach_Namen",
@@ -4101,7 +4171,7 @@
           "file":"prepare_download.plugin.php"
         },
         {
-          "source":1,
+          "source":0,
           "property_preprocess":false,
           "description":"",
           "editor_type":0,
