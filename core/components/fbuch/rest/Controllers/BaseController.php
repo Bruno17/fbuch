@@ -3,6 +3,27 @@
 class BaseController extends modRestController {
     
     public $defaultLimit = 0;
+    
+	public function setProperties(array $properties = array(),$merge = false) {
+        parent::setProperties($properties,$merge);
+        $this->sanitizeRequest();
+	} 
+    
+    /**
+     * Harden GPC variables by removing any MODX tags, Javascript, or entities.
+     */
+    public function sanitizeRequest() {
+        $modxtags = array_values($this->modx->sanitizePatterns);
+        
+        $depth = (int)ini_get('max_input_nesting_level');
+        $depth = ($depth <= 0) ? 99 : $depth + 1;
+
+        if ($this->modx->getOption('allow_tags_in_post',null,true)) {
+            modX :: sanitize($this->properties);
+        } else {
+            modX :: sanitize($this->properties, $modxtags, $depth);
+        }
+    }     
 
     public function getCurrentFbuchUser() {
         $modx = &$this->modx;

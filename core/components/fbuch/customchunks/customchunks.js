@@ -1,140 +1,147 @@
 {
     "custom_fbuchMitgliederMessage_1_heading": {
         "deleted": "0",
-        "group": "1",
+        "group": "Mitglieder Message",
         "tab": "",
         "caption": "",
         "inputTVtype": ""
     },
     "custom_fbuchMitgliederMessage_2_einleitung": {
         "deleted": "0",
-        "group": "1",
+        "group": "Mitglieder Message",
         "tab": "",
         "caption": "",
-        "inputTVtype": ""
+        "inputTVtype": "textarea"
     },
     "custom_fbuchMitgliederMessage_3_body": {
         "deleted": "0",
-        "group": "1",
+        "group": "Mitglieder Message",
         "tab": "",
         "caption": "",
-        "inputTVtype": ""
+        "inputTVtype": "textarea"
     },
     "custom_fbuchMitgliederMessage_4_schluss": {
         "deleted": "0",
-        "group": "1",
+        "group": "Mitglieder Message",
         "tab": "",
         "caption": "",
-        "inputTVtype": ""
+        "inputTVtype": "textarea"
     },
     "custom_fbuchPegelWrapper": {
         "deleted": "0",
         "group": "",
         "tab": "",
         "caption": "",
-        "inputTVtype": ""
+        "inputTVtype": "textarea"
+    },
+    "custom_fbuch_benutzerpasswort_mail": {
+        "deleted": "0",
+        "group": "Benutzer",
+        "tab": "",
+        "caption": "",
+        "inputTVtype": "textarea"
     },
     "custom_fbuch_contact_email": {
         "deleted": "0",
-        "group": "",
+        "group": "Kontaktformular",
         "tab": "",
         "caption": "",
         "inputTVtype": ""
     },
     "custom_fbuch_contact_subject_options": {
         "deleted": "0",
-        "group": "",
+        "group": "Kontaktformular",
         "tab": "",
         "caption": "",
-        "inputTVtype": ""
+        "inputTVtype": "textarea"
     },
     "custom_fbuch_invite_mail_tpl": {
         "deleted": "0",
-        "group": "",
-        "tab": "",
+        "group": "Mails",
+        "tab": "invite",
         "caption": "",
-        "inputTVtype": ""
+        "inputTVtype": "textarea"
     },
     "custom_fbuch_invite_subject_prefix": {
         "deleted": "0",
-        "group": "",
-        "tab": "",
+        "group": "Mails",
+        "tab": "invite",
         "caption": "",
         "inputTVtype": ""
     },
     "custom_fbuch_lgnForgotPassEmail": {
         "deleted": "0",
-        "group": "",
+        "group": "Benutzer",
         "tab": "",
         "caption": "",
-        "inputTVtype": ""
+        "inputTVtype": "textarea"
     },
     "custom_fbuch_login_pagetitle": {
         "deleted": "0",
-        "group": "",
+        "group": "Site",
         "tab": "",
         "caption": "",
         "inputTVtype": ""
     },
     "custom_fbuch_site_logo": {
         "deleted": "0",
-        "group": "",
+        "group": "Site",
         "tab": "",
         "caption": "",
-        "inputTVtype": ""
+        "inputTVtype": "image"
     },
     "custom_mv_datenerfassung_email": {
         "deleted": "0",
-        "group": "",
-        "tab": "",
+        "group": "Mitglieder Datenerfassung",
+        "tab": "Mail",
         "caption": "",
         "inputTVtype": ""
     },
     "custom_mv_mail_tpl": {
         "deleted": "0",
-        "group": "",
-        "tab": "",
+        "group": "Mails",
+        "tab": "Serienmails",
         "caption": "",
-        "inputTVtype": ""
+        "inputTVtype": "textarea"
     },
     "custom_mv_mitgliederDatenFormular": {
         "deleted": "0",
-        "group": "",
-        "tab": "",
+        "group": "Mitglieder Datenerfassung",
+        "tab": "Formular",
         "caption": "",
-        "inputTVtype": ""
+        "inputTVtype": "textarea"
     },
     "custom_mv_sepa_ creditor_id": {
         "deleted": "0",
-        "group": "",
+        "group": "Sepa",
         "tab": "",
         "caption": "",
         "inputTVtype": ""
     },
     "custom_mv_sepa_bic": {
         "deleted": "0",
-        "group": "",
+        "group": "Sepa",
         "tab": "",
         "caption": "",
         "inputTVtype": ""
     },
     "custom_mv_sepa_iban": {
         "deleted": "0",
-        "group": "",
+        "group": "Sepa",
         "tab": "",
         "caption": "",
         "inputTVtype": ""
     },
     "custom_mv_sepa_msgid": {
         "deleted": "0",
-        "group": "",
+        "group": "Sepa",
         "tab": "",
         "caption": "",
         "inputTVtype": ""
     },
     "custom_mv_sepa_nm": {
         "deleted": "0",
-        "group": "",
+        "group": "Sepa",
         "tab": "",
         "caption": "",
         "inputTVtype": ""

@@ -1,6 +1,8 @@
 <?php
 
-class MyControllerBoote extends modRestController {
+include 'BaseController.php';
+
+class MyControllerBoote extends BaseController {
     public $classKey = 'fbuchBoot';
     public $defaultSortField = 'name';
     public $defaultSortDirection = 'ASC';

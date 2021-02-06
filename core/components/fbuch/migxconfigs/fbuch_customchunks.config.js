@@ -3,6 +3,33 @@
   "name":"fbuch_customchunks",
   "formtabs":[
     {
+      "MIGX_id":99,
+      "caption":"Differenz",
+      "print_before_tabs":"0",
+      "fields":[
+        {
+          "MIGX_id":498,
+          "field":"",
+          "caption":"",
+          "description":" \n       [[!phpdiff? &type=`5` &oldChunk=`[[+original_name]]` &newChunk=`[[+name]]`]]   \n        <style type=\"text\/css\">\n            html {\n                font-size: 13px;\n            }\n            .token.coord {\n                color: #6cf;\n            }\n            .token.diff.bold {\n                color: #fb0;\n                font-weight: normal;\n            }\n\n            \n            [[+phpdiff_style]]\n        <\/style>        \n\n        [[+phpdiff_output]]",
+          "description_is_code":1,
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":1
+        }
+      ],
+      "pos":1
+    },
+    {
       "MIGX_id":98,
       "caption":"Inhalt",
       "print_before_tabs":"0",
@@ -44,33 +71,6 @@
           "default":"",
           "useDefaultIfEmpty":"0",
           "pos":2
-        }
-      ],
-      "pos":1
-    },
-    {
-      "MIGX_id":99,
-      "caption":"Differenz",
-      "print_before_tabs":"0",
-      "fields":[
-        {
-          "MIGX_id":498,
-          "field":"",
-          "caption":"",
-          "description":" \n       [[!phpdiff? &type=`5` &oldChunk=`[[+original_name]]` &newChunk=`[[+name]]`]]   \n        <style type=\"text\/css\">\n            html {\n                font-size: 13px;\n            }\n            .token.coord {\n                color: #6cf;\n            }\n            .token.diff.bold {\n                color: #fb0;\n                font-weight: normal;\n            }\n\n            \n            [[+phpdiff_style]]\n        <\/style>        \n\n        [[+phpdiff_output]]",
-          "description_is_code":1,
-          "inputTV":"",
-          "inputTVtype":"",
-          "validation":"",
-          "configs":"",
-          "restrictive_condition":"",
-          "display":"",
-          "sourceFrom":"config",
-          "sources":"",
-          "inputOptionValues":"",
-          "default":"",
-          "useDefaultIfEmpty":"0",
-          "pos":1
         }
       ],
       "pos":2
@@ -126,7 +126,7 @@
       "aftergetfields":"fbuch_customchunks_aftergetfields"
     },
     "cmpmaincaption":"",
-    "cmptabcaption":"Custom Chunks",
+    "cmptabcaption":"Custom Chunks Differenzen",
     "cmptabdescription":"Bearbeiten und Vergleichen der Custom Chunk Inhalte mit den Original Chunks",
     "cmptabcontroller":"",
     "winbuttons":"",
@@ -183,7 +183,7 @@
   "createdby":1,
   "createdon":"2021-01-20 17:52:20",
   "editedby":1,
-  "editedon":"2021-01-24 11:39:03",
+  "editedon":"2021-01-25 23:35:06",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

@@ -9,6 +9,9 @@ $modx->initialize($working_context);
 $modx->getService('error','error.modError', '', '');
 // Boot up any service classes or packages (models) you will need
 
+if ($modx->getRequest()) {
+    $modx->request->sanitizeRequest();
+}
 
 $packageCorePath = realpath($modx->getOption('fbuch.core_path', null, $modx->getOption('core_path') . 'components/fbuch')) . '/';
 $fbuch = $modx->getService('fbuch', 'Fbuch', $packageCorePath . 'model/fbuch/');

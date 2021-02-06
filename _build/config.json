@@ -2370,6 +2370,19 @@
         {
           "source":0,
           "property_preprocess":false,
+          "description":"Mail Template, wenn vom Manager aus Passwort verschickt wird.",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_benutzerpasswort_mail",
+          "file":"fbuch_benutzerpasswort_mail.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
           "description":"",
           "editor_type":0,
           "cache_type":0,
@@ -4062,6 +4075,20 @@
           "name":"mv_Adressliste_nach_Namen",
           "file":"mv_adressliste_nach_namen.chunk.html",
           "category":"mv_content_chunks"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"mv_PDF_Datenerfassung",
+          "file":"mv_pdf_datenerfassung.chunk.html",
+          "category":"mv_content_chunks"
         }
       ],
       "templates":[
@@ -4080,6 +4107,20 @@
           "static_file":"",
           "name":"fahrtenbuch",
           "file":"fahrtenbuch.template.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "icon":"",
+          "template_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_empty",
+          "file":"fbuch_empty.template.html"
         },
         {
           "source":0,
@@ -4191,6 +4232,26 @@
             "OnElementNotFound"
           ],
           "file":"fbuchgetchunk.plugin.php"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "disabled":false,
+          "moduleguid":"",
+          "static":false,
+          "static_file":"",
+          "name":"fbuchUserSave",
+          "events":[
+            "OnBeforeUserFormSave"
+          ],
+          "file":"fbuchusersave.plugin.php"
         }
       ]
     }

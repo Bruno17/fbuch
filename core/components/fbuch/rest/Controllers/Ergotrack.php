@@ -1,6 +1,8 @@
 <?php
 
-class MyControllerErgotrack extends modRestController {
+include 'BaseController.php';
+
+class MyControllerErgotrack extends BaseController {
     public $classKey = 'fbuchErgotrack';
     public $defaultSortField = 'name';
     public $defaultSortDirection = 'ASC';

@@ -1,6 +1,8 @@
 <?php
 
-class MyControllerFahrten extends modRestController {
+include 'BaseController.php';
+
+class MyControllerFahrten extends BaseController {
     public $classKey = 'fbuchFahrt';
     public $defaultSortField = 'date';
     public $defaultSortDirection = 'ASC';
