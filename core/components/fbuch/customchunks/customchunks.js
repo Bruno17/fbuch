@@ -1,4 +1,11 @@
 {
+    "custom_fbuchEmailTplKontakt": {
+        "deleted": "0",
+        "group": "Kontaktformular",
+        "tab": "",
+        "caption": "",
+        "inputTVtype": "textarea"
+    },
     "custom_fbuchMitgliederMessage_1_heading": {
         "deleted": "0",
         "group": "Mitglieder Message",

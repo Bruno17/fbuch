@@ -3,7 +3,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"1.5.5-beta",
+  "version":"1.5.6-beta",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",
@@ -1950,6 +1950,19 @@
         {
           "source":0,
           "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuchEmailTplKontakt",
+          "file":"fbuchemailtplkontakt.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
           "description":"Email f\u00fcr Passwort vergessen - Funktion",
           "editor_type":0,
           "cache_type":0,
@@ -2374,7 +2387,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuch_benutzerpasswort_mail",
@@ -4083,7 +4098,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_PDF_Datenerfassung",
@@ -4116,7 +4133,9 @@
           "icon":"",
           "template_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuch_empty",
