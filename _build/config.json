@@ -3,7 +3,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"1.5.7-beta",
+  "version":"1.5.8-beta",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",
@@ -2404,7 +2404,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuchMitgliederMessage_0_show",
@@ -2417,7 +2419,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuchButtonBeiElementRegistrieren_show",
