@@ -6,6 +6,14 @@
         "caption": "",
         "inputTVtype": "textarea"
     },
+    "custom_fbuchMitgliederMessage_0_show": {
+        "deleted": "0",
+        "group": "Mitglieder Message",
+        "tab": "",
+        "caption": "",
+        "inputTVtype": "checkbox",
+        "inputOptionValues": "Message anzeigen==1"
+    },    
     "custom_fbuchMitgliederMessage_1_heading": {
         "deleted": "0",
         "group": "Mitglieder Message",
@@ -97,6 +105,14 @@
         "caption": "",
         "inputTVtype": "image"
     },
+    "custom_fbuchButtonBeiElementRegistrieren_show": {
+        "deleted": "0",
+        "group": "Site",
+        "tab": "",
+        "caption": "",
+        "inputTVtype": "checkbox",
+        "inputOptionValues": "Button anzeigen==1"
+    },      
     "custom_mv_datenerfassung_email": {
         "deleted": "0",
         "group": "Mitglieder Datenerfassung",

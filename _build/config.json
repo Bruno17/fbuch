@@ -3,7 +3,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"1.5.6-beta",
+  "version":"1.5.7-beta",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",
@@ -1954,7 +1954,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"fbuchEmailTplKontakt",
@@ -2394,6 +2396,32 @@
           "static_file":"",
           "name":"fbuch_benutzerpasswort_mail",
           "file":"fbuch_benutzerpasswort_mail.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"Mitglieder Message anzeigen",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuchMitgliederMessage_0_show",
+          "file":"fbuchmitgliedermessage_0_show.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"Button zum Anmelden bei Element anzeigen",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuchButtonBeiElementRegistrieren_show",
+          "file":"fbuchbuttonbeielementregistrieren_show.chunk.html"
         },
         {
           "source":0,

@@ -42,6 +42,7 @@ foreach ($currentgroup as $row){
     $field['field'] = $row['field'];
     $field['caption'] = $row['field'];
     $field['inputTVtype'] = $row['inputTVtype'];
+    $field['inputOptionValues'] = $row['inputOptionValues'];
     
     if ($chunk = $modx->getObject('modChunk',array('name'=>$row['field']))){
         //$field['default'] = $chunk->get('snippet');
