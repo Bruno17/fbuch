@@ -6,6 +6,7 @@ $record = $object->get('record_fields');
 $configs = $modx->getOption('configs', $properties, '');
 switch ($configs) {
     case 'mv_mitglieder':
+    case 'mv_mitglieder:fbuch':        
         $role_ids = array();
         if ($roles = $object->getMany('RoleLinks')) {
             foreach ($roles as $r_object) {

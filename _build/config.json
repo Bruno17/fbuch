@@ -3,7 +3,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"1.5.9-beta",
+  "version":"1.6.0-beta2",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",
@@ -3874,7 +3874,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_sepa_belegtext",
@@ -3888,7 +3890,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_sepa_collect_date",
@@ -3902,7 +3906,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_sepa_last_collect_date",
@@ -3916,7 +3922,9 @@
           "editor_type":0,
           "cache_type":0,
           "locked":false,
-          "properties":null,
+          "properties":[
+            
+          ],
           "static":false,
           "static_file":"",
           "name":"mv_sepa_beitrags_teilung",
