@@ -1,4 +1,11 @@
 {
+    "custom_fbuchButtonBeiElementRegistrieren_show": {
+        "deleted": "0",
+        "group": "Site",
+        "tab": "",
+        "caption": "",
+        "inputTVtype": "checkbox"
+    },
     "custom_fbuchEmailTplKontakt": {
         "deleted": "0",
         "group": "Kontaktformular",
@@ -11,9 +18,8 @@
         "group": "Mitglieder Message",
         "tab": "",
         "caption": "",
-        "inputTVtype": "checkbox",
-        "inputOptionValues": "Message anzeigen==1"
-    },    
+        "inputTVtype": "checkbox"
+    },
     "custom_fbuchMitgliederMessage_1_heading": {
         "deleted": "0",
         "group": "Mitglieder Message",
@@ -105,14 +111,6 @@
         "caption": "",
         "inputTVtype": "image"
     },
-    "custom_fbuchButtonBeiElementRegistrieren_show": {
-        "deleted": "0",
-        "group": "Site",
-        "tab": "",
-        "caption": "",
-        "inputTVtype": "checkbox",
-        "inputOptionValues": "Button anzeigen==1"
-    },      
     "custom_mv_datenerfassung_email": {
         "deleted": "0",
         "group": "Mitglieder Datenerfassung",
@@ -137,35 +135,63 @@
     "custom_mv_sepa_ creditor_id": {
         "deleted": "0",
         "group": "Sepa",
-        "tab": "",
+        "tab": "Vereinsdaten",
+        "caption": "",
+        "inputTVtype": ""
+    },
+    "custom_mv_sepa_beitrags_teilung": {
+        "deleted": "0",
+        "group": "Sepa",
+        "tab": "Einzugsspezifische Daten",
+        "caption": "",
+        "inputTVtype": ""
+    },
+    "custom_mv_sepa_belegtext": {
+        "deleted": "0",
+        "group": "Sepa",
+        "tab": "Einzugsspezifische Daten",
         "caption": "",
         "inputTVtype": ""
     },
     "custom_mv_sepa_bic": {
         "deleted": "0",
         "group": "Sepa",
-        "tab": "",
+        "tab": "Vereinsdaten",
+        "caption": "",
+        "inputTVtype": ""
+    },
+    "custom_mv_sepa_collect_date": {
+        "deleted": "0",
+        "group": "Sepa",
+        "tab": "Einzugsspezifische Daten",
         "caption": "",
         "inputTVtype": ""
     },
     "custom_mv_sepa_iban": {
         "deleted": "0",
         "group": "Sepa",
-        "tab": "",
+        "tab": "Vereinsdaten",
+        "caption": "",
+        "inputTVtype": ""
+    },
+    "custom_mv_sepa_last_collect_date": {
+        "deleted": "0",
+        "group": "Sepa",
+        "tab": "Einzugsspezifische Daten",
         "caption": "",
         "inputTVtype": ""
     },
     "custom_mv_sepa_msgid": {
         "deleted": "0",
         "group": "Sepa",
-        "tab": "",
+        "tab": "Vereinsdaten",
         "caption": "",
         "inputTVtype": ""
     },
     "custom_mv_sepa_nm": {
         "deleted": "0",
         "group": "Sepa",
-        "tab": "",
+        "tab": "Vereinsdaten",
         "caption": "",
         "inputTVtype": ""
     }

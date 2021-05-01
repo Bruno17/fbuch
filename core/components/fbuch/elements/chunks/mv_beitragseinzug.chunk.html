@@ -1,8 +1,11 @@
 <h3>Aktuelle Einstellungen</h3> 
 Einzugsdatum: [[+collect_date:strtotime:date=`%d.%m.%Y`]]<br>
 letztes Einzugsdatum: [[+last_collect_date:strtotime:date=`%d.%m.%Y`]]<br>
-Belegtext: [[+beleg_text]]<br><br>
-Einstellungen bearbeiten im Manager auf <a href="/manager/?a=resource/update&id=24">manager/?a=resource/update&id=24</a> unter Template Variablen
+Belegtext: [[+beleg_text]]<br>
+Teilung des Jahresbeitrags: [[$$mv_sepa_beitrags_teilung]]
+<br><br>
+Einstellungen bearbeiten im Manager auf <a href="manager/?a=index&namespace=migx&configs=fbuch_customchunks_ui:fbuch||fbuch_customchunks:fbuch">manager/?a=index&namespace=migx&configs=fbuch_customchunks_ui:fbuch||fbuch_customchunks:fbuch</a> 
+<br>In der Tabelle im Eintrag 'Sepa' im Tab 'Einzugsspezifische Daten' die Daten bearbeiten
 <br><br>
 
 <table class="table">
@@ -24,7 +27,7 @@ Einstellungen bearbeiten im Manager auf <a href="/manager/?a=resource/update&id=
 &joins=`[{"alias":"Beitragstyp"},{"alias":"Family","on":"Family.member_id=mvMember.id"}]`
 &tpl=`mv_tpl_beitragseinzug`
 &sortConfig=`[{"sortby":"name"},{"sortby":"firstname"}]`
-&where=`{"deleted":"0","zahlweise":"lastschrift","inactive":"0","Beitragstyp.name":"Familienmitgliedschaft","Family.id:!=":""}`
+&where=`{"deleted":"0","zahlweise":"lastschrift","member_status":"Mitglied","Beitragstyp.name":"Familienmitgliedschaft","Family.id:!=":""}`
 &collect_date=`[[+collect_date]]`
 ]]
 [[migxLoopCollection?
@@ -33,7 +36,7 @@ Einstellungen bearbeiten im Manager auf <a href="/manager/?a=resource/update&id=
 &joins=`[{"alias":"Beitragstyp"},{"alias":"Family"}]`
 &tpl=`mv_tpl_beitragseinzug`
 &sortConfig=`[{"sortby":"name"},{"sortby":"firstname"}]`
-&where=`{"deleted":"0","zahlweise":"lastschrift","inactive":"0","Beitragstyp.name:!=":"Familienmitgliedschaft","Beitragstyp.beitrag:!=":"0"}`
+&where=`{"deleted":"0","zahlweise":"lastschrift","member_status":"Mitglied","Beitragstyp.name:!=":"Familienmitgliedschaft","Beitragstyp.beitrag:!=":"0"}`
 &collect_date=`[[+collect_date]]`
 ]]
 </table>

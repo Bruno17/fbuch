@@ -1,22 +1,5 @@
 <?php
-$alter = $modx->runSnippet('mv_berechne_alter', $scriptProperties);
-$typ = $modx->getOption('typ', $scriptProperties, '');
-$output = $modx->getOption('default', $scriptProperties, '');
+$fbuchCorePath = realpath($modx->getOption('fbuch.core_path', null, $modx->getOption('core_path') . 'components/fbuch')) . '/';
+$fbuch = $modx->getService('fbuch', 'Fbuch', $fbuchCorePath . 'model/fbuch/');
 
-if ($typ == '1') {
-    $c = $modx->newQuery('mvBeitragstyp');
-
-    $c->where(array(
-        'max_age:!=' => '0',
-        'max_age:>=' => $alter,
-        ''));
-    $c->sortby('max_age');
-    $c->limit('1');
-
-    if ($object = $modx->getObject('mvBeitragstyp', $c)) {
-        $output = $object->get('beitrag');
-    }
-}
-
-
-return $output/2;
+return $fbuch->berechneBeitrag($scriptProperties);

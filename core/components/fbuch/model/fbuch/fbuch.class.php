@@ -938,7 +938,6 @@ class Fbuch {
                     $boot->save();
                 }
 
-
             default:
                 $object_id = $hook->getValue('object_id');
 
@@ -996,7 +995,7 @@ class Fbuch {
 
                     $values['start_time'] = $hour . ':' . $min;
                 }
-
+                
                 $object->fromArray($values);
                 $object->save();
 
@@ -1329,6 +1328,8 @@ class Fbuch {
                 $seats = $boot_o->get('seats');
             }
             $settings = is_array($settings) ? $settings : array();
+
+            //print_r($settings);
 
             for ($i = count($settings) + 1; $i <= $seats; $i++) {
                 $setting = array();
@@ -1964,6 +1965,74 @@ class Fbuch {
         }
 
         return $name;        
+    }
+
+    public function berechneBeitrag($scriptProperties) {
+        $modx = $this->modx;
+
+        $beitrags_teilung = (float) $modx->getChunk($this->getChunkName('mv_sepa_beitrags_teilung'),[]); 
+        $alter = $this->berechneAlter($scriptProperties);
+        //$alter = $modx->runSnippet('mv_berechne_alter', $scriptProperties);
+        $typ = $modx->getOption('typ', $scriptProperties, '');
+        $output = $modx->getOption('default', $scriptProperties, '');
+        
+        if ($typ == '1') {
+            $c = $modx->newQuery('mvBeitragstyp');
+        
+            $c->where(array(
+                'max_age:!=' => '0',
+                'max_age:>=' => $alter,
+                ''));
+            $c->sortby('max_age');
+            $c->limit('1');
+        
+            if ($object = $modx->getObject('mvBeitragstyp', $c)) {
+                $output = $object->get('beitrag');
+            }
+        }
+        //return round($output/4);
+        return round($output/$beitrags_teilung);
+    }
+
+    public function berechneAlter($scriptProperties){
+        $modx = $this->modx;
+
+        $birthdate = strtotime($modx->getOption('birthdate', $scriptProperties, 0));
+        $when = $modx->getOption('when', $scriptProperties, '');
+        $alter = '';
+        
+        if (!empty($birthdate)) {
+            switch ($when) {
+                case 'thisyear':
+                    $alter = strftime('%Y') - strftime('%Y', $birthdate);
+                    break;
+                default:
+                    $when = strtotime($when);
+                    
+                    $day = date("d", $birthdate);
+                    $month = date("m", $birthdate);
+                    $year = date("Y", $birthdate);
+        
+                    $cur_day = date("d", $when);
+                    $cur_month = date("m", $when);
+                    $cur_year = date("Y", $when);
+        
+                    $calc_year = $cur_year - $year;
+        
+                    if ($month > $cur_month)
+                        $alter = $calc_year - 1;
+                    elseif ($month == $cur_month && $day > $cur_day)
+                        $alter = $calc_year - 1;
+                    else
+                        $alter = $calc_year;
+        
+                    break;
+        
+            }
+        }
+        
+        return $alter;        
+
     }
 
     public function sendMails($recipients, $properties = array()) {

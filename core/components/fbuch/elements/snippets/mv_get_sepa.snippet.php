@@ -53,13 +53,13 @@ $rows1 = array();
 $rows2 = array();
 
 if (!empty($getFamily)) {
-    $scriptProperties['where'] = '{"deleted":"0","zahlweise":"lastschrift","inactive":"0","Beitragstyp.name":"Familienmitgliedschaft","Family.id:!=":""}';
+    $scriptProperties['where'] = '{"deleted":"0","zahlweise":"lastschrift","member_status":"Mitglied","Beitragstyp.name":"Familienmitgliedschaft","Family.id:!=":""}';
     $c = $migx->prepareQuery($xpdo, $scriptProperties);
     $rows1 = $migx->getCollection($c);
 }
 
 if (!empty($getOthers)) {
-    $scriptProperties['where'] = '{"deleted":"0","zahlweise":"lastschrift","inactive":"0","Beitragstyp.name:!=":"Familienmitgliedschaft","Beitragstyp.beitrag:!=":"0"}';
+    $scriptProperties['where'] = '{"deleted":"0","zahlweise":"lastschrift","member_status":"Mitglied","Beitragstyp.name:!=":"Familienmitgliedschaft","Beitragstyp.beitrag:!=":"0"}';
     $c = $migx->prepareQuery($xpdo, $scriptProperties);
     $rows2 = $migx->getCollection($c);
 }

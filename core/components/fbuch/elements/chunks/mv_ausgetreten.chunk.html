@@ -6,10 +6,28 @@
 <td>Grund</td>
 </tr>
 </tbody>
-[[migxLoopCollection? 
-&packageName=`mv` 
-&classname=`mvMember` 
-&tpl=`mv_tpl_austrittsdatum` 
-&sortConfig=`[{"sortby":"austritt"}]` 
-&where=`{"deleted":"0","inactive":"1"}` ]]
+[[migxLoopCollection?
+&packageName=`mv`
+&classname=`mvMember`
+&tpl=`mv_tpl_austrittsdatum`
+&sortConfig=`[{"sortby":"austritt"}]`
+&where=`{"deleted":"0","member_status":"Ausgetreten"}` ]]
+</table>
+
+<h2>Ausgetreten, aber Gast</h2>
+
+<table class="table">
+<tbody>
+<tr>
+<td>Name</td>
+<td>Austrittsdatum</td>
+<td>Grund</td>
+</tr>
+</tbody>
+[[migxLoopCollection?
+&packageName=`mv`
+&classname=`mvMember`
+&tpl=`mv_tpl_austrittsdatum`
+&sortConfig=`[{"sortby":"austritt"}]`
+&where=`{"deleted":"0","member_status":"Gast","austritt:!=":""}` ]]
 </table>

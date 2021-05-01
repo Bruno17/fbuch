@@ -10,6 +10,7 @@ $fbuch = $modx->getService('fbuch', 'Fbuch', $fbuchCorePath . 'model/fbuch/');
 
 switch ($configs) {
     case 'mv_mitglieder':
+    case 'mv_mitglieder:fbuch':
         $config = array(
             'id_field' => 'member_id',
             'link_field' => 'role_id',
