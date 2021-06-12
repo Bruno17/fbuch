@@ -4,7 +4,8 @@
         "group": "Site",
         "tab": "",
         "caption": "",
-        "inputTVtype": "checkbox"
+        "inputTVtype": "checkbox",
+        "inputOptionValues":"Button anzeigen==1"
     },
     "custom_fbuchEmailTplKontakt": {
         "deleted": "0",
@@ -18,7 +19,8 @@
         "group": "Mitglieder Message",
         "tab": "",
         "caption": "",
-        "inputTVtype": "checkbox"
+        "inputTVtype": "checkbox",
+        "inputOptionValues":"Mitgliedermessage anzeigen==1"
     },
     "custom_fbuchMitgliederMessage_1_heading": {
         "deleted": "0",
