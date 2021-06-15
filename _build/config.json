@@ -3,7 +3,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"1.6.0-beta2",
+  "version":"1.6.1-beta",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",
@@ -143,6 +143,38 @@
         }
       ],
       "snippets":[
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "moduleguid":"",
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_anmelden_impfabfrage_aftersave",
+          "file":"fbuch_anmelden_impfabfrage_aftersave.snippet.php"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "moduleguid":"",
+          "static":false,
+          "static_file":"",
+          "name":"fbuchJsonToPlaceholders",
+          "file":"fbuchjsontoplaceholders.snippet.php"
+        },
         {
           "source":0,
           "property_preprocess":false,
@@ -542,6 +574,23 @@
           "static_file":"",
           "name":"fbuch_mailinglistnames_aftersave",
           "file":"fbuch_mailinglistnames_aftersave.snippet.php"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "moduleguid":"",
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_anmeldungen_impfabfrage_exportrow",
+          "file":"fbuch_anmeldungen_impfabfrage_exportrow.snippet.php",
+          "category":"fbuch_termin_zu_absagen"
         },
         {
           "source":0,
@@ -2729,6 +2778,50 @@
           "static_file":"",
           "name":"fbuchPersonenAnmeldenDateNamesRow",
           "file":"fbuchpersonenanmeldendatenamesrow.chunk.html",
+          "category":"fbuch_termin_zu_absagen"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_anmelden_impfabfrage",
+          "file":"fbuch_anmelden_impfabfrage.chunk.html",
+          "category":"fbuch_termin_zu_absagen"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_anmelden_impfabfrage_form",
+          "file":"fbuch_anmelden_impfabfrage_form.chunk.html",
+          "category":"fbuch_termin_zu_absagen"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":null,
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_personanmelden_impfabfrage_form",
+          "file":"fbuch_personanmelden_impfabfrage_form.chunk.html",
           "category":"fbuch_termin_zu_absagen"
         },
         {

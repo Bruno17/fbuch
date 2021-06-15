@@ -1,0 +1,44 @@
+[[!fbuchJsonToPlaceholders? &value=`[[+extended]]` &prefix=`extended.`]]  
+<strong>Abfrage bzgl. Coronaimpfung. Bitte eine Option auswählen!</strong><br>
+Ich bin
+<div class="radio">
+  <label>
+    <input type="radio" name="corona_geimpft" id="corona_impfung" value="none" [[+extended.ungeimpft:!empty=`checked`]]>
+    weder geimpft noch genesen
+  </label>
+</div>
+<div class="radio">
+  <label>
+    <input type="radio" name="corona_geimpft" id="corona_impfung" value="geimpft" [[+extended.geimpft:!empty=`checked`]] >
+    geimpft
+  </label>
+</div>
+<div class="radio">
+  <label>
+    <input type="radio" name="corona_geimpft" id="corona_impfung" value="genesen" [[+extended.genesen:!empty=`checked`]]>
+    genesen
+  </label>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', (e) => {
+  var acceptbutton = document.getElementById('accept');
+  acceptbutton.addEventListener('click',function(event){
+      var input = document.forms.anmeldeform;
+      var input = document.forms.anmeldeform.elements['corona_geimpft'];
+      var is_checked = false;
+      
+      for(var i = 0; i < input.length; i++){
+         if(input[i].checked){
+            is_checked = true;
+         }
+      }
+      if (!is_checked){
+          event.preventDefault(); 
+          alert('Bitte in der Abfrage zur Corona-Impfung eine Option auswählen!');
+      }
+  });
+});
+
+
+</script>

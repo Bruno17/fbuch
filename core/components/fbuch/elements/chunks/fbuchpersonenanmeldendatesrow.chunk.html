@@ -6,13 +6,14 @@
   </div>
   <div class="panel-body">
 
-<form method="post">
+<form  method="post">
 
 [[!migxLoopCollection?
 &packageName=`fbuch`
 &classname=`mvMember`
 &where=`{"id":"[[+member_id]]"}`
 &tpl=`fbuchPersonenAnmeldenDatesRowForm`
+&person_tpl_extratext=`[[+Type_person_tpl_extratext]]`
 ]]
 
 <hr>

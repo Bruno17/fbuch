@@ -14,6 +14,7 @@ $xpdo_meta_map['fbuchDateNames']= array (
     'date_id' => 0,
     'createdby' => 0,
     'createdon' => NULL,
+    'extended' => '',
     'guestname' => '',
     'guestemail' => '',
     'registeredby' => 0,
@@ -52,6 +53,13 @@ $xpdo_meta_map['fbuchDateNames']= array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
       'null' => true,
+    ),
+    'extended' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
     ),
     'guestname' => 
     array (

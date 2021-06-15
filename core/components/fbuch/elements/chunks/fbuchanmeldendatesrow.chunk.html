@@ -1,12 +1,16 @@
+
+
 <div class="col-sm-6">
 <div class="panel panel-default">
   <div class="panel-heading">
   <h2>[[+title]]</h2><br>
-  <strong>[[+date:strtotime:date=`%a, %d.%m.%Y`]] [[+start_time]]</strong>
+  <strong>[[+date:strtotime:date=`%a, %d.%m.%Y`]] [[+start_time]]</strong><br>
+  [[+description:nl2br]]
+  
   </div>
   <div class="panel-body">
 
-<form method="post">
+<form name="anmeldeform" method="post" action="[[~[[*id]]]]#anmeldung">
 
 [[!today:date=`%Y-%m-%d`:gt=`[[+date:strtotime:date=`%Y-%m-%d`]]`:then=`
 <strong>Der Termin liegt in der Vergangenheit.<br> 
@@ -16,14 +20,10 @@ Du kannst dich nicht für einen vergangenen Termin anmelden!</strong>
 &packageName=`fbuch`
 &classname=`mvMember`
 &where=`{"id":"[[+member_id]]"}`
+&registrationpage_text=`[[+Type_registrationpage_text]]`
 &tpl=`fbuchAnmeldenDatesRowForm`
 ]]
 `]]
-
-
-
-
-
 
 <hr>
 

@@ -286,5 +286,13 @@ $xpdo_meta_map['fbuchDate']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
+    'Type' => 
+    array (
+      'class' => 'fbuchDateType',
+      'local' => 'type',
+      'foreign' => 'name',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
   ),
 );

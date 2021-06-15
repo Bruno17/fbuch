@@ -1,9 +1,8 @@
 
-Nachfolgend kannst Du diesen Termin zu- oder absagen für
-<h3>[[+firstname]] [[+name]]</h3>
+<h3>An/Abmeldung für [[+firstname]] [[+name]]</h3>
+Nachfolgend kannst Du Dich für diesen Termin ein- oder austragen.
 und/oder einen Kommentar für die anderen Teilnehmer hinterlassen.<br><br>
-Falls Du einen bestimmten <strong>Musikwunsch</strong>, <a target="_blank" href="http://www.teamrow.rgmarktheidenfeld.de/strokecounter.html">geeignet fürs Teamrowing</a> hast, kannst Du ihn auch gerne ins Kommentarfeld schreiben.<br>
-Gerne auch einen Link auf eine Spotify-Playlist oder einen Spotify-Titel.<br><br>
+[[+property.registrationpage_text:!empty=`[[+property.registrationpage_text]]<br><br>`]]
 
 <input type="hidden" name="iid" value="[[!#request.iid]]"/>
 <input type="hidden" name="code" value="[[!#request.code]]"/>
@@ -38,8 +37,8 @@ Gerne auch einen Link auf eine Spotify-Playlist oder einen Spotify-Titel.<br><br
   </label>
 </div>
 
-<button type="submit" name="process" value="accept" class="btn btn-primary ">Zusagen</button>
-<button type="submit" name="process" value="cancel" class="btn btn-primary ">Absagen</button>
-<button type="submit" name="process" value="comment" class="btn btn-primary ">Nur Kommentar hinterlassen</button>
+<button type="submit" name="process" id="accept" value="accept" class="btn btn-primary ">Zusagen</button>
+<button type="submit" name="process" id="cancel" value="cancel" class="btn btn-primary ">Absagen</button>
+<button type="submit" name="process" id="comment" value="comment" class="btn btn-primary ">Nur Kommentar hinterlassen</button>
 <br><br>
 <a href="[[~110? &date_id=`[[!#get.date_id]]` &iid=`[[!#get.iid]]`&code=`[[!#get.code]]`]]"><button type="button" class="btn btn-primary ">Weitere Personen anmelden</button></a>

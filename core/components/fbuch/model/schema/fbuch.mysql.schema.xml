@@ -59,6 +59,7 @@
         <field key="deletedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         
         <aggregate alias="Instructor" class="mvMember" local="instructor_member_id" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Type" class="fbuchDateType" local="type" foreign="name" cardinality="one" owner="foreign" />
         <composite alias="Names" class="fbuchDateNames" local="id" foreign="date_id" cardinality="many" owner="local" />
         <composite alias="Invited" class="fbuchDateInvited" local="id" foreign="date_id" cardinality="many" owner="local" />
         <composite alias="Comments" class="fbuchDateComment" local="id" foreign="date_id" cardinality="many" owner="local" />
@@ -69,6 +70,7 @@
         <field key="date_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="extended" dbtype="text" phptype="string" null="false" default="" />
         <field key="guestname" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
         <field key="guestemail" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
         <field key="registeredby" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
@@ -272,6 +274,10 @@
     <object class="fbuchDateType" table="fbuch_date_types" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="description" dbtype="text" phptype="string" null="false" default="" /> 
+        <field key="registrationpage_text" dbtype="text" phptype="string" null="false" default="" />
+        <field key="person_tpl_extratext" dbtype="text" phptype="string" null="false" default="" />
+        <field key="registration_hooksnippet" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="exportrow_hooksnippet" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="show_at_rowinglogbook_page" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />    
     </object>     
     

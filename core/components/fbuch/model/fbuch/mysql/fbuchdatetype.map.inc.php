@@ -12,6 +12,10 @@ $xpdo_meta_map['fbuchDateType']= array (
   array (
     'name' => '',
     'description' => '',
+    'registrationpage_text' => '',
+    'person_tpl_extratext' => '',
+    'registration_hooksnippet' => '',
+    'exportrow_hooksnippet' => '',
     'show_at_rowinglogbook_page' => 0,
   ),
   'fieldMeta' => 
@@ -27,6 +31,36 @@ $xpdo_meta_map['fbuchDateType']= array (
     'description' => 
     array (
       'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'registrationpage_text' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'person_tpl_extratext' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'registration_hooksnippet' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'exportrow_hooksnippet' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

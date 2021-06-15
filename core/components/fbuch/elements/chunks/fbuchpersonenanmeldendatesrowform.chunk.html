@@ -10,6 +10,7 @@ Nachfolgend kannst Du für diesen Termin weitere Personen anmelden<br><br>
 <ul style="display:none;" id="persons_tpl">
     <li><span></span>
         <input type="hidden" name="person[]"/>
+        [[+property.person_tpl_extratext]]
     </li>
 </ul>    
 
@@ -21,7 +22,7 @@ Nachfolgend kannst Du für diesen Termin weitere Personen anmelden<br><br>
     <label for="add_person">
         Namen auswählen:
     </label>
-    <input autocomplete="off" class="form-control" id="add_person" name="name" value="[[!+fi.name]]" />
+    <input type="search" autocomplete="off" class="form-control" id="add_person" name="name" value="[[!+fi.name]]" />
     </div>
 </div>    
 <h3>Weitere Gäste anmelden</h3>

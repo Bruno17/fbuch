@@ -207,6 +207,15 @@ class Fbuch {
         $iid = $modx->getOption('iid', $_REQUEST, '');
 
         if (!empty($member_id) && !empty($date_id)) {
+            if ($date_object = $modx->getObject('fbuchDate', $date_id)) {
+                $date = $date_object->get('date');
+                $start_time = $date_object->get('start_time');
+                $type = $date_object->get('type');
+                if ($type_object = $date_object->getOne('Type')){
+                    $hooksnippet = $type_object->get('registration_hooksnippet');
+                }
+            }
+            
             if (is_array($removepersons)) {
                 foreach ($removepersons as $person) {
                     if ($datename_o = $modx->getObject('fbuchDateNames', $person)) {
@@ -215,7 +224,7 @@ class Fbuch {
                 }
             }
             if (is_array($persons)) {
-                foreach ($persons as $person) {
+                foreach ($persons as $index => $person) {
                     if (!empty($person) && $name_o = $modx->getObject('mvMember', $person)) {
                         if ($datename_o = $modx->getObject('fbuchDateNames', array('date_id' => $date_id, 'member_id' => $person))) {
 
@@ -227,6 +236,15 @@ class Fbuch {
                             $datename_o->set('registeredby_member', $member_id);
                             $datename_o->save();
                         }
+
+                        if (!empty($hooksnippet)){
+                            $sn_properties = [];
+                            $sn_properties['object'] = $datename_o;
+                            //$properties['fields'] = $fields;
+                            $sn_properties['action'] = 'addperson';
+                            $sn_properties['index'] = $index;
+                            $modx->runSnippet($hooksnippet,$sn_properties);
+                        }                        
                     }
                 }
             }
@@ -263,7 +281,7 @@ class Fbuch {
     }
 
     public function cancelAcceptInvite($scriptProperties = array()) {
-
+       
         $modx = &$this->modx;
         $action = $modx->getOption('process', $_REQUEST, '');
         $code = $modx->getOption('code', $_REQUEST, '');
@@ -1604,6 +1622,9 @@ class Fbuch {
             $date = $date_object->get('date');
             $start_time = $date_object->get('start_time');
             $type = $date_object->get('type');
+            if ($type_object = $date_object->getOne('Type')){
+               $hooksnippet = $type_object->get('registration_hooksnippet');
+            }
 
             if ($type == 'TeamrowingXXX') {
                 $classname = 'fbuchFahrt';
@@ -1666,6 +1687,15 @@ class Fbuch {
                             $object->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
                             $object->save();
                         }
+
+                        if (!empty($hooksnippet) && $classname == 'fbuchDateNames'){
+                            $properties = [];
+                            $properties['object'] = $object;
+                            $properties['fields'] = $fields;
+                            $modx->runSnippet($hooksnippet,$properties);
+                        }
+
+
                         break;
                     case 'remove':
 

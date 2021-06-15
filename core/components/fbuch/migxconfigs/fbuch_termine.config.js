@@ -58,10 +58,37 @@
       ]
     },
     {
+      "MIGX_id":101,
+      "caption":"Teilnehmer",
+      "print_before_tabs":"0",
+      "fields":[
+        {
+          "MIGX_id":503,
+          "field":"teilnehmer",
+          "caption":"Teilnehmer",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"migxdb",
+          "validation":"",
+          "configs":"fbuch_datenames:fbuch",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":1
+        }
+      ],
+      "pos":2
+    },
+    {
       "MIGX_id":54,
       "caption":"Einladungsliste",
       "print_before_tabs":"0",
-      "pos":2,
+      "pos":3,
       "MIGXtype":"formtab",
       "MIGXtyperender":"<h3>formtab<\/h3>",
       "fields":[
@@ -179,7 +206,7 @@
           "MIGXlayoutcaption":""
         }
       ],
-      "pos":3
+      "pos":4
     }
   ],
   "contextmenus":"update",
@@ -237,6 +264,20 @@
     "onsubmitsuccess":"",
     "submitparams":""
   },
+  "permissions":{
+    "apiaccess":"",
+    "view":"",
+    "list":"",
+    "save":"",
+    "create":"",
+    "remove":"",
+    "delete":"",
+    "publish":"",
+    "unpublish":"",
+    "viewdeleted":"",
+    "viewunpublished":""
+  },
+  "fieldpermissions":"",
   "columns":[
     {
       "MIGX_id":2,
@@ -337,7 +378,7 @@
   "createdby":1,
   "createdon":"2018-04-18 21:16:14",
   "editedby":1,
-  "editedon":"2020-01-29 17:03:31",
+  "editedon":"2021-06-15 08:43:59",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,
