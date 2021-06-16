@@ -25,6 +25,8 @@ Nachfolgend kannst Du für diesen Termin weitere Personen anmelden<br><br>
     <input type="search" autocomplete="off" class="form-control" id="add_person" name="name" value="[[!+fi.name]]" />
     </div>
 </div>    
+
+[[+property.allow_foreign_guests:is=`1`:then=`
 <h3>Weitere Gäste anmelden</h3>
 <div id="guests_tpl" style="display:none;">
 <div class="row">
@@ -45,6 +47,8 @@ Nachfolgend kannst Du für diesen Termin weitere Personen anmelden<br><br>
 <div id="guests">
     
 </div>
-<button type="button" id="add_guest" class="btn btn-primary ">+</button>
-<br><br>
-<button type="submit" name="process" value="add_persons" class="btn btn-primary ">Angegebene Personen jetzt anmelden</button>
+<button type="button" id="add_guest" class="btn btn-primary ">+</button><br>
+`]]
+
+<br>
+<button type="submit" name="process" id="add_persons" value="add_persons" class="btn btn-primary ">Angegebene Personen jetzt anmelden</button>

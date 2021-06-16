@@ -6,7 +6,7 @@
   </div>
   <div class="panel-body">
 
-<form  method="post">
+<form name="addpersons" method="post">
 
 [[!migxLoopCollection?
 &packageName=`fbuch`
@@ -14,6 +14,7 @@
 &where=`{"id":"[[+member_id]]"}`
 &tpl=`fbuchPersonenAnmeldenDatesRowForm`
 &person_tpl_extratext=`[[+Type_person_tpl_extratext]]`
+&allow_foreign_guests=`[[+Type_allow_foreign_guests]]`
 ]]
 
 <hr>

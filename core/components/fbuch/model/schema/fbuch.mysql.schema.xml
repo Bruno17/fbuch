@@ -278,7 +278,10 @@
         <field key="person_tpl_extratext" dbtype="text" phptype="string" null="false" default="" />
         <field key="registration_hooksnippet" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="exportrow_hooksnippet" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
-        <field key="show_at_rowinglogbook_page" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />    
+        <field key="show_at_rowinglogbook_page" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" /> 
+        <field key="element_invite" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
+        <field key="allow_foreign_guests" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
+           
     </object>     
     
     <object class="mvMember" table="mv_members" extends="xPDOSimpleObject">

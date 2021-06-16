@@ -17,6 +17,8 @@ $xpdo_meta_map['fbuchDateType']= array (
     'registration_hooksnippet' => '',
     'exportrow_hooksnippet' => '',
     'show_at_rowinglogbook_page' => 0,
+    'element_invite' => 0,
+    'allow_foreign_guests' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -70,6 +72,22 @@ $xpdo_meta_map['fbuchDateType']= array (
       'dbtype' => 'tinyint',
       'precision' => '1',
       'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'element_invite' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '1',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'allow_foreign_guests' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '1',
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,

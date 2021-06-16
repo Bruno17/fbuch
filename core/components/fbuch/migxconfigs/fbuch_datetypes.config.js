@@ -4,7 +4,7 @@
   "formtabs":[
     {
       "MIGX_id":96,
-      "caption":"",
+      "caption":"Allgemein",
       "print_before_tabs":"0",
       "fields":[
         {
@@ -24,7 +24,17 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":1
+          "pos":1,
+          "MIGXtype":"field",
+          "MIGXtyperender":"<h3>...field<\/h3>",
+          "MIGXlayoutid":0,
+          "MIGXcolumnid":0,
+          "MIGXcolumnwidth":0,
+          "MIGXcolumnminwidth":"",
+          "MIGXcolumnstyle":"",
+          "MIGXcolumncaption":"",
+          "MIGXlayoutstyle":"",
+          "MIGXlayoutcaption":""
         },
         {
           "MIGX_id":493,
@@ -43,10 +53,69 @@
           "inputOptionValues":"anzeigen==1||verbergen==0",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":2
+          "pos":2,
+          "MIGXtype":"field",
+          "MIGXtyperender":"<h3>...field<\/h3>",
+          "MIGXlayoutid":0,
+          "MIGXcolumnid":0,
+          "MIGXcolumnwidth":0,
+          "MIGXcolumnminwidth":"",
+          "MIGXcolumnstyle":"",
+          "MIGXcolumncaption":"",
+          "MIGXlayoutstyle":"",
+          "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":500,
+          "MIGX_id":509,
+          "field":"element_invite",
+          "caption":"Einladung per Element",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"checkbox",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"active==1",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":3
+        },
+        {
+          "MIGX_id":510,
+          "field":"allow_foreign_guests",
+          "caption":"fremde G\u00e4ste erlauben ",
+          "description":"Erlaubt das Anmelden von Personen, welche nicht in der Fahrtenbuch Namensliste angelegt wurden.",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"checkbox",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"erlauben==1",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":4
+        }
+      ],
+      "pos":1
+    },
+    {
+      "MIGX_id":102,
+      "caption":"Extra",
+      "print_before_tabs":"0",
+      "pos":2,
+      "MIGXtype":"formtab",
+      "MIGXtyperender":"<h3>formtab<\/h3>",
+      "fields":[
+        {
+          "MIGX_id":505,
           "field":"registrationpage_text",
           "caption":"Spezialtext oder Extraformular auf Zu\/Absagen Seite",
           "description":"",
@@ -62,10 +131,20 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":3
+          "pos":1,
+          "MIGXtype":"field",
+          "MIGXtyperender":"<h3>...field<\/h3>",
+          "MIGXlayoutid":0,
+          "MIGXcolumnid":0,
+          "MIGXcolumnwidth":0,
+          "MIGXcolumnminwidth":"",
+          "MIGXcolumnstyle":"",
+          "MIGXcolumncaption":"",
+          "MIGXlayoutstyle":"",
+          "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":501,
+          "MIGX_id":506,
           "field":"registration_hooksnippet",
           "caption":"Spezial Hooksnippet, wird nach zu\/absagen ausgef\u00fchrt",
           "description":"",
@@ -81,10 +160,20 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":4
+          "pos":2,
+          "MIGXtype":"field",
+          "MIGXtyperender":"<h3>...field<\/h3>",
+          "MIGXlayoutid":0,
+          "MIGXcolumnid":0,
+          "MIGXcolumnwidth":0,
+          "MIGXcolumnminwidth":"",
+          "MIGXcolumnstyle":"",
+          "MIGXcolumncaption":"",
+          "MIGXlayoutstyle":"",
+          "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":502,
+          "MIGX_id":507,
           "field":"person_tpl_extratext",
           "caption":"Extratext oder Formularfelder pro hinzuzuf\u00fcgender Person",
           "description":"",
@@ -100,16 +189,35 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":5
+          "pos":3,
+          "MIGXtype":"field",
+          "MIGXtyperender":"<h3>...field<\/h3>",
+          "MIGXlayoutid":0,
+          "MIGXcolumnid":0,
+          "MIGXcolumnwidth":0,
+          "MIGXcolumnminwidth":"",
+          "MIGXcolumnstyle":"",
+          "MIGXcolumncaption":"",
+          "MIGXlayoutstyle":"",
+          "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":504,
+          "MIGX_id":508,
           "field":"exportrow_hooksnippet",
           "caption":"exportrow_hooksnippet",
-          "pos":6
+          "pos":4,
+          "MIGXtype":"field",
+          "MIGXtyperender":"<h3>...field<\/h3>",
+          "MIGXlayoutid":0,
+          "MIGXcolumnid":0,
+          "MIGXcolumnwidth":0,
+          "MIGXcolumnminwidth":"",
+          "MIGXcolumnstyle":"",
+          "MIGXcolumncaption":"",
+          "MIGXlayoutstyle":"",
+          "MIGXlayoutcaption":""
         }
-      ],
-      "pos":1
+      ]
     }
   ],
   "contextmenus":"update||remove",
@@ -225,7 +333,7 @@
   "createdby":1,
   "createdon":"2020-10-14 09:38:13",
   "editedby":1,
-  "editedon":"2021-06-15 11:29:35",
+  "editedon":"2021-06-15 14:20:13",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

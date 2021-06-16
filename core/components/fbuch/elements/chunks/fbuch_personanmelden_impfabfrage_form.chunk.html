@@ -1,6 +1,31 @@
 <select name="corona_geimpft[]" class="form-control">
-  <option>bitte Corona Impfstatus wählen</option>
+  <option value="null">bitte Corona Impfstatus wählen</option>
   <option value="none">weder geimpft noch genesen</option>
   <option value="geimpft">geimpft</option>
   <option value="genesen">genesen</option>
 </select>
+
+<script>
+document.addEventListener('DOMContentLoaded', (e) => {
+  var acceptbutton = document.getElementById('add_persons');
+  acceptbutton.addEventListener('click',function(event){
+      //var input = document.forms.addpersons.elements['corona_geimpft[]'];
+      var input = document.getElementsByName('corona_geimpft[]');       
+
+      var all_checked = true;
+      
+      for(var i = 1; i < input.length; i++){
+          console.log(input[i].value);
+          if (input[i].value == 'null'){
+              all_checked = false;
+          }
+      }
+      if (!all_checked){
+          event.preventDefault(); 
+          alert('Bitte in der Abfrage zur Corona-Impfung eine Option auswählen!');
+      }
+  });
+});
+
+
+</script>
