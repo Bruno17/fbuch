@@ -90,7 +90,7 @@ switch ($col) {
 
         $saveobject = false;
         $req_configs = $modx->getOption('reqConfigs', $_REQUEST, 0);
-        if ($req_configs == 'mv_families') {
+        if ($req_configs == 'mv_families:fbuch') {
             $family = $xpdo->getObject('mvFamily', $scriptProperties['co_id']);
         } else {
             $member = $xpdo->getObject($classname, $scriptProperties['co_id']);

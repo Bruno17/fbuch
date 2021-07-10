@@ -195,7 +195,7 @@
           "inputTV":"",
           "inputTVtype":"migxdb",
           "validation":"",
-          "configs":"fbuch_mailinglistnames",
+          "configs":"fbuch_mailinglistnames:fbuch",
           "restrictive_condition":"",
           "display":"",
           "sourceFrom":"config",
@@ -265,6 +265,20 @@
     "onsubmitsuccess":"",
     "submitparams":""
   },
+  "permissions":{
+    "apiaccess":"",
+    "view":"",
+    "list":"",
+    "save":"",
+    "create":"",
+    "remove":"",
+    "delete":"",
+    "publish":"",
+    "unpublish":"",
+    "viewdeleted":"",
+    "viewunpublished":""
+  },
+  "fieldpermissions":"",
   "columns":[
     {
       "MIGX_id":2,
@@ -360,7 +374,7 @@
   "createdby":1,
   "createdon":"2018-05-28 17:06:30",
   "editedby":1,
-  "editedon":"2020-10-14 09:07:17",
+  "editedon":"2021-07-10 09:35:47",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

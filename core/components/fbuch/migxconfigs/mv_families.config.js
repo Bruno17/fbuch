@@ -1,14 +1,14 @@
 {
-  "id":9,
+  "id":41,
   "name":"mv_families",
   "formtabs":[
     {
-      "MIGX_id":16,
+      "MIGX_id":58,
       "caption":"Familie",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":72,
+          "MIGX_id":230,
           "field":"name",
           "caption":"Name",
           "description":"",
@@ -27,7 +27,7 @@
           "pos":1
         },
         {
-          "MIGX_id":73,
+          "MIGX_id":231,
           "field":"familymembers",
           "caption":"",
           "description":"",
@@ -35,7 +35,7 @@
           "inputTV":"",
           "inputTVtype":"migxdb",
           "validation":"",
-          "configs":"mv_member_familymembers",
+          "configs":"mv_member_familymembers:fbuch",
           "restrictive_condition":"",
           "display":"",
           "sourceFrom":"config",
@@ -50,7 +50,7 @@
     }
   ],
   "contextmenus":"",
-  "actionbuttons":"",
+  "actionbuttons":"exportview",
   "columnbuttons":"update||remove",
   "filters":"",
   "extended":{
@@ -98,6 +98,20 @@
     "onsubmitsuccess":"",
     "submitparams":""
   },
+  "permissions":{
+    "apiaccess":"",
+    "view":"",
+    "list":"",
+    "save":"",
+    "create":"",
+    "remove":"",
+    "delete":"",
+    "publish":"",
+    "unpublish":"",
+    "viewdeleted":"",
+    "viewunpublished":""
+  },
+  "fieldpermissions":"",
   "columns":[
     {
       "MIGX_id":1,
@@ -131,7 +145,7 @@
   "createdby":1,
   "createdon":"2015-03-02 09:33:40",
   "editedby":1,
-  "editedon":"2020-05-15 15:57:45",
+  "editedon":"2021-07-10 09:08:57",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

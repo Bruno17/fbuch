@@ -654,9 +654,6 @@
       "MIGX_id":63,
       "caption":"Familienmitglieder",
       "print_before_tabs":"0",
-      "pos":4,
-      "MIGXtype":"formtab",
-      "MIGXtyperender":"<h3>formtab<\/h3>",
       "fields":[
         {
           "MIGX_id":436,
@@ -667,7 +664,7 @@
           "inputTV":"",
           "inputTVtype":"migxdb",
           "validation":"",
-          "configs":"mv_member_familymembers",
+          "configs":"mv_member_familymembers:fbuch",
           "restrictive_condition":"",
           "display":"",
           "sourceFrom":"config",
@@ -675,14 +672,10 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":1,
-          "MIGXtype":"field",
-          "MIGXtyperender":"<h3>...field<\/h3>",
-          "MIGXlayoutid":0,
-          "MIGXcolumnid":0,
-          "MIGXcolumnwidth":0
+          "pos":1
         }
-      ]
+      ],
+      "pos":4
     },
     {
       "MIGX_id":65,
@@ -1120,7 +1113,7 @@
     }
   ],
   "contextmenus":"",
-  "actionbuttons":"addItem||toggletrash",
+  "actionbuttons":"addItem||toggletrash||exportview",
   "columnbuttons":"update||recall_remove_delete",
   "filters":[
     {
@@ -1214,6 +1207,20 @@
     "onsubmitsuccess":"",
     "submitparams":""
   },
+  "permissions":{
+    "apiaccess":"",
+    "view":"",
+    "list":"",
+    "save":"",
+    "create":"",
+    "remove":"",
+    "delete":"",
+    "publish":"",
+    "unpublish":"",
+    "viewdeleted":"",
+    "viewunpublished":""
+  },
+  "fieldpermissions":"",
   "columns":[
     {
       "MIGX_id":1,
@@ -1319,7 +1326,7 @@
   "createdby":1,
   "createdon":"2015-02-25 22:37:51",
   "editedby":1,
-  "editedon":"2020-06-11 14:02:44",
+  "editedon":"2021-07-10 09:08:06",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

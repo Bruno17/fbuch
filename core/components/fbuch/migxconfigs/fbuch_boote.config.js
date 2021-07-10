@@ -347,7 +347,7 @@
           "inputTV":"",
           "inputTVtype":"migxdb",
           "validation":"",
-          "configs":"fbuch_bootnames",
+          "configs":"fbuch_bootnames:fbuch",
           "restrictive_condition":"",
           "display":"",
           "sourceFrom":"config",
@@ -467,6 +467,20 @@
     "onsubmitsuccess":"",
     "submitparams":""
   },
+  "permissions":{
+    "apiaccess":"load",
+    "view":"",
+    "list":"",
+    "save":"",
+    "create":"",
+    "remove":"",
+    "delete":"",
+    "publish":"",
+    "unpublish":"",
+    "viewdeleted":"",
+    "viewunpublished":""
+  },
+  "fieldpermissions":"",
   "columns":[
     {
       "MIGX_id":2,
@@ -562,7 +576,7 @@
   "createdby":1,
   "createdon":"2016-09-10 13:32:23",
   "editedby":1,
-  "editedon":"2021-01-04 15:51:48",
+  "editedon":"2021-07-10 09:25:34",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

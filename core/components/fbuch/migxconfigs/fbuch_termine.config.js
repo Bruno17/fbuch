@@ -88,9 +88,6 @@
       "MIGX_id":54,
       "caption":"Einladungsliste",
       "print_before_tabs":"0",
-      "pos":3,
-      "MIGXtype":"formtab",
-      "MIGXtyperender":"<h3>formtab<\/h3>",
       "fields":[
         {
           "MIGX_id":221,
@@ -101,7 +98,7 @@
           "inputTV":"",
           "inputTVtype":"migxdb",
           "validation":"",
-          "configs":"fbuch_dateinvites",
+          "configs":"fbuch_dateinvites:fbuch",
           "restrictive_condition":"",
           "display":"",
           "sourceFrom":"config",
@@ -109,19 +106,10 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":1,
-          "MIGXtype":"field",
-          "MIGXtyperender":"<h3>...field<\/h3>",
-          "MIGXlayoutid":0,
-          "MIGXcolumnid":0,
-          "MIGXcolumnwidth":0,
-          "MIGXcolumnminwidth":"",
-          "MIGXcolumnstyle":"",
-          "MIGXcolumncaption":"",
-          "MIGXlayoutstyle":"",
-          "MIGXlayoutcaption":""
+          "pos":1
         }
-      ]
+      ],
+      "pos":3
     },
     {
       "MIGX_id":55,
@@ -185,7 +173,7 @@
           "inputTV":"",
           "inputTVtype":"migxdb",
           "validation":"",
-          "configs":"fbuch_datemailinglist",
+          "configs":"fbuch_datemailinglist:fbuch",
           "restrictive_condition":"",
           "display":"",
           "sourceFrom":"config",
@@ -193,17 +181,7 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":3,
-          "MIGXtype":"field",
-          "MIGXtyperender":"<h3>...field<\/h3>",
-          "MIGXlayoutid":0,
-          "MIGXcolumnid":0,
-          "MIGXcolumnwidth":0,
-          "MIGXcolumnminwidth":"",
-          "MIGXcolumnstyle":"",
-          "MIGXcolumncaption":"",
-          "MIGXlayoutstyle":"",
-          "MIGXlayoutcaption":""
+          "pos":3
         }
       ],
       "pos":4
@@ -378,7 +356,7 @@
   "createdby":1,
   "createdon":"2018-04-18 21:16:14",
   "editedby":1,
-  "editedon":"2021-06-15 08:43:59",
+  "editedon":"2021-07-10 09:32:34",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,
