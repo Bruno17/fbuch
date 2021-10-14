@@ -16,6 +16,7 @@ class MyControllerMailinglists extends BaseController {
         if ($this->modx->hasPermission('fbuch_edit_mailinglists')) {
             switch ($action) {
                 case 'add_members':
+                case 'import_members':
                     break;
                 default:
                     $this->setProperty('editedby', $this->modx->user->get('id'));
@@ -32,34 +33,46 @@ class MyControllerMailinglists extends BaseController {
 
     public function afterPut(array & $objectArray) {
         $action = $this->getProperty('action');
+        $list_id = $this->object->get('id');
         switch ($action) {
+            case 'import_members':
+                $importlist_id = $this->getProperty('importlist_id');
+                $member_ids = [];
+                $c = $this->modx->newQuery('fbuchMailinglistNames');
+                $c->where(array('list_id' => $importlist_id));
+                if ($collection = $this->modx->getCollection('fbuchMailinglistNames',$c)){
+                    foreach ($collection as $object){
+                        $member_ids[] = $object->get('member_id');
+                    }
+                    $this->addMembers($list_id,$member_ids);
+                }
+                break;
             case 'add_members':
                 $member_ids = $this->getProperty('member_ids');
-                $list_id = $this->object->get('id');
-                if (is_array($member_ids)){
-                    foreach ($member_ids as $member_id){
-                        if ($name_o = $this->modx->getObject('fbuchMailinglistNames',array('list_id'=>$list_id,'member_id'=>$member_id))){
-                            
-                        } else {
-                            $name_o = $this->modx->newObject('fbuchMailinglistNames');
-                            $name_o->set('list_id',$list_id);
-                            $name_o->set('member_id',$member_id);
-                            $name_o->set('createdby',$this->modx->user->get('id'));
-                            $name_o->set('createdon',strftime('%Y-%m-%d %H:%M:%S'));
-                            $name_o->save();
-                        }
-                    }
-                }
-                //add all members also to fbuchDateInvited
-                $this->modx->fbuch->updateDatesMailinglistNames($list_id);
-                                
-                
+                $this->addMembers($list_id,$member_ids);
                 break;
             default:
                 break;
         }
+    }
 
-
+    public function addMembers($list_id,$member_ids){
+        if (is_array($member_ids)){
+            foreach ($member_ids as $member_id){
+                if ($name_o = $this->modx->getObject('fbuchMailinglistNames',array('list_id'=>$list_id,'member_id'=>$member_id))){
+                    
+                } else {
+                    $name_o = $this->modx->newObject('fbuchMailinglistNames');
+                    $name_o->set('list_id',$list_id);
+                    $name_o->set('member_id',$member_id);
+                    $name_o->set('createdby',$this->modx->user->get('id'));
+                    $name_o->set('createdon',strftime('%Y-%m-%d %H:%M:%S'));
+                    $name_o->save();
+                }
+            }
+        }
+        //add all members also to fbuchDateInvited
+        $this->modx->fbuch->updateDatesMailinglistNames($list_id);
     }
 
     public function beforePost() {
@@ -86,34 +99,10 @@ class MyControllerMailinglists extends BaseController {
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
         $returntype = $this->getProperty('returntype');
         $which_page = $this->getProperty('which_page');
+        $exclude = $this->getProperty('exclude');
         
         $where = array('deleted' => 0);
-        /*
-        $datewhere = array();
-        switch ($returntype) {
-        case 'open':
-        $this->setProperty('dir','ASC');
-        $where['km'] = 0;
-        $datewhere['date:<='] = strftime('%Y-%m-%d 23:59:59');
-        $datewhere['start_time:<='] = strftime('%H:%M');
-        $datewhere['OR:date:<'] = strftime('%Y-%m-%d 00:00:00');
-        break;
-        case 'sheduled':
-        $this->setProperty('dir','ASC');
-        $where['km'] = 0;
-        $where['date:>='] = strftime('%Y-%m-%d 00:00:00');
-        
-        $datewhere['date:>='] = strftime('%Y-%m-%d 00:00:00');
-        $datewhere['start_time:>'] = strftime('%H:%M');
-        $datewhere['OR:date:>'] = strftime('%Y-%m-%d 23:59:00');                
-        
-        break;                
-        case 'finished':
-        $this->setProperty('dir','DESC');
-        $where['km:>'] = 0;
-        break;                
-        } 
-        */
+
         if ($fbuchUser = $this->getCurrentFbuchUser()) {
             $joins = '[{"alias":"Names","on":"list_id=fbuchMailinglist.id and member_id=' . $fbuchUser->get('id') . '"}]';
         }
@@ -126,7 +115,12 @@ class MyControllerMailinglists extends BaseController {
             case 'edit_mailinglists':
             $w[] = array('member_filter_id' => 0);
             break;
-        }        
+        } 
+        
+        if (!empty($exclude)){
+            $w[] = array('id:!=' => $exclude);
+        }
+        
         $w[] = $where;
         $c->where($w);
         $c->sortby('type');
@@ -176,15 +170,28 @@ class MyControllerMailinglists extends BaseController {
     }
 
     protected function prepareListObject(xPDOObject $object) {
+        $returntype = $this->getProperty('returntype');
 
         $objectArray = $object->toArray();
-        $member_id = $object->get('Names_id');
-        $name_subscribed = $object->get('Names_subscribed');
-        $name_unsubscribed = $object->get('Names_unsubscribed');
 
-        $objectArray['Names_active'] = empty($member_id) ? false : true;
-        $objectArray['Names_subscribed'] = empty($name_subscribed) ? false : true;
-        $objectArray['Names_unsubscribed'] = empty($name_unsubscribed) ? false : true;
+        switch ($returntype) {
+            case 'options':
+                $objectArray = array();
+                $objectArray['label'] = $object->get('name');
+                $objectArray['value'] = $object->get('id');               
+                break;
+            default:
+                $member_id = $object->get('Names_id');
+                $name_subscribed = $object->get('Names_subscribed');
+                $name_unsubscribed = $object->get('Names_unsubscribed');
+        
+                $objectArray['Names_active'] = empty($member_id) ? false : true;
+                $objectArray['Names_subscribed'] = empty($name_subscribed) ? false : true;
+                $objectArray['Names_unsubscribed'] = empty($name_unsubscribed) ? false : true;
+                break;
+        }
+
+ 
 
 
         return $objectArray;

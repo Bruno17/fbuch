@@ -48,6 +48,56 @@
         </q-card-actions>
       </q-card>
     </q-dialog>
+    
+    
+   <q-dialog  v-model="importlist_modal" transition-show="jump-down" transition-hide="jump-up" 
+   @hide="importlist_id=null"
+   @show="$refs.listsselect.focus();"
+   >
+      <q-card style="width: 700px; max-width: 80vw;">
+        <q-card-section>
+          <div class="text-h5">Personen importieren</div>
+        </q-card-section>
+
+        <q-card-section>
+      <div class="row q-col-gutter-sm" >
+      <div class="col col-xs-12 ">
+          {{importlist_id}}
+      <q-select
+        ref="listsselect"
+        outlined
+        use-input
+        emit-value
+        map-options
+        input-debounce="0"
+        :options="mailinglist_options"
+        @filter="filterFn"
+        @input="hideNamesPopup"
+        label="Liste auswählen"
+        v-model="importlist_id"
+      >
+        <template v-slot:no-option>
+          <q-item>
+            <q-item-section class="text-grey">
+              Nichts gefunden
+            </q-item-section>
+          </q-item>
+        </template>
+      </q-select>
+
+   
+      </div>
+
+      </div>
+
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn flat label="Abbrechen" color="primary" v-close-popup ></q-btn>
+          <q-btn flat label="Importieren" color="primary" @click="importNames()" ></q-btn>
+        </q-card-actions>
+      </q-card>
+    </q-dialog>    
 
 
    <q-dialog  v-model="mailinglist_modal" transition-show="jump-down" transition-hide="jump-up" 
@@ -149,6 +199,7 @@ Falls dies nötig ist, bitte eine entsprechende Mail über das Kontakformular an
               
 
            <q-btn label="Personen hinzufügen" color="primary" @click="addnames_modal=true;current_list_id=mailinglist.id;" ></q-btn>
+           <q-btn label="Personen aus Liste importieren" color="primary" @click="loadImportNamesModal(mailinglist);" ></q-btn>           
            <q-btn label="Liste bearbeiten" color="primary" @click="updateMailinglist(mailinglist);" ></q-btn>
            <br>
            <br>

@@ -1133,7 +1133,7 @@ class Fbuch {
                 }
             }
 
-            print_r($existing);
+            //print_r($existing);die();
 
             if (!empty($mailinglist_id)) {
                 $member_filter_id = 0;
@@ -1168,7 +1168,10 @@ class Fbuch {
                 }
                 if (empty($member_filter_id)) {
                     $c = $modx->newQuery('fbuchMailinglistNames');
-                    $c->where(array('list_id' => $mailinglist_id));
+                    //only pull members with status Gast, VHS, Mitglied
+                    //Todo, create a setting for the status, which members to fetch
+                    $c->leftjoin('mvMember', 'Member');
+                    $c->where(array('list_id' => $mailinglist_id,'Member.member_status:IN' => ['Mitglied','Gast','VHS']));
                     if ($names = $modx->getCollection('fbuchMailinglistNames', $c)) {
                         foreach ($names as $name) {
                             $member_id = $name->get('member_id');
@@ -1648,7 +1651,7 @@ class Fbuch {
                 $classname = 'fbuchFahrt';
                 $c = $modx->newQuery($classname);
                 $c->leftjoin('fbuchFahrtNames', 'Members');
-                $c->where(array('Names.member_id' => $fields['member_id'], 'date_id' => $fields['date_id']));
+                $c->where(array('Members.member_id' => $fields['member_id'], 'date_id' => $fields['date_id']));
 
                 switch ($action) {
                     case 'add':

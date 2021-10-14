@@ -79,9 +79,6 @@
                 return;
             }
         
-            console.log(this.new_name_ids); 
-            console.log(this.current_list_id);
-            
             var self = this;
             var data = {};
             
@@ -101,6 +98,31 @@
 
         },
         
+        importNames(){
+            if (this.importlist_id == null){
+                this.importlist_modal = false;
+                return;
+            }
+        
+            var self = this;
+            var data = {};
+            
+            data.id = this.current_list_id;
+            data.action = 'import_members';
+            data.importlist_id = this.importlist_id;              
+
+            var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Mailinglists';
+            axios.put(ajaxUrl,data)
+            .then(function (response) {
+                self.loadMailinglistNames(self.current_list_id);
+                self.importlist_modal = false;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        },        
+        
         updateMailinglist(item){
             
         for (let key in this.mailinglist_form) {
@@ -118,9 +140,32 @@
             this.mailinglist_form[key].value = this.mailinglist_form[key].default;
         } 
         this.mailinglist_modal_title = 'Mailingliste erstellen';
-        this.mailinglist_modal=true;  
+        this.mailinglist_modal = true;  
  
-        },        
+        }, 
+        
+        loadImportNamesModal(item) {
+            var data = {};
+            var self = this;
+            var ajaxUrl = '[[++assets_url]]components/fbuch/rest/Mailinglists';
+            data.iid = this.$route.query.iid;
+            data.code = this.$route.query.code; 
+            data.returntype = 'options';
+            data.which_page = 'edit_mailinglists';
+            data.exclude = item.id;
+            axios.get(ajaxUrl,{params:data})
+            .then(function (response) {
+                self.current_list_id = item.id;
+                self.importlist_modal = true;                 
+                self.mailinglist_options = response.data.results;
+                //make sure, the model gets updated, nested properties, which are not defined in the data, are not watched
+                //self.$forceUpdate();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+
+        },
         
         saveMailinglist(){
 
@@ -204,11 +249,14 @@
               mailinglisttypes: [],
               mailinglistnames: [],
               filtered_options:[],
+              mailinglist_options:[],
               namesoptions: [],
               fbuchuser: {},
               new_name_ids: null,
+              importlist_id: null,
               current_list_id: null,
               addnames_modal: false,
+              importlist_modal: false,
               mailinglist_modal: false,
               mailinglist_modal_title: 'Einladungsliste erstellen',
               mailinglist_form:{
