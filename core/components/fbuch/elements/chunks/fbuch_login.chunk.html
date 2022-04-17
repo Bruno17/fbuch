@@ -17,7 +17,8 @@ versuche es <a href="[[~83]]">hier</a>.<br>
 <p>
 [[!FormIt? &hooks=`spam,email,redirect` 
 &emailTpl=`[[fbuchGetChunk? &name=`fbuchEmailTplKontakt`]]` 
-&emailTo=`[[$$fbuch_contact_email]]` 
+&emailTo=`[[$$fbuch_contact_email]]`
+&emailFrom=`[[++emailsender]]`
 &emailUseFieldForSubject=`1` 
 &redirectTo=`82` 
 &validate=`name:required, email:email:required, subject:required` ]] 

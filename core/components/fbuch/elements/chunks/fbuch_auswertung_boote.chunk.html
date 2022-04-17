@@ -50,7 +50,7 @@
 <table class="table table-striped">
 [[!fbuchQuery? 
 &query=`
-SELECT b1.id as id,  b1.name as Name, SUM(f4.km) as km
+SELECT b1.id as id,  b1.name as Name, SUM(f4.km) as km, COUNT(*) as Fahrten
 FROM  modx_fbuch_boote b1
 left join modx_fbuch_bootsgattungen g on b1.gattung_id=g.id
 left join modx_fbuch_fahrten f4 on b1.id=f4.boot_id 
@@ -84,6 +84,7 @@ ORDER BY  km DESC
 
 </table>
 
-<div id="summe">Summe: [[+km_total]]</div>
+<div id="summe">Summe: [[+km_total]] km</div>
+<div id="summe_fahrten">Summe: [[+fahrten_total]] Fahrten</div>
 </div>
 

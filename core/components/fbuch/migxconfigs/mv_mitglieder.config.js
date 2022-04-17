@@ -518,6 +518,25 @@
           "MIGXlayoutid":0,
           "MIGXcolumnid":0,
           "MIGXcolumnwidth":0
+        },
+        {
+          "MIGX_id":511,
+          "field":"riot_user_id",
+          "caption":"Matrix ID",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":9
         }
       ],
       "pos":2
@@ -1326,7 +1345,7 @@
   "createdby":1,
   "createdon":"2015-02-25 22:37:51",
   "editedby":1,
-  "editedon":"2021-07-10 09:08:06",
+  "editedon":"2021-11-03 20:55:54",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

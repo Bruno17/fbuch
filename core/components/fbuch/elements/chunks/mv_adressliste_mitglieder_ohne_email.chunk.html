@@ -1,0 +1,20 @@
+<table class="table">
+<tbody>
+<tr>
+<td>Anrede</td>
+<td>Name</td>
+<td>PLZ</td>
+<td>Ort</td>
+<td>Strasse</td>
+
+</tr>
+</tbody>
+[[migxLoopCollection? 
+&packageName=`mv` 
+&classname=`mvMember` 
+&tpl=`mv_tpl_adressliste` 
+&sortConfig=`[{"sortby":"zip"},{"sortby":"city"},{"sortby":"street"},{"sortby":"name"}]` 
+&where=`{"deleted":"0","member_status":"Mitglied","email":""}` 
+&groupbyXXX=`concat(zip,street)`
+]]
+</table>

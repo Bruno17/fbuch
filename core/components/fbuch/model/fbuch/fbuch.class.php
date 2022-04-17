@@ -541,11 +541,12 @@ class Fbuch {
             $this->createSchedulerTask('matrixorgclient', array('snippet' => 'web/schedule/createdateroom'));
             $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties);
 
+            /*
             $scriptProperties = array('action' => 'addRoomToGroup', 'date_id' => $date_o->get('id'));
             $reference = 'web/schedule/addroomtogroup';
             $this->createSchedulerTask('matrixorgclient', array('snippet' => 'web/schedule/addroomtogroup'));
             $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties);
-
+            */
             //$this->modx->runSnippet('moc_hooks', $scriptProperties);
         }
         return true;
