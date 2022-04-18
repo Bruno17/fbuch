@@ -1,6 +1,8 @@
 <?php
 
-$file = $modx->getOption('core_path') . 'components/fbuch/customchunks/customchunks.js';
+$packageName = 'fbuch';
+$packagepath = $modx->getOption( $packageName . '.core_path',null,$modx->getOption('core_path').'components/' . $packageName . '/');
+$file = $packagepath . 'customchunks/customchunks.js';
 $input = '';
 if (file_exists($file)) {
     $input = json_decode(file_get_contents($file), true);
