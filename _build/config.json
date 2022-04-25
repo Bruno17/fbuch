@@ -3,7 +3,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"1.6.3-beta",
+  "version":"1.6.4-beta",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",
@@ -64,7 +64,7 @@
         "action":"index",
         "parent":"Vereinsverwaltung",
         "namespace":"migx",
-        "params":"&configs=fbuch_fahrten:fbuch||fbuch_fahrtnamen:fbuch||fbuch_boote:fbuch||fbuch_bootsgattungen:fbuch||fbuch_bootsnutzergruppen:fbuch||fbuch_anmeldungen:fbuch||fbuch_termine:fbuch||fbuch_mailinglists:fbuch||fbuch_datetypes:fbuch",
+        "params":"&configs=fbuch_fahrten:fbuch||fbuch_fahrtnamen:fbuch||fbuch_boote:fbuch||fbuch_bootsgattungen:fbuch||fbuch_bootsnutzergruppen:fbuch||fbuch_anmeldungen:fbuch||fbuch_termine:fbuch||fbuch_mailinglists:fbuch||fbuch_datetypes:fbuch||fbuch_destinations:fbuch",
         "menuIndex":0
       },
       {

@@ -158,6 +158,21 @@
   
 
     </div>
+
+    <div class="row">
+      <div class="form-group col-sm-12">
+        <label for="defaultexcursion_id">Standardruderstrecke ab Bootshaus:</label>
+        <select class="form-control" id="defaultexcursion_id">
+          <option value="">Freie Eingabe der Streckenlänge</option>
+          [[migxLoopCollection?
+            &packageName=`fbuch`
+            &classname=`fbuchDestination`
+            &tpl=`@CODE:<option value="{{+km}}">{{+destination}} - {{+km}} km</option>`
+          ]]
+          <option value="0">Zurücksetzen auf 0</option>
+        </select>
+      </div>
+    </div>
     
     <div class="row">
         <div class="form-group col-sm-12">
@@ -304,6 +319,17 @@ $('.input-group.date').datepicker({
     autoclose: true,
     todayHighlight: true
 });
+
+$('#defaultexcursion_id').on('change', function(event) {
+    var defaultExcursionDistance = $(event.target).val();
+    var inputKm = $('#km');
+    if (!defaultExcursionDistance) {
+      inputKm.prop('readonly', false);
+    } else {
+      inputKm.val(defaultExcursionDistance);
+      inputKm.prop('readonly', true);
+    }
+  });
 
 [[!#request.process:is=`close`:then=`
 $('#fbuchModal').on('shown.bs.modal', function () {

@@ -30,6 +30,12 @@
         <aggregate alias="Date" class="fbuchDate" local="date_id" foreign="id" cardinality="one" owner="foreign" />
         <composite alias="Names" class="fbuchFahrtNames" local="id" foreign="fahrt_id" cardinality="many" owner="local" />
     </object>
+
+    <object class="fbuchDestination" table="fbuch_destinations" extends="xPDOSimpleObject">
+        <field key="destination" dbtype="varchar" phptype="string" precision="190" null="false" default="" />
+        <field key="km" dbtype="decimal" precision="8,1" phptype="float" null="false" default="0" index="index" />
+    </object>
+
     <object class="fbuchDate" table="fbuch_dates" extends="xPDOSimpleObject">
         <field key="date" dbtype="datetime" phptype="datetime" null="true" />
         <field key="date_end" dbtype="datetime" phptype="datetime" null="true" />
