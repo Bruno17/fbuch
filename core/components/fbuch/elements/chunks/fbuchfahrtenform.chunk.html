@@ -331,6 +331,23 @@ $('#defaultexcursion_id').on('change', function(event) {
     }
   });
 
+  $('#start-time').on('change', function(event) {
+      var offset = Number([[++fbuch.endtime_offset]]);
+      if (offset>0){
+        var starttime = $(event.target).val();
+        starttime = starttime.replace('.',':');
+        var timeparts = starttime.split(":");
+        timeparts[1] = timeparts[1] || '0';
+        var mins = Number(timeparts[0]) * 60 + Number(timeparts[1]) + offset;
+        let h = Math.floor(mins / 60);
+        let m = mins % 60;
+        h = h < 10 ? '0' + h : h; // (or alternatively) h = String(h).padStart(2, '0')
+        m = m < 10 ? '0' + m : m; // (or alternatively) m = String(m).padStart(2, '0')
+        $('#end_time').val(h + ':' + m); 
+      }
+    
+  });  
+
 [[!#request.process:is=`close`:then=`
 $('#fbuchModal').on('shown.bs.modal', function () {
   $('#km').focus().select();

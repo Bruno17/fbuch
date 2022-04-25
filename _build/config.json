@@ -95,6 +95,14 @@
         "menuIndex":3
       }
     ],
+    "systemSettings": [
+      {
+          "key": "endtime_offset",
+          "type": "textfield",
+          "area": "default",
+          "value": "90"
+      }
+    ],      
     "elements":{
       "categories":[
         {
