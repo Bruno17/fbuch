@@ -66,7 +66,7 @@ class Fbuch {
             'connectorUrl' => $assetsUrl . 'connector.php'), $options);
 
         $this->modx->addPackage('fbuch', $this->getOption('modelPath'));
-        $this->getClientConfigOptions();
+        //$this->getClientConfigOptions();
     }
 
     /**
@@ -91,30 +91,30 @@ class Fbuch {
         }
         return $option;
     }
-
+/*
     public function getClientConfigOptions() {
         $modx = &$this->modx;
         $path = $modx->getOption('clientconfig.core_path', null, $modx->getOption('core_path') . 'components/clientconfig/');
         $path .= 'model/clientconfig/';
         $clientConfig = $modx->getService('clientconfig', 'ClientConfig', $path);
 
-        /* If we got the class (gotta be careful of failed migrations), grab settings and go! */
+        // If we got the class (gotta be careful of failed migrations), grab settings and go! 
         if ($clientConfig instanceof ClientConfig) {
             $contextKey = $modx->context instanceof modContext ? $modx->context->get('key') : 'web';
             $settings = $clientConfig->getSettings($contextKey);
 
             //print_r($settings);die();
 
-            /* Make settings available as [[++tags]] */
+            // Make settings available as [[++tags]] 
             $modx->setPlaceholders($settings, '+');
 
-            /* Make settings available for $modx->getOption() */
+            // Make settings available for $modx->getOption() 
             foreach ($settings as $key => $value) {
                 $modx->setOption($key, $value);
             }
         }
     }
-
+*/
 
     public function checkPermission($permission, $properties = array()) {
         $modx = &$this->modx;
