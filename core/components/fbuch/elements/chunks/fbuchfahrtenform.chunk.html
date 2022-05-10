@@ -1,326 +1,256 @@
 [[!FormIt?
-&preHooks=`fbuchGetFormValues`
-&hooks=`fbuchUpdate`
-&classname=`fbuchFahrt`
-&submitVar=`fahrt_submit`
-&successMessage=`<script>fahrten_form_success();</script>`
-[[!#request.object_id:is=`0`:then=`
-[[!#request.type:is=`dragdrop`:then=`
-&validate=`boot_id:required,submit_form:required,note:allowTags=^<a>^`
-`:else=`
-&validate=`member_ids:required,boot_id:required,submit_form:required,note:allowTags=^<a>^`
-`]]
-`:else=`
-[[!#request.changeboot:is=`1`:then=`
-&validate=`xx:required`
-`:else=`
-&validate=`note:allowTags=^<a>^`
-`
-`]]
-`]]
+  &preHooks=`fbuchGetFormValues`
+  &hooks=`fbuchUpdate`
+  &classname=`fbuchFahrt`
+  &submitVar=`fahrt_submit`
+  &successMessage=`<script>fahrten_form_success();</script>`
+  [[!#request.object_id:is=`0`:then=`
+    [[!#request.type:is=`dragdrop`:then=`
+      &validate=`boot_id:required,submit_form:required,note:allowTags=^<a>^`
+    `:else=`
+      &validate=`member_ids:required,boot_id:required,submit_form:required,note:allowTags=^<a>^`
+    `]]
+  `:else=`
+    [[!#request.changeboot:is=`1`:then=`
+      &validate=`xx:required`
+    `:else=`
+      &validate=`note:allowTags=^<a>^`
+    `]]
+  `]]
 ]]
 
-
-  <div class="modal-dialog modal-lg">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">
+<div class="modal-dialog modal-lg">
+  <!-- Modal content-->
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">
         [[!#request.object_id:is=`0`:then=`Neue Fahrt`:else=`[[!#request.process:is=`delete`:then=`Diese Fahrt löschen`:else=`Fahrt bearbeiten`]]`]]
-        </h4>
-      </div>
-
-
-<form [[!+hideform:is=`1`:then=`style="display:none;"`:else=``]] id="anmelden_form" action="[[~[[*id]]? &grid_id=`[[+grid_id]]`]]" method="post" class="form">
-    <div id="fbuchModalBody" class="modal-body">
-    <input type="hidden" name="nospam:blank" value="" />
-    <input type="hidden" name="fahrt_submit" value="1" />
-    <input type="hidden" name="submit_form" value="1" />
-    <input type="hidden" name="type" value="[[!#request.type]]" />
-    <input type="hidden" name="process" value="[[!#request.process]]" />
-    <input type="hidden" name="object_id" value="[[!#request.object_id]]" />
-    
-[[!+fbucherror]]    
-    
-    [[!#request.process:is=`delete`:then=`
-    <input type="hidden" name="deleted" value="1" />    
-    `:else=``]]
-
-    [[!#request.process:is=`close`:then=`
-    <input name="date" id="date" type="hidden" value="[[!+fi.date]]" />
-    <input name="start_time" type="hidden" value="[[!+fi.start_time]]" />
-    <input name="boot_id" type="hidden" value="[[!+fi.boot_id]]" />
-    `:else=`
-    <div class="row">
-    
-    <div class="form-group col-sm-3">
-    <label for="boot_id">
-        Boot:
-        [[!+fi.error.boot_id:!empty=`
-        <span class="error"><br>Bitte ein Boot auswählen!</span>
+      </h4>
+    </div>
+    <form [[!+hideform:is=`1`:then=`style="display:none;"`:else=``]] id="anmelden_form" action="[[~[[*id]]? &grid_id=`[[+grid_id]]`]]" method="post" class="form">
+      <div id="fbuchModalBody" class="modal-body">
+        <input type="hidden" name="nospam:blank" value="" />
+        <input type="hidden" name="fahrt_submit" value="1" />
+        <input type="hidden" name="submit_form" value="1" />
+        <input type="hidden" name="type" value="[[!#request.type]]" />
+        <input type="hidden" name="process" value="[[!#request.process]]" />
+        <input type="hidden" name="object_id" value="[[!#request.object_id]]" />
+        [[!+fbucherror]]
+        [[!#request.process:is=`delete`:then=`<input type="hidden" name="deleted" value="1" />`]]
+        [[!#request.process:is=`close`:then=`
+          <input name="date" id="date" type="hidden" value="[[!+fi.date]]" />
+          <input name="start_time" type="hidden" value="[[!+fi.start_time]]" />
+          <input name="boot_id" type="hidden" value="[[!+fi.boot_id]]" />
+        `:else=`
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <label for="boot_id">Boot:[[!+fi.error.boot_id:!empty=`<span class="error"><br />Bitte ein Boot auswählen!</span>`]]</label>
+              <select class="form-control" name="boot_id" id="boot_id">
+                <option value=""></option>
+                [[migxLoopCollection? &packageName=`fbuch` &classname=`fbuchBoot` &joins=`[{"alias":"Bootsgattung"},{"alias":"Nutzergruppe"}]` &where=`{"deleted":"0"}` &sortConfig=`[{"sortby":"Bootsgattung.shortname"},{"sortby":"name"}]` &tpl=`fbuchFahrtenFormBootOption`]]
+              </select>
+            </div>
+            <div class="form-group col-sm-3">
+              <label for="start_time">Uhrzeit Fahrtbeginn:</label>
+              <input type="text" class="form-control" name="start_time" id="start-time" value="[[!+fi.start_time]]" /> 
+              [[!+fi.error.start_time:!empty=`<span class="error">[[!+fi.error.start_time]]</span>`]]
+            </div>
+            <div class="form-group col-sm-3">
+              <label for="date">Datum Fahrtbeginn:</label>
+              <div class="input-group date">
+                <input name="date" id="date" type="text" class="form-control" value="[[!+fi.date]]" />
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <label for="direction">Fahrtrichtung:</label>
+              <select class="form-control" name="direction" id="direction">
+                <option value="flussauf" [[!+fi.selected_direction_flussauf]]>flussauf</option>
+                <option value="flussab" [[!+fi.selected_direction_flussab]]>flussab</option>
+              </select>
+            </div>
+          </div>
         `]]
-    </label>
-    <select class="form-control" name="boot_id" id="boot_id">
-    <option value=""></option>
-    [[!migxLoopCollection?
-    &classname=`fbuchBoot`
-    &joins=`[{"alias":"Bootsgattung"},{"alias":"Nutzergruppe"}]`
-    &where=`{"deleted":"0"}`
-    &sortConfig=`[{"sortby":"Bootsgattung.shortname"},{"sortby":"name"}]`
-    &tpl=`fbuchFahrtenFormBootOption`
-    ]]    
-    </select>
-    </div>    
-    
-    <div class="form-group col-sm-3">
-    <label for="start_time">
-      Uhrzeit Fahrtbeginn:
-    </label>
-    <input type="text" class="form-control" name="start_time" id="start-time" value="[[!+fi.start_time]]" /> 
-    <span class="error">[[!+fi.error.start_time]]</span>
-    
-    </div>   
-    
-    <div class="form-group col-sm-3">
-    <label for="date">
-      Datum Fahrtbeginn:
-    </label>
-    <div class="input-group date">
-        <input name="date" id="date" type="text" class="form-control" value="[[!+fi.date]]"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>    </span>
-    </div>
-    </div>    
-    
 
-    <div class="form-group col-sm-3">
-    <label for="direction">
-        Fahrtrichtung:
-    </label>
-    <select class="form-control" name="direction" id="direction">
-    <option value="flussauf" [[!+fi.selected_direction_flussauf]]>flussauf</option>
-    <option value="flussab" [[!+fi.selected_direction_flussab]]>flussab</option>
-    </select>
-   
-    </div>
-    
-
-
-    </div>
-`]]
-<div class="row">
-
-    <div class="form-group col-sm-3">
-    <label for="km">
-      Fahrtstreckenlänge [km]:
-    </label>
-    <input type="text" id="km" class="form-control" name="km" id="km" value="[[!+fi.km]]">
-    </div>    
-    
-    <div class="form-group col-sm-3">
-    <label for="end_time">
-       Uhrzeit Fahrtende:
-    </label>
-    <input name="end_time" id="end_time" type="text" class="form-control" value="[[!+fi.end_time]]">
-    </div>    
-
-    <div class="form-group col-sm-3">
-    <label for="date_end">
-      Datum Fahrtende:
-    </label>
-    <div class="input-group date">
-        <input name="date_end" id="date_end" type="text" class="form-control" value="[[!+fi.date_end]]"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>    </span>
-    </div>
-    </div>
-    [[!#request.process:is=`close`:then=`
-    <div class="form-group col-sm-3">
-    <label for="finished">
-        Abgeschlossen:
-    </label>
-    <select class="form-control" name="finished" id="finished">
-    <option value="0" [[!+fi.finished:FormItIsSelected=`0`]]>nein</option>
-    <option value="1" [[!+fi.finished:FormItIsSelected=`1`]]>ja</option>
-    </select>
-   
-    </div>       
-    `:else=`
-    <div class="form-group col-sm-3">
-    <label for="wfahrt">
-        Wanderfahrt:
-    </label>
-    <select class="form-control" name="wfahrt" id="wfahrt">
-    <option value="0" [[!+fi.wfahrt:FormItIsSelected=`0`]]>nein</option>
-    <option value="1" [[!+fi.wfahrt:FormItIsSelected=`1`]]>ja</option>
-    </select>
-   
-    </div>      
-    `]]
-  
-
-    </div>
-
-    <div class="row">
-      <div class="form-group col-sm-12">
-        <label for="defaultexcursion_id">Standardruderstrecke ab Bootshaus:</label>
-        <select class="form-control" id="defaultexcursion_id">
-          <option value="">Freie Eingabe der Streckenlänge</option>
-          [[migxLoopCollection?
-            &packageName=`fbuch`
-            &classname=`fbuchDestination`
-            &tpl=`@CODE:<option value="{{+km}}">{{+destination}} - {{+km}} km</option>`
-          ]]
-          <option value="0">Zurücksetzen auf 0</option>
-        </select>
-      </div>
-    </div>
-    
-    <div class="row">
-        <div class="form-group col-sm-12">
-        <div class="checkbox">
-            <label>
-            <input name="endtime_checked" type="checkbox" value="1" [[!+fi.endtime_checked:FormitIsChecked=`1`]]> Ich bestätige vor Abschluß des Trainings die Korrektheit der Trainingsende Zeit
-            </label>
+        <div class="row">
+          <div class="form-group col-sm-3">
+            <label for="km">Fahrtstreckenlänge [km]:</label>
+            <input type="text" id="km" class="form-control" name="km" id="km" value="[[!+fi.km]]" />
+          </div>
+          <div class="form-group col-sm-3">
+            <label for="end_time">Uhrzeit Fahrtende:</label>
+            <input name="end_time" id="end_time" type="text" class="form-control" value="[[!+fi.end_time]]" />
+          </div>    
+          <div class="form-group col-sm-3">
+            <label for="date_end">Datum Fahrtende:</label>
+            <div class="input-group date">
+              <input name="date_end" id="date_end" type="text" class="form-control" value="[[!+fi.date_end]]" /><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+            </div>
+          </div>
+          [[!#request.process:is=`close`:then=`
+            <div class="form-group col-sm-3">
+              <label for="finished">Abgeschlossen:</label>
+              <select class="form-control" name="finished" id="finished">
+                <option value="0" [[!+fi.finished:FormItIsSelected=`0`]]>nein</option>
+                <option value="1" [[!+fi.finished:FormItIsSelected=`1`]]>ja</option>
+              </select>
+            </div>
+          `:else=`
+            <div class="form-group col-sm-3">
+              <label for="wfahrt">Wanderfahrt:</label>
+              <select class="form-control" name="wfahrt" id="wfahrt">
+                <option value="0" [[!+fi.wfahrt:FormItIsSelected=`0`]]>nein</option>
+                <option value="1" [[!+fi.wfahrt:FormItIsSelected=`1`]]>ja</option>
+              </select>
+            </div>      
+          `]]
         </div>
+        <div class="row">
+          <div class="form-group col-sm-12">
+            <label for="defaultexcursion_id">Standardruderstrecke ab Bootshaus:</label>
+            <select class="form-control" id="defaultexcursion_id">
+              <option value="">Freie Eingabe der Streckenlänge</option>
+              [[migxLoopCollection?
+                &packageName=`fbuch`
+                &classname=`fbuchDestination`
+                &tpl=`@CODE:<option value="{{+km}}">{{+destination}} - {{+km}} km</option>`
+              ]]
+
+              <option value="0">Zurücksetzen auf 0</option>
+            </select>
+          </div>
         </div>
-    </div>    
-    
-[[!migxLoopCollection?
-&packageName=`fbuch`
-&classname=`fbuchBoot`
-&joins=`[{"alias":"Nutzergruppe"},{"alias":"Bootsgattung"}]`
-&where=`{"id":"[[!+fi.boot_id]]"}`
-&tpl=`fbuchFahrtenFormBootinfo`
-]]    
-    
+        <div class="row">
+          <div class="form-group col-sm-12">
+            <div class="checkbox">
+              <label><input name="endtime_checked" type="checkbox" value="1" [[!+fi.endtime_checked:FormitIsChecked=`1`]] /> Ich bestätige vor Abschluss des Trainings die Korrektheit der Trainingsende-Zeit</label>
+            </div>
+          </div>
+        </div>
+        [[!migxLoopCollection?
+          &packageName=`fbuch`
+          &classname=`fbuchBoot`
+          &joins=`[{"alias":"Nutzergruppe"},{"alias":"Bootsgattung"}]`
+          &where=`{"id":"[[!+fi.boot_id]]"}`
+          &tpl=`fbuchFahrtenFormBootinfo`
+        ]]
 
-
-  <div class="form-group">
-    <label for="comment">Kommentar (optional)</label>
-    <textarea class="form-control" rows="3" name="note" id="comment">[[!+fi.note]]</textarea>
-  </div>
-
-[[!#request.process:is=`close`:then=``:else=`
-<div class="row">    
-    <div class="form-group col-sm-3">
-    <label for="add_person">
-        Person hinzufügen:
-        [[!+fi.error.member_ids:!empty=`
-        <span class="error"><br>Bitte eine Person auswählen!</span>
+        <div class="form-group">
+          <label for="comment">Kommentar (optional)</label>
+          <textarea class="form-control" rows="3" name="note" id="comment">[[!+fi.note]]</textarea>
+        </div>
+        [[!#request.process:is=`close`:then=``:else=`
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <label for="add_person">Person hinzufügen:[[!+fi.error.member_ids:!empty=`<span class="error"><br />Bitte eine Person auswählen!</span>`]]</label>
+              <input type="search" autocomplete="off" class="form-control" id="add_person" name="name" />
+            </div>
+          </div>
         `]]
-       
-    </label>
-    <input type="search" autocomplete="off" class="form-control" id="add_person" name="name" />
-    </div>
-</div>
-`]]
-
-
-<div id="teamwrapper">
-<input type="hidden" name="member_ids" id="member_ids" value="[[!+fi.member_ids]]">
-</div>
-
-
-
+        <div id="teamwrapper">
+          <input type="hidden" name="member_ids" id="member_ids" value="[[!+fi.member_ids]]" />
+        </div>
       </div>
       <div class="modal-footer">
-    [[!#request.process:is=`delete`:then=`
-    <button id="btn_anmelden" type="submit" class="btn btn-default">Löschen</button>    
-    `:else=`
-    <button id="btn_anmelden" type="submit" class="btn btn-default">Speichern</button>    
-    `]]
-        
+        [[!#request.process:is=`delete`:then=`
+          <button id="btn_anmelden" type="submit" class="btn btn-default">Löschen</button>
+        `:else=`
+          <button id="btn_anmelden" type="submit" class="btn btn-default">Speichern</button>
+        `]]
+
         <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen (Esc)</button>
       </div>
-</form>
-
-
-    </div>
-
+    </form>
   </div>
+</div>
 
 <script>
-var fahrten_form_success = function(){
+  var fahrten_form_success = function() {
     $('#fbuchModal').modal('hide');
     var success_object_id='[[!+success_object_id]]';
-    fbuch_getfahrten('none',success_object_id,formdata);       
-}
-</script>
-[[!+fi.successMessage]]
-
-<script>
-var formdata = [];
-
-$( "#boot_id" ).on( "change", function( event ) {
-  formdata = $("#anmelden_form").serializeArray();
-  var $form = $("#anmelden_form");
-  var url = $form.attr( "action" );
-  for (var i=0;i<formdata.length;i++){
-      if (formdata[i].name == 'submit_form' ){
-          formdata[i].value = '';
-      }
+    fbuch_getfahrten('none', success_object_id, formdata);
   }
-  formdata.push({"name":"changeboot","value":"1"});
-  var posting = $.post( url, formdata );
-  posting.done(function( data ) {
-    $( "#fbuchModal" ).empty().append( data );
+</script>
+
+[[!+fi.successMessage]]
+<script>
+  var formdata = [];
+
+  $('#boot_id').on('change', function(event) {
+    formdata = $('#anmelden_form').serializeArray();
+    var $form = $('#anmelden_form');
+    var url = $form.attr('action');
+    for (var i = 0; i < formdata.length; i++) {
+      if (formdata[i].name == 'submit_form') {
+        formdata[i].value = '';
+      }
+    }
+    
+    formdata.push({'name':'changeboot','value':'1'});
+    var posting = $.post(url, formdata);
+    posting.done(function(data) {
+      $('#fbuchModal').empty().append(data);
+    });
   });
-});
 
-$( "#anmelden_form" ).on( "submit", function( event ) {
-  event.preventDefault();
-  formdata = $( this ).serializeArray();
-  var $form = $( this );
-  var url = $form.attr( "action" );
-  var posting = $.post( url, formdata );
-  posting.done(function( data ) {
-    $( "#fbuchModal" ).empty().append( data );
+  $('#anmelden_form').on('submit', function(event) {
+    event.preventDefault();
+    formdata = $(this).serializeArray();
+    var $form = $(this);
+    var url = $form.attr('action');
+    var posting = $.post(url, formdata);
+    posting.done(function(data) {
+      $('#fbuchModal').empty().append(data);
+    });
   });
-});
 
-var input = $('#add_person');
-input.typeahead({source:[
-    [[!migxLoopCollection?
-    &classname=`mvMember`
-    &sortConfig=`[{"sortby":"name"}]`
-    &tpl=`@CODE:{id:"[[+id]]",name:"[[+name]] [[+firstname]]"}`
-    &where=`{"member_status:IN":["Gast","Mitglied","VHS"],"deleted":"0"}`
-    &outputSeparator=`,`
-    &debug=`0`
-    ]]
-    ],items:15
-     ,autoSelect: false
-     ,afterSelect: function(item){
-         //console.log(item);
-         input.val('');
-         var member_ids = $('#member_ids').val();
-         $( "#teamwrapper" ).load( getneufahrtnamen_ajax_url,{"fahrt_id":"[[!#request.fahrt_id]]","member_ids":member_ids,"member_id":item.id,"processaction":"add"}, function(){
-             $('#add_person').focus();
-             //fbuch_getteam();
-         });
-        }
-    }); 
-
-$( ".remove_anmeldung" ).on( "click", function( event ) {
-  event.preventDefault();
-  var data = {
-    'fullname':'x'
-  };
-  var url = '[[~[[*id]]]]';
-  var posting = $.post( url, data );
-  posting.done(function( data ) {
-    $( "#fbuchModal_body" ).empty().append( data );
+  var input = $('#add_person');
+  input.typeahead({
+    source:[
+      [[!migxLoopCollection?
+        &classname=`mvMember`
+        &sortConfig=`[{"sortby":"name"}]`
+        &tpl=`@CODE:{id:"[[+id]]",name:"[[+name]] [[+firstname]]"}`
+        &where=`{"member_status:IN":["Gast","Mitglied","VHS"],"deleted":"0"}`
+        &outputSeparator=`,`
+        &debug=`0`
+      ]]
+    ],
+    items: 15,
+    autoSelect: false,
+    afterSelect: function(item) {
+      //console.log(item);
+      input.val('');
+      var member_ids = $('#member_ids').val();
+      $('#teamwrapper').load(getneufahrtnamen_ajax_url, {'fahrt_id': '[[!#request.fahrt_id]]', 'member_ids': member_ids, 'member_id': item.id, 'processaction': 'add'}, function() {
+        $('#add_person').focus();
+        //fbuch_getteam();
+      });
+    }
   });
-});
 
-$('.input-group.date').datepicker({
-    format: "dd.mm.yyyy",
-    todayBtn: "linked",
-    language: "de",
+  $('.remove_anmeldung').on('click', function(event) {
+    event.preventDefault();
+    var data = {
+      'fullname':'x'
+    };
+    var url = '[[~[[*id]]]]';
+    var posting = $.post(url, data);
+    posting.done(function( data ) {
+      $('#fbuchModal_body').empty().append(data);
+    });
+  });
+
+  $('.input-group.date').datepicker({
+    format: 'dd.mm.yyyy',
+    todayBtn: 'linked',
+    language: 'de',
     autoclose: true,
     todayHighlight: true
-});
+  });
 
-$('#defaultexcursion_id').on('change', function(event) {
+  $('#defaultexcursion_id').on('change', function(event) {
     var defaultExcursionDistance = $(event.target).val();
     var inputKm = $('#km');
     if (!defaultExcursionDistance) {
@@ -333,7 +263,7 @@ $('#defaultexcursion_id').on('change', function(event) {
 
   $('#start-time').on('change', function(event) {
       var offset = Number([[++fbuch.endtime_offset]]);
-      if (offset>0){
+      if (offset > 0) {
         var starttime = $(event.target).val();
         starttime = starttime.replace('.',':');
         var timeparts = starttime.split(":");
@@ -345,16 +275,16 @@ $('#defaultexcursion_id').on('change', function(event) {
         m = m < 10 ? '0' + m : m; // (or alternatively) m = String(m).padStart(2, '0')
         $('#end_time').val(h + ':' + m); 
       }
-    
   });  
 
-[[!#request.process:is=`close`:then=`
-$('#fbuchModal').on('shown.bs.modal', function () {
-  $('#km').focus().select();
-});
-`:else=`
-$('#fbuchModal').on('shown.bs.modal', function () {
-  $('#boot_id').focus().select();
-});
-`]]
+  [[!#request.process:is=`close`:then=`
+    $('#fbuchModal').on('shown.bs.modal', function () {
+      $('#km').focus().select();
+    });
+  `:else=`
+    $('#fbuchModal').on('shown.bs.modal', function () {
+      $('#boot_id').focus().select();
+    });
+  `]]
+
 </script>
