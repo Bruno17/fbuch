@@ -48,7 +48,14 @@
               <label for="boot_id">Boot:[[!+fi.error.boot_id:!empty=`<span class="error"><br />Bitte ein Boot auswählen!</span>`]]</label>
               <select class="form-control" name="boot_id" id="boot_id">
                 <option value=""></option>
-                [[migxLoopCollection? &packageName=`fbuch` &classname=`fbuchBoot` &joins=`[{"alias":"Bootsgattung"},{"alias":"Nutzergruppe"}]` &where=`{"deleted":"0"}` &sortConfig=`[{"sortby":"Bootsgattung.shortname"},{"sortby":"name"}]` &tpl=`fbuchFahrtenFormBootOption`]]
+                [[migxLoopCollection? 
+                  &packageName=`fbuch` 
+                  &classname=`fbuchBoot` 
+                  &joins=`[{"alias":"Bootsgattung"},{"alias":"Nutzergruppe"}]` 
+                  &where=`{"deleted":"0"}` 
+                  &sortConfig=`[{"sortby":"Bootsgattung.shortname"},{"sortby":"name"}]` 
+                  &tpl=`fbuchFahrtenFormBootOption`
+                ]]
               </select>
             </div>
             <div class="form-group col-sm-3">
