@@ -1,14 +1,14 @@
 {
-  "id":66,
+  "id":34,
   "name":"fbuch_datetypes",
   "formtabs":[
     {
-      "MIGX_id":96,
+      "MIGX_id":49,
       "caption":"Allgemein",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":492,
+          "MIGX_id":212,
           "field":"name",
           "caption":"Name",
           "description":"",
@@ -37,7 +37,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":493,
+          "MIGX_id":213,
           "field":"show_at_rowinglogbook_page",
           "caption":"Terminart auf Rudern und Gruppentraining - Seite anzeigen",
           "description":"",
@@ -66,7 +66,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":509,
+          "MIGX_id":214,
           "field":"element_invite",
           "caption":"Einladung per Element",
           "description":"",
@@ -85,7 +85,7 @@
           "pos":3
         },
         {
-          "MIGX_id":510,
+          "MIGX_id":215,
           "field":"allow_foreign_guests",
           "caption":"fremde G\u00e4ste erlauben ",
           "description":"Erlaubt das Anmelden von Personen, welche nicht in der Fahrtenbuch Namensliste angelegt wurden.",
@@ -102,12 +102,31 @@
           "default":"",
           "useDefaultIfEmpty":"0",
           "pos":4
+        },
+        {
+          "MIGX_id":222,
+          "field":"colorstyle",
+          "caption":"Farbe im Kalender",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"listbox",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"Farbe w\u00e4hlen==||red||pink||purple||deep-purple||indigo||blue||light-blue||cyan||teal||green||light-green||lime||ellow||amber||orange||deep-orange||brown||grey||blue-grey",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":5
         }
       ],
       "pos":1
     },
     {
-      "MIGX_id":102,
+      "MIGX_id":50,
       "caption":"Extra",
       "print_before_tabs":"0",
       "pos":2,
@@ -115,7 +134,7 @@
       "MIGXtyperender":"<h3>formtab<\/h3>",
       "fields":[
         {
-          "MIGX_id":505,
+          "MIGX_id":216,
           "field":"registrationpage_text",
           "caption":"Spezialtext oder Extraformular auf Zu\/Absagen Seite",
           "description":"",
@@ -144,7 +163,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":506,
+          "MIGX_id":217,
           "field":"registration_hooksnippet",
           "caption":"Spezial Hooksnippet, wird nach zu\/absagen ausgef\u00fchrt",
           "description":"",
@@ -173,7 +192,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":507,
+          "MIGX_id":218,
           "field":"person_tpl_extratext",
           "caption":"Extratext oder Formularfelder pro hinzuzuf\u00fcgender Person",
           "description":"",
@@ -202,7 +221,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":508,
+          "MIGX_id":219,
           "field":"exportrow_hooksnippet",
           "caption":"exportrow_hooksnippet",
           "pos":4,
@@ -328,17 +347,32 @@
       "renderchunktpl":"",
       "renderoptions":"",
       "editor":""
+    },
+    {
+      "MIGX_id":7,
+      "header":"colorstyle",
+      "dataIndex":"colorstyle",
+      "width":10,
+      "sortable":true,
+      "show_in_grid":1,
+      "customrenderer":"",
+      "renderer":"this.renderChunk",
+      "clickaction":"",
+      "selectorconfig":"",
+      "renderchunktpl":"<div style=\"background-color:[[+colorstyle:fbuchGetColor]];width:20px;height:20px;\"><\/div>",
+      "renderoptions":"",
+      "editor":""
     }
   ],
   "createdby":1,
   "createdon":"2020-10-14 09:38:13",
   "editedby":1,
-  "editedon":"2021-06-15 14:20:13",
+  "editedon":"2022-06-08 21:04:52",
   "deleted":0,
-  "deletedon":"-1-11-30 00:00:00",
+  "deletedon":null,
   "deletedby":0,
   "published":1,
-  "publishedon":"-1-11-30 00:00:00",
+  "publishedon":null,
   "publishedby":0,
   "category":""
 }

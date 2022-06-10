@@ -52,6 +52,12 @@ class MyControllerDates extends modRestController {
         $returntype = $this->getProperty('returntype');
         $show_hidden = $this->getProperty('show_hidden');
         $which_page = $this->getProperty('which_page');
+
+        $joins = '[{"alias":"Type"}]';
+        
+        $this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);
+
+
      /*   
         if($show_hidden){
             $where = array('deleted' => 0);
@@ -76,8 +82,19 @@ class MyControllerDates extends modRestController {
             $c->where(array('type:IN' => $types));
         }
         
-        $date = strftime('%Y-%m-%d 00:00:00');
-        $c->where(array('date:>=' => $date));
+        if (isset($_GET['start']) && isset($_GET['end'])){
+            $start = $this->getProperty('start');
+            $end = $this->getProperty('end');
+            $c->where(array('date_end:>=' => $start));
+            $c->where(array('date:<=' => $end));
+
+        } elseif (isset($_GET['start'])) {
+            $start = $this->getProperty('start');
+            $c->where(array('date:>=' => $start));
+        } else {
+            $date = strftime('%Y-%m-%d 00:00:00');
+            $c->where(array('date:>=' => $date));
+        }
         //$c->prepare();echo $c->toSql();
         return $c;
         

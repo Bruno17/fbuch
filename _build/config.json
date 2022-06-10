@@ -244,6 +244,22 @@
           "moduleguid":"",
           "static":false,
           "static_file":"",
+          "name":"fbuchGetColor",
+          "file":"fbuchgetcolor.snippet.php"
+        },        
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "moduleguid":"",
+          "static":false,
+          "static_file":"",
           "name":"fbuch_customchunks_aftergetfields",
           "file":"fbuch_customchunks_aftergetfields.snippet.php"
         },
@@ -1093,6 +1109,22 @@
           ],
           "static":false,
           "static_file":"",
+          "name":"fbuch_Kalenderansicht",
+          "file":"fbuch_kalenderansicht.chunk.html",
+          "category":"fbuch_content_chunks"
+        },        
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
           "name":"fbuch_Persoenliche_Mailinggruppen",
           "file":"fbuch_persoenliche_mailinggruppen.chunk.html",
           "category":"fbuch_content_chunks"
@@ -1633,6 +1665,21 @@
           "name":"fbuchAppErgotrack",
           "file":"fbuchappergotrack.chunk.html"
         },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
+          "name":"fbuchAppKalenderansicht",
+          "file":"fbuchappkalenderansicht.chunk.html"
+        },          
         {
           "source":0,
           "property_preprocess":false,
@@ -4466,6 +4513,22 @@
           "name":"fbuch Quasar",
           "file":"fbuch quasar.template.html"
         },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "icon":"",
+          "template_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
+          "name":"fbuch Quasar 2",
+          "file":"fbuch quasar 2.template.html"
+        },        
         {
           "source":0,
           "property_preprocess":false,

@@ -19,6 +19,7 @@ $xpdo_meta_map['fbuchDateType']= array (
     'show_at_rowinglogbook_page' => 0,
     'element_invite' => 0,
     'allow_foreign_guests' => 0,
+    'colorstyle' => '',
   ),
   'fieldMeta' => 
   array (
@@ -91,6 +92,14 @@ $xpdo_meta_map['fbuchDateType']= array (
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
+    ),
+    'colorstyle' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '100',
+      'null' => false,
+      'default' => '',
     ),
   ),
 );

@@ -287,6 +287,7 @@
         <field key="show_at_rowinglogbook_page" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" /> 
         <field key="element_invite" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
         <field key="allow_foreign_guests" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
+        <field key="colorstyle" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
            
     </object>     
     

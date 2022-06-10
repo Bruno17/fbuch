@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+  <!--
+    WARNING! Make sure that you match all Quasar related
+    tags to the same version! (Below it's "@2.7.1")
+  -->
+
+  <head>
+    <meta charset="UTF-8">
+    <title>[[++site_name]] - [[*pagetitle]]</title>
+    <base href="[[!++site_url]]" />
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/quasar@2.7.1/dist/quasar.prod.css" rel="stylesheet" type="text/css">
+    [[*headscripts]]
+  </head>
+
+  <body>
+    <!-- example of injection point where you write your app template -->
+    <div id="q-app">
+      <q-layout view="hHh lpR fFf">
+
+        <q-header elevated class="bg-white text-grey-8">
+          <q-toolbar>
+            <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" ></q-btn>
+    
+            <q-toolbar-title>
+              <a href="[[!++site_url]]">
+                <img src="[[$$fbuch_site_logo]]" style="margin-right: 10px; margin-top: 4px; margin-bottom:-3px; margin-left: 6px; height: 60px;">
+              </a>
+              [[*longtitle:isnot=``:then=`[[*longtitle]]`:else=`[[*pagetitle]]`]]
+            </q-toolbar-title>
+          </q-toolbar>
+        </q-header>
+    
+        <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
+          <!-- drawer content -->
+        </q-drawer>
+    
+        <q-page-container>
+          [[*content]]
+        </q-page-container>
+    
+      </q-layout>
+    </div>
+
+    <!-- Add the following at the end of your body tag -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.7.1/dist/quasar.umd.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.7.1/dist/lang/de.umd.prod.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    [[*scripts]]
+
+
+  </body>
+</html>
