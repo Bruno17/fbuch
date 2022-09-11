@@ -1381,7 +1381,7 @@ class Fbuch {
         }
 
         //print_r($values);die();
-        $modx->log(modX::LOG_LEVEL_ERROR, 'getFormValues');
+        //$modx->log(modX::LOG_LEVEL_ERROR, 'getFormValues');
         return true;
 
     }
