@@ -3,7 +3,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"1.6.5-beta",
+  "version":"1.6.6-beta",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",
@@ -166,7 +166,39 @@
           "static_file":"",
           "name":"setlocale",
           "file":"setlocale.snippet.php"
-        },        
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "moduleguid":"",
+          "static":false,
+          "static_file":"",
+          "name":"getAtoZLinks",
+          "file":"getatozlinks.snippet.php"
+        },          
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "moduleguid":"",
+          "static":false,
+          "static_file":"",
+          "name":"now",
+          "file":"now.snippet.php"
+        },                
         {
           "source":0,
           "property_preprocess":false,
@@ -1109,7 +1141,7 @@
           ],
           "static":false,
           "static_file":"",
-          "name":"fbuch_Kalenderansicht",
+          "name":"fbuch_kalenderansicht",
           "file":"fbuch_kalenderansicht.chunk.html",
           "category":"fbuch_content_chunks"
         },        
@@ -1677,9 +1709,24 @@
           ],
           "static":false,
           "static_file":"",
-          "name":"fbuchAppKalenderansicht",
-          "file":"fbuchappkalenderansicht.chunk.html"
-        },          
+          "name":"fbuch_kalenderansicht_scripts",
+          "file":"fbuch_kalenderansicht_scripts.chunk.html"
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_kalenderansicht_headscripts",
+          "file":"fbuch_kalenderansicht_headscripts.chunk.html"
+        },                   
         {
           "source":0,
           "property_preprocess":false,
@@ -2415,6 +2462,21 @@
           "name":"fbuchAppErgometer_fahrtenliste",
           "file":"fbuchappergometer_fahrtenliste.chunk.html"
         },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "static":false,
+          "static_file":"",
+          "name":"tplAtoZLink",
+          "file":"tplatozlink.chunk.html"
+        },        
         {
           "source":0,
           "property_preprocess":false,

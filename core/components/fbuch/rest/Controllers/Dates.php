@@ -4,50 +4,103 @@ class MyControllerDates extends modRestController {
     
     public $defaultLimit = 0;
     public $classKey = 'fbuchDate';
-    public $defaultSortField = 'date';
+    public $defaultSortField = 'id';
     public $defaultSortDirection = 'ASC';
 
+    public function get() {
+        $pk = $this->getProperty($this->primaryKeyField);
+        
+        $date = $this->getProperty('date');
+        if ($pk == 'new' && !empty($date)){
+            return $this->newDate($date);
+        }
+
+        if (empty($pk)) {
+            return $this->getList();
+        }
+        return $this->read($pk);
+    }    
+
+    public function newDate($date){
+        $this->object = $this->modx->newObject($this->classKey);
+        if (empty($this->object)) {
+            return $this->failure($this->modx->lexicon('rest.err_obj_nf',array(
+                'class_key' => $this->classKey,
+            )));
+        }
+        $this->object->set('date',$date);
+        $this->object->set('start_time','00:00'); 
+        $this->object->set('date_end',$date);
+        $this->object->set('end_time','01:30');         
+        $objectArray = $this->object->toArray();
+                
+        return $this->success('',$objectArray);    
+    }
+
+    public function put() {
+        $deleted = (int) $this->getProperty('deleted');
+        if ($deleted == 1) {
+            $id = $this->getProperty($this->primaryKeyField,false);
+            if (empty($id)) {
+                return $this->failure($this->modx->lexicon('rest.err_field_ns',array(
+                    'field' => $this->primaryKeyField,
+                )));
+            }
+            $c = $this->getPrimaryKeyCriteria($id);
+            $old_deleted = 0;
+            if ($object = $this->modx->getObject($this->classKey,$c)) {
+                $old_deleted = (int) $object->get('deleted');
+            }
+            if ($deleted == 1 && $old_deleted == 0){
+                if ($this->modx->hasPermission('fbuch_delete_termin') || $object->get('createdby') == $this->modx->user->get('id')) {
+                    $this->setProperty('deletedby', $this->modx->user->get('id'));
+                    $this->setProperty('deletedon', strftime('%Y-%m-%d %H:%M:%S'));   
+                } else {
+                    $this->unsetProperty('deleted');
+                }
+            }
+        }       
+        parent::put();
+    }    
+
     public function beforeDelete() {
-        throw new Exception('Unauthorized', 401);
+        if ($this->modx->hasPermission('fbuch_delete_termin')) {
+            $this->object->set('deletedby', $this->modx->user->get('id'));
+            $this->object->set('deletedon', strftime('%Y-%m-%d %H:%M:%S')); 
+        } else {
+            throw new Exception('Unauthorized', 401);
+        }
+
+        return !$this->hasErrors();
     }
 
     public function beforePut() {
-        throw new Exception('Unauthorized', 401);
+
+        if ($this->modx->hasPermission('fbuch_edit_termin')) {
+            $this->object->set('editedby', $this->modx->user->get('id'));
+            $this->object->set('editedon', strftime('%Y-%m-%d %H:%M:%S')); 
+        } else {
+            throw new Exception('Unauthorized', 401);
+        }
+
+        return !$this->hasErrors();
     }
 
     public function beforePost() {
-        throw new Exception('Unauthorized', 401);
+        if ($this->modx->hasPermission('fbuch_create_termin')) {
+            $this->object->set('createdby', $this->modx->user->get('id'));
+            $this->object->set('createdon', strftime('%Y-%m-%d %H:%M:%S')); 
+        } else {
+            throw new Exception('Unauthorized', 401);
+        }
+
+        return !$this->hasErrors();
     }
 
     public function verifyAuthentication() {
         return true;
     }
     
-    public function XXXgetList() {
-        $this->getProperties();
-        $c = $this->modx->newQuery($this->classKey);
-        //$c = $this->addSearchQuery($c);
-        $c = $this->prepareListQueryBeforeCount($c);
-        $total = $this->modx->getCount($this->classKey,$c);
-        $alias = !empty($this->classAlias) ? $this->classAlias : $this->classKey;
-        //$c->select($this->modx->getSelectColumns($this->classKey,$alias));
-        $c->select(array('id','type'));
-        $c = $this->prepareListQueryAfterCount($c);
-        $c->sortby('type');
-        //$c->sortby($this->getProperty($this->getOption('propertySort','sort'),$this->defaultSortField),$this->getProperty($this->getOption('propertySortDir','dir'),$this->defaultSortDirection));
-        $limit = $this->getProperty($this->getOption('propertyLimit','limit'),$this->defaultLimit);
-        if (empty($limit)) $limit = $this->defaultLimit;
-        $c->limit($limit,$this->getProperty($this->getOption('propertyOffset','start'),$this->defaultOffset));
-        $objects = $this->modx->getCollection($this->classKey,$c);
-        if (empty($objects)) $objects = array();
-        $list = array();
-        /** @var xPDOObject $object */
-        foreach ($objects as $object) {
-            $list[] = $this->prepareListObject($object);
-        }
-        return $this->collection($list,$total);
-    }    
-
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
         $returntype = $this->getProperty('returntype');
         $show_hidden = $this->getProperty('show_hidden');
@@ -77,35 +130,37 @@ class MyControllerDates extends modRestController {
         
         $c->groupby('type');
         */
-        if (isset($_GET['types'])){
+        $c->where(['deleted' => 0]);
+        if (isset($_GET['types']) && !empty($_GET['types'])){
             $types = explode(',',$_GET['types']);
-            $c->where(array('type:IN' => $types));
+            $c->where(['type:IN' => $types]);
         }
         
         if (isset($_GET['start']) && isset($_GET['end'])){
             $start = $this->getProperty('start');
             $end = $this->getProperty('end');
-            $c->where(array('date_end:>=' => $start));
-            $c->where(array('date:<=' => $end));
+            $c->where(['date_end:>=' => $start]);
+            $c->where(['date:<=' => $end]);
 
         } elseif (isset($_GET['start'])) {
             $start = $this->getProperty('start');
-            $c->where(array('date:>=' => $start));
+            $c->where(['date:>=' => $start]);
         } else {
             $date = strftime('%Y-%m-%d 00:00:00');
-            $c->where(array('date:>=' => $date));
+            $c->where(['date:>=' => $date]);
         }
+        $c->sortby('date','ASC');
+        $c->sortby('start_time','ASC');
         //$c->prepare();echo $c->toSql();
         return $c;
         
     }
-    /*
+    
     protected function prepareListObject(xPDOObject $object) {
-        $type = array();
-        $type['label'] = $object->get('type');
-        $type['name'] = $object->get('type');
-        return $type;
+        $date = $object->toArray();
+        $date['Type_colorstyle'] = (string) $date['Type_colorstyle'] == '' ? 'grey' : $date['Type_colorstyle'];
+        return $date;
     } 
-    */   
+       
 
 }

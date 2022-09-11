@@ -1,9 +1,9 @@
 {
-  "id":37,
+  "id":89,
   "name":"fbuch_termine",
   "formtabs":[
     {
-      "MIGX_id":53,
+      "MIGX_id":119,
       "caption":"Termin",
       "print_before_tabs":"0",
       "pos":1,
@@ -11,7 +11,7 @@
       "MIGXtyperender":"<h3>formtab<\/h3>",
       "fields":[
         {
-          "MIGX_id":219,
+          "MIGX_id":512,
           "field":"title",
           "caption":"title",
           "pos":1,
@@ -27,7 +27,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":220,
+          "MIGX_id":513,
           "field":"date",
           "caption":"date",
           "description":"",
@@ -58,12 +58,12 @@
       ]
     },
     {
-      "MIGX_id":101,
+      "MIGX_id":120,
       "caption":"Teilnehmer",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":503,
+          "MIGX_id":514,
           "field":"teilnehmer",
           "caption":"Teilnehmer",
           "description":"",
@@ -85,12 +85,12 @@
       "pos":2
     },
     {
-      "MIGX_id":54,
+      "MIGX_id":121,
       "caption":"Einladungsliste",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":221,
+          "MIGX_id":515,
           "field":"invites",
           "caption":"",
           "description":"",
@@ -112,12 +112,12 @@
       "pos":3
     },
     {
-      "MIGX_id":55,
+      "MIGX_id":122,
       "caption":"Mailingliste",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":222,
+          "MIGX_id":516,
           "field":"mailinglist_id",
           "caption":"Mailing List",
           "description":"",
@@ -146,7 +146,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":223,
+          "MIGX_id":517,
           "field":"copy_names_to_mailinglist",
           "caption":"Namen der Einladungsliste in ausgew\u00e4hlte Mailingliste kopieren",
           "description":"",
@@ -165,7 +165,7 @@
           "pos":2
         },
         {
-          "MIGX_id":224,
+          "MIGX_id":518,
           "field":"mailinglist",
           "caption":"",
           "description":"",
@@ -187,8 +187,8 @@
       "pos":4
     }
   ],
-  "contextmenus":"update",
-  "actionbuttons":"",
+  "contextmenus":"update||recall_remove_delete",
+  "actionbuttons":"toggletrash",
   "columnbuttons":"",
   "filters":"",
   "extended":{
@@ -288,6 +288,21 @@
       "editor":""
     },
     {
+      "MIGX_id":12,
+      "header":"date_end",
+      "dataIndex":"date_end",
+      "width":15,
+      "sortable":true,
+      "show_in_grid":1,
+      "customrenderer":"",
+      "renderer":"",
+      "clickaction":"",
+      "selectorconfig":"",
+      "renderchunktpl":"",
+      "renderoptions":"",
+      "editor":""
+    },
+    {
       "MIGX_id":6,
       "header":"start_time",
       "dataIndex":"start_time",
@@ -351,17 +366,32 @@
       "MIGX_id":10,
       "dataIndex":"type",
       "header":"type"
+    },
+    {
+      "MIGX_id":14,
+      "header":"deleted",
+      "dataIndex":"deleted",
+      "width":10,
+      "sortable":true,
+      "show_in_grid":1,
+      "customrenderer":"",
+      "renderer":"",
+      "clickaction":"",
+      "selectorconfig":"",
+      "renderchunktpl":"",
+      "renderoptions":"",
+      "editor":""
     }
   ],
   "createdby":1,
   "createdon":"2018-04-18 21:16:14",
   "editedby":1,
-  "editedon":"2021-07-10 09:32:34",
+  "editedon":"2022-09-04 15:27:01",
   "deleted":0,
-  "deletedon":"-1-11-30 00:00:00",
+  "deletedon":null,
   "deletedby":0,
   "published":1,
-  "publishedon":"-1-11-30 00:00:00",
+  "publishedon":null,
   "publishedby":0,
   "category":""
 }

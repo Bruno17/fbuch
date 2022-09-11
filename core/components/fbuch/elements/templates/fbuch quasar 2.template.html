@@ -7,6 +7,7 @@
 
   <head>
     <meta charset="UTF-8">
+    <meta name=viewport content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
     <title>[[++site_name]] - [[*pagetitle]]</title>
     <base href="[[!++site_url]]" />
 
@@ -18,7 +19,7 @@
   <body>
     <!-- example of injection point where you write your app template -->
     <div id="q-app">
-      <q-layout view="hHh lpR fFf">
+      <q-layout view="hHh LpR fFf">
 
         <q-header elevated class="bg-white text-grey-8">
           <q-toolbar>
@@ -35,10 +36,11 @@
     
         <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
           <!-- drawer content -->
+          <fbuchnav></fbuchnav>
         </q-drawer>
     
         <q-page-container>
-          [[*content]]
+          <router-view :key="$route.fullPath"></router-view>
         </q-page-container>
     
       </q-layout>
@@ -46,11 +48,77 @@
 
     <!-- Add the following at the end of your body tag -->
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/quasar@2.7.1/dist/quasar.umd.prod.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/quasar@2.7.1/dist/lang/de.umd.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.7.4/dist/quasar.umd.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.7.4/dist/lang/de.umd.prod.js"></script>
+    <script src="https://unpkg.com/vue-router@4"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        const fbuch_options = {
+          assets_url:'[[++assets_url]]',
+          resource_id:'[[*id]]',
+          user_id:'[[+modx.user.id]]'
+        };
+    
+    </script>  
     
     [[*scripts]]
+
+    <script type="module">
+      /*
+        Example kicking off the UI. Obviously, adapt this to your specific needs.
+        Assumes you have a <div id="q-app"></div> in your <body> above
+       */
+
+      import fbuchnav from '[[++fbuch.assets_url:default=`assets/components/fbuch/`]]quasar/components/resourcetree.js';
+      
+      [[*content]]
+
+  const router = VueRouter.createRouter({
+    history: VueRouter.createWebHashHistory('/termine/kalenderansicht.html/'),
+    routes: routes
+})
+
+      Vue.$router = router;
+  
+      const { ref, computed } = Vue;
+  
+      const app = Vue.createApp({
+        components : {
+            fbuchnav
+        }, 
+  
+        setup () {
+       
+          const leftDrawerOpen = ref(false)
+  
+          return {
+            leftDrawerOpen,
+            toggleLeftDrawer () {
+              leftDrawerOpen.value = !leftDrawerOpen.value
+            }
+          }
+        }
+      })
+      app.use(router)
+      app.use(Quasar, {
+        config: {
+          /*
+          brand: {
+            // primary: '#e46262',
+            // ... or all other brand colors
+          },
+          notify: {...}, // default set of options for Notify Quasar plugin
+          loading: {...}, // default set of options for Loading Quasar plugin
+          loadingBar: { ... }, // settings for LoadingBar Quasar plugin
+          // ..and many more (check Installation card on each Quasar component/directive/plugin)
+          */
+        }
+      })
+      Quasar.lang.set(Quasar.lang.de)
+      //app.component("QCalendarMonth", QCalendarMonth.QCalendarMonth);
+      app.mount('#q-app')
+    </script>
 
 
   </body>
