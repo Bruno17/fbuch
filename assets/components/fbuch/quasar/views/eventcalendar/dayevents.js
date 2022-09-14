@@ -89,7 +89,7 @@ export default {
     <div class="q-pa-md full-width" >
       <div class="text-h4 text-center"> {{ formattedDate }} </div>
       <div class="q-pa-md q-gutter-sm">
-      <q-btn v-if="hasPermission('fbuch_edit_termin')" icon="add" :to="'/event-create/' +year+'/'+month+'/'+day" >
+      <q-btn v-if="hasPermission('fbuch_create_termin')" icon="add" :to="'/event-create/' +year+'/'+month+'/'+day" >
       Termin erstellen
       </q-btn>
       <q-btn v-if="view=='day'" label="Wochenansicht" :to="'/events/week/'+year+'/'+month+'/'+day"></q-btn>
