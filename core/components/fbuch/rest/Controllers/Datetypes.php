@@ -20,10 +20,8 @@ class MyControllerDatetypes extends BaseController {
     }
 
     public function verifyAuthentication() {
-        if ($fbuchUser = $this->getCurrentFbuchUser()) {
-            return true;
-        }
-        return false;
+        //keine bestimmte Berechtigung benötigt
+        return true;
     }
     
     

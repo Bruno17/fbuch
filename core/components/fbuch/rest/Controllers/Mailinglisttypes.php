@@ -20,10 +20,7 @@ class MyControllerMailinglisttypes extends BaseController {
     }
 
     public function verifyAuthentication() {
-        if ($fbuchUser = $this->getCurrentFbuchUser()) {
-            return true;
-        }
-        return false;
+        return true;
     }
     
     public function getList() {

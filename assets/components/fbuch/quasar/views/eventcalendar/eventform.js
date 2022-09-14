@@ -229,7 +229,7 @@ export default {
         </div>
       </q-form>
   
-      {{ event }} <br>
+      {{ eventx }} <br>
       {{ statex }}
 
     </div>      

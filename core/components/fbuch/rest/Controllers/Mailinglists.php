@@ -90,10 +90,7 @@ class MyControllerMailinglists extends BaseController {
     }
 
     public function verifyAuthentication() {
-        if ($fbuchUser = $this->getCurrentFbuchUser()) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
@@ -103,12 +100,16 @@ class MyControllerMailinglists extends BaseController {
         
         $where = array('deleted' => 0);
 
-        if ($fbuchUser = $this->getCurrentFbuchUser()) {
-            $joins = '[{"alias":"Names","on":"list_id=fbuchMailinglist.id and member_id=' . $fbuchUser->get('id') . '"}]';
-        }
-
-
-        $this->modx->migx->prepareJoins($this->classKey, json_decode($joins, 1), $c);
+        switch ($returntype) {
+            case 'options':
+                break;
+            default:
+            if ($fbuchUser = $this->getCurrentFbuchUser()) {
+                $joins = '[{"alias":"Names","on":"list_id=fbuchMailinglist.id and member_id=' . $fbuchUser->get('id') . '"}]';
+                $this->modx->migx->prepareJoins($this->classKey, json_decode($joins, 1), $c);
+            }
+                break;
+        }        
 
         $w = array();
         switch ($which_page){
