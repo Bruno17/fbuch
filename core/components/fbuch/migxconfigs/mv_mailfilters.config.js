@@ -1,14 +1,14 @@
 {
-  "id":6,
+  "id":98,
   "name":"mv_mailfilters",
   "formtabs":[
     {
-      "MIGX_id":12,
+      "MIGX_id":131,
       "caption":"Filter",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":64,
+          "MIGX_id":541,
           "field":"name",
           "caption":"Name des Filters",
           "description":"",
@@ -27,7 +27,7 @@
           "pos":1
         },
         {
-          "MIGX_id":65,
+          "MIGX_id":542,
           "field":"where",
           "caption":"where-statement",
           "description":"",
@@ -50,7 +50,7 @@
     }
   ],
   "contextmenus":"",
-  "actionbuttons":"addItem",
+  "actionbuttons":"addItem||importcsvmigxdb||exportcsvmigxdb",
   "columnbuttons":"update||remove",
   "filters":"",
   "extended":{
@@ -98,6 +98,20 @@
     "onsubmitsuccess":"",
     "submitparams":""
   },
+  "permissions":{
+    "apiaccess":"",
+    "view":"",
+    "list":"",
+    "save":"",
+    "create":"",
+    "remove":"",
+    "delete":"",
+    "publish":"",
+    "unpublish":"",
+    "viewdeleted":"",
+    "viewunpublished":""
+  },
+  "fieldpermissions":"",
   "columns":[
     {
       "MIGX_id":1,
@@ -131,12 +145,12 @@
   "createdby":1,
   "createdon":"2015-02-26 15:30:58",
   "editedby":1,
-  "editedon":"2020-05-15 15:57:16",
+  "editedon":"2022-09-18 13:36:05",
   "deleted":0,
-  "deletedon":"-1-11-30 00:00:00",
+  "deletedon":null,
   "deletedby":0,
   "published":1,
-  "publishedon":"-1-11-30 00:00:00",
+  "publishedon":null,
   "publishedby":0,
   "category":"mv"
 }

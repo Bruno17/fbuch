@@ -1,0 +1,8 @@
+"id","name","where"
+"1","erweiterter Vorstand","{""membergroups"":""1,2""}"
+"2","enger Vorstand","{""membergroups"":""1""}"
+"3","Alle Mitglieder mit Email Adresse","{""email:!="":"""",""member_status"":""Mitglied""}"
+"4","Mitgliedsverwaltung","{""membergroups"":""3""}"
+"5","Übungsleiter alle Bereiche","{""membergroups"":""4""}"
+"6","Übungsleiter Kinder/Junioren","{""memberrole"":""21""}"
+"7","Lizenzinhaber","{""membergroups"":""8""}"

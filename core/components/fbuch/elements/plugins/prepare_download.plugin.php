@@ -1,66 +1,64 @@
 <?php
-
-$dl_center_download_parent = 29;
-$dl_center_download_resource = 30;
-$dl_center_maildownload_resource = 28;
-
 $packageName = 'fbuch';
 
 $packagepath = $modx->getOption('core_path') . 'components/' . $packageName . '/';
 $modelpath = $packagepath . 'model/';
 $modx->addPackage($packageName, $modelpath);
 
-function downloadfile($filePath,$filename) {
-    global $modx;
-    //echo $filename;die();
+if (!function_exists('downloadfile')){
+    function downloadfile($filePath,$filename) {
+        global $modx;
+        //echo $filename;die();
+        
+        $pathinfo = pathinfo($filePath);
+        
+        //print_r($pathinfo);die();
     
-    $pathinfo = pathinfo($filePath);
+        $extension = $pathinfo['extension'];
+        
+        ob_end_clean(); //added to fix ZIP file corruption
+        ob_start(); //added to fix ZIP file corruption
     
-    //print_r($pathinfo);die();
-
-    $extension = $pathinfo['extension'];
+        header('Pragma: public');  // required
+        header('Expires: 0');  // no cache
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s', filemtime($filePath)) . ' GMT');
+        header('Content-Description: File Transfer');
+        header('Content-Type:'); //added to fix ZIP file corruption
+        header('Content-Type: "application/force-download"');
+        header('Content-Disposition: attachment; filename="' . $pathinfo['basename'] . '"');
+        header('Content-Transfer-Encoding: binary');
+        header('Content-Length: ' . (string) (filesize($filePath))); // provide file size
+        header('Connection: close');
+        sleep(1);
     
-    ob_end_clean(); //added to fix ZIP file corruption
-    ob_start(); //added to fix ZIP file corruption
-
-    header('Pragma: public');  // required
-    header('Expires: 0');  // no cache
-    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-    header('Cache-Control: private', false);
-    header('Last-Modified: ' . gmdate('D, d M Y H:i:s', filemtime($filePath)) . ' GMT');
-    header('Content-Description: File Transfer');
-    header('Content-Type:'); //added to fix ZIP file corruption
-    header('Content-Type: "application/force-download"');
-    header('Content-Disposition: attachment; filename="' . $pathinfo['basename'] . '"');
-    header('Content-Transfer-Encoding: binary');
-    header('Content-Length: ' . (string) (filesize($filePath))); // provide file size
-    header('Connection: close');
-    sleep(1);
-
-    //Close the session to allow for header() to be sent
-    session_write_close();
-    ob_flush();
-    flush();
-    
-    $chunksize = 1 * (1024 * 1024); // how many bytes per chunk
-    $buffer = '';
-    $handle = @fopen($filePath, 'rb');
-    if ($handle === false) {
-        return false;
-    }
-    while (!feof($handle) && connection_status() == 0) {
-        $buffer = @fread($handle, $chunksize);
-        if (!$buffer) {
-            die();
-        }
-        echo $buffer;
+        //Close the session to allow for header() to be sent
+        session_write_close();
         ob_flush();
         flush();
-    }
-    fclose($handle);            
-
-    exit;    
+        
+        $chunksize = 1 * (1024 * 1024); // how many bytes per chunk
+        $buffer = '';
+        $handle = @fopen($filePath, 'rb');
+        if ($handle === false) {
+            return false;
+        }
+        while (!feof($handle) && connection_status() == 0) {
+            $buffer = @fread($handle, $chunksize);
+            if (!$buffer) {
+                die();
+            }
+            echo $buffer;
+            ob_flush();
+            flush();
+        }
+        fclose($handle);            
+    
+        exit;    
+    }    
 }
+
 
 switch ($modx->event->name) {
     case 'OnLoadWebDocument':

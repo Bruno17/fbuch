@@ -454,7 +454,7 @@ $xpdo_meta_map['mvMember']= array (
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
+      'null' => true,
     ),
     'editedby' => 
     array (
@@ -468,7 +468,7 @@ $xpdo_meta_map['mvMember']= array (
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
+      'null' => true,
     ),
     'deleted' => 
     array (
@@ -483,7 +483,7 @@ $xpdo_meta_map['mvMember']= array (
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
+      'null' => true,
     ),
     'deletedby' => 
     array (

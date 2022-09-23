@@ -75,7 +75,7 @@ $xpdo_meta_map['mvMail']= array (
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
+      'null' => true,
     ),
     'editedby' => 
     array (
@@ -89,7 +89,7 @@ $xpdo_meta_map['mvMail']= array (
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
+      'null' => true,
     ),
     'deleted' => 
     array (
@@ -104,7 +104,7 @@ $xpdo_meta_map['mvMail']= array (
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
+      'null' => true,
     ),
     'deletedby' => 
     array (

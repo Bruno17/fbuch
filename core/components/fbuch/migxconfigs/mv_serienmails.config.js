@@ -1,14 +1,14 @@
 {
-  "id":4,
+  "id":103,
   "name":"mv_serienmails",
   "formtabs":[
     {
-      "MIGX_id":7,
+      "MIGX_id":149,
       "caption":"Serienmail",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":33,
+          "MIGX_id":657,
           "field":"subject",
           "caption":"Betreff",
           "description":"",
@@ -27,7 +27,7 @@
           "pos":1
         },
         {
-          "MIGX_id":34,
+          "MIGX_id":658,
           "field":"message",
           "caption":"Text",
           "description":"",
@@ -46,7 +46,7 @@
           "pos":2
         },
         {
-          "MIGX_id":35,
+          "MIGX_id":659,
           "field":"serienmail_members",
           "caption":"Mitglieder Serienmail",
           "description":"",
@@ -68,12 +68,12 @@
       "pos":1
     },
     {
-      "MIGX_id":13,
+      "MIGX_id":150,
       "caption":"Anh\u00e4nge",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":68,
+          "MIGX_id":660,
           "field":"documents",
           "caption":"Dokumente",
           "description":"",
@@ -95,12 +95,12 @@
       "pos":2
     },
     {
-      "MIGX_id":25,
+      "MIGX_id":151,
       "caption":"Hilfe",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":120,
+          "MIGX_id":661,
           "field":"",
           "caption":"",
           "description":"Mail erstellen oder bearbeiten<br\/>\n->Oben den Tab Anh\u00e4nge anklicken<br\/>\n-> Dokument hinzuf\u00fcgen<br\/>\n-> Das Feld 'Dokument' anklicken (rechte Seite)<br\/>\n-> Ordner Protokolle->2015 ausw\u00e4hlen<br\/>\n-> Rechtsklick auf 2015 -> Dateien hochladen<br\/>\n-> Deine Datei(en) zum hochladen ausw\u00e4hlen<br\/>\n-> Hochladen anklicken<br\/>\n-> Fenster schlie\u00dfen wenn fertig<br\/>\n-> Die hochgeladene Datei ausw\u00e4hlen<br\/>\n-> Unten rechts 'OK' klicken - die Datei wird ausgew\u00e4hlt und das Fenster schlie\u00dft sich<br\/>\n-> Das Fenster mit dem Feld 'Dokument' mit 'Fertig' schlie\u00dfen<br\/>\n-> wenn Du fertig bist mit dem Text und dem hinzuf\u00fcgen von Anh\u00e4ngen auch dieses Fenster mit 'Fertig' schlie\u00dfen<br\/>\n<br\/>\nDie Protokoll - Dateien w\u00fcrde ich immer gleich nach diesem Schema benennen, wegen aufsteigender Sortierung nach Jahr,Monat,Tag:<br\/>\n<br\/>\nprotokoll_2015_03_19.pdf \n<br\/>\n<br\/>\n<h3>Bilder im Text<\/h3>\nEs k\u00f6nnen auch Bilder im Text eingef\u00fcgt werden. Diese Bilder sollten in das Verzeichnis \/filedownloads\/public\/ geladen werden. Am Besten in Jahresverzeichnisse einsortiert.",
@@ -189,6 +189,20 @@
     "onsubmitsuccess":"",
     "submitparams":""
   },
+  "permissions":{
+    "apiaccess":"",
+    "view":"",
+    "list":"",
+    "save":"",
+    "create":"",
+    "remove":"",
+    "delete":"",
+    "publish":"",
+    "unpublish":"",
+    "viewdeleted":"",
+    "viewunpublished":""
+  },
+  "fieldpermissions":"",
   "columns":[
     {
       "MIGX_id":1,
@@ -250,12 +264,12 @@
   "createdby":1,
   "createdon":"2015-02-26 11:38:20",
   "editedby":1,
-  "editedon":"2020-05-15 17:30:46",
+  "editedon":"2022-09-16 05:41:24",
   "deleted":0,
-  "deletedon":"-1-11-30 00:00:00",
+  "deletedon":null,
   "deletedby":0,
   "published":1,
-  "publishedon":"-1-11-30 00:00:00",
+  "publishedon":null,
   "publishedby":0,
   "category":"mv"
 }
