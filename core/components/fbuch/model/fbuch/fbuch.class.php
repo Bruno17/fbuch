@@ -37,7 +37,7 @@ class Fbuch {
      */
     function __construct(modX & $modx, array $options = array()) {
         $this->modx = &$modx;
-        $mocCorePath = realpath($modx->getOption('moc.core_path', null, $modx->getOption('core_path') . 'components/matrixorgclient')) . '/';
+        $mocCorePath = realpath($modx->getOption('matrixorgclient.core_path', null, $modx->getOption('core_path') . 'components/matrixorgclient')) . '/';
         $this->moc = $modx->getService('matrixorgclient', 'MatrixOrgClient', $mocCorePath . 'model/matrixorgclient/');
 
         $this->modx->lexicon->load('fbuch:default');
@@ -532,8 +532,10 @@ class Fbuch {
     }
 
     public function afterCreateDate(&$date_o) {
+        
         $type_o = $date_o->getOne('Type');
         $element_invite = $type_o->get('element_invite');
+        
         if (!empty($element_invite)) {
 
             $scriptProperties = array('action' => 'createDateRoom', 'date_id' => $date_o->get('id'));
@@ -552,19 +554,46 @@ class Fbuch {
         return true;
     }
 
-    public function cleanOldDates() {
+    public function scheduleCheckComingOrPastSpace(){
         $modx = &$this->modx;
-        //get all Dates older than now - 2 weeks
-        $rooms = $this->moc->getGroupRooms();
-        $query_date = strftime('%Y-%m-%d 23:59:59', strtotime('- 2 week'));
         $c = $modx->newQuery('fbuchDate');
-        $c->where(array('date:<' => $query_date, 'riot_room_id:IN' => $rooms));
+        $c->where(['riot_room_id:!='=>'','matrix_space:IN'=>['0','1']]);
         //$c->prepare();echo $c->toSql();
         if ($collection = $modx->getIterator('fbuchDate', $c)) {
             foreach ($collection as $object) {
-                $this->moc->cleanOldDate($object);
+                //echo '<pre>' . print_r($object->toArray(),1) . '</pre>';
+                $scriptProperties = array('date_id' => $object->get('id'));
+                $reference = 'web/schedule/checkcomingorpastspace';
+                $this->createSchedulerTask('matrixorgclient', array('snippet' => 'web/schedule/checkcomingorpastspace'));
+                $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties);                
             }
         }
+    }
+
+    public function scheduleKickUsersFromPastRooms(){
+        $modx = &$this->modx;
+        $query_date = strftime('%Y-%m-%d 23:59:59', strtotime('- 1 day'));
+        $c = $modx->newQuery('fbuchDate');
+        $c->where(['riot_room_id:!='=>'','date:<' => $query_date,'matrix_members_kicked'=>'0']); 
+        //$c->prepare();echo $c->toSql();
+        if ($collection = $modx->getIterator('fbuchDate', $c)) {
+            foreach ($collection as $object) {
+                echo '<pre>' . print_r($object->toArray(),1) . '</pre>';
+                $scriptProperties = array('date_id' => $object->get('id'));
+                $reference = 'web/schedule/kickusersfrompastroom';
+                $this->createSchedulerTask('matrixorgclient', array('snippet' => 'web/schedule/kickusersfrompastroom'));
+                $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties);                
+            }
+        }               
+    }
+
+    public function cleanOldDates() {
+        $modx = &$this->modx;
+        //get all Dates older than now - 2 weeks
+        //$rooms = $this->moc->getGroupRooms();
+        $this->scheduleCheckComingOrPastSpace();
+        $this->scheduleKickUsersFromPastRooms();
+
     }
 
     public function autoduplicateDates() {
@@ -591,6 +620,8 @@ class Fbuch {
                 $old_object->save();
                 $object->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
                 $object->set('autoduplicated', 0);
+                $object->set('matrix_members_kicked', 0);
+                $object->set('matrix_space', 0);
                 $object->set('riot_room_id', '');
                 $object->set('last_matrix_start_token', '');
                 $object->set('locked', 0);

@@ -10,7 +10,7 @@ $xpdo_meta_map['mvMimeType']= array (
   ),
   'fields' => 
   array (
-    'name' => NULL,
+    'name' => '',
     'description' => NULL,
     'mime_type' => NULL,
     'file_extensions' => NULL,
@@ -25,6 +25,7 @@ $xpdo_meta_map['mvMimeType']= array (
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
+      'default' => '',
       'index' => 'unique',
     ),
     'description' => 

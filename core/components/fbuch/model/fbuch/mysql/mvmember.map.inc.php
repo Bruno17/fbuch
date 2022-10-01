@@ -260,7 +260,7 @@ $xpdo_meta_map['mvMember']= array (
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
+      'null' => true,
     ),
     'funktion' => 
     array (
@@ -298,7 +298,7 @@ $xpdo_meta_map['mvMember']= array (
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
+      'null' => true,
     ),
     'ehrungen' => 
     array (
@@ -384,7 +384,7 @@ $xpdo_meta_map['mvMember']= array (
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
+      'null' => true,
     ),
     'anredetitel' => 
     array (

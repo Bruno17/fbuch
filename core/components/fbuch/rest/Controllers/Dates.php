@@ -86,6 +86,16 @@ class MyControllerDates extends modRestController {
         return !$this->hasErrors();
     }
 
+    public function afterPost(array &$objectArray){
+        $this->modx->fbuch->checkDateMailinglistNames($this->object->get('id'));
+        $this->modx->fbuch->afterCreateDate($this->object);
+    }
+
+    public function afterPut(array &$objectArray){
+        $this->modx->fbuch->checkDateMailinglistNames($this->object->get('id'));
+        $this->modx->fbuch->afterCreateDate($this->object);
+    }    
+
     public function beforePost() {
         if ($this->modx->hasPermission('fbuch_create_termin')) {
             $this->object->set('createdby', $this->modx->user->get('id'));

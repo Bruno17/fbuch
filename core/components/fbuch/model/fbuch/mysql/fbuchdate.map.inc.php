@@ -21,6 +21,8 @@ $xpdo_meta_map['fbuchDate']= array (
     'autoduplicate_invited' => 0,
     'autoduplicate_names' => 0,
     'riot_room_id' => '',
+    'matrix_space' => 0,
+    'matrix_members_kicked' => 0,
     'last_matrix_start_token' => '',
     'start_time' => '',
     'end_time' => '',
@@ -124,6 +126,24 @@ $xpdo_meta_map['fbuchDate']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
+    ),
+    'matrix_space' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'matrix_members_kicked' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
     ),
     'last_matrix_start_token' => 
     array (

@@ -48,6 +48,8 @@
         <field key="autoduplicate_invited" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="autoduplicate_names" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="riot_room_id" dbtype="text" phptype="string" null="false" default="" />
+        <field key="matrix_space" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="matrix_members_kicked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="last_matrix_start_token" dbtype="text" phptype="string" null="false" default="" />
         <field key="start_time" dbtype="varchar" phptype="string" precision="20" null="false" default="" />
         <field key="end_time" dbtype="varchar" phptype="string" precision="20" null="false" default="" />
@@ -314,12 +316,12 @@
         <field key="kennung1" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="iban" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="gender" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
-        <field key="birthdate" dbtype="datetime" phptype="datetime" null="false" />
+        <field key="birthdate" dbtype="datetime" phptype="datetime" null="true" />
         <field key="funktion" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="fax" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="email" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="wrong_email" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
-        <field key="eintritt" dbtype="datetime" phptype="datetime" null="false" />
+        <field key="eintritt" dbtype="datetime" phptype="datetime" null="true" />
         <field key="ehrungen" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="briefanrede" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="blz3" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
@@ -330,7 +332,7 @@
         <field key="bank3" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="bank2" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="bank1" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
-        <field key="austritt" dbtype="datetime" phptype="datetime" null="false" />
+        <field key="austritt" dbtype="datetime" phptype="datetime" null="true" />
         <field key="anredetitel" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="anrede" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="abteilung" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
@@ -444,18 +446,18 @@
         <field key="filter_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
 
 		<field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />	
-    	<field key="createdon" dbtype="datetime" phptype="datetime" null="false" />
+    	<field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
     </object> 
     <object class="mvMailLogRecipient" table="mv_mail_log_recipients" extends="xPDOSimpleObject">
         <field key="log_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
 
 		<field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />	
-    	<field key="createdon" dbtype="datetime" phptype="datetime" null="false" />
+    	<field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
     </object>
     
     <object class="mvMimeType" table="mv_mime_types" extends="xPDOSimpleObject">
-        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="unique" />
         <field key="description" dbtype="tinytext" phptype="string" null="true" />
         <field key="mime_type" dbtype="tinytext" phptype="string" />
         <field key="file_extensions" dbtype="tinytext" phptype="string" />
@@ -469,7 +471,7 @@
         <field key="other_person" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
 		<field key="assignedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />	
-    	<field key="assignedon" dbtype="datetime" phptype="datetime" null="false" />
+    	<field key="assignedon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="blocked" dbtype="int" precision="1" phptype="integer" null="false" default="0" />        
                 
         <aggregate alias="Member" class="mvMember" local="member_id" foreign="id" cardinality="one" owner="foreign" /> 

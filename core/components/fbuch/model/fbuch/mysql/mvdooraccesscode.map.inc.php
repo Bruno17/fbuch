@@ -56,7 +56,7 @@ $xpdo_meta_map['mvDoorAccesscode']= array (
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
+      'null' => true,
     ),
     'blocked' => 
     array (

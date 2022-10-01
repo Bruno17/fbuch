@@ -47,7 +47,7 @@ $xpdo_meta_map['mvMailLogRecipient']= array (
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
+      'null' => true,
     ),
   ),
 );
