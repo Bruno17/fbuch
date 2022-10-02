@@ -557,7 +557,8 @@ class Fbuch {
     public function scheduleCheckComingOrPastSpace(){
         $modx = &$this->modx;
         $c = $modx->newQuery('fbuchDate');
-        $c->where(['riot_room_id:!='=>'','matrix_space:IN'=>['0','1']]);
+        //check all currently in coming space
+        $c->where(['riot_room_id:!='=>'','matrix_space:IN'=>['1']]);
         //$c->prepare();echo $c->toSql();
         if ($collection = $modx->getIterator('fbuchDate', $c)) {
             foreach ($collection as $object) {
@@ -568,13 +569,30 @@ class Fbuch {
                 $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties);                
             }
         }
+        $c = $modx->newQuery('fbuchDate');
+        //check all currently in no space
+        $c->where(['riot_room_id:!='=>'','matrix_space:IN'=>['0']]);
+        $c->sortby('date','ASC');
+        $c->limit(30);        
+        //$c->prepare();echo $c->toSql();
+        if ($collection = $modx->getIterator('fbuchDate', $c)) {
+            foreach ($collection as $object) {
+                //echo '<pre>' . print_r($object->toArray(),1) . '</pre>';
+                $scriptProperties = array('date_id' => $object->get('id'));
+                $reference = 'web/schedule/checkcomingorpastspace';
+                $this->createSchedulerTask('matrixorgclient', array('snippet' => 'web/schedule/checkcomingorpastspace'));
+                $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties);                
+            }
+        }        
     }
 
     public function scheduleKickUsersFromPastRooms(){
         $modx = &$this->modx;
-        $query_date = strftime('%Y-%m-%d 23:59:59', strtotime('- 1 day'));
+        $query_date = strftime('%Y-%m-%d 23:59:59', strtotime('- 30 day'));
         $c = $modx->newQuery('fbuchDate');
         $c->where(['riot_room_id:!='=>'','date:<' => $query_date,'matrix_members_kicked'=>'0']); 
+        $c->sortby('date','ASC');
+        $c->limit(30);
         //$c->prepare();echo $c->toSql();
         if ($collection = $modx->getIterator('fbuchDate', $c)) {
             foreach ($collection as $object) {
