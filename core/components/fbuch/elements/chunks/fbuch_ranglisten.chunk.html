@@ -1,122 +1,118 @@
-    <div class="row">
+<div class="row">
     <div class="form-group col-sm-3">
-    <label for="group">
-        Gruppe:
-    </label>
-    <select class="form-control" name="group" id="group">
-    <option value="SF" >Frauen</option>
-    <option value="SM" >Männer</option>
-    <option value="JF" >Juniorinnen</option>
-    <option value="JM" >Junioren</option>
-    <option value="Maed" >Mädchen</option>
-    <option value="Jung" >Jungen</option>
-    <option value="Gast" >Gast</option>
-    <option value="VHS" >VHS</option>
-    </select>
+        <label for="group">
+            Gruppe:
+        </label>
+        <select class="form-control" name="group" id="group">
+            <option value="alle" >Alle</option>
+            <option value="SF" >Frauen</option>
+            <option value="SM" >Männer</option>
+            <option value="JF" >Juniorinnen</option>
+            <option value="JM" >Junioren</option>
+            <option value="Maed" >Mädchen</option>
+            <option value="Jung" >Jungen</option>
+            <option value="Gast" >Gast</option>
+            <option value="VHS" >VHS</option>
+        </select>
     </div>
     <div class="form-group col-sm-3">
-    <label for="year">
-        Jahr:
-    </label>
-    <select class="form-control" name="year" id="year">
-[[!migxLoopCollection? 
-&packageName=`fbuch`
-&classname=`fbuchFahrt`
-&groupby = `year(date)`
-&tpl=`fbuchYearOption`
-&sortConfig=`[{"sortby":"date","sortdir":"DESC"}]`
-]]
-    </select>
-   
+        <label for="year">
+            Jahr:
+        </label>
+        <select class="form-control" name="year" id="year">
+            [[!migxLoopCollection? 
+                &packageName=`fbuch`
+                &classname=`fbuchFahrt`
+                &groupby = `year(date)`
+                &tpl=`fbuchYearOption`
+                &sortConfig=`[{"sortby":"date","sortdir":"DESC"}]`
+            ]]
+        </select>
     </div>
-
     <div class="form-group col-sm-3">
-    <label for="Gerät">
-        Gerät:
-    </label>
-    <select class="form-control" name="boot_type" id="boot_type">
-    [[!migxLoopCollection?
-    &classname = `fbuchBootsGattung`
-    &packageName=`fbuch`
-    &tpl=`@CODE:<option value="{{+name}}" >{{+name}}</option>`
-    &groupby=`name`
-    ]]  
-    </select>
+        <label for="Gerät">
+            Gerät:
+        </label>
+        <select class="form-control" name="boot_type" id="boot_type">
+            [[!migxLoopCollection?
+                &classname=`fbuchBootsGattung`
+                &packageName=`fbuch`
+                &tpl=`@CODE:<option value="{{+name}}">{{+name}}</option>`
+                &groupby=`name`
+                &sortdir=`DESC`
+            ]]  
+        </select>
     </div>
-
     <div class="form-group col-sm-3">
-    <label for="zeitraum">
-        Zeitraum:
-    </label>
-    <select class="form-control" name="zeitraum" id="zeitraum">
-    <option value="ganz" [[!#post.zeitraum:is=`ganz`:then=`selected="selected"`]]>Ganzes Jahr</option>
-    <option value="halb_1" [[!#post.zeitraum:is=`halb_1`:then=`selected="selected"`]]>Winterhalbjahr (Okt - März [[+year]])</option>
-    <option value="halb_2" [[!#post.zeitraum:is=`halb_2`:then=`selected="selected"`]]>Sommerhalbjahr (Apr - Sept [[+year]])</option>
-    </select>
+        <label for="zeitraum">
+            Zeitraum:
+        </label>
+        <select class="form-control" name="zeitraum" id="zeitraum">
+            <option value="ganz" [[!#post.zeitraum:is=`ganz`:then=`selected="selected"`]]>Ganzes Jahr</option>
+            <option value="halb_1" [[!#post.zeitraum:is=`halb_1`:then=`selected="selected"`]]>Winterhalbjahr (Okt - März [[+year]])</option>
+            <option value="halb_2" [[!#post.zeitraum:is=`halb_2`:then=`selected="selected"`]]>Sommerhalbjahr (Apr - Sept [[+year]])</option>
+        </select>
     </div>
-
-    </div>
+</div>
 
 [[!setYearPlaceholder]]
 
 <div id="auswertung">
-
-<table class="table table-striped">
-[[!fbuchQuery? 
-&query=`
-select n3.name as Nachname,n3.firstname as Vorname,sum(f4.km) as km,count(n3.name) as Fahrten 
-[[!hasPermission:is=`yes`:then=`, year(n3.birthdate) as Jahrgang`:else=``? &permission=`fbuch_view_birthdate`]]
-from modx_fbuch_fahrt_names f8,modx_fbuch_fahrten f4,modx_mv_members n3,modx_fbuch_boote b1
-left join modx_fbuch_bootsgattungen g on b1.gattung_id=g.id
-WHERE  f8.fahrt_id=f4.id 
-AND f8.member_id=n3.id 
-AND b1.id=f4.boot_id
-[[!fbuchSwitchByReqParam?
-&name=`zeitraum`
-&default=`ganz`
-&options=`{
-"ganz":"AND year(f4.date)=[[+year]]",
-"halb_1":"AND ((year(f4.date)=[[+year]]-1 AND month(f4.date)>=10) OR (year(f4.date)=[[+year]] AND month(f4.date)<=3))",
-"halb_2":"AND year(f4.date)=[[+year]] AND month(f4.date)>=4 AND month(f4.date)<=9",
-"halb_2_and_halb_1":"AND ((year(f4.date)=[[+year]]-1 AND month(f4.date)>=7) OR (year(f4.date)=[[+year]] AND month(f4.date)<=6))"
-}`
-]]
-[[!fbuchSwitchByReqParam?
-&name=`boot_type`
-&default=`Rudern`
-&options=`{
-    [[!migxLoopCollection?
-    &classname = `fbuchBootsGattung`
-    &packageName=`fbuch`
-    &tpl=`@CODE:"{{+name}}":"AND g.name = '{{+name}}'"`
-    &groupby=`name`
-    &outputSeparator=`,`
-    ]]
-}`
-]]
-[[!fbuchSwitchByReqParam?
-&name=`group`
-&default=`SF`
-&options=`{
-"SM":"AND [[+year]]-year(n3.birthdate)>18 AND n3.gender = 'männlich' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
-"SF":"AND [[+year]]-year(n3.birthdate)>18 AND n3.gender = 'weiblich' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
-"JM":"AND [[+year]]-year(n3.birthdate)<=18 AND [[+year]]-year(n3.birthdate)>=15 AND n3.gender = 'männlich' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
-"JF":"AND [[+year]]-year(n3.birthdate)<=18 AND [[+year]]-year(n3.birthdate)>=15 AND n3.gender = 'weiblich' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
-"Jung":"AND [[+year]]-year(n3.birthdate)<=14 AND n3.gender = 'männlich' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
-"Maed":"AND [[+year]]-year(n3.birthdate)<=14 AND n3.gender = 'weiblich' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
-"Gast":"AND n3.member_status = 'Gast'",
-"VHS":"AND n3.member_status = 'VHS'"
-}`
-]]
-AND km is not null
-AND km > 0
-AND n3.name != ''
-group by n3.name,n3.firstname
-order by km desc
-`
-]]
-</table>
-
-<div id="summe">Summe: [[+km_total]]</div>
+    <table class="table table-striped">
+        [[!fbuchQuery? 
+            &query=`
+                select n3.name as Nachname,n3.firstname as Vorname,sum(f4.km) as km,count(n3.name) as Fahrten 
+                [[!hasPermission:is=`yes`:then=`, year(n3.birthdate) as Jahrgang`:else=``? &permission=`fbuch_view_birthdate`]]
+                from modx_fbuch_fahrt_names f8,modx_fbuch_fahrten f4,modx_mv_members n3,modx_fbuch_boote b1
+                left join modx_fbuch_bootsgattungen g on b1.gattung_id=g.id
+                WHERE  f8.fahrt_id=f4.id 
+                AND f8.member_id=n3.id 
+                AND b1.id=f4.boot_id
+                [[!fbuchSwitchByReqParam?
+                    &name=`zeitraum`
+                    &default=`ganz`
+                    &options=`{
+                        "ganz":"AND year(f4.date)=[[+year]]",
+                        "halb_1":"AND ((year(f4.date)=[[+year]]-1 AND month(f4.date)>=10) OR (year(f4.date)=[[+year]] AND month(f4.date)<=3))",
+                        "halb_2":"AND year(f4.date)=[[+year]] AND month(f4.date)>=4 AND month(f4.date)<=9",
+                        "halb_2_and_halb_1":"AND ((year(f4.date)=[[+year]]-1 AND month(f4.date)>=7) OR (year(f4.date)=[[+year]] AND month(f4.date)<=6))"
+                    }`
+                ]]
+                [[!fbuchSwitchByReqParam?
+                    &name=`boot_type`
+                    &default=`Rudern`
+                    &options=`{
+                        [[!migxLoopCollection?
+                            &classname = `fbuchBootsGattung`
+                            &packageName=`fbuch`
+                            &tpl=`@CODE:"{{+name}}":"AND g.name = '{{+name}}'"`
+                            &groupby=`name`
+                            &outputSeparator=`,`
+                        ]]
+                    }`
+                ]]
+                [[!fbuchSwitchByReqParam?
+                    &name=`group`
+                    &default=`SF`
+                    &options=`{
+                        "alle":"AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
+                        "SM":"AND [[+year]]-year(n3.birthdate)>18 AND n3.gender = 'männlich' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
+                        "SF":"AND [[+year]]-year(n3.birthdate)>18 AND n3.gender = 'weiblich' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
+                        "JM":"AND [[+year]]-year(n3.birthdate)<=18 AND [[+year]]-year(n3.birthdate)>=15 AND n3.gender = 'männlich' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
+                        "JF":"AND [[+year]]-year(n3.birthdate)<=18 AND [[+year]]-year(n3.birthdate)>=15 AND n3.gender = 'weiblich' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
+                        "Jung":"AND [[+year]]-year(n3.birthdate)<=14 AND n3.gender = 'männlich' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
+                        "Maed":"AND [[+year]]-year(n3.birthdate)<=14 AND n3.gender = 'weiblich' AND n3.member_status != 'Gast' AND n3.member_status != 'VHS'",
+                        "Gast":"AND n3.member_status = 'Gast'",
+                        "VHS":"AND n3.member_status = 'VHS'"
+                    }`
+                ]]
+                AND km is not null
+                AND km > 0
+                AND n3.name != ''
+                group by n3.name,n3.firstname
+                order by km desc
+            `
+        ]]
+    </table>
+    <div id="summe">Summe: [[+km_total]]</div>
 </div>
-
