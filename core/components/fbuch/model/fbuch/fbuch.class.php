@@ -558,51 +558,46 @@ class Fbuch {
         $modx = &$this->modx;
         $c = $modx->newQuery('fbuchDate');
         //check all currently in coming space
-        $c->where(['riot_room_id:!='=>'','matrix_space:IN'=>['1']]);
+        $today = strftime('%Y-%m-%d 00:00:00');
+        $c->where(['riot_room_id:!='=>'','matrix_space:IN'=>['1'],'date:<'=>$today]);
         //$c->prepare();echo $c->toSql();
+        $count = 0;
+        $perminute = 5;
+        $minutes = 1;
         if ($collection = $modx->getIterator('fbuchDate', $c)) {
             foreach ($collection as $object) {
+                $count++;
                 //echo '<pre>' . print_r($object->toArray(),1) . '</pre>';
                 $scriptProperties = array('date_id' => $object->get('id'));
                 $reference = 'web/schedule/checkcomingorpastspace';
                 $this->createSchedulerTask('matrixorgclient', array('snippet' => 'web/schedule/checkcomingorpastspace'));
-                $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties);                
+                $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties, $minutes);  
+                if ($count >= $perminute){
+                    $minutes++;
+                    $count=0;
+                }                              
             }
         }
         $c = $modx->newQuery('fbuchDate');
         //check all currently in no space
         $c->where(['riot_room_id:!='=>'','matrix_space:IN'=>['0']]);
-        $c->sortby('date','ASC');
+        $c->sortby('date','DESC');
         $c->limit(30);        
         //$c->prepare();echo $c->toSql();
         if ($collection = $modx->getIterator('fbuchDate', $c)) {
             foreach ($collection as $object) {
+                $count++;
                 //echo '<pre>' . print_r($object->toArray(),1) . '</pre>';
                 $scriptProperties = array('date_id' => $object->get('id'));
                 $reference = 'web/schedule/checkcomingorpastspace';
                 $this->createSchedulerTask('matrixorgclient', array('snippet' => 'web/schedule/checkcomingorpastspace'));
-                $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties);                
+                $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties, $minutes);  
+                if ($count >= $perminute){
+                    $minutes++;
+                    $count=0;
+                }                              
             }
         }        
-    }
-
-    public function scheduleKickUsersFromPastRooms(){
-        $modx = &$this->modx;
-        $query_date = strftime('%Y-%m-%d 23:59:59', strtotime('- 30 day'));
-        $c = $modx->newQuery('fbuchDate');
-        $c->where(['riot_room_id:!='=>'','date:<' => $query_date,'matrix_members_kicked'=>'0']); 
-        $c->sortby('date','ASC');
-        $c->limit(30);
-        //$c->prepare();echo $c->toSql();
-        if ($collection = $modx->getIterator('fbuchDate', $c)) {
-            foreach ($collection as $object) {
-                echo '<pre>' . print_r($object->toArray(),1) . '</pre>';
-                $scriptProperties = array('date_id' => $object->get('id'));
-                $reference = 'web/schedule/kickusersfrompastroom';
-                $this->createSchedulerTask('matrixorgclient', array('snippet' => 'web/schedule/kickusersfrompastroom'));
-                $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties);                
-            }
-        }               
     }
 
     public function cleanOldDates() {
@@ -746,7 +741,7 @@ class Fbuch {
 
     }
 
-    public function createSchedulerTaskRun($reference, $namespace, $properties = array()) {
+    public function createSchedulerTaskRun($reference, $namespace, $properties = array(),$minutes=1) {
         $modx = &$this->modx;
 
         // Load the Scheduler service class
@@ -764,7 +759,7 @@ class Fbuch {
         if ($task instanceof sTask) {
             // Schedule a run in 10 minutes from now
             // We're passing along an array of data; in this case a client ID.
-            $task->schedule('+1 minutes', $properties);
+            $task->schedule('+' . $minutes . ' minutes', $properties);
         }
 
 
