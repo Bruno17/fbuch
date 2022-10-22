@@ -618,6 +618,7 @@ class Fbuch {
         $c->where(array(
             'date:<' => $query_date,
             'date:>' => $query_date_min,
+            'deleted' => 0,
             'autoduplicate' => 1,
             'autoduplicated' => 0));
         if ($collection = $modx->getIterator('fbuchDate', $c)) {
