@@ -61,7 +61,7 @@ class MyControllerResourceTree extends modRestController {
         $total = 0;
 
         $scriptProperties['parents'] = '0';
-        $scriptProperties['context'] = 'fbuch';
+        $scriptProperties['context'] = $this->modx->context->get('key');
         $scriptProperties['checkPermissions'] = 'load';
         $scriptProperties['return'] = 'data';
         $scriptProperties['prepareSnippet'] = 'fbuchPrepareTreeNode';

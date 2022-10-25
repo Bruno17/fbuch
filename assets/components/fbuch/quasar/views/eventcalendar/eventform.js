@@ -33,7 +33,7 @@ export default {
         if (id == 'new'){
           data.date = date;
         }
-        const ajaxUrl = fbuch_options.assets_url + 'components/fbuch/rest/Dates/' + id;
+        const ajaxUrl = modx_options.rest_url + 'Dates/' + id;
         axios.get(ajaxUrl,{params:data})
         .then(function (response) {
             event.value = response.data.object;
@@ -45,7 +45,7 @@ export default {
 
     function onSubmit(){
         if (id == 'new'){
-          const ajaxUrl = fbuch_options.assets_url + 'components/fbuch/rest/Dates';
+          const ajaxUrl = modx_options.rest_url + 'Dates';
           axios.post(ajaxUrl,event.value)
           .then(function (response) {
               //event.value = response.data.object;
@@ -55,7 +55,7 @@ export default {
               console.log(error);
           }); 
         } else {
-          const ajaxUrl = fbuch_options.assets_url + 'components/fbuch/rest/Dates/' + id;
+          const ajaxUrl = modx_options.rest_url + 'Dates/' + id;
           axios.put(ajaxUrl,event.value)
           .then(function (response) {
               //event.value = response.data.object;

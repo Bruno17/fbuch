@@ -14,7 +14,7 @@ export default {
 
       function loadNames(){
         
-        const ajaxUrl = fbuch_options.assets_url + 'components/fbuch/rest/' + props.controller;
+        const ajaxUrl = modx_options.rest_url + props.controller;
         axios.get(ajaxUrl)
         .then(function (response) {
             names_options.value = response.data.results;

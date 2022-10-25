@@ -9,7 +9,7 @@ export default {
 
     function loadTree(){
         const data = {};
-        const ajaxUrl = fbuch_options.assets_url + 'components/fbuch/rest/ResourceTree';
+        const ajaxUrl = modx_options.rest_url + 'ResourceTree';
         axios.get(ajaxUrl,{params:data})
         .then(function (response) {
            resourcetree.value = response.data.results;

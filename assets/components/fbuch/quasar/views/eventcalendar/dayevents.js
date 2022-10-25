@@ -32,7 +32,7 @@ export default {
 
       function getPermissions(){
         const data = {};
-        const ajaxUrl = fbuch_options.assets_url + 'components/fbuch/rest/Permissions';
+        const ajaxUrl = modx_options.rest_url + 'Permissions';
         data.permissions = checkPermissions;
         axios.get(ajaxUrl,{params:data})
         .then(function (response) {
@@ -71,7 +71,7 @@ export default {
           data.types = props.type;
         }        
 
-        const ajaxUrl = fbuch_options.assets_url + 'components/fbuch/rest/Dates';
+        const ajaxUrl = modx_options.rest_url + 'Dates';
 
         axios.get(ajaxUrl,{params:data})
         .then(function (response) {

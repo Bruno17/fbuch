@@ -54,10 +54,11 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script>
-        const fbuch_options = {
+        const modx_options = {
           assets_url:'[[++assets_url]]',
           resource_id:'[[*id]]',
-          user_id:'[[+modx.user.id]]'
+          user_id:'[[+modx.user.id]]',
+          rest_url:'[[++fbuch.assets_url:default=`/assets/components/fbuch/rest/`]]'
         };
     
     </script>  
@@ -75,7 +76,7 @@
       [[*content]]
 
   const router = VueRouter.createRouter({
-    history: VueRouter.createWebHashHistory('/termine/kalenderansicht.html/'),
+    history: VueRouter.createWebHashHistory(base_route),
     routes: routes
 })
 

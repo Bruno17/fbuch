@@ -9,7 +9,7 @@ export default {
     setup(props) {
     
       const {onMounted, ref } = Vue;
-      const modx = fbuch_options;
+      const modx = modx_options;
       const { useQuasar } = Quasar;
       const $q = useQuasar(); 
             
@@ -26,7 +26,7 @@ export default {
       }
 
       function deleteEvent(){
-        const ajaxUrl = fbuch_options.assets_url + 'components/fbuch/rest/Dates/' + props.event.id;
+        const ajaxUrl = modx_options.rest_url + 'Dates/' + props.event.id;
         const event = {deleted:1};
         axios.put(ajaxUrl,event)
         .then(function (response) {

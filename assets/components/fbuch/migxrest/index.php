@@ -7,6 +7,10 @@ require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
 $modx = new modX();
 $modx->initialize($working_context);
 $modx->getService('error','error.modError', '', '');
+
+//let xrouting switch the context, depending on the url
+$this->modx->invokeEvent('OnHandleRequest');
+
 // Boot up any service classes or packages (models) you will need
 
 

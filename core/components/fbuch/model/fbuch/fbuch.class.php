@@ -605,7 +605,7 @@ class Fbuch {
         //get all Dates older than now - 2 weeks
         //$rooms = $this->moc->getGroupRooms();
         $this->scheduleCheckComingOrPastSpace();
-        $this->scheduleKickUsersFromPastRooms();
+        //$this->scheduleKickUsersFromPastRooms();
 
     }
 

@@ -129,7 +129,7 @@ export default {
           const start = getStartOfMonth(ts).date;
           const end = getEndOfMonth(ts).date;
           const data = {};
-          const ajaxUrl = fbuch_options.assets_url + 'components/fbuch/rest/Dates';
+          const ajaxUrl = modx_options.rest_url + 'Dates';
           data.start = start + ' 00:00:00';
           data.end = end + ' 23:59:59';
           data.types = selectedType.value;
