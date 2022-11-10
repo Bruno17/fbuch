@@ -49,6 +49,7 @@
         <field key="autoduplicate_names" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="riot_room_id" dbtype="text" phptype="string" null="false" default="" />
         <field key="matrix_space" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="parent" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="matrix_members_kicked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="last_matrix_start_token" dbtype="text" phptype="string" null="false" default="" />
         <field key="start_time" dbtype="varchar" phptype="string" precision="20" null="false" default="" />

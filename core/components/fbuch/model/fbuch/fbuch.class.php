@@ -534,6 +534,11 @@ class Fbuch {
     public function afterCreateDate(&$date_o) {
         
         $type_o = $date_o->getOne('Type');
+
+        if (!$type_o) {
+            return true;
+        }
+
         $element_invite = $type_o->get('element_invite');
         
         if (!empty($element_invite)) {

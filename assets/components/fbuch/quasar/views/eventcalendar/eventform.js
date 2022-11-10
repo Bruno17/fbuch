@@ -18,6 +18,9 @@ export default {
       const date = params.year + '-' + params.month + '-' +params.day;
       const event = ref({});
       const state = ref({});
+      const submitclicked = ref(false);
+      const eventform = ref(null);
+      const eventtype = ref(null);
 
       onMounted(() => {
         loadEvent();
@@ -37,13 +40,22 @@ export default {
         axios.get(ajaxUrl,{params:data})
         .then(function (response) {
             event.value = response.data.object;
+            //eventform.value.resetValidation();
+            //eventtype.value.resetValidation();
+            //console.log(eventtype.value);
         })
         .catch(function (error) {
             console.log(error);
         }); 
     } 
 
+    function onSubmitClick(){
+      //console.log('submitclick');
+      submitclicked.value = true;
+    }
+
     function onSubmit(){
+        //console.log('submit');
         if (id == 'new'){
           const ajaxUrl = modx_options.rest_url + 'Dates';
           axios.post(ajaxUrl,event.value)
@@ -75,7 +87,7 @@ export default {
       Vue.$router.go(-1);
     }
   
-      return { event, onSubmit, state, onReset }
+      return { event,eventform,eventtype,submitclicked, onSubmit, state, onReset, onSubmitClick }
     },
     template: `
     <div class="q-pa-md full-width" style="height: 400px;">
@@ -86,6 +98,7 @@ export default {
         @submit="onSubmit"
         @reset="onReset"
         class="q-col-gutter-md q-gutter-md row"
+        ref="eventform"
       >
 
       <div class="col-md-4 col-sm-12 q-col-gutter-md content-start row">
@@ -187,13 +200,16 @@ export default {
       outlined
       v-model="event.title"
       label="Gruppe/Ziel"
+      :rules="[val => (!submitclicked || !!val) || 'Bitte einen Text eintragen!']"
     />
 
     <api_select
       class="col-md-4 col-sm-4 col-xs-12"
+      ref="eventtype"
       v-model="event.type"
       label="Termin Art"
       controller="Datetypes?limit=100000&returntype=options"
+      :rules="[val => (!submitclicked || !!val) || 'Bitte eine Termin Art wählen!']"
     ></api_select> 
     
     <api_select
@@ -224,7 +240,7 @@ export default {
        
   
         <div class="col-12">
-          <q-btn label="Speichern" type="submit" color="primary"/>
+          <q-btn label="Speichern" type="submit" @click="onSubmitClick" color="primary"/>
           <q-btn label="Abbrechen" type="reset" color="primary" flat class="q-ml-sm" />
         </div>
       </q-form>

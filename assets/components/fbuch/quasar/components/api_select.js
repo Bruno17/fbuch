@@ -7,7 +7,8 @@ export default {
       const {onMounted, ref } = Vue;
       const names_options = ref([]);
       const filtered_options = ref([]);
-  
+      const fieldRef = ref(null);
+
       onMounted(() => {
           loadNames();
       })
@@ -18,7 +19,8 @@ export default {
         axios.get(ajaxUrl)
         .then(function (response) {
             names_options.value = response.data.results;
-            filtered_options.value = response.data.results;                 
+            filtered_options.value = response.data.results;
+            //resetValidation();                 
         })
         .catch(function (error) {
             console.log(error);
@@ -32,10 +34,11 @@ export default {
       })
   }     
   
-      return { names_options, filtered_options, filterFn }
+      return { names_options, filtered_options, filterFn, fieldRef}
     },
     template: `
     <q-select
+    ref="fieldRef"
     outlined
     use-input
     hide-selected
