@@ -1,13 +1,15 @@
 import api_select from '../../components/api_select.js'
 import timeinput from '../../components/timeinput.js'
 import datepicker from '../../components/datepicker.js'
+import eventlist from '../../components/recurringevents.js'
 
 export default {
 
     components : {
       api_select : api_select,
       datepicker : datepicker,
-      timeinput : timeinput
+      timeinput : timeinput,
+      eventlist : eventlist
     },
 
     setup() {
@@ -87,20 +89,46 @@ export default {
       Vue.$router.go(-1);
     }
   
-      return { event,eventform,eventtype,submitclicked, onSubmit, state, onReset, onSubmitClick }
+      return { 
+        tab: ref('date'),
+        event,
+        eventform,
+        eventtype,
+        submitclicked, 
+        onSubmit, 
+        state, 
+        onReset, 
+        onSubmitClick }
     },
     template: `
     <div class="q-pa-md full-width" style="height: 400px;">
       <div class="text-h4 text-center"> {{ event.title }} </div>
-      <div class="q-pa-md" >
 
       <q-form
         @submit="onSubmit"
         @reset="onReset"
-        class="q-col-gutter-md q-gutter-md row"
+        
         ref="eventform"
       >
+      <div class="col-12">
+      <q-tabs
+        v-model="tab"
+        align="left"
+        no-caps
+        outside-arrows
+        mobile-arrows
+        class=""
+      >
+        <q-tab name="date" label="Termin Daten" />
+        <q-tab name="recurrences" label="Wiederholungen" />
+      </q-tabs>
+      </div>
 
+      <q-tab-panels
+      v-model="tab"
+      >
+      <q-tab-panel name="date">
+      <div class="q-col-gutter-md q-gutter-md row">
       <div class="col-md-4 col-sm-12 q-col-gutter-md content-start row">
       <datepicker
       label="Startdatum" 
@@ -236,19 +264,23 @@ export default {
     /> 
 
       </div>
-         
-       
-  
-        <div class="col-12">
-          <q-btn label="Speichern" type="submit" @click="onSubmitClick" color="primary"/>
-          <q-btn label="Abbrechen" type="reset" color="primary" flat class="q-ml-sm" />
-        </div>
+      <div class="col-12">
+      <q-btn label="Speichern" type="submit" @click="onSubmitClick" color="primary"/>
+      <q-btn label="Abbrechen" type="reset" color="primary" flat class="q-ml-sm" />
+      </div>      
+      </q-tab-panel>
+
+      <q-tab-panel name="recurrences">
+        <eventlist parent="25" date="2022-11-05" :view="view" :type="selectedType"/>
+      </q-tab-panel>
+    </q-tab-panels>
+
+      </div>  
       </q-form>
   
       {{ eventx }} <br>
       {{ statex }}
 
-    </div>      
     </div>
     `
     // or `template: '#my-template-element'`

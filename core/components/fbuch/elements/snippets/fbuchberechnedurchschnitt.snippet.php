@@ -7,12 +7,12 @@ if (count($values) > 0) {
     foreach ($values as $value) {
         $trimmedValue = trim($value);
         if (is_numeric($trimmedValue)) {
-            ++$countedValues;
+            $countedValues++;
             $sum += $trimmedValue;
         }
     }
 
-    if (0 < $countedValues) {
+    if ($countedValues > 0) {
         $output = $sum / $countedValues;
     }
 }

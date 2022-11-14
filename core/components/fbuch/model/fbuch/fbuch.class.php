@@ -1460,6 +1460,7 @@ class Fbuch {
 
         if (isset($values['km'])) {
             $values['km'] = str_replace(',', '.', $values['km']);
+            $values['km'] = (float) $values['km'];
         }
 
         $start = '';

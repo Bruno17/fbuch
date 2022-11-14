@@ -16,6 +16,7 @@ class MyControllerFahrten extends BaseController {
         if ($this->modx->hasPermission('fbuch_edit_fahrten')) {
             $this->setProperty('editedby', $this->modx->user->get('id'));
             $this->setProperty('editedon', strftime('%Y-%m-%d %H:%M:%S')); 
+            $this->validateProperties();
         } else {
             throw new Exception('Unauthorized', 401);
         }
@@ -25,6 +26,7 @@ class MyControllerFahrten extends BaseController {
     
     public function afterPut(array &$objectArray) {
         //remove old, unused name(s)
+        $this->modx->log(modX::LOG_LEVEL_ERROR, 'afterPut');
         $fields = array();
         $fields['member_id'] = $this->getProperty('Member_id');
         $fields['fahrt_id'] = isset($objectArray['id']) ? $objectArray['id'] : 0;
@@ -41,11 +43,11 @@ class MyControllerFahrten extends BaseController {
     }       
 
     public function beforePost() {
-
+        $this->modx->log(modX::LOG_LEVEL_ERROR, 'beforePut');
         if ($this->modx->hasPermission('fbuch_create_fahrten')) {
             $this->setProperty('createdby', $this->modx->user->get('id'));
             $this->setProperty('createdon', strftime('%Y-%m-%d %H:%M:%S')); 
-
+            $this->validateProperties();
         } else {
             throw new Exception('Unauthorized', 401);
         }
@@ -59,10 +61,25 @@ class MyControllerFahrten extends BaseController {
         $fields['member_id'] = $this->getProperty('Member_id');
         $fields['fahrt_id'] = isset($objectArray['id']) ? $objectArray['id'] : 0;
         $this->afterSave($fields);
-       
+    }
+
+    public function validateProperties(){
+        $properties = $this->getProperties();
+        if (isset($properties['kmstand_start'])){
+            $this->object->set('kmstand_start',(int) $properties['kmstand_start']);
+        }
+        if (isset($properties['kmstand_end'])){
+            $this->object->set('kmstand_end',(int) $properties['kmstand_end']);
+        }
+        if (isset($properties['km'])){
+            $this->object->set('km',(float) $properties['km']);
+        }                
     }
     
     public function afterSave($fields){
+
+        $this->modx->log(modX::LOG_LEVEL_ERROR, 'afterSave');
+
         $kmstand_start = $this->getProperty('kmstand_start');
         $kmstand_end = $this->getProperty('kmstand_end');
         if ($kmstand_end > $kmstand_start){

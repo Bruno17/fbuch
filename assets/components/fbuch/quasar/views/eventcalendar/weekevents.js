@@ -1,4 +1,4 @@
-import dayevents from './dayevents.js'
+import dayevents from '../../components/dayevents.js'
 import api_select from '../../components/api_select.js'
 import { useGetWeekStart } from "../../composables/dateHelpers.js";
 
@@ -79,9 +79,6 @@ export default {
         const newDate = new Date;
         Vue.$router.push(prepareRoute(newDate));
       }
-
-
-     
 
       return {params, title, dates,view,selectedType,setTypeFilter,onPrev,onNext,onToday }
     },

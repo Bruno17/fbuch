@@ -1,11 +1,13 @@
-import dayevent from '../../components/dayevent.js'
+import dayevent from './dayevent.js'
 
 export default {
 
     props:{
       date:'',
       view:'',
-      type:null
+      type:null,
+      formattedDate:null,
+      events:null
     }, 
     components: {
       dayevent:dayevent    
@@ -20,7 +22,7 @@ export default {
       const year = Quasar.date.formatDate(date, 'YYYY');
       const month = Quasar.date.formatDate(date, 'MM');
       const day = Quasar.date.formatDate(date, 'DD');            
-      const formattedDate = Quasar.date.formatDate(date, 'dd DD. MMMM YYYY');
+      const formattedDate = props.formattedDate || Quasar.date.formatDate(date, 'dd DD. MMMM YYYY');
       const loadedEvents = ref([]);
       const checkPermissions = 'fbuch_edit_termin,fbuch_create_termin,fbuch_delete_termin';
       const userPermissions = ref([]);
@@ -64,6 +66,11 @@ export default {
       }
 
       function loadDayEvents(){
+        if (props.events){
+          loadedEvents.value = prepareEvents(props.events);
+          return;  
+        }
+
         const data = {};
         data.start = date + ' 00:00:00';
         data.end = date + ' 23:59:59';
@@ -86,7 +93,7 @@ export default {
       return {year,month,day, title, formattedDate, loadedEvents, hasPermission, loadDayEvents }
     },
     template: `
-    <div class="q-pa-md full-width" >
+      <div class="q-pa-md full-width" >
       <div class="text-h4 text-center"> {{ formattedDate }} </div>
       <div class="q-pa-md q-gutter-sm">
       <q-btn v-if="hasPermission('fbuch_create_termin')" icon="add" :to="'/event-create/' +year+'/'+month+'/'+day" >

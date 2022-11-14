@@ -4689,7 +4689,27 @@
             "OnBeforeUserFormSave"
           ],
           "file":"fbuchusersave.plugin.php"
-        }
+        },
+        {
+          "source":0,
+          "property_preprocess":false,
+          "description":"",
+          "editor_type":0,
+          "cache_type":0,
+          "locked":false,
+          "properties":[
+            
+          ],
+          "disabled":false,
+          "moduleguid":"",
+          "static":false,
+          "static_file":"",
+          "name":"fbuch_setsqlmode",
+          "events":[
+            "OnMODXInit"
+          ],
+          "file":"fbuch_setsqlmode.plugin.php"
+        }        
       ]
     }
   }
