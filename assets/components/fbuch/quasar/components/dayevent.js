@@ -1,8 +1,9 @@
+import { useHasPermission } from "../composables/helpers.js";
+
 export default {
 
     props:{
         event:{},
-        hasPermission:Function,
         loadDayEvents:Function
     },
 
@@ -37,7 +38,7 @@ export default {
         }); 
       }
 
-      return {modx, confirmDelete }
+      return {modx, confirmDelete,useHasPermission }
     },
     template: `
           <div class="col-12 col-md-6">
@@ -59,8 +60,8 @@ export default {
                 <pre style="white-space: pre-wrap; word-wrap: break-word;font-family: inherit;" >{{ event.description }}</pre>
               </q-card-section>
               <q-card-actions align="right">
-                <q-btn v-if="hasPermission('fbuch_edit_termin')" flat round color="black" icon="edit" :to="'/event-update/'+event.id" ></q-btn>
-                <q-btn v-if="modx.user_id==event.createdby || hasPermission('fbuch_delete_termin')" 
+                <q-btn v-if="useHasPermission('fbuch_edit_termin')" flat round color="black" icon="edit" :to="'/event-update/'+event.id" ></q-btn>
+                <q-btn v-if="modx.user_id==event.createdby || useHasPermission('fbuch_delete_termin')" 
                 flat round color="red" icon="delete" 
                 @click="confirmDelete"
                 ></q-btn>

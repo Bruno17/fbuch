@@ -1,36 +1,25 @@
-import api_select from '../../components/api_select.js'
-import timeinput from '../../components/timeinput.js'
-import datepicker from '../../components/datepicker.js'
 import eventlist from '../../components/recurringevents.js'
+import eventform from '../../components/eventform.js'
 
 export default {
 
     components : {
-      api_select : api_select,
-      datepicker : datepicker,
-      timeinput : timeinput,
-      eventlist : eventlist
+      eventlist : eventlist,
+      eventform : eventform
     },
 
     setup() {
     
       const {onMounted, ref } = Vue;
       const params = Vue.$router.currentRoute._value.params;
-      const id = params.id || 'new';
+      let id = params.id || 'new';
       const date = params.year + '-' + params.month + '-' +params.day;
       const event = ref({});
-      const state = ref({});
-      const submitclicked = ref(false);
-      const eventform = ref(null);
-      const eventtype = ref(null);
+      const recurrence_event = ref({});
+      const tab = ref('');
 
       onMounted(() => {
         loadEvent();
-        state.value.days = 0;
-        state.value.hours = 0;
-        state.value.minutes = 0;
-        state.value.minutes_total = 0;
-        state.value.duration_valid = true;
       })
       
       function loadEvent(){
@@ -41,7 +30,16 @@ export default {
         const ajaxUrl = modx_options.rest_url + 'Dates/' + id;
         axios.get(ajaxUrl,{params:data})
         .then(function (response) {
-            event.value = response.data.object;
+            const object = response.data.object;
+            if (object.parent > 0){
+                id = object.parent;
+                recurrence_event.value = object;
+                tab.value = 'this recurrence';
+                loadEvent();
+                return;      
+            }
+            event.value = object;
+            tab.value = tab.value=='' ?'date':tab.value;
             //eventform.value.resetValidation();
             //eventtype.value.resetValidation();
             //console.log(eventtype.value);
@@ -51,65 +49,15 @@ export default {
         }); 
     } 
 
-    function onSubmitClick(){
-      //console.log('submitclick');
-      submitclicked.value = true;
-    }
-
-    function onSubmit(){
-        //console.log('submit');
-        if (id == 'new'){
-          const ajaxUrl = modx_options.rest_url + 'Dates';
-          axios.post(ajaxUrl,event.value)
-          .then(function (response) {
-              //event.value = response.data.object;
-              Vue.$router.push('/events/day/' + Quasar.date.formatDate(event.value.date, 'YYYY/MM/DD')); 
-          })
-          .catch(function (error) {
-              console.log(error);
-          }); 
-        } else {
-          const ajaxUrl = modx_options.rest_url + 'Dates/' + id;
-          axios.put(ajaxUrl,event.value)
-          .then(function (response) {
-              //event.value = response.data.object;
-              Vue.$router.push('/events/day/' + Quasar.date.formatDate(event.value.date, 'YYYY/MM/DD')); 
-          })
-          .catch(function (error) {
-              console.log(error);
-          }); 
-        }
-
-    
-    }
-
-
-    function onReset(){
-      console.log('reset');
-      Vue.$router.go(-1);
-    }
-  
       return { 
-        tab: ref('date'),
+        tab,
         event,
-        eventform,
-        eventtype,
-        submitclicked, 
-        onSubmit, 
-        state, 
-        onReset, 
-        onSubmitClick }
+        recurrence_event,
+     }
     },
     template: `
     <div class="q-pa-md full-width" style="height: 400px;">
       <div class="text-h4 text-center"> {{ event.title }} </div>
-
-      <q-form
-        @submit="onSubmit"
-        @reset="onReset"
-        
-        ref="eventform"
-      >
       <div class="col-12">
       <q-tabs
         v-model="tab"
@@ -119,8 +67,9 @@ export default {
         mobile-arrows
         class=""
       >
-        <q-tab name="date" label="Termin Daten" />
+        <q-tab name="date" label="Haupttermin" />
         <q-tab name="recurrences" label="Wiederholungen" />
+        <q-tab v-if="recurrence_event.parent>0" name="this recurrence" label="Diese Wiederholung" />
       </q-tabs>
       </div>
 
@@ -128,158 +77,27 @@ export default {
       v-model="tab"
       >
       <q-tab-panel name="date">
-      <div class="q-col-gutter-md q-gutter-md row">
-      <div class="col-md-4 col-sm-12 q-col-gutter-md content-start row">
-      <datepicker
-      label="Startdatum" 
-      class="col-md-12 col-sm-6 col-xs-12" 
-      v-model="event.date"
-      :event="event"
-      :state="state"
-      startfield="date"
-      endfield="date_end"
-      timestartfield="start_time"
-      timeendfield="end_time"        
-      which="start"
-      > 
-      </datepicker>
-
-      <timeinput
-      label="Uhrzeit Beginn"
-      class="col-md-12 col-sm-6 col-xs-12" 
-      v-model="event.start_time"
-      :event="event"
-      :state="state"
-      startfield="date"
-      endfield="date_end"
-      timestartfield="start_time"
-      timeendfield="end_time" 
-      which="start"        
-      >
-      </timeinput>
-
-      <datepicker
-      label="Datum bis" 
-      class="col-md-12 col-sm-6 col-xs-12" 
-      v-model="event.date_end"
-      :event="event"
-      :state="state"
-      startfield="date"
-      endfield="date_end"
-      timestartfield="start_time"
-      timeendfield="end_time" 
-      which="end"
-      > 
-      </datepicker>
-
-      <timeinput
-      label="Uhrzeit Ende"
-      class="col-md-12 col-sm-6 col-xs-12" 
-      v-model="event.end_time"
-      :event="event"
-      :state="state"
-      startfield="date"
-      endfield="date_end"
-      timestartfield="start_time"
-      timeendfield="end_time" 
-      which="end" 
-      >
-      </timeinput>        
-
-      <q-input
-      class="col-4"
-      outlined
-      readonly
-      v-model="state.days"
-      label="Tage"
-      mask="###"
-    />  
-    
-    <q-input
-    class="col-4"
-    outlined
-    readonly
-    v-model="state.hours"
-    label="Stunden"
-    mask="######"
-    />  
-
-      <q-input
-      class="col-4"
-      outlined
-      readonly
-      v-model="state.minutes"
-      label="Minuten"
-      /> 
-      </div>
-      
-
-      <div class="col-md-8 col-sm-12 q-col-gutter-md content-start row">
-    
-      <api_select
-      class="col-md-4 col-sm-4 col-xs-12"
-      v-model="event.instructor_member_id"
-      label="Betreuer"
-      controller="Names?limit=100000&returntype=options" 
-    ></api_select>
-
-    <q-input
-      class="col-md-8 col-sm-4 col-xs-12"
-      outlined
-      v-model="event.title"
-      label="Gruppe/Ziel"
-      :rules="[val => (!submitclicked || !!val) || 'Bitte einen Text eintragen!']"
-    />
-
-    <api_select
-      class="col-md-4 col-sm-4 col-xs-12"
-      ref="eventtype"
-      v-model="event.type"
-      label="Termin Art"
-      controller="Datetypes?limit=100000&returntype=options"
-      :rules="[val => (!submitclicked || !!val) || 'Bitte eine Termin Art wählen!']"
-    ></api_select> 
-    
-    <api_select
-      class="col-md-6 col-sm-8 col-xs-12"
-      v-model="event.mailinglist_id"
-      label="Einladungs Liste"
-      controller="Mailinglists?limit=100000&returntype=options"
-    ></api_select> 
-
-    <q-input
-    class="col-md-2 col-sm-4 col-xs-12"
-    outlined
-    v-model="event.max_reservations"
-    label="Plätze max."
-    mask="###"
-    />     
-
-    <q-input
-    class="col-12"
-    outlined
-    v-model="event.description"
-    label="Beschreibung"
-    type="textarea"
-    /> 
-
-      </div>
-      <div class="col-12">
-      <q-btn label="Speichern" type="submit" @click="onSubmitClick" color="primary"/>
-      <q-btn label="Abbrechen" type="reset" color="primary" flat class="q-ml-sm" />
-      </div>      
+      <eventform :event="event" />
       </q-tab-panel>
 
       <q-tab-panel name="recurrences">
-        <eventlist parent="25" date="2022-11-05" :view="view" :type="selectedType"/>
+        <eventlist v-if="event.id !=null " :parent="event.id" date="2022-11-05" :view="view" :type="selectedType"/>
+        <q-banner v-if="event.id ==null " inline-actions class="text-white bg-red">
+        Um Wiederholungen erstellen zu können, muß der Haupttermin erst gespeichert werden.
+      </q-banner>        
       </q-tab-panel>
+      <q-tab-panel name="this recurrence">
+        <h4>Diese Wiederholung</h4>
+
+        <eventform :event="recurrence_event" />
+      </q-tab-panel>      
     </q-tab-panels>
 
       </div>  
       </q-form>
   
-      {{ eventx }} <br>
-      {{ statex }}
+       <br>
+
 
     </div>
     `

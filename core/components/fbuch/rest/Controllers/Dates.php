@@ -145,6 +145,10 @@ class MyControllerDates extends modRestController {
             $types = explode(',',$_GET['types']);
             $c->where(['type:IN' => $types]);
         }
+
+        if (isset($_GET['parent']) && !empty($_GET['parent'])){
+            $c->where(['parent' => (int) $_GET['parent']]);
+        }        
         
         if (isset($_GET['start']) && isset($_GET['end'])){
             $start = $this->getProperty('start');

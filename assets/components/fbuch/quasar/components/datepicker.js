@@ -22,12 +22,14 @@ export default {
 
       watch(() => props.modelValue, (value) => {
         formattedDate.value = formatDate(value);
- 
+        //console.log('watch',props);
         useSetDateDiff(props);
-
       })
 
       onMounted(() => {
+        formattedDate.value = formatDate(props.modelValue);
+        useSetDateDiff(props);
+        //console.log('datepicker onMounted',props);
       })
 
     const onFocus = () => {

@@ -1,6 +1,7 @@
 import dayevents from '../../components/dayevents.js'
 import api_select from '../../components/api_select.js'
 import { useGetWeekStart } from "../../composables/dateHelpers.js";
+import { useLoadPermissions,useHasPermission } from "../../composables/helpers.js";
 
 export default {
 
@@ -18,25 +19,36 @@ export default {
       const dates = ref([]);
       const selectedType = ref(Vue.$router.currentRoute._value.query.type||null);
       const view = params.view;
+      const checkPermissions = 'fbuch_edit_termin,fbuch_create_termin,fbuch_delete_termin';
 
       onMounted(() => {
         setWeekDates();
+        useLoadPermissions(checkPermissions);
       })
+
+      function prepareDate(date){
+          return {
+              date: Quasar.date.formatDate(date,'YYYY-MM-DD'),
+              year: Quasar.date.formatDate(date, 'YYYY'),
+              month: Quasar.date.formatDate(date, 'MM'),
+              day: Quasar.date.formatDate(date, 'DD')               
+          };
+      }
 
       function setWeekDates(){
         if (view == 'week'){
           let daydate = null;
           const startOfWeek = useGetWeekStart(date);
-          dates.value.push(Quasar.date.formatDate(startOfWeek,'YYYY-MM-DD'));
+          dates.value.push(prepareDate(startOfWeek));
           for (let i=1;i<=6;i++){
             daydate = Quasar.date.addToDate(startOfWeek,{days:i});
-            dates.value.push(Quasar.date.formatDate(daydate,'YYYY-MM-DD'));
+            dates.value.push(prepareDate(daydate));
           }
 
           const endOfWeek = Quasar.date.addToDate(startOfWeek,{days:6});
            
         }  else {
-            dates.value.push(date);
+            dates.value.push(prepareDate(date));
         }
       }    
       function setTypeFilter () {
@@ -80,7 +92,17 @@ export default {
         Vue.$router.push(prepareRoute(newDate));
       }
 
-      return {params, title, dates,view,selectedType,setTypeFilter,onPrev,onNext,onToday }
+      return {
+        params, 
+        title, 
+        dates,
+        view,
+        selectedType,
+        useHasPermission,
+        setTypeFilter,
+        onPrev,
+        onNext,
+        onToday }
     },
     template: `
     <div class="q-pa-md q-gutter-sm row">
@@ -100,7 +122,16 @@ export default {
       <q-avatar color="blue" class="text-white" icon="question_mark"/>
     </div>    
       <template v-for="date in dates">
-        <dayevents :date="date" :view="view" :type="selectedType"/>  
+        <dayevents :date="date.date" :view="view" :type="selectedType">
+        <template v-slot:buttons>
+        <q-btn v-if="useHasPermission('fbuch_create_termin')" icon="add" :to="'/event-create/' +date.year+'/'+date.month+'/'+date.day" >
+        Termin erstellen
+        </q-btn>
+        <q-btn v-if="view=='day'" label="Wochenansicht" :to="'/events/week/'+date.year+'/'+date.month+'/'+date.day"></q-btn>
+        <q-btn v-if="view=='week'" label="Tagesansicht" :to="'/events/day/'+date.year+'/'+date.month+'/'+date.day"></q-btn>      
+        <q-btn label="Kalenderansicht" :to="'/'+date.year+'/'+date.month" ></q-btn>        
+        </templae>
+        </dayevents>
       </template>
     `
     // or `template: '#my-template-element'`

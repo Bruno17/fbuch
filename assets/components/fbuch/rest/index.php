@@ -20,8 +20,8 @@ if ($modx->getRequest()) {
 
 $packageCorePath = realpath($modx->getOption('fbuch.core_path', null, $modx->getOption('core_path') . 'components/fbuch')) . '/';
 $fbuch = $modx->getService('fbuch', 'Fbuch', $packageCorePath . 'model/fbuch/');
-$mvCorePath = realpath($modx->getOption('mv.core_path', null, $modx->getOption('core_path') . 'components/mv')) . '/';
-$mv = $modx->getService('mv', 'Mv', $mvCorePath . 'model/mv/');
+//$mvCorePath = realpath($modx->getOption('mv.core_path', null, $modx->getOption('core_path') . 'components/mv')) . '/';
+//$mv = $modx->getService('mv', 'Mv', $mvCorePath . 'model/mv/');
 
 $migxCorePath = realpath($modx->getOption('migx.core_path', null, $modx->getOption('core_path') . 'components/migx')) . '/';
 $migx = $modx->getService('migx', 'Migx', $migxCorePath . 'model/migx/');

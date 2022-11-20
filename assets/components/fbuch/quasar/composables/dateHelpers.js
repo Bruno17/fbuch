@@ -17,6 +17,7 @@ export function useSetDateDiff(props) {
     props.state.hours = diff.hours;
     props.state.minutes = diff.minutes;
     props.state.minutes_total = diff.minutes_total;
+    //console.log('useSetDateDiff',props,diff);
   }
 
 export function useSetEndDate(props) {

@@ -1253,14 +1253,17 @@ class Fbuch {
 
             }
             //remove evtl. remaining
-            $c = $modx->newQuery('fbuchDateInvited');
-            $c->where(array('date_id' => $date_id, 'member_id:IN' => $existing));
-            //$c->prepare();echo $c->toSql();die();
-            if ($invite_c = $modx->getCollection('fbuchDateInvited', $c)) {
-                foreach ($invite_c as $invite_o) {
-                    $invite_o->remove();
-                }
+            if (is_array($existing) && count($existing)>0){
+                $c = $modx->newQuery('fbuchDateInvited');
+                $c->where(array('date_id' => $date_id, 'member_id:IN' => $existing));
+                //$c->prepare();echo $c->toSql();die();
+                if ($invite_c = $modx->getCollection('fbuchDateInvited', $c)) {
+                    foreach ($invite_c as $invite_o) {
+                        $invite_o->remove();
+                    }
+                }                
             }
+
         }
     }
 
