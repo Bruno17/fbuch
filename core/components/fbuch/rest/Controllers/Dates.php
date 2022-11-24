@@ -94,8 +94,40 @@ class MyControllerDates extends modRestController {
     public function afterPut(array &$objectArray){
         $this->modx->fbuch->checkDateMailinglistNames($this->object->get('id'));
         $this->modx->fbuch->afterCreateDate($this->object);
-    }    
+        $recurrencies = $this->getProperty('recurrencies');
+        if (is_array($recurrencies)){
+            foreach($recurrencies as $id => $selected){
+                if ($id != $this->object->get('id') && $selected) {
+                    $this->updateRecurrence($id);
+                }
+            }
+        }
+    }
 
+    public function updateRecurrence($id){
+        if ($object = $this->modx->getObject($this->classKey,['id'=>$id])){
+            $fields = [
+                'title',
+                'description',
+                'start_time',
+                'end_time',
+                'mailinglist_id',
+                'type',
+                'max_reservations'
+            ];
+            foreach ($fields as $field){
+                $object->set($field,$this->object->get($field));
+            }
+            $object->set('editedby', $this->modx->user->get('id'));
+            $object->set('editedon', strftime('%Y-%m-%d %H:%M:%S'));  
+            $object->save();           
+
+            $this->modx->fbuch->checkDateMailinglistNames($id);
+            $this->modx->fbuch->afterCreateDate($object);  
+        }
+    }
+    
+    
     public function beforePost() {
         if ($this->modx->hasPermission('fbuch_create_termin')) {
             $this->object->set('createdby', $this->modx->user->get('id'));

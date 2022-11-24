@@ -1,5 +1,5 @@
 [[$[[fbuchGetChunk? &name=`fbuchMitgliederMessage`]]]]
-[[$fbuchButtonBeiElementRegistrieren]]
+[[-$fbuchButtonBeiElementRegistrieren]]
 <br><br>
 [[!migxLoopCollection?
 &packageName=`fbuch`
@@ -9,7 +9,7 @@
 &toPlaceholder=`fbuch_user_id`
 ]]
 
-[[!migxLoopCollection?
+[[-!migxLoopCollection?
 &packageName=`fbuch`
 &classname=`fbuchDateInvited`
 &joins=`[{"alias":"Date"},{"alias":"Zusagen","classname":"fbuchDateNames","on":"Zusagen.date_id=Date.id AND Zusagen.member_id=[[!+fbuch_user_id]]"}]`

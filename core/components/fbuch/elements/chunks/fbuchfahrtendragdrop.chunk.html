@@ -90,10 +90,10 @@
   </div>
   <div class="panel-body">
 [[!hasPermission:is=`yes`:then=`
-<button data-type="Rudern" data-ajax_url="[[~51? &grid_id=`Ergotermine`]]" class="create create_fahrt btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+<a class="btn btn-default" href="/termine/kalenderansicht.html/#/event-create/[[+[[+grid_id]]_offset:strtotime:date=`%Y/%m/%d`]]" ><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
 `:else=``? &permission=`fbuch_create_termin`]]
 
-    <a class="btn btn-default" href="[[~80]]" >Zur Terminübersicht</a>
+    <a class="btn btn-default" href="/termine/kalenderansicht.html/#/events/day/[[+[[+grid_id]]_offset:strtotime:date=`%Y/%m/%d`]]" >Zur Kalender Tagesansicht</a>
   </div>
 </div>
 

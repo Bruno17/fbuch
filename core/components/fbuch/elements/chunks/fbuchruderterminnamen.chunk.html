@@ -1,4 +1,15 @@
 <div class="row fahrten " data-type="dragdrop" >
+  <div class="col-sm-12">
+    [[!migxLoopCollection?
+    &packageName=`fbuch`
+    &classname=`fbuchDate`
+    &where=`{"id":"[[!#request.fahrt_id:isnot=``:then=`[[!#request.fahrt_id]]`:else=`9999999`]]"}`
+    &tpl=`@CODE:<a href="/termine/kalenderansicht.html/#/events/day/{{+date:date=`%Y/%m/%d`}}" ><button class="btn btn-primary">Zur Kalender Tagesansicht</button></a>`
+    &debug=`0`
+    &limit=`100`
+    ]]
+  </div>
+ 
 <div class="col-sm-4" id="groups-container" >
 <h3>Zusagen</h3>
 [[!migxLoopCollection?

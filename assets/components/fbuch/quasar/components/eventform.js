@@ -3,6 +3,9 @@ import timeinput from './timeinput.js'
 import datepicker from './datepicker.js'
 import { useLoadPermissions,useHasPermission } from "../composables/helpers.js";
 
+import { useRecurrenciesStore } from '../stores/eventform.js';
+
+
 export default {
 
     props : {
@@ -15,22 +18,21 @@ export default {
     },
 
     setup(props) {
-    
-      const {onMounted, ref } = Vue;      
+
+      const recurrencies_store = useRecurrenciesStore(); 
+      const {onMounted, ref, watch } = Vue;      
       const event = props.event;
       const params = Vue.$router.currentRoute._value.params;
       const id = event.id || 'new';
       const date = params.year + '-' + params.month + '-' +params.day;
       const state = ref({});
       const save_dialog = ref(false);
+      const save_which = ref('');
       const submitclicked = ref(false);
       const eventform = ref(null);
       const eventtype = ref(null);
       const checkPermissions = 'fbuch_edit_termin,fbuch_create_termin,fbuch_delete_termin';
-      const urls = {
-        day : '/events/day/' + Quasar.date.formatDate(event.date, 'YYYY/MM/DD'),
-        kalender : '/' + Quasar.date.formatDate(event.date, 'YYYY/MM')
-      }
+      const urls = ref(setUrls())
 
       onMounted(() => {
         //console.log('eventform mounted');
@@ -41,9 +43,22 @@ export default {
         state.value.minutes_total = state.value.minutes_total || 0;
         state.value.duration_valid = state.value.duration_valid || true;
       })
+
+      function setUrls(){
+        return {
+            day : '/events/day/' + Quasar.date.formatDate(event.date, 'YYYY/MM/DD'),
+            kalender : '/' + Quasar.date.formatDate(event.date, 'YYYY/MM'),
+            fahrtenbuch : '/?offset=' + Quasar.date.formatDate(event.date, 'YYYY-MM-DD') + '&type=dragdrop&dir=none'
+          }
+      }
+
+      watch(() => event.date, (value) => {
+          urls.value = setUrls();
+      })
       
     function onSubmitClick(){
-      console.log('submitclick');
+      //console.log('submitclick',id);
+      submitclicked.value=true;
     }
 
     function save(){
@@ -53,13 +68,17 @@ export default {
           axios.post(ajaxUrl,event)
           .then(function (response) {
               //event.value = response.data.object;
-              Vue.$router.push(urls.day); 
+              Vue.$router.push('/events/day/' + Quasar.date.formatDate(event.date, 'YYYY/MM/DD')); 
           })
           .catch(function (error) {
               console.log(error);
           }); 
         } else {
           const ajaxUrl = modx_options.rest_url + 'Dates/' + id;
+          //console.log(save_which.value);
+          if (save_which.value == 'recurrencies') {
+            event.recurrencies = recurrencies_store.recurrenceSelections;
+          }
           axios.put(ajaxUrl,event)
           .then(function (response) {
               save_dialog.value=false;
@@ -72,8 +91,24 @@ export default {
         }
     }
 
+    function loadRecurrencies(){
+        let props = {parent : event.id}
+        if (event.parent > 0){
+            props = {parent : event.parent}
+        }
+        recurrencies_store.loadEvents(props);    
+    }
+      
+
     function onSubmit(){
-        console.log('submit');
+        //console.log('submit',id);
+        save_which.value='this_only';
+        if (id=='new'){
+          save();
+          return;
+        }
+
+        loadRecurrencies();
         save_dialog.value = true;
     }
 
@@ -94,7 +129,9 @@ export default {
         urls,
         save_dialog,
         useHasPermission,
-        save
+        save,
+        save_which,
+        recurrencies_store
     }
     },
     template: `
@@ -245,6 +282,7 @@ export default {
       <q-btn label="Speichern" type="submit" @click="onSubmitClick" color="primary"/>
       <q-btn label="Zur Tagesansicht" :to="urls.day" color="primary" flat class="q-ml-sm" />
       <q-btn label="Zur Kalenderansicht" :to="urls.kalender" color="primary" flat class="q-ml-sm" />
+      <q-btn label="Zum Fahrtenbuch" :href="urls.fahrtenbuch" color="primary" flat class="q-ml-sm" />
       </div>      
 
 
@@ -260,9 +298,48 @@ export default {
         </q-card-section>
 
         <q-card-section>
-
-          <div class="text-h6">Zu ändernde Wiederholungen auswählen</div>
- 
+        <q-option-group
+        v-model="save_which"
+        inline
+        :options="[
+          { label: 'nur diesen Termin', value: 'this_only' },
+          { label: 'auch kommende Wiederholungen', value: 'recurrencies' }
+        ]"
+      />
+          <template v-if="save_which=='recurrencies'">
+          <div  class="text-h6">Markierte Wiederholungen werden überschrieben</div>
+          <template v-for="month in recurrencies_store.monthlyEvents">
+            <q-list bordered padding>
+            <q-item-label header>{{month.formattedmonth}}</q-item-label>
+            
+            <template v-for="event in month.events">
+            <q-item  tag="label" v-ripple>
+            <q-separator />
+            <q-item-section side top>
+              <q-checkbox v-model="recurrencies_store.recurrenceSelections[event.id]" />
+            </q-item-section>
+    
+            <q-item-section>
+              <q-item-label>{{event.title}}
+              <div class="text-subtitle2">
+              {{ event.formattedDate }}
+              <template v-if="event.formattedEndDate != ''">
+                <br>
+                {{ event.formattedEndDate }}
+              </template>
+              </div>              
+              </q-item-label>
+              <q-item-label caption>
+                {{event.description}}
+              </q-item-label>
+            </q-item-section>
+          </q-item> 
+          <q-separator inset="item" />  
+          </template>
+                  
+            </q-list>            
+          </template>  
+          </template>          
         </q-card-section>
         <q-card-actions vertical align="right"> 
         <q-btn color="primary" v-if="useHasPermission('fbuch_edit_termin')" @click="save" >

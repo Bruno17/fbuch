@@ -23,11 +23,11 @@ var fbuch_getfahrten = function(dir,active_id,data){
     } );            
 }
 
-var fbuch_getteam = function(){
+var fbuch_getteam = function(id){
     if(typeof getfahrtnamen_ajax_url == 'undefined'){
         return;
     }
-    var fahrt_id = $('.fahrten').find('.active').data('id');
+    var fahrt_id = id || $('.fahrten').find('.active').data('id');
     $( "#team" ).load( getfahrtnamen_ajax_url,{"fahrt_id":fahrt_id}, function(){
         fbuch_init_removenameclick();
     } );         
@@ -52,6 +52,22 @@ var fbuch_init_removenameclick = function(){
             $("#fbuchModal").modal();
         });      
     }); 
+
+    $('.invite_persons').click(function(){
+        var current = $('.fahrten').find('.active');
+        if (current.length == 0){
+            current = $(this);
+        }
+        var id = current.data('id');        
+        active_grid = '';
+        var data = {"fahrt_id":id,"process":"invite"};
+        var ajax_url = invite_ajax_url;
+        $( "#fbuchModal" ).load( ajax_url,data, function(){
+            $("#fbuchModal").modal();
+            active_grid = '';
+            $('#add_person').focus();
+        });
+    });     
     
     $('.mail_invite').click(function(){
         var id = $(this).data('id');
@@ -350,7 +366,9 @@ for (var i=0;i<dd_lists.length;i++){
         fbuch_handleDragDrop(source,target,target_id,fahrtNames_id,dateNames_id);
     }        
     });
-}                  
+} 
+
+fbuch_check_date_id();
     
 }
 
@@ -399,10 +417,26 @@ $(window).keydown(function(event){
             }
         }
     } 
+    
 })
+
+var fbuch_check_date_id = function(){
+    let searchParams = new URLSearchParams(window.location.search);
+    let date_id = '';
+    if (searchParams.has('date_id')){
+        date_id = searchParams.get('date_id');   
+        fbuch_getteam(date_id); 
+        $('#fahrten').hide();
+        $('#member-message').hide();
+    } 
+    
+    //console.log(event_id);
+}
+
 
 fbuch_init_rowclick();
 fbuch_getteam();
+fbuch_check_date_id();
 
 $('#fbuchModal').on('hide.bs.modal', function (e) {
   if(e.target.id == 'fbuchModal'){

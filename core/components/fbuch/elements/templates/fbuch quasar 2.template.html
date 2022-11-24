@@ -52,6 +52,8 @@
     <script src="https://cdn.jsdelivr.net/npm/quasar@2.7.4/dist/lang/de.umd.prod.js"></script>
     <script src="https://unpkg.com/vue-router@4"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue-demi"></script>
+    <script src="https://unpkg.com/pinia"></script>
 
     <script>
         const modx_options = {
@@ -72,9 +74,9 @@
        */
 
       import fbuchnav from '[[++fbuch.assets_url:default=`/assets/components/fbuch/`]]quasar/components/resourcetree.js';
-      
       [[*content]]
 
+  const pinia = Pinia.createPinia();
   const router = VueRouter.createRouter({
     history: VueRouter.createWebHashHistory(base_route),
     routes: routes
@@ -101,6 +103,7 @@
           }
         }
       })
+      app.use(pinia)
       app.use(router)
       app.use(Quasar, {
         config: {

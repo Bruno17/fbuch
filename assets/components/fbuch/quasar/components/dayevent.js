@@ -60,12 +60,53 @@ export default {
                 <pre style="white-space: pre-wrap; word-wrap: break-word;font-family: inherit;" >{{ event.description }}</pre>
               </q-card-section>
               <q-card-actions align="right">
-                <q-btn v-if="useHasPermission('fbuch_edit_termin')" flat round color="black" icon="edit" :to="'/event-update/'+event.id" ></q-btn>
-                <q-btn v-if="modx.user_id==event.createdby || useHasPermission('fbuch_delete_termin')" 
-                flat round color="red" icon="delete" 
-                @click="confirmDelete"
-                ></q-btn>
-                <q-btn flat round color="primary" icon="share" ></q-btn>
+                <q-btn color="primary" icon-right="keyboard_arrow_right" label="Aktionen" >
+                <q-menu anchor="bottom right" self="top right" :offset="[0, 5]">
+                <q-list dense bordered separator>
+
+                <q-item :href="'/termine/anmelden.html?date_id='+event.id"  clickable v-ripple>
+                <q-item-section avatar><q-avatar icon="group_add" /></q-item-section>
+                  <q-item-section>
+                  <q-item-label>Anmelden</q-item-label>
+                  <q-item-label caption>Dich oder Andere anmelden<br>oder Nachricht schreiben</q-item-label>   
+                  </q-item-section>
+                </q-item> 
+                
+                <q-item :href="'/?offset='+event.date + '&type=dragdrop&dir=none'"  clickable v-ripple>
+                <q-item-section avatar><q-avatar icon="launch" /></q-item-section>
+                  <q-item-section>
+                  <q-item-label>Zum Termin im Fahrtenbuch</q-item-label>
+                  </q-item-section>
+                </q-item>                    
+
+                <q-item :href="'/termine/rudern.html?date_id='+event.id"  clickable v-ripple>
+                <q-item-section avatar><q-avatar icon="event" /></q-item-section>
+                  <q-item-section>
+                  <q-item-label>Einladungen vornehmen</q-item-label>
+                  <q-item-label caption>Übersicht Einladungen und Zusagen</q-item-label>                  
+                  </q-item-section>
+                </q-item>                
+                
+                <q-item  v-if="useHasPermission('fbuch_edit_termin')" :to="'/event-update/'+event.id" clickable v-ripple>
+                <q-item-section avatar><q-avatar icon="edit" /></q-item-section>
+                  <q-item-section>Termin/Wiederholungen bearbeiten</q-item-section>
+                </q-item>
+
+                <q-item v-if="event.parent>0 && useHasPermission('fbuch_edit_termin')" @click="confirmDelete" clickable v-ripple>
+                <q-item-section avatar><q-avatar icon="visibility_off" /></q-item-section>
+                  <q-item-section>
+                  <q-item-label>Diese Wiederholung verbergen</q-item-label>
+                  </q-item-section>
+                </q-item>                 
+
+                <q-item  v-if="modx.user_id==event.createdby || useHasPermission('fbuch_delete_termin')"  @click="confirmDelete" clickable v-ripple>
+                <q-item-section avatar><q-avatar text-color="red" icon="delete" /></q-item-section>
+                  <q-item-section>Termin löschen</q-item-section>
+                </q-item>       
+       
+              </q-list>
+                </q-menu>
+                </q-btn>
               </q-card-actions>
 
             </q-card>

@@ -1,6 +1,7 @@
 import eventlist from '../../components/recurringevents.js'
 import eventform from '../../components/eventform.js'
 
+
 export default {
 
     components : {
@@ -9,7 +10,7 @@ export default {
     },
 
     setup() {
-    
+
       const {onMounted, ref } = Vue;
       const params = Vue.$router.currentRoute._value.params;
       let id = params.id || 'new';
@@ -52,7 +53,7 @@ export default {
       return { 
         tab,
         event,
-        recurrence_event,
+        recurrence_event
      }
     },
     template: `
