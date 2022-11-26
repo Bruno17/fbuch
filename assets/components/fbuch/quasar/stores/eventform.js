@@ -44,7 +44,10 @@ export const useRecurrenciesStore = Pinia.defineStore('recurrencies',() => {
         const data = {};
         if (props.parent){
           data.parent = props.parent;
-        }        
+        }
+        if (props.showhidden){
+          data.show_hidden = props.showhidden;
+        }                 
         const ajaxUrl = modx_options.rest_url + 'Dates';
         axios.get(ajaxUrl,{params:data})
         .then(function (response) {

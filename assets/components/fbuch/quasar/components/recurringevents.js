@@ -7,7 +7,8 @@ import { useRecurrenciesStore } from '../stores/eventform.js';
 export default {
 
     props:{
-      parent:null
+      parent:null,
+      showhidden:null
     }, 
       components: {
       eventlist:eventlist,

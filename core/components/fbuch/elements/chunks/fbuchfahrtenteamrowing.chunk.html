@@ -27,7 +27,7 @@
             &classname=`fbuchDate`
             &tpl=`@CODE:[[+date]]`
             &limit=`1`
-            &where=`{"deleted":"0",[[+where]]}`
+            &where=`{"hidden":"0","deleted":"0",[[+where]]}`
             &sortConfig=`[{"sortby":"date","sortdir":"DESC"}]`
             &toPlaceholder=`lastDate`
         ]]
@@ -100,7 +100,7 @@
 [[!migxLoopCollection?
 &packageName=`fbuch`
 &classname=`fbuchDate`
-&where=`[{"deleted":"0",[[+where]]},[[+date_where]]]`
+&where=`[{"hidden":"0","deleted":"0",[[+where]]},[[+date_where]]]`
 &tpl=`fbuchFahrtenDragdropDatesRow`
 &sortConfig=`[{"sortby":"date","sortdir":"ASC"},{"sortby":"start_time","sortdir":"ASC"}]`
 &debug=`0`

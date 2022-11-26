@@ -66,6 +66,10 @@
         <field key="deleted" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="deletedon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="deletedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="hidden" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="hiddenon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="hiddenby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="protected_fields" dbtype="text" phptype="string" null="false" default="" />
         
         <aggregate alias="Instructor" class="mvMember" local="instructor_member_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Type" class="fbuchDateType" local="type" foreign="name" cardinality="one" owner="foreign" />

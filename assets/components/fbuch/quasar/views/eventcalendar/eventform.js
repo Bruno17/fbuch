@@ -82,7 +82,7 @@ export default {
       </q-tab-panel>
 
       <q-tab-panel name="recurrences">
-        <eventlist v-if="event.id !=null " :parent="event.id" date="2022-11-05" :view="view" :type="selectedType"/>
+        <eventlist v-if="event.id !=null " showhidden="1" :parent="event.id" date="2022-11-05" :view="view" :type="selectedType"/>
         <q-banner v-if="event.id ==null " inline-actions class="text-white bg-red">
         Um Wiederholungen erstellen zu können, muß der Haupttermin erst gespeichert werden.
       </q-banner>        

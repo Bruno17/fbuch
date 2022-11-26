@@ -145,7 +145,6 @@ class MyControllerDates extends modRestController {
     
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
         $returntype = $this->getProperty('returntype');
-        $show_hidden = $this->getProperty('show_hidden');
         $which_page = $this->getProperty('which_page');
 
         $joins = '[{"alias":"Type"}]';
@@ -180,7 +179,13 @@ class MyControllerDates extends modRestController {
 
         if (isset($_GET['parent']) && !empty($_GET['parent'])){
             $c->where(['parent' => (int) $_GET['parent']]);
-        }        
+        }  
+        
+        if (isset($_GET['show_hidden']) && !empty($_GET['show_hidden'])){
+ 
+        } else {
+            $c->where(['hidden' => 0]);
+        }         
         
         if (isset($_GET['start']) && isset($_GET['end'])){
             $start = $this->getProperty('start');

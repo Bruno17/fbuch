@@ -3,6 +3,7 @@ import { useHasPermission } from "../composables/helpers.js";
 export default {
 
     props:{
+        view:'',
         event:{},
         loadDayEvents:Function
     },
@@ -26,6 +27,18 @@ export default {
           })
       }
 
+      function confirmHide(){
+        $q.dialog({
+            title: 'Termin verbergen',
+            message: 'Soll der Termin wirklich deaktiviert werden? Termin kann über die Wiederholungen wieder sichtbar gemacht werden.',
+            ok: {label:'Verbergen'},
+            cancel: true,
+            persistent: true
+          }).onOk(() => {
+             hideEvent();
+          })
+      }      
+
       function deleteEvent(){
         const ajaxUrl = modx_options.rest_url + 'Dates/' + props.event.id;
         const event = {deleted:1};
@@ -38,12 +51,24 @@ export default {
         }); 
       }
 
-      return {modx, confirmDelete,useHasPermission }
+      function hideEvent(){
+        const ajaxUrl = modx_options.rest_url + 'Dates/' + props.event.id;
+        const event = {hidden:props.event.hidden==1?0:1};
+        axios.put(ajaxUrl,event)
+        .then(function (response) {
+          props.loadDayEvents();      
+        })
+        .catch(function (error) {
+            console.log(error);
+        }); 
+      }      
+
+      return {modx, confirmDelete,confirmHide,hideEvent,useHasPermission }
     },
     template: `
           <div class="col-12 col-md-6">
             <q-card bordered class="full-height full-width">
-              <q-card-section :class="'bg-'+event.Type_colorstyle" class="text-white">
+              <q-card-section :class="event.hidden==1 ? 'text-grey' : 'bg-'+event.Type_colorstyle + ' text-white' " >
                 <div class="text-h6">{{event.title}}</div>
                 <div class="text-subtitle2">
                   {{ event.formattedDate }}
@@ -91,13 +116,21 @@ export default {
                 <q-item-section avatar><q-avatar icon="edit" /></q-item-section>
                   <q-item-section>Termin/Wiederholungen bearbeiten</q-item-section>
                 </q-item>
-
-                <q-item v-if="event.parent>0 && useHasPermission('fbuch_edit_termin')" @click="confirmDelete" clickable v-ripple>
+                <template v-if="view=='recurrencies'">
+                <q-item v-if="event.hidden==0 && event.parent>0 && useHasPermission('fbuch_edit_termin')" @click="confirmHide" clickable v-ripple>
                 <q-item-section avatar><q-avatar icon="visibility_off" /></q-item-section>
                   <q-item-section>
                   <q-item-label>Diese Wiederholung verbergen</q-item-label>
                   </q-item-section>
+                </q-item> 
+
+                <q-item v-if="event.hidden==1 && event.parent>0 && useHasPermission('fbuch_edit_termin')" @click="hideEvent" clickable v-ripple>
+                <q-item-section avatar><q-avatar icon="visibility" /></q-item-section>
+                  <q-item-section>
+                  <q-item-label>Diese Wiederholung wieder anzeigen</q-item-label>
+                  </q-item-section>
                 </q-item>                 
+                </template>
 
                 <q-item  v-if="modx.user_id==event.createdby || useHasPermission('fbuch_delete_termin')"  @click="confirmDelete" clickable v-ripple>
                 <q-item-section avatar><q-avatar text-color="red" icon="delete" /></q-item-section>

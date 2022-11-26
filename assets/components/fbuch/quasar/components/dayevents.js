@@ -91,6 +91,7 @@ export default {
           <dayevent 
           :event="event"
           :loadDayEvents="reloadEvents"
+          :view="view"
           ></dayevent>
         </template>
       </div>

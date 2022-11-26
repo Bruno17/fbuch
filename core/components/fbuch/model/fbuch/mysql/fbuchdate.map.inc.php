@@ -39,6 +39,10 @@ $xpdo_meta_map['fbuchDate']= array (
     'deleted' => 0,
     'deletedon' => NULL,
     'deletedby' => 0,
+    'hidden' => 0,
+    'hiddenon' => NULL,
+    'hiddenby' => 0,
+    'protected_fields' => '',
   ),
   'fieldMeta' => 
   array (
@@ -269,6 +273,36 @@ $xpdo_meta_map['fbuchDate']= array (
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
+    ),
+    'hidden' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'hiddenon' => 
+    array (
+      'dbtype' => 'datetime',
+      'phptype' => 'datetime',
+      'null' => true,
+    ),
+    'hiddenby' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'protected_fields' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
     ),
   ),
   'composites' => 

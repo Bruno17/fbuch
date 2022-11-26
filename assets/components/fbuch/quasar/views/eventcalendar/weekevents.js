@@ -129,7 +129,8 @@ export default {
         </q-btn>
         <q-btn v-if="view=='day'" label="Wochenansicht" :to="'/events/week/'+date.year+'/'+date.month+'/'+date.day"></q-btn>
         <q-btn v-if="view=='week'" label="Tagesansicht" :to="'/events/day/'+date.year+'/'+date.month+'/'+date.day"></q-btn>      
-        <q-btn label="Kalenderansicht" :to="'/'+date.year+'/'+date.month" ></q-btn>        
+        <q-btn label="Kalenderansicht" :to="'/'+date.year+'/'+date.month" ></q-btn>  
+        <q-btn label="Zum Fahrtenbuch" :href="'/?offset='+date.date+'&type=dragdrop&dir=none'" />      
         </templae>
         </dayevents>
       </template>
