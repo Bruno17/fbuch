@@ -300,7 +300,7 @@ $xpdo_meta_map['fbuchDate']= array (
     'protected_fields' => 
     array (
       'dbtype' => 'text',
-      'phptype' => 'string',
+      'phptype' => 'json',
       'null' => false,
       'default' => '',
     ),

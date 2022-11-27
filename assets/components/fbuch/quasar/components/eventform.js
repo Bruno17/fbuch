@@ -32,7 +32,19 @@ export default {
       const eventform = ref(null);
       const eventtype = ref(null);
       const checkPermissions = 'fbuch_edit_termin,fbuch_create_termin,fbuch_delete_termin';
-      const urls = ref(setUrls())
+      const urls = ref(setUrls());
+      const tab = ref('date');
+      const protect_fields=ref(
+        [
+            {field:'title',label:'Titel'},
+            {field:'description',label:'Beschreibung'},
+            {field:'start_time',label:'Uhrzeit Beginn'},
+            {field:'end_time',label:'Uhrzeit Ende'},
+            {field:'mailinglist_id',label:'Einladungsliste'},
+            {field:'type',label:'Termin Art'},
+            {field:'max_reservations',label:'Plätze max.'}
+        ]
+      );
 
       onMounted(() => {
         //console.log('eventform mounted');
@@ -55,7 +67,7 @@ export default {
       watch(() => event.date, (value) => {
           urls.value = setUrls();
       })
-      
+
     function onSubmitClick(){
       //console.log('submitclick',id);
       submitclicked.value=true;
@@ -119,6 +131,7 @@ export default {
 
       return { 
         event,
+        tab,
         eventform,
         eventtype,
         submitclicked, 
@@ -131,7 +144,8 @@ export default {
         useHasPermission,
         save,
         save_which,
-        recurrencies_store
+        recurrencies_store,
+        protect_fields
     }
     },
     template: `
@@ -142,7 +156,26 @@ export default {
         ref="eventform"
       >
 
+      <div class="col-12">
+      <q-tabs
+        v-if="event.parent>0"
+        v-model="tab"
+        align="left"
+        no-caps
+        outside-arrows
+        mobile-arrows
+        class=""
+      >
+        <q-tab name="date" label="Termin Daten" />
+        <q-tab name="fields" label="Felder schützen" />
+      </q-tabs>
+      </div>
+      <q-tab-panels
+      v-model="tab"
+      >
+      <q-tab-panel name="date">  
       <div class="q-col-gutter-md q-gutter-md row">
+
       <div class="col-md-4 col-sm-12 q-col-gutter-md content-start row">
       <datepicker
       label="Startdatum" 
@@ -278,6 +311,22 @@ export default {
     /> 
 
       </div>
+
+      </q-tab-panel>  
+      <q-tab-panel name="fields">
+      Nachfolgend markierte Felder werden vor dem Überschreiben geschützt, wenn man beim speichern eines Termins 'auch in kommende Termine speichern' ausgewählt hat.
+      <br>
+      Ansonsten werden dann jeweils die Werte aller nachfolgend aufgeführter Felder in die ausgewählten Wiederholungen kopiert.
+      <br>
+      Dies ist sinnvoll, wenn man für diese Wiederholung zb. einen individuellen Text oder eine individuelle Uhrzeit, abweichend von den übrigen Wiederholungen, festgelegt hat.  
+      <br>
+      <template v-for="field in protect_fields">
+      <q-checkbox v-model="event.protected_fields" :val="field.field" :label="field.label" /><br>
+      </template>
+      
+      </q-tab-panel>     
+    </q-tab-panels>
+
       <div class="col-12">
       <q-btn label="Speichern" type="submit" @click="onSubmitClick" color="primary"/>
       <q-btn label="Zur Tagesansicht" :to="urls.day" color="primary" flat class="q-ml-sm" />

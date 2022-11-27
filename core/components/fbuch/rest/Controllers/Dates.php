@@ -77,6 +77,7 @@ class MyControllerDates extends modRestController {
     public function beforePut() {
 
         if ($this->modx->hasPermission('fbuch_edit_termin')) {
+            $protected_fields=$this->object->get('protected_fields');
             $this->object->set('editedby', $this->modx->user->get('id'));
             $this->object->set('editedon', strftime('%Y-%m-%d %H:%M:%S')); 
         } else {
@@ -106,6 +107,7 @@ class MyControllerDates extends modRestController {
 
     public function updateRecurrence($id){
         if ($object = $this->modx->getObject($this->classKey,['id'=>$id])){
+            $protected_fields = $object->get('protected_fields');
             $fields = [
                 'title',
                 'description',
@@ -115,7 +117,8 @@ class MyControllerDates extends modRestController {
                 'type',
                 'max_reservations'
             ];
-            foreach ($fields as $field){
+            $copy_fields = is_array($protected_fields) && count($protected_fields) > 0 ? (array_diff($fields,$protected_fields)):$fields;
+            foreach ($copy_fields as $field){
                 $object->set($field,$this->object->get($field));
             }
             $object->set('editedby', $this->modx->user->get('id'));
@@ -206,6 +209,11 @@ class MyControllerDates extends modRestController {
         return $c;
         
     }
+
+    public function afterRead(array &$objectArray) {
+        $objectArray['protected_fields'] = is_array($objectArray['protected_fields']) ? $objectArray['protected_fields'] : [];
+        return !$this->hasErrors();
+    }    
     
     protected function prepareListObject(xPDOObject $object) {
         $date = $object->toArray();
