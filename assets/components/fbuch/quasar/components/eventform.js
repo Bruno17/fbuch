@@ -31,7 +31,6 @@ export default {
       const submitclicked = ref(false);
       const eventform = ref(null);
       const eventtype = ref(null);
-      const checkPermissions = 'fbuch_edit_termin,fbuch_create_termin,fbuch_delete_termin';
       const urls = ref(setUrls());
       const tab = ref('date');
       const protect_fields=ref(
@@ -48,7 +47,7 @@ export default {
 
       onMounted(() => {
         //console.log('eventform mounted');
-        useLoadPermissions(checkPermissions);
+        useLoadPermissions();
         state.value.days = state.value.days || 0;
         state.value.hours = state.value.hours || 0;
         state.value.minutes = state.value.minutes || 0;

@@ -25,7 +25,6 @@ export default {
       //const date = params.year + '-' + params.month + '-' +params.day;
       const dates = ref([]);
       const view = params.view;
-      const checkPermissions = 'fbuch_edit_termin,fbuch_create_termin,fbuch_delete_termin';
       const recurrences_dialog = ref(false);
       const now = new Date();
       const year_month_now = Quasar.date.formatDate(now, 'YYYY/MM');
@@ -43,7 +42,7 @@ export default {
       */
 
       onMounted(() => {
-        useLoadPermissions(checkPermissions);
+        useLoadPermissions();
         loadEvents();
       })
 

@@ -20,9 +20,21 @@ class MyControllerPermissions extends modRestController {
         return true;
     }
 
+    public function getAllPermissions(){
+        $permissions = [];
+        if ($collection = $this->modx->getCollection('modAccessPermission')){
+            foreach ($collection as $object){
+                $permissions[$object->get('name')] = $object->get('name');
+            }
+        }
+        return $permissions;
+    }
+
     public function getList() {
-        $total = 0;
-        $permissions = explode(',',$this->getProperty('permissions'));
+        $total = false;
+        if ($this->modx->user->get('sudo')) return $this->collection(['is_sudo'],$total);
+        $permissions = $this->getAllPermissions();
+        //$permissions = explode(',',$this->getProperty('permissions'));
         $list = [];
         if (is_array($permissions)){
             foreach ($permissions as $permission){

@@ -19,11 +19,10 @@ export default {
       const dates = ref([]);
       const selectedType = ref(Vue.$router.currentRoute._value.query.type||null);
       const view = params.view;
-      const checkPermissions = 'fbuch_edit_termin,fbuch_create_termin,fbuch_delete_termin';
 
       onMounted(() => {
         setWeekDates();
-        useLoadPermissions(checkPermissions);
+        useLoadPermissions();
       })
 
       function prepareDate(date){
