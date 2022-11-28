@@ -263,6 +263,9 @@ export default {
       <q-calendar-month 
   ref="calendar" 
   v-model="selectedDate" 
+  date-align="left"
+  showDayOfYearLabel
+  showMonthLabel="false"
   :day-min-height="70" 
   focusable hoverable bordered 
   @change="onChange" 
@@ -273,6 +276,9 @@ export default {
   locale="de"
   :weekdays="[1,2,3,4,5,6,0]"
   >
+  <template #day-of-year="{ scope: { timestamp } }">
+      <q-btn flat round padding="none" color="primary" icon="info" :to="'/events/day/' + timestamp.year + '/' + timestamp.month + '/' + timestamp.day"/>
+  </template>
   
             <template #week="{ scope: { week, weekdays } }">
               <template
