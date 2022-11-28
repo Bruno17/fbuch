@@ -1,4 +1,5 @@
 import api_select from '../../components/api_select.js'
+import { useLoadPermissions,useHasPermission } from "../../composables/helpers.js";
 
 export default {
     components:{
@@ -23,6 +24,7 @@ export default {
       endDate = ref(today());
 
       onMounted(() => {
+        useLoadPermissions();
         loadMonthEvents();
       })
 
@@ -236,7 +238,8 @@ export default {
         badgeClasses,
         badgeStyles,
         selectedType,
-        setTypeFilter
+        setTypeFilter,
+        useHasPermission
       }
     },
     template: `
@@ -277,7 +280,12 @@ export default {
   :weekdays="[1,2,3,4,5,6,0]"
   >
   <template #day-of-year="{ scope: { timestamp } }">
-      <q-btn flat round padding="none" color="primary" icon="info" :to="'/events/day/' + timestamp.year + '/' + timestamp.month + '/' + timestamp.day"/>
+      <template v-if="useHasPermission('fbuch_edit_termin')">
+        <q-btn flat round padding="none" icon="edit" :to="'/events/day/' + timestamp.year + '/' + timestamp.month + '/' + timestamp.day"/>
+      </template>
+      <template v-else>
+        <q-btn flat round padding="none" color="primary" icon="info" :to="'/events/day/' + timestamp.year + '/' + timestamp.month + '/' + timestamp.day"/>
+      </template>
   </template>
   
             <template #week="{ scope: { week, weekdays } }">
