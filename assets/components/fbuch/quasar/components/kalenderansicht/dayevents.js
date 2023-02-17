@@ -1,4 +1,4 @@
-import dayevent from './dayevent.js'
+import dayevent from '../dayevent.js'
 
 export default {
 
@@ -88,11 +88,14 @@ export default {
       </div>
       <div class="row q-col-gutter-sm">
         <template v-for="event in loadedEvents">
+          <div class="col-12 col-md-6">
           <dayevent 
+          class="full-height"
           :event="event"
           :loadDayEvents="reloadEvents"
           :view="view"
           ></dayevent>
+          </div>
         </template>
       </div>
     </div>

@@ -40,11 +40,24 @@
         </q-drawer>
     
         <q-page-container>
+            
           <router-view :key="$route.fullPath"></router-view>
         </q-page-container>
     
       </q-layout>
     </div>
+    [[fbuchGetFiles? 
+    &folder=`[[++fbuch.assets_path:default=`[[++base_path]]assets/components/fbuch/`]]quasar/components`
+    &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`
+    ]]  
+    [[fbuchGetFiles? 
+    &folder=`[[++fbuch.assets_path:default=`[[++base_path]]assets/components/fbuch/`]]quasar/components/[[*alias]]`
+    &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`
+    ]]    
+    [[fbuchGetFiles? 
+    &folder=`[[++fbuch.assets_path:default=`[[++base_path]]assets/components/fbuch/`]]quasar/views/[[*alias]]`
+    &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`
+    ]]
 
     <!-- Add the following at the end of your body tag -->
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
@@ -59,13 +72,18 @@
         const modx_options = {
           assets_url:'[[++assets_url]]',
           resource_id:'[[*id]]',
-          user_id:'[[+modx.user.id]]',
+          user_id:'[[!+modx.user.id]]',
           rest_url:'[[++fbuch.assets_url:default=`/assets/components/fbuch/`]]rest/'
         };
     
     </script>  
     
     [[*scripts]]
+    
+    <script>
+        const base_route = '/[[*uri]]/';
+    </script>    
+    
 
     <script type="module">
       /*
@@ -74,12 +92,12 @@
        */
 
       import fbuchnav from '[[++fbuch.assets_url:default=`/assets/components/fbuch/`]]quasar/components/resourcetree.js';
-      [[*content]]
+      import routes from '[[++fbuch.assets_url:default=`/assets/components/fbuch/`]]quasar/views/[[*alias]]/routes.js';
 
   const pinia = Pinia.createPinia();
   const router = VueRouter.createRouter({
     history: VueRouter.createWebHashHistory(base_route),
-    routes: routes
+    routes: typeof(routes) == "undefined" ? [] : routes
 })
 
       Vue.$router = router;

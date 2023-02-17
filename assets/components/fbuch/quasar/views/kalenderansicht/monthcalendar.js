@@ -242,83 +242,8 @@ export default {
         useHasPermission
       }
     },
-    template: `
-    <div id="kalender" style="min-height: 100vh;">
-    <div class="q-pa-md q-gutter-sm row">
-      <q-btn outline label="< Früher" @click="onPrev"></q-btn>
-      <q-btn outline label="Heute" @click="onToday"></q-btn>
-      <q-btn outline label="Später >" @click="onNext"></q-btn>
-
-      <api_select
-      clearable
-      v-model="selectedType"
-      label="Termin Art filtern"
-      controller="Datetypes?limit=100000&returntype=options"
-      @update:model-value="setTypeFilter"
-      >
-      </api_select>  
-      <q-space/>
-      <q-avatar color="blue" class="text-white" icon="question_mark"/>
-    </div>
-  
-    <div class="q-pa-md full-width" style="height: 400px;">
-    <div class="text-h4 text-center"> {{ formattedMonth }} </div>
-      <q-calendar-month 
-  ref="calendar" 
-  v-model="selectedDate" 
-  date-align="left"
-  showDayOfYearLabel
-  showMonthLabel="false"
-  :day-min-height="70" 
-  focusable hoverable bordered 
-  @change="onChange" 
-  @moved="onMoved" 
-  @click-date="onClickDate" 
-  @click-day="onClickDay" 
-  @click-head-day="onClickHeadDay" 
-  locale="de"
-  :weekdays="[1,2,3,4,5,6,0]"
-  >
-  <template #day-of-year="{ scope: { timestamp } }">
-      <template v-if="useHasPermission('fbuch_edit_termin')">
-        <q-btn flat round padding="none" icon="edit" :to="'/events/day/' + timestamp.year + '/' + timestamp.month + '/' + timestamp.day"/>
-      </template>
-      <template v-else>
-        <q-btn flat round padding="none" color="primary" icon="info" :to="'/events/day/' + timestamp.year + '/' + timestamp.month + '/' + timestamp.day"/>
-      </template>
-  </template>
-  
-            <template #week="{ scope: { week, weekdays } }">
-              <template
-                v-for="(computedEvent, index) in getWeekEvents(week, weekdays)"
-                :key="index"
-              >
-                <div
-                  :class="badgeClasses(computedEvent)"
-                  :style="badgeStyles(computedEvent, week.length)"
-                >
-                  <div
-                    v-if="computedEvent.event && computedEvent.event.title"
-                    class="title q-calendar__ellipsis"
-                  >
-                    {{ computedEvent.event.title }}
-
-                  </div>
-                  <q-tooltip 
-                  v-if="computedEvent.event && computedEvent.event.title" 
-                  >
-<pre style="white-space: pre-wrap; word-wrap: break-word;font-family: inherit;">{{ computedEvent.event.title  }} {{ computedEvent.event.start_time}} 
-{{ computedEvent.event.description }}</pre>
-                  </q-tooltip>                  
-                </div>
-              </template>
-            </template>
-  
-  
-      </q-calendar-month>
-    </div>
-  </div>
-    `
+    template: '#monthcalendar-view' 
+    
     // or `template: '#my-template-element'`
   }
   

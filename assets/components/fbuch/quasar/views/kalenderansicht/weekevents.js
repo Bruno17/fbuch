@@ -1,4 +1,4 @@
-import dayevents from '../../components/dayevents.js'
+import dayevents from '../../components/kalenderansicht/dayevents.js'
 import api_select from '../../components/api_select.js'
 import { useGetWeekStart } from "../../composables/dateHelpers.js";
 import { useLoadPermissions,useHasPermission } from "../../composables/helpers.js";
@@ -103,36 +103,6 @@ export default {
         onNext,
         onToday }
     },
-    template: `
-    <div class="q-pa-md q-gutter-sm row">
-      <q-btn outline label="< Früher" @click="onPrev"></q-btn>
-      <q-btn outline label="Heute" @click="onToday"></q-btn>
-      <q-btn outline label="Später >" @click="onNext"></q-btn>
-
-      <api_select
-      clearable
-      v-model="selectedType"
-      label="Termin Art filtern"
-      controller="Datetypes?limit=100000&returntype=options"
-      @update:model-value="setTypeFilter"
-      >
-      </api_select>  
-      <q-space/>
-      <q-avatar color="blue" class="text-white" icon="question_mark"/>
-    </div>    
-      <template v-for="date in dates">
-        <dayevents :date="date.date" :view="view" :type="selectedType">
-        <template v-slot:buttons>
-        <q-btn v-if="useHasPermission('fbuch_create_termin')" icon="add" :to="'/event-create/' +date.year+'/'+date.month+'/'+date.day" >
-        Termin erstellen
-        </q-btn>
-        <q-btn v-if="view=='day'" label="Wochenansicht" :to="'/events/week/'+date.year+'/'+date.month+'/'+date.day"></q-btn>
-        <q-btn v-if="view=='week'" label="Tagesansicht" :to="'/events/day/'+date.year+'/'+date.month+'/'+date.day"></q-btn>      
-        <q-btn label="Kalenderansicht" :to="'/'+date.year+'/'+date.month" ></q-btn>  
-        <q-btn label="Zum Fahrtenbuch" :href="'/?offset='+date.date+'&type=dragdrop&dir=none'" />      
-        </templae>
-        </dayevents>
-      </template>
-    `
+    template: '#weekevents-view'
     // or `template: '#my-template-element'`
   }

@@ -4,7 +4,7 @@ include 'BaseController.php';
 
 class MyControllerFahrten extends BaseController {
     public $classKey = 'fbuchFahrt';
-    public $defaultSortField = 'date';
+    public $defaultSortField = 'id';
     public $defaultSortDirection = 'ASC';
     
     public function beforeDelete() {
@@ -110,18 +110,20 @@ class MyControllerFahrten extends BaseController {
         
         $returntype = $this->getProperty('returntype');
         $where = array('deleted'=>0);
-        $datewhere = array();
+        $datewhere = [];
+        $sortConfig = [];
+        $finishedwhere = [];
       
         switch ($returntype) {
             case 'open':
-                $this->setProperty('dir','ASC');
+                $sortConfig = ['date'=>'ASC','start_time'=>'ASC'];
                 $where['km'] = 0;
                 $datewhere['date:<='] = strftime('%Y-%m-%d 23:59:59');
                 $datewhere['start_time:<='] = strftime('%H:%M');
                 $datewhere['OR:date:<'] = strftime('%Y-%m-%d 00:00:00');
                 break;
             case 'sheduled':
-                $this->setProperty('dir','ASC');
+                $sortConfig = ['date'=>'ASC','start_time'=>'ASC'];
                 $where['km'] = 0;
                 $where['date:>='] = strftime('%Y-%m-%d 00:00:00');
                 
@@ -131,9 +133,32 @@ class MyControllerFahrten extends BaseController {
                 
                 break;                
             case 'finished':
-                $this->setProperty('dir','DESC');
-                $where['km:>'] = 0;
-                break;                
+                $sortConfig = ['date'=>'ASC','start_time'=>'ASC'];
+                $finishedwhere['km:>'] = 0;
+                $finishedwhere['OR:finished:='] = 1;
+                if (isset($_GET['start_date']) && isset($_GET['end_date'])){
+                    $start = $this->getProperty('start_date');
+                    $end = $this->getProperty('end_date');
+                    $datewhere['date:>='] = $start;
+                    $datewhere['date:<='] = $end;
+                }        
+                break; 
+                case 'finished_coming':
+                    $sortConfig = ['date'=>'ASC','start_time'=>'ASC'];
+                    $where['km:>'] = 0;
+                    if (isset($_GET['start_date']) && isset($_GET['end_date'])){
+                        $end = $this->getProperty('end_date');
+                        $datewhere['date:>'] = $end;
+                    }        
+                break; 
+                case 'finished_past':
+                    $sortConfig = ['date'=>'DESC','start_time'=>'DESC'];
+                    $where['km:>'] = 0;
+                    if (isset($_GET['start_date']) && isset($_GET['end_date'])){
+                        $start = $this->getProperty('start_date');
+                        $datewhere['date:<'] = $start;
+                    }        
+                break;                                               
         } 
         
         
@@ -148,14 +173,18 @@ class MyControllerFahrten extends BaseController {
         $w = array();
         $w[] = $where;
         $w[] = $datewhere;
-        $c->where($w);
+        $w[] = $finishedwhere;
+         $c->where($w);
+
+        foreach ($sortConfig as $field => $dir){
+            $c->sortby($field,$dir);
+        }
         
         //$c->prepare();echo $c->toSql();
         return $c;
     }
     
     protected function prepareListObject(xPDOObject $object) {
-        
         $names_array = array();
         if ($fahrt_names = $object->getMany('Names')){
             foreach ($fahrt_names as $fahrt_name){

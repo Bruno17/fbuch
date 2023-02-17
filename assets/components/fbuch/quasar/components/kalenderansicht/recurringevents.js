@@ -1,8 +1,8 @@
 import eventlist from './dayevents.js'
 //import api_select from '../../components/api_select.js'
 //import { useGetWeekStart } from "../../composables/dateHelpers.js";
-import { useLoadPermissions,useHasPermission } from "../composables/helpers.js";
-import { useRecurrenciesStore } from '../stores/eventform.js';
+import { useLoadPermissions,useHasPermission } from "../../composables/helpers.js";
+import { useRecurrenciesStore } from '../../stores/eventform.js';
 
 export default {
 

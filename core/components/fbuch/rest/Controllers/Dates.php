@@ -153,6 +153,12 @@ class MyControllerDates extends modRestController {
         
         $this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);
 
+        $start = $this->getProperty('start','undefined');
+        $start = $this->getProperty('start_date',$start);
+        $end = $this->getProperty('end','undefined');
+        $end = $this->getProperty('end_date',$end);  
+        $dir = $this->getProperty('dir','ASC');      
+        
 
      /*   
         if($show_hidden){
@@ -173,6 +179,13 @@ class MyControllerDates extends modRestController {
         
         $c->groupby('type');
         */
+
+        switch ($which_page){
+            case 'rowinglogbook':
+            $c->where(['Type.show_at_rowinglogbook_page' => 1]);
+            break;
+        }
+
         $c->where(['deleted' => 0]);
         if (isset($_GET['types']) && !empty($_GET['types'])){
             $types = explode(',',$_GET['types']);
@@ -189,21 +202,17 @@ class MyControllerDates extends modRestController {
             $c->where(['hidden' => 0]);
         }         
         
-        if (isset($_GET['start']) && isset($_GET['end'])){
-            $start = $this->getProperty('start');
-            $end = $this->getProperty('end');
+        if ($start != 'undefined' && $end != 'undefined'){
             $c->where(['date_end:>=' => $start]);
             $c->where(['date:<=' => $end]);
-
-        } elseif (isset($_GET['start'])) {
-            $start = $this->getProperty('start');
+        } elseif ($start != 'undefined') {
             $c->where(['date:>=' => $start]);
         } else {
             $date = strftime('%Y-%m-%d 00:00:00');
             $c->where(['date:>=' => $date]);
         }
-        $c->sortby('date','ASC');
-        $c->sortby('start_time','ASC');
+        $c->sortby('date',$dir);
+        $c->sortby('start_time',$dir);
         //$c->prepare();echo $c->toSql();
         return $c;
         

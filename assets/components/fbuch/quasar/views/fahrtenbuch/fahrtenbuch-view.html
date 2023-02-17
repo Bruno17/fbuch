@@ -1,0 +1,56 @@
+<div class="q-pa-md q-gutter-sm row">
+    <q-btn outline label="< Früher" @click="onPrev"></q-btn>
+    <q-btn outline label="Heute" @click="onToday"></q-btn>
+    <q-btn outline label="Später >" @click="onNext"></q-btn>
+
+    <q-space />
+    <q-avatar color="blue" class="text-white" icon="question_mark" />
+</div>
+
+<div class="text-h4 text-center"> {{ formattedDate }} </div>
+
+<div class="q-pa-sm row q-col-gutter-sm">
+
+    <div class="col-12 col-md-4">
+        <q-card flat bordered class="full-width">
+            <q-card-section class="q-pa-sm">
+                <div class="text-h6">Teilnehmergruppen (Termine)</div>
+            
+            </q-card-section>
+            <q-separator></q-separator>
+            <q-card-section class="q-pa-sm q-gutter-y-sm">
+                <template v-for="event in loadedEvents">
+                    <dayevent :event="event" :loadDayEvents="reloadEvents" :view="view"></dayevent>
+                </template>
+            </q-card-section>
+
+        </q-card>
+    </div>
+
+    <div class="col-12 col-md-4">
+        <q-card flat bordered class="full-width">
+            <q-card-section>
+                <div class="text-h6">offene Einträge</div>
+            
+            </q-card-section>
+            <q-separator></q-separator>  
+            <q-card-section>
+            {{open.length}}<br>
+            {{open}}<br>
+            {{sheduled}}<br>                
+            </q-card-section>          
+
+        </q-card>
+    </div>
+    <div class="col-12 col-md-4">
+        <q-card flat bordered class="full-width">
+            <q-card-section>
+                <div class="text-h6">abgeschlossene Einträge</div>
+            
+            </q-card-section>
+            <q-separator></q-separator>              
+            Finished:<br>
+            {{finished}}<br>
+        </q-card>
+    </div>
+</div>
