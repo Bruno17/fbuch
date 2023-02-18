@@ -221,11 +221,50 @@ class MyControllerDates extends modRestController {
     public function afterRead(array &$objectArray) {
         $objectArray['protected_fields'] = is_array($objectArray['protected_fields']) ? $objectArray['protected_fields'] : [];
         return !$this->hasErrors();
-    }    
+    } 
+    
+    public function addNames($id){
+        $memberfields = 'name,firstname,member_status';
+        $properties = [];
+        $properties['classname'] = 'fbuchDateNames';
+        $properties['where'] = '{"date_id":"' . $id . '","Fahrt.id":null}';
+        $properties['joins'] = '[{"alias":"Member","selectfields":"' . $memberfields . '"},{"alias":"RegisteredbyMember","selectfields":"' . $memberfields . '"},{"alias":"Fahrtname","selectfields":"id"},{"alias":"Fahrt","classname":"fbuchFahrt","selectfields":"id","on":"Fahrt.id=Fahrtname.fahrt_id and Fahrt.deleted=0"}]';
+        $properties['sortConfig'] = '[{"sortby":"registeredby_member"},{"sortby":"createdon"}]';
+        $names = [];
+
+        $c = $this->modx->migx->prepareQuery($this->modx,$properties);
+        $rows = $this->modx->migx->getCollection($c);
+        if (count($rows)>0){
+            $idx = 1;
+            $registeredby = '0';
+            foreach ($rows as $row){
+                $row['new_registeredby'] = false;
+                if (isset($row['registeredby_member']) && $row['registeredby_member'] != $registeredby){
+                    $row['new_registeredby'] = true;
+                    $registeredby = $row['registeredby_member'];
+                }
+                $row['selected'] = false;
+                $row['idx'] = $idx;
+                if (isset($row['createdon'])){
+                    $date = date_create($row['createdon']);
+                    $row['createdon_formatted'] = date_format($date,'d.m.Y H:i');    
+                }
+                
+                $names[] = $row;
+                $idx ++;
+            }
+        }
+
+
+        return $names;
+    }
     
     protected function prepareListObject(xPDOObject $object) {
         $date = $object->toArray();
         $date['Type_colorstyle'] = (string) $date['Type_colorstyle'] == '' ? 'grey' : $date['Type_colorstyle'];
+        $names = $this->addNames($object->get('id'));
+        $date['names'] = $names;
+        $date['counted_names'] = count($names);
         return $date;
     } 
        

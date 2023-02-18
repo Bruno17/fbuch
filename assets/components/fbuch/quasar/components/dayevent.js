@@ -63,7 +63,14 @@ export default {
         }); 
       }      
 
-      return {modx, confirmDelete,confirmHide,hideEvent,useHasPermission }
+      return {
+        expanded: ref(false),
+        modx, 
+        confirmDelete,
+        confirmHide,
+        hideEvent,
+        useHasPermission 
+      }
     },
     template: '#dayevent-component'
     // or `template: '#my-template-element'`

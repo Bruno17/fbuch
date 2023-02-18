@@ -84,5 +84,57 @@
     <q-card-section>
         <pre style="white-space: pre-wrap; word-wrap: break-word;font-family: inherit;">{{ event.description }}</pre>
     </q-card-section>
+    <q-separator></q-separator>
+
+    <q-card-actions>
+        <template v-if="event.counted_names==0">keine Anmeldung</template>
+        <template v-if="event.counted_names==1">{{event.counted_names}} Anmeldung</template>
+        <template v-if="event.counted_names>1">{{event.counted_names}} Anmeldungen</template>
+        <q-space />
+
+        <q-btn color="grey" round flat dense :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+            @click="expanded = !expanded" />
+    </q-card-actions>
+
+    <q-slide-transition>
+        <div v-show="expanded">
+            <q-separator />
+            <q-card-section class="q-pa-none">
+                <q-list separator>
+                    <template v-for="name in event.names">
+                        <q-item v-if="name.new_registeredby">
+                            Anmeldungen von {{name.RegisteredbyMember_firstname}} {{name.RegisteredbyMember_name}}:
+                        </q-item>
+                        <q-item tag="label" v-ripple>
+                            <q-item-section side top class="q-pa-none">
+                                <q-checkbox v-model="name.selected" />
+                            </q-item-section>
+                            <q-item-section side>
+                                {{name.idx}}
+                            </q-item-section>
+
+                            <q-item-section>
+                                <q-item-label>{{name.createdon_formatted}}</q-item-label>
+                                <q-item-label v-if="name.guestname=='' && name.Member_member_status=='Mitglied' ">
+                                    {{name.Member_firstname}} {{name.Member_name}}
+                                </q-item-label>
+                                <q-item-label v-if="name.guestname=='' && name.Member_member_status!=='Mitglied' ">
+                                    {{name.Member_firstname}} {{name.Member_name}} ({{name.Member_member_status}})
+                                </q-item-label>
+                                <q-item-label v-if="name.guestname!==''">
+                                    {{name.guestname}} (Gasteintrag)
+                                </q-item-label>
+
+                            </q-item-section>
+                        </q-item>
+                    </template>
+                </q-list>
+
+
+            </q-card-section>
+        </div>
+    </q-slide-transition>
+
+
 
 </q-card>
