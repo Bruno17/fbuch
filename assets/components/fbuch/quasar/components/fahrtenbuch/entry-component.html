@@ -11,6 +11,15 @@
                         {{ entry.formattedEndDate }}
                     </template>
                 </div>
+                <div v-if="useHasPermission('fbuch_view_birthdate')" class="text-subtitle2">
+                    <template v-if="entry.average_age > 0">
+                        Altersschnitt: {{entry.average_age}}       
+                    </template>
+                    <template v-if="entry.average_error">
+                        Fehlende Altersangaben: {{entry.average_error.missingValues}}       
+                    </template>                    
+                     
+                </div>
             </div>
             <div class="col-auto">
                 <q-btn color="white" text-color="black" round icon="more_vert">
@@ -100,10 +109,10 @@
                     </q-item-section>
                     <q-item-section>
                         <q-item-label v-if="name.guestname=='' && name.Member_member_status=='Mitglied' ">
-                            {{name.Member_firstname}} {{name.Member_name}}
+                            {{name.Member_firstname}} {{name.Member_name}} <template v-if="useHasPermission('fbuch_view_birthdate')"> ({{name.age}})</template>
                         </q-item-label>
                         <q-item-label v-if="name.guestname=='' && name.Member_member_status!=='Mitglied' ">
-                            {{name.Member_firstname}} {{name.Member_name}} ({{name.Member_member_status}})
+                            {{name.Member_firstname}} {{name.Member_name}} ({{name.Member_member_status}}) <template v-if="useHasPermission('fbuch_view_birthdate')"> ({{name.age}})</template>
                         </q-item-label>
                         <q-item-label v-if="name.guestname!==''">
                             {{name.guestname}} (Gasteintrag)

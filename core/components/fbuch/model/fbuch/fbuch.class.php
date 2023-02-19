@@ -2101,6 +2101,32 @@ class Fbuch {
         return round($output / $beitrags_teilung);
     }
 
+    public function calculateAverage($values, & $error){
+        $output = 0;
+        $values = is_array($values) ? $values : explode(',', $values);
+        $valuesCount = count($values);
+        $sum = 0;
+        
+        if ($valuesCount > 0) {
+            $countedValues = 0;
+            foreach ($values as $value) {
+                $trimmedValue = trim($value);
+                if (is_numeric($trimmedValue) && $trimmedValue > 0) {
+                    $countedValues++;
+                    $sum += $trimmedValue;
+                }
+            }
+            if ($valuesCount == $countedValues) {
+                $output = $sum / $countedValues;
+            } else {
+                $missingValueCount = $valuesCount - $countedValues;
+                $error = ['missingValues' => $missingValueCount];
+            }
+        }
+        
+        return $output;        
+    }
+
     public function berechneAlter($scriptProperties) {
         $modx = $this->modx;
 

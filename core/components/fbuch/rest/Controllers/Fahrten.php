@@ -194,10 +194,35 @@ class MyControllerFahrten extends BaseController {
         return $c;
     }
 
+    public function calculateAge($birthdate,$when){
+        $date = date_create($when);
+        $when = date_format($date, 'Y-12-31 23:59:59'); 
+        $age = (int) $this->modx->fbuch->berechneAlter(['birthdate' => $birthdate,'when' => $when]);
+        return $age;
+    }
+
+    public function calculateAverage($names,& $error){
+        $ages = [];
+        if (is_array($names)){
+            foreach ($names as $name){
+                $cox = $this->modx->getOption('cox',$name,'0');
+                $age = $this->modx->getOption('age',$name,'0');
+                if ($cox == '0'){
+                  $ages[] = $age;
+                } 
+            } 
+        }
+
+        $average = $this->modx->fbuch->calculateAverage($ages,$error);
+
+        return $average;
+    }
+
     public function addNames($object){
         $id = $object->get('id');
         $nutzergruppe_id = (int) $object->get('Nutzergruppe_id');
         $memberfields = 'name,firstname,member_status';
+        $memberfields .= $this->modx->hasPermission('fbuch_view_birthday') ? ',birthdate' : '';
         $properties = [];
         $properties['classname'] = 'fbuchFahrtNames';
         $properties['where'] = '{"fahrt_id":"' . $id . '"}';
@@ -213,11 +238,11 @@ class MyControllerFahrten extends BaseController {
             foreach ($rows as $row){
                 $row['selected'] = false;
                 $row['idx'] = $idx;
+                $row['age'] = $this->modx->hasPermission('fbuch_view_birthday') ? $this->calculateAge($row['Member_birthdate'],$object->get('date')) : 0;
                 $names[] = $row;
                 $idx ++;
             }
         }
-
 
         return $names;
     }    
@@ -234,8 +259,11 @@ class MyControllerFahrten extends BaseController {
         }
 
         $objectArray = $object->toArray();
-
+      
         $objectArray['names'] = $names;
+        $error = false;
+        $objectArray['average_age'] = $this->calculateAverage($names,$error);
+        $objectArray['average_error'] = $error;
         $objectArray['date'] = substr($object->get('date'),0,10);
         $objectArray['date_end'] = substr($object->get('date_end'),0,10);
         
