@@ -227,9 +227,9 @@ class MyControllerDates extends modRestController {
         $memberfields = 'name,firstname,member_status';
         $properties = [];
         $properties['classname'] = 'fbuchDateNames';
-        $properties['where'] = '{"date_id":"' . $id . '","Fahrt.id":null}';
-        $properties['joins'] = '[{"alias":"Member","selectfields":"' . $memberfields . '"},{"alias":"RegisteredbyMember","selectfields":"' . $memberfields . '"},{"alias":"Fahrtname","selectfields":"id"},{"alias":"Fahrt","classname":"fbuchFahrt","selectfields":"id","on":"Fahrt.id=Fahrtname.fahrt_id and Fahrt.deleted=0"}]';
-        $properties['sortConfig'] = '[{"sortby":"registeredby_member"},{"sortby":"createdon"}]';
+        $properties['where'] = '{"date_id":"' . $id . '"}';
+        $properties['joins'] = '[{"alias":"Member","selectfields":"' . $memberfields . '"},{"alias":"RegisteredbyMember","selectfields":"' . $memberfields . '"},{"alias":"Fahrtname","selectfields":"id,fahrt_id"},{"alias":"Fahrt","classname":"fbuchFahrt","selectfields":"id","on":"Fahrt.id=Fahrtname.fahrt_id and Fahrt.deleted=0"}]';
+        $properties['sortConfig'] = '[{"sortby":"Fahrtname.fahrt_id"},{"sortby":"registeredby_member"},{"sortby":"createdon"}]';
         $names = [];
 
         $c = $this->modx->migx->prepareQuery($this->modx,$properties);
@@ -237,7 +237,14 @@ class MyControllerDates extends modRestController {
         if (count($rows)>0){
             $idx = 1;
             $registeredby = '0';
+            $fahrt_id = '0';
             foreach ($rows as $row){
+                $row['Fahrt_id'] = $row['Fahrtname_fahrt_id'] = $this->modx->getOption('Fahrtname_fahrt_id',$row,'0');
+                $row['new_fahrt_id'] = false;
+                if ($row['Fahrt_id'] != $fahrt_id){
+                    $row['new_fahrt_id'] = true;
+                    $fahrt_id = $row['Fahrt_id'];    
+                }
                 $row['new_registeredby'] = false;
                 if (isset($row['registeredby_member']) && $row['registeredby_member'] != $registeredby){
                     $row['new_registeredby'] = true;

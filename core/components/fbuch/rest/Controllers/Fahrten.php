@@ -109,24 +109,30 @@ class MyControllerFahrten extends BaseController {
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
         
         $returntype = $this->getProperty('returntype');
-        $where = array('deleted'=>0);
+        $show_in_offen = (int) $this->getProperty('show_in_offen',0);
+        $where = [];
+        $where['deleted'] = 0;
         $datewhere = [];
         $sortConfig = [];
         $finishedwhere = [];
+
+        if ($show_in_offen == 1) {
+            $where['Gattung.show_in_offen'] = '1';
+        }
       
         switch ($returntype) {
             case 'open':
                 $sortConfig = ['date'=>'ASC','start_time'=>'ASC'];
-                $where['km'] = 0;
+                $finishedwhere['km'] = 0;
+                $finishedwhere['finished'] = 0;
                 $datewhere['date:<='] = strftime('%Y-%m-%d 23:59:59');
                 $datewhere['start_time:<='] = strftime('%H:%M');
                 $datewhere['OR:date:<'] = strftime('%Y-%m-%d 00:00:00');
                 break;
             case 'sheduled':
                 $sortConfig = ['date'=>'ASC','start_time'=>'ASC'];
-                $where['km'] = 0;
-                $where['date:>='] = strftime('%Y-%m-%d 00:00:00');
-                
+                $finishedwhere['km'] = 0;
+                $finishedwhere['finished'] = 0;
                 $datewhere['date:>='] = strftime('%Y-%m-%d 00:00:00');
                 $datewhere['start_time:>'] = strftime('%H:%M');
                 $datewhere['OR:date:>'] = strftime('%Y-%m-%d 23:59:00');                
@@ -145,7 +151,8 @@ class MyControllerFahrten extends BaseController {
                 break; 
                 case 'finished_coming':
                     $sortConfig = ['date'=>'ASC','start_time'=>'ASC'];
-                    $where['km:>'] = 0;
+                    $finishedwhere['km:>'] = 0;
+                    $finishedwhere['OR:finished:='] = 1;
                     if (isset($_GET['start_date']) && isset($_GET['end_date'])){
                         $end = $this->getProperty('end_date');
                         $datewhere['date:>'] = $end;
@@ -153,7 +160,8 @@ class MyControllerFahrten extends BaseController {
                 break; 
                 case 'finished_past':
                     $sortConfig = ['date'=>'DESC','start_time'=>'DESC'];
-                    $where['km:>'] = 0;
+                    $finishedwhere['km:>'] = 0;
+                    $finishedwhere['OR:finished:='] = 1;
                     if (isset($_GET['start_date']) && isset($_GET['end_date'])){
                         $start = $this->getProperty('start_date');
                         $datewhere['date:<'] = $start;
@@ -163,7 +171,9 @@ class MyControllerFahrten extends BaseController {
         
         
                 
-        $joins = '[{"alias":"Boot"},{"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"}]';
+        $joins = '[{"alias":"Boot"},
+        {"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"},
+        {"alias":"Nutzergruppe","classname":"fbuchBootsNutzergruppe","on":"Nutzergruppe.id=Boot.nutzergruppe"}]';
         
         $this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);
         
@@ -183,29 +193,49 @@ class MyControllerFahrten extends BaseController {
         //$c->prepare();echo $c->toSql();
         return $c;
     }
-    
-    protected function prepareListObject(xPDOObject $object) {
-        $names_array = array();
-        if ($fahrt_names = $object->getMany('Names')){
-            foreach ($fahrt_names as $fahrt_name){
 
-                if ($name = $fahrt_name->getOne('Member')){
-                    $name_array = $name->toArray();
-                    foreach ($name_array as $field => $value){
-                        $fahrt_name->set('Member_' . $field,$value);
-                        if (count($fahrt_names == 1)){
-                            $object->set('Member_' . $field,$value);
-                            $object->set('Member_fullname',$name->get('firstname') . ' ' . $name->get('name'));
-                        }                            
-                    }
-                    
-                }
-                $names_array[] = $fahrt_name->toArray();
-                
+    public function addNames($object){
+        $id = $object->get('id');
+        $nutzergruppe_id = (int) $object->get('Nutzergruppe_id');
+        $memberfields = 'name,firstname,member_status';
+        $properties = [];
+        $properties['classname'] = 'fbuchFahrtNames';
+        $properties['where'] = '{"fahrt_id":"' . $id . '"}';
+        $properties['joins'] = '[{"alias":"Member","selectfields":"'. $memberfields .'"},{"alias":"NgMember","classname":"fbuchBootsNutzergruppenMembers","on":"NgMember.member_id=Member.id and NgMember.group_id=' . $nutzergruppe_id .'"}]';
+        $properties['sortConfig'] = '[{"sortby":"obmann","sortdir":"DESC"},{"sortby":"pos"}]';
+        $properties['debug'] = '0';
+        $names = [];
+
+        $c = $this->modx->migx->prepareQuery($this->modx,$properties);
+        $rows = $this->modx->migx->getCollection($c);
+        if (count($rows)>0){
+            $idx = 1;
+            foreach ($rows as $row){
+                $row['selected'] = false;
+                $row['idx'] = $idx;
+                $names[] = $row;
+                $idx ++;
             }
         }
+
+
+        return $names;
+    }    
+    
+    protected function prepareListObject(xPDOObject $object) {
+        $names = $this->addNames($object);
+        if (count($names) == 1){
+            $name_array = $names[0];
+            foreach ($name_array as $field => $value){
+                if (substr($field,0,7)=='Member_');
+                $object->set($field,$value);
+            }
+            $object->set('Member_fullname',$object->get('Member_firstname') . ' ' . $object->get('Member_name'));                            
+        }
+
         $objectArray = $object->toArray();
-        $objectArray['names'] = $names_array;
+
+        $objectArray['names'] = $names;
         $objectArray['date'] = substr($object->get('date'),0,10);
         $objectArray['date_end'] = substr($object->get('date_end'),0,10);
         

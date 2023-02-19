@@ -31,11 +31,14 @@
         <q-card bordered class="full-width">
             <q-card-section class="q-pa-sm">
                 <div class="text-h6">offene Einträge</div>
-            
+                <q-btn @click="getSelectedNames">Namen kopieren</q-btn> 
             </q-card-section>
             <q-separator></q-separator>  
-            <q-card-section class="q-pa-sm">
-            {{open.length}}<br>
+            <q-card-section class="q-pa-sm q-gutter-y-sm">
+                <template v-for="entry in open">
+                    <entry :entry="entry"></entry>
+                </template>
+
             {{open}}<br>
             {{sheduled}}<br>                
             </q-card-section>          

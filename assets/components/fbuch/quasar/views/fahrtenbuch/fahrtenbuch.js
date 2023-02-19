@@ -1,10 +1,12 @@
 import dayevent from '../../components/dayevent.js';
+import entry from '../../components/fahrtenbuch/entry.js';
 import { useLoadPermissions,useHasPermission } from "../../composables/helpers.js";
 
 export default {
 
     components: {
-        dayevent: dayevent
+        dayevent: dayevent,
+        entry: entry
     },
     setup() {
 
@@ -46,14 +48,14 @@ export default {
             const data = {};
             data.returntype = 'sheduled';
             loadFahrten(data).then(function (result) {
-                sheduled.value = result;
+                sheduled.value = prepareEvents(result);
             });
         }
         function loadOpen() {
             const data = {};
             data.returntype = 'open';
             loadFahrten(data).then(function (result) {
-                open.value = result;
+                open.value = prepareEvents(result);
             });
         }
         function loadFinished() {
@@ -62,7 +64,7 @@ export default {
             data.start_date = selectedDate.value + ' 00:00:00';
             data.end_date = selectedDate.value + ' 23:59:59';
             loadFahrten(data).then(function (result) {
-                finished.value = result;
+                finished.value = prepareEvents(result);
             });
         }
 
@@ -99,6 +101,18 @@ export default {
             loadEvents(data).then(function (result) {
                 loadedEvents.value = prepareEvents(result);
             });
+        }
+
+        function getSelectedNames(){
+            let names = [];
+            loadedEvents.value.forEach((date,id) => {
+                date.names.forEach((name,name_id) => {
+                    if (name.selected) {
+                       names.push(name);
+                    }
+                })
+            })
+            console.log(names);
         }
 
         function loadEvents(data) {
@@ -145,6 +159,7 @@ export default {
             open,
             sheduled,
             loadedEvents,
+            getSelectedNames,
             onNext,
             onPrev,
             onToday
