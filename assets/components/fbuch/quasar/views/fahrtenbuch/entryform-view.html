@@ -54,7 +54,8 @@
                         <api_select ref="bootsgattungSelect" class="col-md-4 col-sm-4 col-xs-12"
                             v-model="bootSelection.bootsgattung" label="Unterkategorie"
                             :first_option="{'label':'---','value':'0'}" @update:model-value="onSelectBootsgattung"
-                            controller="Boote?limit=100000&returntype=bootsgattungen"></api_select>
+                            controller="Boote?limit=100000&returntype=bootsgattungen">
+                        </api_select>
 
                         <api_select ref="bootSelect" class="col-md-4 col-sm-4 col-xs-12" v-model="entry.boot_id"
                             label="Boot/Gerät/Raum/..." :first_option="{'label':'---','value':'0'}"
@@ -89,12 +90,56 @@
                                 <template v-for="(name,index) in entry.names">
                                     <q-item>
                                         <q-item-section v-if="name.member_status == 'Mitglied'">{{name.firstname}}
-                                            {{name.firstname}}</q-item-section>
-                                        <q-item-section v-if="name.member_status != 'Mitglied'">{{name.firstname}}
-                                            {{name.firstname}} ({{name.member_status}})</q-item-section>
-                                        <q-item-section side>
-                                            <q-btn color="red" @click="removePerson(index)" flat dense round icon="delete" />
+                                            {{name.firstname}}
                                         </q-item-section>
+                                        <q-item-section v-if="name.member_status != 'Mitglied'">{{name.firstname}}
+                                            {{name.firstname}}<br>({{name.member_status}})
+                                        </q-item-section>
+                                        <q-item-section v-if="name.cox==1" side class="q-pa-none" style="padding-left:0;">
+                                            <q-avatar>
+                                                <img src="[[++fbuch.assets_url:default=`assets/components/fbuch/`]]img/noun_78924_cc.svg"
+                                                    style="width: 18px;" />
+                                            </q-avatar>
+                                        </q-item-section >                    
+                                        <q-item-section v-if="name.obmann==1" side class="q-pa-none" style="padding-left:0;">
+                                            <q-avatar>
+                                                <img src="[[++fbuch.assets_url:default=`assets/components/fbuch/`]]img/king-svgrepo-com.svg"
+                                                    style="width: 18px;" />
+                                            </q-avatar>
+                                        </q-item-section>    
+                                        <q-item-section side top class="q-pa-none" style="padding-left:0;">
+                                            <q-btn color="primary" text-color="white" round icon="more_vert">
+                                                <q-menu auto-close anchor="bottom right" self="top right"
+                                                    :offset="[0, 5]">
+                                                    <q-list dense bordered separator>
+                                                        <q-item clickable v-ripple @click="setObmann(index)">
+                                                            <q-item-section avatar>
+                                                                <q-avatar >
+                                                                    <img src="[[++fbuch.assets_url:default=`assets/components/fbuch/`]]img/king-svgrepo-com.svg"
+                                                                        style="width: 18px;" />
+                                                                </q-avatar>
+                                                            </q-item-section>
+                                                            <q-item-section>Obmann/-frau</q-item-section>
+                                                        </q-item>
+                                                        <q-item clickable v-ripple @click="setCox(index)">
+                                                            <q-item-section avatar>
+                                                                <q-avatar >
+                                                                    <img src="[[++fbuch.assets_url:default=`assets/components/fbuch/`]]img/noun_78924_cc.svg"
+                                                                        style="width: 18px;" />
+                                                                </q-avatar>
+                                                            </q-item-section>
+                                                            <q-item-section>Steuermann/-frau</q-item-section>
+                                                        </q-item>
+                                                        <q-item @click="removePerson(index)" clickable v-ripple>
+                                                            <q-item-section avatar><q-avatar text-color="red"
+                                                                    icon="person_remove" /></q-item-section>
+                                                            <q-item-section>Person entfernen</q-item-section>
+                                                        </q-item>
+                                                    </q-list>
+                                                </q-menu>
+                                            </q-btn>
+                                        </q-item-section>
+
                                     </q-item>
                                 </template>
                             </q-list>

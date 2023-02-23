@@ -64,6 +64,8 @@ class MyControllerFahrten extends BaseController {
                 $row['name'] = $this->modx->getOption('Member_name',$name,'');
                 $row['member_status'] = $this->modx->getOption('Member_member_status',$name,'');
                 $row['label'] = $row['name'] . ' ' . $row['firstname'];
+                $row['cox'] = $this->modx->getOption('cox',$name,0);
+                $row['obmann'] = $this->modx->getOption('cox',$name,0);
                 $rows[] = $row;
             }
         }
@@ -152,7 +154,7 @@ class MyControllerFahrten extends BaseController {
         $names = $this->getProperty('names',[]);
         $existing = [];
         if (is_array($names) & count($names) > 0) {
-            //first remove all Guests
+            //first remove all Guests ???
             if ($members = $this->object->getMany('Names')) {
                 foreach ($members as $member) {
                     if ($this->modx->fbuch->isguest($member->get('member_id'))) {
@@ -166,12 +168,16 @@ class MyControllerFahrten extends BaseController {
             foreach ($names as $name) {
                 $member_id = $this->modx->getOption('value',$name,0);
                 if (!$this->modx->fbuch->isguest($member_id) && $fahrtnam = $this->modx->getObject('fbuchFahrtNames', array('fahrt_id' => $this->object->get('id'), 'member_id' => $member_id))) {
-                    //name exists allready in fahrt, do nothing
+                        $fahrtnam->set('cox', $this->modx->getOption('cox',$name,0));
+                        $fahrtnam->set('obmann', $this->modx->getOption('obmann',$name,0));
+                        $fahrtnam->save();
                 } else {
                     if (!empty($member_id) && $fahrtnam = $this->modx->newObject('fbuchFahrtNames')) {
                         $fahrtnam->set('member_id', $member_id);
                         $fahrtnam->set('fahrt_id', $this->object->get('id'));
-                        $fahrtnam->save();
+                        $fahrtnam->set('cox', $this->modx->getOption('cox',$name,0));
+                        $fahrtnam->set('obmann', $this->modx->getOption('obmann',$name,0));
+                        $fahrtnam->save();                        
                     }
                 }
                 unset($existing[$member_id]);
@@ -347,7 +353,7 @@ class MyControllerFahrten extends BaseController {
         $properties['classname'] = 'fbuchFahrtNames';
         $properties['where'] = '{"fahrt_id":"' . $id . '"}';
         $properties['joins'] = '[{"alias":"Member","selectfields":"'. $memberfields .'"},{"alias":"NgMember","classname":"fbuchBootsNutzergruppenMembers","on":"NgMember.member_id=Member.id and NgMember.group_id=' . $nutzergruppe_id .'"}]';
-        $properties['sortConfig'] = '[{"sortby":"obmann","sortdir":"DESC"},{"sortby":"pos"}]';
+        $properties['sortConfig'] = '[{"sortby":"cox","sortdir":"ASC"},{"sortby":"pos"}]';
         $properties['debug'] = '0';
         $names = [];
 

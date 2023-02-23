@@ -42,7 +42,6 @@ class MyControllerFahrtNames extends BaseController {
 
     public function post() {
         $properties = $this->getProperties();
-        $parent = (int) $this->modx->getOption('parent',$properties,0);
         $action = $this->getProperty('processaction');
         $names = $this->getProperty('names');
         $source = $this->getProperty('source');
@@ -67,6 +66,18 @@ class MyControllerFahrtNames extends BaseController {
                     }
                 }
                 break;
+                case 'setObmann':
+                    $fields = [];
+                    $fields['member_id'] = $this->getProperty('member_id');
+                    $fields['fahrt_id'] = $this->getProperty('fahrt_id');
+                    $this->modx->fbuch->setObmann($fields);
+                    break;
+                case 'setCox':
+                    $fields = [];
+                    $fields['member_id'] = $this->getProperty('member_id');
+                    $fields['fahrt_id'] = $this->getProperty('fahrt_id');
+                    $this->modx->fbuch->setCox($fields);
+                    break;                                     
         }
 
         $objectArray = [];

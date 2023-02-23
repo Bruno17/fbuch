@@ -78,6 +78,20 @@ export default {
       entry.value.names.splice(index, 1);
     }
 
+    function setObmann(index) {
+      console.log(index);
+      for (let i = 0; i < entry.value.names.length; i++) {
+        entry.value.names[i].obmann = (i == index) ? 1 : 0;
+      }
+    }
+
+    function setCox(index) {
+      for (let i = 0; i < entry.value.names.length; i++) {
+        const iscox = entry.value.names[i].cox == 1 ? 0 : 1;
+        entry.value.names[i].cox = (i == index) ? iscox : 0;
+      }
+    }    
+
     function findPerson(id) {
       let result = false;
       entry.value.names.forEach((person) => {
@@ -163,6 +177,8 @@ export default {
       onSubmit,
       onSubmitClick,
       removePerson,
+      setObmann,
+      setCox,
       bootSelect,
       personSelect,
       bootSelection,

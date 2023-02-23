@@ -61,7 +61,7 @@
     <q-card-section class="q-pa-none">
         <q-list separator>
             <template v-for="name in entry.names">
-                <q-item tag="label" v-ripple>
+                <q-item tag="label" class="q-px-sm" v-ripple>
                     <q-item-section side top class="q-pa-none">
                         <q-checkbox v-model="name.selected" />
                     </q-item-section>
@@ -70,29 +70,57 @@
                     </q-item-section>
                     <q-item-section>
                         <q-item-label v-if="name.guestname=='' && name.Member_member_status=='Mitglied' ">
-                            {{name.Member_firstname}} {{name.Member_name}} <template
-                                v-if="useHasPermission('fbuch_view_birthdate')"> ({{name.age}})</template>
+                            {{name.Member_firstname}} {{name.Member_name}} 
+                            <template v-if="useHasPermission('fbuch_view_birthdate')"><br>({{name.age}})</template>
                         </q-item-label>
                         <q-item-label v-if="name.guestname=='' && name.Member_member_status!=='Mitglied' ">
-                            {{name.Member_firstname}} {{name.Member_name}} ({{name.Member_member_status}}) <template
-                                v-if="useHasPermission('fbuch_view_birthdate')"> ({{name.age}})</template>
+                            {{name.Member_firstname}} {{name.Member_name}} <br>
+                            ({{name.Member_member_status}}) <template v-if="useHasPermission('fbuch_view_birthdate')"> ({{name.age}})</template>
                         </q-item-label>
                         <q-item-label v-if="name.guestname!==''">
-                            {{name.guestname}} (Gasteintrag)
+                            {{name.guestname}} (Gasteintrag)                                             
                         </q-item-label>
                     </q-item-section>
-                    <q-item-section side top class="q-pa-none">
+                    <q-item-section v-if="name.cox==1" side class="q-pa-none" style="padding-left:0;">
+                        <q-avatar>
+                            <img src="[[++fbuch.assets_url:default=`assets/components/fbuch/`]]img/noun_78924_cc.svg"
+                                style="width: 18px;" />
+                        </q-avatar>
+                    </q-item-section >                    
+                    <q-item-section v-if="name.obmann==1" side class="q-pa-none" style="padding-left:0;">
+                        <q-avatar>
+                            <img src="[[++fbuch.assets_url:default=`assets/components/fbuch/`]]img/king-svgrepo-com.svg"
+                                style="width: 18px;" />
+                        </q-avatar>
+                    </q-item-section>
+                    <q-item-section side top class="q-pa-none" style="padding-left:0;">
                         <q-btn color="primary" text-color="white" round icon="more_vert">
                             <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
                                 <q-list dense bordered separator>
-
+                                    <q-item @click="setObmann(name)" clickable v-ripple>
+                                        <q-item-section avatar>
+                                            <q-avatar>
+                                                <img src="[[++fbuch.assets_url:default=`assets/components/fbuch/`]]img/king-svgrepo-com.svg"
+                                                    style="width: 18px;" />
+                                            </q-avatar>
+                                        </q-item-section>
+                                        <q-item-section>Obmann/-frau</q-item-section>
+                                    </q-item>
+                                    <q-item @click="setCox(name)" clickable v-ripple>
+                                        <q-item-section avatar>
+                                            <q-avatar>
+                                                <img src="[[++fbuch.assets_url:default=`assets/components/fbuch/`]]img/noun_78924_cc.svg"
+                                                    style="width: 18px;" />
+                                            </q-avatar>
+                                        </q-item-section>
+                                        <q-item-section>Steuermann/-frau</q-item-section>
+                                    </q-item>                                    
                                     <q-item
                                         @click="confirmRemoveName(name)" clickable v-ripple>
                                         <q-item-section avatar><q-avatar text-color="red"
-                                                icon="delete" /></q-item-section>
-                                        <q-item-section>Eintrag entfernen</q-item-section>
+                                                icon="person_remove" /></q-item-section>
+                                        <q-item-section>Person entfernen</q-item-section>
                                     </q-item>
-
                                 </q-list>
                             </q-menu>
                         </q-btn>

@@ -1929,6 +1929,40 @@ class Fbuch {
 
     }
 
+    public function setObmann($fields){
+        $modx = &$this->modx;
+        $classname = 'fbuchFahrtNames';
+        if ($collection = $modx->getCollection($classname, array('fahrt_id' => $fields['fahrt_id']))) {
+            foreach ($collection as $object) {
+                $object->set('obmann', 0);
+                $object->save();
+            }
+        }
+        if ($object = $modx->getObject($classname, $fields)) {
+            
+            $object->set('obmann', '1');
+            $object->save();
+        }
+    }
+
+    public function setCox($fields){
+        $modx = &$this->modx;
+        $classname = 'fbuchFahrtNames';
+        if ($object = $modx->getObject($classname, $fields)) {
+            $cox = $object->get('cox');
+        }         
+        if ($collection = $modx->getCollection($classname, array('fahrt_id' => $fields['fahrt_id']))) {
+            foreach ($collection as $object) {
+                $object->set('cox', 0);
+                $object->save();
+            }
+        }
+        if ($object = $modx->getObject($classname, $fields)) {
+            $object->set('cox', $cox == 1 ? 0 : 1);
+            $object->save();
+        }    
+    }
+
     public function updateFahrtNames($fields, $action) {
         $modx = &$this->modx;
         $classname = 'fbuchFahrtNames';
@@ -1964,42 +1998,11 @@ class Fbuch {
                 }
                 break;
             case 'setobmann':
-
-
-                if ($collection = $modx->getCollection($classname, array('fahrt_id' => $fields['fahrt_id']))) {
-                    foreach ($collection as $object) {
-                        $object->set('obmann', 0);
-                        $object->save();
-                    }
-                }
-                if ($fahrtname_o) {
-                    $fahrtname_o->set('obmann', 1);
-                    $fahrtname_o->save();
-                } elseif ($object = $modx->getObject($classname, $fields)) {
-                    $object->set('obmann', 1);
-                    $object->save();
-                } else {
-
-                }
+                $this->setObmann($fields); 
                 break;
 
-            case 'setcox':
-
-                if ($collection = $modx->getCollection($classname, array('fahrt_id' => $fields['fahrt_id']))) {
-                    foreach ($collection as $object) {
-                        $object->set('cox', 0);
-                        $object->save();
-                    }
-                }
-                if ($fahrtname_o) {
-                    $fahrtname_o->set('cox', 1);
-                    $fahrtname_o->save();
-                } elseif ($object = $modx->getObject($classname, $fields)) {
-                    $object->set('cox', 1);
-                    $object->save();
-                } else {
-
-                }
+            case 'setCox':
+                $this->setCox($fields);
                 break;
         }
     }
