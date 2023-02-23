@@ -1,6 +1,6 @@
 import fahrtenbuch from './fahrtenbuch.js'
 //import weekevents from './weekevents.js'
-//import eventform from './eventform.js'
+import entryform from './entryform.js'
 
 const routes = [
   {
@@ -12,7 +12,17 @@ const routes = [
     path: '/:year/:month/:day',
     name:'fahrtenbuch',
     component: fahrtenbuch
-  }   
+  },  
+  {
+    path: '/entry-create',
+    name:'entryform_create',
+    component: entryform
+  },  
+  {
+    path: '/entry-update/:id',
+    name:'entryform_update',
+    component: entryform
+  }           
 ]
 
 export default routes

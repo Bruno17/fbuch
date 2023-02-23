@@ -1,6 +1,7 @@
 export default {
    props:{
-     controller:''
+     controller:'',
+     first_option:{}
    }, 
 
     setup(props) {
@@ -13,13 +14,24 @@ export default {
           loadNames();
       })
 
-      function loadNames(){
-        
+      function clearSelection(){
+        filtered_options.value = names_options.value;  
+      }
+
+      function loadNames(data = {}){
         const ajaxUrl = modx_options.rest_url + props.controller;
-        axios.get(ajaxUrl)
+        axios.get(ajaxUrl, { params: data })
         .then(function (response) {
-            names_options.value = response.data.results;
-            filtered_options.value = response.data.results;
+            let options = [];
+            console.log(props);
+            if (props.first_option && props.first_option.label && props.first_option.value){
+              options.push(props.first_option);
+              options.push(...response.data.results);      
+            } else {
+              options = response.data.results;
+            }
+            names_options.value = options;
+            filtered_options.value = options;
             //resetValidation();                 
         })
         .catch(function (error) {
@@ -34,7 +46,7 @@ export default {
       })
   }     
   
-      return { names_options, filtered_options, filterFn, fieldRef}
+      return { names_options, filtered_options, filterFn, fieldRef, loadNames, clearSelection}
     },
     template: `
     <q-select

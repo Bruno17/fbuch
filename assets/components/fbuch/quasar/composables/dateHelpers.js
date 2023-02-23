@@ -5,8 +5,45 @@ export function useNewDateFromDateAndTime(date,time){
 }
 
 export function useSetDateDiff(props) {
-    const date1 = useNewDateFromDateAndTime(props.event[props.startfield],props.event[props.timestartfield]);
-    const date2 = useNewDateFromDateAndTime(props.event[props.endfield],props.event[props.timeendfield]);
+    let startfield = props.startfield || false;
+    let timestartfield = props.timestartfield || false;
+    let endfield = props.endfield || false;
+    let timeendfield = props.timeendfield || false;
+    let event = props.event || false;
+    let startdate = new Date();
+    let enddate = new Date();
+    let starttime = '00:00';
+    let endtime = '00:00';
+    if (!startfield) {
+        console.log('property startfield not defined, default:date');
+        startfield = 'date';
+    }
+    if (!timestartfield) {
+        console.log('property timestartfield not defined, default:start_time');
+        timestartfield = 'start_time';
+    }
+    if (!endfield) {
+        console.log('property endfield not defined, default:date_end');
+        endfield = 'date_end';
+    } 
+    if (!timeendfield) {
+        console.log('property timeendfield not defined, default:end_time');
+        timeendfield = 'end_time';
+    }
+    if (!event) {
+        console.log('property event not defined');
+        event = {};
+        event[startfield] = startdate;
+        event[endfield] = enddate;
+        event[timestartfield] = starttime;
+        event[timeendfield] = endtime;
+    } 
+    startdate = event[startfield] || startdate; 
+    enddate = event[endfield] || enddate;
+    starttime = event[timestartfield] || starttime;
+    endtime = event[timeendfield] || endtime;         
+    const date1 = useNewDateFromDateAndTime(startdate,starttime);
+    const date2 = useNewDateFromDateAndTime(enddate,endtime);
     const diff = {};
     diff.minutes_total = Quasar.date.getDateDiff(date2, date1, 'minutes');
     let hours = Math.floor(diff.minutes_total/60);

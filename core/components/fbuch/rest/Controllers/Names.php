@@ -106,7 +106,6 @@ class MyControllerNames extends BaseController {
         $returntype = $this->getProperty('returntype');
         switch ($returntype) {
             case 'options':
-                $output = array();
                 $output['label'] = $object->get('name') . ' ' . $object->get('firstname');
                 if ($object->get('member_status') != 'Mitglied') {
                     $output['label'] .= ' (' . $object->get('member_status') . ')';

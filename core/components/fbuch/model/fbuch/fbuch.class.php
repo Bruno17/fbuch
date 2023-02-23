@@ -2219,4 +2219,10 @@ class Fbuch {
         return $success;
     }
 
+    function date_round(\DateTime $dt, $precision = 15) {
+        $s = $precision * 60;
+        $dt->setTimestamp($s * (int) ceil($dt->getTimestamp() / $s));
+        return $dt;
+    }    
+
 }

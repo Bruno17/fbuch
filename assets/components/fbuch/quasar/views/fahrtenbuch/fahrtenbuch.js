@@ -103,16 +103,91 @@ export default {
             });
         }
 
-        function getSelectedNames(){
+        function getSelectedEventNames(fields=[]){
             let names = [];
             loadedEvents.value.forEach((date,id) => {
                 date.names.forEach((name,name_id) => {
+                    //name.selected = false;
+                    let item = {};
                     if (name.selected) {
-                       names.push(name);
+                        if (fields.length > 0){
+                            fields.forEach((field) => {
+                                item[field] = name[field];
+                            })
+                        } else {
+                            item = name;
+                        }
+                        names.push(item);
                     }
                 })
             })
-            console.log(names);
+            return names;
+        }
+
+        function getSelectedFahrtNames(fields=[]){
+            let names = [];
+            open.value.forEach((fahrt,id) => {
+                fahrt.names.forEach((name,name_id) => {
+                    //name.selected = false;
+                    let item = {};
+                    if (name.selected) {
+                        if (fields.length > 0){
+                            fields.forEach((field) => {
+                                item[field] = name[field];
+                            })
+                        } else {
+                            item = name;
+                        }
+                        names.push(item);
+                    }
+                })
+            })
+            sheduled.value.forEach((fahrt,id) => {
+                fahrt.names.forEach((name,name_id) => {
+                    //name.selected = false;
+                    let item = {};
+                    if (name.selected) {
+                        if (fields.length > 0){
+                            fields.forEach((field) => {
+                                item[field] = name[field];
+                            })
+                        } else {
+                            item = name;
+                        }
+                        names.push(item);
+                    }
+                })
+            })            
+            return names;
+        }        
+
+        function moveMembers(properties){
+            let hasSelected = false;
+            const eventNames = getSelectedEventNames(['id','date_id','member_id']);
+            const fahrtNames = getSelectedFahrtNames(['id','fahrt_id','member_id']);
+            if (eventNames.length > 0){
+                hasSelected = true;
+                properties['source'] = 'dates';
+                properties['names'] = eventNames;
+            }
+            if (fahrtNames.length > 0){
+                hasSelected = true;
+                properties['source'] = 'fahrten';
+                properties['names'] = fahrtNames;
+            }            
+            if (!hasSelected) {
+                return;
+            } 
+            properties['processaction'] = 'moveNames'; 
+            const ajaxUrl = modx_options.rest_url + 'Fahrtnames';
+            axios.post(ajaxUrl,properties)
+            .then(function (response) {
+                loadAll();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });             
+            
         }
 
         function loadEvents(data) {
@@ -159,7 +234,9 @@ export default {
             open,
             sheduled,
             loadedEvents,
-            getSelectedNames,
+            loadAll,
+            moveMembers,
+            getSelectedEventNames,
             onNext,
             onPrev,
             onToday

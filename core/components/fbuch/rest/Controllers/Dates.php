@@ -242,8 +242,10 @@ class MyControllerDates extends modRestController {
                 $row['Fahrt_id'] = $row['Fahrtname_fahrt_id'] = $this->modx->getOption('Fahrtname_fahrt_id',$row,'0');
                 $row['new_fahrt_id'] = false;
                 if ($row['Fahrt_id'] != $fahrt_id){
-                    $row['new_fahrt_id'] = true;
-                    $fahrt_id = $row['Fahrt_id'];    
+                    if ($fahrt_id == 0){
+                        $row['new_fahrt_id'] = true;
+                        $fahrt_id = $row['Fahrt_id'];
+                    }    
                 }
                 $row['new_registeredby'] = false;
                 if (isset($row['registeredby_member']) && $row['registeredby_member'] != $registeredby){

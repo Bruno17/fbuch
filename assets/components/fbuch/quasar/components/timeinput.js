@@ -42,7 +42,6 @@ export default {
             useSetDateDiff(props);
 
             if (props.which == 'end'){
-                console.log('end',props.state.minutes_total);
                 if (props.state.minutes_total < 0) {
                     props.event[props.timeendfield] = oldvalue; 
                     useSetDateDiff(props);

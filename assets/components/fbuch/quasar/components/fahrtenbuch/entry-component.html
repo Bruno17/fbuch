@@ -13,72 +13,36 @@
                 </div>
                 <div v-if="useHasPermission('fbuch_view_birthdate')" class="text-subtitle2">
                     <template v-if="entry.average_age > 0">
-                        Altersschnitt: {{entry.average_age}}       
+                        Altersschnitt: {{entry.average_age}}
                     </template>
                     <template v-if="entry.average_error">
-                        Fehlende Altersangaben: {{entry.average_error.missingValues}}       
-                    </template>                    
-                     
+                        Fehlende Altersangaben: {{entry.average_error.missingValues}}
+                    </template>
+
                 </div>
             </div>
             <div class="col-auto">
                 <q-btn color="white" text-color="black" round icon="more_vert">
-                    <q-menu anchor="bottom right" self="top right" :offset="[0, 5]">
+                    <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
                         <q-list dense bordered separator>
 
-                            <q-item :href="'/termine/anmelden.html?date_id='+entry.id" clickable v-ripple>
+                            <q-item @click="pullMembers" clickable v-ripple>
                                 <q-item-section avatar><q-avatar icon="group_add" /></q-item-section>
                                 <q-item-section>
-                                    <q-item-label>Anmelden</q-item-label>
-                                    <q-item-label caption>Dich oder Andere anmelden<br>oder Nachricht
-                                        schreiben</q-item-label>
+                                    <q-item-label>Einfügen</q-item-label>
+                                    <q-item-label caption>Markierte Personen einfügen</q-item-label>
                                 </q-item-section>
                             </q-item>
-
-                            <q-item :href="'/?offset='+entry.date + '&type=dragdrop&dir=none'" clickable v-ripple>
-                                <q-item-section avatar><q-avatar icon="launch" /></q-item-section>
-                                <q-item-section>
-                                    <q-item-label>Zum Termin im Fahrtenbuch</q-item-label>
-                                </q-item-section>
-                            </q-item>
-
-                            <q-item :href="'/termine/rudern.html?date_id='+entry.id" clickable v-ripple>
-                                <q-item-section avatar><q-avatar icon="entry" /></q-item-section>
-                                <q-item-section>
-                                    <q-item-label>Einladungen vornehmen</q-item-label>
-                                    <q-item-label caption>Übersicht Einladungen und Zusagen</q-item-label>
-                                </q-item-section>
-                            </q-item>
-
-                            <q-item v-if="useHasPermission('fbuch_edit_termin')"
-                                :href="'/termine/kalenderansicht.html/#/entry-update/'+entry.id" clickable v-ripple>
+                            <q-item :href="'/fahrtenbuch/fahrtenbuch.html/#/entry-update/'+entry.id" clickable v-ripple>
                                 <q-item-section avatar><q-avatar icon="edit" /></q-item-section>
-                                <q-item-section>Termin/Wiederholungen bearbeiten</q-item-section>
+                                <q-item-section>
+                                    <q-item-label>Eintrag bearbeiten</q-item-label>
+                                    <q-item-label caption>Bearbeiten und Personen hinzufügen</q-item-label>
+                                </q-item-section>
                             </q-item>
-                            <template v-if="view=='recurrencies'">
-                                <q-item
-                                    v-if="entry.hidden==0 && entry.parent>0 && useHasPermission('fbuch_edit_termin')"
-                                    @click="confirmHide" clickable v-ripple>
-                                    <q-item-section avatar><q-avatar icon="visibility_off" /></q-item-section>
-                                    <q-item-section>
-                                        <q-item-label>Diese Wiederholung verbergen</q-item-label>
-                                    </q-item-section>
-                                </q-item>
-
-                                <q-item
-                                    v-if="entry.hidden==1 && entry.parent>0 && useHasPermission('fbuch_edit_termin')"
-                                    @click="hideentry" clickable v-ripple>
-                                    <q-item-section avatar><q-avatar icon="visibility" /></q-item-section>
-                                    <q-item-section>
-                                        <q-item-label>Diese Wiederholung wieder anzeigen</q-item-label>
-                                    </q-item-section>
-                                </q-item>
-                            </template>
-
-                            <q-item v-if="modx.user_id==entry.createdby || useHasPermission('fbuch_delete_termin')"
-                                @click="confirmDelete" clickable v-ripple>
+                            <q-item @click="confirmDelete" clickable v-ripple>
                                 <q-item-section avatar><q-avatar text-color="red" icon="delete" /></q-item-section>
-                                <q-item-section>Termin löschen</q-item-section>
+                                <q-item-section>Eintrag löschen</q-item-section>
                             </q-item>
 
                         </q-list>
@@ -97,9 +61,6 @@
     <q-card-section class="q-pa-none">
         <q-list separator>
             <template v-for="name in entry.names">
-                <q-item v-if="name.new_registeredby">
-                    Anmeldungen von {{name.RegisteredbyMember_firstname}} {{name.RegisteredbyMember_name}}:
-                </q-item>
                 <q-item tag="label" v-ripple>
                     <q-item-section side top class="q-pa-none">
                         <q-checkbox v-model="name.selected" />
@@ -109,15 +70,32 @@
                     </q-item-section>
                     <q-item-section>
                         <q-item-label v-if="name.guestname=='' && name.Member_member_status=='Mitglied' ">
-                            {{name.Member_firstname}} {{name.Member_name}} <template v-if="useHasPermission('fbuch_view_birthdate')"> ({{name.age}})</template>
+                            {{name.Member_firstname}} {{name.Member_name}} <template
+                                v-if="useHasPermission('fbuch_view_birthdate')"> ({{name.age}})</template>
                         </q-item-label>
                         <q-item-label v-if="name.guestname=='' && name.Member_member_status!=='Mitglied' ">
-                            {{name.Member_firstname}} {{name.Member_name}} ({{name.Member_member_status}}) <template v-if="useHasPermission('fbuch_view_birthdate')"> ({{name.age}})</template>
+                            {{name.Member_firstname}} {{name.Member_name}} ({{name.Member_member_status}}) <template
+                                v-if="useHasPermission('fbuch_view_birthdate')"> ({{name.age}})</template>
                         </q-item-label>
                         <q-item-label v-if="name.guestname!==''">
                             {{name.guestname}} (Gasteintrag)
                         </q-item-label>
+                    </q-item-section>
+                    <q-item-section side top class="q-pa-none">
+                        <q-btn color="primary" text-color="white" round icon="more_vert">
+                            <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
+                                <q-list dense bordered separator>
 
+                                    <q-item
+                                        @click="confirmRemoveName(name)" clickable v-ripple>
+                                        <q-item-section avatar><q-avatar text-color="red"
+                                                icon="delete" /></q-item-section>
+                                        <q-item-section>Eintrag entfernen</q-item-section>
+                                    </q-item>
+
+                                </q-list>
+                            </q-menu>
+                        </q-btn>
                     </q-item-section>
                 </q-item>
             </template>

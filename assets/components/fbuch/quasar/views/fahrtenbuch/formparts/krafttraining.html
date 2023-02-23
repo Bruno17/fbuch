@@ -1,0 +1,10 @@
+<template v-if="bootSelection.gattungname == 'Krafttraining'">
+    <q-field class="col-md-4 col-sm-4 col-xs-12" outlined color="dark">
+        <q-checkbox
+          v-model="entry.finished"
+          label="Training abgeschlossen"
+          :true-value="1"
+          :false-value="0"
+        />
+    </q-field>
+</template>

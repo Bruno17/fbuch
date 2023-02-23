@@ -23,6 +23,77 @@ class MyControllerFahrten extends BaseController {
 
         return !$this->hasErrors();
     }
+
+    public function getPrimaryKeyCriteria($id) {
+
+        $c = $this->modx->newQuery($this->classKey);
+        $c->select($this->modx->getSelectColumns($this->classKey,$this->classKey));
+        $joins = '[{"alias":"Boot"},
+        {"alias":"Gattung","classname":"fbuchBootsGattung","on":"Gattung.id=Boot.gattung_id"},
+        {"alias":"Nutzergruppe","classname":"fbuchBootsNutzergruppe","on":"Nutzergruppe.id=Boot.nutzergruppe"}]';
+        
+        $this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);
+        $c->where(array($this->primaryKeyField => $id));
+        //$c->prepare();echo $c->toSql();die();
+        return $c;
+    }    
+
+    public function get() {
+        $pk = $this->getProperty($this->primaryKeyField);
+        
+        $date = $this->getProperty('date');
+        if ($pk == 'new' ){
+            return $this->newEntry();
+        }
+
+        if (empty($pk)) {
+            return $this->getList();
+        }
+        return $this->read($pk);
+    } 
+
+    public function afterRead(array &$objectArray) {
+        $names = $this->addNames($this->object);
+        $rows = [];
+        if (is_array($names)){ 
+            foreach ($names as $name){
+                $row = [];
+                $row['id'] = $this->modx->getOption('member_id',$name,'');
+                $row['value'] = $this->modx->getOption('member_id',$name,'');
+                $row['firstname'] = $this->modx->getOption('Member_firstname',$name,'');
+                $row['name'] = $this->modx->getOption('Member_name',$name,'');
+                $row['member_status'] = $this->modx->getOption('Member_member_status',$name,'');
+                $row['label'] = $row['name'] . ' ' . $row['firstname'];
+                $rows[] = $row;
+            }
+        }
+        $objectArray['names'] = $rows; 
+        return !$this->hasErrors();
+    }     
+    
+    public function newEntry(){
+        $this->object = $this->modx->newObject($this->classKey);
+        if (empty($this->object)) {
+            return $this->failure($this->modx->lexicon('rest.err_obj_nf',array(
+                'class_key' => $this->classKey,
+            )));
+        }
+
+        $date = new DateTime(null, new DateTimeZone('Europe/Berlin'));
+        $date_end = new DateTime(null, new DateTimeZone('Europe/Berlin'));   
+        $date = $this->modx->fbuch->date_round($date);
+        $date_end = $this->modx->fbuch->date_round($date_end);
+   
+        date_add($date_end,date_interval_create_from_date_string("90 minutes"));
+
+        $this->object->set('date',date_format($date,'Y-m-d 00:00:00'));
+        $this->object->set('start_time',date_format($date,'H:i'));
+        $this->object->set('date_end',date_format($date_end,'Y-m-d 00:00:00'));
+        $this->object->set('end_time',date_format($date_end,'H:i'));       
+        $objectArray = $this->object->toArray();
+                
+        return $this->success('',$objectArray);    
+    }    
     
     public function afterPut(array &$objectArray) {
         //remove old, unused name(s)
@@ -75,10 +146,59 @@ class MyControllerFahrten extends BaseController {
             $this->object->set('km',(float) $properties['km']);
         }                
     }
+
+    public function saveNames(){
+
+        $names = $this->getProperty('names',[]);
+        $existing = [];
+        if (is_array($names) & count($names) > 0) {
+            //first remove all Guests
+            if ($members = $this->object->getMany('Names')) {
+                foreach ($members as $member) {
+                    if ($this->modx->fbuch->isguest($member->get('member_id'))) {
+                        $member->remove();
+                    } else {
+                        $existing[$member->get('member_id')] = $member;
+                    }
+                }
+            }
+
+            foreach ($names as $name) {
+                $member_id = $this->modx->getOption('value',$name,0);
+                if (!$this->modx->fbuch->isguest($member_id) && $fahrtnam = $this->modx->getObject('fbuchFahrtNames', array('fahrt_id' => $this->object->get('id'), 'member_id' => $member_id))) {
+                    //name exists allready in fahrt, do nothing
+                } else {
+                    if (!empty($member_id) && $fahrtnam = $this->modx->newObject('fbuchFahrtNames')) {
+                        $fahrtnam->set('member_id', $member_id);
+                        $fahrtnam->set('fahrt_id', $this->object->get('id'));
+                        $fahrtnam->save();
+                    }
+                }
+                unset($existing[$member_id]);
+            }
+            foreach ($existing as $member){
+                $member->remove();
+            }
+        }
+
+        if ($grid_id == 'Ergofahrten' && !empty($values['member_id'])) {
+            if ($fahrtnam = $modx->getObject('fbuchFahrtNames', array('fahrt_id' => $object->get('id')))) {
+                $fahrtnam->set('member_id', $values['member_id']);
+            } else {
+                $fahrtnam = $modx->newObject('fbuchFahrtNames');
+                $fahrtnam->set('member_id', $values['member_id']);
+                if (!empty($values['datenames_id'])) {
+                    $fahrtnam->set('datenames_id', $values['datenames_id']);
+                }
+                $fahrtnam->set('fahrt_id', $object->get('id'));
+            }
+            $fahrtnam->save();
+        }
+    }
     
     public function afterSave($fields){
-
-        $this->modx->log(modX::LOG_LEVEL_ERROR, 'afterSave');
+        $this->saveNames($fields);
+        return;
 
         $kmstand_start = $this->getProperty('kmstand_start');
         $kmstand_end = $this->getProperty('kmstand_end');
@@ -252,8 +372,9 @@ class MyControllerFahrten extends BaseController {
         if (count($names) == 1){
             $name_array = $names[0];
             foreach ($name_array as $field => $value){
-                if (substr($field,0,7)=='Member_');
-                $object->set($field,$value);
+                if (substr($field,0,7)=='Member_'){
+                    $object->set($field,$value);
+                }
             }
             $object->set('Member_fullname',$object->get('Member_firstname') . ' ' . $object->get('Member_name'));                            
         }
