@@ -18,7 +18,6 @@
                     <template v-if="entry.average_error">
                         Fehlende Altersangaben: {{entry.average_error.missingValues}}
                     </template>
-
                 </div>
             </div>
             <div class="col-auto">
@@ -26,7 +25,7 @@
                     <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
                         <q-list dense bordered separator>
 
-                            <q-item @click="pullMembers" clickable v-ripple>
+                            <q-item v-if="section != 'finished'" @click="pullMembers" clickable v-ripple>
                                 <q-item-section avatar><q-avatar icon="group_add" /></q-item-section>
                                 <q-item-section>
                                     <q-item-label>Einfügen</q-item-label>
@@ -40,7 +39,7 @@
                                     <q-item-label caption>Bearbeiten und Personen hinzufügen</q-item-label>
                                 </q-item-section>
                             </q-item>
-                            <q-item @click="confirmDelete" clickable v-ripple>
+                            <q-item v-if="section != 'finished'" @click="confirmDelete" clickable v-ripple>
                                 <q-item-section avatar><q-avatar text-color="red" icon="delete" /></q-item-section>
                                 <q-item-section>Eintrag löschen</q-item-section>
                             </q-item>
@@ -62,7 +61,7 @@
         <q-list separator>
             <template v-for="name in entry.names">
                 <q-item tag="label" class="q-px-sm" v-ripple>
-                    <q-item-section side top class="q-pa-none">
+                    <q-item-section v-if="section != 'finished'" side top class="q-pa-none">
                         <q-checkbox v-model="name.selected" />
                     </q-item-section>
                     <q-item-section side>
@@ -93,7 +92,7 @@
                                 style="width: 18px;" />
                         </q-avatar>
                     </q-item-section>
-                    <q-item-section side top class="q-pa-none" style="padding-left:0;">
+                    <q-item-section v-if="section != 'finished'" side top class="q-pa-none" style="padding-left:0;">
                         <q-btn color="primary" text-color="white" round icon="more_vert">
                             <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
                                 <q-list dense bordered separator>

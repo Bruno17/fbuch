@@ -6,7 +6,8 @@ export default {
     view: '',
     entry: {},
     moveMembers: Function,
-    loadAll: Function
+    loadAll: Function,
+    section: ''
   },
 
   setup(props) {

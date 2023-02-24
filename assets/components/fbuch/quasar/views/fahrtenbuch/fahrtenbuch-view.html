@@ -15,7 +15,7 @@
         <q-card bordered class="full-width">
             <q-card-section class="q-pa-sm">
                 <div class="text-h6">Teilnehmergruppen (Termine)</div>
-            
+
             </q-card-section>
             <q-separator></q-separator>
             <q-card-section class="q-pa-sm q-gutter-y-sm">
@@ -35,7 +35,7 @@
                     <q-btn color="primary" text-color="white" round icon="more_vert">
                         <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
                             <q-list dense bordered separator>
-    
+
                                 <q-item href="/fahrtenbuch/fahrtenbuch.html/#/entry-create" clickable v-ripple>
                                     <q-item-section avatar><q-avatar icon="add" /></q-item-section>
                                     <q-item-section>
@@ -45,44 +45,38 @@
                             </q-list>
                         </q-menu>
                     </q-btn>
-                </div>                
+                </div>
             </q-card-section>
-            <q-separator></q-separator>  
+            <q-separator></q-separator>
             <q-card-section class="q-pa-sm q-gutter-y-sm">
                 <template v-for="entry in open">
-                    <entry 
-                        :entry="entry"
-                        :moveMembers="moveMembers"
-                        :loadAll="loadAll"
-                    />
+                    <entry :entry="entry" :moveMembers="moveMembers" :loadAll="loadAll" />
                 </template>
-           </q-card-section>          
+            </q-card-section>
         </q-card>
         <q-card v-if="sheduled.length > 0" bordered class="full-width">
             <q-card-section class="q-pa-sm">
                 <div class="text-h6">geplante Einträge</div>
             </q-card-section>
-            <q-separator></q-separator>  
+            <q-separator></q-separator>
             <q-card-section class="q-pa-sm q-gutter-y-sm">
                 <template v-for="entry in sheduled">
-                    <entry 
-                        :entry="entry"
-                        :moveMembers="moveMembers"
-                        :loadAll="loadAll"
-                    />
+                    <entry :entry="entry" :moveMembers="moveMembers" :loadAll="loadAll" />
                 </template>
-            </q-card-section>          
-        </q-card>        
+            </q-card-section>
+        </q-card>
     </div>
     <div class="col-12 col-md-4">
         <q-card bordered class="full-width">
             <q-card-section class="q-pa-sm">
                 <div class="text-h6">abgeschlossene Einträge</div>
-            
             </q-card-section>
-            <q-separator></q-separator>              
-            Finished:<br>
-            {{finished}}<br>
+            <q-separator></q-separator>
+            <q-card-section class="q-pa-sm q-gutter-y-sm">
+                <template v-for="entry in finished">
+                    <entry section="finished" :entry="entry" :moveMembers="moveMembers" :loadAll="loadAll" />
+                </template>
+            </q-card-section>
         </q-card>
     </div>
 </div>

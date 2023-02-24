@@ -251,7 +251,6 @@ class MyControllerFahrten extends BaseController {
         switch ($returntype) {
             case 'open':
                 $sortConfig = ['date'=>'ASC','start_time'=>'ASC'];
-                $finishedwhere['km'] = 0;
                 $finishedwhere['finished'] = 0;
                 $datewhere['date:<='] = strftime('%Y-%m-%d 23:59:59');
                 $datewhere['start_time:<='] = strftime('%H:%M');
@@ -259,7 +258,6 @@ class MyControllerFahrten extends BaseController {
                 break;
             case 'sheduled':
                 $sortConfig = ['date'=>'ASC','start_time'=>'ASC'];
-                $finishedwhere['km'] = 0;
                 $finishedwhere['finished'] = 0;
                 $datewhere['date:>='] = strftime('%Y-%m-%d 00:00:00');
                 $datewhere['start_time:>'] = strftime('%H:%M');
@@ -268,8 +266,7 @@ class MyControllerFahrten extends BaseController {
                 break;                
             case 'finished':
                 $sortConfig = ['date'=>'ASC','start_time'=>'ASC'];
-                $finishedwhere['km:>'] = 0;
-                $finishedwhere['OR:finished:='] = 1;
+                $finishedwhere['finished'] = 1;
                 if (isset($_GET['start_date']) && isset($_GET['end_date'])){
                     $start = $this->getProperty('start_date');
                     $end = $this->getProperty('end_date');
@@ -279,8 +276,7 @@ class MyControllerFahrten extends BaseController {
                 break; 
                 case 'finished_coming':
                     $sortConfig = ['date'=>'ASC','start_time'=>'ASC'];
-                    $finishedwhere['km:>'] = 0;
-                    $finishedwhere['OR:finished:='] = 1;
+                    $finishedwhere['finished'] = 1;
                     if (isset($_GET['start_date']) && isset($_GET['end_date'])){
                         $end = $this->getProperty('end_date');
                         $datewhere['date:>'] = $end;
@@ -288,8 +284,7 @@ class MyControllerFahrten extends BaseController {
                 break; 
                 case 'finished_past':
                     $sortConfig = ['date'=>'DESC','start_time'=>'DESC'];
-                    $finishedwhere['km:>'] = 0;
-                    $finishedwhere['OR:finished:='] = 1;
+                    $finishedwhere['finished'] = 1;
                     if (isset($_GET['start_date']) && isset($_GET['end_date'])){
                         $start = $this->getProperty('start_date');
                         $datewhere['date:<'] = $start;
