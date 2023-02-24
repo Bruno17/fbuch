@@ -65,7 +65,7 @@ class MyControllerFahrten extends BaseController {
                 $row['member_status'] = $this->modx->getOption('Member_member_status',$name,'');
                 $row['label'] = $row['name'] . ' ' . $row['firstname'];
                 $row['cox'] = $this->modx->getOption('cox',$name,0);
-                $row['obmann'] = $this->modx->getOption('cox',$name,0);
+                $row['obmann'] = $this->modx->getOption('obmann',$name,0);
                 $rows[] = $row;
             }
         }
@@ -99,7 +99,7 @@ class MyControllerFahrten extends BaseController {
     
     public function afterPut(array &$objectArray) {
         //remove old, unused name(s)
-        $this->modx->log(modX::LOG_LEVEL_ERROR, 'afterPut');
+        $this->modx->log(modX::LOG_LEVEL_DEBUG, 'afterPut');
         $fields = array();
         $fields['member_id'] = $this->getProperty('Member_id');
         $fields['fahrt_id'] = isset($objectArray['id']) ? $objectArray['id'] : 0;
@@ -116,7 +116,7 @@ class MyControllerFahrten extends BaseController {
     }       
 
     public function beforePost() {
-        $this->modx->log(modX::LOG_LEVEL_ERROR, 'beforePut');
+        $this->modx->log(modX::LOG_LEVEL_DEBUG, 'beforePut');
         if ($this->modx->hasPermission('fbuch_create_fahrten')) {
             $this->setProperty('createdby', $this->modx->user->get('id'));
             $this->setProperty('createdon', strftime('%Y-%m-%d %H:%M:%S')); 
@@ -204,6 +204,8 @@ class MyControllerFahrten extends BaseController {
     
     public function afterSave($fields){
         $this->saveNames($fields);
+        $fahrt_id = $this->modx->getOption('fahrt_id',$fields,0);
+        $this->modx->fbuch->forceObmann($fahrt_id);
         return;
 
         $kmstand_start = $this->getProperty('kmstand_start');

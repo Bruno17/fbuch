@@ -14,7 +14,7 @@ class MyControllerFahrtNames extends BaseController {
         } else {
             throw new Exception('Unauthorized', 401);
         }
-
+        $this->setProperty('fahrt_id',$this->object->get('fahrt_id'));
         return !$this->hasErrors();
     }
 
@@ -40,11 +40,18 @@ class MyControllerFahrtNames extends BaseController {
         return !$this->hasErrors();
     }
 
+    public function afterDelete(array &$objectArray) {
+        $fahrt_id = $this->getProperty('fahrt_id');
+        $this->modx->fbuch->forceObmann($fahrt_id);
+    }
+
     public function post() {
         $properties = $this->getProperties();
         $action = $this->getProperty('processaction');
         $names = $this->getProperty('names');
         $source = $this->getProperty('source');
+        $target = $this->getProperty('target');
+        $target_id = $this->getProperty('target_id');
 
         $beforePost = $this->beforePost();
         if ($beforePost !== true && $beforePost !== null) {
@@ -64,6 +71,16 @@ class MyControllerFahrtNames extends BaseController {
                             $this->modx->fbuch->handleDragDrop();                            
                         }                        
                     }
+                    if ($target == 'fahrten'){
+                        $this->modx->fbuch->forceObmann($target_id);    
+                    }
+                    if ($source == 'fahrten'){
+                        if (is_array($names[0])){
+                            $fahrt_id = $this->modx->getOption('fahrt_id',$names[0],0);
+                            $this->modx->fbuch->forceObmann($fahrt_id);      
+                        }
+  
+                    }                    
                 }
                 break;
                 case 'setObmann':

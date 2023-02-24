@@ -1859,6 +1859,8 @@ class Fbuch {
                                 if ($object = $modx->getObject($classname, $fahrtnames_id)) {
                                     $object->set('fahrt_id', $target_id);
                                     $object->set('pos', $pos);
+                                    $object->set('cox',0);
+                                    $object->set('obmann',0);
                                     $object->save();
                                 }
                             }
@@ -1927,6 +1929,18 @@ class Fbuch {
                 break;
         }
 
+    }
+
+    public function forceObmann($fahrt_id){
+        $classname = 'fbuchFahrtNames';
+        if ($object = $this->modx->getObject($classname,['fahrt_id'=>$fahrt_id,'obmann'=>1])){
+            
+        } else {
+            if ($object = $this->modx->getObject($classname,['fahrt_id'=>$fahrt_id])){
+                $object->set('obmann',1);
+                $object->save();
+            }
+        }
     }
 
     public function setObmann($fields){
