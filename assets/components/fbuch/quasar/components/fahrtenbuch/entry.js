@@ -39,10 +39,27 @@ export default {
       }
     }
 
+    function deleteEntry(entry) {
+      console.log(entry);
+      const id = entry.id || false;
+      const ajaxUrl = modx_options.rest_url + 'Fahrten/' + id;
+      let properties = {};
+      properties['processaction'] = 'setDeleted';
+      properties['deleted'] = 1;
+      if (id) {
+        axios.put(ajaxUrl,properties)
+          .then(function (response) {
+            props.loadAll();
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    }    
+
     function setObmann(properties) {
       const id = properties.id || false;
       const ajaxUrl = modx_options.rest_url + 'Fahrtnames/' + id;
-      console.log(properties);
       properties['processaction'] = 'setObmann';
       if (id) {
         axios.post(ajaxUrl,properties)
@@ -69,7 +86,26 @@ export default {
             console.log(error);
           });
       }
-    }    
+    }   
+    
+    function confirmDeleteEntry(entry){
+      console.log(entry);
+      $q.dialog({
+        title: 'Eintrag entfernen',
+        message: 'Soll der Eintrag mit dem Namen <strong>' + entry.Boot_name + '</strong> wirklich gelöscht werden? Trage zur Bestätigung den Namen des Eintrags ein!',
+        html: true,
+        prompt: {
+          model: '',
+          isValid: val => val == entry.Boot_name, // << here is the magic
+          type: 'text' // optional
+        },             
+        ok: { label: 'Entfernen' },
+        cancel: true,
+        persistent: true
+      }).onOk(() => {
+        deleteEntry(entry);
+      })      
+    }
 
     function confirmRemoveName(name) {
       $q.dialog({
@@ -89,6 +125,7 @@ export default {
       setCox,
       setObmann,
       confirmRemoveName,
+      confirmDeleteEntry,
       useHasPermission,
       pullMembers
     }

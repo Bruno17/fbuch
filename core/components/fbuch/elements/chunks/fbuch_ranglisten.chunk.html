@@ -23,6 +23,7 @@
             [[!migxLoopCollection? 
                 &packageName=`fbuch`
                 &classname=`fbuchFahrt`
+                &where=`{"deleted":"0"}`
                 &groupby = `year(date)`
                 &tpl=`fbuchYearOption`
                 &sortConfig=`[{"sortby":"date","sortdir":"DESC"}]`
@@ -61,13 +62,14 @@
     <table class="table table-striped">
         [[!fbuchQuery? 
             &query=`
-                select f4.finished as finished, n3.name as Nachname,n3.firstname as Vorname,sum(f4.km) as km,count(n3.name) as Fahrten 
+                select n3.name as Nachname,n3.firstname as Vorname,sum(f4.km) as km,count(n3.name) as Fahrten 
                 [[!hasPermission:is=`yes`:then=`, year(n3.birthdate) as Jahrgang`:else=``? &permission=`fbuch_view_birthdate`]]
                 from modx_fbuch_fahrt_names f8,modx_fbuch_fahrten f4,modx_mv_members n3,modx_fbuch_boote b1
                 left join modx_fbuch_bootsgattungen g on b1.gattung_id=g.id
                 WHERE  f8.fahrt_id=f4.id 
                 AND f8.member_id=n3.id 
                 AND b1.id=f4.boot_id
+                AND f4.deleted = 0
                 [[!fbuchSwitchByReqParam?
                     &name=`zeitraum`
                     &default=`ganz`
@@ -106,7 +108,7 @@
                         "VHS":"AND n3.member_status = 'VHS'"
                     }`
                 ]]
-                AND finished = 1
+                AND f4.finished = 1
                 AND n3.name != ''
                 group by n3.name,n3.firstname
                 order by km desc

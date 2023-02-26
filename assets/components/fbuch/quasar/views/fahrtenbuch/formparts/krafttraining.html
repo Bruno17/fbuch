@@ -1,4 +1,4 @@
-<template v-if="bootSelection.gattungname == 'Krafttraining'">
+<template v-if="['Krafttraining'].includes(selectionState.gattungname)">
     <q-field class="col-md-4 col-sm-4 col-xs-12" outlined color="dark">
         <q-checkbox
           v-model="entry.finished"

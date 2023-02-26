@@ -1,16 +1,16 @@
 {
-  "id":38,
+  "id":73,
   "name":"fbuch_bootsgattungen",
   "formtabs":[
     {
-      "MIGX_id":56,
-      "caption":"Gattung",
+      "MIGX_id":104,
+      "caption":"Ger\u00e4te-\/Bootskategorien",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":226,
+          "MIGX_id":461,
           "field":"name",
-          "caption":"Bootsgattung",
+          "caption":"Kategorie",
           "description":"",
           "description_is_code":"0",
           "inputTV":"",
@@ -27,19 +27,45 @@
           "pos":1
         },
         {
-          "MIGX_id":471,
+          "MIGX_id":462,
           "field":"shortname",
-          "caption":"shortname",
+          "caption":"Kurzbezeichnung (zb. 4x+)",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
           "pos":2
         },
         {
-          "MIGX_id":472,
+          "MIGX_id":463,
           "field":"longname",
-          "caption":"longname",
+          "caption":"Bezeichnung",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
           "pos":3
         },
         {
-          "MIGX_id":483,
+          "MIGX_id":464,
           "field":"show_in_offen",
           "caption":"In Offene Fahrten anzeigen",
           "description":"",
@@ -58,7 +84,7 @@
           "pos":4
         },
         {
-          "MIGX_id":486,
+          "MIGX_id":465,
           "field":"check_availability",
           "caption":"Verf\u00fcgbarkeit pr\u00fcfen",
           "description":"Pr\u00fcft auf Verf\u00fcgbarkeit beim Eintrag einer Fahrt ins Fahrtenbuch",
@@ -78,6 +104,33 @@
         }
       ],
       "pos":1
+    },
+    {
+      "MIGX_id":153,
+      "caption":"Formular Optionen",
+      "print_before_tabs":"0",
+      "fields":[
+        {
+          "MIGX_id":665,
+          "field":"formoptions.persons",
+          "caption":"Personen",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"listbox",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"Team==team||Einzelperson==single",
+          "default":"team",
+          "useDefaultIfEmpty":1,
+          "pos":1
+        }
+      ],
+      "pos":2
     }
   ],
   "contextmenus":"",
@@ -129,6 +182,20 @@
     "onsubmitsuccess":"",
     "submitparams":""
   },
+  "permissions":{
+    "apiaccess":"",
+    "view":"",
+    "list":"",
+    "save":"",
+    "create":"",
+    "remove":"",
+    "delete":"",
+    "publish":"",
+    "unpublish":"",
+    "viewdeleted":"",
+    "viewunpublished":""
+  },
+  "fieldpermissions":"",
   "columns":[
     {
       "MIGX_id":1,
@@ -179,12 +246,12 @@
   "createdby":1,
   "createdon":"2017-04-08 10:21:35",
   "editedby":1,
-  "editedon":"2021-01-11 21:26:31",
+  "editedon":"2023-02-26 11:47:11",
   "deleted":0,
-  "deletedon":"-1-11-30 00:00:00",
+  "deletedon":null,
   "deletedby":0,
   "published":1,
-  "publishedon":"-1-11-30 00:00:00",
+  "publishedon":null,
   "publishedby":0,
   "category":""
 }

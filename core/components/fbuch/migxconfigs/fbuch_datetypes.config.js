@@ -1,14 +1,14 @@
 {
-  "id":34,
+  "id":80,
   "name":"fbuch_datetypes",
   "formtabs":[
     {
-      "MIGX_id":49,
+      "MIGX_id":110,
       "caption":"Allgemein",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":212,
+          "MIGX_id":475,
           "field":"name",
           "caption":"Name",
           "description":"",
@@ -37,7 +37,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":213,
+          "MIGX_id":476,
           "field":"show_at_rowinglogbook_page",
           "caption":"Terminart auf Rudern und Gruppentraining - Seite anzeigen",
           "description":"",
@@ -66,7 +66,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":214,
+          "MIGX_id":477,
           "field":"element_invite",
           "caption":"Einladung per Element",
           "description":"",
@@ -85,7 +85,7 @@
           "pos":3
         },
         {
-          "MIGX_id":215,
+          "MIGX_id":478,
           "field":"allow_foreign_guests",
           "caption":"fremde G\u00e4ste erlauben ",
           "description":"Erlaubt das Anmelden von Personen, welche nicht in der Fahrtenbuch Namensliste angelegt wurden.",
@@ -102,31 +102,12 @@
           "default":"",
           "useDefaultIfEmpty":"0",
           "pos":4
-        },
-        {
-          "MIGX_id":222,
-          "field":"colorstyle",
-          "caption":"Farbe im Kalender",
-          "description":"",
-          "description_is_code":"0",
-          "inputTV":"",
-          "inputTVtype":"listbox",
-          "validation":"",
-          "configs":"",
-          "restrictive_condition":"",
-          "display":"",
-          "sourceFrom":"config",
-          "sources":"",
-          "inputOptionValues":"Farbe w\u00e4hlen==||red||pink||purple||deep-purple||indigo||blue||light-blue||cyan||teal||green||light-green||lime||ellow||amber||orange||deep-orange||brown||grey||blue-grey",
-          "default":"",
-          "useDefaultIfEmpty":"0",
-          "pos":5
         }
       ],
       "pos":1
     },
     {
-      "MIGX_id":50,
+      "MIGX_id":111,
       "caption":"Extra",
       "print_before_tabs":"0",
       "pos":2,
@@ -134,7 +115,7 @@
       "MIGXtyperender":"<h3>formtab<\/h3>",
       "fields":[
         {
-          "MIGX_id":216,
+          "MIGX_id":479,
           "field":"registrationpage_text",
           "caption":"Spezialtext oder Extraformular auf Zu\/Absagen Seite",
           "description":"",
@@ -163,7 +144,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":217,
+          "MIGX_id":480,
           "field":"registration_hooksnippet",
           "caption":"Spezial Hooksnippet, wird nach zu\/absagen ausgef\u00fchrt",
           "description":"",
@@ -192,7 +173,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":218,
+          "MIGX_id":481,
           "field":"person_tpl_extratext",
           "caption":"Extratext oder Formularfelder pro hinzuzuf\u00fcgender Person",
           "description":"",
@@ -221,7 +202,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":219,
+          "MIGX_id":482,
           "field":"exportrow_hooksnippet",
           "caption":"exportrow_hooksnippet",
           "pos":4,
@@ -237,6 +218,71 @@
           "MIGXlayoutcaption":""
         }
       ]
+    },
+    {
+      "MIGX_id":152,
+      "caption":"Verkn\u00fcpfungen mit Boot\/Ger\u00e4t\/Raum\/Kategorien",
+      "print_before_tabs":"0",
+      "fields":[
+        {
+          "MIGX_id":664,
+          "field":"",
+          "caption":"tab_beschreibung",
+          "description":"f\u00fcr die Erstellung von Eintr\u00e4gen aus Personen in Terminen.<br>\nEs braucht\/soll nur eines der beiden Felder ausgew\u00e4hlt werden.\n",
+          "description_is_code":1,
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":1
+        },
+        {
+          "MIGX_id":662,
+          "field":"linkto_bootsgattung_name",
+          "caption":"Verkn\u00fcpfte Bootskategorie",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"listbox",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"@CHUNK:input_options_gattungname",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":2
+        },
+        {
+          "MIGX_id":663,
+          "field":"linkto_boot_id",
+          "caption":"Verkn\u00fcpfung zu speziellem Boot\/Ger\u00e4t\/Raum",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"listbox",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"@CHUNK:input_options_boot_id",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":3
+        }
+      ],
+      "pos":3
     }
   ],
   "contextmenus":"update||remove",
@@ -347,27 +393,12 @@
       "renderchunktpl":"",
       "renderoptions":"",
       "editor":""
-    },
-    {
-      "MIGX_id":7,
-      "header":"colorstyle",
-      "dataIndex":"colorstyle",
-      "width":10,
-      "sortable":true,
-      "show_in_grid":1,
-      "customrenderer":"",
-      "renderer":"this.renderChunk",
-      "clickaction":"",
-      "selectorconfig":"",
-      "renderchunktpl":"<div style=\"background-color:[[+colorstyle:fbuchGetColor]];width:20px;height:20px;\"><\/div>",
-      "renderoptions":"",
-      "editor":""
     }
   ],
   "createdby":1,
   "createdon":"2020-10-14 09:38:13",
   "editedby":1,
-  "editedon":"2022-06-08 21:04:52",
+  "editedon":"2023-02-25 14:08:43",
   "deleted":0,
   "deletedon":null,
   "deletedby":0,

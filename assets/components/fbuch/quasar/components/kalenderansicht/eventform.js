@@ -59,7 +59,7 @@ export default {
         return {
             day : '/events/day/' + Quasar.date.formatDate(event.date, 'YYYY/MM/DD'),
             kalender : '/' + Quasar.date.formatDate(event.date, 'YYYY/MM'),
-            fahrtenbuch : '/?offset=' + Quasar.date.formatDate(event.date, 'YYYY-MM-DD') + '&type=dragdrop&dir=none'
+            fahrtenbuch : '/fahrtenbuch/fahrtenbuch.html/#/' + Quasar.date.formatDate(event.date, 'YYYY/MM/DD')
           }
       }
 

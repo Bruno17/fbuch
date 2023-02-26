@@ -227,9 +227,12 @@ class MyControllerDates extends modRestController {
         $memberfields = 'name,firstname,member_status';
         $properties = [];
         $properties['classname'] = 'fbuchDateNames';
+        $properties['specialfields'] = 'min(IFNULL(Fahrt.deleted, 0))as Fahrt_deleted';
         $properties['where'] = '{"date_id":"' . $id . '"}';
-        $properties['joins'] = '[{"alias":"Member","selectfields":"' . $memberfields . '"},{"alias":"RegisteredbyMember","selectfields":"' . $memberfields . '"},{"alias":"Fahrtname","selectfields":"id,fahrt_id"},{"alias":"Fahrt","classname":"fbuchFahrt","selectfields":"id","on":"Fahrt.id=Fahrtname.fahrt_id and Fahrt.deleted=0"}]';
-        $properties['sortConfig'] = '[{"sortby":"Fahrtname.fahrt_id"},{"sortby":"registeredby_member"},{"sortby":"createdon"}]';
+        $properties['joins'] = '[{"alias":"Member","selectfields":"' . $memberfields . '"},{"alias":"RegisteredbyMember","selectfields":"' . $memberfields . '"},{"alias":"Fahrtname","selectfields":"id,fahrt_id"},{"alias":"Fahrt","classname":"fbuchFahrt","selectfields":"id","on":"Fahrt.id=Fahrtname.fahrt_id"}]';
+        $properties['sortConfig'] = '[{"sortby":"Fahrt_deleted","sortdir":"DESC"},{"sortby":"Fahrtname.fahrt_id"},{"sortby":"registeredby_member"},{"sortby":"createdon"}]';
+        $properties['groupby'] = 'id';
+        $properties['debug'] = 0;
         $names = [];
 
         $c = $this->modx->migx->prepareQuery($this->modx,$properties);
@@ -241,7 +244,7 @@ class MyControllerDates extends modRestController {
             foreach ($rows as $row){
                 $row['Fahrt_id'] = $row['Fahrtname_fahrt_id'] = $this->modx->getOption('Fahrtname_fahrt_id',$row,'0');
                 $row['new_fahrt_id'] = false;
-                if ($row['Fahrt_id'] != $fahrt_id){
+                if ($row['Fahrt_id'] != $fahrt_id && $row['Fahrt_deleted'] == 0){
                     if ($fahrt_id == 0){
                         $row['new_fahrt_id'] = true;
                         $fahrt_id = $row['Fahrt_id'];

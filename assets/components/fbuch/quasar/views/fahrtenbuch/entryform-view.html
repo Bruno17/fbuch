@@ -3,7 +3,7 @@
     <div class="col-12">
         <q-tabs v-model="tab" align="left" no-caps outside-arrows mobile-arrows class="">
             <q-tab name="general" label="Eintrag" />
-            <q-tab name="persons" label="Personen" />
+            <q-tab v-if="['Ruderboot','Krafttraining'].includes(selectionState.gattungname)"  name="persons" label="Personen" />
         </q-tabs>
     </div>
     <q-form @submit="onSubmit" @reset="onReset" ref="eventform">
@@ -45,14 +45,14 @@
 
                     <div class="col-md-8 col-sm-12 q-col-gutter-md content-start row">
 
-                        <api_select class="col-md-4 col-sm-4 col-xs-12" v-model="bootSelection.gattungname"
+                        <api_select class="col-md-4 col-sm-4 col-xs-12" v-model="selectionState.gattungname"
                             label="Kategorieauswahl" :first_option="{'label':'---','value':'0'}"
                             @update:model-value="onSelectGattung"
                             controller="Boote?limit=100000&returntype=gattungnames">
                         </api_select>
 
                         <api_select ref="bootsgattungSelect" class="col-md-4 col-sm-4 col-xs-12"
-                            v-model="bootSelection.bootsgattung" label="Unterkategorie"
+                            v-model="selectionState.bootsgattung" label="Unterkategorie"
                             :first_option="{'label':'---','value':'0'}" @update:model-value="onSelectBootsgattung"
                             controller="Boote?limit=100000&returntype=bootsgattungen">
                         </api_select>
@@ -78,22 +78,49 @@
 
                 <div class="q-col-gutter-md q-gutter-md q-mb-sm row">
 
-                    <div class="col-md-4 col-sm-12 q-col-gutter-md content-start row">
+                    <div class="col-md-4 col-sm-12 col-xs-12 q-col-gutter-md content-start row">
                         <api_select ref="personSelect" class="col-md-12 col-sm-12 col-xs-12"
-                            v-model="bootSelection.person" @update:model-value="onSelectPerson" :emit-value="false"
+                            v-model="selectionState.person" @update:model-value="onSelectPerson" :emit-value="false"
                             label="Person hinzufügen" controller="Names?limit=100000&returntype=options"></api_select>
-                    </div>
-                    <div class="col-md-4 col-sm-12 q-col-gutter-md content-start row">
+                     
+                        <div class="col-12">    
+                            <q-list bordered class="rounded-borders">
+                                <q-expansion-item
+                                  expand-separator
+                                  icon="perm_identity"
+                                  label="Gäste eintragen"
+                                >
+                                  <q-card>
+                                    <q-card-section>
+                                     Hier können weitere Gäste eingetragen werden.<br>
+                                     Bitte nur verwenden, wenn über obige Suche kein Eintrag gefunden wurde!
+                                    </q-card-section>
+                                    <q-separator/>
+                                    <q-card-section class="q-gutter-y-md">
+                                        <q-input class="col-12" outlined v-model="newguest.name" label="Name" />
+                                        <q-input class="col-12" outlined v-model="newguest.email" label="Email" />
+                                        <q-btn label="Gast eintragen" @click="addGuest" color="primary" />
+                                    </q-card-section>                                    
+                                  </q-card>
+                                </q-expansion-item>
+                              </q-list>
+                        </div>
 
-                        <div class="q-pa-md" class="col-md-12 col-sm-6 col-xs-12">
+                    </div>
+
+                    <div class="col-lg-4 col-md-8 col-sm-12 col-xs-12 q-col-gutter-md content-start row">
+
+                        <div class="" class="col-md-12 col-sm-12 col-xs-12">
                             <q-list bordered separator>
                                 <template v-for="(name,index) in entry.names">
                                     <q-item>
-                                        <q-item-section v-if="name.member_status == 'Mitglied'">{{name.firstname}}
-                                            {{name.firstname}}
+                                        <q-item-section v-if="name.member_status == 'Mitglied'">
+                                            {{name.firstname}} {{name.name}}
                                         </q-item-section>
-                                        <q-item-section v-if="name.member_status != 'Mitglied'">{{name.firstname}}
-                                            {{name.firstname}}<br>({{name.member_status}})
+                                        <q-item-section v-if="name.member_status != 'Mitglied'">
+                                            <template v-if="name.member_status != 'Gasteintrag'">{{name.firstname}} {{name.name}}</template>
+                                            <template v-if="name.member_status == 'Gasteintrag'">{{name.guestname}}</template>
+                                            <br>({{name.member_status}})
                                         </q-item-section>
                                         <q-item-section v-if="name.cox==1" side class="q-pa-none" style="padding-left:0;">
                                             <q-avatar>
@@ -151,7 +178,7 @@
         </q-tab-panels>
         <div class="col-12">
             <q-btn label="Speichern" type="submit" @click="onSubmitClick" color="primary" />
-            <q-btn label="Abbrechen" to="/" class="q-ml-sm" />
+            <q-btn label="Abbrechen" @click="onCancelClick" class="q-ml-sm" />
         </div>
     </q-form>
 </div>

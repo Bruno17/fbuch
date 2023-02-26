@@ -20,6 +20,8 @@ $xpdo_meta_map['fbuchDateType']= array (
     'element_invite' => 0,
     'allow_foreign_guests' => 0,
     'colorstyle' => '',
+    'linkto_bootsgattung_name' => '',
+    'linkto_boot_id' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -100,6 +102,22 @@ $xpdo_meta_map['fbuchDateType']= array (
       'precision' => '100',
       'null' => false,
       'default' => '',
+    ),
+    'linkto_bootsgattung_name' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
+    ),
+    'linkto_boot_id' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
     ),
   ),
 );

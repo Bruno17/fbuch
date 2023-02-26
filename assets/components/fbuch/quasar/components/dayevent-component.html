@@ -104,18 +104,17 @@
                     <template v-for="name in event.names">
                         <q-item v-if="name.new_fahrt_id">
                             In Fahrten übernommen:
-                        </q-item>                        
+                        </q-item>
                         <q-item v-if="name.Fahrt_id < 1 && name.new_registeredby">
                             Anmeldungen von {{name.RegisteredbyMember_firstname}} {{name.RegisteredbyMember_name}}:
                         </q-item>
-                        <q-item tag="label" v-ripple>
-                            <q-item-section v-if="name.Fahrt_id < 1" side top class="q-pa-none">
+                        <q-item tag="label" v-ripple class="q-px-sm">
+                            <q-item-section v-if="name.Fahrt_id < 1 || name.Fahrt_deleted==1" side class="q-pa-none">
                                 <q-checkbox v-model="name.selected" />
                             </q-item-section>
                             <q-item-section side>
                                 {{name.idx}}
                             </q-item-section>
-
                             <q-item-section>
                                 <q-item-label>{{name.createdon_formatted}}</q-item-label>
                                 <q-item-label v-if="name.guestname=='' && name.Member_member_status=='Mitglied' ">
@@ -127,13 +126,35 @@
                                 <q-item-label v-if="name.guestname!==''">
                                     {{name.guestname}} (Gasteintrag)
                                 </q-item-label>
-
+                            </q-item-section>
+                            <q-item-section v-if="view == 'fahrtenbuch' && (name.Fahrt_id < 1 || name.Fahrt_deleted==1)" side top class="q-pa-none"
+                                style="padding-left:0;">
+                                <q-btn color="primary" text-color="white" round icon="more_vert">
+                                    <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
+                                        <q-list dense bordered separator>
+                                            <q-item
+                                                :href="'/fahrtenbuch/fahrtenbuch.html/#/entry-createfromdate/'+name.id"
+                                                clickable v-ripple>
+                                                <q-item-section avatar>
+                                                    <q-avatar icon="done" />
+                                                </q-item-section>
+                                                <q-item-section>
+                                                    <q-item-label>Fahrtenbuch Eintrag erstellen</q-item-label>
+                                                    <q-item-label caption>und km eintragen</q-item-label>
+                                                </q-item-section>
+                                            </q-item>
+                                            <q-item @click="confirmRemoveName(name)" clickable v-ripple>
+                                                <q-item-section avatar><q-avatar text-color="red"
+                                                        icon="person_remove" /></q-item-section>
+                                                <q-item-section>Person entfernen</q-item-section>
+                                            </q-item>
+                                        </q-list>
+                                    </q-menu>
+                                </q-btn>
                             </q-item-section>
                         </q-item>
                     </template>
                 </q-list>
-
-
             </q-card-section>
         </div>
     </q-slide-transition>

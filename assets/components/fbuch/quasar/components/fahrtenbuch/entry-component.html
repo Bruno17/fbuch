@@ -28,8 +28,8 @@
                             <q-item v-if="section != 'finished'" @click="pullMembers" clickable v-ripple>
                                 <q-item-section avatar><q-avatar icon="group_add" /></q-item-section>
                                 <q-item-section>
-                                    <q-item-label>Einfügen</q-item-label>
-                                    <q-item-label caption>Markierte Personen einfügen</q-item-label>
+                                    <q-item-label>Hier einfügen</q-item-label>
+                                    <q-item-label caption>Markierte Personen hier einfügen</q-item-label>
                                 </q-item-section>
                             </q-item>
                             <q-item :href="'/fahrtenbuch/fahrtenbuch.html/#/entry-update/'+entry.id" clickable v-ripple>
@@ -39,7 +39,7 @@
                                     <q-item-label caption>Bearbeiten und Personen hinzufügen</q-item-label>
                                 </q-item-section>
                             </q-item>
-                            <q-item v-if="section != 'finished'" @click="confirmDelete" clickable v-ripple>
+                            <q-item v-if="section != 'finished'" @click="confirmDeleteEntry(entry)" clickable v-ripple>
                                 <q-item-section avatar><q-avatar text-color="red" icon="delete" /></q-item-section>
                                 <q-item-section>Eintrag löschen</q-item-section>
                             </q-item>
@@ -77,7 +77,7 @@
                             ({{name.Member_member_status}}) <template v-if="useHasPermission('fbuch_view_birthdate')"> ({{name.age}})</template>
                         </q-item-label>
                         <q-item-label v-if="name.guestname!==''">
-                            {{name.guestname}} (Gasteintrag)                                             
+                            {{name.guestname}}<br> (Gasteintrag)                                             
                         </q-item-label>
                     </q-item-section>
                     <q-item-section v-if="name.cox==1" side class="q-pa-none" style="padding-left:0;">

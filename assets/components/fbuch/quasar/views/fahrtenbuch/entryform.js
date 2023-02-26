@@ -17,13 +17,15 @@ export default {
   setup(props) {
 
     const { onMounted, ref } = Vue;
-    const params = Vue.$router.currentRoute._value.params;
+    const routeValue = Vue.$router.currentRoute._value;
+    const params = routeValue.params;
     let id = params.id || 'new';
     const entry = ref({});
+    const newguest = ref({});
     const state = ref({});
     const bootSelect = ref();
     const personSelect = ref();
-    const bootSelection = ref({});
+    const selectionState = ref({});
     const bootsgattungSelect = ref();
     const submitclicked = ref(false);
     const tab = ref('general');
@@ -43,14 +45,14 @@ export default {
       bootsgattungSelect.value.loadNames({ 'gattung_name': value });
       bootSelect.value.loadNames({ 'gattung_name': value });
       entry.value.boot_id = 0;
-      bootSelection.value.bootsgattung = 0;
+      selectionState.value.bootsgattung = 0;
     }
 
     function onSelectBoot(value) {
       console.log('onSelectBoot', value);
       entry.value.boot_id = value.value;
-      bootSelection.value.gattungname = value.Bootsgattung_name;
-      bootSelection.value.bootsgattung = value.Bootsgattung_id;
+      selectionState.value.gattungname = value.Bootsgattung_name;
+      selectionState.value.bootsgattung = value.Bootsgattung_id;
       bootsgattungSelect.value.loadNames({ 'gattung_name': value.Bootsgattung_name });
     }
 
@@ -59,13 +61,25 @@ export default {
       entry.value.boot_id = 0;
     }
 
+    function addGuest(){
+      const value = {
+          guestname : newguest.value.name || '',
+          guestemail : newguest.value.email || '',
+          member_status : 'Gasteintrag' 
+      }
+      if (value.name != ''){
+        entry.value.names.push(value);      
+      }
+      newguest.value = {};
+    }
+
     function onSelectPerson(value) {
       if (!entry.value.names) {
         entry.value.names = [];
       }
       const id = value.value;
       const exists = findPerson(id);
-      bootSelection.value.person = 0;
+      selectionState.value.person = 0;
       personSelect.value.clearSelection();
       if (exists) {
         return;
@@ -103,8 +117,14 @@ export default {
     }
 
     function loadEntry() {
-      const data = {};
-      const ajaxUrl = modx_options.rest_url + 'Fahrten/' + id;
+      let data = {};
+      let ajaxUrl = modx_options.rest_url + 'Fahrten/' + id;
+      console.log(routeValue);
+      if (routeValue.name == 'entry_createfromdate'){
+        ajaxUrl = modx_options.rest_url + 'FahrtFromDate/' + id;
+        data.datenames_id = params.datenames_id;    
+      }
+      
       axios.get(ajaxUrl, { params: data })
         .then(function (response) {
           const object = response.data.object;
@@ -117,11 +137,15 @@ export default {
         });
     }
 
+    function onCancelClick(){
+      Vue.$router.push('/' + Quasar.date.formatDate(entry.value.date, 'YYYY/MM/DD'));
+    }
+
     function setUrls() {
       return {
-        day: '/events/day/' + Quasar.date.formatDate(event.date, 'YYYY/MM/DD'),
-        kalender: '/' + Quasar.date.formatDate(event.date, 'YYYY/MM'),
-        fahrtenbuch: '/?offset=' + Quasar.date.formatDate(event.date, 'YYYY-MM-DD') + '&type=dragdrop&dir=none'
+        day: '/events/day/' + Quasar.date.formatDate(entry.date, 'YYYY/MM/DD'),
+        kalender: '/' + Quasar.date.formatDate(entry.date, 'YYYY/MM'),
+        fahrtenbuch: '/fahrtenbuch/fahrtenbuch.html/#/' + Quasar.date.formatDate(entry.date, 'YYYY/MM/DD')
       }
     }
 
@@ -170,18 +194,21 @@ export default {
       entry,
       state,
       tab,
+      newguest,
       onSelectBoot,
       onSelectGattung,
       onSelectBootsgattung,
       onSelectPerson,
       onSubmit,
       onSubmitClick,
+      onCancelClick,
       removePerson,
       setObmann,
       setCox,
+      addGuest,
       bootSelect,
       personSelect,
-      bootSelection,
+      selectionState,
       bootsgattungSelect,
       submitclicked,
     }
