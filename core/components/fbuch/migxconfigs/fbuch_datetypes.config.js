@@ -102,6 +102,25 @@
           "default":"",
           "useDefaultIfEmpty":"0",
           "pos":4
+        },
+        {
+          "MIGX_id":222,
+          "field":"colorstyle",
+          "caption":"Farbe im Kalender",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"listbox",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"Farbe w\u00e4hlen==||red||pink||purple||deep-purple||indigo||blue||light-blue||cyan||teal||green||light-green||lime||ellow||amber||orange||deep-orange||brown||grey||blue-grey",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":5          
         }
       ],
       "pos":1
@@ -393,6 +412,21 @@
       "renderchunktpl":"",
       "renderoptions":"",
       "editor":""
+    },
+    {
+      "MIGX_id":7,
+      "header":"colorstyle",
+      "dataIndex":"colorstyle",
+      "width":10,
+      "sortable":true,
+      "show_in_grid":1,
+      "customrenderer":"",
+      "renderer":"this.renderChunk",
+      "clickaction":"",
+      "selectorconfig":"",
+      "renderchunktpl":"<div style=\"background-color:[[+colorstyle:fbuchGetColor]];width:20px;height:20px;\"><\/div>",
+      "renderoptions":"",
+      "editor":""      
     }
   ],
   "createdby":1,
