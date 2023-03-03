@@ -14,7 +14,10 @@ export default {
       const {onMounted, ref } = Vue;
       const params = Vue.$router.currentRoute._value.params;
       let id = params.id || 'new';
-      const date = params.year + '-' + params.month + '-' +params.day;
+      const year = params.year || Quasar.date.formatDate(new Date(), 'YYYY');
+      const month = params.month || Quasar.date.formatDate(new Date(), 'MM');
+      const day = params.day || Quasar.date.formatDate(new Date(), 'DD');
+      const date = year + '-' + month + '-' +day;
       const event = ref({});
       const recurrence_event = ref({});
       const tab = ref('');

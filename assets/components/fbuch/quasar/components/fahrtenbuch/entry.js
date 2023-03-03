@@ -25,20 +25,6 @@ export default {
       props.moveMembers(properties);
     }
 
-    function removeName(name) {
-      const id = name.id || false;
-      const ajaxUrl = modx_options.rest_url + 'Fahrtnames/' + id;
-      if (id) {
-        axios.delete(ajaxUrl)
-          .then(function (response) {
-            props.loadAll();
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }
-    }
-
     function deleteEntry(entry) {
       console.log(entry);
       const id = entry.id || false;
@@ -117,6 +103,20 @@ export default {
       }).onOk(() => {
         removeName(name);
       })
+    }
+
+    function removeName(name) {
+      const id = name.id || false;
+      const ajaxUrl = modx_options.rest_url + 'Fahrtnames/' + id;
+      if (id) {
+        axios.delete(ajaxUrl)
+          .then(function (response) {
+            props.loadAll();
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
     }
 
     return {

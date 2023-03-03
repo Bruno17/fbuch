@@ -235,6 +235,7 @@ export default {
             sheduled,
             loadedEvents,
             loadAll,
+            loadEventsToday,
             moveMembers,
             getSelectedEventNames,
             onNext,

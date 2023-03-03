@@ -1807,6 +1807,8 @@ class Fbuch {
             case 'dates':
                 if (!empty($datenames_id) && $object = $modx->getObject('fbuchDateNames', $datenames_id)) {
                     $member_id = $object->get('member_id');
+                    $guestname = $object->get('guestname');
+                    $guestemail = $object->get('guestemail');
                     if ($date_o = $object->getOne('Date')) {
                         $source_date = $date_o->get('date');
                     }
@@ -1815,6 +1817,8 @@ class Fbuch {
             case 'fahrten':
                 if (!empty($fahrtnames_id) && $object = $modx->getObject('fbuchFahrtNames', $fahrtnames_id)) {
                     $member_id = $object->get('member_id');
+                    $guestname = $object->get('guestname');
+                    $guestemail = $object->get('guestemail');                    
                     if ($fahrt_o = $object->getOne('Fahrt')) {
                         $source_date = $fahrt_o->get('date');
                         $source_locked = $fahrt_o->get('locked');
@@ -1861,6 +1865,8 @@ class Fbuch {
                                     $object->set('pos', $pos);
                                     $object->set('cox',0);
                                     $object->set('obmann',0);
+                                    $object->set('guestname',$guestname);
+                                    $object->set('guestemail',$guestemail);                                    
                                     $object->save();
                                 }
                             }
@@ -1876,6 +1882,8 @@ class Fbuch {
                                 $object->set('datenames_id', $datenames_id);
                                 $object->set('createdby', $modx->user->get('id'));
                                 $object->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
+                                $object->set('guestname',$guestname);
+                                $object->set('guestemail',$guestemail);                                  
                                 $object->save();
                             }
                             break;

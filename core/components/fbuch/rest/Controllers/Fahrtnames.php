@@ -9,7 +9,7 @@ class MyControllerFahrtNames extends BaseController {
     public $defaultSortDirection = 'ASC';
 
     public function beforeDelete() {
-        if ($this->modx->hasPermission('fbuch_edit_fahrt')) {
+        if ($this->modx->hasPermission('fbuch_edit_fahrten')) {
 
         } else {
             throw new Exception('Unauthorized', 401);
@@ -20,7 +20,7 @@ class MyControllerFahrtNames extends BaseController {
 
     public function beforePut() {
 
-        if ($this->modx->hasPermission('fbuch_edit_fahrt')) {
+        if ($this->modx->hasPermission('fbuch_edit_fahrten')) {
  
         } else {
             throw new Exception('Unauthorized', 401);
@@ -31,8 +31,8 @@ class MyControllerFahrtNames extends BaseController {
 
 
     public function beforePost() {
-        if ($this->modx->hasPermission('fbuch_edit_fahrt')) {
-
+        if ($this->modx->hasPermission('fbuch_edit_fahrten')) {
+           
         } else {
             throw new Exception('Unauthorized', 401);
         }
@@ -103,6 +103,9 @@ class MyControllerFahrtNames extends BaseController {
     }    
 
     public function verifyAuthentication() {
+        if (!$this->modx->hasPermission('fbuch_view_fahrten')){
+            return false;
+        }        
         return true;
     }
     

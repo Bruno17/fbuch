@@ -27,7 +27,12 @@ const routes = [
     path: '/event-create/:year/:month/:day',
     name: 'eventform_create',
     component: eventform
-  }     
+  },
+  {
+    path: '/event-create',
+    name: 'eventform_create_now',
+    component: eventform
+  }       
 ]
 
 export default routes

@@ -11,6 +11,9 @@
                         {{ entry.formattedEndDate }}
                     </template>
                 </div>
+                <div v-if="entry.km > 0" class="text-subtitle2">
+                    {{entry.km}} km
+                </div>                
                 <div v-if="useHasPermission('fbuch_view_birthdate')" class="text-subtitle2">
                     <template v-if="entry.average_age > 0">
                         Altersschnitt: {{entry.average_age}}

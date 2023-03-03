@@ -1,14 +1,14 @@
 import { useHasPermission } from "../composables/helpers.js";
 
 export default {
-
+  emits: ['removeName'],
     props:{
         view:'',
         event:{},
         loadDayEvents:Function
     },
 
-    setup(props) {
+    setup(props,{emit}) {
     
       const {onMounted, ref } = Vue;
       const modx = modx_options;
@@ -61,7 +61,33 @@ export default {
         .catch(function (error) {
             console.log(error);
         }); 
-      }      
+      }
+      
+      function confirmRemoveName(name) {
+        $q.dialog({
+          title: 'Person entfernen',
+          message: 'Soll ' + name.Member_firstname + ' ' + name.Member_name + ' wirklich aus dem Eintrag entfernt werden?',
+          ok: { label: 'Entfernen' },
+          cancel: true,
+          persistent: true
+        }).onOk(() => {
+          removeName(name);
+        })
+      }
+  
+      function removeName(name) {
+        const id = name.id || false;
+        const ajaxUrl = modx_options.rest_url + 'Datenames/' + id;
+        if (id) {
+          axios.delete(ajaxUrl)
+            .then(function (response) {
+              emit('removeName');
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
+      }
 
       return {
         expanded: ref(false),
@@ -69,7 +95,8 @@ export default {
         confirmDelete,
         confirmHide,
         hideEvent,
-        useHasPermission 
+        useHasPermission,
+        confirmRemoveName 
       }
     },
     template: '#dayevent-component'

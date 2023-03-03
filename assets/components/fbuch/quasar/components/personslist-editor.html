@@ -1,0 +1,106 @@
+
+<div class="q-col-gutter-md q-gutter-md q-mb-sm row">
+
+    <div class="col-md-4 col-sm-12 col-xs-12 q-col-gutter-md content-start row">
+        <api_select ref="personSelect" class="col-md-12 col-sm-12 col-xs-12"
+            v-model="selectionState.person" @update:model-value="onSelectPerson" :emit-value="false"
+            label="Person hinzufügen" controller="Names?limit=100000&returntype=options"></api_select>
+     
+        <div class="col-12">    
+            <q-list bordered class="rounded-borders">
+                <q-expansion-item
+                  expand-separator
+                  icon="perm_identity"
+                  label="Weitere Gäste eintragen"
+                >
+                  <q-card>
+                    <q-card-section>
+                     Hier können weitere Gäste eingetragen werden.<br>
+                     Bitte nur verwenden, wenn über obige Suche kein Eintrag gefunden wurde!
+                    </q-card-section>
+                    <q-separator/>
+                    <q-card-section class="q-gutter-y-md">
+                        <q-input class="col-12" outlined v-model="newguest.name" label="Name" />
+                        <q-input class="col-12" outlined v-model="newguest.email" label="Email" />
+                        <q-btn label="Gast eintragen" @click="addGuest" color="primary" />
+                    </q-card-section>                                    
+                  </q-card>
+                </q-expansion-item>
+              </q-list>
+        </div>
+
+    </div>
+
+    <div class="col-lg-4 col-md-8 col-sm-12 col-xs-12 q-col-gutter-md content-start row">
+
+        <div class="" class="col-md-12 col-sm-12 col-xs-12">
+            <q-list bordered separator>
+                <template v-if="props.entry.names && props.entry.names.length == 0">
+                    <q-item>
+                        <q-item-section>
+                            Keine Person eingetragen
+                        </q-item-section>
+                    </q-item>                 
+                </template>
+                <template v-for="(name,index) in props.entry.names">
+                    <q-item>
+                        <q-item-section v-if="name.member_status == 'Mitglied'">
+                            {{name.firstname}} {{name.name}}
+                        </q-item-section>
+                        <q-item-section v-if="name.member_status != 'Mitglied'">
+                            <template v-if="name.member_status != 'Gasteintrag'">{{name.firstname}} {{name.name}}</template>
+                            <template v-if="name.member_status == 'Gasteintrag'">{{name.guestname}}</template>
+                            <br>({{name.member_status}})
+                        </q-item-section>
+                        <q-item-section v-if="name.cox==1" side class="q-pa-none" style="padding-left:0;">
+                            <q-avatar>
+                                <img src="[[++fbuch.assets_url:default=`assets/components/fbuch/`]]img/noun_78924_cc.svg"
+                                    style="width: 18px;" />
+                            </q-avatar>
+                        </q-item-section >                    
+                        <q-item-section v-if="name.obmann==1" side class="q-pa-none" style="padding-left:0;">
+                            <q-avatar>
+                                <img src="[[++fbuch.assets_url:default=`assets/components/fbuch/`]]img/king-svgrepo-com.svg"
+                                    style="width: 18px;" />
+                            </q-avatar>
+                        </q-item-section>    
+                        <q-item-section side top class="q-pa-none" style="padding-left:0;">
+                            <q-btn color="primary" text-color="white" round icon="more_vert">
+                                <q-menu auto-close anchor="bottom right" self="top right"
+                                    :offset="[0, 5]">
+                                    <q-list dense bordered separator>
+                                        <q-item v-if="!hideoptions.obmann" clickable v-ripple @click="setObmann(index)">
+                                            <q-item-section avatar>
+                                                <q-avatar >
+                                                    <img src="[[++fbuch.assets_url:default=`assets/components/fbuch/`]]img/king-svgrepo-com.svg"
+                                                        style="width: 18px;" />
+                                                </q-avatar>
+                                            </q-item-section>
+                                            <q-item-section>Obmann/-frau</q-item-section>
+                                        </q-item>
+                                        <q-item  v-if="!hideoptions.cox" clickable v-ripple @click="setCox(index)">
+                                            <q-item-section avatar>
+                                                <q-avatar >
+                                                    <img src="[[++fbuch.assets_url:default=`assets/components/fbuch/`]]img/noun_78924_cc.svg"
+                                                        style="width: 18px;" />
+                                                </q-avatar>
+                                            </q-item-section>
+                                            <q-item-section>Steuermann/-frau</q-item-section>
+                                        </q-item>
+                                        <q-item @click="removePerson(index)" clickable v-ripple>
+                                            <q-item-section avatar><q-avatar text-color="red"
+                                                    icon="person_remove" /></q-item-section>
+                                            <q-item-section>Person entfernen</q-item-section>
+                                        </q-item>
+                                    </q-list>
+                                </q-menu>
+                            </q-btn>
+                        </q-item-section>
+
+                    </q-item>
+                </template>
+            </q-list>
+        </div>
+
+    </div>
+</div>

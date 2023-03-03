@@ -16,7 +16,7 @@ export default {
 
   setup(props) {
 
-    const { onMounted, ref } = Vue;
+    const { onMounted, ref, watch } = Vue;
     const routeValue = Vue.$router.currentRoute._value;
     const params = routeValue.params;
     let id = params.id || 'new';
@@ -41,6 +41,10 @@ export default {
       state.value.duration_valid = state.value.duration_valid || true;
     })
 
+    watch(() => entry.value.date, (value) => {
+      selectionState.value.formattedDate = Quasar.date.formatDate(entry.value.date, 'DD.MM.YYYY');
+    })
+
     function onSelectGattung(value) {
       bootsgattungSelect.value.loadNames({ 'gattung_name': value });
       bootSelect.value.loadNames({ 'gattung_name': value });
@@ -53,6 +57,7 @@ export default {
       entry.value.boot_id = value.value;
       selectionState.value.gattungname = value.Bootsgattung_name;
       selectionState.value.bootsgattung = value.Bootsgattung_id;
+      selectionState.value.bootname = value.name;
       bootsgattungSelect.value.loadNames({ 'gattung_name': value.Bootsgattung_name });
     }
 
@@ -119,7 +124,6 @@ export default {
     function loadEntry() {
       let data = {};
       let ajaxUrl = modx_options.rest_url + 'Fahrten/' + id;
-      console.log(routeValue);
       if (routeValue.name == 'entry_createfromdate'){
         ajaxUrl = modx_options.rest_url + 'FahrtFromDate/' + id;
         data.datenames_id = params.datenames_id;    

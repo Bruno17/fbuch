@@ -1,6 +1,6 @@
 <?php
-
-class MyControllerDates extends modRestController {
+include 'BaseController.php';
+class MyControllerDates extends BaseController {
     
     public $defaultLimit = 0;
     public $classKey = 'fbuchDate';
@@ -220,12 +220,39 @@ class MyControllerDates extends modRestController {
 
     public function afterRead(array &$objectArray) {
         $objectArray['protected_fields'] = is_array($objectArray['protected_fields']) ? $objectArray['protected_fields'] : [];
+        $names = $this->addNames($this->object);
+        $rows = [];
+        if (is_array($names)){ 
+            foreach ($names as $name){
+                $row = [];
+                $row['id'] = $this->modx->getOption('member_id',$name,'');
+                $row['value'] = $this->modx->getOption('member_id',$name,'');
+                $row['firstname'] = $this->modx->getOption('Member_firstname',$name,'');
+                $row['name'] = $this->modx->getOption('Member_name',$name,'');
+                $row['member_status'] = $this->modx->getOption('Member_member_status',$name,'');
+                $row['label'] = $row['name'] . ' ' . $row['firstname'];
+                $row['cox'] = $this->modx->getOption('cox',$name,0);
+                $row['obmann'] = $this->modx->getOption('obmann',$name,0);
+                $row['guestname'] = $this->modx->getOption('guestname',$name,0);
+                $row['guestemail'] = $this->modx->getOption('guestemail',$name,0);
+                $row['member_status'] = !empty($row['guestname']) ? 'Gasteintrag' : $row['member_status'];
+                $rows[] = $row;
+                if ($row['obmann'] == '1') {
+                    $objectArray['member_id'] = (int) $row['id'];
+                }
+            }
+        }
+        $objectArray['names'] = $rows;         
         return !$this->hasErrors();
     } 
     
-    public function addNames($id){
-        $memberfields = 'name,firstname,member_status';
+    public function addNames($object){
+        $returntype = $this->getProperty('returntype');
+    
+        $id = $object->get('id');
+        $names = [];
         $properties = [];
+        $memberfields = 'name,firstname,member_status'; 
         $properties['classname'] = 'fbuchDateNames';
         $properties['specialfields'] = 'min(IFNULL(Fahrt.deleted, 0))as Fahrt_deleted';
         $properties['where'] = '{"date_id":"' . $id . '"}';
@@ -233,7 +260,16 @@ class MyControllerDates extends modRestController {
         $properties['sortConfig'] = '[{"sortby":"Fahrt_deleted","sortdir":"DESC"},{"sortby":"Fahrtname.fahrt_id"},{"sortby":"registeredby_member"},{"sortby":"createdon"}]';
         $properties['groupby'] = 'id';
         $properties['debug'] = 0;
-        $names = [];
+        switch ($returntype) {
+            case 'selfregistered_names':    
+                $member = $this->getCurrentFbuchUser();
+                if (!$member_id = $member->get('id')){
+                    $member_id = 99999999999; 
+                }                
+                
+                $properties['where'] = '{"registeredby_member":"' . $member_id . '","date_id":"' . $id . '"}';
+                break;
+        }              
 
         $c = $this->modx->migx->prepareQuery($this->modx,$properties);
         $rows = $this->modx->migx->getCollection($c);
@@ -274,7 +310,7 @@ class MyControllerDates extends modRestController {
     protected function prepareListObject(xPDOObject $object) {
         $date = $object->toArray();
         $date['Type_colorstyle'] = (string) $date['Type_colorstyle'] == '' ? 'grey' : $date['Type_colorstyle'];
-        $names = $this->addNames($object->get('id'));
+        $names = $this->addNames($object);
         $date['names'] = $names;
         $date['counted_names'] = count($names);
         return $date;

@@ -1,4 +1,6 @@
-<div class="q-pa-md q-gutter-sm row">
+<div class="q-pl-md">
+[[$$fbuchPegelWrapper]]
+<div class="q-pa-sm q-gutter-sm row">
     <q-btn outline label="< Früher" @click="onPrev"></q-btn>
     <q-btn outline label="Heute" @click="onToday"></q-btn>
     <q-btn outline label="Später >" @click="onNext"></q-btn>
@@ -13,14 +15,28 @@
 
     <div class="col-12 col-md-4">
         <q-card bordered class="full-width">
-            <q-card-section class="q-pa-sm">
-                <div class="text-h6">Teilnehmergruppen (Termine)</div>
+            <q-card-section class="q-pa-sm row">
+                <div class="col text-h6">Teilnehmergruppen (Termine)</div>
+                <div class="col-auto">
+                    <q-btn color="primary" text-color="white" round icon="more_vert">
+                        <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
+                            <q-list dense bordered separator>
 
+                                <q-item href="/termine/kalenderansicht.html/#/event-create" clickable v-ripple>
+                                    <q-item-section avatar><q-avatar icon="add" /></q-item-section>
+                                    <q-item-section>
+                                        <q-item-label>Neuen Termin erstellen</q-item-label>
+                                    </q-item-section>
+                                </q-item>
+                            </q-list>
+                        </q-menu>
+                    </q-btn>
+                </div>                
             </q-card-section>
             <q-separator></q-separator>
             <q-card-section class="q-pa-sm q-gutter-y-sm">
                 <template v-for="event in loadedEvents">
-                    <dayevent :event="event" :loadDayEvents="reloadEvents" view="fahrtenbuch"></dayevent>
+                    <dayevent :event="event" @removeName="loadEventsToday" view="fahrtenbuch"></dayevent>
                 </template>
             </q-card-section>
 
@@ -79,4 +95,5 @@
             </q-card-section>
         </q-card>
     </div>
+</div>
 </div>
