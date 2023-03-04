@@ -13,7 +13,7 @@
                 </div>
                 <div v-if="entry.km > 0" class="text-subtitle2">
                     {{entry.km}} km
-                </div>                
+                </div>
                 <div v-if="useHasPermission('fbuch_view_birthdate')" class="text-subtitle2">
                     <template v-if="entry.average_age > 0">
                         Altersschnitt: {{entry.average_age}}
@@ -54,11 +54,20 @@
         </div>
     </q-card-section>
 
-    <q-separator></q-separator>
+    <template v-if="entry.destination != ''">
+        <q-separator></q-separator>
+        <q-card-section>
+            {{ entry.destination }}
+        </q-card-section>
+    </template>
 
-    <q-card-section>
-        <pre style="white-space: pre-wrap; word-wrap: break-word;font-family: inherit;">{{ entry.note }}</pre>
-    </q-card-section>
+    <template v-if="entry.note != ''">
+        <q-separator></q-separator>
+        <q-card-section>
+            <pre style="white-space: pre-wrap; word-wrap: break-word;font-family: inherit;">{{ entry.note }}</pre>
+        </q-card-section>
+    </template>
+
     <q-separator></q-separator>
     <q-card-section class="q-pa-none">
         <q-list separator>
@@ -72,15 +81,16 @@
                     </q-item-section>
                     <q-item-section>
                         <q-item-label v-if="name.guestname=='' && name.Member_member_status=='Mitglied' ">
-                            {{name.Member_firstname}} {{name.Member_name}} 
+                            {{name.Member_firstname}} {{name.Member_name}}
                             <template v-if="useHasPermission('fbuch_view_birthdate')"><br>({{name.age}})</template>
                         </q-item-label>
                         <q-item-label v-if="name.guestname=='' && name.Member_member_status!=='Mitglied' ">
                             {{name.Member_firstname}} {{name.Member_name}} <br>
-                            ({{name.Member_member_status}}) <template v-if="useHasPermission('fbuch_view_birthdate')"> ({{name.age}})</template>
+                            ({{name.Member_member_status}}) <template v-if="useHasPermission('fbuch_view_birthdate')">
+                                ({{name.age}})</template>
                         </q-item-label>
                         <q-item-label v-if="name.guestname!==''">
-                            {{name.guestname}}<br> (Gasteintrag)                                             
+                            {{name.guestname}}<br> (Gasteintrag)
                         </q-item-label>
                     </q-item-section>
                     <q-item-section v-if="name.cox==1" side class="q-pa-none" style="padding-left:0;">
@@ -88,7 +98,7 @@
                             <img src="[[++fbuch.assets_url:default=`assets/components/fbuch/`]]img/noun_78924_cc.svg"
                                 style="width: 18px;" />
                         </q-avatar>
-                    </q-item-section >                    
+                    </q-item-section>
                     <q-item-section v-if="name.obmann==1" side class="q-pa-none" style="padding-left:0;">
                         <q-avatar>
                             <img src="[[++fbuch.assets_url:default=`assets/components/fbuch/`]]img/king-svgrepo-com.svg"
@@ -116,9 +126,8 @@
                                             </q-avatar>
                                         </q-item-section>
                                         <q-item-section>Steuermann/-frau</q-item-section>
-                                    </q-item>                                    
-                                    <q-item
-                                        @click="confirmRemoveName(name)" clickable v-ripple>
+                                    </q-item>
+                                    <q-item @click="confirmRemoveName(name)" clickable v-ripple>
                                         <q-item-section avatar><q-avatar text-color="red"
                                                 icon="person_remove" /></q-item-section>
                                         <q-item-section>Person entfernen</q-item-section>

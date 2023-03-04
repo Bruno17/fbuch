@@ -6,6 +6,7 @@
         <field key="boot_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="date_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="km" dbtype="decimal" precision="8,1" phptype="float" null="false" default="0" index="index" />
+        <field key="destination" dbtype="varchar" phptype="string" precision="190" null="false" default="" />        
         <field key="kmstand_start" dbtype="decimal" precision="8,1" phptype="float" null="false" default="0" index="index" />
         <field key="kmstand_end" dbtype="decimal" precision="8,1" phptype="float" null="false" default="0" index="index" />
         <field key="purpose" dbtype="varchar" phptype="string" precision="50" null="false" default="" />

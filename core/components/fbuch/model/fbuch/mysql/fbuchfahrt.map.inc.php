@@ -15,6 +15,7 @@ $xpdo_meta_map['fbuchFahrt']= array (
     'boot_id' => 0,
     'date_id' => 0,
     'km' => 0.0,
+    'destination' => '',
     'kmstand_start' => 0.0,
     'kmstand_end' => 0.0,
     'purpose' => '',
@@ -76,6 +77,14 @@ $xpdo_meta_map['fbuchFahrt']= array (
       'null' => false,
       'default' => 0.0,
       'index' => 'index',
+    ),
+    'destination' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '190',
+      'null' => false,
+      'default' => '',
     ),
     'kmstand_start' => 
     array (
