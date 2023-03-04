@@ -85,14 +85,14 @@ class MyControllerFahrtNames extends BaseController {
                 break;
                 case 'setObmann':
                     $fields = [];
-                    $fields['member_id'] = $this->getProperty('member_id');
                     $fields['fahrt_id'] = $this->getProperty('fahrt_id');
+                    $fields['fahrtnames_id'] = $this->getProperty('id');
                     $this->modx->fbuch->setObmann($fields);
                     break;
                 case 'setCox':
                     $fields = [];
-                    $fields['member_id'] = $this->getProperty('member_id');
                     $fields['fahrt_id'] = $this->getProperty('fahrt_id');
+                    $fields['fahrtnames_id'] = $this->getProperty('id');
                     $this->modx->fbuch->setCox($fields);
                     break;                                     
         }

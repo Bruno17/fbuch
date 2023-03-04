@@ -33,6 +33,11 @@ export default {
         } 
         
         function onUpdateNames(action,value){
+            if (action == 'remove'){
+                removeName(value);
+                return;    
+            }
+
             const member_id = value.id || 0;
             const guestname = value.guestname || '';
             const guestemail = value.guestemail || '';
@@ -64,7 +69,21 @@ export default {
                 console.log(error);
             });             
             
-        }        
+        }
+        
+        function removeName(name) {
+            const id = name.datename_id || false;
+            const ajaxUrl = modx_options.rest_url + 'Datenames/' + id;
+            if (id) {
+              axios.delete(ajaxUrl)
+                .then(function (response) {
+                    loadEvent();
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+            }
+          }
 
 
         return {

@@ -180,11 +180,24 @@ class MyControllerFahrten extends BaseController {
         $existing = [];
         if ($members = $this->object->getMany('Names')) {
             foreach ($members as $member) {
-                $existing[$member->get('member_id')] = $member;
+                $member_id = $member->get('member_id');
+                if (!empty($member_id)){
+                    $existing[$member_id] = $member;    
+                }
             }
         }
         return $existing;               
     }
+    public function getExistingGuests() {
+        $existing = [];
+        if ($members = $this->object->getMany('Names')) {
+            foreach ($members as $member) {
+                $guestname = $member->get('guestname');
+                $existing[$guestname] = $member;
+            }
+        }
+        return $existing;               
+    }    
 
     public function getBootsgattung($boot_id){
         if ($boot = $this->modx->getObject('fbuchBoot',$boot_id)){
@@ -212,25 +225,21 @@ class MyControllerFahrten extends BaseController {
 
         $names = $this->getProperty('names',[]);
         $existing = $this->getExistingNames();
+        $existingguests = $this->getExistingGuests();
         
         if (is_array($names) & count($names) > 0) {
-            //first remove all Guests ???
-            if ($members = $this->object->getMany('Names')) {
-                foreach ($members as $member) {
-                    if ($this->modx->fbuch->isguest($member->get('member_id'))) {
-                        $member->remove();
-                        unset($existing[$member->get('member_id')]);
-                    }
-                }
-            }
 
             foreach ($names as $name) {
                 $member_id = $this->modx->getOption('value',$name,0);
                 $guestname = $this->modx->getOption('guestname',$name,0);
-                if (!$this->modx->fbuch->isguest($member_id) && $fahrtnam = $this->modx->getObject('fbuchFahrtNames', array('fahrt_id' => $this->object->get('id'), 'member_id' => $member_id))) {
+                if ($member_id != 0 && $fahrtnam = $this->modx->getObject('fbuchFahrtNames', array('fahrt_id' => $this->object->get('id'), 'member_id' => $member_id))) {
                         $fahrtnam->set('cox', $this->modx->getOption('cox',$name,0));
                         $fahrtnam->set('obmann', $this->modx->getOption('obmann',$name,0));
                         $fahrtnam->save();
+                } elseif ($member_id == 0 && $guestname != '' && $fahrtnam = $this->modx->getObject('fbuchFahrtNames', array('fahrt_id' => $this->object->get('id'), 'guestname' => $guestname))) {
+                    $fahrtnam->set('cox', $this->modx->getOption('cox',$name,0));
+                    $fahrtnam->set('obmann', $this->modx->getOption('obmann',$name,0));
+                    $fahrtnam->save();
                 } else {
                     if (!empty($member_id) && $fahrtnam = $this->modx->newObject('fbuchFahrtNames')) {
                         $fahrtnam->set('member_id', $member_id);
@@ -249,10 +258,14 @@ class MyControllerFahrten extends BaseController {
                     }                    
                 }
                 unset($existing[$member_id]);
+                unset($existingguests[$guestname]);
             }            
             foreach ($existing as $member){
                 $member->remove();
             }
+            foreach ($existingguests as $member){
+                $member->remove();
+            }            
         }
     }
     

@@ -225,6 +225,7 @@ class MyControllerDates extends BaseController {
         if (is_array($names)){ 
             foreach ($names as $name){
                 $row = [];
+                $row['datename_id'] = $this->modx->getOption('id',$name,'');
                 $row['id'] = $this->modx->getOption('member_id',$name,'');
                 $row['value'] = $this->modx->getOption('member_id',$name,'');
                 $row['firstname'] = $this->modx->getOption('Member_firstname',$name,'');

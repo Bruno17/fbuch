@@ -250,10 +250,11 @@ class Fbuch {
             }
             if (is_array($guestnames)) {
                 $gast_id = 0;
+                /*
                 if ($gast_o = $modx->getObject('mvMember', array('firstname' => '', 'name' => 'Gast'))) {
                     $gast_id = $gast_o->get('id');
                 }
-
+                */
                 foreach ($guestnames as $key => $guestname) {
                     if (!empty($guestname)) {
                         if ($datename_o = $modx->getObject('fbuchDateNames', array('date_id' => $date_id, 'guestname' => $guestname))) {
@@ -1857,9 +1858,11 @@ class Fbuch {
                 if ($target_date == $source_date) {
                     switch ($source) {
                         case 'fahrten':
-                            if (!$this->isguest($member_id) && $object = $modx->getObject($classname, array('fahrt_id' => $target_id, 'member_id' => $member_id))) {
+                            if ($member_id != 0 && $object = $modx->getObject($classname, array('fahrt_id' => $target_id, 'member_id' => $member_id))) {
                                 //name exists allready in fahrt, do nothing
-                            } else {
+                            } elseif ($member_id == 0 && !empty($guestname) && $object = $modx->getObject($classname, array('fahrt_id' => $target_id, 'guestname' => $guestname))) {
+                                //name exists allready in fahrt, do nothing
+                            }else {
                                 if ($object = $modx->getObject($classname, $fahrtnames_id)) {
                                     $object->set('fahrt_id', $target_id);
                                     $object->set('pos', $pos);
@@ -1872,7 +1875,9 @@ class Fbuch {
                             }
                             break;
                         case 'dates':
-                            if (!$this->isguest($member_id) && $object = $modx->getObject($classname, array('fahrt_id' => $target_id, 'member_id' => $member_id))) {
+                            if ($member_id != 0 && $object = $modx->getObject($classname, array('fahrt_id' => $target_id, 'member_id' => $member_id))) {
+                                //name exists allready in fahrt, do nothing
+                            } elseif ($member_id == 0 && !empty($guestname) && $object = $modx->getObject($classname, array('fahrt_id' => $target_id, 'guestname' => $guestname))) {
                                 //name exists allready in fahrt, do nothing
                             } else {
                                 $object = $modx->newObject($classname);
@@ -1954,13 +1959,14 @@ class Fbuch {
     public function setObmann($fields){
         $modx = &$this->modx;
         $classname = 'fbuchFahrtNames';
+        $fahrtnames_id = $this->modx->getOption('fahrtnames_id',$fields,0);
         if ($collection = $modx->getCollection($classname, array('fahrt_id' => $fields['fahrt_id']))) {
             foreach ($collection as $object) {
                 $object->set('obmann', 0);
                 $object->save();
             }
         }
-        if ($object = $modx->getObject($classname, $fields)) {
+        if ($object = $modx->getObject($classname, $fahrtnames_id)) {
             
             $object->set('obmann', '1');
             $object->save();
@@ -1970,7 +1976,8 @@ class Fbuch {
     public function setCox($fields){
         $modx = &$this->modx;
         $classname = 'fbuchFahrtNames';
-        if ($object = $modx->getObject($classname, $fields)) {
+        $fahrtnames_id = $this->modx->getOption('fahrtnames_id',$fields,0);
+        if ($object = $modx->getObject($classname, $fahrtnames_id)) {
             $cox = $object->get('cox');
         }         
         if ($collection = $modx->getCollection($classname, array('fahrt_id' => $fields['fahrt_id']))) {
@@ -1979,7 +1986,7 @@ class Fbuch {
                 $object->save();
             }
         }
-        if ($object = $modx->getObject($classname, $fields)) {
+        if ($object = $modx->getObject($classname, $fahrtnames_id)) {
             $object->set('cox', $cox == 1 ? 0 : 1);
             $object->save();
         }    
