@@ -159,20 +159,54 @@ export default {
                 })
             })            
             return names;
-        }   
-        
-        function unselectEventsNames(){
-            console.log('unselectEventsNames',loadedEvents.value)
+        }
+
+        function onNameCheckbox(name,from){
+            console.log('onNameCheckbox',from,name);
+            let excludeFahrt = 0;
+            let excludeEvent = 0;
+            if (from == 'fahrt'){
+                excludeFahrt = name.fahrt_id;
+            }
+            if (from == 'date'){
+                excludeEvent = name.date_id;
+            }            
+
+            uncheckEventsNames(excludeEvent);
+            uncheckFahrtenNames(excludeFahrt);
+        }
+
+        function uncheckEventsNames(exclude){
+            console.log('uncheckEventsNames',loadedEvents.value)
             for (let i = 0; i < loadedEvents.value.length; i++) {
-                 unselectEventNames(loadedEvents.value[i].names);
+                 if (loadedEvents.value[i].id != exclude){
+                     uncheckNames(loadedEvents.value[i].names);   
+                 }
             }
         } 
-        function unselectEventNames(names){
+        function uncheckFahrtenNames(exclude){
+            console.log('uncheckFahrtenNames',open.value,sheduled.value)
+            for (let i = 0; i < open.value.length; i++) {
+                if (open.value[i].id != exclude){
+                    uncheckNames(open.value[i].names);
+                }                
+                 
+            }
+            for (let i = 0; i < sheduled.value.length; i++) {
+                if (sheduled.value[i].id != exclude){
+                    uncheckNames(sheduled.value[i].names);
+                }                
+                
+           }            
+        }
+        function uncheckNames(names){
             console.log(names);
             for (let i = 0; i < names.length; i++) {
                 names[i].selected = false;
             }
-        }               
+        }
+
+ 
 
         function moveMembers(properties){
             let hasSelected = false;
@@ -240,10 +274,7 @@ export default {
             Vue.$router.push(prepareRoute(newDate));
         }
 
-        function onNameCheckbox(name){
-            console.log('onNameCheckbox',name);
-            unselectEventsNames();
-        }
+
 
         return {
             selectedDate,

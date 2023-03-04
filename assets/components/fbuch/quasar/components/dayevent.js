@@ -1,7 +1,7 @@
 import { useHasPermission } from "../composables/helpers.js";
 
 export default {
-  emits: ['removeName'],
+  emits: ['removeName','nameCheckbox'],
     props:{
         view:'',
         event:{},
@@ -89,6 +89,10 @@ export default {
         }
       }
 
+      function onNameCheckbox(name){
+        emit('nameCheckbox',name,'date');
+      }      
+
       return {
         expanded: ref(false),
         modx, 
@@ -96,7 +100,8 @@ export default {
         confirmHide,
         hideEvent,
         useHasPermission,
-        confirmRemoveName 
+        confirmRemoveName,
+        onNameCheckbox 
       }
     },
     template: '#dayevent-component'

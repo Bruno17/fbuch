@@ -110,7 +110,7 @@
                         </q-item>
                         <q-item tag="label" v-ripple class="q-px-sm">
                             <q-item-section v-if="name.Fahrt_id < 1 || name.Fahrt_deleted==1" side class="q-pa-none">
-                                <q-checkbox v-model="name.selected" />
+                                <q-checkbox @update:model-value="onNameCheckbox(name)" v-model="name.selected" />
                             </q-item-section>
                             <q-item-section side>
                                 {{name.idx}}

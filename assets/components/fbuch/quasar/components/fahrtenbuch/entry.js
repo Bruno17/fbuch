@@ -120,7 +120,7 @@ export default {
     }
 
     function onNameCheckbox(name){
-        emit('nameCheckbox',name);
+        emit('nameCheckbox',name,'fahrt');
     }
 
     return {

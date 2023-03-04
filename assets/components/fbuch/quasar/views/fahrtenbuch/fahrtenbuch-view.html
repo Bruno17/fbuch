@@ -36,7 +36,7 @@
             <q-separator></q-separator>
             <q-card-section class="q-pa-sm q-gutter-y-sm">
                 <template v-for="event in loadedEvents">
-                    <dayevent :event="event" @removeName="loadEventsToday" view="fahrtenbuch"></dayevent>
+                    <dayevent :event="event" @nameCheckbox="onNameCheckbox" @removeName="loadEventsToday" view="fahrtenbuch"></dayevent>
                 </template>
             </q-card-section>
 
