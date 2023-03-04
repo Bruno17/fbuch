@@ -1,5 +1,5 @@
 <div class="q-pa-md full-width" style="height: 400px;">
-    <div class="text-h4 text-center"> {{ selectionState.bootname }} {{ selectionState.formattedDate }} </div>
+    <div class="text-h4 text-center"> {{ boot.name }} {{ selectionState.formattedDate }} </div>
     <div class="col-12">
         <q-tabs v-model="tab" align="left" no-caps outside-arrows mobile-arrows class="">
             <q-tab name="general" label="Eintrag" />
@@ -41,6 +41,23 @@
 
 
                     <div class="col-md-8 col-sm-12 q-col-gutter-md content-start row">
+                        <div v-if="boot.id > 0" class="col-12">
+                        <q-card flat bordered >
+                            <q-card-section v-if="boot.gesperrt == 0" class="bg-primary text-white">
+                                {{ boot.gewichtsklasse }} <br>
+                                Gruppe: <strong>{{ boot.Nutzergruppe_name}}</strong> <br>
+                                {{ boot.Nutzergruppe_description}} <br>
+                              </q-card-section> 
+                              <q-card-section v-if="boot.gesperrt == 0" :style="'background-color:#' + boot.Nutzergruppe_color">
+                                
+                             </q-card-section>                               
+                              <q-card-section v-if="boot.gesperrt == 1" class="bg-negative text-white">
+                                 Das Boot/Gerät ist zur Zeit für die Benutzung gesperrt.  
+                              </q-card-section>                                                          
+                           </q-card>                            
+                        </div>
+
+                      
 
                         <api_select class="col-md-4 col-sm-4 col-xs-12" v-model="selectionState.gattungname"
                             label="Kategorieauswahl" :first_option="{'label':'---','value':'0'}"

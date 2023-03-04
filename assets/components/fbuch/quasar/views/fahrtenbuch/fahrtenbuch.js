@@ -159,7 +159,20 @@ export default {
                 })
             })            
             return names;
-        }        
+        }   
+        
+        function unselectEventsNames(){
+            console.log('unselectEventsNames',loadedEvents.value)
+            for (let i = 0; i < loadedEvents.value.length; i++) {
+                 unselectEventNames(loadedEvents.value[i].names);
+            }
+        } 
+        function unselectEventNames(names){
+            console.log(names);
+            for (let i = 0; i < names.length; i++) {
+                names[i].selected = false;
+            }
+        }               
 
         function moveMembers(properties){
             let hasSelected = false;
@@ -227,6 +240,11 @@ export default {
             Vue.$router.push(prepareRoute(newDate));
         }
 
+        function onNameCheckbox(name){
+            console.log('onNameCheckbox',name);
+            unselectEventsNames();
+        }
+
         return {
             selectedDate,
             formattedDate,
@@ -238,6 +256,7 @@ export default {
             loadEventsToday,
             moveMembers,
             getSelectedEventNames,
+            onNameCheckbox,
             onNext,
             onPrev,
             onToday

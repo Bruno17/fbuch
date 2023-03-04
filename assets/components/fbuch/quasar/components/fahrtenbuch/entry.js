@@ -1,7 +1,7 @@
 import { useHasPermission } from "../../composables/helpers.js";
 
 export default {
-
+  emits:['nameCheckbox'],
   props: {
     view: '',
     entry: {},
@@ -10,7 +10,7 @@ export default {
     section: ''
   },
 
-  setup(props) {
+  setup(props,{emit}) {
 
     const { onMounted, ref } = Vue;
     const modx = modx_options;
@@ -119,6 +119,10 @@ export default {
       }
     }
 
+    function onNameCheckbox(name){
+        emit('nameCheckbox',name);
+    }
+
     return {
       expanded: ref(false),
       modx,
@@ -127,7 +131,8 @@ export default {
       confirmRemoveName,
       confirmDeleteEntry,
       useHasPermission,
-      pullMembers
+      pullMembers,
+      onNameCheckbox
     }
   },
   template: '#entry-component'

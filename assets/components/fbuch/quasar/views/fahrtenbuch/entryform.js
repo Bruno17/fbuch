@@ -21,6 +21,7 @@ export default {
     const params = routeValue.params;
     let id = params.id || 'new';
     const entry = ref({});
+    const boot = ref({'id':0});
     const newguest = ref({});
     const state = ref({});
     const bootSelect = ref();
@@ -53,12 +54,12 @@ export default {
     }
 
     function onSelectBoot(value) {
-      console.log('onSelectBoot', value);
       entry.value.boot_id = value.value;
       selectionState.value.gattungname = value.Bootsgattung_name;
       selectionState.value.bootsgattung = value.Bootsgattung_id;
       selectionState.value.bootname = value.name;
       bootsgattungSelect.value.loadNames({ 'gattung_name': value.Bootsgattung_name });
+      loadBoot(entry.value.boot_id);
     }
 
     function onSelectBootsgattung(value) {
@@ -141,6 +142,26 @@ export default {
         });
     }
 
+    function loadBoot(id) {
+      if (id == 0){
+        boot.value = {'id':0};
+        return;  
+      }
+
+      let data = {};
+      let ajaxUrl = modx_options.rest_url + 'Boote/' + id;
+
+      axios.get(ajaxUrl, { params: data })
+        .then(function (response) {
+          const object = response.data.object;
+          boot.value = object;
+          //onSelectBoot({ 'value': object.boot_id, 'Bootsgattung_name': object.Gattung_name, 'Bootsgattung_id': object.Gattung_id });
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }    
+
     function onCancelClick(){
       Vue.$router.push('/' + Quasar.date.formatDate(entry.value.date, 'YYYY/MM/DD'));
     }
@@ -196,6 +217,7 @@ export default {
 
     return {
       entry,
+      boot,
       state,
       tab,
       newguest,

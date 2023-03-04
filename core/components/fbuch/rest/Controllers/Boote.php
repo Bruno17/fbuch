@@ -13,24 +13,18 @@ class MyControllerBoote extends BaseController {
 
     public function beforePut() {
 
-        $userid = $this->modx->user->id;
-        if ($playlist = $this->object->getOne('Playlist')) {
-            if ($playlist->createdby == $userid) {
-                //print_r($playlist->toArray());
-            } else {
-                throw new Exception('Unauthorized', 401);
-            }
-        } else {
-            throw new Exception($this->modx->lexicon('rest.err_obj_nf', array('class_key' => 'trPlaylist', )), 200);
-        }
+        if ($this->modx->hasPermission('fbuch_edit_boot')) {
 
+        } else {
+            throw new Exception('Unauthorized', 401);
+        }
 
         return !$this->hasErrors();
     }
 
     public function beforePost() {
 
-        if ($this->modx->hasPermission('fbuch_create_fahrten')) {
+        if ($this->modx->hasPermission('fbuch_create_boot')) {
 
         } else {
             throw new Exception('Unauthorized', 401);
@@ -46,6 +40,25 @@ class MyControllerBoote extends BaseController {
         }
         return true;
     }
+
+    public function afterRead(array &$objectArray) {
+
+        if ($gattung = $this->object->getOne('Bootsgattung')){
+            $item = $gattung->toArray();
+            foreach ($item as $field => $value){
+                $objectArray['Bootsgattung_' . $field] = $value;
+            }
+        }
+        if ($gruppe = $this->object->getOne('Nutzergruppe')){
+            $item = $gruppe->toArray();
+            foreach ($item as $field => $value){
+                $objectArray['Nutzergruppe_' . $field] = $value;
+            }
+        }        
+
+         
+        return !$this->hasErrors();
+    }     
 
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
 
