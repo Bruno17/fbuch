@@ -429,8 +429,6 @@ var fbuch_check_date_id = function(){
         $('#fahrten').hide();
         $('#member-message').hide();
     } 
-    
-    //console.log(event_id);
 }
 
 
@@ -452,7 +450,6 @@ onChangeAuswertung = function(){
     var zeitraum = $('#zeitraum').val();
     $( "#auswertung" ).load( selfurl + ' #auswertung>*',{"zeitraum":zeitraum,"boot_type":boot_type,"group":group,'year':year}, function(html){
         var select = $(html).find("#zeitraum");
-        console.log(select.html());
         $("#zeitraum").html(select.html());
     } );    
 }

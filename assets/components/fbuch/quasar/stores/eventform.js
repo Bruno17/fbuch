@@ -52,7 +52,6 @@ export const useRecurrenciesStore = Pinia.defineStore('recurrencies',() => {
         axios.get(ajaxUrl,{params:data})
         .then(function (response) {
            prepareEvents(response.data.results);
-           //console.log(monthlyEvents.value);
         })
         .catch(function (error) {
             console.log(error);

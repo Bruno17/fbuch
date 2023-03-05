@@ -34,7 +34,6 @@ export default {
     const tab = ref('general');
 
     onMounted(() => {
-      //console.log('eventform mounted');
       useLoadPermissions();
       loadEntry();
       state.value.days = state.value.days || 0;
@@ -101,7 +100,6 @@ export default {
     }
 
     function setObmann(index) {
-      console.log(index);
       for (let i = 0; i < entry.value.names.length; i++) {
         entry.value.names[i].obmann = (i == index) ? 1 : 0;
       }
@@ -177,7 +175,6 @@ export default {
     }
 
     function onSubmitClick() {
-      //console.log('submitclick',id);
       tab.value = 'general';
       submitclicked.value = true;
     }
@@ -209,7 +206,6 @@ export default {
     }
 
     function onSubmit() {
-      console.log(boot.value);
       if (boot.value.Bootsgattung_check_availability == 1) {
         checkAvailability();
         return;
@@ -268,7 +264,6 @@ export default {
     }
 
     function onReset() {
-      console.log('reset');
       //Vue.$router.go(-1);
     }
 

@@ -58,8 +58,6 @@ export default {
             properties.guestemail = guestemails;
             properties.date_id = id;
             
-            console.log(properties);
-
             const ajaxUrl = modx_options.rest_url + 'Datenames' ;
             axios.post(ajaxUrl,properties)
             .then(function (response) {

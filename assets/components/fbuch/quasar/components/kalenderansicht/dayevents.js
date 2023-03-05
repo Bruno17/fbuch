@@ -71,7 +71,6 @@ export default {
         axios.get(ajaxUrl,{params:data})
         .then(function (response) {
            loadedEvents.value = prepareEvents(response.data.results);
-           //console.log(loadedEvents.value);
         })
         .catch(function (error) {
             console.log(error);

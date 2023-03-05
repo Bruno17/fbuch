@@ -162,7 +162,6 @@ export default {
         }
 
         function onNameCheckbox(name,from){
-            console.log('onNameCheckbox',from,name);
             let excludeFahrt = 0;
             let excludeEvent = 0;
             if (from == 'fahrt'){
@@ -177,7 +176,6 @@ export default {
         }
 
         function uncheckEventsNames(exclude){
-            console.log('uncheckEventsNames',loadedEvents.value)
             for (let i = 0; i < loadedEvents.value.length; i++) {
                  if (loadedEvents.value[i].id != exclude){
                      uncheckNames(loadedEvents.value[i].names);   
@@ -185,7 +183,7 @@ export default {
             }
         } 
         function uncheckFahrtenNames(exclude){
-            console.log('uncheckFahrtenNames',open.value,sheduled.value)
+
             for (let i = 0; i < open.value.length; i++) {
                 if (open.value[i].id != exclude){
                     uncheckNames(open.value[i].names);
@@ -200,7 +198,6 @@ export default {
            }            
         }
         function uncheckNames(names){
-            console.log(names);
             for (let i = 0; i < names.length; i++) {
                 names[i].selected = false;
             }

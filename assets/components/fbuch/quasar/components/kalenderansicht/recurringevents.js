@@ -35,12 +35,6 @@ export default {
         days:[]
       });
      
-      /*
-      watch(store, (newVal) => {
-        console.log('watch',newVal);
-      },{deep:true})
-      */
-
       onMounted(() => {
         useLoadPermissions();
         loadEvents();
@@ -52,7 +46,6 @@ export default {
       }
 
       function getPossibleDates(date){
-          //console.log(date);
           const today = Quasar.date.formatDate(now, 'YYYY/MM/DD');
           return date >= today && !store.recurrencesDates.includes(date);    
       }
@@ -72,7 +65,6 @@ export default {
       } 
       
       function onNavigation(view){
-        //console.log('onNavigation',view);
       }
 
       return {

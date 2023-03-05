@@ -51,7 +51,6 @@ export default {
       }
 
       function getWeekEvents (week, weekdays) {
-          //console.log('getWeekEvents' , week);
           const firstDay = parsed(week[ 0 ].date + ' 00:00')
           const lastDay = parsed(week[ week.length - 1 ].date + ' 23:59')
           const eventsWeek = []

@@ -46,7 +46,6 @@ export default {
       );
 
       onMounted(() => {
-        //console.log('eventform mounted');
         useLoadPermissions();
         state.value.days = state.value.days || 0;
         state.value.hours = state.value.hours || 0;
@@ -68,12 +67,10 @@ export default {
       })
 
     function onSubmitClick(){
-      //console.log('submitclick',id);
       submitclicked.value=true;
     }
 
     function save(){
-        //console.log('submit');
         if (id == 'new'){
           const ajaxUrl = modx_options.rest_url + 'Dates';
           axios.post(ajaxUrl,event)
@@ -86,7 +83,6 @@ export default {
           }); 
         } else {
           const ajaxUrl = modx_options.rest_url + 'Dates/' + id;
-          //console.log(save_which.value);
           if (save_which.value == 'recurrencies') {
             event.recurrencies = recurrencies_store.recurrenceSelections;
           }
@@ -112,7 +108,6 @@ export default {
       
 
     function onSubmit(){
-        //console.log('submit',id);
         save_which.value='this_only';
         if (id=='new'){
           save();
@@ -124,7 +119,6 @@ export default {
     }
 
     function onReset(){
-      console.log('reset');
       //Vue.$router.go(-1);
     }
 

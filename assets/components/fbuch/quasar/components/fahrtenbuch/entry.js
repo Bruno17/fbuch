@@ -26,7 +26,6 @@ export default {
     }
 
     function deleteEntry(entry) {
-      console.log(entry);
       const id = entry.id || false;
       const ajaxUrl = modx_options.rest_url + 'Fahrten/' + id;
       let properties = {};
@@ -61,7 +60,6 @@ export default {
     function setCox(properties) {
       const id = properties.id || false;
       const ajaxUrl = modx_options.rest_url + 'Fahrtnames/' + id;
-      console.log(properties);
       properties['processaction'] = 'setCox';
       if (id) {
         axios.post(ajaxUrl,properties)
@@ -75,7 +73,6 @@ export default {
     }   
     
     function confirmDeleteEntry(entry){
-      console.log(entry);
       $q.dialog({
         title: 'Eintrag entfernen',
         message: 'Soll der Eintrag mit dem Namen <strong>' + entry.Boot_name + '</strong> wirklich gelöscht werden? Trage zur Bestätigung den Namen des Eintrags ein!',

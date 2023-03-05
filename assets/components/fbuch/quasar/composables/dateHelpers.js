@@ -15,23 +15,18 @@ export function useSetDateDiff(props) {
     let starttime = '00:00';
     let endtime = '00:00';
     if (!startfield) {
-        console.log('property startfield not defined, default:date');
         startfield = 'date';
     }
     if (!timestartfield) {
-        console.log('property timestartfield not defined, default:start_time');
         timestartfield = 'start_time';
     }
     if (!endfield) {
-        console.log('property endfield not defined, default:date_end');
         endfield = 'date_end';
     } 
     if (!timeendfield) {
-        console.log('property timeendfield not defined, default:end_time');
         timeendfield = 'end_time';
     }
     if (!event) {
-        console.log('property event not defined');
         event = {};
         event[startfield] = startdate;
         event[endfield] = enddate;
@@ -54,7 +49,6 @@ export function useSetDateDiff(props) {
     props.state.hours = diff.hours;
     props.state.minutes = diff.minutes;
     props.state.minutes_total = diff.minutes_total;
-    //console.log('useSetDateDiff',props,diff);
   }
 
 export function useSetEndDate(props) {
@@ -69,8 +63,4 @@ export function useGetWeekStart(date) {
     const newDate = useNewDateFromDateAndTime(date,'00:00');
     const dayOfWeek = Quasar.date.getDayOfWeek(newDate); 
     return Quasar.date.subtractFromDate(newDate, { days: dayOfWeek-1 });
-    /*
-    weekStartAndEnd.end = Quasar.date.addToDate(newDate, { days: 7-dayOfWeek });
-    console.log(weekStartAndEnd);
-    */
 }  

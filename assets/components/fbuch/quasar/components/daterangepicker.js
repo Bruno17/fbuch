@@ -23,7 +23,6 @@ export default {
       }
 
       function save () {
-        console.log(proxyDate.value);
         if (proxyDate.value.from){        
           //date.value = proxyDate.value;
           props.date[startfield] = proxyDate.value.from;

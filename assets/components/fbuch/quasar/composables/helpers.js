@@ -13,7 +13,6 @@ export function useLoadPermissions(permissions){
     .then(function (response) {
         userPermissions.value = response.data.results;
         loaded.value=true;
-        //console.log(loadedEvents.value);
     })
     .catch(function (error) {
         console.log(error);
