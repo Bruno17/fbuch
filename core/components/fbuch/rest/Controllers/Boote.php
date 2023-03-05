@@ -40,13 +40,6 @@ class MyControllerBoote extends BaseController {
         }
         return true;
     }
-    /*
-    public function checkAvailability(){
-        echo 'availability';
-        return;
-        $this->modx->fbuch->checkBoatAvailability($boot_id, $start, $end, $current_id);    
-    }
-    */
 
     public function afterRead(array &$objectArray) {
         $returntype = $this->getProperty('returntype');
