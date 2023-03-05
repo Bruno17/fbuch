@@ -17,11 +17,13 @@ export default {
   setup(props) {
 
     const { onMounted, ref, watch } = Vue;
+    const { useQuasar } = Quasar;
+    const $q = useQuasar();     
     const routeValue = Vue.$router.currentRoute._value;
     const params = routeValue.params;
     let id = params.id || 'new';
     const entry = ref({});
-    const boot = ref({'id':0});
+    const boot = ref({ 'id': 0 });
     const newguest = ref({});
     const state = ref({});
     const bootSelect = ref();
@@ -67,14 +69,14 @@ export default {
       entry.value.boot_id = 0;
     }
 
-    function addGuest(){
+    function addGuest() {
       const value = {
-          guestname : newguest.value.name || '',
-          guestemail : newguest.value.email || '',
-          member_status : 'Gasteintrag' 
+        guestname: newguest.value.name || '',
+        guestemail: newguest.value.email || '',
+        member_status: 'Gasteintrag'
       }
-      if (value.name != ''){
-        entry.value.names.push(value);      
+      if (value.name != '') {
+        entry.value.names.push(value);
       }
       newguest.value = {};
     }
@@ -110,7 +112,7 @@ export default {
         const iscox = entry.value.names[i].cox == 1 ? 0 : 1;
         entry.value.names[i].cox = (i == index) ? iscox : 0;
       }
-    }    
+    }
 
     function findPerson(id) {
       let result = false;
@@ -125,11 +127,11 @@ export default {
     function loadEntry() {
       let data = {};
       let ajaxUrl = modx_options.rest_url + 'Fahrten/' + id;
-      if (routeValue.name == 'entry_createfromdate'){
+      if (routeValue.name == 'entry_createfromdate') {
         ajaxUrl = modx_options.rest_url + 'FahrtFromDate/' + id;
-        data.datenames_id = params.datenames_id;    
+        data.datenames_id = params.datenames_id;
       }
-      
+
       axios.get(ajaxUrl, { params: data })
         .then(function (response) {
           const object = response.data.object;
@@ -143,9 +145,9 @@ export default {
     }
 
     function loadBoot(id) {
-      if (id == 0){
-        boot.value = {'id':0};
-        return;  
+      if (id == 0) {
+        boot.value = { 'id': 0 };
+        return;
       }
 
       let data = {};
@@ -160,9 +162,9 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
-    }    
+    }
 
-    function onCancelClick(){
+    function onCancelClick() {
       Vue.$router.push('/' + Quasar.date.formatDate(entry.value.date, 'YYYY/MM/DD'));
     }
 
@@ -207,7 +209,62 @@ export default {
     }
 
     function onSubmit() {
+      console.log(boot.value);
+      if (boot.value.Bootsgattung_check_availability == 1) {
+        checkAvailability();
+        return;
+      }
+
       save();
+    }
+
+    function checkAvailability() {
+      const id = boot.value.id;
+      let data = {};
+      data.returntype = 'availability';
+      data.entry = entry.value;
+      let ajaxUrl = modx_options.rest_url + 'Boote/' + id;
+
+      axios.get(ajaxUrl, { params: data })
+        .then(function (response) {
+          const object = response.data.object;
+
+          if (object.available){
+              save();
+          } else {
+            $q.dialog({
+              title: 'Dieses Boot ist bereits belegt',
+              message: 'von ' + object.errorstart + ' <br>bis '  + object.errorend,
+              html:true,
+              options: {
+                type: 'checkbox',
+                model: [],
+                // inline: true
+                items: [
+                  { label: 'Eintrag trotzdem erzwingen. (Nur in dringenden, berechtigten Fällen!)', value: 'forceentry', color: 'secondary' }
+                ]
+              },
+              cancel: true,
+              persistent: true
+            }).onOk(data => {
+              if (data[0] == 'forceentry'){
+                  save(); 
+              }
+            }).onCancel(() => {
+              // console.log('>>>> Cancel')
+            }).onDismiss(() => {
+              // console.log('I am triggered on both OK and Cancel')
+            })
+          }
+
+
+
+          //boot.value = object;
+          //onSelectBoot({ 'value': object.boot_id, 'Bootsgattung_name': object.Gattung_name, 'Bootsgattung_id': object.Gattung_id });
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
 
     function onReset() {

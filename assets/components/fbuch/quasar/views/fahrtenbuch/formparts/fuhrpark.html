@@ -1,0 +1,23 @@
+<template v-if="['Fuhrpark'].includes(selectionState.gattungname)">
+    <api_select class="col-md-4 col-sm-4 col-xs-12" v-model="entry.member_id" :emit-value="true"
+        label="Fahrer auswählen" :first_option="{'label':'---','value':'0'}"
+        controller="Names?limit=100000&returntype=options"
+        :hide-bottom-space="true"
+        :rules="[val => (!submitclicked || val > 0 ) || 'Bitte einen Fahrer auswählen!']"        
+        ></api_select>
+    <q-input @update:model-value="val =>(entry.km = ((entry.kmstand_end-val)>0) ? entry.kmstand_end-val : 0)"
+        class="col-md-4 col-sm-4 col-xs-12" outlined v-model="entry.kmstand_start" label="Start km Stand" type="number"
+        step="1" />
+    <q-input @update:model-value="val =>(entry.km = ((val-entry.kmstand_start)>0) ? val-entry.kmstand_start : 0)"
+        class="col-md-4 col-sm-4 col-xs-12" outlined v-model="entry.kmstand_end" label="Ende km Stand" type="number"
+        step="1" :hide-bottom-space="true"
+        :rules="[val => (!submitclicked || entry.finished == 0 || val > entry.kmstand_start ) || 'km Stand muß am Ende höher als am Start sein!']" />
+    <q-input class="col-md-12 col-sm-12 col-xs-12" outlined autogrow v-model="entry.destination"
+        label="Ziel/Zweck der Fahrt" />
+    <q-input readonly class="col-md-4 col-sm-4 col-xs-12" outlined v-model="entry.km" label="Fahrtstreckenlänge (km)"
+        type="number" step="0.1" />
+    <q-field class="col-md-4 col-sm-4 col-xs-12" outlined color="dark">
+        <q-checkbox v-model="entry.finished" label="Fahrt abgeschlossen" :true-value="1" :false-value="0" />
+    </q-field>
+
+</template>

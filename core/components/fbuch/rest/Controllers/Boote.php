@@ -40,22 +40,65 @@ class MyControllerBoote extends BaseController {
         }
         return true;
     }
+    /*
+    public function checkAvailability(){
+        echo 'availability';
+        return;
+        $this->modx->fbuch->checkBoatAvailability($boot_id, $start, $end, $current_id);    
+    }
+    */
 
     public function afterRead(array &$objectArray) {
+        $returntype = $this->getProperty('returntype');
+ 
 
-        if ($gattung = $this->object->getOne('Bootsgattung')){
-            $item = $gattung->toArray();
-            foreach ($item as $field => $value){
-                $objectArray['Bootsgattung_' . $field] = $value;
-            }
+        switch ($returntype){
+            case 'availability':
+                $boot_id = $this->object->get('id');
+                $entry = $this->getProperty('entry',false);
+                $start = false;
+                $end = false;
+                $objectArray['available'] = true;
+                if ($entry){
+                    $current_id = $this->modx->getOption('id',$entry,'new'); 
+                    $startdate = $this->modx->getOption('date',$entry,false); 
+                    $enddate = $this->modx->getOption('date_end',$entry,false); 
+                    $starttime = $this->modx->getOption('start_time',$entry,false);  
+                    $endtime = $this->modx->getOption('end_time',$entry,false);
+                    if ($startdate && $starttime) {
+                        $start = substr($startdate,0,10) . ' ' . $starttime . ':00';
+                        $start = strtotime($start);
+                    } 
+                    if ($enddate && $endtime) {
+                        $end = substr($enddate,0,10) . ' ' . $endtime . ':00';
+                        $end = strtotime($end);
+                    }
+                    if ($start && $end) {
+                        $success = $this->modx->fbuch->checkBoatAvailability($boot_id, $start, $end, $current_id);
+                        if (!$success){
+                            $objectArray['errorstart'] = $this->modx->fbuch->errorstart;
+                            $objectArray['errorend'] = $this->modx->fbuch->errorend;
+                            $objectArray['available'] = false;
+                        }    
+                    }
+                }
+               
+                break;
+            default:
+                if ($gattung = $this->object->getOne('Bootsgattung')){
+                    $item = $gattung->toArray();
+                    foreach ($item as $field => $value){
+                        $objectArray['Bootsgattung_' . $field] = $value;
+                    }
+                }
+                if ($gruppe = $this->object->getOne('Nutzergruppe')){
+                    $item = $gruppe->toArray();
+                    foreach ($item as $field => $value){
+                        $objectArray['Nutzergruppe_' . $field] = $value;
+                    }
+                }                  
+                break;
         }
-        if ($gruppe = $this->object->getOne('Nutzergruppe')){
-            $item = $gruppe->toArray();
-            foreach ($item as $field => $value){
-                $objectArray['Nutzergruppe_' . $field] = $value;
-            }
-        }        
-
          
         return !$this->hasErrors();
     }     

@@ -1632,7 +1632,7 @@ class Fbuch {
             'boot_id' => $boot_id,
             'id:!=' => $current_id));
         $c->where('UNIX_TIMESTAMP(CONCAT(date(date), " ", start_time)) >= ' . $unixstart);
-        $c->where('UNIX_TIMESTAMP(CONCAT(date(date), " ", start_time)) <= ' . $unixend);
+        $c->where('UNIX_TIMESTAMP(CONCAT(date(date), " ", start_time)) < ' . $unixend);
 
         $c->prepare();
         $this->error = $c->toSql();
@@ -1649,7 +1649,7 @@ class Fbuch {
             'deleted' => 0,
             'boot_id' => $boot_id,
             'id:!=' => $current_id));
-        $c->where('UNIX_TIMESTAMP(CONCAT(date(date_end), " ", end_time)) >= ' . $unixstart);
+        $c->where('UNIX_TIMESTAMP(CONCAT(date(date_end), " ", end_time)) > ' . $unixstart);
         $c->where('UNIX_TIMESTAMP(CONCAT(date(date_end), " ", end_time)) <= ' . $unixend);
 
         $c->prepare();

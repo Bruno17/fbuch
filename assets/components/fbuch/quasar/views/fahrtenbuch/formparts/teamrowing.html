@@ -1,8 +1,8 @@
 <template v-if="['Ergometer','Motorboot','SkiErg'].includes(selectionState.gattungname)">
-    <api_select class="col-md-4 col-sm-4 col-xs-12" v-model="entry.member_id"
-        :emit-value="true" label="Person auswählen"
-        :first_option="{'label':'---','value':'0'}"
-        controller="Names?limit=100000&returntype=options"></api_select>    
+    <api_select class="col-md-4 col-sm-4 col-xs-12" v-model="entry.member_id" :emit-value="true"
+        label="Person auswählen" :first_option="{'label':'---','value':'0'}"
+        controller="Names?limit=100000&returntype=options" :hide-bottom-space="true"
+        :rules="[val => (!submitclicked || val > 0 ) || 'Bitte eine Person auswählen!']"></api_select>
     <q-input @update:model-value="val =>(entry.finished = (val>0) ? 1 : 0)" class="col-md-4 col-sm-4 col-xs-12" outlined
         v-model="entry.km" label="Fahrtstreckenlänge (km)" type="number" step="0.1" />
 </template>
