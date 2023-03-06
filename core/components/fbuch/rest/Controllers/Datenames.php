@@ -56,8 +56,11 @@ class MyControllerDateNames extends BaseController {
 
         switch ($action) {
             case 'add': 
-                $member = $this->getCurrentFbuchUser();
-                if ($member_id = $member->get('id')){
+                $member_id = 0;
+                if ($member = $this->getCurrentFbuchUser()){
+                    $member_id = $member->get('id');    
+                }
+                if ($this->modx->hasPermission('fbuch_edit_fahrten')){
                     $properties['member_id'] = $member_id;
                     $this->modx->fbuch->addPersonsToDate($properties); 
                 } else {

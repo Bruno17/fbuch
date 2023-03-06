@@ -16,7 +16,7 @@ export default {
 
   setup(props) {
 
-    const { onMounted, ref, watch } = Vue;
+    const { onMounted, ref, watch} = Vue;
     const { useQuasar } = Quasar;
     const $q = useQuasar();     
     const routeValue = Vue.$router.currentRoute._value;
@@ -32,6 +32,7 @@ export default {
     const bootsgattungSelect = ref();
     const submitclicked = ref(false);
     const tab = ref('general');
+    const inputs = ref({});
 
     onMounted(() => {
       useLoadPermissions();
@@ -41,6 +42,7 @@ export default {
       state.value.minutes = state.value.minutes || 0;
       state.value.minutes_total = state.value.minutes_total || 0;
       state.value.duration_valid = state.value.duration_valid || true;
+      
     })
 
     watch(() => entry.value.date, (value) => {
@@ -289,6 +291,7 @@ export default {
       selectionState,
       bootsgattungSelect,
       submitclicked,
+      inputs
     }
   },
   template: '#entryform-view'

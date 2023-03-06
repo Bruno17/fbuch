@@ -206,7 +206,7 @@ class Fbuch {
         $code = $modx->getOption('code', $_REQUEST, '');
         $iid = $modx->getOption('iid', $_REQUEST, '');
 
-        if (!empty($member_id) && !empty($date_id)) {
+        if (!empty($date_id)) {
             if ($date_object = $modx->getObject('fbuchDate', $date_id)) {
                 $date = $date_object->get('date');
                 $start_time = $date_object->get('start_time');

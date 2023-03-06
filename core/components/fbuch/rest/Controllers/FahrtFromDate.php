@@ -58,13 +58,13 @@ class MyControllerFahrtFromDate extends MyControllerFahrten {
     }
     
     public function addNames($object){
-        $id = $this->getProperty('datenames_id',0);
+        $datenames_id = $this->getProperty('datenames_id',0);
         //$nutzergruppe_id = (int) $object->get('Nutzergruppe_id');
         $memberfields = 'name,firstname,member_status';
         $memberfields .= $this->modx->hasPermission('fbuch_view_birthday') ? ',birthdate' : '';
         $properties = [];
         $properties['classname'] = 'fbuchDateNames';
-        $properties['where'] = '{"id":"' . $id . '"}';
+        $properties['where'] = '{"id":"' . $datenames_id . '"}';
         $properties['joins'] = '[{"alias":"Member","selectfields":"'. $memberfields .'"}]';
         $properties['debug'] = '0';
         $names = [];
@@ -74,6 +74,7 @@ class MyControllerFahrtFromDate extends MyControllerFahrten {
         if (count($rows)>0){
             $idx = 1;
             foreach ($rows as $row){
+                $row['datenames_id'] = $datenames_id;
                 $row['obmann'] = 1;
                 $row['selected'] = false;
                 $row['idx'] = $idx;

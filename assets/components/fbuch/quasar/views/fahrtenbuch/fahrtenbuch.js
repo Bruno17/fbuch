@@ -82,12 +82,12 @@ export default {
         function prepareEvents(events) {
             const preparedEvents = [];
             events.forEach((event, id) => {
-                event['formattedDate'] = Quasar.date.formatDate(event.date, 'dd DD. MM. YYYY ' + event.start_time + ' - ');
+                event['formattedDate'] = Quasar.date.formatDate(event.date, 'dd DD.MM.YYYY ' + event.start_time + ' - ');
                 if (Quasar.date.isSameDate(event.date, event.date_end, 'days')) {
                     event['formattedDate'] += event.end_time;
                     event['formattedEndDate'] = '';
                 } else {
-                    event['formattedEndDate'] = Quasar.date.formatDate(event.date_end, 'dd DD. MM. YYYY ' + event.end_time);
+                    event['formattedEndDate'] = Quasar.date.formatDate(event.date_end, 'dd DD.MM.YYYY ' + event.end_time);
                 }
                 preparedEvents.push(event);
             })

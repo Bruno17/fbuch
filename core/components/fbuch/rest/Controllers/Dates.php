@@ -225,6 +225,8 @@ class MyControllerDates extends BaseController {
         if (is_array($names)){ 
             foreach ($names as $name){
                 $row = [];
+                $row['can_remove'] = $this->modx->getOption('can_remove',$name,'');
+                $row['hidemenu'] = !$row['can_remove'];
                 $row['datename_id'] = $this->modx->getOption('id',$name,'');
                 $row['id'] = $this->modx->getOption('member_id',$name,'');
                 $row['value'] = $this->modx->getOption('member_id',$name,'');
@@ -263,17 +265,25 @@ class MyControllerDates extends BaseController {
         $properties['debug'] = 0;
         switch ($returntype) {
             case 'selfregistered_names':    
-                $member = $this->getCurrentFbuchUser();
-                if (!$member_id = $member->get('id')){
-                    $member_id = 99999999999; 
+                $member_id = 99999999999; 
+                if ($member = $this->getCurrentFbuchUser()){
+                    $member_id = $member->get('id');
                 }                
-                
                 $properties['where'] = '{"registeredby_member":"' . $member_id . '","date_id":"' . $id . '"}';
+                $c = $this->modx->migx->prepareQuery($this->modx,$properties);
+                $selfrows = $this->modx->migx->getCollection($c);
+                $properties['where'] = '{"registeredby_member:!=":"' . $member_id . '","date_id":"' . $id . '"}';
+                $c = $this->modx->migx->prepareQuery($this->modx,$properties);
+                $otherrows = $this->modx->migx->getCollection($c);
+                $rows = array_merge($selfrows,$otherrows);
+                break;
+            default:
+                $c = $this->modx->migx->prepareQuery($this->modx,$properties);
+                $rows = $this->modx->migx->getCollection($c);
                 break;
         }              
 
-        $c = $this->modx->migx->prepareQuery($this->modx,$properties);
-        $rows = $this->modx->migx->getCollection($c);
+
         if (count($rows)>0){
             $idx = 1;
             $registeredby = '0';
@@ -298,7 +308,7 @@ class MyControllerDates extends BaseController {
                     $date = date_create($row['createdon']);
                     $row['createdon_formatted'] = date_format($date,'d.m.Y H:i');    
                 }
-                
+                $row['can_remove'] = $registeredby == $member_id || $this->modx->hasPermission('fbuch_remove_datenames');
                 $names[] = $row;
                 $idx ++;
             }

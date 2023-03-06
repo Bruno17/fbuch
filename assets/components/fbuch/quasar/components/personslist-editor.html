@@ -65,7 +65,7 @@
                             </q-avatar>
                         </q-item-section>    
                         <q-item-section side top class="q-pa-none" style="padding-left:0;">
-                            <q-btn color="primary" text-color="white" round icon="more_vert">
+                            <q-btn v-if="!name.hidemenu" color="primary" text-color="white" round icon="more_vert">
                                 <q-menu auto-close anchor="bottom right" self="top right"
                                     :offset="[0, 5]">
                                     <q-list dense bordered separator>
@@ -87,7 +87,7 @@
                                             </q-item-section>
                                             <q-item-section>Steuermann/-frau</q-item-section>
                                         </q-item>
-                                        <q-item @click="removePerson(index)" clickable v-ripple>
+                                        <q-item v-if="name.can_remove" @click="removePerson(index)" clickable v-ripple>
                                             <q-item-section avatar><q-avatar text-color="red"
                                                     icon="person_remove" /></q-item-section>
                                             <q-item-section>Person entfernen</q-item-section>

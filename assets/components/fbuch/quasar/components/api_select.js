@@ -45,7 +45,13 @@ export default {
       })
   }     
   
-      return { names_options, filtered_options, filterFn, fieldRef, loadNames, clearSelection}
+      return { 
+        names_options, 
+        filtered_options, 
+        filterFn, 
+        fieldRef, 
+        loadNames, 
+        clearSelection}
     },
     template: `
     <q-select

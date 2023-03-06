@@ -1,9 +1,11 @@
 <div class="q-pa-md full-width" style="height: 400px;">
+    <div class="text-h4 text-center"> {{ entry.title }} {{ formattedDate }} </div>
+
+    <div class="q-py-md">
+        <q-btn label="Zum Fahrtenbuch" :href="urls.fahrtenbuch" color="primary" />
+    </div>    
+
     <personslist :entry="entry" :hideoptions="{'cox':true,'obmann':true}"
     @updateNames="onUpdateNames"
     />
 </div>
-
-
-
-{{entry}}

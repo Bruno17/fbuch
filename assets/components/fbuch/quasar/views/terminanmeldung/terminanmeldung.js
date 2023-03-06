@@ -10,6 +10,8 @@ export default {
 
         const { onMounted, ref,watch } = Vue;
         const entry = ref({});
+        const urls = ref({});
+        const formattedDate = ref('');
         const params = Vue.$router.currentRoute._value.params;
         const id = params.id || 'new';        
 
@@ -26,6 +28,8 @@ export default {
             .then(function (response) {
                 const object = response.data.object;
                 entry.value = object;
+                urls.value.fahrtenbuch = '/fahrtenbuch/fahrtenbuch.html/#/' + Quasar.date.formatDate(entry.value.date, 'YYYY/MM/DD')
+                formattedDate.value = Quasar.date.formatDate(entry.value.date, 'dd DD.MM.YYYY');
             })
             .catch(function (error) {
                 console.log(error);
@@ -86,7 +90,9 @@ export default {
 
         return {
             entry,
-            onUpdateNames
+            onUpdateNames,
+            formattedDate,
+            urls
         }
     },
 

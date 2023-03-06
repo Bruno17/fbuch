@@ -27,14 +27,6 @@
                 <q-btn color="white" text-color="black" round icon="more_vert">
                     <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
                         <q-list dense bordered separator>
-
-                            <q-item v-if="section != 'finished'" @click="pullMembers" clickable v-ripple>
-                                <q-item-section avatar><q-avatar icon="group_add" /></q-item-section>
-                                <q-item-section>
-                                    <q-item-label>Hier einfügen</q-item-label>
-                                    <q-item-label caption>Markierte Personen hier einfügen</q-item-label>
-                                </q-item-section>
-                            </q-item>
                             <q-item :href="'/fahrtenbuch/fahrtenbuch.html/#/entry-update/'+entry.id" clickable v-ripple>
                                 <q-item-section avatar><q-avatar icon="edit" /></q-item-section>
                                 <q-item-section>
@@ -42,6 +34,20 @@
                                     <q-item-label caption>Bearbeiten und Personen hinzufügen</q-item-label>
                                 </q-item-section>
                             </q-item>
+                            <q-item v-if="section != 'finished'" @click="pullMembers" clickable v-ripple>
+                                <q-item-section avatar><q-avatar icon="group_add" /></q-item-section>
+                                <q-item-section>
+                                    <q-item-label>Hier einfügen</q-item-label>
+                                    <q-item-label caption>Markierte Personen hier einfügen</q-item-label>
+                                </q-item-section>
+                            </q-item>
+                            <q-item target="_blank" :href="'/listen/bootsliste/boots-details/?boot_id='+entry.boot_id" clickable v-ripple>
+                                <q-item-section avatar><q-avatar icon="settings" /></q-item-section>
+                                <q-item-section>
+                                    <q-item-label>Zur Bootsseite</q-item-label>
+                                    <q-item-label caption>Schaden melden/Bootseinstellungen eintragen</q-item-label>
+                                </q-item-section>
+                            </q-item>                            
                             <q-item v-if="section != 'finished'" @click="confirmDeleteEntry(entry)" clickable v-ripple>
                                 <q-item-section avatar><q-avatar text-color="red" icon="delete" /></q-item-section>
                                 <q-item-section>Eintrag löschen</q-item-section>
