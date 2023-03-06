@@ -27,14 +27,14 @@
                 <q-btn color="white" text-color="black" round icon="more_vert">
                     <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
                         <q-list dense bordered separator>
-                            <q-item :href="'/fahrtenbuch/fahrtenbuch.html/#/entry-update/'+entry.id" clickable v-ripple>
+                            <q-item v-if="entry.locked==0" :href="'/fahrtenbuch/fahrtenbuch.html/#/entry-update/'+entry.id" clickable v-ripple>
                                 <q-item-section avatar><q-avatar icon="edit" /></q-item-section>
                                 <q-item-section>
                                     <q-item-label>Eintrag bearbeiten</q-item-label>
                                     <q-item-label caption>Bearbeiten und Personen hinzufügen</q-item-label>
                                 </q-item-section>
                             </q-item>
-                            <q-item v-if="section != 'finished'" @click="pullMembers" clickable v-ripple>
+                            <q-item v-if="entry.locked==0 && section != 'finished'" @click="pullMembers" clickable v-ripple>
                                 <q-item-section avatar><q-avatar icon="group_add" /></q-item-section>
                                 <q-item-section>
                                     <q-item-label>Hier einfügen</q-item-label>
@@ -48,10 +48,18 @@
                                     <q-item-label caption>Schaden melden/Bootseinstellungen eintragen</q-item-label>
                                 </q-item-section>
                             </q-item>                            
-                            <q-item v-if="section != 'finished'" @click="confirmDeleteEntry(entry)" clickable v-ripple>
+                            <q-item v-if="entry.locked==0 && section != 'finished'" @click="confirmDeleteEntry(entry)" clickable v-ripple>
                                 <q-item-section avatar><q-avatar text-color="red" icon="delete" /></q-item-section>
                                 <q-item-section>Eintrag löschen</q-item-section>
                             </q-item>
+                            <q-item v-if="entry.locked==0" @click="lockEntry(entry)"  clickable v-ripple>
+                                <q-item-section avatar><q-avatar icon="lock" /></q-item-section>
+                                <q-item-section>Für Bearbeitung sperren</q-item-section>
+                            </q-item> 
+                            <q-item v-if="entry.locked==1" @click="lockEntry(entry)"  clickable v-ripple>
+                                <q-item-section avatar><q-avatar icon="lock-open" /></q-item-section>
+                                <q-item-section>Für Bearbeitung freigeben</q-item-section>
+                            </q-item>                                                       
 
                         </q-list>
                     </q-menu>
@@ -82,7 +90,7 @@
         <q-list separator>
             <template v-for="name in entry.names">
                 <q-item tag="label" class="q-px-sm" v-ripple>
-                    <q-item-section v-if="section != 'finished'" side top class="q-pa-none">
+                    <q-item-section v-if="entry.locked==0 && section != 'finished'" side top class="q-pa-none">
                         <q-checkbox @update:model-value="onNameCheckbox(name)"  v-model="name.selected" />
                     </q-item-section>
                     <q-item-section side>
@@ -114,7 +122,7 @@
                                 style="width: 18px;" />
                         </q-avatar>
                     </q-item-section>
-                    <q-item-section v-if="section != 'finished'" side top class="q-pa-none" style="padding-left:0;">
+                    <q-item-section v-if="entry.locked==0 && section != 'finished'" side top class="q-pa-none" style="padding-left:0;">
                         <q-btn color="primary" text-color="white" round icon="more_vert">
                             <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
                                 <q-list dense bordered separator>

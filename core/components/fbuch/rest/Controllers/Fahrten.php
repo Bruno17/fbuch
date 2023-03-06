@@ -9,13 +9,25 @@ class MyControllerFahrten extends BaseController {
     
     public function beforeDelete() {
         throw new Exception('Unauthorized', 401);
-    }    
+    } 
 
+    public function getProperties(){
+        $this->unsetProperty('locked');
+    }
+    
     public function beforePut() {
 
         if ($this->modx->hasPermission('fbuch_edit_fahrten')) {
-            $this->setProperty('editedby', $this->modx->user->get('id'));
-            $this->setProperty('editedon', strftime('%Y-%m-%d %H:%M:%S')); 
+            $locked = $this->object->get('locked');
+
+            if (!isset($_REQUEST['set_locked']) && $locked != 0){
+                return 'is_locked';
+            } else {
+                $this->object->set('locked',$this->getProperty('set_locked'));
+            }
+
+            $this->object->set('editedby', $this->modx->user->get('id'));
+            $this->object->set('editedon', strftime('%Y-%m-%d %H:%M:%S')); 
             $this->validateProperties();
         } else {
             throw new Exception('Unauthorized', 401);
@@ -125,10 +137,10 @@ class MyControllerFahrten extends BaseController {
     }       
 
     public function beforePost() {
-        $this->modx->log(modX::LOG_LEVEL_DEBUG, 'beforePut');
+        //$this->modx->log(modX::LOG_LEVEL_DEBUG, 'beforePut');
         if ($this->modx->hasPermission('fbuch_create_fahrten')) {
-            $this->setProperty('createdby', $this->modx->user->get('id'));
-            $this->setProperty('createdon', strftime('%Y-%m-%d %H:%M:%S')); 
+            $this->object->set('createdby', $this->modx->user->get('id'));
+            $this->object->set('createdon', strftime('%Y-%m-%d %H:%M:%S')); 
             $this->validateProperties();
         } else {
             throw new Exception('Unauthorized', 401);
@@ -164,6 +176,10 @@ class MyControllerFahrten extends BaseController {
         $datenames_id = $this->getProperty('datenames_id',0);
         $existing = $this->getExistingNames();
         $existingguests = $this->getExistingGuests();
+        if (empty($member_id && empty($guestname))){
+            return;
+        }
+
         if ($member_id != 0 && $fahrtnam = $this->modx->getObject('fbuchFahrtNames', array('fahrt_id' => $this->object->get('id'), 'member_id' => $member_id))) {
             unset($existing[$fahrtnam->get('member_id')]);
         } elseif ($member_id == 0 && $guestname != '' && $fahrtnam = $this->modx->getObject('fbuchFahrtNames', array('fahrt_id' => $this->object->get('id'), 'guestname' => $guestname))) {

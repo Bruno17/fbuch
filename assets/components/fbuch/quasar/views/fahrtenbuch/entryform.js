@@ -197,6 +197,16 @@ export default {
         const ajaxUrl = modx_options.rest_url + 'Fahrten/' + id;
         axios.put(ajaxUrl, entry.value)
           .then(function (response) {
+            const success = response.data.success;
+            let message = response.data.message;
+            message = message == 'is_locked' ? 'Fahrt ist für die Bearbeitung gesperrt' : message;
+            if (!success){
+              $q.dialog({
+                title: 'Warnung!',
+                message: message
+              })
+              return;              
+            }
             //event.value = response.data.object;
             //Vue.$router.push('/events/day/' + Quasar.date.formatDate(event.value.date, 'YYYY/MM/DD')); 
             Vue.$router.push('/' + Quasar.date.formatDate(entry.value.date, 'YYYY/MM/DD'));

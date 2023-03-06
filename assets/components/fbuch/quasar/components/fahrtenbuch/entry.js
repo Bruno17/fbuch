@@ -70,7 +70,24 @@ export default {
             console.log(error);
           });
       }
-    }   
+    }
+    
+    function lockEntry(entry) {
+      console.log(entry);
+      const id = entry.id || false;
+      const properties = {}; 
+      const ajaxUrl = modx_options.rest_url + 'Fahrten/' + id;
+      properties['set_locked'] = entry.locked==1 ? 0 : 1;
+      if (id) {
+        axios.put(ajaxUrl,properties)
+          .then(function (response) {
+            props.loadAll();
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    }     
     
     function confirmDeleteEntry(entry){
       $q.dialog({
@@ -129,7 +146,8 @@ export default {
       confirmDeleteEntry,
       useHasPermission,
       pullMembers,
-      onNameCheckbox
+      onNameCheckbox,
+      lockEntry
     }
   },
   template: '#entry-component'
