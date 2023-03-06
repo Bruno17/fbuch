@@ -20,7 +20,8 @@ export default {
     function pullMembers() {
       const properties = {
         target: 'fahrten',
-        target_id: props.entry.id
+        target_id: props.entry.id,
+        date: props.entry.date
       };
       props.moveMembers(properties);
     }

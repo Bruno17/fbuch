@@ -11,6 +11,8 @@ export default {
     setup() {
 
         const { onMounted, ref } = Vue;
+        const { useQuasar } = Quasar;
+        const $q = useQuasar();          
         const selectedDate = ref(getDateFromRoute())
         const formattedDate = Quasar.date.formatDate(selectedDate.value, 'dd, DD.MM.YYYY');
         const sheduled = ref([]);
@@ -103,13 +105,17 @@ export default {
             });
         }
 
-        function getSelectedEventNames(fields=[]){
+        function getSelectedEventNames(fields=[],eventfields=[]){
             let names = [];
-            loadedEvents.value.forEach((date,id) => {
-                date.names.forEach((name,name_id) => {
-                    //name.selected = false;
+            loadedEvents.value.forEach((event,id) => {
+                event.names.forEach((name,name_id) => {
                     let item = {};
                     if (name.selected) {
+                        if (eventfields.length > 0){
+                            eventfields.forEach((field) => {
+                                item['Date_' + field] = event[field];
+                            })
+                        }                        
                         if (fields.length > 0){
                             fields.forEach((field) => {
                                 item[field] = name[field];
@@ -124,13 +130,18 @@ export default {
             return names;
         }
 
-        function getSelectedFahrtNames(fields=[]){
+        function getSelectedFahrtNames(fields=[],fahrtfields=[]){
             let names = [];
             open.value.forEach((fahrt,id) => {
                 fahrt.names.forEach((name,name_id) => {
                     //name.selected = false;
                     let item = {};
                     if (name.selected) {
+                        if (fahrtfields.length > 0){
+                            fahrtfields.forEach((field) => {
+                                item['Fahrt_' + field] = fahrt[field];
+                            })
+                        }                         
                         if (fields.length > 0){
                             fields.forEach((field) => {
                                 item[field] = name[field];
@@ -147,6 +158,11 @@ export default {
                     //name.selected = false;
                     let item = {};
                     if (name.selected) {
+                        if (fahrtfields.length > 0){
+                            fahrtfields.forEach((field) => {
+                                item['Fahrt_' + field] = fahrt[field];
+                            })
+                        }                         
                         if (fields.length > 0){
                             fields.forEach((field) => {
                                 item[field] = name[field];
@@ -207,21 +223,45 @@ export default {
 
         function moveMembers(properties){
             let hasSelected = false;
-            const eventNames = getSelectedEventNames(['id','date_id','member_id']);
-            const fahrtNames = getSelectedFahrtNames(['id','fahrt_id','member_id']);
+            let sourcedate = '';
+            let message = '';
+            const targetdate = Quasar.date.formatDate(properties.date, 'DD.MM.YYYY');
+            const eventNames = getSelectedEventNames(['id','date_id','member_id'],['date']);
+            const fahrtNames = getSelectedFahrtNames(['id','fahrt_id','member_id'],['date']);
             if (eventNames.length > 0){
                 hasSelected = true;
                 properties['source'] = 'dates';
                 properties['names'] = eventNames;
+                sourcedate = Quasar.date.formatDate(eventNames[0].Date_date, 'DD.MM.YYYY');
             }
             if (fahrtNames.length > 0){
                 hasSelected = true;
                 properties['source'] = 'fahrten';
                 properties['names'] = fahrtNames;
+                sourcedate = Quasar.date.formatDate(fahrtNames[0].Fahrt_date, 'DD.MM.YYYY');
             }            
             if (!hasSelected) {
+                message = 'Es wurden keine Personen zum Einfügen markiert';
+                $q.dialog({
+                    title: 'Warnung!',
+                    message: message,
+                    html:true
+                  })                
                 return;
-            } 
+            }
+            
+            if (sourcedate != targetdate){
+                message = 'Das Startdatum des Ursprungs ist nicht identisch mit dem Startdatum des Ziels';
+                message += '<br>Ursprung: ' + sourcedate;
+                message += '<br>Ziel: ' + targetdate;
+                $q.dialog({
+                    title: 'Warnung!',
+                    message: message,
+                    html:true
+                  })
+                return;
+            }
+
             properties['processaction'] = 'moveNames'; 
             const ajaxUrl = modx_options.rest_url + 'Fahrtnames';
             axios.post(ajaxUrl,properties)
