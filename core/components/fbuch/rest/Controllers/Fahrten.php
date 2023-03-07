@@ -13,6 +13,7 @@ class MyControllerFahrten extends BaseController {
 
     public function getProperties(){
         $this->unsetProperty('locked');
+        return $this->properties;
     }
     
     public function beforePut() {
@@ -22,7 +23,7 @@ class MyControllerFahrten extends BaseController {
 
             if (!isset($_REQUEST['set_locked']) && $locked != 0){
                 return 'is_locked';
-            } else {
+            } elseif (isset($_REQUEST['set_locked'])) {
                 $this->object->set('locked',$this->getProperty('set_locked'));
             }
 
@@ -176,7 +177,7 @@ class MyControllerFahrten extends BaseController {
         $datenames_id = $this->getProperty('datenames_id',0);
         $existing = $this->getExistingNames();
         $existingguests = $this->getExistingGuests();
-        if (empty($member_id && empty($guestname))){
+        if (empty($member_id) && empty($guestname)){
             return;
         }
 
@@ -305,24 +306,6 @@ class MyControllerFahrten extends BaseController {
         $fahrt_id = $this->modx->getOption('fahrt_id',$fields,0);
         $this->modx->fbuch->forceObmann($fahrt_id);
         return;
-
-        $kmstand_start = $this->getProperty('kmstand_start');
-        $kmstand_end = $this->getProperty('kmstand_end');
-        if ($kmstand_end > $kmstand_start){
-            $this->object->set('km',$kmstand_end-$kmstand_start);        
-        }  else {
-            $this->object->set('km',0); 
-            $this->object->set('kmstand_end',0);  
-        }
-        $this->object->save();
-        
-        if ($this->modx->getObject('fbuchFahrtNames',$fields)){
-            
-        }else{
-            $fahrtname = $this->modx->newObject('fbuchFahrtNames');
-            $fahrtname->fromArray($fields);
-            $fahrtname->save();
-        }        
     }    
 
     public function verifyAuthentication() {

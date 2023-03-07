@@ -19,8 +19,8 @@ class MyControllerMailinglists extends BaseController {
                 case 'import_members':
                     break;
                 default:
-                    $this->setProperty('editedby', $this->modx->user->get('id'));
-                    $this->setProperty('editedon', strftime('%Y-%m-%d %H:%M:%S'));
+                    $this->object->set('editedby', $this->modx->user->get('id'));
+                    $this->object->set('editedon', strftime('%Y-%m-%d %H:%M:%S'));
                     break;
             }
 
@@ -78,8 +78,8 @@ class MyControllerMailinglists extends BaseController {
     public function beforePost() {
 
         if ($this->modx->hasPermission('fbuch_create_mailinglists')) {
-            $this->setProperty('createdby', $this->modx->user->get('id'));
-            $this->setProperty('createdon', strftime('%Y-%m-%d %H:%M:%S'));
+            $this->object->set('createdby', $this->modx->user->get('id'));
+            $this->object->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
 
         } else {
             throw new Exception('Unauthorized', 401);

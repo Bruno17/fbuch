@@ -15,10 +15,12 @@ export default {
         const $q = useQuasar();          
         const selectedDate = ref(getDateFromRoute())
         const formattedDate = Quasar.date.formatDate(selectedDate.value, 'dd, DD.MM.YYYY');
+        const urlDate = Quasar.date.formatDate(selectedDate.value, 'YYYY/MM/DD');
         const sheduled = ref([]);
         const open = ref([]);
         const finished = ref([]);
         const loadedEvents = ref([]);
+        const mm_expanded = ref(false);
 
         onMounted(() => {
             useLoadPermissions();
@@ -320,6 +322,8 @@ export default {
             open,
             sheduled,
             loadedEvents,
+            urlDate,
+            mm_expanded,
             loadAll,
             loadEventsToday,
             moveMembers,
@@ -327,7 +331,8 @@ export default {
             onNameCheckbox,
             onNext,
             onPrev,
-            onToday
+            onToday,
+            useHasPermission
         }
     },
 

@@ -1,0 +1,30 @@
+[[$$fbuchMitgliederMessage_0_show:is=`1`:then=`
+<div class="q-pa-sm">
+    <q-card class=" ">
+        <q-card-section horizontal class="bg-primary text-white text-h5 text-weight-bold">
+            <q-card-section class="q-pa-none q-pl-sm items-end row">
+                <q-btn class="" size="xl" color="white" round flat dense
+                    :icon="mm_expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+                    @click="mm_expanded = !mm_expanded" />
+            </q-card-section>
+            <q-card-section>
+                [[$$fbuchMitgliederMessage_1_heading:nl2br]]
+            </q-card-section>
+        </q-card-section>
+        <q-slide-transition>
+            <div v-show="mm_expanded">
+                <q-card-section class="q-pa-md">
+                    [[$$fbuchMitgliederMessage_2_einleitung:nl2br]]
+                </q-card-section>
+                <q-card-section v-if="'[[$$fbuchMitgliederMessage_3_body:fbuch_stripwhitespaces]]' != ''"
+                    class="bg-red-1 text-red-10 text-weight-medium q-pa-md">
+                    [[$$fbuchMitgliederMessage_3_body:nl2br]]
+                </q-card-section>
+                <q-card-section class="q-pa-md">
+                    [[$$fbuchMitgliederMessage_4_schluss:nl2br]]
+                </q-card-section>
+            </div>
+        </q-slide-transition>
+    </q-card>
+</div>
+`:else=``]]

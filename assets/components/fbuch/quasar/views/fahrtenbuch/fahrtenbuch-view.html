@@ -1,5 +1,6 @@
 <div class="q-pl-md">
 [[$$fbuchPegelWrapper]]
+[[$$fbuchMitgliederMessageQuasar]]
 <div class="q-pa-sm q-gutter-sm row">
     <q-btn outline label="< Früher" @click="onPrev"></q-btn>
     <q-btn outline label="Heute" @click="onToday"></q-btn>
@@ -22,12 +23,18 @@
                         <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
                             <q-list dense bordered separator>
 
-                                <q-item href="/termine/kalenderansicht.html/#/event-create" clickable v-ripple>
+                                <q-item v-if="useHasPermission('fbuch_create_termin')" href="/termine/kalenderansicht.html/#/event-create" clickable v-ripple>
                                     <q-item-section avatar><q-avatar icon="add" /></q-item-section>
                                     <q-item-section>
                                         <q-item-label>Neuen Termin erstellen</q-item-label>
                                     </q-item-section>
                                 </q-item>
+                                <q-item :href="'/termine/kalenderansicht.html/#/events/day/' + urlDate" clickable v-ripple>
+                                    <q-item-section avatar><q-avatar icon="calendar_today" /></q-item-section>
+                                    <q-item-section>
+                                        <q-item-label>Zur Kalender Tagesansicht</q-item-label>
+                                    </q-item-section>
+                                </q-item>                                
                             </q-list>
                         </q-menu>
                     </q-btn>

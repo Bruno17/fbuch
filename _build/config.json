@@ -168,6 +168,11 @@
           "file":"setlocale.snippet.php"
         },
         {
+          "name":"fbuch_stripwhitespaces",
+          "file":"fbuch_stripwhitespaces.snippet.php"
+        },
+        
+        {
           "source":0,
           "property_preprocess":false,
           "description":"",
@@ -2362,6 +2367,10 @@
           "name":"fbuchMitgliederMessage",
           "file":"fbuchmitgliedermessage.chunk.html"
         },
+        {
+          "name":"fbuchMitgliederMessageQuasar",
+          "file":"fbuchmitgliedermessage_quasar.chunk.html"
+        },        
         {
           "source":0,
           "property_preprocess":false,
