@@ -2230,16 +2230,6 @@ class Fbuch {
         $modx->mail->set(modMail::MAIL_SENDER, $emailFromAddress);
         $modx->mail->set(modMail::MAIL_SUBJECT, $subject);
 
-        if (file_exists(MODX_CORE_PATH . MODX_CONFIG_KEY . '/dkim.config.inc.php')){
-            include(MODX_CORE_PATH . MODX_CONFIG_KEY . '/dkim.config.inc.php');
-            if (isset($dkim_domain) && isset($dkim_selector) && isset($dkim_key)){
-                $modx->mail->set(modMail::MAIL_DKIM_SELECTOR, $dkim_selector);
-                $modx->mail->set(modMail::MAIL_DKIM_DOMAIN, $dkim_domain);
-                $modx->mail->set(modMail::MAIL_DKIM_IDENTITY, $emailFromAddress);
-                $modx->mail->set(modMail::MAIL_DKIM_PRIVATEKEYSTRING, $dkim_key);           
-            }
-        }        
-
         $mailTo = explode(',', $mailTo);
 
         if (is_array($mailTo)) {
