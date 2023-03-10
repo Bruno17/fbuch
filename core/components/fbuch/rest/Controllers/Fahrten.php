@@ -18,6 +18,10 @@ class MyControllerFahrten extends BaseController {
     
     public function beforePut() {
 
+        if (!$this->modx->fbuch->checkPermission('fbuch_edit_old_entries', array('classname' => $this->classKey, 'object_id' => $this->object->get('id')))) {
+            return 'cant_edit_old_entries';
+        }
+
         if ($this->modx->hasPermission('fbuch_edit_fahrten')) {
             $locked = $this->object->get('locked');
 
@@ -92,6 +96,11 @@ class MyControllerFahrten extends BaseController {
             }
         }
         $objectArray['names'] = $rows; 
+        $objectArray['can_edit'] = $this->modx->hasPermission('fbuch_edit_fahrten');
+        if (!$this->modx->fbuch->checkPermission('fbuch_edit_old_entries', array('classname' => $this->classKey, 'object_id' => $this->object->get('id')))) {
+            $objectArray['can_edit'] = false;
+            $objectArray['cant_edit_reason'] = 'cant_edit_old_entries';
+        }        
         return !$this->hasErrors();
     } 
 
@@ -185,16 +194,23 @@ class MyControllerFahrten extends BaseController {
             unset($existing[$fahrtnam->get('member_id')]);
         } elseif ($member_id == 0 && $guestname != '' && $fahrtnam = $this->modx->getObject('fbuchFahrtNames', array('fahrt_id' => $this->object->get('id'), 'guestname' => $guestname))) {
             unset($existingguests[$guestname]);
-        } else {
+        } elseif ($member_id > 0) {
             $fahrtnam = $this->modx->newObject('fbuchFahrtNames');
             $fahrtnam->set('member_id', $member_id);
+            if (!empty($datenames_id)) {
+                $fahrtnam->set('datenames_id', $datenames_id);
+            }
+            $fahrtnam->set('fahrt_id', $this->object->get('id'));
+            $fahrtnam->save();
+            unset($existing[$member_id]);
+        } elseif ($guestname != '') {
+            $fahrtnam = $this->modx->newObject('fbuchFahrtNames');
             $fahrtnam->set('guestname', $guestname);
             if (!empty($datenames_id)) {
                 $fahrtnam->set('datenames_id', $datenames_id);
             }
             $fahrtnam->set('fahrt_id', $this->object->get('id'));
             $fahrtnam->save();
-            unset($existing[$fahrtnam->get('member_id')]);
             unset($existingguests[$guestname]);
         }
         
@@ -223,8 +239,11 @@ class MyControllerFahrten extends BaseController {
         $existing = [];
         if ($members = $this->object->getMany('Names')) {
             foreach ($members as $member) {
+                
                 $guestname = $member->get('guestname');
-                $existing[$guestname] = $member;
+                if (!empty($guestname)){
+                    $existing[$guestname] = $member;
+                }
             }
         }
         return $existing;               

@@ -1,5 +1,23 @@
 <div class="q-pa-md full-width" style="height: 400px;">
     <div class="text-h4 text-center"> {{ boot.name }} {{ selectionState.formattedDate }} </div>
+    <template v-if="!entry.can_edit">
+        <q-card class="">
+            <q-card-section class="text-h6 bg-negative text-white">
+               Du hast keine Berechtigung diese Fahrt zu bearbeiten. 
+            </q-card-section>
+        
+        <q-card-section v-if="entry.cant_edit_reason == 'cant_edit_old_entries'">
+             Abgeschlossene Fahrten, welche in der Vergangenheit liegen, können von Dir nicht bearbeitet werden.
+        </q-card-section>  
+        <q-card-actions>
+        <q-btn label="Abbrechen" @click="onCancelClick" class="q-ml-sm" color="primary" />    
+        </q-card-actions>          
+        </q-card>
+
+            
+
+    </template>
+    <template v-if="entry.can_edit">
     <div class="col-12">
         <q-tabs v-model="tab" align="left" no-caps outside-arrows mobile-arrows class="">
             <q-tab name="general" label="Eintrag" />
@@ -195,4 +213,5 @@
             <q-btn label="Abbrechen" @click="onCancelClick" class="q-ml-sm" />
         </div>
     </q-form>
+    </template>
 </div>

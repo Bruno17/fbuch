@@ -125,10 +125,12 @@ class Fbuch {
             case 'fbuch_edit_old_entries':
                 if (!$this->modx->hasPermission($permission)) {
                     if (!empty($object_id) && $object = $this->modx->getObject($classname, $object_id)) {
-                        $km = $object->get('km');
-                        $date = strftime('%Y%m%d', strtotime($object->get('date')));
-                        $today = strftime('%Y%m%d');
-                        if (!empty($km) && $date < $today) {
+                        $finished = $object->get('finished');
+                        $now = new DateTime(null, new DateTimeZone('Europe/Berlin'));
+                        $today = date_format($now,'Y-m-d');
+                        $date = $object->get('date');
+                        $date = substr($date,0,10);
+                        if (!empty($finished) && $date < $today) {
                             $this->error('Du bist nicht berechtigt, abgeschlossene Einträge aus der Vergangenheit zu bearbeiten');
                             $result = false;
                         }
