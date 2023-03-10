@@ -6,6 +6,7 @@ class MyControllerFahrten extends BaseController {
     public $classKey = 'fbuchFahrt';
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'ASC';
+    public $defaultLimit = 1000;
     
     public function beforeDelete() {
         throw new Exception('Unauthorized', 401);
@@ -124,6 +125,8 @@ class MyControllerFahrten extends BaseController {
         $this->object->set('date_end',date_format($date_end,'Y-m-d 00:00:00'));
         $this->object->set('end_time',date_format($date_end,'H:i'));       
         $objectArray = $this->object->toArray();
+
+        $objectArray['can_edit'] = $this->modx->hasPermission('fbuch_create_fahrten');
                 
         return $this->success('',$objectArray);    
     }    
