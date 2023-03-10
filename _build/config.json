@@ -3,7 +3,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"1.8.0-beta",
+  "version":"1.8.1-beta",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",
@@ -957,8 +957,8 @@
           "category":"mv"
         },
         {
-          "name":"fbuchGetFiles",
-          "file":"fbuchgefiles.snippet.php"
+          "name":"fbuchGetAssetsFiles",
+          "file":"fbuchgetassetsfiles.snippet.php"
         }        
       ],
       "chunks":[

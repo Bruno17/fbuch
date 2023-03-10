@@ -95,8 +95,8 @@
                             :emit-value="false" :hide-bottom-space="true"
                             :rules="[val => (!submitclicked || val != '0' ) || 'Bitte eine Auswahl treffen!']">
                         </api_select>
-                        [[fbuchGetFiles?
-                        &folder=`[[++fbuch.assets_path:default=`[[++base_path]]assets/components/fbuch/`]]quasar/views/fahrtenbuch/formparts`
+                        [[fbuchGetAssetsFiles?
+                        &folder=`quasar/views/fahrtenbuch/formparts`
                         ]]
 
                         <q-input class="col-12" outlined autogrow v-model="entry.note" label="Kommentar (optional)" />

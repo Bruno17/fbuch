@@ -46,16 +46,16 @@
     
       </q-layout>
     </div>
-    [[fbuchGetFiles? 
-    &folder=`[[++fbuch.assets_path:default=`[[++base_path]]assets/components/fbuch/`]]quasar/components`
+    [[fbuchGetAssetsFiles? 
+    &folder=`quasar/components`
     &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`
     ]]  
-    [[fbuchGetFiles? 
-    &folder=`[[++fbuch.assets_path:default=`[[++base_path]]assets/components/fbuch/`]]quasar/components/[[*alias]]`
+    [[fbuchGetAssetsFiles? 
+    &folder=`quasar/components/[[*alias]]`
     &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`
     ]]    
-    [[fbuchGetFiles? 
-    &folder=`[[++fbuch.assets_path:default=`[[++base_path]]assets/components/fbuch/`]]quasar/views/[[*alias]]`
+    [[fbuchGetAssetsFiles? 
+    &folder=`quasar/views/[[*alias]]`
     &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`
     ]]
 
