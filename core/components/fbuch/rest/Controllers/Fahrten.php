@@ -14,6 +14,21 @@ class MyControllerFahrten extends BaseController {
 
     public function getProperties(){
         $this->unsetProperty('locked');
+        $old_finished = 0;
+        $new_finished = (int) $this->getProperty('finished');
+        if ($this->object instanceof $this->classKey ){
+            $old_finished = (int) $this->object->get('finished');
+        }
+        if ($new_finished == 1 && $new_finished != $old_finished){
+            $now = date_create();
+            $this->setProperty('finishedon',date_format($now, 'Y-m-d h:i:s'));
+            $this->setProperty('finishedby',$this->modx->user->get('id'));
+        }
+        if (isset($_REQUEST['finished']) && $new_finished == 0){
+            $this->setProperty('finishedon',null);
+            $this->setProperty('finishedby',0);
+        }        
+
         return $this->properties;
     }
     
@@ -365,7 +380,6 @@ class MyControllerFahrten extends BaseController {
                 $datewhere['date:>='] = strftime('%Y-%m-%d 00:00:00');
                 $datewhere['start_time:>'] = strftime('%H:%M');
                 $datewhere['OR:date:>'] = strftime('%Y-%m-%d 23:59:00');                
-                
                 break;                
             case 'finished':
                 $sortConfig = ['date'=>'ASC','start_time'=>'ASC'];

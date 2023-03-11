@@ -128,7 +128,11 @@ class Fbuch {
                         $finished = $object->get('finished');
                         $now = new DateTime(null, new DateTimeZone('Europe/Berlin'));
                         $today = date_format($now,'Y-m-d');
-                        $date = $object->get('date');
+                        $date = $object->get('date_end');
+                        $finishedon = $object->get('finishedon');
+                        if ($finishedon != null) {
+                            $date = $finishedon;
+                        }
                         $date = substr($date,0,10);
                         if (!empty($finished) && $date < $today) {
                             $this->error('Du bist nicht berechtigt, abgeschlossene Einträge aus der Vergangenheit zu bearbeiten');

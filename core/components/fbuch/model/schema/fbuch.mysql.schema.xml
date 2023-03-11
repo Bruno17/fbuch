@@ -20,6 +20,8 @@
         <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="finished" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="lock_password" dbtype="varchar" phptype="string" precision="50" null="false" default="" />
+        <field key="finishedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="finishedon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="editedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />

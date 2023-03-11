@@ -29,6 +29,8 @@ $xpdo_meta_map['fbuchFahrt']= array (
     'locked' => 0,
     'finished' => 0,
     'lock_password' => '',
+    'finishedby' => 0,
+    'finishedon' => NULL,
     'createdby' => 0,
     'createdon' => NULL,
     'editedby' => 0,
@@ -195,6 +197,20 @@ $xpdo_meta_map['fbuchFahrt']= array (
       'precision' => '50',
       'null' => false,
       'default' => '',
+    ),
+    'finishedby' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'finishedon' => 
+    array (
+      'dbtype' => 'datetime',
+      'phptype' => 'datetime',
+      'null' => true,
     ),
     'createdby' => 
     array (
