@@ -61,7 +61,9 @@ export default {
       selectionState.value.gattungname = value.Bootsgattung_name;
       selectionState.value.bootsgattung = value.Bootsgattung_id;
       selectionState.value.bootname = value.name;
-      bootsgattungSelect.value.loadNames({ 'gattung_name': value.Bootsgattung_name });
+      if (bootsgattungSelect.value){
+        bootsgattungSelect.value.loadNames({ 'gattung_name': value.Bootsgattung_name });  
+      }
       loadBoot(entry.value.boot_id);
     }
 

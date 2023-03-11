@@ -84,7 +84,7 @@
             <q-separator></q-separator>
             <q-card-section class="q-pa-sm q-gutter-y-sm">
                 <template v-for="entry in sheduled">
-                    <entry :entry="entry" :moveMembers="moveMembers" :loadAll="loadAll" />
+                    <entry :entry="entry" @nameCheckbox="onNameCheckbox" :moveMembers="moveMembers" :loadAll="loadAll" />
                 </template>
             </q-card-section>
         </q-card>

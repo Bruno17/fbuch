@@ -3,7 +3,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"1.8.1-beta",
+  "version":"1.8.3-beta",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",
@@ -4092,6 +4092,16 @@
           "file":"input_options_gattung_ids.chunk.html",
           "category":"fbuch_input_options"
         },
+        {
+          "name":"input_options_gattungname",
+          "file":"input_options_gattungname.chunk.html",
+          "category":"fbuch_input_options"
+        },
+        {
+          "name":"input_options_boot_id",
+          "file":"input_options_boot_id.chunk.html",
+          "category":"fbuch_input_options"
+        },                  
         {
           "source":0,
           "property_preprocess":false,
