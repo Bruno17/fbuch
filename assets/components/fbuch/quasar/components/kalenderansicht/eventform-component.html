@@ -45,8 +45,7 @@
                         label="Betreuer" controller="Names?limit=100000&returntype=options"></api_select>
 
                     <q-input class="col-md-8 col-sm-4 col-xs-12" outlined v-model="event.title"
-                        label="Titel/Gruppe/Zweck"
-                        :hide-bottom-space="true"
+                        label="Titel/Gruppe/Zweck" :hide-bottom-space="true"
                         :rules="[val => (!submitclicked || !!val) || 'Bitte einen Text eintragen!']" />
 
                     <api_select class="col-md-4 col-sm-4 col-xs-12" ref="eventtype" v-model="event.type"
@@ -66,14 +65,16 @@
 
         </q-tab-panel>
         <q-tab-panel name="fields">
-            Nachfolgend markierte Felder werden vor dem Überschreiben geschützt, wenn man beim speichern eines Termins
-            'auch in kommende Termine speichern' ausgewählt hat.
+            Wenn Du eine Änderung vornimmst, werden alle Felder der nachfolgend aufgeführten Wiederholungen
+            überschrieben.
             <br>
-            Ansonsten werden dann jeweils die Werte aller nachfolgend aufgeführter Felder in die ausgewählten
-            Wiederholungen kopiert.
+            Du kannst dies umgehen: Du hast für einen spezifischen Termin in der Zukunft eine Änderung vorgenommen, z.B.
+            soll der Titel dieses einen Termins „Training mit Christoph Galandi“ statt ursprünglich „Teamrowing –
+            allgemein 18.00 Uhr“ heißen.
             <br>
-            Dies ist sinnvoll, wenn man für diese Wiederholung zb. einen individuellen Text oder eine individuelle
-            Uhrzeit, abweichend von den übrigen Wiederholungen, festgelegt hat.
+            Um den Titel vor einer Überschreibung zu schützen, z.B. weil Du eines Tages bei allen Wiederholungen den
+            Titel in „Teamrowing – allgemein 19.00 Uhr“ ändern möchtest, kannst Du bei dem spezifischen Termin „Training
+            mit Christoph Galandi“ ein Häckchen im Feld Titel setzten. Somit wird dieser nicht geändert.
             <br>
             <template v-for="field in protect_fields">
                 <q-checkbox v-model="event.protected_fields" :val="field.field" :label="field.label" /><br>

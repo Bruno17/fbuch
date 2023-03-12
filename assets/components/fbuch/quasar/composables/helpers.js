@@ -19,6 +19,30 @@ export function useLoadPermissions(permissions){
     }); 
 }
 
+export function useLoadCurrentMember(){
+    const data = {};
+    const ajaxUrl = modx_options.rest_url + 'Names/me';
+    return axios.get(ajaxUrl,{params:data})
+    .then(function (response) {
+        return response.data;
+    })
+    .catch(function (error) {
+        console.log(error);
+    }); 
+}
+
+export function useLoadCurrentUser(){
+    const data = {};
+    const ajaxUrl = modx_options.rest_url + 'ModUser/me';
+    return axios.get(ajaxUrl,{params:data})
+    .then(function (response) {
+        return response.data;
+    })
+    .catch(function (error) {
+        console.log(error);
+    }); 
+}
+
 export function useHasPermission(permission){
     if (userPermissions.value.includes('is_sudo')){
         return true;

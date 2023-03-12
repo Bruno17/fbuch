@@ -1,11 +1,53 @@
 <div class="q-pa-md full-width" style="height: 400px;">
-    <div class="text-h4 text-center"> {{ entry.title }} {{ formattedDate }} </div>
+    <q-card bordered flat class="full-width">
+        <q-card-section :class="entry.hidden==1 ? 'text-grey' : 'bg-'+entry.Type_colorstyle + ' text-white' ">
+            <div class="row items-center no-wrap">
+                <div class="col">
+                    <div class="text-subtitle2">{{entry.title}}</div>
+                    <div class="text-h6">{{entry.Type_name}}</div>
+                    <div class="text-subtitle2">
+                        {{ entry.formattedDate }}
+                        <template v-if="entry.formattedEndDate != ''">
+                            <br>
+                            {{ entry.formattedEndDate }}
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </q-card-section>
+
+        <q-separator></q-separator>
+
+        <q-card-section>
+            <pre
+                style="white-space: pre-wrap; word-wrap: break-word;font-family: inherit;">{{ entry.description }}</pre>
+        </q-card-section>
+        <q-separator></q-separator>
+        <q-card-section>
+            Du bist eingeloggt als <span class="text-bold"> {{currentUser.username}}</span><br>
+            Mitgliederstatus:
+            <template v-if="currentUser.Member_member_status != null">
+                <span class="text-bold"> {{currentUser.Member_firstname}} {{currentUser.Member_name}}</span>
+                ({{currentUser.Member_member_status}})<br>
+                Mit nachfolgenden Buttons kannst Du Dich selbst eintragen oder austragen.
+            </template>
+            <template v-if="currentUser.Member_member_status == null">
+                Du bist nicht in der Mitgliederliste eingetragen. 
+            </template>
+        </q-card-section>
+        <template v-if="currentUser.Member_member_status != null">
+            <q-separator></q-separator>
+            <q-card-actions>
+                <q-btn @click="addMyself" color="positive">Selbst zusagen</q-btn>
+                <q-btn @click="RemoveMyself" color="negative">absagen</q-btn>
+              </q-card-actions>
+        </template>        
+
+    </q-card>
 
     <div class="q-py-md">
-        <q-btn label="Zum Fahrtenbuch" :href="urls.fahrtenbuch" color="primary" />
-    </div>    
+        <q-btn label="Zum Fahrtenbuch" :href="urls.fahrtenbuch" color="primary"  />
+    </div>
 
-    <personslist :entry="entry" :hideoptions="{'cox':true,'obmann':true}"
-    @updateNames="onUpdateNames"
-    />
+    <personslist :entry="entry" :hideoptions="{'cox':true,'obmann':true}" @updateNames="onUpdateNames" />
 </div>

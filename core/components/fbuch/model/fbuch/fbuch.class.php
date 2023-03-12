@@ -200,6 +200,20 @@ class Fbuch {
         return $email;
     }
 
+    public function removePersonFromDate($date_id,$datename_id){
+        $member_id = 0;//Todo: try to get and set currently logged in mv_Member here? 
+        if ($datename_o = $this->modx->getObject('fbuchDateNames', $datename_id)) {
+            $name = $datename_o->get('guestname');
+            if ($member = $datename_o->getOne('Member')){
+                $name = $member->get('firstname') . ' ' . $member->get('name');
+            }
+            $datename_o->remove();
+            $comment = 'Abmeldung: ' . $name;
+            $this->addDateComment($comment,$date_id,$member_id);
+            $this->sendElementMessage($comment,$date_id,$member_id);                         
+        }   
+    }
+
     public function addPersonsToDate($properties) {
         $modx = &$this->modx;
         $date_id = $modx->getOption('date_id', $properties, '');
@@ -224,23 +238,29 @@ class Fbuch {
 
             if (is_array($removepersons)) {
                 foreach ($removepersons as $person) {
-                    if ($datename_o = $modx->getObject('fbuchDateNames', $person)) {
-                        $datename_o->remove();
-                    }
+                    $this->removePersonFromDate($person);
                 }
             }
             if (is_array($persons)) {
                 foreach ($persons as $index => $person) {
                     if (!empty($person) && $name_o = $modx->getObject('mvMember', $person)) {
                         if ($datename_o = $modx->getObject('fbuchDateNames', array('date_id' => $date_id, 'member_id' => $person))) {
-
+                            if ($person == $member_id){
+                                $datename_o->set('registeredby_member', 0);
+                                $datename_o->save();
+                            }
                         } else {
                             $datename_o = $modx->newObject('fbuchDateNames');
                             $datename_o->set('date_id', $date_id);
                             $datename_o->set('member_id', $person);
                             $datename_o->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
-                            $datename_o->set('registeredby_member', $member_id);
+                            if ($person != $member_id){
+                                $datename_o->set('registeredby_member', $member_id);
+                            }
                             $datename_o->save();
+                            $comment = 'Anmeldung: ' . $name_o->get('firstname') . ' ' . $name_o->get('name');
+                            $this->addDateComment($comment,$date_id,$member_id);
+                            $this->sendElementMessage($comment,$date_id,$member_id);
                         }
 
                         if (!empty($hooksnippet)) {
@@ -274,6 +294,9 @@ class Fbuch {
                             $datename_o->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
                             $datename_o->set('registeredby_member', $member_id);
                             $datename_o->save();
+                            $comment = 'Gasteintrag: ' . $guestname;
+                            $this->addDateComment($comment,$date_id,$member_id);
+                            $this->sendElementMessage($comment,$date_id,$member_id);                            
                         }
                     }
                 }
@@ -385,22 +408,12 @@ class Fbuch {
                     $comment = empty($comment) ? 'Absage' : $comment;
                     break;
                 case 'remove_comment':
-                    if ($comment_o = $modx->getObject('fbuchDateComment', $remove_comment)) {
-                        $createdby = $comment_o->get('createdby');
-                        if ((!empty($createdby) && $modx->user->get('id') == $createdby) || $member_id == $comment_o->get('member_id')) {
-                            $comment_o->remove();
-                        }
-                    }
+                    $this->removeDateComment($remove_comment,$member_id);
                     break;
             }
 
             if (!empty($comment)) {
-                $comment_o = $modx->newObject('fbuchDateComment');
-                $comment_o->set('date_id', $date_id);
-                $comment_o->set('member_id', $member_id);
-                $comment_o->set('comment', $comment);
-                $comment_o->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
-                $comment_o->save();
+                $this->addDateComment($comment,$date_id,$member_id);
 
                 if ($mail_comment == 'selected' && isset($_REQUEST['mailto'])) {
                     $mail_comment = ($_REQUEST['mailto']);
@@ -411,21 +424,12 @@ class Fbuch {
                 $name_o = $invite_o->getOne('Member');
                 $date_o = $invite_o->getOne('Date');
                 $type_o = $date_o->getOne('Type');
-                $element_invite = $type_o->get('element_invite');
+                $element_invite = (int) $type_o->get('element_invite');
 
+                $this->sendElementMessage($comment,$date_o->get('id'),$name_o->get('id'));
+                
                 if (!empty($element_invite)) {
-                    if (!empty($send_riot)) {
-                        $properties = array(
-                            'action' => 'send',
-                            'date_id' => $date_o->get('id'),
-                            'name_id' => $name_o->get('id'),
-                            'comment' => $comment);
 
-                        $reference = 'web/schedule/sendcomment';
-                        $this->createSchedulerTask('matrixorgclient', array('snippet' => $reference));
-                        $this->createSchedulerTaskRun($reference, 'matrixorgclient', $properties);
-                        //$this->modx->runSnippet('moc_hooks', $properties);
-                    }
                     if ($action == 'accept' || $action == 'cancel') {
                         //invite to Riot/Matrix - Room
 
@@ -459,6 +463,53 @@ class Fbuch {
 
         return '';
 
+    }
+    
+    public function addDateComment($comment,$date_id,$member_id){
+        if (!empty($comment)) {
+                $comment_o = $this->modx->newObject('fbuchDateComment');
+                $comment_o->set('date_id', $date_id);
+                $comment_o->set('member_id', $member_id);
+                $comment_o->set('comment', $comment);
+                $comment_o->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
+                $comment_o->set('createdby', $this->modx->user->get('id'));
+                $comment_o->save();  
+        }          
+    }
+
+    public function removeDateComment($comment_id,$member_id){
+        if ($comment_o = $this->modx->getObject('fbuchDateComment', $comment_id)) {
+            $createdby = $comment_o->get('createdby');
+            if ((!empty($createdby) && $this->modx->user->get('id') == $createdby) || $member_id == $comment_o->get('member_id')) {
+                $comment_o->remove();
+            }
+        }    
+    }
+
+    public function sendElementMessage($comment,$date_id,$name_id,$action='send'){
+        $send_riot = $this->modx->getOption('send_riot', $scriptProperties, '1');
+        if ($send_riot != '1'){
+            return;
+        }
+        $element_invite = 0;
+        if ($date_o = $this->modx->getObject('fbuchDate',$date_id)){
+            if ($type_o = $date_o->getOne('Type')){
+                $element_invite = (int) $type_o->get('element_invite');
+            }
+        }
+        if (!empty($element_invite)){
+            $properties = array(
+                'action'  => $action,
+                'date_id' => $date_id,
+                'name_id' => $name_id,
+                'comment' => $comment,
+                'user_id' => $this->modx->user->get('id')
+            );        
+    
+            $reference = 'web/schedule/sendcomment';
+            $this->createSchedulerTask('matrixorgclient', array('snippet' => $reference));
+            $this->createSchedulerTaskRun($reference, 'matrixorgclient', $properties);            
+        }
     }
 
     public function sendCommentMails($comment, $mail_comment, $name_o, $date_id) {
@@ -2058,15 +2109,10 @@ class Fbuch {
         $date_o = $object->getOne('Date');
         $email = $name_o->get('email');
 
+        $member_id = 0;//Todo: try to get and set currently logged in mv_Member here? 
         if ($add_datecomment && !empty($comment)) {
-            $comment_o = $modx->newObject('fbuchDateComment');
-            $comment_o->set('date_id', $object->get('date_id'));
-            $comment_o->set('createdby', $modx->user->get('id'));
-            $comment_o->set('comment', $comment);
-            $comment_o->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
-            $comment_o->save();
+            $this->addDateComment($comment,$object->get('date_id'),$member_id);
         }
-
 
         if (!empty($email) && $object && $name_o && $date_o) {
             $properties = array_merge($name_o->toArray(), $date_o->toArray(), $object->toArray());

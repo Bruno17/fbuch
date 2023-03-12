@@ -219,6 +219,13 @@ class MyControllerDates extends BaseController {
     }
 
     public function afterRead(array &$objectArray) {
+        if ($type = $this->object->getOne('Type')){
+            $fields = $type->toArray();
+            foreach ($fields as $key => $value){
+                $objectArray['Type_' . $key] = $value;
+            }
+        }
+
         $objectArray['protected_fields'] = is_array($objectArray['protected_fields']) ? $objectArray['protected_fields'] : [];
         $names = $this->addNames($this->object);
         $rows = [];

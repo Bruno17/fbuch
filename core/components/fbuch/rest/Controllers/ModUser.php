@@ -2,9 +2,9 @@
 
 include 'BaseController.php';
 
-class MyControllerNames extends BaseController {
-    public $classKey = 'mvMember';
-    public $defaultSortField = 'name';
+class MyControllerModUser extends BaseController {
+    public $classKey = 'modUser';
+    public $defaultSortField = 'id';
     public $defaultSortDirection = 'ASC';
 
     public function beforeDelete() {
@@ -16,9 +16,7 @@ class MyControllerNames extends BaseController {
         $id = $this->getProperty($this->primaryKeyField);
         if ($id == 'me') {
 
-            if ($fbuchUser = $this->getCurrentFbuchUser()) {
-                $id = $fbuchUser->get('id');
-            }
+            $id = $this->modx->user->get('id');
 
             if (!empty($id)) {
                 $this->setProperty('id', $id);
@@ -33,10 +31,25 @@ class MyControllerNames extends BaseController {
     public function afterRead(array &$objectArray) {
         $allowed_fields = [
         'id',
-        'firstname',
-        'name',
-        'member_status'];
+        'username',
+        'Member_id',
+        'Member_name',
+        'Member_firstname',
+        'Member_member_status'];
         $objectArray = [];
+        if ($profile = $this->object->getOne('Profile')){
+            $fields = $profile->toArray();
+            foreach ($fields as $key => $value){
+                $this->object->set('Profile_' . $key,$value);
+            }
+        }
+        if ($member = $this->modx->getObject('mvMember',['modx_user_id'=>$this->object->get('id')])){
+            $fields = $member->toArray();
+            foreach ($fields as $key => $value){
+                $this->object->set('Member_' . $key,$value);
+            }
+        }        
+
         foreach ($allowed_fields as $field){
             $objectArray[$field] = $this->object->get($field);
         }
@@ -86,15 +99,10 @@ class MyControllerNames extends BaseController {
 
         //$this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);
 
-        $c->where(array('deleted' => 0, 'member_status:IN' => array(
-                'Mitglied',
-                'VHS',
-                'Gast')));
-
         return $c;
     }
 
-    protected function prepareListQueryAfterCount(xPDOQuery $c) {
+    protected function prepareListQueryAfterCountXX(xPDOQuery $c) {
 
         $c->query['columns'] = array(); //reset default $c->select
         $c->select(array(
@@ -110,17 +118,6 @@ class MyControllerNames extends BaseController {
     protected function prepareListObject(xPDOObject $object) {
 
         $output = $object->toArray('', false, true);
-
-        $returntype = $this->getProperty('returntype');
-        switch ($returntype) {
-            case 'options':
-                $output['label'] = $object->get('name') . ' ' . $object->get('firstname');
-                if ($object->get('member_status') != 'Mitglied') {
-                    $output['label'] .= ' (' . $object->get('member_status') . ')';
-                }
-                $output['value'] = $object->get('id');
-                break;
-        }
 
         return $output;
     }
