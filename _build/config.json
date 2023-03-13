@@ -152,18 +152,6 @@
       ],
       "snippets":[
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"setlocale",
           "file":"setlocale.snippet.php"
         },
@@ -173,785 +161,209 @@
         },
         
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"getAtoZLinks",
           "file":"getatozlinks.snippet.php"
         },          
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"now",
           "file":"now.snippet.php"
         },  
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"today",
           "file":"today.snippet.php"
         },                      
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"hasPermission",
           "file":"haspermission.snippet.php"
         },        
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuch_anmelden_impfabfrage_aftersave",
           "file":"fbuch_anmelden_impfabfrage_aftersave.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchJsonToPlaceholders",
           "file":"fbuchjsontoplaceholders.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchGetChunk",
           "file":"fbuchgetchunk.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchGetColor",
           "file":"fbuchgetcolor.snippet.php"
         },        
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuch_customchunks_aftergetfields",
           "file":"fbuch_customchunks_aftergetfields.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchSetGridPlaceholders",
           "file":"fbuchsetgridplaceholders.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchUpdate",
           "file":"fbuchupdate.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchGetFormValues",
           "file":"fbuchgetformvalues.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchValidateTime",
           "file":"fbuchvalidatetime.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchSetDatePlaceholders",
           "file":"fbuchsetdateplaceholders.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchGetGridOffset",
           "file":"fbuchgetgridoffset.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchQuery",
           "file":"fbuchquery.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchSwitchByReqParam",
           "file":"fbuchswitchbyreqparam.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"setYearPlaceholder",
           "file":"setyearplaceholder.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuch_strtotime",
           "file":"fbuch_strtotime.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchLoopWeekDays",
           "file":"fbuchloopweekdays.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchBuildTeam",
           "file":"fbuchbuildteam.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchGetNameEmail",
           "file":"fbuchgetnameemail.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuch_rendercolumn_bootnutzer_checkbox",
           "file":"fbuch_rendercolumn_bootnutzer_checkbox.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuch_prepare_allowed_where",
           "file":"fbuch_prepare_allowed_where.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchBerechneDurchschnitt",
           "file":"fbuchberechnedurchschnitt.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuch_termine_aftersave",
           "file":"fbuch_termine_aftersave.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuch_getPegel",
           "file":"fbuch_getpegel.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchFormatDate",
           "file":"fbuchformatdate.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuch_prepare_ngm_where",
           "file":"fbuch_prepare_ngm_where.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuch_rendercolumn_ngm_checkbox",
           "file":"fbuch_rendercolumn_ngm_checkbox.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchSendInviteMail",
           "file":"fbuchsendinvitemail.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuch_mailinglistnames_aftersave",
           "file":"fbuch_mailinglistnames_aftersave.snippet.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuch_anmeldungen_impfabfrage_exportrow",
           "file":"fbuch_anmeldungen_impfabfrage_exportrow.snippet.php",
           "category":"fbuch_termin_zu_absagen"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"mv_member_aftersave",
           "file":"mv_member_aftersave.snippet.php",
           "category":"mv"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"mv_member_aftergetfields",
           "file":"mv_member_aftergetfields.snippet.php",
           "category":"mv"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"check_sendmails",
           "file":"check_sendmails.snippet.php",
           "category":"mv"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"mv_prepareMemberWhere",
           "file":"mv_preparememberwhere.snippet.php",
           "category":"mv"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"add_mediasourcepath",
           "file":"add_mediasourcepath.snippet.php",
           "category":"mv"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"mv_rendercolumn_family_checkbox",
           "file":"mv_rendercolumn_family_checkbox.snippet.php",
           "category":"mv"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"mv_rendercolumn_payer_checkbox",
           "file":"mv_rendercolumn_payer_checkbox.snippet.php",
           "category":"mv"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"mv_getcombo_family_id",
           "file":"mv_getcombo_family_id.snippet.php",
           "category":"mv"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"mv_berechne_alter",
           "file":"mv_berechne_alter.snippet.php",
           "category":"mv"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"mv_serienmails_aftersave",
           "file":"mv_serienmails_aftersave.snippet.php",
           "category":"mv"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"mv_berechne_beitrag",
           "file":"mv_berechne_beitrag.snippet.php",
           "category":"mv"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"mv_get_sepa",
           "file":"mv_get_sepa.snippet.php",
           "category":"mv"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"authorize_member",
           "file":"authorize_member.snippet.php",
           "category":"mv"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"mv_datenerfassung_report_newvalues",
           "file":"mv_datenerfassung_report_newvalues.snippet.php",
           "category":"mv"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"mv_dooraccesscode_beforesave",
           "file":"mv_dooraccesscode_beforesave.snippet.php",
           "category":"mv"
@@ -959,7 +371,11 @@
         {
           "name":"fbuchGetAssetsFiles",
           "file":"fbuchgetassetsfiles.snippet.php"
-        }        
+        },
+        {
+          "name":"fbuchLoginByCode",
+          "file":"fbuchloginbycode.snippet.php"
+        }                 
       ],
       "chunks":[
         {
@@ -4728,7 +4144,17 @@
             "OnBeforeUserFormSave"
           ],
           "file":"fbuchusersave.plugin.php"
-        }       
+        },
+        {
+          "name":"fbuchAuthenticateByCode",
+          "events":[
+            "OnWebAuthentication"
+          ],
+          "file":"fbuchauthenticatebycode.plugin.php"
+        }         
+        
+        
+        
       ]
     }
   }

@@ -28,6 +28,8 @@ class Fbuch {
      */
     public $options = array();
 
+    public $authenticated = false;
+
 
     /**
      * Fbuch constructor
@@ -310,6 +312,10 @@ class Fbuch {
         }
     }
 
+    public function is_authenticated(){
+        return $this->authenticated;
+    }    
+
     public function cancelAcceptInvite($scriptProperties = array()) {
 
         $modx = &$this->modx;
@@ -332,6 +338,7 @@ class Fbuch {
                 $email = $this->getNameEmail($name_o);
             }
         }
+        $code_matches = ($date_id && $email && $code == md5($date_id . $email . $iid)) ? true : false;
 
         //try to get invite of the current user or create an invite for him, if he is calling this page
         if ($date_id && empty($member_id)) {
@@ -364,7 +371,9 @@ class Fbuch {
             $_SESSION['last_cai_post'] = $cai_post;
         }
 
-        if ($date_id && $email && $code == md5($date_id . $email . $iid)) {
+        $code_matches = ($date_id && $email && $code == md5($date_id . $email . $iid)) ? true : false;
+
+        if ($code_matches) {
             $fields = $invite_o->toArray();
 
             switch ($action) {
@@ -827,6 +836,62 @@ class Fbuch {
         }
 
 
+    }
+
+    public function createUserFromMember($object_id,$active=0){
+        $modx = &$this->modx;
+        $allowedstates = ['Mitglied','Gast'];//Todo: https://github.com/Bruno17/fbuch/issues/10#issue-647438245
+        if (!empty($object_id) && $object = $modx->getObject('mvMember', array('id' => $object_id))) {
+            $user_id = $object->get('modx_user_id');
+            $member_status = $object->get('member_status');
+            if (!in_array($member_status,$allowedstates)){
+                return false;
+            }
+            if ($user = $modx->getObject('modUser',array('id'=>$user_id))){
+                
+            } else {
+                $user_id = 0;
+            }
+            
+            if ($user_id == 0) {
+                $firstname = $object->get('firstname');
+                $lastname = $object->get('name'); 
+                $date = new DateTime($object->get('birthdate'));
+                $birthdate = date_format($date,'Y');
+                $user = $modx->newObject('modUser');
+
+                $password = "";
+                for($i=0;$i<50;$i++) {
+                    $password .= chr( (mt_rand(1, 36) <= 26) ? mt_rand(97, 122) : mt_rand(48, 57 ));
+                }                
+               
+                $year = substr($birthdate, 2, 2);
+                $user->set('username', strtolower($firstname) . strtolower($lastname) . $year);
+                $user->set('active', $active);
+                $user->set('password', $password);
+                $profile = $modx->newObject('modUserProfile');
+                $user->addOne($profile);
+                $profile->set('fullname', $firstname . ' ' . $lastname);
+                $profile->set('email', $object->get('email'));
+                $user->save();
+        
+                $user->joinGroup('fbuch', 'Member');//Todo: set usergroup specific to member_status
+                $user_id = $user->get('id');
+                if ($collection = $modx->getCollection('mvMember',['modx_user_id'=>$user_id])){
+                    foreach ($collection as $member){
+                        echo $member->get('name');
+                        $member->set('modx_user_id',0);
+                        $member->save();
+                    }
+                }
+                
+                $object->set('modx_user_id',$user_id);
+                $object->save();
+                
+            }
+            return $user;
+        }
+        return false;
     }
 
     public function scheduleInviteMail($properties) {

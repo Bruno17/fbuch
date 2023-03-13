@@ -35,36 +35,9 @@ if (!empty($config['packageName'])) {
 $classname = $config['classname'];
 $object_id = $modx->getOption('object_id', $scriptProperties, 0);
 
-if ($object = $modx->getObject($classname, array('id' => $object_id))) {
-    $user_id = $object->get('modx_user_id');
-    if ($user = $modx->getObject('modUser',array('id'=>$user_id))){
-        
-    } else {
-        $user_id = 0;
-    }
-    
-    if ($user_id == 0) {
-        $vorname = $object->get('firstname');
-        $lastname = $object->get('name'); 
-        $birthdate = strftime('%Y',strtotime($object->get('birthdate'))); 
-        $user = $modx->newObject('modUser');
-       
-        $year = substr($birthdate, 2, 2);
-        $user->set('username', strtolower($vorname) . strtolower($lastname) . $year);
-        $user->set('active', 0);
-        $profile = $modx->newObject('modUserProfile');
-        $user->addOne($profile);
-        $profile->set('fullname', $vorname . ' ' . $lastname);
-        $profile->set('email', $object->get('email'));
-        $user->save();
+$fbuchCorePath = realpath($modx->getOption('fbuch.core_path', null, $modx->getOption('core_path') . 'components/fbuch')) . '/';
+$modx->getService('fbuch', 'Fbuch', $fbuchCorePath . 'model/fbuch/');
 
-        $user->joinGroup('fbuch', 'Member');
-        
-        $object->set('modx_user_id',$user->get('id'));
-        $object->save();
-        
-    }
-}
-
+$modx->fbuch->createUserFromMember($object_id);
 
 return $modx->error->success();
