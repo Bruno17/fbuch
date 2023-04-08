@@ -1,0 +1,23 @@
+<div class="q-pa-md full-width" style="height: 400px;">
+    <div class="text-h4 text-center"> [[*pagetitle]] </div>
+    <div class="col-12">
+      <q-tabs v-model="tab" align="left" no-caps outside-arrows mobile-arrows class="">
+        <q-tab name="acls" label="Berechtigungen" />
+        <q-tab name="resources" label="Seiten" />
+      </q-tabs>
+    </div>
+  
+    <q-tab-panels v-model="tab">
+      <q-tab-panel name="acls">
+            <q-btn @click="setupAcls" >
+                Berechtigungen einrichten
+            </q-btn>
+      </q-tab-panel>
+  
+      <q-tab-panel name="resources">
+      Setup Resources
+      </q-tab-panel>
+
+    </q-tab-panels>
+  
+  </div>

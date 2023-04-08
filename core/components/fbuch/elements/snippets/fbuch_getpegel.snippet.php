@@ -33,6 +33,7 @@ $data = json_decode($result, true);
 $current_pegel = $data['currentMeasurement']['value'];
 
 //$mm_percent = 0.25;//1cm entspricht 0,25%
+$mm_percent = 1;
 
 $current_pegel_percent = ($current_pegel * 100) /  $max_pegel;
 $max_pegel_ok_percent = ($max_pegel_ok * 100) /  $max_pegel; 

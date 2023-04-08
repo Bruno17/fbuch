@@ -24,7 +24,7 @@ class MyControllerResourceTree extends modRestController {
         $newnodes = [];
         foreach ($tree as $node) {
             $node['haschildren'] = 0;
-            if (is_array($node['children'])){
+            if (isset($node['children']) && is_array($node['children'])){
                 $node['children'] = $this->prepareTreeNodes($node['children']);
                 if (count($node['children']) > 0){
                     $node['haschildren'] = 1;    

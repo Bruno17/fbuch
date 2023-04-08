@@ -496,7 +496,7 @@ class Fbuch {
     }
 
     public function sendElementMessage($comment,$date_id,$name_id,$action='send'){
-        $send_riot = $this->modx->getOption('send_riot', $scriptProperties, '1');
+        $send_riot = $this->modx->getOption('send_riot', null, '1');
         if ($send_riot != '1'){
             return;
         }

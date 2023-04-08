@@ -32,6 +32,7 @@ class BaseController extends modRestController {
         $code = $this->getProperty('code');
         $user_id = $this->modx->user->get('id');
         $email = '';
+        $date_id = null;
         
         $fbuchUser = false;
 
