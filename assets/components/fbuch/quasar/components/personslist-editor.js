@@ -100,6 +100,7 @@ export default {
             addGuest,
             setObmann,
             setCox,
+            useHasPermission,
             hideoptions
         }
     },

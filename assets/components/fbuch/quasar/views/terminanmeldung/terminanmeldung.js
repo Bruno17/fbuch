@@ -133,6 +133,7 @@ export default {
             onUpdateNames,
             RemoveMyself,
             addMyself,
+            useHasPermission,
             urls
         }
     },

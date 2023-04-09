@@ -50,19 +50,25 @@ class MyControllerDateNames extends BaseController {
     public function post() {
         $properties = $this->getProperties();
         $action = $this->getProperty('processaction');
-
+        $persons = $this->getProperty('person');
+        
         $beforePost = $this->beforePost();
         if ($beforePost !== true && $beforePost !== null) {
             return $this->failure($beforePost === false ? $this->errorMessage : $beforePost);
         }
-
+        $member_id = 0;
+        if ($member = $this->getCurrentFbuchUser()){
+            $member_id = $member->get('id');    
+        }
         switch ($action) {
-            case 'add': 
-                $member_id = 0;
-                if ($member = $this->getCurrentFbuchUser()){
-                    $member_id = $member->get('id');    
+            case 'add':
+                $person_id = 0;
+                if (is_array($persons) && isset($persons[0])){
+                    $person_id = $persons[0]; 
                 }
-                if ($this->modx->hasPermission('fbuch_create_fahrten')){
+                if (!empty($person_id) && $person_id == $member_id && $this->modx->hasPermission('fbuch_accept_invite')){
+                    $this->modx->fbuch->addPersonsToDate($properties);
+                } elseif ($this->modx->hasPermission('fbuch_add_persons_to_dates')){
                     $properties['member_id'] = $member_id;
                     $this->modx->fbuch->addPersonsToDate($properties); 
                 } else {
@@ -71,31 +77,41 @@ class MyControllerDateNames extends BaseController {
                     
                 break;
             case 'remove': 
-                $member_id = 0;
-                if ($this->modx->hasPermission('fbuch_create_fahrten')){
-                    $date_id = $this->getProperty('date_id');
-                    $persons = $this->getProperty('person');
-                    $datename_id = $this->getProperty('datename_id',0);
-                    if (!empty($datename_id)){
-                        $this->modx->fbuch->removePersonFromDate($date_id,$datename_id);
-                    } elseif (is_array($persons)){
-                        foreach ($persons as $person){
-                            if ($object = $this->modx->getObject($this->classKey,['member_id'=>$person,'date_id'=>$date_id])){
-                                $datename_id = $object->get('id');
-                                $this->modx->fbuch->removePersonFromDate($date_id,$datename_id);
-                            }
-                        }
+
+                $date_id = $this->getProperty('date_id');
+                $datename_id = $this->getProperty('datename_id',0);
+                if (!empty($datename_id)){
+                    if ($this->modx->hasPermission('fbuch_add_persons_to_dates')){
+                        $this->modx->fbuch->removePersonFromDate($date_id,$datename_id);   
                     } else {
-                        $person = $persons;
-                        if ($object = $this->modx->getObject($this->classKey,['member_id'=>$person,'date_id'=>$date_id])){
-                            $datename_id = $object->get('id');
-                            $this->modx->fbuch->removePersonFromDate($date_id,$datename_id);
-                        }
-                    }     
-                } else {
-                    throw new Exception('Unauthorized', 401);
-                }     
+                        throw new Exception('Unauthorized', 401);
+                    }                     
                     
+                } elseif (is_array($persons)){
+                    foreach ($persons as $person_id){
+                        if ($object = $this->modx->getObject($this->classKey,['member_id'=>$person_id,'date_id'=>$date_id])){
+                            $datename_id = $object->get('id');
+                            if ($this->modx->hasPermission('fbuch_add_persons_to_dates')){
+                                $this->modx->fbuch->removePersonFromDate($date_id,$datename_id);   
+                            } else {
+                                throw new Exception('Unauthorized', 401);
+                            } 
+                        }
+                    }
+                } else {
+                    $person_id = $persons;
+                    if ($object = $this->modx->getObject($this->classKey,['member_id'=>$person_id,'date_id'=>$date_id])){
+                        $datename_id = $object->get('id');
+                        if (!empty($person_id) && $person_id == $member_id && $this->modx->hasPermission('fbuch_accept_invite')){
+                            $this->modx->fbuch->removePersonFromDate($date_id,$datename_id);
+                        } elseif ($this->modx->hasPermission('fbuch_add_persons_to_dates')){
+                            $this->modx->fbuch->removePersonFromDate($date_id,$datename_id);   
+                        } else {
+                            throw new Exception('Unauthorized', 401);
+                        } 
+                    }
+                }                  
+
                 break;                
                                 
         }
@@ -106,9 +122,6 @@ class MyControllerDateNames extends BaseController {
     }    
 
     public function verifyAuthentication() {
-        if (!$this->modx->hasPermission('fbuch_create_fahrten')){
-            return false;
-        }        
         return true;
     }
     

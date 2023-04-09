@@ -14,6 +14,12 @@ class MyControllerModUser extends BaseController {
     public function get() {
 
         $id = $this->getProperty($this->primaryKeyField);
+        if ($id == 'me' && $fbuchUser = $this->getCurrentFbuchUser()) {
+    
+        } else {
+            throw new Exception('Unauthorized', 401);    
+        }
+
         if ($id == 'me') {
 
             $id = $this->modx->user->get('id');
@@ -78,41 +84,6 @@ class MyControllerModUser extends BaseController {
 
 
         return !$this->hasErrors();
-    }
-
-    public function verifyAuthentication() {
-
-        $id = $this->getProperty($this->primaryKeyField);
-        if ($id == 'me' && $fbuchUser = $this->getCurrentFbuchUser()) {
-            return true;
-        }
-        
-        if (!$this->modx->hasPermission('fbuch_view_names')) {
-            return false;
-        }
-        return true;
-    }
-
-    protected function prepareListQueryBeforeCount(xPDOQuery $c) {
-
-        //$joins = '[{"alias":"Boot"}]';
-
-        //$this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);
-
-        return $c;
-    }
-
-    protected function prepareListQueryAfterCountXX(xPDOQuery $c) {
-
-        $c->query['columns'] = array(); //reset default $c->select
-        $c->select(array(
-            'id',
-            'firstname',
-            'name',
-            'member_status'));
-
-        //$c->prepare();echo $c->toSql();
-        return $c;
     }
 
     protected function prepareListObject(xPDOObject $object) {

@@ -840,11 +840,16 @@ class Fbuch {
 
     public function createUserFromMember($object_id,$active=0){
         $modx = &$this->modx;
-        $allowedstates = ['Mitglied','Gast'];//Todo: https://github.com/Bruno17/fbuch/issues/10#issue-647438245
+        //$allowedstates = ['Mitglied','Gast'];//Todo: https://github.com/Bruno17/fbuch/issues/10#issue-647438245
         if (!empty($object_id) && $object = $modx->getObject('mvMember', array('id' => $object_id))) {
             $user_id = $object->get('modx_user_id');
             $member_status = $object->get('member_status');
-            if (!in_array($member_status,$allowedstates)){
+            $allowed = false;
+            if (!empty($member_status) && $member_state = $modx->getObject('mvMemberState',['state'=>$member_status])){
+                $usergroups = $member_state->get('add_to_usergroups');
+                $allowed = !empty($usergroups) ? true : false;
+            }
+            if (!$allowed){
                 return false;
             }
             if ($user = $modx->getObject('modUser',array('id'=>$user_id))){
@@ -866,7 +871,7 @@ class Fbuch {
                 }                
                
                 $year = substr($birthdate, 2, 2);
-                $user->set('username', strtolower($firstname) . strtolower($lastname) . $year);
+                $user->set('username', trim(strtolower($firstname)) . trim(strtolower($lastname)) . $year);
                 $user->set('active', $active);
                 $user->set('password', $password);
                 $profile = $modx->newObject('modUserProfile');
@@ -874,12 +879,13 @@ class Fbuch {
                 $profile->set('fullname', $firstname . ' ' . $lastname);
                 $profile->set('email', $object->get('email'));
                 $user->save();
-        
-                $user->joinGroup('fbuch', 'Member');//Todo: set usergroup specific to member_status
+                $groups = explode(',',$usergroups);
+                foreach ($groups as $group){
+                    $user->joinGroup($group, 'Member');                  
+                }
                 $user_id = $user->get('id');
                 if ($collection = $modx->getCollection('mvMember',['modx_user_id'=>$user_id])){
                     foreach ($collection as $member){
-                        echo $member->get('name');
                         $member->set('modx_user_id',0);
                         $member->save();
                     }

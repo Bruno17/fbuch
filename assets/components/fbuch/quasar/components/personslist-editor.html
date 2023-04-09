@@ -1,7 +1,7 @@
 
 <div class="q-col-gutter-md q-gutter-md q-mb-sm row">
 
-    <div class="col-md-4 col-sm-12 col-xs-12 q-col-gutter-md content-start row">
+    <div v-if="useHasPermission('fbuch_add_persons_to_dates')" class="col-md-4 col-sm-12 col-xs-12 q-col-gutter-md content-start row">
         <api_select ref="personSelect" class="col-md-12 col-sm-12 col-xs-12"
             v-model="selectionState.person" @update:model-value="onSelectPerson" :emit-value="false"
             label="Person hinzufügen" controller="Names?limit=100000&returntype=options"></api_select>

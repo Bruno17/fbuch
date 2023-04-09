@@ -73,7 +73,7 @@
         "action":"index",
         "parent":"Vereinsverwaltung",
         "namespace":"migx",
-        "params":"&configs=mv_mitglieder:fbuch||mv_roles:fbuch||mv_gruppen:fbuch||mv_families:fbuch||mv_beitragstypen:fbuch||mv_dooraccesscodes:fbuch",
+        "params":"&configs=mv_mitglieder:fbuch||mv_roles:fbuch||mv_gruppen:fbuch||mv_families:fbuch||mv_beitragstypen:fbuch||mv_member_states||mv_dooraccesscodes:fbuch",
         "menuIndex":1
       },
       {

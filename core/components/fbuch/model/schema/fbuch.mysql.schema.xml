@@ -301,7 +301,14 @@
         <field key="colorstyle" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="linkto_bootsgattung_name" dbtype="varchar" phptype="string" precision="255" null="false" default="" />   
         <field key="linkto_boot_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
-    </object>     
+    </object> 
+
+    <object class="mvMemberState" table="mv_member_states" extends="xPDOSimpleObject">
+        <field key="state" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="description" dbtype="text" phptype="string" null="false" default="" /> 
+        <field key="add_to_usergroups" dbtype="text" phptype="string" null="false" default="" /> 
+        <field key="remove_from_usergroups" dbtype="text" phptype="string" null="false" default="" /> 
+    </object>           
     
     <object class="mvMember" table="mv_members" extends="xPDOSimpleObject">
     	<field key="firstname" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
@@ -473,7 +480,6 @@
         <field key="file_extensions" dbtype="tinytext" phptype="string" />
         <field key="headers" dbtype="mediumtext" phptype="array" />
         <field key="binary" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
-
     </object>  
     
     <object class="mvDoorAccesscode" table="mv_door_accesscodes" extends="xPDOSimpleObject">

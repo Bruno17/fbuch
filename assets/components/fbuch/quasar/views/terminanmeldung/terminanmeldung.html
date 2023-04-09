@@ -45,7 +45,7 @@
 
     </q-card>
 
-    <div class="q-py-md">
+    <div v-if="useHasPermission('fbuch_create_fahrten')" class="q-py-md">
         <q-btn label="Zum Fahrtenbuch" :href="urls.fahrtenbuch" color="primary"  />
     </div>
 
