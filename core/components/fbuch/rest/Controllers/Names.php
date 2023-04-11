@@ -82,23 +82,29 @@ class MyControllerNames extends BaseController {
 
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
 
-        //$joins = '[{"alias":"Boot"}]';
+        $joins = '[{"alias":"State"}]';
 
-        //$this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);
+        $this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);         
 
-        $c->where(array('deleted' => 0, 'member_status:IN' => array(
-                'Mitglied',
-                'VHS',
-                'Gast')));
+        $c->where(array('deleted' => 0, 'State.can_be_invited' => 1));             
 
         return $c;
     }
 
     protected function prepareListQueryAfterCount(xPDOQuery $c) {
 
-        $c->query['columns'] = array(); //reset default $c->select
+        if (isset($c->query['columns']) && is_array($c->query['columns'])){
+            foreach ($c->query['columns'] as $key => $column){
+                if (strstr($column,'mvMember')){
+                    unset($c->query['columns'][$key]);
+                }
+            }
+        }
+
+        //$c->query['columns'] = array(); //reset default $c->select
+
         $c->select(array(
-            'id',
+            'mvMember.id',
             'firstname',
             'name',
             'member_status'));

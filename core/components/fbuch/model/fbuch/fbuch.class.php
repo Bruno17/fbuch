@@ -840,7 +840,6 @@ class Fbuch {
 
     public function createUserFromMember($object_id,$active=0){
         $modx = &$this->modx;
-        //$allowedstates = ['Mitglied','Gast'];//Todo: https://github.com/Bruno17/fbuch/issues/10#issue-647438245
         if (!empty($object_id) && $object = $modx->getObject('mvMember', array('id' => $object_id))) {
             $user_id = $object->get('modx_user_id');
             $member_status = $object->get('member_status');
@@ -1242,17 +1241,27 @@ class Fbuch {
         return true;
     }
 
+    public function hasPermission($pm,$user,$context_key) {
+        if ($context = $this->modx->getObject('modContext',['key'=>$context_key])){
+            $state = $context->checkPolicy($pm,null,$user);    
+        }
+        return $state;
+    }    
+
     public function checkMemberMailinglists($member_id) {
         $modx = &$this->modx;
-        //remove person from fbuchMailinglist, if not longer Mitglied,Gast,VHS
+        //remove person from fbuchMailinglist, if not longer can be invited
         if ($object = $modx->getObject('mvMember', $member_id)) {
+            $can_be_invited = false;
+            $modx_user_id = $object->get('modx_user_id');
             $member_status = $object->get('member_status');
+            if ($state = $modx->getObject('mvMemberState',['state'=>$member_status])){
+                $can_be_invited = (bool) $state->get('can_be_invited');    
+            }
             $deleted = $object->get('deleted');
-            $member_status = !empty($deleted) ? 'deleted' : $member_status;
-            if (!in_array($member_status, array(
-                'Mitglied',
-                'Gast',
-                'VHS'))) {
+            $can_be_invited = !empty($deleted) ? false : $can_be_invited;
+
+            if (!$can_be_invited) {
                 $c = $modx->newQuery('fbuchMailinglistNames');
                 $c->where(array('member_id' => $member_id));
                 if ($collection = $modx->getCollection('fbuchMailinglistNames', $c)) {

@@ -308,6 +308,8 @@
         <field key="description" dbtype="text" phptype="string" null="false" default="" /> 
         <field key="add_to_usergroups" dbtype="text" phptype="string" null="false" default="" /> 
         <field key="remove_from_usergroups" dbtype="text" phptype="string" null="false" default="" /> 
+        <field key="can_be_added_to_entry" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="can_be_invited" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
     </object>           
     
     <object class="mvMember" table="mv_members" extends="xPDOSimpleObject">
@@ -383,7 +385,8 @@
         <aggregate alias="Beitragstyp" class="mvBeitragstyp" foreign="id" local="beitragstyp_id" cardinality="one" owner="foreign" /> 
         <composite alias="RoleLinks" class="mvMemberRoleLink" local="id" foreign="member_id" cardinality="many" owner="local" />
         <aggregate alias="Family" class="mvFamily" local="family_id" foreign="id" cardinality="one" owner="foreign" />
-        <aggregate alias="User" class="modUser" foreign="id" local="modx_user_id" cardinality="one" owner="foreign" />         
+        <aggregate alias="User" class="modUser" foreign="id" local="modx_user_id" cardinality="one" owner="foreign" /> 
+        <aggregate alias="State" class="mvMemberState" foreign="state" local="member_status" cardinality="one" owner="foreign" />         
     
         <aggregate alias="DoorAccesscode" class="mvDoorAccesscode" local="id" foreign="member_id" cardinality="one" owner="local" />
         <composite alias="Nutzergruppen" class="fbuchBootsNutzergruppenMembers" local="id" foreign="member_id" cardinality="many" owner="local" />

@@ -82,6 +82,18 @@
           "default":"",
           "useDefaultIfEmpty":"0",
           "pos":4
+        },
+        {
+          "MIGX_id":1334,
+          "field":"can_be_added_to_entry",
+          "caption":"can_be_added_to_entry",
+          "pos":5
+        },
+        {
+          "MIGX_id":1335,
+          "field":"can_be_invited",
+          "caption":"can_be_invited",
+          "pos":6
         }
       ],
       "pos":1
@@ -175,12 +187,22 @@
       "MIGX_id":4,
       "dataIndex":"add_to_usergroups",
       "header":"add_to_usergroups"
+    },
+    {
+      "MIGX_id":6,
+      "dataIndex":"can_be_added_to_entry",
+      "header":"can_be_added_to_entry"
+    },
+    {
+      "MIGX_id":7,
+      "dataIndex":"can_be_invited",
+      "header":"can_be_invited"
     }
   ],
   "createdby":1,
   "createdon":"2023-04-09 19:03:40",
   "editedby":1,
-  "editedon":"2023-04-09 19:09:58",
+  "editedon":"2023-04-11 11:18:56",
   "deleted":0,
   "deletedon":null,
   "deletedby":0,

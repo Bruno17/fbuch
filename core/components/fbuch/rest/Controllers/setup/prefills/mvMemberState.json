@@ -4,30 +4,40 @@
         "state":"Mitglied",
         "description":"reguläres Vereinsmitglied",
         "add_to_usergroups":"fbuch",
-        "remove_from_usergroups":"fbuch_guest"
+        "remove_from_usergroups":"fbuch_guest",
+        "can_be_invited":1,
+        "can_be_added_to_entry":1       
     },
     {
         "state":"Gast",
         "description":"Gastruderer oder sonstiger eingetragener Gast",
         "add_to_usergroups":"fbuch_guest",
-        "remove_from_usergroups":"fbuch,fbuch_instructor"
+        "remove_from_usergroups":"fbuch,fbuch_instructor",
+        "can_be_invited":1,
+        "can_be_added_to_entry":1       
     },
     {
         "state":"VHS",
         "description":"Gastruderer von der VHS",
         "add_to_usergroups":"fbuch_guest",
-        "remove_from_usergroups":"fbuch,fbuch_instructor"
+        "remove_from_usergroups":"fbuch,fbuch_instructor",
+        "can_be_invited":1,
+        "can_be_added_to_entry":1       
     },    
     {
         "state":"Ausgetreten",
         "description":"Ausgetretenes Mitglied",
         "add_to_usergroups":"",
-        "remove_from_usergroups":"fbuch,fbuch_guest,fbuch_instructor"
+        "remove_from_usergroups":"fbuch,fbuch_guest,fbuch_instructor",
+        "can_be_invited":0,
+        "can_be_added_to_entry":0     
     },    
     {
         "state":"Unbekannt",
         "description":"Aus unbekannten Gründen in der Mitgliederdatenbank",
         "add_to_usergroups":"",
-        "remove_from_usergroups":"fbuch,fbuch_guest,fbuch_instructor"
+        "remove_from_usergroups":"fbuch,fbuch_guest,fbuch_instructor",
+        "can_be_invited":0,
+        "can_be_added_to_entry":0            
     }             
 ]

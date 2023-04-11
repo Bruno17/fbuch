@@ -28,7 +28,8 @@ class MyControllerSetupPrefillTable extends BaseController {
             }
             
             if ($object = $this->modx->getObject($classname,[$keyfield => $item[$keyfield]])){
-                
+                $object->fromArray($item);
+                $object->save();                
             } else {
                 $object = $this->modx->newObject($classname);
                 $object->fromArray($item);

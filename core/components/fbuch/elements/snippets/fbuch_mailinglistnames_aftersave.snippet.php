@@ -49,7 +49,7 @@ switch ($configs) {
 
         }
         
-        //remove person from fbuchMailinglist, if not longer Mitglied,Gast,VHS
+        //remove person from fbuchMailinglist, if not longer can be invited
         $member_id = $object->get('id');
         $fbuch->checkMemberMailinglists($member_id);
 

@@ -54,21 +54,26 @@ switch ($configs) {
                 if (!empty($add_to_usergroups)) {
                     $groups = explode(',',$add_to_usergroups);
                     foreach ($groups as $group){
-                        $user->joinGroup(trim($group),'Member');
+                        if (!$user->isMember($group)){
+                            $user->joinGroup(trim($group),'Member');
+                        }
                     }
                 }
                 $remove_from_usergroups = $state_object->get('remove_from_usergroups');
                 if (!empty($remove_from_usergroups)) {
                     $groups = explode(',',$remove_from_usergroups);
                     foreach ($groups as $group){
-                        $user->leaveGroup(trim($group));
+                        if ($user->isMember($group)){
+                            $user->leaveGroup(trim($group));    
+                        }
                     }
-                }                
+                }
+                $modx->cacheManager->flushPermissions();                
             }            
 
         }
         
-        //remove person from fbuchMailinglist, if not longer Mitglied,Gast,VHS
+        //remove person from fbuchMailinglist, if not longer can be invited
         $member_id = $object->get('id');
         $fbuch->checkMemberMailinglists($member_id);
 

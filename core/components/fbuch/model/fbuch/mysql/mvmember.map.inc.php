@@ -657,6 +657,14 @@ $xpdo_meta_map['mvMember']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
+    'State' => 
+    array (
+      'class' => 'mvMemberState',
+      'foreign' => 'state',
+      'local' => 'member_status',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
     'DoorAccesscode' => 
     array (
       'class' => 'mvDoorAccesscode',

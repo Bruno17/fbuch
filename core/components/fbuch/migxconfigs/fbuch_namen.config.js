@@ -58,7 +58,7 @@
           "display":"",
           "sourceFrom":"config",
           "sources":"",
-          "inputOptionValues":"Unbekannt||Mitglied||Gast||VHS",
+          "inputOptionValues":"@CHUNK input_options_memberstates",
           "default":"",
           "useDefaultIfEmpty":"0",
           "pos":5

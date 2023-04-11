@@ -73,7 +73,7 @@
         "action":"index",
         "parent":"Vereinsverwaltung",
         "namespace":"migx",
-        "params":"&configs=mv_mitglieder:fbuch||mv_roles:fbuch||mv_gruppen:fbuch||mv_families:fbuch||mv_beitragstypen:fbuch||mv_member_states||mv_dooraccesscodes:fbuch",
+        "params":"&configs=mv_mitglieder:fbuch||mv_roles:fbuch||mv_gruppen:fbuch||mv_families:fbuch||mv_beitragstypen:fbuch||mv_member_states:fbuch||mv_dooraccesscodes:fbuch",
         "menuIndex":1
       },
       {
@@ -3963,6 +3963,11 @@
           "name":"mv_Bestandserhebung_blsv",
           "file":"mv_bestandserhebung_blsv.chunk.html",
           "category":"mv_content_chunks"
+        },
+        {
+          "name":"input_options_memberstates",
+          "file":"input_options_memberstates.chunk.html",
+          "category":"mv"
         }
       ],
       "templates":[

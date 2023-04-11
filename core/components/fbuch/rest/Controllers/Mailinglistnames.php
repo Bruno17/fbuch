@@ -12,11 +12,11 @@ class MyControllerMailinglistnames extends BaseController {
         throw new Exception('Unauthorized', 401);
     }
     
-    public function afterPut(){
+    public function afterPut(array &$objectArray){
         $this->updateDatesMailinglistNames();    
     }
     
-    public function afterPost(){
+    public function afterPost(array &$objectArray){
         $this->updateDatesMailinglistNames();       
     }
 
@@ -123,33 +123,6 @@ class MyControllerMailinglistnames extends BaseController {
         $returntype = $this->getProperty('returntype');
         $list_id = $this->getProperty('list_id');
         $where = array('list_id' => $list_id);
-        /*
-        $datewhere = array();
-        switch ($returntype) {
-        case 'open':
-        $this->setProperty('dir','ASC');
-        $where['km'] = 0;
-        $datewhere['date:<='] = strftime('%Y-%m-%d 23:59:59');
-        $datewhere['start_time:<='] = strftime('%H:%M');
-        $datewhere['OR:date:<'] = strftime('%Y-%m-%d 00:00:00');
-        break;
-        case 'sheduled':
-        $this->setProperty('dir','ASC');
-        $where['km'] = 0;
-        $where['date:>='] = strftime('%Y-%m-%d 00:00:00');
-        
-        $datewhere['date:>='] = strftime('%Y-%m-%d 00:00:00');
-        $datewhere['start_time:>'] = strftime('%H:%M');
-        $datewhere['OR:date:>'] = strftime('%Y-%m-%d 23:59:00');                
-        
-        break;                
-        case 'finished':
-        $this->setProperty('dir','DESC');
-        $where['km:>'] = 0;
-        break;                
-        } 
-        */
-
 
         $joins = '[{"alias":"Member","selectfields":"id,name,firstname,member_status"}]';
 
