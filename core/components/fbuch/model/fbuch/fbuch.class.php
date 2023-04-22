@@ -1357,10 +1357,10 @@ class Fbuch {
                 }
                 if (empty($member_filter_id)) {
                     $c = $modx->newQuery('fbuchMailinglistNames');
-                    //only pull members with status Gast, VHS, Mitglied
-                    //Todo, create a setting for the status, which members to fetch
+                    //only pull members which can be invited
                     $c->leftjoin('mvMember', 'Member');
-                    $c->where(array('list_id' => $mailinglist_id,'Member.member_status:IN' => ['Mitglied','Gast','VHS']));
+                    $c->leftjoin('mvMemberState','State','State.state = Member.member_status');
+                    $c->where(array('list_id' => $mailinglist_id,'State.can_be_invited' => 1));
                     if ($names = $modx->getCollection('fbuchMailinglistNames', $c)) {
                         foreach ($names as $name) {
                             $member_id = $name->get('member_id');
