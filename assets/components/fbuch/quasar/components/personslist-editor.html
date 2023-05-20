@@ -33,7 +33,7 @@
 
     <div class="col-lg-4 col-md-8 col-sm-12 col-xs-12 q-col-gutter-md content-start row">
 
-        <div class="" class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <q-list bordered separator>
                 <template v-if="props.entry.names && props.entry.names.length == 0">
                     <q-item>
@@ -65,7 +65,7 @@
                             </q-avatar>
                         </q-item-section>    
                         <q-item-section side top class="q-pa-none" style="padding-left:0;">
-                            <q-btn v-if="!name.hidemenu" color="primary" text-color="white" round icon="more_vert">
+                            <q-btn v-if="!name.hidemenu" color="primary" text-color="white" round icon="navigate_next">
                                 <q-menu auto-close anchor="bottom right" self="top right"
                                     :offset="[0, 5]">
                                     <q-list dense bordered separator>

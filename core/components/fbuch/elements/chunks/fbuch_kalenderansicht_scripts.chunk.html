@@ -1,8 +1,13 @@
-
-
-    <!-- at end of body, AFTER Quasar script(s): -->
-    <script src="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@next/dist/QCalendarMonth.umd.min.js"></script>
-
-    <!-- If you need Timestamp functions: -->
-    <script src="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@next/dist/Timestamp.umd.min.js"></script>
+[[!fbuchStoreAndReadAssets? 
+&url=`https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@next/dist/QCalendarMonth.umd.min.js`
+&filename=`QCalendarMonth.umd.min.js`
+&ph=`qcm.js`
+]]
+<script src="[[!+qcm.js]]"></script>
+[[!fbuchStoreAndReadAssets? 
+&url=`https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@next/dist/Timestamp.umd.min.js`
+&filename=`Timestamp.umd.min.js`
+&ph=`ts.js`
+]]
+<script src="[[!+ts.js]]"></script>
 

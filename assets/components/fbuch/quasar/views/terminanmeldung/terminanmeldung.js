@@ -1,10 +1,10 @@
-import personslist from '../../components/personslist-editor.js'
+import api_select from '../../components/api_select.js'
 import { useLoadPermissions, useLoadCurrentUser, useLoadCurrentMember, useHasPermission } from "../../composables/helpers.js";
 
 export default {
 
     components: {
-        personslist: personslist
+        api_select: api_select
     },
     setup() {
 
@@ -14,6 +14,9 @@ export default {
         const currentUser = ref({});
         const params = Vue.$router.currentRoute._value.params;
         const id = params.id || 'new';
+        const selectionState = ref({});
+        const personSelect = ref();
+        const newguest = ref({});
 
         onMounted(() => {
             useLoadPermissions();
@@ -42,6 +45,8 @@ export default {
                     const object = response.data.object;
                     entry.value = object;
                     urls.value.fahrtenbuch = '/fahrtenbuch/fahrtenbuch.html/#/' + Quasar.date.formatDate(entry.value.date, 'YYYY/MM/DD')
+                    urls.value.dayevents = '/termine/kalenderansicht.html/#/events/day/' + Quasar.date.formatDate(entry.value.date, 'YYYY/MM/DD')
+                    console.log(urls);
                     prepareEvent();
                 })
                 .catch(function (error) {
@@ -126,15 +131,70 @@ export default {
             }
         }
 
+        function onSelectPerson(value) {
+            if (!entry.names) {
+                entry.names = [];
+            }
+            const id = value.value;
+            const exists = findPerson(id);
+            selectionState.value.person = 0;
+            personSelect.value.clearSelection();
+            if (exists) {
+                return;
+            }
+            //props.entry.names.push(value);
+            //emit('updateNames','add',value);
+            onUpdateNames('add', value);
+
+        } 
+        
+        function findPerson(id) {
+            let result = false;
+            entry.value.names.forEach((person) => {
+                if (person.value == id) {
+                    result = person;
+                }
+            })
+            return result;
+        } 
+
+        function addGuest() {
+            const value = {
+                guestname: newguest.value.name || '',
+                guestemail: newguest.value.email || '',
+                member_status: 'Gasteintrag'
+            }
+            if (value.name != '') {
+                if (!entry.names) {
+                    entry.names = [];
+                }
+                //props.entry.names.push(value);
+                onUpdateNames('add',value);
+            }
+            newguest.value = {};
+        }  
+        
+        function removePerson(index) {
+            const name = entry.value.names[index];
+            //entry.value.names.splice(index, 1);
+            onUpdateNames('remove',name);
+        }        
+
 
         return {
             entry,
             currentUser,
+            newguest,
             onUpdateNames,
             RemoveMyself,
             addMyself,
             useHasPermission,
-            urls
+            selectionState,
+            urls,
+            onSelectPerson,
+            personSelect,
+            addGuest,
+            removePerson
         }
     },
 

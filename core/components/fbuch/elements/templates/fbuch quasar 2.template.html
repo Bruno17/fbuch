@@ -11,11 +11,116 @@
     <title>[[++site_name]] - [[*pagetitle]]</title>
     <base href="[[!++site_url]]" />
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
-    <link href="https://cdn.jsdelivr.net/npm/quasar@2.7.1/dist/quasar.prod.css" rel="stylesheet" type="text/css">
+    [[!fbuchStoreAndReadAssets? 
+    &url=`https://fonts.gstatic.com/s/materialicons/v140/flUhRq6tzZclQEJ-Vdg-IuiaDsNZ.ttf`
+    &filename=`material_icons.ttf`
+    &ph=`material_icons`
+    ]] 
+    [[!fbuchStoreAndReadAssets? 
+    &url=`https://fonts.gstatic.com/s/roboto/v30/KFOkCnqEu92Fr1MmgWxP.ttf`
+    &filename=`roboto100.ttf`
+    &ph=`roboto100`
+    ]]   
+    [[!fbuchStoreAndReadAssets? 
+    &url=`https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmSU5vAw.ttf`
+    &filename=`roboto300.ttf`
+    &ph=`roboto300`
+    ]] 
+    [[!fbuchStoreAndReadAssets? 
+    &url=`https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Me5Q.ttf`
+    &filename=`roboto400.ttf`
+    &ph=`roboto400`
+    ]] 
+    [[!fbuchStoreAndReadAssets? 
+    &url=`https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9vAw.ttf`
+    &filename=`roboto500.ttf`
+    &ph=`roboto500`
+    ]] 
+    [[!fbuchStoreAndReadAssets? 
+    &url=`https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlvAw.ttf`
+    &filename=`roboto700.ttf`
+    &ph=`roboto700`
+    ]] 
+    [[!fbuchStoreAndReadAssets? 
+    &url=`https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmYUtvAw.ttf`
+    &filename=`roboto900.ttf`
+    &ph=`roboto900`
+    ]]  
+                                   
+    <style type="text/css">
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url([[!+material_icons]]) format('truetype');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 100;
+  src: url([[!+roboto100]]) format('truetype');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: url([[!+roboto300]]) format('truetype');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url([[!+roboto400]]) format('truetype');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: url([[!+roboto500]]) format('truetype');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: url([[!+roboto700]]) format('truetype');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 900;
+  src: url([[!+roboto900]]) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+}
+    </style>
+    [[-!fbuchStoreAndReadAssets? 
+    &url=`https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons`
+    &filename=`material_icons.css`
+    &ph=`mic`
+    ]]
+    <link href="[[-!+mic]]" rel="stylesheet" type="text/css">
+    [[!fbuchStoreAndReadAssets? 
+    &url=`https://cdn.jsdelivr.net/npm/quasar@2.12.0/dist/quasar.prod.css `
+    &filename=`quasar.prod.2.12.0.css`
+    &ph=`qpc`
+    ]]
+    <link href="[[!+qpc]]" rel="stylesheet" type="text/css">
     [[*headscripts]]
   </head>
 
+  
   <body>
     <!-- example of injection point where you write your app template -->
     <div id="q-app">
@@ -60,13 +165,48 @@
     ]]
 
     <!-- Add the following at the end of your body tag -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/quasar@2.7.4/dist/quasar.umd.prod.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/quasar@2.7.4/dist/lang/de.umd.prod.js"></script>
-    <script src="https://unpkg.com/vue-router@4"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/vue-demi"></script>
-    <script src="https://unpkg.com/pinia"></script>
+    [[!fbuchStoreAndReadAssets? 
+    &url=`https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js`
+    &filename=`vue.global.prod.js`
+    &ph=`vue.global.prod.js`
+    ]]
+    <script src="[[!+vue.global.prod.js]]"></script>
+    [[!fbuchStoreAndReadAssets? 
+    &url=`https://cdn.jsdelivr.net/npm/quasar@2.12.0/dist/quasar.umd.prod.js`
+    &filename=`quasar.umd.prod.2.12.0.js`
+    &ph=`quasar.umd.prod.js`
+    ]]
+    <script src="[[!+quasar.umd.prod.js]]"></script>
+    [[!fbuchStoreAndReadAssets? 
+    &url=`https://cdn.jsdelivr.net/npm/quasar@2.12.0/dist/lang/de.umd.prod.js`
+    &filename=`de.umd.prod.2.12.0.js`
+    &ph=`de.umd.prod.js`
+    ]]
+    <script src="[[!+de.umd.prod.js]]"></script>
+    [[!fbuchStoreAndReadAssets? 
+    &url=`https://unpkg.com/vue-router@4`
+    &filename=`vue-router4.js`
+    &ph=`vue-router4.js`
+    ]]
+    <script src="[[!+vue-router4.js]]"></script>
+    [[!fbuchStoreAndReadAssets? 
+    &url=`https://unpkg.com/axios/dist/axios.min.js`
+    &filename=`axios.min.js`
+    &ph=`axios.min.js`
+    ]]
+    <script src="[[!+axios.min.js]]"></script>
+    [[!fbuchStoreAndReadAssets? 
+    &url=`https://unpkg.com/vue-demi`
+    &filename=`vue-demi.js`
+    &ph=`vue-demi.js`
+    ]]
+    <script src="[[!+vue-demi.js]]"></script>
+    [[!fbuchStoreAndReadAssets? 
+    &url=`https://unpkg.com/pinia`
+    &filename=`pinia.js`
+    &ph=`pinia.js`
+    ]]
+    <script src="[[!+pinia.js]]"></script>
 
     <script>
         const modx_options = {

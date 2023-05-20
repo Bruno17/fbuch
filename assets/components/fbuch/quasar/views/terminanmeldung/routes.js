@@ -1,4 +1,5 @@
 import terminanmeldung from './terminanmeldung.js'
+import eventcomments from './eventcomments.js'
 
 const routes = [
   {
@@ -10,7 +11,12 @@ const routes = [
     path: '/:id',
     name: 'terminanmeldung',
     component: terminanmeldung
-  }             
+  },
+  {
+    path: '/comments/:id',
+    name: 'eventcomments',
+    component: eventcomments
+  }              
 ]
 
 export default routes

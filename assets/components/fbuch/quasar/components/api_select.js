@@ -43,7 +43,8 @@ export default {
           const needle = val.toLowerCase();
           filtered_options.value = names_options.value.filter(v => v.label.toLowerCase().indexOf(needle) > -1)
       })
-  }     
+  }  
+  
   
       return { 
         names_options, 
@@ -51,7 +52,8 @@ export default {
         filterFn, 
         fieldRef, 
         loadNames, 
-        clearSelection}
+        clearSelection
+      }
     },
     template: `
     <q-select
@@ -62,10 +64,12 @@ export default {
     fill-input
     map-options
     emit-value
+    stack-label
     input-debounce="0"
     :options="filtered_options"
     @filter="filterFn"
     v-on:input-value="$emit('input-value', $event.value)" 
+    :input-style="{border:'1px solid #aaaaaa','border-radius':'4px',width:'100%',flex:'none',padding:'5px' }"
     >
     <template v-slot:no-option>
       <q-item>

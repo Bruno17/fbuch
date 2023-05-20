@@ -14,7 +14,6 @@ class MyControllerDateNames extends BaseController {
         } else {
             throw new Exception('Unauthorized', 401);
         }
-        $this->setProperty('fahrt_id',$this->object->get('fahrt_id'));
         return !$this->hasErrors();
     }
 
@@ -40,11 +39,6 @@ class MyControllerDateNames extends BaseController {
         */
 
         return !$this->hasErrors();
-    }
-
-    public function afterDelete(array &$objectArray) {
-        $fahrt_id = $this->getProperty('fahrt_id');
-        $this->modx->fbuch->forceObmann($fahrt_id);
     }
 
     public function post() {
@@ -76,8 +70,7 @@ class MyControllerDateNames extends BaseController {
                 }     
                     
                 break;
-            case 'remove': 
-
+            case 'remove':
                 $date_id = $this->getProperty('date_id');
                 $datename_id = $this->getProperty('datename_id',0);
                 if (!empty($datename_id)){
@@ -119,6 +112,44 @@ class MyControllerDateNames extends BaseController {
         $objectArray = [];
         $this->afterPost($objectArray);
         return $this->success('',$objectArray);
+    } 
+    
+    protected function prepareListQueryBeforeCount(xPDOQuery $c) {
+        $date_id = $this->getProperty('date_id',false);
+        $joins = '[{"alias":"Member","selectfields":"id,name,firstname,member_status"}]';
+
+        $this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);         
+
+        if ($date_id){
+            $c->where(['date_id' => $date_id]);
+        }
+
+        $c->where(['Member.id:!=' => 'null']);
+
+        $c->sortby('Member.name','ASC');
+        $c->sortby('Member.firstname','ASC');
+        
+        return $c;
+    }
+
+    protected function prepareListObject(xPDOObject $object) {
+
+        $output = $object->toArray('', false, true);
+
+        $returntype = $this->getProperty('returntype');
+        switch ($returntype) {
+            case 'options':
+                $output['label'] = $object->get('Member_name') . ' ' . $object->get('Member_firstname');
+                if ($object->get('guestname') != '') {
+                    $output['label'] = $object->get('guestname') . ' (Gasteintrag)' ;
+                } elseif ($object->get('Member_member_status') != 'Mitglied') {
+                    $output['label'] .= ' (' . $object->get('Member_member_status') . ')';
+                }
+                $output['value'] = $object->get('Member_id');
+                break;
+        }
+
+        return $output;
     }    
 
     public function verifyAuthentication() {
