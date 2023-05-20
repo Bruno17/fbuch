@@ -25,36 +25,13 @@ class BaseController extends modRestController {
         }
     }     
 
-    public function getCurrentFbuchUser() {
+    public function getCurrentFbuchMember() {
         $modx = &$this->modx;
-
-        $iid = $this->getProperty('iid');
-        $code = $this->getProperty('code');
         $user_id = $this->modx->user->get('id');
-        $email = '';
-        $date_id = null;
-        
-        $fbuchUser = false;
+        //try to get fbuch Member by logged in MODX User
+        $fbuchMember = $this->modx->getObject('mvMember', array('modx_user_id' => $user_id));    
 
-        //try to get fbuch User by invite - mail - link
-        if ($invite_o = $modx->getObject('fbuchDateInvited', $iid)) {
-            $date_id = $invite_o->get('date_id');
-            $member_id = $invite_o->get('member_id');
-            if ($name_o = $invite_o->getOne('Member')) {
-                $email = $this->getNameEmail($name_o);
-            }
-        }
-        
-        if ($date_id && $email && $code == md5($date_id . $email . $iid)){
-            //code matches
-            $fbuchUser = $name_o;    
-        } else if (!empty($user_id)){
-            //try to get fbuch User by logged in MODX User
-            $fbuchUser = $this->modx->getObject('mvMember', array('modx_user_id' => $user_id));    
-        }
-
-        return $fbuchUser;
-
+        return $fbuchMember;
     }
     
     public function getNameEmail($object) {

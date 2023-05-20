@@ -16,7 +16,7 @@ class MyControllerNames extends BaseController {
         $id = $this->getProperty($this->primaryKeyField);
         if ($id == 'me') {
 
-            if ($fbuchUser = $this->getCurrentFbuchUser()) {
+            if ($fbuchUser = $this->getCurrentFbuchMember()) {
                 $id = $fbuchUser->get('id');
             }
 
@@ -70,7 +70,7 @@ class MyControllerNames extends BaseController {
     public function verifyAuthentication() {
 
         $id = $this->getProperty($this->primaryKeyField);
-        if ($id == 'me' && $fbuchUser = $this->getCurrentFbuchUser()) {
+        if ($id == 'me' && $fbuchUser = $this->getCurrentFbuchMember()) {
             return true;
         }
         

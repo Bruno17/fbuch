@@ -273,7 +273,7 @@ class MyControllerDates extends BaseController {
         switch ($returntype) {
             case 'selfregistered_names':    
                 $member_id = 99999999999; 
-                if ($member = $this->getCurrentFbuchUser()){
+                if ($member = $this->getCurrentFbuchMember()){
                     $member_id = $member->get('id');
                 }                
                 $properties['where'] = '{"registeredby_member":"' . $member_id . '","date_id":"' . $id . '"}';

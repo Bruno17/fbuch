@@ -32,7 +32,7 @@ class MyControllerDateComments extends BaseController {
 
     public function beforePost() {
         if ($this->modx->hasPermission('fbuch_accept_invite')) {
-            if ($member = $this->getCurrentFbuchUser()){
+            if ($member = $this->getCurrentFbuchMember()){
                 $this->object->set('member_id',$member->get('id'));
             }
                $date = new DateTime;
@@ -48,7 +48,7 @@ class MyControllerDateComments extends BaseController {
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
 
         $date_id = $this->getProperty('date_id',false);
-        $this->currentFbuchUser = $this->getCurrentFbuchUser();        
+        $this->currentFbuchUser = $this->getCurrentFbuchMember();        
 
         $joins = '[{"alias":"Member","selectfields":"name,firstname"}]';
 

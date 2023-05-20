@@ -220,7 +220,7 @@ class Fbuch {
         $modx = &$this->modx;
         $date_id = $modx->getOption('date_id', $properties, '');
         $redirect = $modx->getOption('redirect', $properties, 0);
-        $member_id = $modx->getOption('member_id', $properties, '');
+        $current_member_id = $modx->getOption('current_member_id', $properties, '');
         $persons = $modx->getOption('person', $properties, '');
         $guestnames = $modx->getOption('guestname', $properties, '');
         $removepersons = $modx->getOption('remove_person', $properties, '');
@@ -247,7 +247,7 @@ class Fbuch {
                 foreach ($persons as $index => $person) {
                     if (!empty($person) && $name_o = $modx->getObject('mvMember', $person)) {
                         if ($datename_o = $modx->getObject('fbuchDateNames', array('date_id' => $date_id, 'member_id' => $person))) {
-                            if ($person == $member_id){
+                            if ($person == $current_member_id){
                                 $datename_o->set('registeredby_member', 0);
                                 $datename_o->save();
                             }
@@ -256,13 +256,13 @@ class Fbuch {
                             $datename_o->set('date_id', $date_id);
                             $datename_o->set('member_id', $person);
                             $datename_o->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
-                            if ($person != $member_id){
-                                $datename_o->set('registeredby_member', $member_id);
+                            if ($person != $current_member_id){
+                                $datename_o->set('registeredby_member', $current_member_id);
                             }
                             $datename_o->save();
                             $comment = 'Anmeldung: ' . $name_o->get('firstname') . ' ' . $name_o->get('name');
-                            $this->addDateComment($comment,$date_id,$member_id);
-                            $this->sendElementMessage($comment,$date_id,$member_id);
+                            $this->addDateComment($comment,$date_id,$current_member_id);
+                            $this->sendElementMessage($comment,$date_id,$current_member_id);
                         }
 
                         if (!empty($hooksnippet)) {
@@ -294,11 +294,11 @@ class Fbuch {
                             $datename_o->set('guestname', $guestname);
                             $datename_o->set('guestemail', $guestemails[$key]);
                             $datename_o->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
-                            $datename_o->set('registeredby_member', $member_id);
+                            $datename_o->set('registeredby_member', $current_member_id);
                             $datename_o->save();
                             $comment = 'Gasteintrag: ' . $guestname;
-                            $this->addDateComment($comment,$date_id,$member_id);
-                            $this->sendElementMessage($comment,$date_id,$member_id);                            
+                            $this->addDateComment($comment,$date_id,$current_member_id);
+                            $this->sendElementMessage($comment,$date_id,$current_member_id);                            
                         }
                     }
                 }
@@ -380,7 +380,7 @@ class Fbuch {
                 case 'add_persons':
                     $properties = $_REQUEST;
                     $properties['date_id'] = $date_id;
-                    $properties['member_id'] = $member_id;
+                    $properties['person'] = $member_id;
                     $properties['redirect'] = $redirect;
                     $this->addPersonsToDate($properties);
                     break;

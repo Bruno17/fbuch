@@ -14,7 +14,7 @@ class MyControllerModUser extends BaseController {
     public function get() {
 
         $id = $this->getProperty($this->primaryKeyField);
-        if ($id == 'me' && $fbuchUser = $this->getCurrentFbuchUser()) {
+        if ($id == 'me' && $fbuchUser = $this->getCurrentFbuchMember()) {
     
         } else {
             throw new Exception('Unauthorized', 401);    

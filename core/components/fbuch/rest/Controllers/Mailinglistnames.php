@@ -57,7 +57,7 @@ class MyControllerMailinglistnames extends BaseController {
 
     public function subscribe() {
 
-        if ($fbuchUser = $this->getCurrentFbuchUser()) {
+        if ($fbuchUser = $this->getCurrentFbuchMember()) {
             $this->object->set('member_id', $fbuchUser->get('id'));
             $this->object->set('subscribed', 1);
             $this->object->set('unsubscribed', 0);
@@ -72,7 +72,7 @@ class MyControllerMailinglistnames extends BaseController {
 
     public function unsubscribe() {
 
-        if ($fbuchUser = $this->getCurrentFbuchUser()) {
+        if ($fbuchUser = $this->getCurrentFbuchMember()) {
             $this->object->set('member_id', $fbuchUser->get('id'));
             $this->object->set('subscribed', 0);
             $this->object->set('unsubscribed', 1);
@@ -113,7 +113,7 @@ class MyControllerMailinglistnames extends BaseController {
 
 
     public function verifyAuthentication() {
-        if ($fbuchUser = $this->getCurrentFbuchUser()) {
+        if ($fbuchUser = $this->getCurrentFbuchMember()) {
             return true;
         }
         return false;

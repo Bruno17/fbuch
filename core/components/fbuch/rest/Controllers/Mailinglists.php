@@ -104,7 +104,7 @@ class MyControllerMailinglists extends BaseController {
             case 'options':
                 break;
             default:
-            if ($fbuchUser = $this->getCurrentFbuchUser()) {
+            if ($fbuchUser = $this->getCurrentFbuchMember()) {
                 $joins = '[{"alias":"Names","on":"list_id=fbuchMailinglist.id and member_id=' . $fbuchUser->get('id') . '"}]';
                 $this->modx->migx->prepareJoins($this->classKey, json_decode($joins, 1), $c);
             }
