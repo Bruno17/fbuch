@@ -78,6 +78,12 @@ $permissions = [
         'fbuch_guest'=>'1',
         'fbuch_user'=>'1',
         'fbuch_instructor'=>'1'
+    ],
+    ['name'=>'fbuch_read_datecomments',
+        'description'=>'Berechtigung, Terminkommentare zu lesen',
+        'fbuch_guest'=>'1',
+        'fbuch_user'=>'1',
+        'fbuch_instructor'=>'1'
     ]
     
 ];

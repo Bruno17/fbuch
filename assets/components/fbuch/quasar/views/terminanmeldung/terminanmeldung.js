@@ -17,6 +17,7 @@ export default {
         const selectionState = ref({});
         const personSelect = ref();
         const newguest = ref({});
+        const messageCount = ref(0);
 
         onMounted(() => {
             useLoadPermissions();
@@ -24,6 +25,7 @@ export default {
                 currentUser.value = data.object;
             });
             loadEvent();
+            loadMessageCount();
         })
 
         function prepareEvent() {
@@ -53,6 +55,21 @@ export default {
                     console.log(error);
                 });
         }
+
+        function loadMessageCount() {
+            const data = {};
+            data.date_id = id;
+            data.returntype = 'count';
+            const ajaxUrl = modx_options.rest_url + 'Datecomments';
+            axios.get(ajaxUrl, { params: data })
+                .then(function (response) {
+                    const total = response.data.total;
+                    messageCount.value = total;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }        
 
         function onUpdateNames(action, value) {
             if (action == 'remove') {
@@ -194,7 +211,8 @@ export default {
             onSelectPerson,
             personSelect,
             addGuest,
-            removePerson
+            removePerson,
+            messageCount
         }
     },
 

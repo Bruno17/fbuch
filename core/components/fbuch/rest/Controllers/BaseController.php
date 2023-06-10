@@ -26,12 +26,7 @@ class BaseController extends modRestController {
     }     
 
     public function getCurrentFbuchMember() {
-        $modx = &$this->modx;
-        $user_id = $this->modx->user->get('id');
-        //try to get fbuch Member by logged in MODX User
-        $fbuchMember = $this->modx->getObject('mvMember', array('modx_user_id' => $user_id));    
-
-        return $fbuchMember;
+        return $this->modx->fbuch->getCurrentFbuchMember();
     }
     
     public function getNameEmail($object) {

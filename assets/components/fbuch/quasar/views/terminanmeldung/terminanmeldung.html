@@ -61,7 +61,7 @@
                 <q-btn @click="addMyself" color="positive" label="Selbst zusagen"></q-btn>
                 <q-btn @click="RemoveMyself" color="negative" label="absagen"></q-btn>
                 <q-btn :href="'/termine/terminanmeldung.html/#/comments/'+entry.id" color="primary" label="Nachricht schreiben/lesen">
-                    <q-badge color="red" floating>15</q-badge>
+                    <q-badge color="red" floating>{{messageCount}}</q-badge>
                 </q-btn> 
                 
             </q-card-section>
@@ -104,7 +104,10 @@
             <div class="col-lg-4 col-md-8 col-sm-12 col-xs-12 q-col-gutter-md content-start row">
         
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    <q-list bordered separator>
+                    <q-toolbar class="bg-primary text-white shadow-2">
+                        <q-toolbar-title>Anmeldungen</q-toolbar-title>
+                      </q-toolbar>                    
+                    <q-list bordered separator >
                         <template v-if="entry.names && entry.names.length == 0">
                             <q-item>
                                 <q-item-section>

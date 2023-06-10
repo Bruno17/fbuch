@@ -75,12 +75,11 @@
                 <q-card-section>
                     Nachfolgend kannst Du Nachrichten für die anderen Terminteilnehmer:innen hinterlassen.<br>
                     Optional kannst Du ausgewählte Personen auch per Mail benachrichtigen.<br>
-                    Die optionale Mail - Funktion bitte nur in dringenden Bedarfsfällen verwenden!
                 </q-card-section>
                 <q-separator />
                 <q-card-section class="q-gutter-y-md">
                     <q-input type="textarea" class="col-12" outlined v-model="message.comment" label="Nachricht" />
-                    <q-btn icon="chat_bubble_outline" label="Nachricht senden" @click="onClickSendMail"
+                    <q-btn icon="chat_bubble_outline" label="Nachricht senden" @click="onClickSendMessage"
                         color="primary" />
                 </q-card-section>
             </q-card>
@@ -89,6 +88,9 @@
 
         <div class="col-md-4 col-sm-12 col-xs-12">
             <q-card flat bordered>
+                <q-card-section class="bg-primary text-white">
+                    <div class="text-h6">Nachrichten</div>
+                  </q-card-section>                                
                 <q-card-section>
                     <template v-for="message in messages">
                         <q-chat-message text-html :name="message.from" :text="message.text"
@@ -108,7 +110,7 @@
 
 </div>
 
-<q-dialog v-model="mail_dialog">
+<q-dialog v-model="mail_dialog" @before-hide="onHideDialog">
     <q-card style="width: 400px; max-width: 100vw;">
         <q-card-section class="row items-center q-pb-none">
             <div class="text-h6">Nachricht senden</div>
@@ -117,10 +119,10 @@
         </q-card-section>
         <q-separator></q-separator>
         <q-card-section class="">
-            <q-option-group v-model="sendtype" :options="[
+            <q-option-group v-model="selectionState.commenttype" :options="[
             {label:'nur als Kommentar',value:'comment_only'},
             {label:'auch als Mail',value:'comment_and_mail'},
-            {label:'nur als Mail',value:'mail_only'}]" color="primary" @update:model-value="onChangeSendType" dense />
+            {label:'nur als Mail',value:'mail_only'}]" color="primary" @update:model-value="onChangecommenttype" dense />
         </q-card-section>
 
         <q-expansion-item v-model="mail_expanded" icon="perm_identity" label="Account settings" caption="John Doe"
@@ -133,26 +135,31 @@
             </template>
             <q-card-section class="q-gutter-sm">
                 <div>
-                    <q-checkbox v-model="selectionState.allpersons" label="Alle Teilnehmer" />
+                Die Mail - Funktion bitte nur in dringenden Bedarfsfällen verwenden und nachfolgend wirklich nur die benötigten Empfänger auswählen!
                 </div>
+                <q-separator></q-separator>
+
                 <api_select multiple ref="personSelect" class="col-md-12 col-sm-12 col-xs-12"
-                    v-model="selectionState.person" label="Teilnehmer auswählen"
+                    v-model="selectionState.persons" label="Teilnehmer auswählen"
                     :controller="'Datenames?limit=100000&returntype=options&date_id='+entry.id">
-                </api_select>
+                </api_select>                
                 <div>
-                    <q-checkbox v-model="selectionState.allinvited" label="Alle Eingeladenen" />
-                </div>                
+                    <q-checkbox v-model="selectionState.allpersons" label="An alle Teilnehmer" />
+                </div>
+                
                 <api_select multiple ref="personSelect2" class="col-md-12 col-sm-12 col-xs-12"
                     v-model="selectionState.invited" label="Eingeladene auswählen"
                     :controller="'Dateinvited?limit=100000&returntype=options&date_id='+entry.id">
                 </api_select>
-
+                <div>
+                    <q-checkbox v-model="selectionState.allinvited" label="An alle Eingeladenen" />
+                </div>
             </q-card-section>
         </q-expansion-item>
 
 
         <q-card-actions vertical align="right">
-            <q-btn color="primary" v-if="useHasPermission('fbuch_edit_termin')" @click="sendMail">
+            <q-btn color="primary" v-if="useHasPermission('fbuch_accept_invite')" @click="sendMessage">
                 Absenden
             </q-btn>
         </q-card-actions>

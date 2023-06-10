@@ -54,6 +54,7 @@ class MyControllerDateNames extends BaseController {
         if ($member = $this->getCurrentFbuchMember()){
             $current_member_id = $member->get('id');    
         }
+        $properties['current_member_id'] = $current_member_id;
         switch ($action) {
             case 'add':
                 $person_id = 0;
@@ -63,7 +64,7 @@ class MyControllerDateNames extends BaseController {
                 if (!empty($person_id) && $person_id == $current_member_id && $this->modx->hasPermission('fbuch_accept_invite')){
                     $this->modx->fbuch->addPersonsToDate($properties);
                 } elseif ($this->modx->hasPermission('fbuch_add_persons_to_dates')){
-                    $properties['current_member_id'] = $current_member_id;
+                    
                     $this->modx->fbuch->addPersonsToDate($properties); 
                 } else {
                     throw new Exception('Unauthorized', 401);
@@ -75,7 +76,7 @@ class MyControllerDateNames extends BaseController {
                 $datename_id = $this->getProperty('datename_id',0);
                 if (!empty($datename_id)){
                     if ($this->modx->hasPermission('fbuch_add_persons_to_dates')){
-                        $this->modx->fbuch->removePersonFromDate($date_id,$datename_id);   
+                        $this->modx->fbuch->removePersonFromDate($datename_id);   
                     } else {
                         throw new Exception('Unauthorized', 401);
                     }                     
@@ -85,7 +86,7 @@ class MyControllerDateNames extends BaseController {
                         if ($object = $this->modx->getObject($this->classKey,['member_id'=>$person_id,'date_id'=>$date_id])){
                             $datename_id = $object->get('id');
                             if ($this->modx->hasPermission('fbuch_add_persons_to_dates')){
-                                $this->modx->fbuch->removePersonFromDate($date_id,$datename_id);   
+                                $this->modx->fbuch->removePersonFromDate($datename_id);   
                             } else {
                                 throw new Exception('Unauthorized', 401);
                             } 
@@ -95,15 +96,20 @@ class MyControllerDateNames extends BaseController {
                     $person_id = $persons;
                     if ($object = $this->modx->getObject($this->classKey,['member_id'=>$person_id,'date_id'=>$date_id])){
                         $datename_id = $object->get('id');
-                        if (!empty($person_id) && $person_id == $current_member_id && $this->modx->hasPermission('fbuch_accept_invite')){
-                            $this->modx->fbuch->removePersonFromDate($date_id,$datename_id);
-                        } elseif ($this->modx->hasPermission('fbuch_add_persons_to_dates')){
-                            $this->modx->fbuch->removePersonFromDate($date_id,$datename_id);   
-                        } else {
-                            throw new Exception('Unauthorized', 401);
-                        } 
                     }
-                }                  
+                    if (!empty($person_id) && $person_id == $current_member_id && $this->modx->hasPermission('fbuch_accept_invite')){
+                        $this->modx->fbuch->cancelInvite($date_id,$person_id);
+                        $this->modx->fbuch->removePersonFromDate($datename_id);
+                    } elseif ($this->modx->hasPermission('fbuch_add_persons_to_dates')){
+                        $this->modx->fbuch->removePersonFromDate($datename_id);   
+                    } else {
+                        throw new Exception('Unauthorized', 401);
+                    } 
+                }
+
+
+
+                                  
 
                 break;                
                                 

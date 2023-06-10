@@ -161,10 +161,17 @@ class Fbuch {
         return $result;
     }
 
-
     public function error($error) {
         $this->modx->setPlaceholder('fbucherror', '<div class="col-sm-12"><div class="alert alert-danger" role="alert">' . $error . '</div></div>');
     }
+
+    public function getCurrentFbuchMember() {
+        $user_id = $this->modx->user->get('id');
+        //try to get fbuch Member by logged in MODX User
+        $fbuchMember = $this->modx->getObject('mvMember', array('modx_user_id' => $user_id));    
+
+        return $fbuchMember;
+    }    
 
     public function lockFahrt() {
         $modx = &$this->modx;
@@ -202,17 +209,39 @@ class Fbuch {
         return $email;
     }
 
-    public function removePersonFromDate($date_id,$datename_id){
-        $member_id = 0;//Todo: try to get and set currently logged in mv_Member here? 
+    public function cancelInvite($date_id,$member_id){
+        if (!empty($date_id) && !empty($member_id)){ 
+            if ($object = $this->modx->getObject('fbuchDateInvited', ['date_id'=>$date_id,'member_Id'=>$member_id])){
+                $object->set('canceled',1); 
+                $object->save();   
+            }
+        }
+    }
+    public function uncancelInvite($date_id,$member_id){
+        if (!empty($date_id) && !empty($member_id)){ 
+            if ($object = $this->modx->getObject('fbuchDateInvited', ['date_id'=>$date_id,'member_Id'=>$member_id])){
+                $object->set('canceled',0);
+                $object->save();     
+            }
+        }
+    }    
+
+    public function removePersonFromDate($datename_id){
+        $current_member_id = 0;
+        if ($member = $this->getCurrentFbuchMember()){
+            $current_member_id = $member->get('id');    
+        }
         if ($datename_o = $this->modx->getObject('fbuchDateNames', $datename_id)) {
+            $member_id = $datename_o->get('member_id');
+            $date_id = $datename_o->get('date_id');
             $name = $datename_o->get('guestname');
             if ($member = $datename_o->getOne('Member')){
                 $name = $member->get('firstname') . ' ' . $member->get('name');
             }
             $datename_o->remove();
             $comment = 'Abmeldung: ' . $name;
-            $this->addDateComment($comment,$date_id,$member_id);
-            $this->sendElementMessage($comment,$date_id,$member_id);                         
+            $this->addDateComment($comment,$date_id,$current_member_id);
+            //$this->sendElementMessage($comment,$date_id,$current_member_id);                         
         }   
     }
 
@@ -240,7 +269,12 @@ class Fbuch {
 
             if (is_array($removepersons)) {
                 foreach ($removepersons as $person) {
-                    $this->removePersonFromDate($person);
+                    if (!empty($date_id) && !empty($person)){ 
+                        if ($datename_o = $this->modx->getObject('fbuchDateNames', ['date_id'=>$date_id,'member_Id'=>$person])){
+                            $datename_id = $datename_o->get('id');
+                            $this->removePersonFromDate($datename_id);    
+                        }
+                    }
                 }
             }
             if (is_array($persons)) {
@@ -262,8 +296,12 @@ class Fbuch {
                             $datename_o->save();
                             $comment = 'Anmeldung: ' . $name_o->get('firstname') . ' ' . $name_o->get('name');
                             $this->addDateComment($comment,$date_id,$current_member_id);
-                            $this->sendElementMessage($comment,$date_id,$current_member_id);
+                            //$this->sendElementMessage($comment,$date_id,$current_member_id);
                         }
+
+                        $this->uncancelInvite($date_id,$person); 
+                        
+                        $this->sendElementInvite($date_id,$person);
 
                         if (!empty($hooksnippet)) {
                             $sn_properties = [];
@@ -298,7 +336,7 @@ class Fbuch {
                             $datename_o->save();
                             $comment = 'Gasteintrag: ' . $guestname;
                             $this->addDateComment($comment,$date_id,$current_member_id);
-                            $this->sendElementMessage($comment,$date_id,$current_member_id);                            
+                            //$this->sendElementMessage($comment,$date_id,$current_member_id);                            
                         }
                     }
                 }
@@ -429,32 +467,10 @@ class Fbuch {
                 }
 
                 $this->sendCommentMails($comment, $mail_comment, $name_o, $date_id);
-
-                $name_o = $invite_o->getOne('Member');
-                $date_o = $invite_o->getOne('Date');
-                $type_o = $date_o->getOne('Type');
-                $element_invite = (int) $type_o->get('element_invite');
-
-                $this->sendElementMessage($comment,$date_o->get('id'),$name_o->get('id'));
-                
-                if (!empty($element_invite)) {
-
-                    if ($action == 'accept' || $action == 'cancel') {
-                        //invite to Riot/Matrix - Room
-
-                        $properties = array(
-                            'action' => 'invite',
-                            'invite_action' => $action,
-                            'date_id' => $date_o->get('id'),
-                            'name_id' => $name_o->get('id'));
-                        //$this->modx->runSnippet('moc_hooks', $scriptProperties);
-                        $reference = 'web/schedule/invite';
-                        $this->createSchedulerTask('matrixorgclient', array('snippet' => $reference));
-                        $this->createSchedulerTaskRun($reference, 'matrixorgclient', $properties);
-
-                        //$this->modx->runSnippet('moc_hooks', $properties);
-                    }
+                if ($action == 'accept' || $action == 'cancel') {
+                    $this->sendElementInvite($date_id,$member_id,$action);
                 }
+
                 if (!empty($redirect)) {
                     $modx->sendRedirect($modx->makeUrl($modx->resource->get('id'), '', array(
                         'iid' => $iid,
@@ -482,8 +498,10 @@ class Fbuch {
                 $comment_o->set('comment', $comment);
                 $comment_o->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
                 $comment_o->set('createdby', $this->modx->user->get('id'));
-                $comment_o->save();  
-        }          
+                $comment_o->save(); 
+                $this->sendElementMessage($comment,$date_id,$member_id);      
+        }
+              
     }
 
     public function removeDateComment($comment_id,$member_id){
@@ -494,6 +512,44 @@ class Fbuch {
             }
         }    
     }
+
+    public function sendElementInvite($date_id,$member_id,$action=''){
+        $send_riot = $this->modx->getOption('send_riot', null, '1');
+        if ($send_riot != '1'){
+            return;
+        }
+        $element_invite = 0;
+        if ($date_o = $this->modx->getObject('fbuchDate',$date_id)){
+            if ($type_o = $date_o->getOne('Type')){
+                $element_invite = (int) $type_o->get('element_invite');
+            }
+        }
+
+        if ($member = $this->modx->getObject('mvMember',$member_id)){
+            $item = $member->toArray();
+        }        
+
+        //$this->sendElementMessage($comment,$date_o->get('id'),$name_o->get('id'));
+        
+        if (!empty($element_invite)) {
+
+            //invite to Element/Matrix - Room
+
+            $properties = [
+                'action' => 'invite',
+                'invite_action' => $action,
+                'date_id' => $date_id,
+                'name_id' => $member_id
+            ];
+            //$this->modx->runSnippet('moc_hooks', $scriptProperties);
+            $reference = 'web/schedule/invite';
+            $this->createSchedulerTask('matrixorgclient', array('snippet' => $reference));
+            $this->createSchedulerTaskRun($reference, 'matrixorgclient', $properties);
+
+            //$this->modx->runSnippet('moc_hooks', $properties);
+            
+        }
+    }    
 
     public function sendElementMessage($comment,$date_id,$name_id,$action='send'){
         $send_riot = $this->modx->getOption('send_riot', null, '1');
@@ -978,8 +1034,6 @@ class Fbuch {
                     $comment = $hook->getValue('comment');
                     if ($object = $modx->getObject($classname, $object_id)) {
                         $date_o = $object->getOne('Date');
-                        $type_o = $date_o->getOne('Type');
-                        $element_invite = $type_o->get('element_invite');
                         $profile = $modx->user->getOne('Profile');
                         $comment_name = $profile->get('fullname');
                         if ($action == 'mail_invite') {
@@ -996,19 +1050,7 @@ class Fbuch {
                             //$this->sendInviteMail($object->get('id'), $comment, $comment_name, true);
                         }
                         if ($action == 'mail_invite' || $action == 'riotinvite_invite') {
-                            $name_o = $object->getOne('Member');
-                            if (!empty($element_invite)) {
-                                $scriptProperties = array(
-                                    'action' => 'invite',
-                                    'invite_action' => $action,
-                                    'date_id' => $date_o->get('id'),
-                                    'name_id' => $name_o->get('id'));
-                                //$this->modx->runSnippet('moc_hooks', $scriptProperties);
-                                $reference = 'web/schedule/invite';
-                                $this->createSchedulerTask('matrixorgclient', array('snippet' => $reference));
-                                $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties);
-                            }
-
+                            $this->sendElementInvite($object->get('date_id'),$object->get('member_id'),$action);
                         }
                         $modx->setPlaceholder('success_object_id', $object->get('date_id'));
                     }
@@ -1020,9 +1062,6 @@ class Fbuch {
                     $object_id = $hook->getValue('object_id');
                     $comment = $hook->getValue('comment');
                     if ($date_o = $modx->getObject('fbuchDate', $object_id)) {
-                        $type_o = $date_o->getOne('Type');
-                        $element_invite = $type_o->get('element_invite');
-
                         $c = $modx->newQuery($classname);
                         $c->where(array('date_id' => $object_id));
                         $add_datecomment = true;
@@ -1042,19 +1081,7 @@ class Fbuch {
                                     //$this->sendInviteMail($object, $comment, $comment_name, $add_datecomment, 'RGM Einladung');
                                 }
                                 if ($action == 'mail_invites' || $action == 'riotinvite_invites') {
-                                    $name_o = $object->getOne('Member');
-                                    //$date_o = $object->getOne('Date');
-                                    if (!empty($element_invite)) {
-                                        $scriptProperties = array(
-                                            'action' => 'invite',
-                                            'invite_action' => $action,
-                                            'date_id' => $object_id,
-                                            'name_id' => $name_o->get('id'));
-                                        //$this->modx->runSnippet('moc_hooks', $scriptProperties);
-                                        $reference = 'web/schedule/invite';
-                                        $this->createSchedulerTask('matrixorgclient', array('snippet' => $reference));
-                                        $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties);
-                                    }
+                                    $this->sendElementInvite($object->get('date_id'),$object->get('member_id'),$action);
                                 }
                                 $add_datecomment = false;
                             }
