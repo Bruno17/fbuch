@@ -19,9 +19,9 @@
     </template>
     <template v-if="entry.can_edit">
     <div class="col-12">
-        <q-tabs v-model="tab" align="left" no-caps outside-arrows mobile-arrows class="">
+        <q-tabs v-if="showpersonstab" v-model="tab" align="left" no-caps outside-arrows mobile-arrows class="">
             <q-tab name="general" label="Eintrag" />
-            <q-tab v-if="['Ruderboot','Krafttraining'].includes(selectionState.gattungname)"  name="persons" label="Personen" />
+            <q-tab name="persons" label="Personen" />
         </q-tabs>
     </div>
     <q-form @submit="onSubmit" @reset="onReset" ref="eventform">
@@ -100,7 +100,7 @@
 
                         <q-input class="col-12" outlined autogrow v-model="entry.note" label="Kommentar (optional)" />
 
-                        <div class="col-12" >
+                        <div v-if="showpersonstab" class="col-12" >
                             <q-btn @click="tab='persons'" color="primary" label="Personen eintragen"></q-btn>
                         </div>                          
 

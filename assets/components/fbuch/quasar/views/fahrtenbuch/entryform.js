@@ -1,6 +1,7 @@
 import api_select from '../../components/api_select.js'
 import timeinput from '../../components/timeinput.js'
 import datepicker from '../../components/datepicker.js'
+import valuesetter from '../../components/valuesetter.js'
 import { useLoadPermissions, useLoadCurrentMember, useHasPermission } from "../../composables/helpers.js";
 
 export default {
@@ -12,6 +13,7 @@ export default {
     api_select: api_select,
     datepicker: datepicker,
     timeinput: timeinput,
+    valuesetter: valuesetter
   },
 
   setup(props) {
@@ -34,6 +36,7 @@ export default {
     const tab = ref('general');
     const inputs = ref({});
     const currentMember = ref({});
+    const showpersonstab = ref(true);
 
     onMounted(() => {
       useLoadPermissions();
@@ -341,7 +344,8 @@ export default {
       bootsgattungSelect,
       submitclicked,
       inputs,
-      currentMember
+      currentMember,
+      showpersonstab
     }
   },
   template: '#entryform-view'

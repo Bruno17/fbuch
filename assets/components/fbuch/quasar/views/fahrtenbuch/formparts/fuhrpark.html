@@ -1,4 +1,5 @@
 <template v-if="['Fuhrpark'].includes(selectionState.gattungname)">
+    <valuesetter @hasmounted="showpersonstab=false" />
     <api_select class="col-md-4 col-sm-4 col-xs-12" v-model="entry.member_id" :emit-value="true"
         label="Fahrer auswählen" :first_option="{'label':'---','value':'0'}"
         controller="Names?limit=100000&returntype=options&statefilter=can_be_added_to_entry"
