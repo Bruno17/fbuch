@@ -12,7 +12,12 @@ const routes = [
     path: '/:year/:month/:day',
     name:'fahrtenbuch',
     component: fahrtenbuch
-  },  
+  },
+  {
+    path: '/entry-create/:gattungname',
+    name:'entryform_create_gattung',
+    component: entryform
+  },    
   {
     path: '/entry-create',
     name:'entryform_create',

@@ -1,7 +1,7 @@
 import api_select from '../../components/api_select.js'
 import timeinput from '../../components/timeinput.js'
 import datepicker from '../../components/datepicker.js'
-import { useLoadPermissions, useHasPermission } from "../../composables/helpers.js";
+import { useLoadPermissions, useLoadCurrentMember, useHasPermission } from "../../composables/helpers.js";
 
 export default {
 
@@ -33,9 +33,13 @@ export default {
     const submitclicked = ref(false);
     const tab = ref('general');
     const inputs = ref({});
+    const currentMember = ref({});
 
     onMounted(() => {
       useLoadPermissions();
+      useLoadCurrentMember().then(function (data) {
+        currentMember.value = data.object;
+      });      
       loadEntry();
       state.value.days = state.value.days || 0;
       state.value.hours = state.value.hours || 0;
@@ -50,8 +54,12 @@ export default {
     })
 
     function onSelectGattung(value) {
-      bootsgattungSelect.value.loadNames({ 'gattung_name': value });
-      bootSelect.value.loadNames({ 'gattung_name': value });
+      if (bootsgattungSelect.value){
+        bootsgattungSelect.value.loadNames({ 'gattung_name': value });
+      }
+      if (bootSelect.value){
+        bootSelect.value.loadNames({ 'gattung_name': value });
+      }  
       entry.value.boot_id = 0;
       selectionState.value.bootsgattung = 0;
     }
@@ -79,9 +87,27 @@ export default {
         member_status: 'Gasteintrag'
       }
       if (value.name != '') {
+        if (!entry.value.names) {
+          entry.value.names = [];
+        }        
         entry.value.names.push(value);
       }
       newguest.value = {};
+    }
+
+    function addMyself(){
+      if (!entry.value.names) {
+        entry.value.names = [];
+      }  
+      const id = currentMember.value.id;
+      const exists = findPerson(id);
+      selectionState.value.person = 0;
+      personSelect.value.clearSelection();
+      if (exists) {
+        return;
+      }
+      currentMember.value.value = id;
+      entry.value.names.push(currentMember.value);          
     }
 
     function onSelectPerson(value) {
@@ -133,13 +159,23 @@ export default {
         ajaxUrl = modx_options.rest_url + 'FahrtFromDate/' + id;
         data.datenames_id = params.datenames_id;
       }
+      if (routeValue.name == 'entryform_create_gattung') {
+        data.gattungname = params.gattungname;
+      }     
 
       axios.get(ajaxUrl, { params: data })
         .then(function (response) {
           const object = response.data.object;
           entry.value = object;
-          onSelectBoot({ 'value': object.boot_id, 'Bootsgattung_name': object.Gattung_name, 'Bootsgattung_id': object.Gattung_id });
-          //tab.value = tab.value=='' ?'date':tab.value;
+
+          if (routeValue.name == 'entryform_create_gattung') {
+            selectionState.value.gattungname = object.Gattung_name;
+            //onSelectGattung(object.Gattung_name);
+          }  else {
+            onSelectBoot({ 'value': object.boot_id, 'Bootsgattung_name': object.Gattung_name, 'Bootsgattung_id': object.Gattung_id });
+            //tab.value = tab.value=='' ?'date':tab.value;            
+          }           
+          
         })
         .catch(function (error) {
           console.log(error);
@@ -298,12 +334,14 @@ export default {
       setObmann,
       setCox,
       addGuest,
+      addMyself,
       bootSelect,
       personSelect,
       selectionState,
       bootsgattungSelect,
       submitclicked,
-      inputs
+      inputs,
+      currentMember
     }
   },
   template: '#entryform-view'

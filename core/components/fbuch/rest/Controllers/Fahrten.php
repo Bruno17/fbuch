@@ -121,6 +121,8 @@ class MyControllerFahrten extends BaseController {
     } 
 
     public function newEntry(){
+        $gattungname = $this->getProperty('gattungname');
+
         $this->object = $this->modx->newObject($this->classKey);
         if (empty($this->object)) {
             return $this->failure($this->modx->lexicon('rest.err_obj_nf',array(
@@ -142,6 +144,10 @@ class MyControllerFahrten extends BaseController {
         $objectArray = $this->object->toArray();
 
         $objectArray['can_edit'] = $this->modx->hasPermission('fbuch_create_fahrten');
+
+        if (!empty($gattungname)){
+            $objectArray['Gattung_name'] = $gattungname;    
+        }
                 
         return $this->success('',$objectArray);    
     }    

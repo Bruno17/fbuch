@@ -40,6 +40,12 @@ class MyControllerNames extends BaseController {
         foreach ($allowed_fields as $field){
             $objectArray[$field] = $this->object->get($field);
         }
+        if ($state = $this->object->getOne('State')){
+            $stateArray = $state->toArray();
+            foreach ($stateArray as $key => $value){
+                $objectArray['State_' . $key] = $value;
+            } 
+        }
 
         return !$this->hasErrors();
     }
@@ -81,12 +87,17 @@ class MyControllerNames extends BaseController {
     }
 
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
+        $statefilter = $this->getProperty('statefilter');
+        $statefilter = empty($statefilter) ? 'can_be_invited' : $statefilter;
 
         $joins = '[{"alias":"State"}]';
-
-        $this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);         
-
-        $c->where(array('deleted' => 0, 'State.can_be_invited' => 1));             
+        $this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);  
+        
+        $where = ['deleted' => 0];
+        if ($statefilter != 'none'){
+            $where['State.'.$statefilter] = 1; 
+        }
+        $c->where($where);             
 
         return $c;
     }

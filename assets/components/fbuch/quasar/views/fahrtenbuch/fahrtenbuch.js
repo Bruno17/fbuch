@@ -21,10 +21,12 @@ export default {
         const finished = ref([]);
         const loadedEvents = ref([]);
         const mm_expanded = ref(false);
+        const gattungnames = ref([]);
 
         onMounted(() => {
             useLoadPermissions();
             loadAll();
+            loadGattungnames();
         })
 
         function getDateFromRoute() {
@@ -82,6 +84,17 @@ export default {
                     console.log(error);
                 });
         }
+
+        function loadGattungnames() {
+            const ajaxUrl = modx_options.rest_url + 'Boote?limit=100000&returntype=gattungnames';
+            return axios.get(ajaxUrl)
+                .then(function (response) {
+                    gattungnames.value = response.data.results;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }        
 
         function prepareEvents(events) {
             const preparedEvents = [];
@@ -324,6 +337,7 @@ export default {
             loadedEvents,
             urlDate,
             mm_expanded,
+            gattungnames,
             loadAll,
             loadEventsToday,
             moveMembers,

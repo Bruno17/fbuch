@@ -42,7 +42,7 @@
                 <div class="col-md-8 col-sm-12 q-col-gutter-md content-start row">
 
                     <api_select class="col-md-4 col-sm-4 col-xs-12" v-model="event.instructor_member_id"
-                        label="Betreuer" controller="Names?limit=100000&returntype=options"></api_select>
+                        label="Betreuer" controller="Names?limit=100000&returntype=options&statefilter=can_be_added_to_entry"></api_select>
 
                     <q-input class="col-md-8 col-sm-4 col-xs-12" outlined v-model="event.title"
                         label="Titel/Gruppe/Zweck" :hide-bottom-space="true"

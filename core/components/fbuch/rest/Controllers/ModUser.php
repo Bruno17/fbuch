@@ -43,6 +43,7 @@ class MyControllerModUser extends BaseController {
         'Member_firstname',
         'Member_member_status'];
         $objectArray = [];
+        $state = false;
         if ($profile = $this->object->getOne('Profile')){
             $fields = $profile->toArray();
             foreach ($fields as $key => $value){
@@ -54,11 +55,19 @@ class MyControllerModUser extends BaseController {
             foreach ($fields as $key => $value){
                 $this->object->set('Member_' . $key,$value);
             }
+            $state = $member->getOne('State');
         }        
 
         foreach ($allowed_fields as $field){
             $objectArray[$field] = $this->object->get($field);
         }
+        
+        if ($state){
+            $stateArray = $state->toArray();
+            foreach ($stateArray as $key => $value){
+                $objectArray['State_' . $key] = $value;
+            } 
+        }        
 
         return !$this->hasErrors();
     }

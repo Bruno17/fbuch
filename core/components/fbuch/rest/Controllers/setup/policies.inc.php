@@ -1,7 +1,36 @@
 <?php
 
 $policies = [
-    ['name'=>'fbuch_instructor','user_group'=>'fbuch_instructor'],
-    ['name'=>'fbuch_user','user_group'=>'fbuch'],
-    ['name'=>'fbuch_guest','user_group'=>'fbuch_guest']
+    [
+        'name'=>'fbuch_instructor',
+        'user_group'=>'fbuch_instructor',
+        'resource_groups'=>[
+            [
+                'name'=>'fbuch_instructor'
+            ]
+        ]
+    ],
+    [
+        'name'=>'fbuch_user',
+        'user_group'=>'fbuch',
+        'resource_groups'=>[
+            [
+                'name'=>'fbuch'
+            ]
+        ]
+    ],
+    [
+        'name'=>'fbuch_guest',
+        'user_group'=>'fbuch_guest',
+        'resource_groups'=>[]
+    ],
+    [
+        'name'=>'fbuch_clubhome',
+        'user_group'=>'fbuch_clubhome',
+        'resource_groups'=>[
+            [
+                'name'=>'fbuch'
+            ]
+        ]
+    ]
 ];

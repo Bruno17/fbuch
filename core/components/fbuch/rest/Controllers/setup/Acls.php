@@ -12,6 +12,7 @@ class MyControllerSetupAcls extends BaseController {
         $result = $this->updatePermissions();
         $result = $this->updatePolicies();
         $result = $this->updateUserGroups();
+        $result = $this->updateResourceGroups();
 
         return $this->success('',$objectArray);
     }
@@ -142,6 +143,52 @@ class MyControllerSetupAcls extends BaseController {
   
         }
     }
+
+    public function updateResourceGroups(){
+        $policies = $this->getPolicies();
+        if (!$policies){
+            return false;
+        }
+
+        foreach ($policies as $policy){
+            $context_key = 'fbuch';
+            $principal_class = 'modUserGroup';
+            $policy_id = '1';//Resource - policy, is this allways 1?
+            $authority = '9999';
+            //target - document_group_names
+            //principal - member_group_names
+            $resource_groups = isset($policy['resource_groups']) ? $policy['resource_groups'] : [];
+
+            if (is_array($resource_groups) && $userGroup = $this->modx->getObject('modUserGroup', ['name' => $policy['user_group']])){
+                $principal = $userGroup->get('id');
+                foreach ($resource_groups as $resource_group){
+                    if (isset($resource_group['name']) && $resourceGroup = $this->modx->getObject('modResourceGroup', ['name' => $resource_group['name']])){
+                        
+                    } else {
+                        $resourceGroup = $this->modx->newObject('modResourceGroup');
+                        $resourceGroup->set('name' , $resource_group['name']); 
+                        $resourceGroup->save();   
+                    }
+                    $target_id = $resourceGroup->get('id');
+                    $rga_array = [
+                        'target' => $target_id, 
+                        'principal_class' => $principal_class, 
+                        'principal' => $principal, 
+                        'policy' => $policy_id,
+                        'context_key' => $context_key
+                    ];
+                    if ($resourceGroupAccess = $this->modx->getObject('modAccessResourceGroup', $rga_array)){
+        
+                    } else {
+                        $resourceGroupAccess = $this->modx->newObject('modAccessResourceGroup');
+                        $resourceGroupAccess->fromArray($rga_array);
+                        $resourceGroupAccess->set('authority', 9999);
+                        $resourceGroupAccess->save();
+                    }  
+                }
+            }
+        }
+    }    
     
     public function verifyAuthentication() {
         if (!$this->modx->user->isMember('Administrator')) {

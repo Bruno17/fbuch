@@ -55,16 +55,16 @@
             <q-card-section class="q-pa-sm row">
                 <div class="col text-h6">offene Einträge</div>
                 <div class="col-auto">
-                    <q-btn color="primary" text-color="white" round icon="navigate_next">
+                    <q-btn color="primary" text-color="white" round icon="add">
                         <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
                             <q-list dense bordered separator>
+                                <q-item-label header>Neuen Eintrag erstellen</q-item-label>
 
-                                <q-item href="/fahrtenbuch/fahrtenbuch.html/#/entry-create" clickable v-ripple>
-                                    <q-item-section avatar><q-avatar icon="add" /></q-item-section>
+                                <q-item v-for="gattung in gattungnames" :href="'/fahrtenbuch/fahrtenbuch.html/#/entry-create/'+gattung.Bootsgattung_name" clickable v-ripple>
                                     <q-item-section>
-                                        <q-item-label>Neuen Eintrag erstellen</q-item-label>
+                                        <q-item-label>{{gattung.Bootsgattung_name}}</q-item-label>
                                     </q-item-section>
-                                </q-item>
+                                </q-item>                                
                             </q-list>
                         </q-menu>
                     </q-btn>

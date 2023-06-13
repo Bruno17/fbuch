@@ -1,7 +1,8 @@
 <template v-if="['Ergometer','Motorboot','SkiErg'].includes(selectionState.gattungname)">
     <api_select class="col-md-4 col-sm-4 col-xs-12" v-model="entry.member_id" :emit-value="true"
         label="Person auswählen" :first_option="{'label':'Gasteintrag','value':'0'}"
-        controller="Names?limit=100000&returntype=options" :hide-bottom-space="true"
+        controller="Names?limit=100000&returntype=options&statefilter=can_be_added_to_entry" 
+        :hide-bottom-space="true"
         :ref="el => { inputs.member_id = el }"
         :rules="[val => (!submitclicked || (val > 0 || entry.guestname != '') ) || 'Bitte eine Person auswählen!']">
     </api_select>

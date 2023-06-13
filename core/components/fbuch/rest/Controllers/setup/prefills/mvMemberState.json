@@ -39,5 +39,13 @@
         "remove_from_usergroups":"fbuch,fbuch_guest,fbuch_instructor",
         "can_be_invited":0,
         "can_be_added_to_entry":0            
-    }             
+    },
+    {
+        "state":"Bootshaus",
+        "description":"Bootshaus Benutzer, wird für die Anmeldung am PC im Bootshaus benötigt.",
+        "add_to_usergroups":"fbuch_clubhome",
+        "remove_from_usergroups":"fbuch,fbuch_guest,fbuch_instructor",
+        "can_be_invited":0,
+        "can_be_added_to_entry":0     
+    }              
 ]
