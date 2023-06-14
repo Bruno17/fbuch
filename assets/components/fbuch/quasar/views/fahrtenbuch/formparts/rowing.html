@@ -1,5 +1,5 @@
 <template v-if="['Ruderboot'].includes(selectionState.gattungname)">
-
+    <valuesetter @hasmounted="showbootsgattungselect=true" />
     <api_select class="col-md-12 col-sm-12 col-xs-12" v-model="selectionState.destination"
         label="Standardruderstrecken ab Bootshaus" :first_option="{'label':'---','value':'0','km':'0'}"
         @update:model-value="entry.km=selectionState.destination.km;entry.destination=selectionState.destination.destination"

@@ -32,5 +32,20 @@ $policies = [
                 'name'=>'fbuch'
             ]
         ]
+    ],
+    [
+        'name'=>'Administrator',
+        'user_group'=>'Administrator',
+        'resource_groups'=>[
+            [
+                'name'=>'fbuch'
+            ],
+            [
+                'name'=>'fbuch_instructor'
+            ],
+            [
+                'name'=>'Administrator'
+            ]               
+        ]
     ]
 ];

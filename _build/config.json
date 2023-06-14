@@ -3,13 +3,14 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"1.8.4-beta",
+  "version":"1.9.2-beta",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",
       "after":[
         "tables.resolver.php",
-        "customchunks.resolver.php"
+        "customchunks.resolver.php",
+        "resources.resolver.php"
       ]
     }
   },
@@ -373,8 +374,12 @@
           "file":"fbuchgetassetsfiles.snippet.php"
         },
         {
-          "name":"fbuchLoginByCode",
-          "file":"fbuchloginbycode.snippet.php"
+          "name":"fbuchGetAssetsFiles",
+          "file":"fbuchgetassetsfiles.snippet.php"
+        },        
+        {
+          "name":"fbuchStoreAndReadAssets",
+          "file":"fbuchstoreandreadassets.snippet.php"
         }                 
       ],
       "chunks":[

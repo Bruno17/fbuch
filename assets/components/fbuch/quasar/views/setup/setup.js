@@ -18,10 +18,7 @@ export default {
             const ajaxUrl = modx_options.rest_url + 'setup/Acls';
             axios.post(ajaxUrl)
             .then(function (response) {
-                //event.value = response.data.object;
-                //recurrences_dialog.value = false;
-                //recurre.value.days = [];
-                //loadEvents();
+  
             })
             .catch(function (error) {
                 console.log(error);
@@ -32,10 +29,7 @@ export default {
             const ajaxUrl = modx_options.rest_url + 'setup/PrefillTable';
             axios.post(ajaxUrl,{'classname':classname})
             .then(function (response) {
-                //event.value = response.data.object;
-                //recurrences_dialog.value = false;
-                //recurre.value.days = [];
-                //loadEvents();
+ 
             })
             .catch(function (error) {
                 console.log(error);

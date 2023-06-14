@@ -36,7 +36,7 @@
                             controller="Boote?limit=100000&returntype=gattungnames">
                         </api_select>
 
-                        <api_select ref="bootsgattungSelect" class="col-md-12 col-sm-6 col-xs-12"
+                        <api_select v-if="showbootsgattungselect" ref="bootsgattungSelect" class="col-md-12 col-sm-6 col-xs-12"
                             v-model="selectionState.bootsgattung" label="Kategorie Vorauswahl"
                             :first_option="{'label':'---','value':'0'}" @update:model-value="onSelectBootsgattung"
                             :controller="'Boote?limit=100000&returntype=bootsgattungen&gattung_name='+entry.Gattung_name">

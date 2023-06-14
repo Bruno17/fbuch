@@ -37,6 +37,7 @@ export default {
     const inputs = ref({});
     const currentMember = ref({});
     const showpersonstab = ref(true);
+    const showbootsgattungselect = ref(false);
 
     onMounted(() => {
       useLoadPermissions();
@@ -345,7 +346,8 @@ export default {
       submitclicked,
       inputs,
       currentMember,
-      showpersonstab
+      showpersonstab,
+      showbootsgattungselect
     }
   },
   template: '#entryform-view'
