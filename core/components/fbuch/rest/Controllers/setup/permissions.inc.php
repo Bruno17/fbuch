@@ -78,6 +78,13 @@ $permissions = [
         'fbuch_instructor'=>'1',
         'fbuch_clubhome'=>'1'
     ],
+    ['name'=>'fbuch_view_datenames',
+        'description'=>'Berechtigung Anmeldungen zu Terminen zu sehen',
+        'fbuch_guest'=>'1',
+        'fbuch_user'=>'1',
+        'fbuch_instructor'=>'1',
+        'fbuch_clubhome'=>'1'
+    ],    
     ['name'=>'fbuch_add_persons_to_dates',
         'description'=>'Berechtigung, andere Personen in Termine einzutragen',
         'fbuch_guest'=>'',

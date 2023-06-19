@@ -5,6 +5,7 @@
             <q-tab name="acls" label="Berechtigungen" />
             <q-tab name="table_prefills" label="Initiale Tabellendaten" />
             <q-tab name="resources" label="Seiten" />
+            <q-tab name="special" label="Spezialfunktionen" />
         </q-tabs>
     </div>
     <q-tab-panels v-model="tab">
@@ -19,8 +20,19 @@
             </q-btn>
         </q-tab-panel>        
         <q-tab-panel name="resources">
-            Setup Resources
+            <q-btn @click="setupResources">
+                Seiten einrichten
+            </q-btn>
         </q-tab-panel>
+        <q-tab-panel name="special">
+            Bei älteren Versionen wurden Fahrten als abgeschlossen erkannt, sobald km eingetragen waren.<br>
+            Bei neueren Versionen muß das explizit eingetragen sein.<br>
+            Diese Funktion setzt alle Fahrten mit eingetragenen km auf abgechlossen!<br>
+            Bei neueren Versionen, wo dies bereits durchgeführt wurde, bitte nicht mehr ausführen!<br>
+            <q-btn @click="fixFinishedEntries">
+                Auf abgeschlossen setzen
+            </q-btn>
+        </q-tab-panel>        
 
     </q-tab-panels>
 

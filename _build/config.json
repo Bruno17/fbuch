@@ -3,7 +3,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"1.9.2-beta",
+  "version":"1.9.6-beta",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",
@@ -376,11 +376,19 @@
         {
           "name":"fbuchGetAssetsFiles",
           "file":"fbuchgetassetsfiles.snippet.php"
-        },        
+        },  
+        {
+          "name":"fbuchLoginByCode",
+          "file":"fbuchloginbycode.snippet.php"
+        },              
         {
           "name":"fbuchStoreAndReadAssets",
           "file":"fbuchstoreandreadassets.snippet.php"
-        }                 
+        },        
+        {
+          "name":"fbuchGetResourceIdByUri",
+          "file":"fbuchgetresourceidbyuri.snippet.php"
+        }        
       ],
       "chunks":[
         {

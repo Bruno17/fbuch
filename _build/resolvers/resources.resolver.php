@@ -6,8 +6,8 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
     case xPDOTransport::ACTION_UPGRADE:
 
-        $policy = [
-            'name'=>'Administrator',
+        $group = [
+            'policy'=>'Administrator',
             'user_group'=>'Administrator',
             'resource_groups'=>[
                 [
@@ -23,18 +23,18 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         ]; 
         
         //userGroup
-        if ($accessPolicy = $this->modx->getObject('modAccessPolicy', ['name' => $policy['name']])){
-            if ($userGroup = $this->modx->getObject('modUserGroup', ['name' => $policy['user_group']])){
+        if ($accessPolicy = $modx->getObject('modAccessPolicy', ['name' => $group['policy']])){
+            if ($userGroup = $modx->getObject('modUserGroup', ['name' => $group['user_group']])){
 
             } else {
-                $userGroup = $this->modx->newObject('modUserGroup');
-                $userGroup->set('name' , $policy['user_group']); 
+                $userGroup = $modx->newObject('modUserGroup');
+                $userGroup->set('name' , $group['user_group']); 
                 $userGroup->save();   
             }
-            if ($contextAccess = $this->modx->getObject('modAccessContext', ['target' => 'fbuch', 'principal_class' => 'modUserGroup', 'principal' => $userGroup->get('id'), 'policy' => $accessPolicy->get('id')])){
+            if ($contextAccess = $modx->getObject('modAccessContext', ['target' => 'fbuch', 'principal_class' => 'modUserGroup', 'principal' => $userGroup->get('id'), 'policy' => $accessPolicy->get('id')])){
 
             } else {
-                 $contextAccess = $this->modx->newObject('modAccessContext');
+                 $contextAccess = $modx->newObject('modAccessContext');
                  $contextAccess->set('target', 'fbuch');
                  $contextAccess->set('principal_class', 'modUserGroup');
                  $contextAccess->set('principal', $userGroup->get('id'));
@@ -51,15 +51,15 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $authority = '9999';
         //target - document_group_names
         //principal - member_group_names
-        $resource_groups = isset($policy['resource_groups']) ? $policy['resource_groups'] : [];
+        $resource_groups = isset($group['resource_groups']) ? $group['resource_groups'] : [];
 
-        if (is_array($resource_groups) && $userGroup = $this->modx->getObject('modUserGroup', ['name' => $policy['user_group']])){
+        if (is_array($resource_groups) && $userGroup = $modx->getObject('modUserGroup', ['name' => $group['user_group']])){
             $principal = $userGroup->get('id');
             foreach ($resource_groups as $resource_group){
-                if (isset($resource_group['name']) && $resourceGroup = $this->modx->getObject('modResourceGroup', ['name' => $resource_group['name']])){
+                if (isset($resource_group['name']) && $resourceGroup = $modx->getObject('modResourceGroup', ['name' => $resource_group['name']])){
                     
                 } else {
-                    $resourceGroup = $this->modx->newObject('modResourceGroup');
+                    $resourceGroup = $modx->newObject('modResourceGroup');
                     $resourceGroup->set('name' , $resource_group['name']); 
                     $resourceGroup->save();   
                 }
@@ -71,10 +71,10 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                     'policy' => $policy_id,
                     'context_key' => $context_key
                 ];
-                if ($resourceGroupAccess = $this->modx->getObject('modAccessResourceGroup', $rga_array)){
+                if ($resourceGroupAccess = $modx->getObject('modAccessResourceGroup', $rga_array)){
     
                 } else {
-                    $resourceGroupAccess = $this->modx->newObject('modAccessResourceGroup');
+                    $resourceGroupAccess = $modx->newObject('modAccessResourceGroup');
                     $resourceGroupAccess->fromArray($rga_array);
                     $resourceGroupAccess->set('authority', 9999);
                     $resourceGroupAccess->save();

@@ -257,6 +257,13 @@ class MyControllerDates extends BaseController {
     } 
     
     public function addNames($object){
+       if ($this->modx->hasPermission('fbuch_view_datenames')){
+  
+       } else {
+           return []; 
+       }
+
+
         $returntype = $this->getProperty('returntype');
     
         $id = $object->get('id');

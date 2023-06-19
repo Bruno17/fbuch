@@ -36,10 +36,36 @@ export default {
             }); 
         }
 
+        function setupResources(){
+            const ajaxUrl = modx_options.rest_url + 'setup/Resources';
+            axios.post(ajaxUrl)
+            .then(function (response) {
+  
+            })
+            .catch(function (error) {
+                console.log(error);
+            }); 
+        } 
+
+        function fixFinishedEntries(){
+            const ajaxUrl = modx_options.rest_url + 'setup/fixFinishedEntries';
+            axios.post(ajaxUrl)
+            .then(function (response) {
+  
+            })
+            .catch(function (error) {
+                console.log(error);
+            }); 
+        }         
+        
+        
+
         return {
             tab,
             setupAcls,
-            prefill
+            prefill,
+            setupResources,
+            fixFinishedEntries
         }
     },
 

@@ -1,8 +1,8 @@
 <?php
 
-$policies = [
+$usergroups = [
     [
-        'name'=>'fbuch_instructor',
+        'policy'=>'fbuch_instructor',
         'user_group'=>'fbuch_instructor',
         'resource_groups'=>[
             [
@@ -11,7 +11,7 @@ $policies = [
         ]
     ],
     [
-        'name'=>'fbuch_user',
+        'policy'=>'fbuch_user',
         'user_group'=>'fbuch',
         'resource_groups'=>[
             [
@@ -20,12 +20,16 @@ $policies = [
         ]
     ],
     [
-        'name'=>'fbuch_guest',
+        'policy'=>'fbuch_guest',
         'user_group'=>'fbuch_guest',
-        'resource_groups'=>[]
+        'resource_groups'=>[
+            [
+                'name'=>'fbuch_guest'
+            ]            
+        ]
     ],
     [
-        'name'=>'fbuch_clubhome',
+        'policy'=>'fbuch_clubhome',
         'user_group'=>'fbuch_clubhome',
         'resource_groups'=>[
             [
@@ -34,7 +38,7 @@ $policies = [
         ]
     ],
     [
-        'name'=>'Administrator',
+        'policy'=>'Administrator',
         'user_group'=>'Administrator',
         'resource_groups'=>[
             [
