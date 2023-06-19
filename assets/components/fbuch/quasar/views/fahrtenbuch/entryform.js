@@ -99,6 +99,11 @@ export default {
       newguest.value = {};
     }
 
+    function selectMyself(){
+      const id = currentMember.value.id;
+      entry.value.member_id = id;          
+    }    
+
     function addMyself(){
       if (!entry.value.names) {
         entry.value.names = [];
@@ -339,6 +344,7 @@ export default {
       setCox,
       addGuest,
       addMyself,
+      selectMyself,
       bootSelect,
       personSelect,
       selectionState,

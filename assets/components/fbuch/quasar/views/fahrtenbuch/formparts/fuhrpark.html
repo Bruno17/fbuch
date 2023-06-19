@@ -1,5 +1,8 @@
 <template v-if="['Fuhrpark'].includes(selectionState.gattungname)">
     <valuesetter @hasmounted="showpersonstab=false" />
+    <div class="col-md-8 col-sm-8 col-xs-12 row" v-if="currentMember.State_can_be_added_to_entry == 1">
+        <q-btn class="col-12" @click="selectMyself" color="positive" :label="'Selbst eintragen ('+currentMember.firstname+' '+currentMember.name+')'"></q-btn>
+    </div>     
     <api_select class="col-md-4 col-sm-4 col-xs-12" v-model="entry.member_id" :emit-value="true"
         label="Fahrer auswählen" :first_option="{'label':'---','value':'0'}"
         controller="Names?limit=100000&returntype=options&statefilter=can_be_added_to_entry"
