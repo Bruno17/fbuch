@@ -1,44 +1,76 @@
+<div class="q-pa-md full-width" style="height: 400px;">
+    <div class="text-h4 text-center"> [[*menutitle]] </div>
 
-[[$fbuchMyInvites]]
 
-[[!+modx.user.id:is=`0`:then=``:else=`
-Du bist angemeldet als <strong>[[!+modx.user.username]]</strong><br>
-Dein Passwort kannst Du bei Bedarf <a href="[[~85]]">hier</a> ändern.
-`]] 
-[[!Login? &logoutTpl=`fbuchLogoutTpl`&loginResourceId=`[[fbuchGetResourceIdByUri? &uri=`fahrtenbuch/fahrtenbuch.html`]]`]]
+[[-$fbuchMyInvites]]
 
-[[!+modx.user.id:is=`0`:then=`<hr>
-Falls Du Dein Passwort nicht weißt, oder nicht weißt, ob Du bereits einen Login hast,<br>
-versuche es <a href="[[~83]]">hier</a>.<br>
-`:else=`
-`]] 
+[[$$fbuchMitgliederMessageQuasar]]
+<valuesetter @hasmounted="state.tab='mail_login'" />
+<div class="col-12">
+    <q-tabs v-model="state.tab" align="left" no-caps outside-arrows mobile-arrows class="">
+        <q-tab name="mail_login" label="Mail Login" />
+        <q-tab name="pasword_login" label="Passwort Login" />
+        <q-tab name="contact" label="Kontakt" />
+    </q-tabs>
+</div>
+<q-tab-panels keep-alive v-model="state.tab">
+    <q-tab-panel name="pasword_login">
+        <div class="q-mb-xl row">
+            <div class="col-12">
+            [[!+modx.user.id:is=`0`:then=`
+            Falls Du einen Benutzernamen und ein Passwort hast, kannst Du Dich nachfolgend einloggen.
+            `:else=`
+            Du bist angemeldet als <strong>[[!+modx.user.username]]</strong><br>
+            Dein Passwort kannst Du bei Bedarf <a href="[[~85]]">hier</a> ändern.
+            `]]                      
+            </div>
 
-<hr>
-<p>
-[[!FormIt? &hooks=`spam,email,redirect` 
-&emailTpl=`[[fbuchGetChunk? &name=`fbuchEmailTplKontakt`]]` 
-&emailTo=`[[$$fbuch_contact_email]]`
-&emailFrom=`[[++emailsender]]`
-&emailUseFieldForSubject=`1` 
-&redirectTo=`82` 
-&validate=`name:required, email:email:required, subject:required` ]] 
-[[!+fi.error_message:notempty=`</p>
-<p>[[!+fi.error_message]]</p>
-<p>`]]</p>
-<p>Zugangsdaten können über folgendes Formular angefordert werden. Ebenso können Fragen gesendet werden.</p>
-<form class="form uk-form uk-form-stacked" action="[[~[[*id]]]]" method="post"><input name="nospam:blank" type="hidden" value="" />
-<div class="form-group uk-form-row"><label class="uk-form-label" for="name"> Vor- und Nachname: </label> <input id="name" class="uk-width-1-1 form-control" name="name" type="text" value="[[!+fi.name]]" /> <span class="error">[[!+fi.error.name]]</span></div>
+        </div>
+    
+        <div class="q-col-gutter-md q-gutter-md q-mb-sm row">
+            <div class="col-md-4 col-sm-6 col-xs-12  q-col-gutter-md row">
+                [[!Login?
+                &loginTpl=`fbuchLoginTpl` 
+                &logoutTpl=`fbuchLogoutTpl`
+                &loginResourceId=`[[fbuchGetResourceIdByUri? &uri=`fahrtenbuch/fahrtenbuch.html`]]`
+                ]]
+                
+            </div>
+        </div>
+    </q-tab-panel>
+    <q-tab-panel name="contact">
+        [[!FormIt? &hooks=`spam,email,redirect` 
+        &emailTpl=`[[fbuchGetChunk? &name=`fbuchEmailTplKontakt`]]` 
+        &emailTo=`[[$$fbuch_contact_email]]`
+        &emailFrom=`[[++emailsender]]`
+        &emailUseFieldForSubject=`1` 
+        &redirectTo=`82` 
+        &validate=`name:required, email:email:required, subject:required` ]] 
+        [[!+fi.error_message:notempty=`</p>
+        <p>[[!+fi.error_message]]</p>
+        <p>`]]</p>
+        <p>Zugangsdaten können über folgendes Formular angefordert werden. Ebenso können Fragen gesendet werden.</p>
+        <form class="" action="[[~[[*id]]]]" method="post">
+            <input name="nospam:blank" type="hidden" value="" />
+        
+           
+            <div class="form-group uk-form-row">
+            <label class="uk-form-label" for="name"> Vor- und Nachname: </label> <input id="name" class="uk-width-1-1 form-control" name="name" type="text" value="[[!+fi.name]]" /> <span class="error">[[!+fi.error.name]]</span></div>
+        
+        <div class="form-group uk-form-row"><label class="uk-form-label" for="email"> Email: </label> <input id="email" class="uk-width-1-1 form-control" name="email" type="text" value="[[!+fi.email]]" /> <span class="error">[[!+fi.error.email]]</span></div>
+        
+        <div class="form-group uk-form-row"><label class="uk-form-label" for="subject"> Betreff: </label> 
+        <select id="subject" class="uk-width-1-1 form-control" name="subject" >
+        [[$$fbuch_contact_subject_options]]
+        </select> 
+        
+        <span class="error">[[!+fi.error.subject]]</span></div>
+        
+        <div class="form-group uk-form-row"><label class="uk-form-label" for="text"> Nachricht: </label> <textarea id="text" class="uk-width-1-1 form-control" name="text" rows="7">[[!+fi.text]]</textarea> <span class="error">[[!+fi.error.text]]</span></div>
+        
+        <div class="uk-form-row form-buttons"><button class="uk-button btn btn-default" type="submit">Anfrage senden</button></div>
+        </form>
+    </q-tab-panel>
+</q-tab-panels>
 
-<div class="form-group uk-form-row"><label class="uk-form-label" for="email"> Email: </label> <input id="email" class="uk-width-1-1 form-control" name="email" type="text" value="[[!+fi.email]]" /> <span class="error">[[!+fi.error.email]]</span></div>
-
-<div class="form-group uk-form-row"><label class="uk-form-label" for="subject"> Betreff: </label> 
-<select id="subject" class="uk-width-1-1 form-control" name="subject" >
-[[$$fbuch_contact_subject_options]]
-</select> 
-
-<span class="error">[[!+fi.error.subject]]</span></div>
-
-<div class="form-group uk-form-row"><label class="uk-form-label" for="text"> Nachricht: </label> <textarea id="text" class="uk-width-1-1 form-control" name="text" rows="7">[[!+fi.text]]</textarea> <span class="error">[[!+fi.error.text]]</span></div>
-
-<div class="uk-form-row form-buttons"><button class="uk-button btn btn-default" type="submit">Anfrage senden</button></div>
-</form>
+</div>

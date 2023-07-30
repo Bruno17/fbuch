@@ -1,0 +1,17 @@
+
+
+        <q-form class="col-12 q-col-gutter-md row" action="[[~[[*id]]]]" method="post">
+            <q-input class="col-12" v-model="state.username" name="username" outlined label="[[%login.username]]"
+            :hide-bottom-space="true"
+            >
+            </q-input> 
+            <q-input class="col-12" v-model="state.password" type="password" name="password" outlined label="[[%login.password]]"
+            :hide-bottom-space="true"
+            >
+            </q-input>             
+            <input class="loginLoginValue" type="hidden" name="service" value="login" />
+            <input class="returnUrl" type="hidden" name="returnUrl" value="[[+request_uri]]" />
+            <div class="col-12 row">
+                <q-btn class="col-12" color="primary" type="submit" name="Login" label="[[+actionMsg]]" ></q-btn>
+            </div>
+        </q-form>

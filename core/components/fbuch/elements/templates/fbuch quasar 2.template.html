@@ -145,7 +145,6 @@
         </q-drawer>
     
         <q-page-container>
-            
           <router-view :key="$route.fullPath"></router-view>
         </q-page-container>
     
@@ -160,7 +159,7 @@
     &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`
     ]]    
     [[fbuchGetAssetsFiles? 
-    &folder=`quasar/views/[[*alias]]`
+    &folder=`[[fbuchGetViewDirectory]]`
     &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`
     ]]
 
@@ -232,7 +231,8 @@
        */
 
       import fbuchnav from '[[++fbuch.assets_url:default=`/assets/components/fbuch/`]]quasar/components/resourcetree.js';
-      import routes from '[[++fbuch.assets_url:default=`/assets/components/fbuch/`]]quasar/views/[[*alias]]/routes.js';
+      import routes from '[[++fbuch.assets_url:default=`/assets/components/fbuch/`]][[fbuchGetViewDirectory]]/routes.js';
+      
 
   const pinia = Pinia.createPinia();
   const router = VueRouter.createRouter({
