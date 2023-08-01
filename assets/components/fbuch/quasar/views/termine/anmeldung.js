@@ -18,6 +18,7 @@ export default {
         const personSelect = ref();
         const newguest = ref({});
         const messageCount = ref(0);
+        const abmeldungen = ref([]);
 
         onMounted(() => {
             useLoadPermissions();
@@ -25,6 +26,7 @@ export default {
                 currentUser.value = data.object;
             });
             loadEvent();
+            loadInvited();
             loadMessageCount();
         })
 
@@ -55,6 +57,21 @@ export default {
                     console.log(error);
                 });
         }
+
+        function loadInvited() {
+            const data = {};
+            data.date_id = id;
+            data.canceled = 1;
+            const ajaxUrl = modx_options.rest_url + 'Dateinvited';
+            axios.get(ajaxUrl, { params: data })
+                .then(function (response) {
+                    const results = response.data.results;
+                    abmeldungen.value = results;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }        
 
         function loadMessageCount() {
             const data = {};
@@ -128,6 +145,7 @@ export default {
             axios.post(ajaxUrl, properties)
                 .then(function (response) {
                     loadEvent();
+                    loadInvited();
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -199,6 +217,7 @@ export default {
 
 
         return {
+            abmeldungen,
             entry,
             currentUser,
             newguest,
@@ -216,5 +235,5 @@ export default {
         }
     },
 
-    template: '#terminanmeldung'
+    template: '#anmeldung'
 }

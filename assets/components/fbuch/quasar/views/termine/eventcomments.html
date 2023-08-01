@@ -1,73 +1,6 @@
-<div class="q-pa-md full-width" style="height: 400px;">
-    <q-card class="q-mb-md" bordered flat class="full-width">
-        <q-card-section :class="entry.hidden==1 ? 'text-grey' : 'bg-primary text-white' ">
-            <div class="row items-center no-wrap">
-                <div class="col">
-                    <div class="text-subtitle2">{{entry.title}}</div>
-                    <div class="text-h6">{{entry.Type_name}}</div>
-                    <div class="text-subtitle2">
-                        {{ entry.formattedDate }}
-                        <template v-if="entry.formattedEndDate != ''">
-                            <br>
-                            {{ entry.formattedEndDate }}
-                        </template>
-                    </div>
-                </div>
 
-                <div class="col-auto">
-                    <q-btn color="white" text-color="black" round icon="navigate_next">
-                        <q-menu anchor="bottom right" self="top right" :offset="[0, 5]">
-                            <q-list dense bordered separator>
-                                <q-item v-if="useHasPermission('fbuch_create_fahrten')" :href="urls.fahrtenbuch"
-                                    clickable v-ripple>
-                                    <q-item-section avatar><q-avatar icon="view_list" /></q-item-section>
-                                    <q-item-section>
-                                        <q-item-label>Zum Fahrtenbuch</q-item-label>
-                                    </q-item-section>
-                                </q-item>
-                                <q-item :href="urls.dayevents" clickable v-ripple>
-                                    <q-item-section avatar><q-avatar icon="calendar_today" /></q-item-section>
-                                    <q-item-section>
-                                        <q-item-label>Zur Kalender Tagesansicht</q-item-label>
-                                    </q-item-section>
-                                </q-item>
-                                <q-item :href="'/termine/terminanmeldung.html/#/'+entry.id" clickable v-ripple>
-                                    <q-item-section avatar><q-avatar icon="group_add" /></q-item-section>
-                                    <q-item-section>
-                                        <q-item-label>Zur Anmeldung</q-item-label>
-                                        <q-item-label caption>Dich oder Andere anmelden</q-item-label>
-                                    </q-item-section>
-                                </q-item>
-                            </q-list>
-                        </q-menu>
-                    </q-btn>
-                </div>
-            </div>
-        </q-card-section>
 
-        <q-separator></q-separator>
-
-        <q-card-section>
-            <pre
-                style="white-space: pre-wrap; word-wrap: break-word;font-family: inherit;">{{ entry.description }}</pre>
-        </q-card-section>
-        <q-separator></q-separator>
-        <q-card-section>
-            Du bist eingeloggt als <span class="text-bold"> {{currentUser.username}}</span><br>
-            Mitgliederstatus:
-            <template v-if="currentUser.Member_member_status != null">
-                <span class="text-bold"> {{currentUser.Member_firstname}} {{currentUser.Member_name}}</span>
-                ({{currentUser.Member_member_status}})<br>
-
-            </template>
-            <template v-if="currentUser.Member_member_status == null">
-                Du bist nicht in der Mitgliederliste eingetragen.
-            </template>
-        </q-card-section>
-
-    </q-card>
-
-    <div class="q-col-gutter-md q-pb-sm q-mb-sm row">
+    <div class="q-pt-md q-pb-sm q-col-gutter-md q-mb-sm row">        
 
         <div v-if="useHasPermission('fbuch_accept_invite')" class="col-md-4 col-sm-12 col-xs-12 ">
 
@@ -108,7 +41,7 @@
     </div>
 
 
-</div>
+
 
 <q-dialog v-model="mail_dialog" @before-hide="onHideDialog">
     <q-card style="width: 400px; max-width: 100vw;">

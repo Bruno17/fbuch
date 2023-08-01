@@ -42,7 +42,8 @@ class MyControllerDateInvited extends BaseController {
     }
 
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
-        $date_id = $this->getProperty('date_id',false);
+        $date_id = (int) $this->getProperty('date_id',false);
+        $canceled = (int) $this->getProperty('canceled',false);
         $joins = '[{"alias":"Member","selectfields":"id,name,firstname,member_status"}]';
 
         $this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);         
@@ -50,6 +51,9 @@ class MyControllerDateInvited extends BaseController {
         if ($date_id){
             $c->where(['date_id' => $date_id]);
         }
+        if ($canceled){
+            $c->where(['canceled' => $canceled]);
+        }        
 
         $c->where(['Member.id:!=' => 'null']);
 

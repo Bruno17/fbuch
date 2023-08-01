@@ -29,6 +29,16 @@ $update_resources = [
      'published'=>1,
      'hidemenu'=>1,
      'resource_groups'=>['fbuch','fbuch_guest']
-    ]    
+    ],
+    ['pagetitle'=>'Termine/Reservierung',
+     'alias'=>'termine',
+     'context_key' => 'fbuch',
+     'uri' => 'termine',
+     'uri_override' => 1,
+     'template_name'=>'fbuch Quasar 2',
+     'published'=>1,
+     'hidemenu'=>0,
+     'resource_groups'=>['fbuch','fbuch_guest']
+    ]     
 
 ];

@@ -1,0 +1,34 @@
+<div class="q-pt-md q-col-gutter-md q-mb-sm row">
+
+    <div class="col-lg-4 col-md-6 col-xs-12">
+
+        <q-card flat bordered class="q-mb-md">
+            <q-card-section class="bg-primary text-white">
+                <div class="text-h6">Einladungen</div>
+              </q-card-section>                                
+                <q-list bordered separator>
+                    <template v-if="invites && invites.length == 0">
+                        <q-item>
+                            <q-item-section>
+                                Keine Einladungen
+                            </q-item-section>
+                        </q-item>
+                    </template>
+                    <template v-for="(name,index) in invites">
+                        <q-item>
+                            <q-item-section v-if="name.Member_member_status == 'Mitglied'">
+                                {{name.Member_firstname}} {{name.Member_name}}
+                            </q-item-section>
+                            <q-item-section v-if="name.Member_member_status != 'Mitglied'">
+                                {{name.Member_firstname}} {{name.Member_name}}
+                                <br>({{name.Member_member_status}})
+                            </q-item-section>
+        
+                        </q-item>
+                    </template>
+                </q-list>
+
+        </q-card>
+
+    </div>
+</div>

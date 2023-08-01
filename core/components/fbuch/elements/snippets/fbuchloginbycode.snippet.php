@@ -26,7 +26,7 @@ if (!empty($code) && !empty($iid)){
                 'rememberme'    => false
             );
             $rawResponse = $modx->runProcessor('security/login', $properties);
-            $modx->sendRedirect('/termine/terminanmeldung.html/#/' . $date_id);          
+            $modx->sendRedirect('/termine/#/' . $date_id . '/anmeldung');          
     }
     
   
