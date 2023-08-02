@@ -2,75 +2,149 @@
     <div class="text-h4 text-center"> [[*menutitle]] </div>
 
 
-[[-$fbuchMyInvites]]
+    [[-$fbuchMyInvites]]
 
-[[$$fbuchMitgliederMessageQuasar]]
-<valuesetter @hasmounted="state.tab='mail_login'" />
-<div class="col-12">
-    <q-tabs v-model="state.tab" align="left" no-caps outside-arrows mobile-arrows class="">
-        <q-tab name="mail_login" label="Mail Login" />
-        <q-tab name="pasword_login" label="Passwort Login" />
-        <q-tab name="contact" label="Kontakt" />
-    </q-tabs>
-</div>
-<q-tab-panels keep-alive v-model="state.tab">
-    <q-tab-panel name="pasword_login">
-        <div class="q-mb-xl row">
-            <div class="col-12">
-            [[!+modx.user.id:is=`0`:then=`
-            Falls Du einen Benutzernamen und ein Passwort hast, kannst Du Dich nachfolgend einloggen.
-            `:else=`
-            Du bist angemeldet als <strong>[[!+modx.user.username]]</strong><br>
-            Dein Passwort kannst Du bei Bedarf <a href="[[~85]]">hier</a> ändern.
-            `]]                      
-            </div>
+    [[$$fbuchMitgliederMessageQuasar]]
+    <valuesetter @hasmounted="state.tab='[[!#post.tab:default=`mail_login`]]'" />
+    <div class="col-12">
+        <q-tabs v-model="state.tab" align="left" no-caps outside-arrows mobile-arrows class="">
+            <q-tab name="mail_login" label="Mail Login" />
+            <q-tab name="pasword_login" label="Passwort Login" />
+            <q-tab name="contact" label="Kontakt" />
+        </q-tabs>
+    </div>
+    <q-tab-panels keep-alive v-model="state.tab">
+        <q-tab-panel name="mail_login">
+            <div class="q-mb-xl row">
+                [[!#request.target]]
+                [[!Personalize?
+                    &noChunk=`@CODE:                    
+                    <div class="col-12 q-mb-xl">
+                    Falls Du als Mitglied oder Gast bei uns registriert bist, kannst Du Dich mit Deiner Email Adresse hier einloggen.<br>
+                    Du bekommst dann per Mail einen zeitlich begrenzt gültigen Login Link.                        
+                    </div>
 
-        </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12 row">
+
+                        <q-form class="col-12 q-col-gutter-md row" action="[[~[[*id]]]]" method="post">
+                            <input name="nospam:blank" type="hidden" value="" />
+                            <input name="tab" type="hidden" value="mail_login" />
     
-        <div class="q-col-gutter-md q-gutter-md q-mb-sm row">
-            <div class="col-md-4 col-sm-6 col-xs-12  q-col-gutter-md row">
-                [[!Login?
-                &loginTpl=`fbuchLoginTpl` 
-                &logoutTpl=`fbuchLogoutTpl`
-                &loginResourceId=`[[fbuchGetResourceIdByUri? &uri=`fahrtenbuch/fahrtenbuch.html`]]`
-                ]]
+                            <valuesetter @hasmounted="state.email='[[!+fi.email]]'" />
+                            <q-input class="col-12" v-model="state.email" name="email" outlined label="Email"
+                                :hide-bottom-space="true" [[!+fi.error.email:!empty=`error
+                                error-message="[[!+fi.error.email:striptags]]" `]]>
+                            </q-input>
+  
+                            <div class="col-12 row">
+                                <q-btn class="col-12" color="primary" type="submit" label="Login Link holen" ></q-btn>
+                            </div>                        
+    
+                        </q-form>
+                    </div>                    
+                    `
+                    &yesChunk=`@CODE:
+                    <div class="col-12 q-mb-xl">
+                    Du bist angemeldet als <strong>[[!+modx.user.username]]</strong><br>    
+                    </div>
+                    
+                    <div class="col-md-4 col-sm-6 col-xs-12 row">
+                        <div class="col-12 q-col-gutter-md row" >
+                            <div class="col-12 row">
+                                <q-btn class="col-12" color="primary" href="/login/?service=logout" title="[[+actionMsg]]" label="[[+actionMsg]]" ></q-btn>
+                            </div>
+                        </div>     
+                    </div>                    
+                    `
+                ]]                
                 
             </div>
-        </div>
-    </q-tab-panel>
-    <q-tab-panel name="contact">
-        [[!FormIt? &hooks=`spam,email,redirect` 
-        &emailTpl=`[[fbuchGetChunk? &name=`fbuchEmailTplKontakt`]]` 
-        &emailTo=`[[$$fbuch_contact_email]]`
-        &emailFrom=`[[++emailsender]]`
-        &emailUseFieldForSubject=`1` 
-        &redirectTo=`82` 
-        &validate=`name:required, email:email:required, subject:required` ]] 
-        [[!+fi.error_message:notempty=`</p>
-        <p>[[!+fi.error_message]]</p>
-        <p>`]]</p>
-        <p>Zugangsdaten können über folgendes Formular angefordert werden. Ebenso können Fragen gesendet werden.</p>
-        <form class="" action="[[~[[*id]]]]" method="post">
-            <input name="nospam:blank" type="hidden" value="" />
-        
-           
-            <div class="form-group uk-form-row">
-            <label class="uk-form-label" for="name"> Vor- und Nachname: </label> <input id="name" class="uk-width-1-1 form-control" name="name" type="text" value="[[!+fi.name]]" /> <span class="error">[[!+fi.error.name]]</span></div>
-        
-        <div class="form-group uk-form-row"><label class="uk-form-label" for="email"> Email: </label> <input id="email" class="uk-width-1-1 form-control" name="email" type="text" value="[[!+fi.email]]" /> <span class="error">[[!+fi.error.email]]</span></div>
-        
-        <div class="form-group uk-form-row"><label class="uk-form-label" for="subject"> Betreff: </label> 
-        <select id="subject" class="uk-width-1-1 form-control" name="subject" >
-        [[$$fbuch_contact_subject_options]]
-        </select> 
-        
-        <span class="error">[[!+fi.error.subject]]</span></div>
-        
-        <div class="form-group uk-form-row"><label class="uk-form-label" for="text"> Nachricht: </label> <textarea id="text" class="uk-width-1-1 form-control" name="text" rows="7">[[!+fi.text]]</textarea> <span class="error">[[!+fi.error.text]]</span></div>
-        
-        <div class="uk-form-row form-buttons"><button class="uk-button btn btn-default" type="submit">Anfrage senden</button></div>
-        </form>
-    </q-tab-panel>
-</q-tab-panels>
+
+        </q-tab-panel>        
+        <q-tab-panel name="pasword_login">
+            <div class="q-mb-xl row">
+                <div class="col-12">
+                    [[!Personalize?
+                    &noChunk=`@CODE:                    
+                    Falls Du einen Benutzernamen und ein Passwort hast, kannst Du Dich nachfolgend einloggen.
+                    `
+                    &yesChunk=`@CODE:
+                    Du bist angemeldet als <strong>[[!+modx.user.username]]</strong><br>
+                    Dein Passwort kannst Du bei Bedarf <a href="login/passwort-aendern.html">hier</a> ändern.                
+                    `
+                ]]   
+
+                </div>
+
+            </div>
+
+            <div class="q-mb-sm row">
+                <div class="col-md-4 col-sm-6 col-xs-12 row">
+                    [[!Login?
+                    &loginTpl=`fbuchLoginTpl`
+                    &logoutTpl=`fbuchLogoutTpl`
+                    &loginResourceId=`[[fbuchGetResourceIdByUri? &uri=`fahrtenbuch/fahrtenbuch.html`]]`
+                    ]]
+
+                </div>
+            </div>
+        </q-tab-panel>
+        <q-tab-panel name="contact">
+            [[!FormIt? &hooks=`spam,email,redirect`
+            &emailTpl=`[[fbuchGetChunk? &name=`fbuchEmailTplKontakt`]]`
+            &emailTo=`[[$$fbuch_contact_email]]`
+            &emailFrom=`[[++emailsender]]`
+            &emailUseFieldForSubject=`1`
+            &submitVar=`contact`
+            &redirectTo=`[[fbuchGetResourceIdByUri? &uri=`danke-fuer-deine-anfrage.html`]]`
+            &validate=`name:required, email:email:required, subject:required, text:required` ]]
+            [[!+fi.error_message:notempty=`<p>[[!+fi.error_message]]</p>`]]
+            <p>Für Fragen zum Fahrtenbuch oder zum Training könnt ihr nachfolgendes Formular verwenden.</p>
+            <div class="q-mb-sm row">
+                <div class="col-md-4 col-sm-6 col-xs-12 row">
+
+                    <q-form class="col-12 q-col-gutter-md row" action="[[~[[*id]]]]" method="post">
+                        <input name="nospam:blank" type="hidden" value="" />
+                        <input name="tab" type="hidden" value="contact" />
+                        <input name="contact" type="hidden" value="1" />
+
+                        <valuesetter @hasmounted="state.name='[[!+fi.name]]'" />
+                        <q-input class="col-12" v-model="state.name" name="name" outlined label="Vor- und Nachname"
+                            :hide-bottom-space="true" [[!+fi.error.name:!empty=`error
+                            error-message="[[!+fi.error.name:striptags]]" `]]>
+                        </q-input>
+
+
+                        <valuesetter @hasmounted="state.email='[[!+fi.email]]'" />
+                        <q-input class="col-12" v-model="state.email" name="email" outlined label="Email"
+                            :hide-bottom-space="true" [[!+fi.error.email:!empty=`error
+                            error-message="[[!+fi.error.email:striptags]]" `]]>
+                        </q-input>
+
+
+                        <valuesetter @hasmounted="state.subject='[[!+fi.subject]]'" />
+                        <q-select class="col-12" name="subject" 
+                            v-model="state.subject"
+                            :options="[[$$fbuch_contact_subject_options]]" color="primary" outlined clearable
+                            label="Betreff" [[!+fi.error.subject:!empty=`error
+                            error-message="[[!+fi.error.subject:striptags]]" `]]></q-select>
+
+                        <valuesetter @hasmounted="state.text=`[[!+fi.text]]`" />
+                        <q-input type="textarea" class="col-12" v-model="state.text" name="text" outlined
+                            label="Nachricht" :hide-bottom-space="true" [[!+fi.error.text:!empty=`error
+                            error-message="[[!+fi.error.text:striptags]]" `]]>
+                        </q-input>
+                        <div class="col-12 row">
+                            <q-btn class="col-12" color="primary" type="submit" label="Anfrage senden" ></q-btn>
+                        </div>                        
+
+                    </q-form>
+                </div>
+
+            </div>
+
+
+        </q-tab-panel>
+    </q-tab-panels>
 
 </div>

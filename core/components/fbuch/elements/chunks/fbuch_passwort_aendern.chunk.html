@@ -1,39 +1,55 @@
-<h2>Passwort ändern</h2>
-[[!ChangePassword?
-   &submitVar=`change-password`
-   &placeholderPrefix=`cp.`
-   &validateOldPassword=`1`
-   &validate=`nospam:blank`
-   &reloadOnSuccess=``
-   &successMessage=`Dein Passwort wurde erfolgreich geändert.`
-]]
+<div class="q-pa-md full-width" style="height: 400px;">
+    <div class="text-h4 text-center"> [[*pagetitle]] </div>
 
-<div class="updprof-error">[[!+cp.error_message]]</div>
-[[!+cp.successMessage:is=``:then=`
-<form class="form" action="[[~[[*id]]]]" method="post">
-    <input type="hidden" name="nospam" value="" />
-    <div class="ff">
-        <label for="password_old">Dein bisheriges Passwort
-            <span class="error">[[!+cp.error.password_old]]</span>
-        </label>
-        <input type="password" name="password_old" id="password_old" value="[[+cp.password_old]]" />
+    [[!ChangePassword?
+    &submitVar=`change-password`
+    &placeholderPrefix=`cp.`
+    &validateOldPassword=`1`
+    &validate=`nospam:blank`
+    &reloadOnSuccess=``
+    &successMessage=`Dein Passwort wurde erfolgreich geändert.`
+    ]]
+    <div class="q-mb-sm row">
+        <div class="col-md-4 col-sm-6 col-xs-12 row">
+            [[!+cp.successMessage:is=``:then=`
+            <form class="col-12 q-col-gutter-md row" action="[[~[[*id]]]]" method="post">
+                <input type="hidden" name="nospam" value="" />
+
+                <valuesetter @hasmounted="state.isPwd=true" /> 
+                <valuesetter @hasmounted="state.password_old='[[!+cp.password_old]]'" />
+                <q-input :type="state.isPwd ? 'password' : 'text'" class="col-12" v-model="state.password_old" name="password_old" outlined
+                    label="bisheriges Passwort" :hide-bottom-space="true" 
+                    [[!+cp.error.password_old:!empty=`error error-message="[[!+cp.error.password_old]]" `]]>
+                    <template v-slot:append>
+                        <q-icon
+                          :name="state.isPwd ? 'visibility' : 'visibility_off'"
+                          class="cursor-pointer"
+                          @click="state.isPwd = !state.isPwd"
+                        />
+                      </template>                    
+                </q-input>
+                <valuesetter @hasmounted="state.password_new='[[!+cp.password_new]]'" />
+                <q-input :type="state.isPwd ? 'password' : 'text'" class="col-12" v-model="state.password_new" name="password_new" outlined
+                    label="neues Passwort" :hide-bottom-space="true" 
+                    [[!+cp.error.password_new:!empty=`error error-message="[[!+cp.error.password_new]]" `]]>
+                </q-input>
+                <valuesetter @hasmounted="state.password_new_confirm='[[!+cp.password_new_confirm]]'" />
+                <q-input :type="state.isPwd ? 'password' : 'text'" class="col-12" v-model="state.password_new_confirm" name="password_new_confirm" outlined
+                    label="Neues Passwort bestätigen" :hide-bottom-space="true" 
+                    [[!+cp.error.password_new_confirm:!empty=`error error-message="[[!+cp.error.password_new_confirm]]" `]]>
+                </q-input>
+
+                <div class="col-12 row">
+                    <q-btn class="col-12" name="change-password" color="primary" type="submit" label="Passwort ändern" ></q-btn>
+                </div>   
+
+            </form>
+            `:else=`
+            [[!+cp.successMessage]]
+            `]]
+        </div>
     </div>
-    <div class="ff">
-        <label for="password_new">Dein neues Passwort
-            <span class="error">[[!+cp.error.password_new]]</span>
-        </label>
-        <input type="password" name="password_new" id="password_new" value="[[+cp.password_new]]" />
-    </div>
-    <div class="ff">
-        <label for="password_new_confirm">Neues Passwort bestätigen
-            <span class="error">[[!+cp.error.password_new_confirm]]</span>
-        </label>
-        <input type="password" name="password_new_confirm" id="password_new_confirm" value="[[+cp.password_new_confirm]]" />
-    </div>
-    <div class="ff">
-        <input type="submit" name="change-password" value="Passwort ändern" />
-    </div>
-</form>
-`:else=`
-[[!+cp.successMessage]]
-`]]
+
+
+
+</div>

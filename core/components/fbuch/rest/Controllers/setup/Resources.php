@@ -30,6 +30,16 @@ class MyControllerSetupResources extends BaseController {
                 }
             }
         }
+        if ($resources = $this->getResources('update_uris')){
+            foreach ($resources as $r){
+                if ($resource = $this->modx->getObject('modResource',['uri'=>$r['uri']])){
+                    if (isset($r['new_uri'])){
+                        $resource->set('uri',$r['new_uri']);
+                        $resource->save();                        
+                    }
+                }
+            }
+        }        
         if ($resources = $this->getResources('update_resources')){
             foreach ($resources as $r){
                 if ($resource = $this->modx->getObject('modResource',['uri'=>$r['uri']])){

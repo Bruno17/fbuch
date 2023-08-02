@@ -10,6 +10,15 @@ $delete_resources = [
      'fahrtenbuch/fahrtenbuch-ergometer-neu/'
 ];
 
+$update_uris = [
+    ['uri'=>'danke-für-deine-anfrage.html',
+    'new_uri'=>'danke-fuer-deine-anfrage.html'
+    ],
+    ['uri'=>'termine/',
+    'new_uri'=>'termine'
+    ]    
+];
+
 $update_resources = [
     ['pagetitle'=>'Fahrtenbuch',
      'alias'=>'fahrtenbuch',
@@ -39,6 +48,17 @@ $update_resources = [
      'published'=>1,
      'hidemenu'=>0,
      'resource_groups'=>['fbuch','fbuch_guest']
-    ]     
+    ],
+    ['pagetitle'=>'Danke für Deine Anfrage',
+     'alias'=>'danke-fuer-deine-anfrage',
+     'context_key' => 'fbuch',
+     'uri' => 'danke-fuer-deine-anfrage.html',
+     'uri_override' => 0,
+     'template_name'=>'fbuch Quasar 2',
+     'published'=>1,
+     'hidemenu'=>1,
+     'content'=>'[[$fbuch_danke_fuer_deine_anfrage]]',
+     'richtext'=>0
+    ]       
 
 ];
