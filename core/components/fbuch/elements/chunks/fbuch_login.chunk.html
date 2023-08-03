@@ -5,6 +5,7 @@
     [[-$fbuchMyInvites]]
 
     [[$$fbuchMitgliederMessageQuasar]]
+    [[!fbuch_redirect_to_prior_xxx]]
     <valuesetter @hasmounted="state.tab='[[!#post.tab:default=`mail_login`]]'" />
     <div class="col-12">
         <q-tabs v-model="state.tab" align="left" no-caps outside-arrows mobile-arrows class="">
@@ -16,7 +17,6 @@
     <q-tab-panels keep-alive v-model="state.tab">
         <q-tab-panel name="mail_login">
             <div class="q-mb-xl row">
-                [[!#request.target]]
                 [[!Personalize?
                     &noChunk=`@CODE:                    
                     <div class="col-12 q-mb-xl">
@@ -83,7 +83,8 @@
                     [[!Login?
                     &loginTpl=`fbuchLoginTpl`
                     &logoutTpl=`fbuchLogoutTpl`
-                    &loginResourceId=`[[fbuchGetResourceIdByUri? &uri=`fahrtenbuch/fahrtenbuch.html`]]`
+                    &loginResourceId=`[[fbuchGetResourceIdByUri? &uri=`login/login-und-redirect.html`]]`
+                    &loginResourceParams=`{"target":"[[!#request.target:default=`fahrtenbuch/fahrtenbuch.html`]]","route":"[[!#request.route]]"}`  
                     ]]
 
                 </div>

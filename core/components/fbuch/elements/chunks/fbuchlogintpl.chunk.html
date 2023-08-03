@@ -2,6 +2,9 @@
 
         <q-form class="col-12 q-col-gutter-md row" action="[[~[[*id]]]]" method="post">
             <input name="tab" type="hidden" value="pasword_login" />
+            <input name="target" type="hidden" value="[[!#request.target:default=`fahrtenbuch/fahrtenbuch.html`]]" />
+            <input name="route" type="hidden" value="[[!#request.route]]" />
+            
             <q-input class="col-12" v-model="state.username" name="username" outlined label="[[%login.username]]"
             :hide-bottom-space="true"
             >

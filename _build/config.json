@@ -286,6 +286,10 @@
           "file":"fbuchsendinvitemail.snippet.php"
         },
         {
+          "name":"fbuch_login_und_redirect",
+          "file":"fbuch_login_und_redirect.snippet.php"
+        },
+        {
           "name":"fbuch_mailinglistnames_aftersave",
           "file":"fbuch_mailinglistnames_aftersave.snippet.php"
         },
@@ -396,19 +400,13 @@
       ],
       "chunks":[
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "static":false,
-          "static_file":"",
           "name":"fbuch_Ergotrack",
           "file":"fbuch_ergotrack.chunk.html",
+          "category":"fbuch_content_chunks"
+        },
+        {
+          "name":"fbuch_login_und_redirect",
+          "file":"fbuch_login_und_redirect.chunk.html",
           "category":"fbuch_content_chunks"
         },
         {
@@ -4092,19 +4090,6 @@
       ],
       "plugins":[
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "disabled":false,
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"prepare_download",
           "events":[
             "OnLoadWebDocument",
@@ -4113,19 +4098,6 @@
           "file":"prepare_download.plugin.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "disabled":false,
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchGetChunk",
           "events":[
             "OnChunkFormSave",
@@ -4135,19 +4107,6 @@
           "file":"fbuchgetchunk.plugin.php"
         },
         {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "disabled":false,
-          "moduleguid":"",
-          "static":false,
-          "static_file":"",
           "name":"fbuchUserSave",
           "events":[
             "OnBeforeUserFormSave"
@@ -4160,10 +4119,14 @@
             "OnWebAuthentication"
           ],
           "file":"fbuchauthenticatebycode.plugin.php"
-        }         
-        
-        
-        
+        },
+        {
+          "name":"fbuch_loginrouter",
+          "events":[
+            "OnHandleRequest"
+          ],
+          "file":"fbuch_loginrouter.plugin.php"
+        }           
       ]
     }
   }
