@@ -5,7 +5,7 @@
     [[-$fbuchMyInvites]]
 
     [[$$fbuchMitgliederMessageQuasar]]
-    [[!fbuch_redirect_to_prior_xxx]]
+    
     <valuesetter @hasmounted="state.tab='[[!#post.tab:default=`mail_login`]]'" />
     <div class="col-12">
         <q-tabs v-model="state.tab" align="left" no-caps outside-arrows mobile-arrows class="">
@@ -17,6 +17,11 @@
     <q-tab-panels keep-alive v-model="state.tab">
         <q-tab-panel name="mail_login">
             <div class="q-mb-xl row">
+                [[!FormIt? 
+                &hooks=`fbuch_getotp_hook` 
+                &validate=`email:email:required` 
+                &submitVar=`mail_login`
+                ]]                
                 [[!Personalize?
                     &noChunk=`@CODE:                    
                     <div class="col-12 q-mb-xl">
@@ -29,8 +34,10 @@
                         <q-form class="col-12 q-col-gutter-md row" action="[[~[[*id]]]]" method="post">
                             <input name="nospam:blank" type="hidden" value="" />
                             <input name="tab" type="hidden" value="mail_login" />
+                            <input name="mail_login" type="hidden" value="1" />
     
                             <valuesetter @hasmounted="state.email='[[!+fi.email]]'" />
+                            [[!+my.successMessage:is=``:then=`
                             <q-input class="col-12" v-model="state.email" name="email" outlined label="Email"
                                 :hide-bottom-space="true" [[!+fi.error.email:!empty=`error
                                 error-message="[[!+fi.error.email:striptags]]" `]]>
@@ -38,7 +45,27 @@
   
                             <div class="col-12 row">
                                 <q-btn class="col-12" color="primary" type="submit" label="Login Link holen" ></q-btn>
-                            </div>                        
+                            </div>                             
+                            `:else=`
+                            <div class="col-12 row">
+                            <q-card class="col-12">
+                                <q-card-section class="bg-info text-white">
+                                    [[!+my.successMessage]]
+                                </q-card-section>
+                                
+                            </q-card>
+                            
+                            </div>
+                            <div class="col-12 row">
+                            <q-btn class="col-12" color="primary" href="[[~[[*id]]]]" label="Ok" ></q-btn>                                                                                            
+                            </div>
+                            `]]
+
+                            
+                            
+
+
+
     
                         </q-form>
                     </div>                    
@@ -97,9 +124,10 @@
             &emailFrom=`[[++emailsender]]`
             &emailUseFieldForSubject=`1`
             &submitVar=`contact`
+            &placeholderPrefix=`contact.`
             &redirectTo=`[[fbuchGetResourceIdByUri? &uri=`danke-fuer-deine-anfrage.html`]]`
             &validate=`name:required, email:email:required, subject:required, text:required` ]]
-            [[!+fi.error_message:notempty=`<p>[[!+fi.error_message]]</p>`]]
+            [[!+contact.error_message:notempty=`<p>[[!+contact.error_message]]</p>`]]
             <p>Für Fragen zum Fahrtenbuch oder zum Training könnt ihr nachfolgendes Formular verwenden.</p>
             <div class="q-mb-sm row">
                 <div class="col-md-4 col-sm-6 col-xs-12 row">
@@ -109,31 +137,31 @@
                         <input name="tab" type="hidden" value="contact" />
                         <input name="contact" type="hidden" value="1" />
 
-                        <valuesetter @hasmounted="state.name='[[!+fi.name]]'" />
+                        <valuesetter @hasmounted="state.name='[[!+contact.name]]'" />
                         <q-input class="col-12" v-model="state.name" name="name" outlined label="Vor- und Nachname"
-                            :hide-bottom-space="true" [[!+fi.error.name:!empty=`error
-                            error-message="[[!+fi.error.name:striptags]]" `]]>
+                            :hide-bottom-space="true" [[!+contact.error.name:!empty=`error
+                            error-message="[[!+contact.error.name:striptags]]" `]]>
                         </q-input>
 
 
-                        <valuesetter @hasmounted="state.email='[[!+fi.email]]'" />
+                        <valuesetter @hasmounted="state.email='[[!+contact.email]]'" />
                         <q-input class="col-12" v-model="state.email" name="email" outlined label="Email"
-                            :hide-bottom-space="true" [[!+fi.error.email:!empty=`error
-                            error-message="[[!+fi.error.email:striptags]]" `]]>
+                            :hide-bottom-space="true" [[!+contact.error.email:!empty=`error
+                            error-message="[[!+contact.error.email:striptags]]" `]]>
                         </q-input>
 
 
-                        <valuesetter @hasmounted="state.subject='[[!+fi.subject]]'" />
+                        <valuesetter @hasmounted="state.subject='[[!+contact.subject]]'" />
                         <q-select class="col-12" name="subject" 
                             v-model="state.subject"
                             :options="[[$$fbuch_contact_subject_options]]" color="primary" outlined clearable
-                            label="Betreff" [[!+fi.error.subject:!empty=`error
-                            error-message="[[!+fi.error.subject:striptags]]" `]]></q-select>
+                            label="Betreff" [[!+contact.error.subject:!empty=`error
+                            error-message="[[!+contact.error.subject:striptags]]" `]]></q-select>
 
-                        <valuesetter @hasmounted="state.text=`[[!+fi.text]]`" />
+                        <valuesetter @hasmounted="state.text=`[[!+contact.text]]`" />
                         <q-input type="textarea" class="col-12" v-model="state.text" name="text" outlined
-                            label="Nachricht" :hide-bottom-space="true" [[!+fi.error.text:!empty=`error
-                            error-message="[[!+fi.error.text:striptags]]" `]]>
+                            label="Nachricht" :hide-bottom-space="true" [[!+contact.error.text:!empty=`error
+                            error-message="[[!+contact.error.text:striptags]]" `]]>
                         </q-input>
                         <div class="col-12 row">
                             <q-btn class="col-12" color="primary" type="submit" label="Anfrage senden" ></q-btn>

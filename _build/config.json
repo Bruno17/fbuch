@@ -286,6 +286,10 @@
           "file":"fbuchsendinvitemail.snippet.php"
         },
         {
+          "name":"fbuch_getotp_hook",
+          "file":"fbuch_getotp_hook.snippet.php"
+        },
+        {
           "name":"fbuch_login_und_redirect",
           "file":"fbuch_login_und_redirect.snippet.php"
         },
@@ -408,6 +412,10 @@
           "name":"fbuch_login_und_redirect",
           "file":"fbuch_login_und_redirect.chunk.html",
           "category":"fbuch_content_chunks"
+        },
+        {
+          "name":"fbuch_emailLogin",
+          "file":"fbuch_emaillogin.chunk.html"
         },
         {
           "source":0,

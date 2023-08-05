@@ -894,19 +894,32 @@ class Fbuch {
 
     }
 
+    public function userCouldBeCreated($object_id){
+        $usergroups = $this->getMemberUsergroups($object_id);
+        $allowed = !empty($usergroups) ? true : false;
+        return $allowed;
+    }
+
+    public function getMemberUsergroups($object_id){
+        $modx = &$this->modx;
+        if (!empty($object_id) && $object = $modx->getObject('mvMember', array('id' => $object_id))) {
+            $member_status = $object->get('member_status');
+            if (!empty($member_status) && $member_state = $modx->getObject('mvMemberState',['state'=>$member_status])){
+                $usergroups = $member_state->get('add_to_usergroups');
+                return $usergroups;
+            }
+        }
+        return false;        
+    }
+
     public function createUserFromMember($object_id,$active=0){
         $modx = &$this->modx;
         if (!empty($object_id) && $object = $modx->getObject('mvMember', array('id' => $object_id))) {
-            $user_id = $object->get('modx_user_id');
-            $member_status = $object->get('member_status');
-            $allowed = false;
-            if (!empty($member_status) && $member_state = $modx->getObject('mvMemberState',['state'=>$member_status])){
-                $usergroups = $member_state->get('add_to_usergroups');
-                $allowed = !empty($usergroups) ? true : false;
-            }
+            $allowed = $usergroups = $this->getMemberUsergroups($object_id);
             if (!$allowed){
                 return false;
             }
+            $user_id = $object->get('modx_user_id');
             if ($user = $modx->getObject('modUser',array('id'=>$user_id))){
                 
             } else {
@@ -2357,6 +2370,118 @@ class Fbuch {
 
         return $alter;
 
+    }
+
+    public function getNow(){
+        return new DateTime(null, new DateTimeZone('Europe/Berlin'));
+    } 
+    
+    public function getOtpExpireson($otp_createdon){
+        $date = new DateTime($otp_createdon, new DateTimeZone('Europe/Berlin'));
+        date_add($date,date_interval_create_from_date_string("24 hours"));
+        return $date;
+    }
+
+    public function generateOTP(){
+        $password = "";
+        for($i=0;$i<50;$i++) {
+            $password .= chr( (mt_rand(1, 36) <= 26) ? mt_rand(97, 122) : mt_rand(48, 57 ));
+        } 
+        return $password;        
+    } 
+    
+    public function loginByInvite($iid,$code){
+        $modx = &$this->modx;
+        if ($invite_o = $modx->getObject('fbuchDateInvited', $iid)) {
+            if ($date_o = $invite_o->getOne('Date')){
+                $date = $date_o->get('date_end'); 
+                $now = new DateTime(null, new DateTimeZone('Europe/Berlin'));
+                $today = date_format($now,'Y-m-d');
+                $date = substr($date,0,10);
+                if ($date < $today) {
+                    return 'Zugang nicht möglich. Der Termin dieses Einladungslinks liegt in der Vergangenheit.';
+                }
+    
+            }
+            $date_id = $invite_o->get('date_id');
+            $member_id = $invite_o->get('member_id');
+            if ($name_o = $invite_o->getOne('Member')) {
+                $email = $this->getNameEmail($name_o);
+                $code_matches = ($date_id && $email && $code == md5($date_id . $email . $iid)) ? true : false;    
+    
+                if ($code_matches && $user = $this->createUserFromMember($member_id,1)){
+                    $rawResponse = $this->login($user);
+                    $modx->sendRedirect('/termine/#/' . $date_id . '/anmeldung');          
+                }
+            }
+        } 
+        return false; 
+    }
+
+    public function loginByOtp($mid,$code){
+        $modx = &$this->modx;
+        if ($member = $modx->getObject('mvMember',$mid)){
+            $otp = $member->get('otp');
+            $otp_createdon = $member->get('otp_createdon');
+           
+            if (!empty($otp && !empty($otp_createdon))){
+                $otp_expireson = $this->getOtpExpireson($otp_createdon);
+                $now = $this->getNow();                
+                $dateDifference = ($otp_expireson->getTimestamp() - $now->getTimestamp()) / 60;
+                if ($dateDifference < 0) {
+                    return 'Login nicht möglich. Der Login Link ist nicht mehr gültig.';
+                }
+                if ($otp == $code && $user = $this->createUserFromMember($mid,1)){
+                    $rawResponse = $this->login($user);
+                    $modx->sendRedirect('/fahrtenbuch/fahrtenbuch.html');       
+                }                  
+            }
+        } 
+        return false;   
+    }
+
+    public function login($user){
+        $this->authenticated = true;
+        $properties = array(
+            'login_context' => 'fbuch',
+            //'add_contexts'  => $this->getProperty('contexts',''),
+            'username'      => $user->get('username'),
+            'password'      => 'password',
+            'returnUrl'     => '/',
+            'rememberme'    => false
+        );
+        $rawResponse = $this->modx->runProcessor('security/login', $properties); 
+        return $rawResponse;       
+    }    
+
+    public function sendLoginMail($member_id){
+        $allowed = $this->userCouldBeCreated($member_id);
+        if (!$allowed){
+            return false;
+        }
+        $classname = 'mvMember';
+        if ($object = $this->modx->getObject($classname,['id'=>$member_id])){
+            /*
+            $activated = $object->get('activated');
+            if (empty($activated)){
+                return false;
+            }
+            */
+            $otp = $this->generateOTP();
+            $now = $this->getNow();
+            $object->set('otp',$otp);
+            $object->set('otp_createdon',date_format($now,'Y-m-d H:i:s'));
+            $object->save();
+
+            $properties = $object->toArray();
+            $otp_expireson = $this->getOtpExpireson($object->get('otp_createdon'));
+            $properties['otp_expireson'] = date_format($otp_expireson,'d.m.Y H:i');
+            $properties['tpl'] = 'fbuch_emailLogin';
+            $properties['code'] = $object->get('otp');
+            $properties['subject'] = 'Dein Login Link';
+            return $this->sendMail($properties);
+        }
+        return false;            
     }
 
     public function sendMails($recipients, $properties = array()) {

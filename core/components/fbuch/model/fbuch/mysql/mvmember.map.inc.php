@@ -75,6 +75,8 @@ $xpdo_meta_map['mvMember']= array (
     'modx_user_id' => 0,
     'member_status' => '',
     'riot_user_id' => '',
+    'otp' => '',
+    'otp_createdon' => NULL,
   ),
   'fieldMeta' => 
   array (
@@ -594,6 +596,20 @@ $xpdo_meta_map['mvMember']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
+    ),
+    'otp' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '150',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'otp_createdon' => 
+    array (
+      'dbtype' => 'datetime',
+      'phptype' => 'datetime',
+      'null' => true,
     ),
   ),
   'composites' => 
