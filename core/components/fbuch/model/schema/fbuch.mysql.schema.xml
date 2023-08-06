@@ -310,6 +310,7 @@
         <field key="remove_from_usergroups" dbtype="text" phptype="string" null="false" default="" /> 
         <field key="can_be_added_to_entry" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="can_be_invited" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="can_self_register" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
     </object>           
     
     <object class="mvMember" table="mv_members" extends="xPDOSimpleObject">

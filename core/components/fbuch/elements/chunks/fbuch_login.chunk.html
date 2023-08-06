@@ -25,7 +25,7 @@
                 [[!Personalize?
                     &noChunk=`@CODE:                    
                     <div class="col-12 q-mb-xl">
-                    Falls Du als Mitglied oder Gast bei uns registriert bist, kannst Du Dich mit Deiner Email Adresse hier einloggen.<br>
+                    Falls Du als Mitglied bei uns registriert bist, kannst Du Dich mit Deiner Email Adresse hier einloggen.<br>
                     Du bekommst dann per Mail einen zeitlich begrenzt gültigen Login Link.                        
                     </div>
 
@@ -35,6 +35,8 @@
                             <input name="nospam:blank" type="hidden" value="" />
                             <input name="tab" type="hidden" value="mail_login" />
                             <input name="mail_login" type="hidden" value="1" />
+                            <input name="target" type="hidden" value="[[!#request.target:default=`fahrtenbuch/fahrtenbuch.html`]]" />
+                            <input name="route" type="hidden" value="[[!#request.route]]" />                            
     
                             <valuesetter @hasmounted="state.email='[[!+fi.email]]'" />
                             [[!+my.successMessage:is=``:then=`
@@ -60,12 +62,6 @@
                             <q-btn class="col-12" color="primary" href="[[~[[*id]]]]" label="Ok" ></q-btn>                                                                                            
                             </div>
                             `]]
-
-                            
-                            
-
-
-
     
                         </q-form>
                     </div>                    

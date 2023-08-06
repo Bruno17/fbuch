@@ -12,7 +12,7 @@ if ($member = $modx->getObject('mvMember',['email'=>$email])){
 
     $dateDifference = date_diff($date1, $date2)->i;
 
-    if (!empty($otp) &&  $dateDifference < 10){
+    if (!empty($otp) &&  $dateDifference < 1){
         //otp innerhalb der letzten 10 Minuten bereits angefordert
         
         $modx->setPlaceholder('my.successMessage','Auf diese Adresse wurde kürzlich bereits ein Login Link gesendet.');
@@ -21,11 +21,16 @@ if ($member = $modx->getObject('mvMember',['email'=>$email])){
     }
 
     $success = false;
+    $params = [
+        'target' =>$hook->getValue('target'),
+        'route' => $hook->getValue('route')
+    ];
+
     $c = $modx->newQuery('mvMember');
     $c->where(['email'=>$email]);
     if ($collection = $modx->getCollection('mvMember',$c)){
         foreach ($collection as $object){
-            if ($modx->fbuch->sendLoginMail($object->get('id'))) {
+            if ($modx->fbuch->sendLoginMail($object->get('id'),$params)) {
                 $success = true;
             }             
         }

@@ -94,6 +94,12 @@
           "field":"can_be_invited",
           "caption":"can_be_invited",
           "pos":6
+        },
+        {
+          "MIGX_id":1336,
+          "field":"can_self_register",
+          "caption":"can_self_register",
+          "pos":7
         }
       ],
       "pos":1
@@ -197,12 +203,17 @@
       "MIGX_id":7,
       "dataIndex":"can_be_invited",
       "header":"can_be_invited"
+    },
+    {
+      "MIGX_id":9,
+      "dataIndex":"can_self_register",
+      "header":"can_self_register"
     }
   ],
   "createdby":1,
   "createdon":"2023-04-09 19:03:40",
   "editedby":1,
-  "editedon":"2023-04-11 11:18:56",
+  "editedon":"2023-08-06 11:28:46",
   "deleted":0,
   "deletedon":null,
   "deletedby":0,

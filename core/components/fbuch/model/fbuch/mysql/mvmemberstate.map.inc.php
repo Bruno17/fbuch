@@ -16,6 +16,7 @@ $xpdo_meta_map['mvMemberState']= array (
     'remove_from_usergroups' => '',
     'can_be_added_to_entry' => 0,
     'can_be_invited' => 0,
+    'can_self_register' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -58,6 +59,15 @@ $xpdo_meta_map['mvMemberState']= array (
       'default' => 0,
     ),
     'can_be_invited' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'can_self_register' => 
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',

@@ -894,10 +894,15 @@ class Fbuch {
 
     }
 
-    public function userCouldBeCreated($object_id){
-        $usergroups = $this->getMemberUsergroups($object_id);
-        $allowed = !empty($usergroups) ? true : false;
-        return $allowed;
+    public function memberCanSelfregister($object_id){
+        if (!empty($object_id) && $object = $this->modx->getObject('mvMember', array('id' => $object_id))) {
+            $member_status = $object->get('member_status');
+            if (!empty($member_status) && $member_state = $this->modx->getObject('mvMemberState',['state'=>$member_status])){
+                $can_self_register = $member_state->get('can_self_register');
+                return $can_self_register;
+            }
+        }
+        return false;
     }
 
     public function getMemberUsergroups($object_id){
@@ -2411,14 +2416,21 @@ class Fbuch {
     
                 if ($code_matches && $user = $this->createUserFromMember($member_id,1)){
                     $rawResponse = $this->login($user);
-                    $modx->sendRedirect('/termine/#/' . $date_id . '/anmeldung');          
+                    $response = $rawResponse->getResponse();
+                    $success = $this->modx->getOption('success',$response);
+                    if ($success){
+                        $modx->sendRedirect('/termine/#/' . $date_id . '/anmeldung');  
+                    }
+                    $message = $this->modx->getOption('message',$response);
+                    return $message;                    
+                            
                 }
             }
         } 
         return false; 
     }
 
-    public function loginByOtp($mid,$code){
+    public function loginByOtp($mid,$code,$target,$route){
         $modx = &$this->modx;
         if ($member = $modx->getObject('mvMember',$mid)){
             $otp = $member->get('otp');
@@ -2433,7 +2445,18 @@ class Fbuch {
                 }
                 if ($otp == $code && $user = $this->createUserFromMember($mid,1)){
                     $rawResponse = $this->login($user);
-                    $modx->sendRedirect('/fahrtenbuch/fahrtenbuch.html');       
+                    $response = $rawResponse->getResponse();
+                    $success = $this->modx->getOption('success',$response);
+                    $target = !empty($target) ? $target : '/fahrtenbuch/fahrtenbuch.html';
+                    if (!empty($route)){
+                        $target .= '/#/' . $route;
+                    }
+                    if ($success){
+ 
+                        $modx->sendRedirect($target); 
+                    }
+                    $message = $this->modx->getOption('message',$response);
+                    return $message;      
                 }                  
             }
         } 
@@ -2441,7 +2464,7 @@ class Fbuch {
     }
 
     public function login($user){
-        $this->authenticated = true;
+        $this->authenticated = true; 
         $properties = array(
             'login_context' => 'fbuch',
             //'add_contexts'  => $this->getProperty('contexts',''),
@@ -2450,12 +2473,18 @@ class Fbuch {
             'returnUrl'     => '/',
             'rememberme'    => false
         );
-        $rawResponse = $this->modx->runProcessor('security/login', $properties); 
+        $rawResponse = $this->modx->runProcessor('security/login', $properties);
+        /*
+        $success = $this->modx->getOption('success',$rawResponse);
+        if (success){
+            $this->authenticated = true;    
+        } 
+        */
         return $rawResponse;       
     }    
 
-    public function sendLoginMail($member_id){
-        $allowed = $this->userCouldBeCreated($member_id);
+    public function sendLoginMail($member_id,$params){
+        $allowed = (bool) $this->memberCanSelfregister($member_id);
         if (!$allowed){
             return false;
         }
@@ -2467,18 +2496,44 @@ class Fbuch {
                 return false;
             }
             */
-            $otp = $this->generateOTP();
+            $createotp = false;
+            $otp = $object->get('otp');
+            $otp_createdon = $object->get('otp_createdon');
+            if (empty($otp) || empty($otp_createdon)){
+                $createotp = true;
+            }
+            $otp_expireson = $this->getOtpExpireson($otp_createdon);
             $now = $this->getNow();
-            $object->set('otp',$otp);
-            $object->set('otp_createdon',date_format($now,'Y-m-d H:i:s'));
-            $object->save();
+            $dateDifference = ($otp_expireson->getTimestamp() - $now->getTimestamp()) / 60;
+            if ($dateDifference < 0) {
+                $createotp = true;
+            }            
+ 
+            if ($createotp){
+                $otp = $this->generateOTP();
+                $otp_createdon = date_format($now,'Y-m-d H:i:s');
+                $otp_expireson = $this->getOtpExpireson($otp_createdon); 
+                $object->set('otp',$otp);
+                $object->set('otp_createdon',$otp_createdon);
+                $object->save();
+            }
+
+            $url_params = '';
+            $url_params_delimiter = '&'; 
+            if (isset($params['target']) && !empty($params['target'])){
+                $url_params = $url_params_delimiter . 'target=' . $params['target'];
+            }
+            if (isset($params['route']) && !empty($params['route'])){
+                $url_params .= $url_params_delimiter . 'route=' . $params['route'];
+            }            
 
             $properties = $object->toArray();
-            $otp_expireson = $this->getOtpExpireson($object->get('otp_createdon'));
+            
             $properties['otp_expireson'] = date_format($otp_expireson,'d.m.Y H:i');
             $properties['tpl'] = 'fbuch_emailLogin';
             $properties['code'] = $object->get('otp');
             $properties['subject'] = 'Dein Login Link';
+            $properties['url_params'] = $url_params;
             return $this->sendMail($properties);
         }
         return false;            
