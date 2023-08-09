@@ -1,11 +1,10 @@
 import { useHasPermission } from "../composables/helpers.js";
 
 export default {
-  emits: ['removeName', 'nameCheckbox'],
+  emits: ['updateEvent', 'nameCheckbox'],
   props: {
     view: '',
-    event: {},
-    loadDayEvents: Function
+    event: {}
   },
 
   setup(props, { emit }) {
@@ -14,6 +13,7 @@ export default {
     const modx = modx_options;
     const { useQuasar } = Quasar;
     const $q = useQuasar();
+    const state = ref({});
 
     function confirmDelete() {
       $q.dialog({
@@ -44,7 +44,8 @@ export default {
       const event = { deleted: 1 };
       axios.put(ajaxUrl, event)
         .then(function (response) {
-          props.loadDayEvents();
+          state.value.showmenu = false;
+          emit('updateEvent');
         })
         .catch(function (error) {
           console.log(error);
@@ -56,7 +57,7 @@ export default {
       const event = { hidden: props.event.hidden == 1 ? 0 : 1 };
       axios.put(ajaxUrl, event)
         .then(function (response) {
-          props.loadDayEvents();
+          emit('updateEvent');
         })
         .catch(function (error) {
           console.log(error);
@@ -88,7 +89,7 @@ export default {
         properties.datename_id = datename_id;
         axios.post(ajaxUrl, properties)
           .then(function (response) {
-            emit('removeName');
+            emit('updateEvent');
           })
           .catch(function (error) {
             console.log(error);
@@ -103,6 +104,7 @@ export default {
     return {
       expanded: ref(false),
       modx,
+      state,
       confirmDelete,
       confirmHide,
       hideEvent,

@@ -3,7 +3,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"1.9.6-beta",
+  "version":"2.0.1-beta",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",
@@ -1231,8 +1231,8 @@
           ],
           "static":false,
           "static_file":"",
-          "name":"fbuch_contact_subject_options",
-          "file":"fbuch_contact_subject_options.chunk.html"
+          "name":"fbuch_contact_subject_options_json",
+          "file":"fbuch_contact_subject_options_json.chunk.html"
         },
         {
           "source":0,

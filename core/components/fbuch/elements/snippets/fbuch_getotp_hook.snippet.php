@@ -12,7 +12,7 @@ if ($member = $modx->getObject('mvMember',['email'=>$email])){
 
     $dateDifference = date_diff($date1, $date2)->i;
 
-    if (!empty($otp) &&  $dateDifference < 1){
+    if (!empty($otp) &&  $dateDifference < 10){
         //otp innerhalb der letzten 10 Minuten bereits angefordert
         
         $modx->setPlaceholder('my.successMessage','Auf diese Adresse wurde kürzlich bereits ein Login Link gesendet.');

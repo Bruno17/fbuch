@@ -150,7 +150,7 @@
                         <valuesetter @hasmounted="state.subject='[[!+contact.subject]]'" />
                         <q-select class="col-12" name="subject" 
                             v-model="state.subject"
-                            :options="[[$$fbuch_contact_subject_options]]" color="primary" outlined clearable
+                            :options="[[$$fbuch_contact_subject_options_json]]" color="primary" outlined clearable
                             label="Betreff" [[!+contact.error.subject:!empty=`error
                             error-message="[[!+contact.error.subject:striptags]]" `]]></q-select>
 

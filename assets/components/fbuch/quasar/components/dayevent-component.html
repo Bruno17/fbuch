@@ -14,7 +14,7 @@
             </div>
             <div class="col-auto">
                 <q-btn color="white" text-color="black" round icon="navigate_next">
-                    <q-menu anchor="bottom right" self="top right" :offset="[0, 5]">
+                    <q-menu v-model="state.showmenu" anchor="bottom right" self="top right" :offset="[0, 5]">
                         <q-list dense bordered separator>
                             <q-item :href="'/termine/#/'+event.id+'/anmeldung'" clickable v-ripple>
                                 <q-item-section avatar><q-avatar icon="group_add" /></q-item-section>

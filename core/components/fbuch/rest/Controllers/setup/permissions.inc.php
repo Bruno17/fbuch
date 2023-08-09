@@ -55,7 +55,7 @@ $permissions = [
         'fbuch_guest'=>'',
         'fbuch_user'=>'',
         'fbuch_instructor'=>'1',
-        'fbuch_clubhome'=>'1'
+        'fbuch_clubhome'=>''
     ],
     ['name'=>'fbuch_view_birthdate',
         'description'=>'User can view Birthdate and Age in fbuch',

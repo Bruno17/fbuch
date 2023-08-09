@@ -91,7 +91,7 @@ export default {
           <dayevent 
           class="full-height"
           :event="event"
-          :loadDayEvents="reloadEvents"
+          @updateEvent="reloadEvents"
           :view="view"
           ></dayevent>
           </div>

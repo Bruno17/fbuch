@@ -71,7 +71,7 @@
         "caption": "",
         "inputTVtype": ""
     },
-    "custom_fbuch_contact_subject_options": {
+    "custom_fbuch_contact_subject_options_json": {
         "deleted": "0",
         "group": "Kontaktformular",
         "tab": "",

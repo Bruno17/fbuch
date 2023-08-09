@@ -23,8 +23,8 @@ class MyControllerSetupResources extends BaseController {
 
     public function updateResources(){
         if ($resources = $this->getResources('delete_resources')){
-            foreach ($resources as $uri){
-                if ($resource = $this->modx->getObject('modResource',['uri'=>$uri])){
+            foreach ($resources as $r){
+                if ($resource = $this->modx->getObject('modResource',['uri'=>$r['uri'],'context_key'=>$r['context_key']])){
                     $resource->set('deleted',1);
                     $resource->save();
                 }
@@ -32,9 +32,10 @@ class MyControllerSetupResources extends BaseController {
         }
         if ($resources = $this->getResources('update_uris')){
             foreach ($resources as $r){
-                if ($resource = $this->modx->getObject('modResource',['uri'=>$r['uri']])){
+                if ($resource = $this->modx->getObject('modResource',['uri'=>$r['uri'],'context_key'=>$r['context_key']])){
                     if (isset($r['new_uri'])){
                         $resource->set('uri',$r['new_uri']);
+                        $resource->set('uri_override',1);
                         $resource->save();                        
                     }
                 }
@@ -42,7 +43,7 @@ class MyControllerSetupResources extends BaseController {
         }        
         if ($resources = $this->getResources('update_resources')){
             foreach ($resources as $r){
-                if ($resource = $this->modx->getObject('modResource',['uri'=>$r['uri']])){
+                if ($resource = $this->modx->getObject('modResource',['uri'=>$r['uri'],'context_key'=>$r['context_key']])){
 
                 } else {
                     $resource = $this->modx->newObject('modResource');
