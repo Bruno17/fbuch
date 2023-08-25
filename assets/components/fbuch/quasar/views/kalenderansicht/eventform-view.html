@@ -1,5 +1,4 @@
 <div class="q-pa-md full-width" style="height: 400px;">
-  <div class="text-h4 text-center"> {{ event.title }} </div>
   <div class="col-12">
     <q-tabs v-model="tab" align="left" no-caps outside-arrows mobile-arrows class="">
       <q-tab name="date" label="Haupttermin" />
@@ -21,8 +20,6 @@
       </q-banner>
     </q-tab-panel>
     <q-tab-panel name="this recurrence">
-      <h4>Diese Wiederholung</h4>
-
       <eventform :event="recurrence_event" />
     </q-tab-panel>
   </q-tab-panels>

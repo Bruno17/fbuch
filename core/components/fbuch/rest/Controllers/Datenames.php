@@ -106,11 +106,6 @@ class MyControllerDateNames extends BaseController {
                         throw new Exception('Unauthorized', 401);
                     } 
                 }
-
-
-
-                                  
-
                 break;                
                                 
         }

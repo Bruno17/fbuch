@@ -1,10 +1,12 @@
 import api_select from '../../components/api_select.js'
+import api_select_multiple from '../../components/api_select_multiple.js'
 import { useLoadPermissions, useLoadCurrentUser, useLoadCurrentMember, useHasPermission } from "../../composables/helpers.js";
 
 export default {
 
     components: {
-        api_select: api_select
+        api_select: api_select,
+        api_select_multiple: api_select_multiple
     },
     setup() {
 
@@ -28,6 +30,7 @@ export default {
             loadEvent();
             loadInvited();
             loadMessageCount();
+            selectionState.value.persons = [];
         })
 
         function prepareEvent() {
@@ -167,20 +170,8 @@ export default {
         }
 
         function onSelectPerson(value) {
-            if (!entry.names) {
-                entry.names = [];
-            }
-            const id = value.value;
-            const exists = findPerson(id);
-            selectionState.value.person = 0;
-            personSelect.value.clearSelection();
-            if (exists) {
-                return;
-            }
-            //props.entry.names.push(value);
-            //emit('updateNames','add',value);
-            onUpdateNames('add', value);
-
+           personSelect.value.hidePopup();
+           return;
         } 
         
         function findPerson(id) {
@@ -213,7 +204,22 @@ export default {
             const name = entry.value.names[index];
             //entry.value.names.splice(index, 1);
             onUpdateNames('remove',name);
-        }        
+        }  
+        
+        function addPersons() {
+            let persons = [];
+            let properties = {};
+            selectionState.value.persons.forEach((person) => {
+                persons.push(person.id);
+            })
+            properties.processaction = 'add';
+            properties.person = persons;
+            properties.date_id = id;
+            selectionState.value.persons = [];
+            personSelect.value.clearSelection();              
+            postDateNames(properties);                        
+          
+        }         
 
 
         return {
@@ -228,6 +234,7 @@ export default {
             selectionState,
             urls,
             onSelectPerson,
+            addPersons,
             personSelect,
             addGuest,
             removePerson,

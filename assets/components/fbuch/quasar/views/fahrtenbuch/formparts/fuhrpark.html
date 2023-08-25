@@ -1,5 +1,6 @@
 <template v-if="['Fuhrpark'].includes(selectionState.gattungname)">
     <valuesetter @hasmounted="showpersonstab=false" />
+    <valuesetter @hasmounted="entry.persons_option='single'" />
     <div class="col-md-8 col-sm-8 col-xs-12 row" v-if="currentMember.State_can_be_added_to_entry == 1">
         <q-btn class="col-12" @click="selectMyself" color="positive" :label="'Selbst eintragen ('+currentMember.firstname+' '+currentMember.name+')'"></q-btn>
     </div>     
@@ -7,7 +8,8 @@
         label="Fahrer auswählen" :first_option="{'label':'---','value':'0'}"
         controller="Names?limit=100000&returntype=options&statefilter=can_be_added_to_entry"
         :hide-bottom-space="true"
-        :rules="[val => (!submitclicked || val > 0 ) || 'Bitte einen Fahrer auswählen!']"        
+        :rules="[val => (!submitclicked || val > 0 ) || 'Bitte einen Fahrer auswählen!']"
+        behavior="default"        
         ></api_select>
     <q-input @update:model-value="val =>(entry.km = ((entry.kmstand_end-val)>0) ? entry.kmstand_end-val : 0)"
         class="col-md-4 col-sm-4 col-xs-12" outlined v-model="entry.kmstand_start" label="Start km Stand" type="number"

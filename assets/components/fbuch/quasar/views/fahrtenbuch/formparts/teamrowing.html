@@ -1,5 +1,6 @@
 <template v-if="['Ergometer','Motorboot','SkiErg'].includes(selectionState.gattungname)">
     <valuesetter @hasmounted="showpersonstab=false" />
+    <valuesetter @hasmounted="entry.persons_option='single'" />
     <div class="col-md-4 col-sm-4 col-xs-12 row" v-if="currentMember.State_can_be_added_to_entry == 1">
         <q-btn class="col-12" @click="selectMyself" color="positive" :label="'Selbst eintragen ('+currentMember.firstname+' '+currentMember.name+')'"></q-btn>
     </div>    
@@ -8,7 +9,9 @@
         controller="Names?limit=100000&returntype=options&statefilter=can_be_added_to_entry" 
         :hide-bottom-space="true"
         :ref="el => { inputs.member_id = el }"
-        :rules="[val => (!submitclicked || (val > 0 || entry.guestname != '') ) || 'Bitte eine Person auswählen!']">
+        :rules="[val => (!submitclicked || (val > 0 || entry.guestname != '') ) || 'Bitte eine Person auswählen!']"
+        behavior="default"
+        >
     </api_select>
     <q-input v-if="entry.member_id==0" @update:model-value="() =>(inputs.member_id.fieldRef.resetValidation())"
         class="col-md-4 col-sm-4 col-xs-12" outlined v-model="entry.guestname" label="Gastname" />

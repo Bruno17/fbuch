@@ -1,5 +1,58 @@
 <q-form @submit="onSubmit" @reset="onReset" ref="eventform">
 
+
+    <q-card class="q-mb-md" bordered flat class="full-width">
+        <q-card-section :class="event.hidden==1 ? 'text-grey' : 'bg-primary text-white' ">
+            <div class="row items-center no-wrap">
+                <div class="col">
+                    <div class="text-subtitle2">{{event.title}}</div>
+                    <div class="text-h6">{{event.type}}</div>
+                    <div class="text-subtitle2">
+                        {{ event.formattedDate }}
+                        <template v-if="event.formattedEndDate != ''">
+                            <br>
+                            {{ event.formattedEndDate }}
+                        </template>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <q-btn color="white" text-color="black" round icon="navigate_next">
+                        <q-menu anchor="bottom right" self="top right" :offset="[0, 5]">
+                            <q-list dense bordered separator>
+                                <q-item v-if="useHasPermission('fbuch_create_fahrten')" :href="urls.fahrtenbuch" clickable v-ripple>
+                                    <q-item-section avatar><q-avatar icon="view_list" /></q-item-section>
+                                    <q-item-section>
+                                        <q-item-label>Zum Fahrtenbuch</q-item-label>
+                                    </q-item-section>
+                                </q-item>  
+                                <q-item :to="urls.day" clickable v-ripple>
+                                    <q-item-section avatar><q-avatar icon="calendar_today" /></q-item-section>
+                                    <q-item-section>
+                                        <q-item-label>Zur Tagesansicht</q-item-label>
+                                    </q-item-section>
+                                </q-item> 
+                                <q-item :to="urls.kalender" clickable v-ripple>
+                                    <q-item-section avatar><q-avatar icon="calendar_today" /></q-item-section>
+                                    <q-item-section>
+                                        <q-item-label>Zur Kalenderansicht</q-item-label>
+                                    </q-item-section>
+                                </q-item>
+                                <q-item :href="'/termine/#/' +event.id+ '/einladungen'" clickable v-ripple>
+                                    <q-item-section avatar><q-avatar icon="event" /></q-item-section>
+                                    <q-item-section>
+                                        <q-item-label>Einladungen vornehmen</q-item-label>
+                                        <q-item-label caption>Übersicht Einladungen und Zusagen</q-item-label>
+                                    </q-item-section>
+                                </q-item>                                                                                                                              
+                            </q-list>
+                        </q-menu>
+                    </q-btn>
+                </div>                 
+            </div>
+        </q-card-section>
+    </q-card>
+
+
     <div class="col-12">
         <q-tabs v-if="event.parent>0" v-model="tab" align="left" no-caps outside-arrows mobile-arrows class="">
             <q-tab name="date" label="Termin Daten" />
@@ -42,7 +95,9 @@
                 <div class="col-md-8 col-sm-12 q-col-gutter-md content-start row">
 
                     <api_select class="col-md-4 col-sm-4 col-xs-12" v-model="event.instructor_member_id"
-                        label="Betreuer" controller="Names?limit=100000&returntype=options&statefilter=can_be_added_to_entry"></api_select>
+                        label="Betreuer" controller="Names?limit=100000&returntype=options&statefilter=can_be_added_to_entry"
+                        behavior="default"
+                        ></api_select>
 
                     <q-input class="col-md-8 col-sm-4 col-xs-12" outlined v-model="event.title"
                         label="Titel/Gruppe/Zweck" :hide-bottom-space="true"
@@ -51,10 +106,14 @@
                     <api_select class="col-md-4 col-sm-4 col-xs-12" ref="eventtype" v-model="event.type"
                         label="Termin Art" controller="Datetypes?limit=100000&returntype=options"
                         :hide-bottom-space="true"
-                        :rules="[val => (!submitclicked || !!val) || 'Bitte eine Termin Art wählen!']"></api_select>
+                        :rules="[val => (!submitclicked || !!val) || 'Bitte eine Termin Art wählen!']"
+                        behavior="default"
+                        ></api_select>
 
                     <api_select class="col-md-6 col-sm-8 col-xs-12" v-model="event.mailinglist_id"
-                        label="Einladungs Liste" controller="Mailinglists?limit=100000&returntype=options"></api_select>
+                        label="Einladungs Liste" controller="Mailinglists?limit=100000&returntype=options"
+                        behavior="default"
+                        ></api_select>
 
                     <q-input class="col-md-2 col-sm-4 col-xs-12" outlined v-model="event.max_reservations"
                         label="Plätze max." mask="###" />

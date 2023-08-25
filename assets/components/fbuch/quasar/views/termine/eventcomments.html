@@ -74,7 +74,9 @@
 
                 <api_select multiple ref="personSelect" class="col-md-12 col-sm-12 col-xs-12"
                     v-model="selectionState.persons" label="Teilnehmer auswählen"
-                    :controller="'Datenames?limit=100000&returntype=options&date_id='+entry.id">
+                    :controller="'Datenames?limit=100000&returntype=options&date_id='+entry.id"
+                    behavior="default"
+                    >
                 </api_select>                
                 <div>
                     <q-checkbox v-model="selectionState.allpersons" label="An alle Teilnehmer" />
@@ -82,7 +84,9 @@
                 
                 <api_select multiple ref="personSelect2" class="col-md-12 col-sm-12 col-xs-12"
                     v-model="selectionState.invited" label="Eingeladene auswählen"
-                    :controller="'Dateinvited?limit=100000&returntype=options&date_id='+entry.id">
+                    :controller="'Dateinvited?limit=100000&returntype=options&date_id='+entry.id"
+                    behavior="default"
+                    >
                 </api_select>
                 <div>
                     <q-checkbox v-model="selectionState.allinvited" label="An alle Eingeladenen" />

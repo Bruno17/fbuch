@@ -9,6 +9,7 @@ export default {
       const names_options = ref([]);
       const filtered_options = ref([]);
       const fieldRef = ref(null);
+      const popupstate = ref(false);
 
       onMounted(() => {
           loadNames();
@@ -52,11 +53,14 @@ export default {
         filterFn, 
         fieldRef, 
         loadNames, 
-        clearSelection
+        clearSelection,
+        popupstate
       }
     },
     template: `
     <q-select
+    @popup-show="popupstate=true"
+    @popup-hide="popupstate=false"
     ref="fieldRef"
     outlined
     use-input
@@ -77,6 +81,9 @@ export default {
           No results
         </q-item-section>
       </q-item>
+    </template>
+    <template v-if="($q.screen.width <= 760) && popupstate" v-slot:prepend>
+    <q-btn  flat @click="$refs.fieldRef.hidePopup()" icon="close" />
     </template>
     <template v-slot:option="scope">
     <q-item v-bind="scope.itemProps">

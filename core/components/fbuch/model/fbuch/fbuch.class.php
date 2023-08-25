@@ -552,6 +552,10 @@ class Fbuch {
     }    
 
     public function sendElementMessage($comment,$date_id,$name_id,$action='send'){
+        if (empty($date_id || empty($comment))){
+            return false;
+        }
+
         $send_riot = $this->modx->getOption('send_riot', null, '1');
         if ($send_riot != '1'){
             return;
@@ -979,6 +983,60 @@ class Fbuch {
         $this->createSchedulerTaskRun($reference, 'fbuch', $properties);
     }
 
+    public function scheduleInvites($action,$properties = []){
+        $modx = &$this->modx;
+
+        $date_id = $modx->getOption('date_id',$properties,0);
+        $comment = $modx->getOption('comment',$properties,'');
+        $member_id = $modx->getOption('member_id',$properties,0);
+
+        $current_member = $this->getCurrentFbuchMember();
+        $name_id = $current_member->get('id');
+
+        $comment_name = $current_member->get('firstname') . ' ' . $current_member->get('name');          
+
+        $classname = 'fbuchDateInvited';
+        $c = $modx->newQuery($classname);
+        $c->where(['date_id' => $date_id]);
+        if (!empty($member_id)){
+            $c->where(['member_id' => $member_id]);
+        }
+
+        $this->sendElementMessage('Einladung: ' . $comment,$date_id,$name_id);
+
+        $add_datecomment = true;        
+        if ($collection = $modx->getCollection($classname, $c)) {
+            
+            foreach ($collection as $object) {
+
+                $removedby = $object->get('removedby');
+                if ($removedby > 0){
+                    continue;
+                }
+
+                $invite_id = $object->get('id');
+                $member_id = $object->get('member_id');
+                $date_id = $object->get('date_id');                              
+                if ($action == 'mail_invites' || $action == 'mail_invite') {
+
+                    $iproperties = [
+                        'invite_id' => $invite_id,
+                        'comment' => $comment,
+                        'comment_name' => $comment_name,
+                        'add_datecomment' => $add_datecomment,
+                        'subject_prefix' => ''
+
+                    ];
+
+                    $this->scheduleInviteMail($iproperties);
+                }
+                $this->sendElementInvite($date_id,$member_id,$action);
+
+                $add_datecomment = false;
+            }
+        }
+    }
+
     public function update(&$hook, $scriptProperties) {
         $modx = &$this->modx;
 
@@ -1046,65 +1104,43 @@ class Fbuch {
 
         switch ($classname) {
             case 'fbuchDateInvited':
+
                 if ($action == 'mail_invite' || $action == 'riotinvite_invite') {
 
                     $object_id = $hook->getValue('object_id');
                     $comment = $hook->getValue('comment');
+                    $add_datecomment = true;
                     if ($object = $modx->getObject($classname, $object_id)) {
-                        $date_o = $object->getOne('Date');
-                        $profile = $modx->user->getOne('Profile');
-                        $comment_name = $profile->get('fullname');
+      
                         if ($action == 'mail_invite') {
 
-                            $iproperties = array();
-                            $iproperties['invite_id'] = $object->get('id');
-                            $iproperties['comment'] = $comment;
-                            $iproperties['comment_name'] = $comment_name;
-                            $iproperties['add_datecomment'] = true;
-                            $iproperties['subject_prefix'] = '';
+                            $properties = [
+                                'date_id' => $object->get('date_id'),
+                                'comment' => $comment,
+                                'member_id' => $object->get('member_id')
+                            ];
+        
+                            if ($date_o = $modx->getObject('fbuchDate', $properties['date_id'])) {
+                                $this->scheduleInvites($action, $properties);
+                                $modx->setPlaceholder('success_object_id', $date_id);
+                            }
 
-                            $this->scheduleInviteMail($iproperties);
+                        }
 
-                            //$this->sendInviteMail($object->get('id'), $comment, $comment_name, true);
-                        }
-                        if ($action == 'mail_invite' || $action == 'riotinvite_invite') {
-                            $this->sendElementInvite($object->get('date_id'),$object->get('member_id'),$action);
-                        }
-                        $modx->setPlaceholder('success_object_id', $object->get('date_id'));
                     }
 
                     return true;
                 }
                 if ($action == 'mail_invites' || $action == 'riotinvite_invites') {
 
-                    $object_id = $hook->getValue('object_id');
-                    $comment = $hook->getValue('comment');
-                    if ($date_o = $modx->getObject('fbuchDate', $object_id)) {
-                        $c = $modx->newQuery($classname);
-                        $c->where(array('date_id' => $object_id));
-                        $add_datecomment = true;
-                        if ($collection = $modx->getCollection($classname, $c)) {
-                            foreach ($collection as $object) {
-                                $profile = $modx->user->getOne('Profile');
-                                $comment_name = $profile->get('fullname');
-                                if ($action == 'mail_invites') {
-                                    $iproperties = array();
-                                    $iproperties['invite_id'] = $object->get('id');
-                                    $iproperties['comment'] = $comment;
-                                    $iproperties['comment_name'] = $comment_name;
-                                    $iproperties['add_datecomment'] = $add_datecomment;
-                                    $iproperties['subject_prefix'] = '';
+                    $properties = [
+                        'date_id' => $hook->getValue('object_id'),
+                        'comment' => $hook->getValue('comment')
+                    ];
 
-                                    $this->scheduleInviteMail($iproperties);
-                                    //$this->sendInviteMail($object, $comment, $comment_name, $add_datecomment, 'RGM Einladung');
-                                }
-                                if ($action == 'mail_invites' || $action == 'riotinvite_invites') {
-                                    $this->sendElementInvite($object->get('date_id'),$object->get('member_id'),$action);
-                                }
-                                $add_datecomment = false;
-                            }
-                        }
-                        $modx->setPlaceholder('success_object_id', $object_id);
+                    if ($date_o = $modx->getObject('fbuchDate', $properties['date_id'])) {
+                        $this->scheduleInvites($action, $properties);
+                        $modx->setPlaceholder('success_object_id', $date_id);
                     }
                     return true;
                 }
@@ -1359,13 +1395,27 @@ class Fbuch {
             $c = $modx->newQuery('fbuchDateInvited');
             $c->where(array('date_id' => $date_id));
             //$c->prepare();echo $c->toSql();die();
+            
             $existing = array();
             if ($invite_c = $modx->getCollection('fbuchDateInvited', $c)) {
                 foreach ($invite_c as $invite_o) {
                     $member_id = $invite_o->get('member_id');
-                    $existing[$member_id] = $member_id;
+                    $existing[$member_id] = $invite_o;
                 }
             }
+
+            //get all existing persons, added to date
+            $c = $modx->newQuery('fbuchDateNames');
+            $c->where(array('date_id' => $date_id));
+            //$c->prepare();echo $c->toSql();die();
+            
+            $existing_names = array();
+            if ($datenames_c = $modx->getCollection('fbuchDateNames', $c)) {
+                foreach ($datenames_c as $datenames_o) {
+                    $member_id = $datenames_o->get('member_id');
+                    $existing_names[$member_id] = $datenames_o;
+                }
+            }            
 
             //print_r($existing);die();
 
@@ -1378,10 +1428,13 @@ class Fbuch {
                             $member_id = $name->get('id');
                             //$unsubscribed = $name->get('unsubscribed');
                             $unsubscribed = 0;
-                            if ($invite_o = $modx->getObject('fbuchDateInvited', array('date_id' => $date_id, 'member_id' => $member_id))) {
+                            if (is_object($existing[$member_id])) {
+                                $invite_o = $existing[$member_id];
                                 if (!empty($unsubscribed)) {
+                                    //remove unsubscribed
                                     $invite_o->remove();
                                 } else {
+                                    //set the new mailinglist_id
                                     $invite_o->set('mailinglist_id', $mailinglist_id);
                                     $invite_o->save();
                                 }
@@ -1393,6 +1446,8 @@ class Fbuch {
                                     $invite_o->set('mailinglist_id', $mailinglist_id);
                                     $invite_o->set('date_id', $date_id);
                                     $invite_o->set('member_id', $member_id);
+                                    $invite_o->set('createdon',date_format($now,'Y-m-d H:i:s'));
+                                    $invite_o->set('createdby',$modx->user->get('id'));
                                     $invite_o->save();
                                 }
                             }
@@ -1411,7 +1466,8 @@ class Fbuch {
                             $member_id = $name->get('member_id');
                             $unsubscribed = $name->get('unsubscribed');
 
-                            if ($invite_o = $modx->getObject('fbuchDateInvited', array('date_id' => $date_id, 'member_id' => $member_id))) {
+                            if (is_object($existing[$member_id])) {
+                                $invite_o = $existing[$member_id];
                                 if (!empty($unsubscribed)) {
                                     $invite_o->remove();
                                 } else {
@@ -1426,6 +1482,8 @@ class Fbuch {
                                     $invite_o->set('mailinglist_id', $mailinglist_id);
                                     $invite_o->set('date_id', $date_id);
                                     $invite_o->set('member_id', $member_id);
+                                    $invite_o->set('createdon',date_format($now,'Y-m-d H:i:s'));
+                                    $invite_o->set('createdby',$modx->user->get('id'));                                    
                                     $invite_o->save();
                                 }
                             }
@@ -1437,16 +1495,26 @@ class Fbuch {
             }
             //remove evtl. remaining
             if (is_array($existing) && count($existing)>0){
-                $c = $modx->newQuery('fbuchDateInvited');
-                $c->where(array('date_id' => $date_id, 'member_id:IN' => $existing));
-                //$c->prepare();echo $c->toSql();die();
-                if ($invite_c = $modx->getCollection('fbuchDateInvited', $c)) {
-                    foreach ($invite_c as $invite_o) {
-                        $invite_o->remove();
+                foreach ($existing as $invite_o) {
+                    $member_id = $invite_o->get('member_id');
+                    if ($invite_o->get('canceled')==1){
+                        continue;
                     }
-                }                
+                    if ($invite_o->get('invited')==1){
+                        continue;
+                    } 
+                    if (is_object($existing_names[$member_id])){
+                        continue;
+                    }
+                    if ($invite_o->get('addedby')>0){
+                        continue;
+                    }                    
+                    if ($invite_o->get('removedby')>0){
+                        continue;
+                    }                     
+                    $invite_o->remove();
+                }
             }
-
         }
     }
 
@@ -1761,17 +1829,38 @@ class Fbuch {
         }
 
         if ($grid_id == 'Ergofahrten' && !empty($values['member_id'])) {
+
+            $date_end = $object->get('date_end');
+            $date = $object->get('date');
+
+            if ($date_end < $date){
+                $object->set('date_end',$date);
+                $object->save();
+            }
+
+            if (isset($values['km'])) {
+                if ($values['km'] > 0) {
+                    $object->set('finished',1);
+                } else {
+                    $object->set('finished',0);
+                }
+                $object->save();
+            } 
+            
             if ($fahrtnam = $modx->getObject('fbuchFahrtNames', array('fahrt_id' => $object->get('id')))) {
                 $fahrtnam->set('member_id', $values['member_id']);
             } else {
                 $fahrtnam = $modx->newObject('fbuchFahrtNames');
                 $fahrtnam->set('member_id', $values['member_id']);
+                
                 if (!empty($values['datenames_id'])) {
                     $fahrtnam->set('datenames_id', $values['datenames_id']);
                 }
                 $fahrtnam->set('fahrt_id', $object->get('id'));
             }
+            $fahrtnam->set('obmann',1);
             $fahrtnam->save();
+
         }
 
         return $object;

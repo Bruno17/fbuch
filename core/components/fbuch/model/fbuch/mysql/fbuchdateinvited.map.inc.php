@@ -18,6 +18,8 @@ $xpdo_meta_map['fbuchDateInvited']= array (
     'riot_state' => '',
     'createdby' => 0,
     'createdon' => NULL,
+    'addedby' => 0,
+    'removedby' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -85,6 +87,22 @@ $xpdo_meta_map['fbuchDateInvited']= array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
       'null' => true,
+    ),
+    'addedby' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'removedby' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
     ),
   ),
   'aggregates' => 

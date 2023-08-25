@@ -17,6 +17,8 @@ export default {
         const { useQuasar } = Quasar;
         const options = ref([]);
         const $q = useQuasar();
+        const fieldRef = ref(null);
+        const popupstate = ref(false);
 
         onMounted(() => {
             for (let h = 0; h <= 23;  h++) {
@@ -54,11 +56,22 @@ export default {
 
         } 
   
-      return {updateValue, options}      
+      return {
+        updateValue, 
+        options,
+        popupstate
+      }      
     
       },
       template: `
-      <q-select :options="options" v-model="modelValue" outlined @update:model-value="updateValue" >
+      <q-select :options="options" v-model="modelValue" outlined @update:model-value="updateValue" 
+      @popup-show="popupstate=true"
+      @popup-hide="popupstate=false"
+      ref="fieldRef"
+      >
+      <template v-if="($q.screen.width <= 760) && popupstate" v-slot:prepend>
+      <q-btn  flat @click="$refs.fieldRef.hidePopup()" icon="close" />
+      </template>      
       </q-select>
       `
       // or `template: '#my-template-element'`

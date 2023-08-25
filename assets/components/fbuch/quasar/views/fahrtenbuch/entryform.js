@@ -228,6 +228,45 @@ export default {
       submitclicked.value = true;
     }
 
+    function checkPersonsAndSave(){
+      if (!entry.value.names) {
+        entry.value.names = [];
+      }        
+
+      if (!entry.value.names.length && !entry.value.member_id){
+
+        $q.dialog({
+          title: 'Keine Personen eingetragen!',
+          html:false,
+          options: {
+            type: 'radio',
+            model: 'opt1',
+            // inline: true
+            items: [
+              { label: 'Personen eintragen', value: 'opt1' },
+              { label: 'Personen werden aus Termningruppe reingezogen', value: 'opt2' }
+            ]
+          },
+          persistent: true
+        }).onOk(data => {
+          if (data == 'opt2'){
+              save(); 
+          } else {
+              if (showpersonstab.value) {
+                tab.value = 'persons';  
+              }            
+          }
+        }).onCancel(() => {
+          // console.log('>>>> Cancel')
+        }).onDismiss(() => {
+          // console.log('I am triggered on both OK and Cancel')
+        })
+
+        return;  
+      } 
+      save();     
+    }
+
     function save() {
 
       if (id == 'new') {
@@ -270,7 +309,7 @@ export default {
         return;
       }
 
-      save();
+      checkPersonsAndSave();
     }
 
     function checkAvailability() {
@@ -285,7 +324,7 @@ export default {
           const object = response.data.object;
 
           if (object.available){
-              save();
+              checkPersonsAndSave();
           } else {
             $q.dialog({
               title: 'Dieses Boot ist bereits belegt',
@@ -303,7 +342,7 @@ export default {
               persistent: true
             }).onOk(data => {
               if (data[0] == 'forceentry'){
-                  save(); 
+                  checkPersonsAndSave(); 
               }
             }).onCancel(() => {
               // console.log('>>>> Cancel')

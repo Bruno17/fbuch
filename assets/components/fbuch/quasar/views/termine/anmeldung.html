@@ -7,9 +7,29 @@
         </template>
 
         <template v-if="useHasPermission('fbuch_add_persons_to_dates')">
-            <api_select ref="personSelect" class="col-md-12 col-sm-12 col-xs-12" v-model="selectionState.person"
-                @update:model-value="onSelectPerson" :emit-value="false" label="Person hinzufügen"
-                controller="Names?limit=100000&returntype=options&statefilter=can_be_invited"></api_select>
+
+                <div class="col-12">
+                    <q-list bordered class="rounded-borders">
+                        <q-expansion-item expand-separator icon="group_add" label="Weitere Mitglieder eintragen">
+                            <q-card>
+                                <q-card-section>
+                                    Hier können weitere Personen und Gäste aus der Mitgliederliste eingetragen werden.<br>
+                                 </q-card-section>
+                                <q-separator />
+                                <q-card-section class="q-gutter-y-md">
+                                    <api_select_multiple multiple ref="personSelect" class="col-md-12 col-sm-12 col-xs-12" v-model="selectionState.persons"
+                                    @update:model-value="onSelectPerson"
+                                    label="Personen hinzufügen"
+                                    controller="Names?limit=100000&returntype=options&statefilter=can_be_invited"
+                                    behavior="default"
+                                    ></api_select_multiple>
+                                    <q-btn label="Personen eintragen" @click="addPersons" color="primary" />
+                                </q-card-section>
+                            </q-card>
+                        </q-expansion-item>
+                    </q-list>
+                </div>
+
 
             <div class="col-12">
                 <q-list bordered class="rounded-borders">

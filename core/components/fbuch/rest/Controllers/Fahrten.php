@@ -284,11 +284,14 @@ class MyControllerFahrten extends BaseController {
 
     public function saveNames(){
 
+        /*
         $persons_option = 'team';
         if ($gattung = $this->getBootsgattung($this->object->get('boot_id'))){
             $formoptions = $gattung->get('formoptions');
             $persons_option = $this->modx->getOption('persons',$formoptions,'team');
         }
+        */
+        $persons_option = $this->getProperty('persons_option','team');
 
         if ($persons_option == 'single') {
             $this->saveSingleName();

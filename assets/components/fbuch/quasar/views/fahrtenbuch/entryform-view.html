@@ -33,20 +33,27 @@
                         <api_select style="display:none;" class="col-md-12 col-sm-12 col-xs-12" v-model="selectionState.gattungname"
                             label="Kategorieauswahl" :first_option="{'label':'---','value':'0'}"
                             @update:model-value="onSelectGattung"
-                            controller="Boote?limit=100000&returntype=gattungnames">
+                            controller="Boote?limit=100000&returntype=gattungnames"
+                            behavior="default"
+                            >
                         </api_select>
 
                         <api_select v-if="showbootsgattungselect" ref="bootsgattungSelect" class="col-md-12 col-sm-6 col-xs-12"
                             v-model="selectionState.bootsgattung" label="Kategorie Vorauswahl"
                             :first_option="{'label':'---','value':'0'}" @update:model-value="onSelectBootsgattung"
-                            :controller="'Boote?limit=100000&returntype=bootsgattungen&gattung_name='+entry.Gattung_name">
+                            :controller="'Boote?limit=100000&returntype=bootsgattungen&gattung_name='+entry.Gattung_name"
+                            behavior="default"
+                            >
                         </api_select>
 
                         <api_select ref="bootSelect" class="col-md-12 col-sm-6 col-xs-12" v-model="entry.boot_id"
                             label="Boot/Gerät/Raum/..." :first_option="{'label':'---','value':'0'}"
                             :controller="'Boote?limit=100000&returntype=options&gattung_name='+entry.Gattung_name" @update:model-value="onSelectBoot"
                             :emit-value="false" :hide-bottom-space="true"
-                            :rules="[val => (!submitclicked || val != '0' ) || 'Bitte eine Auswahl treffen!']">
+                            :rules="[val => (!submitclicked || val != '0' ) || 'Bitte eine Auswahl treffen!']"
+                            behavior="default"
+                            >
+                            
                         </api_select>                        
 
                         <datepicker label="Startdatum" class="col-md-12 col-sm-6 col-xs-12" v-model="entry.date"
@@ -121,7 +128,9 @@
 
                         <api_select ref="personSelect" class="col-md-12 col-sm-12 col-xs-12"
                             v-model="selectionState.person" @update:model-value="onSelectPerson" :emit-value="false"
-                            label="Person hinzufügen" controller="Names?limit=100000&returntype=options&statefilter=can_be_added_to_entry">
+                            label="Person hinzufügen" controller="Names?limit=100000&returntype=options&statefilter=can_be_added_to_entry"
+                            behavior="default"
+                            >
                         </api_select>
                      
                         <div class="col-12">    

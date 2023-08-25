@@ -31,8 +31,7 @@
                                     <q-item-label caption>Benachrichtigungen schreiben/lesen</q-item-label>
                                 </q-item-section>
                             </q-item>                            
-
-                            <q-item :href="'/termine/rudern.html?date_id='+event.id" clickable v-ripple>
+                            <q-item :href="'/termine/#/' +event.id+ '/einladungen'" clickable v-ripple>
                                 <q-item-section avatar><q-avatar icon="event" /></q-item-section>
                                 <q-item-section>
                                     <q-item-label>Einladungen vornehmen</q-item-label>

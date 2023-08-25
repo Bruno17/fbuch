@@ -105,6 +105,8 @@
         <field key="riot_state" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
         <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="addedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="removedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <aggregate alias="Date" class="fbuchDate" local="date_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Member" class="mvMember" local="member_id" foreign="id" cardinality="one" owner="foreign" />
     </object>

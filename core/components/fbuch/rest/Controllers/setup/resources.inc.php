@@ -7,9 +7,6 @@ $delete_resources = [
     ['uri'=>'fahrtenbuch/rudern-dd/ruderverbot.html',
      'context_key' => 'fbuch'
     ],
-    ['uri'=>'fahrtenbuch/ergometer/',
-     'context_key' => 'fbuch'
-    ],
     ['uri'=>'fahrtenbuch/rudern/',
      'context_key' => 'fbuch'
     ],

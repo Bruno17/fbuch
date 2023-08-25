@@ -3,7 +3,9 @@
     <api_select class="col-md-12 col-sm-12 col-xs-12" v-model="selectionState.destination"
         label="Standardruderstrecken ab Bootshaus" :first_option="{'label':'---','value':'0','km':'0'}"
         @update:model-value="entry.km=selectionState.destination.km;entry.destination=selectionState.destination.destination"
-        :emit-value="false" controller="Destinations?limit=100000&returntype=options"></api_select>
+        :emit-value="false" controller="Destinations?limit=100000&returntype=options"
+        behavior="default"
+        ></api_select>
 
     <q-input class="col-md-12 col-sm-12 col-xs-12" outlined autogrow v-model="entry.destination" label="Ruderstrecke" />
     <q-input class="col-md-4 col-sm-4 col-xs-12" outlined v-model="entry.km" label="Fahrtstreckenlänge (km)"
