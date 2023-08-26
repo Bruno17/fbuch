@@ -1,5 +1,5 @@
 <?php
-$route=$modx->getOption('r',$_GET,'');
+$route=trim($modx->getOption('r',$_GET,''),'/');
 
 if (!empty($route)){
    

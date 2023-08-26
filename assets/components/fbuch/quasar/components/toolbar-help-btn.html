@@ -1,0 +1,33 @@
+
+<q-btn color="primary" text-color="white" round icon="question_mark">
+    <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
+      <q-list dense bordered separator>
+          <q-item clickable v-ripple @click="state.qrdialog=true;">
+              <q-item-section avatar><q-avatar icon="qr_code_2" /></q-item-section>
+              <q-item-section>
+                  <q-item-label>QR Code anzeigen</q-item-label>
+              </q-item-section>
+          </q-item>
+      </q-list>
+  </q-menu>
+</q-btn> 
+
+<q-dialog v-model="state.qrdialog" @show="createCode" >
+    <q-card>
+      <q-card-section class="row items-center q-pb-none">
+        <div class="text-h6">QR Code</div>
+        <q-space />
+        <q-btn icon="close" flat round dense v-close-popup />
+      </q-card-section>
+
+      <q-card-section >
+      <section ref="qr_code">
+      </section>        
+      </q-card-section>
+
+
+      <q-card-section>
+        {{state.route}}
+      </q-card-section>
+    </q-card>
+</q-dialog>

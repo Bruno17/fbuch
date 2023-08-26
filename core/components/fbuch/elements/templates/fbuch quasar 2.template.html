@@ -136,6 +136,7 @@
               </a>
               [[*longtitle:isnot=``:then=`[[*longtitle]]`:else=`[[*pagetitle]]`]]
             </q-toolbar-title>
+            <toolbar_help_btn/>
           </q-toolbar>
         </q-header>
     
@@ -207,10 +208,19 @@
     ]]
     <script src="[[!+pinia.js]]"></script>
 
+    [[!fbuchStoreAndReadAssets? 
+    &url=`https://cdn.jsdelivr.net/npm/qr-creator/dist/qr-creator.min.js`
+    &filename=`qr-creator.js`
+    &ph=`qr-creator.js`
+    ]]
+    <script src="[[!+qr-creator.js]]"></script>    
+
     <script>
         const modx_options = {
+          site_url:'[[!++site_url]]',
           assets_url:'[[++assets_url]]',
           resource_id:'[[*id]]',
+          resource_uri:'[[*uri]]',
           user_id:'[[!+modx.user.id]]',
           rest_url:'[[++fbuch.assets_url:default=`/assets/components/fbuch/`]]rest/'
         };
@@ -231,6 +241,7 @@
        */
 
       import fbuchnav from '[[++fbuch.assets_url:default=`/assets/components/fbuch/`]]quasar/components/resourcetree.js';
+      import toolbar_help_btn from '[[++fbuch.assets_url:default=`/assets/components/fbuch/`]]quasar/components/toolbar_help_btn.js';      
       import routes from '[[++fbuch.assets_url:default=`/assets/components/fbuch/`]][[fbuchGetViewDirectory]]/routes.js';
       
 
@@ -246,7 +257,8 @@
   
       const app = Vue.createApp({
         components : {
-            fbuchnav
+            fbuchnav,
+            toolbar_help_btn
         }, 
   
         setup () {
