@@ -18,7 +18,17 @@ $delete_resources = [
     ],
     ['uri'=>'fahrtenbuch/fahrtenbuch-ergometer-neu/',
      'context_key' => 'fbuch'
+    ],
+    ['uri'=>'termine/rudern.html',
+     'context_key' => 'fbuch'
+    ],
+    ['uri'=>'termine/personen-anmelden.html',
+     'context_key' => 'fbuch'
+    ],
+    ['uri'=>'termine/terminanmeldung.html',
+     'context_key' => 'fbuch'
     ]
+
 ];
 
 $update_uris = [
@@ -75,15 +85,43 @@ $update_resources = [
      'published'=>1,
      'hidemenu'=>1,
      'resource_groups'=>['fbuch','fbuch_guest']
-    ],                  
-    ['pagetitle'=>'Fahrtenbuch',
-     'alias'=>'fahrtenbuch',
+    ],
+    ['pagetitle'=>'Meine Einladungslisten Einträge',
+     'alias'=>'meine-einladungslisten-eintraege',
      'context_key' => 'fbuch',
-     'uri' => 'fahrtenbuch/fahrtenbuch.html',
-     'parent_uri'=>'fahrtenbuch/',
+     'uri' => 'termine/meine-einladungslisten-eintraege.html',
+     'uri_override' => 0,
+     'parent_uri'=>'termine',
      'template_name'=>'fbuch Quasar 2',
+     'content'=>'',
      'published'=>1,
-     'resource_groups'=>['fbuch']
+     'hidemenu'=>0,
+     'resource_groups'=>['fbuch'],
+     'tvs'=>[['name'=>'scripts','value'=>'']]
+    ], 
+    ['pagetitle'=>'Meine Einladungslisten Einträge',
+     'alias'=>'meine-einladungslisten-eintraege',
+     'context_key' => 'fbuch',
+     'uri' => 'termine/meine-einladungslisten-eintraege.html',
+     'uri_override' => 0,
+     'parent_uri'=>'termine',
+     'template_name'=>'fbuch Quasar 2',
+     'content'=>'',
+     'published'=>1,
+     'hidemenu'=>0,
+     'resource_groups'=>['fbuch'],
+     'tvs'=>[['name'=>'scripts','value'=>'']]
+    ],                                       
+    ['pagetitle'=>'LoginByCode',
+     'alias'=>'anmelden',
+     'context_key' => 'fbuch',
+     'uri' => 'termine/anmelden.html',
+     'uri_override' => 0,
+     'parent_uri'=>'termine',
+     'template_name'=>'fahrtenbuch',
+     'content'=>'[[!fbuchLoginByCode]]',
+     'published'=>1,
+     'hidemenu'=>1
     ],
     ['pagetitle'=>'Login und Redirect',
      'alias'=>'login-und-redirect',
@@ -94,18 +132,7 @@ $update_resources = [
      'published'=>1,
      'hidemenu'=>1,
      'richtext'=>0
-    ],    
-    ['pagetitle'=>'Meine Einladungslisten Einträge',
-     'alias'=>'meine-einladungslisten-eintraege',
-     'context_key' => 'fbuch',
-     'uri' => 'termine/meine-einladungslisten-eintraege.html',
-     'uri_override' => 0,
-     'template_name'=>'fbuch Quasar',
-     'published'=>1,
-     'hidemenu'=>0,
-     'parent_uri'=>'termine',
-     'content'=>'[[$fbuch_Persoenliche_Mailinggruppen]]',
-     'resource_groups'=>['fbuch'],
-     'tvs'=>[['name'=>'scripts','value'=>'[[$fbuchAppMailinggruppen]]']]
-    ]    
+    ]
+
+    
 ];

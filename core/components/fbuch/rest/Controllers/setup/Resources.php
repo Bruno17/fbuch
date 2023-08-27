@@ -60,7 +60,13 @@ class MyControllerSetupResources extends BaseController {
                     foreach ($r['resource_groups'] as $group){
                         $resource->joinGroup($group);
                     }
-                }                
+                } 
+                if (isset($r['tvs']) && is_array($r['tvs'])){
+                    foreach ($r['tvs'] as $tv){
+                        if (isset($tv['name']) && isset($tv['value']))
+                        $resource->setTVValue($tv['name'],$tv['value']);
+                    }
+                }                               
             }
         }              
     }
