@@ -604,22 +604,6 @@
           ],
           "static":false,
           "static_file":"",
-          "name":"fbuch_Persoenliche_Mailinggruppen",
-          "file":"fbuch_persoenliche_mailinggruppen.chunk.html",
-          "category":"fbuch_content_chunks"
-        },
-        {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "static":false,
-          "static_file":"",
           "name":"fbuch_Namensliste",
           "file":"fbuch_namensliste.chunk.html",
           "category":"fbuch_content_chunks"
@@ -1856,21 +1840,6 @@
           "static_file":"",
           "name":"fbuchAppFuhrpark",
           "file":"fbuchappfuhrpark.chunk.html"
-        },
-        {
-          "source":0,
-          "property_preprocess":false,
-          "description":"",
-          "editor_type":0,
-          "cache_type":0,
-          "locked":false,
-          "properties":[
-            
-          ],
-          "static":false,
-          "static_file":"",
-          "name":"fbuchAppMailinggruppen",
-          "file":"fbuchappmailinggruppen.chunk.html"
         },
         {
           "source":0,
