@@ -1,4 +1,67 @@
-   <q-dialog  v-model="addnames_modal" transition-show="jump-down" transition-hide="jump-up" 
+<div class="q-pa-md">
+<p>
+  Hier können Übungsleiter Einladungslisten erstellen und bearbeiten, sowie weitere Personen hinzufügen.<br>
+  Listen löschen oder Personen aus Listen entfernen ist für Euch nicht möglich.<br> 
+  Falls dies nötig ist, bitte eine entsprechende Mail über das Kontakformular an den Admin senden.
+  </p>
+  
+  <q-btn label="Einladungsliste erstellen" color="primary" @click="createMailinglist();" ></q-btn>
+  
+  <q-tabs
+    v-model="tab"
+    align="left"
+  >
+    <q-tab v-for="mailinglisttype in mailinglisttypes" v-bind="mailinglisttype" ></q-tab>
+  </q-tabs>
+  
+  <q-tab-panels v-model="tab" animated>
+    <q-tab-panel v-for="mailinglisttype in mailinglisttypes" v-bind="mailinglisttype"> 
+        
+  
+    <q-list bordered separator class="rounded-borders">
+        <q-expansion-item v-for="mailinglist in mailinglists[mailinglisttype.label]"
+          group="mailinglists"
+          switch-toggle-side
+          expand-separator
+          v-bind:label="mailinglist.name"
+          @show="loadMailinglistNames(mailinglist.id)"
+        >
+          <q-card>
+            
+                
+             <q-card-section class="q-pa-md q-gutter-sm"> 
+             <q-btn label="Personen hinzufügen" color="primary" @click="addnames_modal=true;current_list_id=mailinglist.id;" ></q-btn>
+             <q-btn label="Personen aus Liste importieren" color="primary" @click="loadImportNamesModal(mailinglist);" ></q-btn>           
+             <q-btn label="Liste bearbeiten" color="primary" @click="updateMailinglist(mailinglist);" ></q-btn>
+             </q-card-section>
+
+             <q-card-section>
+             <div class="q-markup-table q-table__container q-table__card q-table--horizontal-separator q-table--no-wrap">
+                <table class="q-table" >
+                  <thead><tr><th class="text-left">Name</th><th class="text-left">Eintrag bestätigt</th><th class="text-left">Ausgetragen</th></tr></thead> 
+                  <tbody>
+                      <template v-for="member in mailinglistnames[mailinglist.id]">
+                      <tr>
+                          <td class="text-left">{{member.Member_firstname}} {{member.Member_name}}</td>
+                          <td class="text-left"><q-icon v-if="member.subscribed" name="check_box" style="color: green; font-size: 32px;" ></q-icon><q-icon v-else name="check_box_outline_blank" style="font-size: 32px;" ></q-icon> </td>
+                          <td class="text-left"><q-icon v-if="member.unsubscribed" name="check_box" style="color: red; font-size: 32px;" ></q-icon><q-icon v-else name="check_box_outline_blank" style="font-size: 32px;" ></q-icon> </td>
+                      </tr>
+                      </template>
+                  </tbody> 
+                </table>      
+                </div>
+            </q-card-section>
+          </q-card>
+        </q-expansion-item>
+     </q-list>
+    
+    </q-tab-panel>
+  </q-tab-panels>  
+
+</div>
+
+
+<q-dialog  v-model="addnames_modal" transition-show="jump-down" transition-hide="jump-up" 
    @hide="new_name_ids=null"
    @show="$refs.namesselect.focus();"
    >
@@ -164,65 +227,3 @@
         </q-card-actions>
       </q-card>
     </q-dialog>
-
-
-
-<p>
-Hier können Übungsleiter Einladungslisten erstellen und bearbeiten, sowie weitere Personen hinzufügen.<br>
-Listen löschen oder Personen aus Listen entfernen ist für Euch nicht möglich.<br> 
-Falls dies nötig ist, bitte eine entsprechende Mail über das Kontakformular an den Admin senden.
-</p>
-
-<q-btn label="Einladungsliste erstellen" color="primary" @click="createMailinglist();" ></q-btn>
-
-<q-tabs
-  v-model="tab"
-  align="left"
->
-  <q-tab v-for="mailinglisttype in mailinglisttypes" v-bind="mailinglisttype" ></q-tab>
-</q-tabs>
-
-<q-tab-panels v-model="tab" animated>
-  <q-tab-panel v-for="mailinglisttype in mailinglisttypes" v-bind="mailinglisttype"> 
-      
-
-  <q-list bordered separator class="rounded-borders">
-      <q-expansion-item v-for="mailinglist in mailinglists[mailinglisttype.label]"
-        group="mailinglists"
-        switch-toggle-side
-        expand-separator
-        v-bind:label="mailinglist.name"
-        @show="loadMailinglistNames(mailinglist.id)"
-      >
-        <q-card>
-          <q-card-section>
-              
-
-           <q-btn label="Personen hinzufügen" color="primary" @click="addnames_modal=true;current_list_id=mailinglist.id;" ></q-btn>
-           <q-btn label="Personen aus Liste importieren" color="primary" @click="loadImportNamesModal(mailinglist);" ></q-btn>           
-           <q-btn label="Liste bearbeiten" color="primary" @click="updateMailinglist(mailinglist);" ></q-btn>
-           <br>
-           <br>
-           <div class="q-markup-table q-table__container q-table__card q-table--horizontal-separator q-table--no-wrap">
-              <table class="q-table" >
-                <thead><tr><th class="text-left">Name</th><th class="text-left">Eintrag bestätigt</th><th class="text-left">Ausgetragen</th></tr></thead> 
-                <tbody>
-                    <template v-for="member in mailinglistnames[mailinglist.id]">
-                    <tr>
-                        <td class="text-left">{{member.Member_firstname}} {{member.Member_name}}</td>
-                        <td class="text-left"><q-icon v-if="member.subscribed" name="check_box" style="color: green; font-size: 32px;" ></q-icon><q-icon v-else name="check_box_outline_blank" style="font-size: 32px;" ></q-icon> </td>
-                        <td class="text-left"><q-icon v-if="member.unsubscribed" name="check_box" style="color: red; font-size: 32px;" ></q-icon><q-icon v-else name="check_box_outline_blank" style="font-size: 32px;" ></q-icon> </td>
-                    </tr>
-                    </template>
-                </tbody> 
-              </table>      
-              </div>
-          </q-card-section>
-        </q-card>
-      </q-expansion-item>
-   </q-list>
-  
-  </q-tab-panel>
-</q-tab-panels>  
-
-
