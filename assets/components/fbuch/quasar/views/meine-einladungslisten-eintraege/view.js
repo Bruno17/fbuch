@@ -66,6 +66,7 @@ export default {
             //data.iid = this.$route.query.iid;
             //data.code = this.$route.query.code; 
             data.returntype = 'grouped_by_type';
+            data.which_page = 'subscribe';
             axios.get(ajaxUrl,{params:data})
             .then(function (response) {
                 mailinglists.value = response.data.results;

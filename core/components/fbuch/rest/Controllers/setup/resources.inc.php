@@ -86,6 +86,15 @@ $update_resources = [
      'hidemenu'=>1,
      'resource_groups'=>['fbuch','fbuch_guest']
     ],
+    ['pagetitle'=>'Fahrtenbuch',
+     'alias'=>'fahrtenbuch',
+     'context_key' => 'fbuch',
+     'uri' => 'fahrtenbuch/fahrtenbuch.html',
+     'parent_uri'=>'fahrtenbuch/',
+     'template_name'=>'fbuch Quasar 2',
+     'published'=>1,
+     'resource_groups'=>['fbuch']
+    ],    
     ['pagetitle'=>'Meine Einladungslisten Einträge',
      'alias'=>'meine-einladungslisten-eintraege',
      'context_key' => 'fbuch',
@@ -133,6 +142,4 @@ $update_resources = [
      'hidemenu'=>1,
      'richtext'=>0
     ]
-
-    
 ];

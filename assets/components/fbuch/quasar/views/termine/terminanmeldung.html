@@ -81,7 +81,14 @@
           :to="'/'+entry.id+'/kommentare'"
           exact
         >        <q-badge color="red" floating>{{messageCount}}</q-badge>
-        </q-route-tab>              
+        </q-route-tab>
+        <q-route-tab
+          icon="insert_invitation"
+          label="Einladungsliste"
+          :to="'/'+entry.id+'/einladungsliste'"
+          exact
+        >
+        </q-route-tab>                       
 
       </q-tabs>
       <router-view></router-view>

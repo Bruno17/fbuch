@@ -97,6 +97,7 @@ class MyControllerMailinglists extends BaseController {
         $returntype = $this->getProperty('returntype');
         $which_page = $this->getProperty('which_page');
         $exclude = $this->getProperty('exclude');
+        $date_id = $this->getProperty('date_id');
         
         $where = array('deleted' => 0);
 
@@ -114,13 +115,25 @@ class MyControllerMailinglists extends BaseController {
         $w = array();
         switch ($which_page){
             case 'edit_mailinglists':
-            $w[] = array('member_filter_id' => 0);
+            $w[] = ['member_filter_id' => 0];
+            break;
+            case 'subscribe':
+                $w[] = ['hidden' => 0];
             break;
         } 
         
         if (!empty($exclude)){
             $w[] = array('id:!=' => $exclude);
         }
+
+        if (!empty($date_id)){
+            $id = 9999999999999;
+            if ($date_o = $this->modx->getObject('fbuchDate',$date_id)){
+                $id = $date_o->get('mailinglist_id');
+            }
+
+            $w[] = array('id' => $id);
+        }        
         
         $w[] = $where;
         $c->where($w);

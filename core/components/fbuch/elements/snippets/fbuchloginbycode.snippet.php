@@ -8,7 +8,7 @@ $fbuchCorePath = realpath($modx->getOption('fbuch.core_path', null, $modx->getOp
 $modx->getService('fbuch', 'Fbuch', $fbuchCorePath . 'model/fbuch/');
 
 if (!empty($code) && !empty($iid)){
-    $result = $modx->fbuch->loginByInvite($iid,$code);
+    $result = $modx->fbuch->loginByInvite($iid,$code,$route);
     if ($result){
         return $result;
     }

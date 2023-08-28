@@ -1,32 +1,220 @@
-Hallo [[+firstname]] [[+name]],<br><br>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
+    xmlns:o="urn:schemas-microsoft-com:office:office">
 
-Du bist eingeladen zur Teilnahme am RGM - Termin:<br>
-[[+title]]<br>
-am [[+date:strtotime:date=`%a, %d.%m.%Y`]] [[+start_time]]
-<br>
-<br>
-[[+status:is=`invited`:then=`Wir bedanken uns für eine Zu- oder Absage.`:else=``]]
-[[+status:is=`accepted`:then=`Du hast verbindlich zugesagt. Vielen Dank! Falls Du doch verhindert sein solltest, denke bitte daran rechtzeitig abzusagen!`:else=``]]
-[[+status:is=`canceled`:then=`Vielen Dank für Deine Rückmeldung! Du hast abgesagt. Falls Du es Dir doch noch anders überlegst, kannst Du jederzeit noch zusagen.`:else=``]]
-<br><br>
-[[+comment:isnot=``:then=`
-<strong>Kommentar</strong> von [[+Comment_name]]:<br>
-[[+comment:nl2br]]
-<br><br>
-`:else=``]]
+<head>
+    <title></title><!--[if !mso]><!-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><!--<![endif]-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style type="text/css">
+        #outlook a {
+            padding: 0;
+        }
 
-Du kannst jederzeit <a href="[[~87? &iid=`[[+iid]]`&code=`[[+code]]`&scheme=`full`]]">hier</a> mit einem Klick den Termin zu- oder absagen oder einen Kommentar hinterlassen. Dafür benötigst Du keine speziellen Zugangsdaten.
-<br><br> 
-----&gt; <a href="[[~87? &iid=`[[+iid]]`&code=`[[+code]]`&scheme=`full`]]">Hier klicken!</a>&lt;--- 
-<br><br>
-Falls der Link zur Anmeldeseite nicht funktioniert, hier nochmal der gesamte Link zum Kopieren und Einfügen in den Browser:
-<br>
-<a href="[[~87? &iid=`[[+iid]]`&code=`[[+code]]`&scheme=`full`]]">[[~87? &iid=`[[+iid]]`&code=`[[+code]]`&scheme=`full`]]</a> 
-<br><br>
+        body {
+            margin: 0;
+            padding: 0;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
 
-<span style="color:#AAA;">
-Rudergesellschaft Marktheidenfeld e.V.<br/>
-Georg-Mayr-Str. 25<br/>
-<a href="http://www.rgmarktheidenfeld.de">www.rgmarktheidenfeld.de</a> 
-</span>
+        table,
+        td {
+            border-collapse: collapse;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
 
+        img {
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+            -ms-interpolation-mode: bicubic;
+        }
+
+        p {
+            display: block;
+            margin: 13px 0;
+        }
+    </style><!--[if mso]>
+  <noscript>
+  <xml>
+  <o:OfficeDocumentSettings>
+    <o:AllowPNG/>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+  </o:OfficeDocumentSettings>
+  </xml>
+  </noscript>
+  <![endif]--><!--[if lte mso 11]>
+  <style type="text/css">
+    .mj-outlook-group-fix { width:100% !important; }
+  </style>
+  <![endif]-->
+    <style type="text/css">
+        @media only screen and (min-width:480px) {
+            .mj-column-per-100 {
+                width: 100% !important;
+                max-width: 100%;
+            }
+        }
+    </style>
+    <style media="screen and (min-width:480px)">
+        .moz-text-html .mj-column-per-100 {
+            width: 100% !important;
+            max-width: 100%;
+        }
+    </style>
+    <style type="text/css"></style>
+</head>
+
+<body style="word-spacing:normal;background-color:#dddddd;">
+    <div style="background-color:#dddddd;">
+        <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#dddddd" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+        <div style="background:#dddddd;background-color:#dddddd;margin:0px auto;max-width:600px;">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation"
+                style="background:#dddddd;background-color:#dddddd;width:100%;">
+                <tbody>
+                    <tr>
+                        <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                            <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+                            <div class="mj-column-per-100 mj-outlook-group-fix"
+                                style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation"
+                                    style="background-color:#ffffff;vertical-align:top;" width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td align="center"
+                                                style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                                <div
+                                                    style="font-family:Helvetica;font-size:15px;line-height:1;text-align:center;color:#000000;">
+                                                    Hallo [[+firstname]]
+                                                    [[+name]],<br><br>[[+status:is=`invited`:then=`Du bist eingeladen
+                                                    zur Teilnahme an folgendem Termin:`:else=``]]
+                                                    [[+status:is=`accepted`:then=`Du hast zugesagt zu folgendem
+                                                    Termin:`:else=``]] [[+status:is=`canceled`:then=`Du hast für
+                                                    folgenden Termin abgesagt:`:else=``]]</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center"
+                                                style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                                <div
+                                                    style="font-family:Helvetica;font-size:16px;font-weight:bold;line-height:130%;text-align:center;color:#000000;">
+                                                    [[+title]]<br>[[+date:strtotime:date=`%a, %d.%m.%Y`]]
+                                                    [[+start_time]]</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center"
+                                                style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                                <div
+                                                    style="font-family:Helvetica;font-size:15px;line-height:1;text-align:center;color:#000000;">
+                                                    [[+status:is=`invited`:then=`Wir bedanken uns für Deine Zu- oder
+                                                    Absage.`:else=``]] [[+status:is=`accepted`:then=`Falls Du doch
+                                                    verhindert sein solltest, denke bitte daran rechtzeitig
+                                                    abzusagen!`:else=``]] [[+status:is=`canceled`:then=`Falls Du doch
+                                                    teilnehmen möchtest, kannst Du jederzeit noch zusagen.`:else=``]]
+                                                    [[+comment:isnot=``:then=`<br><br><strong><small>Nachricht von
+                                                            [[+Comment_name]]:</small></strong><br>[[+comment:nl2br]]
+                                                    `:else=``]]</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center"
+                                                style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                                <div
+                                                    style="font-family:Helvetica;font-size:15px;line-height:130%;text-align:center;color:#000000;">
+                                                    Bitte klicke auf nachfolgenden Link um Dich oder weitere Personen
+                                                    an- oder abzumelden oder um eine Nachricht zu hinterlassen.</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center" vertical-align="middle"
+                                                style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                                <table border="0" cellpadding="0" cellspacing="0" role="presentation"
+                                                    style="border-collapse:separate;line-height:100%;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td align="center" bgcolor="#1976d2" role="presentation"
+                                                                style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:#1976d2;"
+                                                                valign="middle"><a
+                                                                    href="[[~[[fbuchGetResourceIdByUri? &uri=`termine/anmelden.html`]]? &iid=`[[+iid]]`&code=`[[+code]]`&scheme=`full`]]"
+                                                                    style="display:inline-block;background:#1976d2;color:white;font-family:Helvetica;font-size:13px;font-weight:bold;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;"
+                                                                    target="_blank">An-/Abmelden</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center"
+                                                style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                                <div
+                                                    style="font-family:Helvetica;font-size:15px;line-height:1;text-align:center;color:#888888;">
+                                                    Rudergesellschaft Marktheidenfeld e.V.<br>Georg-Mayr-Str.
+                                                    25<br>www.rgmarktheidenfeld.de</div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div><!--[if mso | IE]></td></tr></table><![endif]-->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#dddddd" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+        <div style="background:#dddddd;background-color:#dddddd;margin:0px auto;max-width:600px;">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation"
+                style="background:#dddddd;background-color:#dddddd;width:100%;">
+                <tbody>
+                    <tr>
+                        <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                            <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+                            <div class="mj-column-per-100 mj-outlook-group-fix"
+                                style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation"
+                                    style="background-color:#dddddd;vertical-align:top;" width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td align="center"
+                                                style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                                <div
+                                                    style="font-family:Helvetica;font-size:15px;line-height:130%;text-align:center;color:#888888;">
+                                                    Nachfolgend kannst Du Dich aus unseren Einladunglisten austragen
+                                                    oder eintragen.</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center" vertical-align="middle"
+                                                style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                                <table border="0" cellpadding="0" cellspacing="0" role="presentation"
+                                                    style="border-collapse:separate;line-height:100%;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td align="center" bgcolor="#1976d2" role="presentation"
+                                                                style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:#1976d2;"
+                                                                valign="middle"><a
+                                                                    href="[[~[[fbuchGetResourceIdByUri? &uri=`termine/anmelden.html`]]? &iid=`[[+iid]]`&code=`[[+code]]`&scheme=`full` &route=`einladungsliste`]]"
+                                                                    style="display:inline-block;background:#1976d2;color:white;font-family:Helvetica;font-size:13px;font-weight:bold;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;"
+                                                                    target="_blank">Einladungsliste</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div><!--[if mso | IE]></td></tr></table><![endif]-->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div><!--[if mso | IE]></td></tr></table><![endif]-->
+    </div>
+</body>
+
+</html>

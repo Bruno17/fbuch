@@ -1469,7 +1469,10 @@ class Fbuch {
                             if (is_object($existing[$member_id])) {
                                 $invite_o = $existing[$member_id];
                                 if (!empty($unsubscribed)) {
-                                    $invite_o->remove();
+                                    if ($invite_o->get('invited')==0){
+                                        //remove only, if not invited
+                                        $invite_o->remove();
+                                    }                                    
                                 } else {
                                     $invite_o->set('mailinglist_id', $mailinglist_id);
                                     $invite_o->save();
@@ -2484,7 +2487,7 @@ class Fbuch {
         return $password;        
     } 
     
-    public function loginByInvite($iid,$code){
+    public function loginByInvite($iid,$code,$route=''){
         $modx = &$this->modx;
         if ($invite_o = $modx->getObject('fbuchDateInvited', $iid)) {
             if ($date_o = $invite_o->getOne('Date')){
@@ -2508,7 +2511,8 @@ class Fbuch {
                     $response = $rawResponse->getResponse();
                     $success = $this->modx->getOption('success',$response);
                     if ($success){
-                        $modx->sendRedirect('/termine/#/' . $date_id . '/anmeldung');  
+                        $route = empty($route) ? 'anmeldung' : $route;
+                        $modx->sendRedirect('/termine/#/' . $date_id . '/' . $route);  
                     }
                     $message = $this->modx->getOption('message',$response);
                     return $message;                    
