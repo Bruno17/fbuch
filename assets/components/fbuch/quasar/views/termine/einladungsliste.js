@@ -1,3 +1,5 @@
+import { useLoadPermissions,useHasPermission } from "../../composables/helpers.js";
+
 export default {
 
     components: {
@@ -11,6 +13,7 @@ export default {
         const id = params.id || 'new';        
 
         onMounted(() => {
+            useLoadPermissions();
             loadMailinglists();
         })
 
@@ -68,7 +71,8 @@ export default {
 
         return {
             mailinglists,
-            subscribe
+            subscribe,
+            useHasPermission,
         }
     },
 

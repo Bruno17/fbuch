@@ -57,7 +57,7 @@ class MyControllerMailinglistnames extends BaseController {
 
     public function subscribe() {
 
-        if ($fbuchUser = $this->getCurrentFbuchMember()) {
+        if ($this->modx->hasPermission('fbuch_mailinglist_subscribe') && $fbuchUser = $this->getCurrentFbuchMember()) {
             $this->object->set('member_id', $fbuchUser->get('id'));
             $this->object->set('subscribed', 1);
             $this->object->set('unsubscribed', 0);

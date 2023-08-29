@@ -47,17 +47,17 @@
                             v-on:click="subscribe(mailinglist,'unsubscribe')"></q-btn>
                     </template>
                     <template v-else-if="mailinglist.Names_unsubscribed">
-                        <q-btn class="bg-positive text-white" label="Eintragen"
+                        <q-btn v-if="useHasPermission('fbuch_mailinglist_subscribe')" class="bg-positive text-white" label="Eintragen"
                             v-on:click="subscribe(mailinglist,'subscribe')"></q-btn>
                     </template>
                     <template v-else-if="mailinglist.Names_active">
-                        <q-btn class="bg-positive text-white" label="Eintrag bestätigen"
+                        <q-btn v-if="useHasPermission('fbuch_mailinglist_subscribe')" class="bg-positive text-white" label="Eintrag bestätigen"
                             v-on:click="subscribe(mailinglist,'subscribe')"></q-btn>
                         <q-btn class="bg-negative text-white" label="Austragen"
                             v-on:click="subscribe(mailinglist,'unsubscribe')"></q-btn>
                     </template>
                     <template v-else>
-                        <q-btn class="bg-positive text-white" label="Eintragen"
+                        <q-btn v-if="useHasPermission('fbuch_mailinglist_subscribe')" class="bg-positive text-white" label="Eintragen"
                             v-on:click="subscribe(mailinglist,'subscribe')"></q-btn>
                     </template>
                 </q-card-actions>
@@ -66,6 +66,6 @@
     </div>
 </div>
 
-<div class="q-pa-sm" >
+<div v-if="useHasPermission('fbuch_mailinglist_subscribe')" class="q-pa-sm" >
     <q-btn class="bg-primary text-white" label="In weitere Listen ein/austragen" href="/termine/meine-einladungslisten-eintraege.html"></q-btn>
 </div>

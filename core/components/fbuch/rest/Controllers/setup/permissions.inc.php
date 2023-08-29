@@ -36,6 +36,13 @@ $permissions = [
         'fbuch_instructor'=>'1',
         'fbuch_clubhome'=>'1'
     ],
+    ['name'=>'fbuch_mailinglist_subscribe',
+        'description'=>'Berechtigung, sich in Mailinglisten einzutragen',
+        'fbuch_guest'=>'',
+        'fbuch_user'=>'1',
+        'fbuch_instructor'=>'1',
+        'fbuch_clubhome'=>''
+    ],    
     ['name'=>'fbuch_edit_names',
         'description'=>'Berechtigung Namen zu bearbeiten',
         'fbuch_guest'=>'',  
