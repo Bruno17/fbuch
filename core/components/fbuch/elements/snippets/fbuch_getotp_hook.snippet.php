@@ -5,14 +5,14 @@ $modx->getService('fbuch', 'Fbuch', $fbuchCorePath . 'model/fbuch/');
 $email = $hook->getValue('email');
 if ($member = $modx->getObject('mvMember',['email'=>$email])){
     $otp = $member->get('otp');
-    $otp_createdon = $member->get('otp_createdon');
+    $otp_sendedon = $member->get('otp_sendedon');
     
     $date1 = date_create();
-    $date2 = date_create($otp_createdon);
+    $date2 = date_create($otp_sendedon);
 
-    $dateDifference = date_diff($date1, $date2)->i;
+    $dateDifference = ($date1->getTimestamp() - $date2->getTimestamp()) / 60;
 
-    if (!empty($otp) &&  $dateDifference < 10){
+    if ($otp_sendedon != null && !empty($otp) &&  $dateDifference < 10){
         //otp innerhalb der letzten 10 Minuten bereits angefordert
         
         $modx->setPlaceholder('my.successMessage','Auf diese Adresse wurde kürzlich bereits ein Login Link gesendet.');

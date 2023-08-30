@@ -2618,7 +2618,10 @@ class Fbuch {
             }
             if (isset($params['route']) && !empty($params['route'])){
                 $url_params .= $url_params_delimiter . 'route=' . $params['route'];
-            }            
+            } 
+            
+            $object->set('otp_sendedon', date_format($now,'Y-m-d H:i:s'));
+            $object->save();
 
             $properties = $object->toArray();
             

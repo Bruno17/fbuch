@@ -348,6 +348,11 @@ class MyControllerFahrten extends BaseController {
     }
     
     public function afterSave($fields){
+        $date_end = $this->object->get('date_end');
+        if (empty($date_end)){
+            $this->object->set('date_end',$this->object->get('date'));
+            $this->object->save();
+        }
         $this->saveNames($fields);
         $fahrt_id = $this->modx->getOption('fahrt_id',$fields,0);
         $this->modx->fbuch->forceObmann($fahrt_id);

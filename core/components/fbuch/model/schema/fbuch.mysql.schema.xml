@@ -382,7 +382,8 @@
         <field key="member_status" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
         <field key="riot_user_id" dbtype="text" phptype="string" null="false" default="" />
 		<field key="otp" dbtype="varchar" precision="150" phptype="string" null="false" default=""/>
-        <field key="otp_createdon" dbtype="datetime" phptype="datetime" null="true" />        
+        <field key="otp_createdon" dbtype="datetime" phptype="datetime" null="true" />   
+        <field key="otp_sendedon" dbtype="datetime" phptype="datetime" null="true" />       
 
         <composite alias="Fahrten" class="fbuchFahrtNames" local="id" foreign="member_id" cardinality="many" owner="local" />
         <composite alias="Mailinglists" class="fbuchMailinglistNames" local="id" foreign="member_id" cardinality="many" owner="local" />
