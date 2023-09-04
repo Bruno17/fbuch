@@ -39,7 +39,11 @@ $update_uris = [
     ['uri'=>'termine/',
      'context_key' => 'fbuch',
      'new_uri'=>'termine'
-    ]    
+    ],
+    ['uri'=>'termine/einladungslisten.html',
+     'context_key' => 'fbuch',
+     'new_uri'=>'listen/einladungslisten.html'
+    ]      
 ];
 
 $update_resources = [
@@ -113,7 +117,7 @@ $update_resources = [
      'context_key' => 'fbuch',
      'uri' => 'listen/einladungslisten.html',
      'uri_override' => 0,
-     'parent_uri'=>'termine',
+     'parent_uri'=>'listen/',
      'template_name'=>'fbuch Quasar 2',
      'content'=>'',
      'published'=>1,
@@ -127,7 +131,7 @@ $update_resources = [
      'uri' => 'termine/anmelden.html',
      'uri_override' => 0,
      'parent_uri'=>'termine',
-     'template_name'=>'fahrtenbuch',
+     'template_name'=>'fbuch Quasar 2',
      'content'=>'[[!fbuchLoginByCode]]',
      'published'=>1,
      'hidemenu'=>1

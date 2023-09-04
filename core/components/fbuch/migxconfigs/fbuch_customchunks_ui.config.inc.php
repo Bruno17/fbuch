@@ -7,7 +7,8 @@ $id = $modx->getOption('object_id',$_REQUEST);
 
 //echo '<pre>' . print_r(json_decode($this->customconfigs['tabs'],1),1) . '</pre>';
 
-$file = $modx->getOption('core_path') . 'components/fbuch/customchunks/customchunks.js';
+$fbuchCorePath = realpath($modx->getOption('fbuch.core_path', null, $modx->getOption('core_path') . 'components/fbuch')) . '/';
+$file = $fbuchCorePath . 'customchunks/customchunks.js';
 $input = '';
 if (file_exists($file)) {
     $input = json_decode(file_get_contents($file), true);
@@ -46,7 +47,7 @@ foreach ($currentgroup as $row){
     
     if ($chunk = $modx->getObject('modChunk',array('name'=>$row['field']))){
         //$field['default'] = $chunk->get('snippet');
-        $field['description'] = $chunk->get('description');
+        $field['description'] = isset($row['description']) ? $row['description'] : '';
     }
     
     $caption = $modx->getOption('tab',$row); 

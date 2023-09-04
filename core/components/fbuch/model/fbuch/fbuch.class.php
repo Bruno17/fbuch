@@ -2626,7 +2626,7 @@ class Fbuch {
             $properties = $object->toArray();
             
             $properties['otp_expireson'] = date_format($otp_expireson,'d.m.Y H:i');
-            $properties['tpl'] = 'fbuch_emailLogin';
+            $properties['tpl'] = $this->getChunkName('fbuch_emailLogin');
             $properties['code'] = $object->get('otp');
             $properties['subject'] = 'Dein Login Link';
             $properties['url_params'] = $url_params;

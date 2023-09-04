@@ -2,7 +2,8 @@
 
 $id = $modx->getOption('object_id',$scriptProperties,'new');
 
-$file = $modx->getOption('core_path') . 'components/fbuch/customchunks/customchunks.js';
+$fbuchCorePath = realpath($modx->getOption('fbuch.core_path', null, $modx->getOption('core_path') . 'components/fbuch')) . '/';
+$file = $fbuchCorePath . 'customchunks/customchunks.js';
 $input = '';
 if (file_exists($file)) {
     $input = json_decode(file_get_contents($file), true);
@@ -33,10 +34,12 @@ $currentgroup = $numgroups[$id];
 //echo '<pre>' . print_r($currentgroup,1) . '</pre>';
 $record = array();
 foreach ($currentgroup as $row){
-    
+    $original_name = str_replace('custom_', '', $row['field']);
     if ($chunk = $modx->getObject('modChunk',array('name'=>$row['field']))){
         //$field['default'] = $chunk->get('snippet');
         $record[$row['field']] = $chunk->get('snippet');
+    } elseif ($chunk = $modx->getObject('modChunk',array('name'=>$original_name))){
+        $record[$row['field']] = $chunk->getContent();
     }
 }
 

@@ -1,0 +1,26 @@
+<mjml>
+  <mj-body background-color="#dddddd">
+    <mj-section background-color="#dddddd">
+      <mj-column background-color="#ffffff">
+        <mj-text align="center" font-family="Helvetica" font-size="15px">
+          Hallo [[+firstname]] [[+name]],<br /><br />
+          Mit nachfolgendem Link, kannst Du Dich im Fahrtenbuch der RGM einloggen.
+        </mj-text>
+        <mj-button font-family="Helvetica" font-weight="bold" background-color="#1976d2" color="white" href="[[++site_url]]/termine/anmelden.html?mid=[[+id]]&code=[[+code]][[+url_params]]">
+          Zum Login
+        </mj-button>
+        <mj-text align="center" font-family="Helvetica" font-size="15px">
+            Dieser Link ist gültig bis [[+otp_expireson]].
+            <br><br>
+            Für weitere Logins kannst Du Dir jederzeit einen neuen Login Link holen.
+        </mj-text>
+
+        <mj-text color="#888888" align="center" font-family="Helvetica" font-size="15px">
+          Rudergesellschaft Marktheidenfeld e.V.<br />
+          Georg-Mayr-Str. 25<br />
+          www.rgmarktheidenfeld.de
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

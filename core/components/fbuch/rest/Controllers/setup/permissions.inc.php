@@ -91,7 +91,14 @@ $permissions = [
         'fbuch_user'=>'1',
         'fbuch_instructor'=>'1',
         'fbuch_clubhome'=>'1'
-    ],    
+    ], 
+    ['name'=>'fbuch_remove_datenames',
+        'description'=>'Berechtigung eingetragene Personen aus Terminen zu entfernen',
+        'fbuch_guest'=>'',
+        'fbuch_user'=>'',
+        'fbuch_instructor'=>'1',
+        'fbuch_clubhome'=>''
+    ],     
     ['name'=>'fbuch_add_persons_to_dates',
         'description'=>'Berechtigung, andere Personen in Termine einzutragen',
         'fbuch_guest'=>'',

@@ -79,6 +79,7 @@
         "inputTVtype": "textarea"
     },
     "custom_fbuch_invite_mail_tpl": {
+        "description":"Templatevorlage für Einladungsmails.",
         "deleted": "0",
         "group": "Mails",
         "tab": "invite",
@@ -91,6 +92,14 @@
         "tab": "invite",
         "caption": "",
         "inputTVtype": ""
+    },
+    "custom_fbuch_emailLogin": {
+        "description":"Templatevorlage für Einladungsmails.",
+        "deleted": "0",
+        "group": "Mails",
+        "tab": "Login",
+        "caption": "",
+        "inputTVtype": "textarea"
     },
     "custom_fbuch_lgnForgotPassEmail": {
         "deleted": "0",

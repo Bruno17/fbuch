@@ -3,13 +3,12 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"2.2.2-beta",
+  "version":"2.2.3-beta",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",
       "after":[
         "tables.resolver.php",
-        "customchunks.resolver.php",
         "resources.resolver.php"
       ]
     }

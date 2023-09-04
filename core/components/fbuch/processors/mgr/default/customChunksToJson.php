@@ -1,6 +1,7 @@
 <?php
 
-$file = $modx->getOption('core_path') . 'components/fbuch/customchunks/customchunks.js';
+$fbuchCorePath = realpath($modx->getOption('fbuch.core_path', null, $modx->getOption('core_path') . 'components/fbuch')) . '/';
+$file = $fbuchCorePath . 'customchunks/customchunks.js';
 $input = '';
 if (file_exists($file)) {
     $input = json_decode(file_get_contents($file), true);
