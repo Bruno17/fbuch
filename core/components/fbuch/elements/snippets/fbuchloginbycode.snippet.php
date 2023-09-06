@@ -16,9 +16,17 @@ if (!empty($code) && !empty($iid)){
 
 if (!empty($code) && !empty($mid)){
     $result = $modx->fbuch->loginByOtp($mid,$code,$target,$route);
+    $url_params = '';
+    if (!empty($target)){
+        $url_params = '?target=' . $target;
+        if (!empty($route)){
+            $url_params .= '&route=' . $route;
+        }
+        $modx->setPlaceholder('url_params',$url_params);
+    }
+
     if ($result){
         return $result;
     }    
 }
-
-return 'Login nicht möglich. Die übermittelten Zugangsdaten sind ungültig';
+return 'code_not_valid';

@@ -2496,7 +2496,7 @@ class Fbuch {
                 $today = date_format($now,'Y-m-d');
                 $date = substr($date,0,10);
                 if ($date < $today) {
-                    return 'Zugang nicht möglich. Der Termin dieses Einladungslinks liegt in der Vergangenheit.';
+                    return 'invite_expired';
                 }
     
             }
@@ -2525,7 +2525,12 @@ class Fbuch {
 
     public function loginByOtp($mid,$code,$target,$route){
         $modx = &$this->modx;
+        $is_loggedin = false;
         if ($member = $modx->getObject('mvMember',$mid)){
+            if ($current_member = $this->getCurrentFbuchMember()){
+                $current_member_id = $current_member->get('id');
+                $is_loggedin = $mid == $current_member_id;
+            }
             $otp = $member->get('otp');
             $otp_createdon = $member->get('otp_createdon');
            
@@ -2533,24 +2538,24 @@ class Fbuch {
                 $otp_expireson = $this->getOtpExpireson($otp_createdon);
                 $now = $this->getNow();                
                 $dateDifference = ($otp_expireson->getTimestamp() - $now->getTimestamp()) / 60;
-                if ($dateDifference < 0) {
-                    return 'Login nicht möglich. Der Login Link ist nicht mehr gültig.';
+                if (!$is_loggedin && $dateDifference < 0) {
+                    return 'otp_expired';
                 }
-                if ($otp == $code && $user = $this->createUserFromMember($mid,1)){
+                if (!$is_loggedin && $otp == $code && $user = $this->createUserFromMember($mid,1)){
                     $rawResponse = $this->login($user);
                     $response = $rawResponse->getResponse();
-                    $success = $this->modx->getOption('success',$response);
+                    $is_loggedin = $this->modx->getOption('success',$response);
+                    $message = $this->modx->getOption('message',$response);
+                         
+                }  
+                if ($is_loggedin){
                     $target = !empty($target) ? $target : '/fahrtenbuch/fahrtenbuch.html';
                     if (!empty($route)){
                         $target .= '/#/' . $route;
-                    }
-                    if ($success){
- 
-                        $modx->sendRedirect($target); 
-                    }
-                    $message = $this->modx->getOption('message',$response);
-                    return $message;      
-                }                  
+                    }                        
+                    $modx->sendRedirect($target); 
+                } 
+                return $message;                                
             }
         } 
         return false;   

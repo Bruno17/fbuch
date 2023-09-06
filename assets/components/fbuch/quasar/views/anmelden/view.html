@@ -1,0 +1,29 @@
+
+<valuesetter @hasmounted="state.result='[[!fbuchLoginByCode]]'" />
+<div class="q-pa-md full-width" style="height: 400px;">
+    <template v-if="state.result=='code_not_valid'">
+        Login nicht möglich. Die übermittelten Zugangsdaten sind ungültig.
+     </template>
+     <template v-else-if="state.result=='otp_expired'">
+        Login nicht möglich. Dieser Login Link ist nicht mehr gültig.;
+     </template>
+     <template v-else-if="state.result=='invite_expired'">
+        Zugang nicht möglich. Der Termin dieses Einladungslinks liegt in der Vergangenheit.
+      </template>
+     <template v-else >
+         {{state.result}}
+     </template>
+
+     <div class="q-mb-xl q-mt-sm row">
+        <div class="col-md-4 col-sm-6 col-xs-12 row">
+            <div class="col-12 q-col-gutter-md row" >
+                <div class="col-12 row">
+                    <q-btn class="col-12" color="primary" href="/login[[!+url_params]]" title="Zum Login" label="Zum Login" ></q-btn>
+                </div>
+            </div>     
+        </div>
+     </div>
+     
+</div>
+
+

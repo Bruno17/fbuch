@@ -132,7 +132,7 @@ $update_resources = [
      'uri_override' => 0,
      'parent_uri'=>'termine',
      'template_name'=>'fbuch Quasar 2',
-     'content'=>'[[!fbuchLoginByCode]]',
+     'content'=>'',
      'published'=>1,
      'hidemenu'=>1
     ],

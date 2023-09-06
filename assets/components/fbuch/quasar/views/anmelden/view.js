@@ -22,5 +22,5 @@ export default {
         }
     },
 
-    template: '#default_view'
+    template: '#view'
 }

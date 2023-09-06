@@ -94,7 +94,7 @@
         "inputTVtype": ""
     },
     "custom_fbuch_emailLogin": {
-        "description":"Templatevorlage für Einladungsmails.",
+        "description":"Templatevorlage für Loginmails.",
         "deleted": "0",
         "group": "Mails",
         "tab": "Login",
