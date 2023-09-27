@@ -1,0 +1,36 @@
+<q-dialog
+v-model="state.showfahrten"
+maximized
+@before-show="loadFahrten"
+>
+
+<q-layout container view="hHh lpR fFf" class="bg-white" style="width: 600px;">
+
+  <q-header elevated class="bg-white text-black">
+    <q-toolbar>
+      <q-toolbar-title>
+        {{member.Vorname}} {{member.Nachname}}
+      </q-toolbar-title>
+      <q-btn flat @click="state.showfahrten=false" round dense icon="close" />
+    </q-toolbar>
+  </q-header>
+
+  <q-page-container >
+    <div class="q-pa-sm q-gutter-y-sm">
+    <template v-for="entry in fahrten">
+        <entry section="finished" :entry="entry" />
+    </template>
+    </div>
+  </q-page-container>
+
+  <q-footer elevated class="bg-white text-black">
+    <q-toolbar>
+      <q-toolbar-title>
+      </q-toolbar-title>
+      <q-btn flat @click="state.showfahrten=false" label="Schließen" />
+    </q-toolbar>
+  </q-footer>
+
+</q-layout>
+
+</q-dialog>

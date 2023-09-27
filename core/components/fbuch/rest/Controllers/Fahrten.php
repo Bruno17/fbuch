@@ -1,8 +1,10 @@
 <?php
 
 include 'BaseController.php';
+include 'traits/ranglisten.trait.php';
 
 class MyControllerFahrten extends BaseController {
+    use RanglistenTrait;
     public $classKey = 'fbuchFahrt';
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'ASC';
@@ -365,7 +367,7 @@ class MyControllerFahrten extends BaseController {
         }
         return true;
     }
-    
+
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
         
         $returntype = $this->getProperty('returntype');
@@ -420,6 +422,17 @@ class MyControllerFahrten extends BaseController {
                         $start = $this->getProperty('start_date');
                         $datewhere['date:<'] = $start;
                     }        
+                break;
+                case 'member_fahrten':
+                    $fahrten = $this->getRangliste();
+                    $fahrt_ids = [];
+                    if (is_array($fahrten)){
+                        foreach ($fahrten as $fahrt){
+                            $fahrt_ids[] = $fahrt['id'];
+                        }
+                    }
+                    $where['id:IN'] = $fahrt_ids;
+                    $sortConfig = ['date'=>'ASC','start_time'=>'ASC'];    
                 break;                                               
         } 
         
@@ -438,7 +451,7 @@ class MyControllerFahrten extends BaseController {
         $w[] = $where;
         $w[] = $datewhere;
         $w[] = $finishedwhere;
-         $c->where($w);
+        $c->where($w);
 
         foreach ($sortConfig as $field => $dir){
             $c->sortby($field,$dir);
