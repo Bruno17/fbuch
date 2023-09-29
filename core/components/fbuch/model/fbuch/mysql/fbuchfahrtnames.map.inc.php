@@ -20,6 +20,7 @@ $xpdo_meta_map['fbuchFahrtNames']= array (
     'nameid_old' => 0,
     'fahrtid_old' => 0,
     'datenames_id' => 0,
+    'member_status' => '',
     'createdby' => 0,
     'createdon' => NULL,
   ),
@@ -111,6 +112,15 @@ $xpdo_meta_map['fbuchFahrtNames']= array (
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
+      'index' => 'index',
+    ),
+    'member_status' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '255',
+      'null' => false,
+      'default' => '',
       'index' => 'index',
     ),
     'createdby' => 

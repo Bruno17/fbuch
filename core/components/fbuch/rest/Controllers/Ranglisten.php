@@ -80,7 +80,9 @@ class MyControllerRanglisten extends modRestController {
     
     public function collection($list = array(),$total = false,$status = null) {
         parent::collection($list,$total,$status);
-        $this->response['km_sum'] = $this->km_sum;
+        $this->response['km_sum'] = (string) $this->km_sum;
     }    
 
 }
+
+

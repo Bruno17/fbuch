@@ -48,7 +48,18 @@ export default {
         } 
 
         function fixFinishedEntries(){
-            const ajaxUrl = modx_options.rest_url + 'setup/fixFinishedEntries';
+            const ajaxUrl = modx_options.rest_url + 'setup/FixFinishedEntries';
+            axios.post(ajaxUrl)
+            .then(function (response) {
+  
+            })
+            .catch(function (error) {
+                console.log(error);
+            }); 
+        } 
+
+        function addStatusToEntries(){
+            const ajaxUrl = modx_options.rest_url + 'setup/AddStatusToEntries';
             axios.post(ajaxUrl)
             .then(function (response) {
   
@@ -58,6 +69,8 @@ export default {
             }); 
         }         
         
+
+        
         
 
         return {
@@ -65,7 +78,8 @@ export default {
             setupAcls,
             prefill,
             setupResources,
-            fixFinishedEntries
+            fixFinishedEntries,
+            addStatusToEntries
         }
     },
 

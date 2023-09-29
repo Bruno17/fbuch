@@ -28,11 +28,24 @@
             Bei älteren Versionen wurden Fahrten als abgeschlossen erkannt, sobald km eingetragen waren.<br>
             Bei neueren Versionen muß das explizit eingetragen sein.<br>
             Diese Funktion setzt alle Fahrten mit eingetragenen km auf abgechlossen!<br>
-            Bei neueren Versionen, wo dies bereits durchgeführt wurde, bitte nicht mehr ausführen!<br>
+            Bei neueren Versionen, wo dies bereits durchgeführt wurde, bitte nicht mehr ausführen,<br>
+            sonst werden alle offenen Fahrten, wo bereits km eingetragen wurden, auf abgeschlossen gesetzt.<br>
             <q-btn @click="fixFinishedEntries">
                 Auf abgeschlossen setzen
             </q-btn>
-        </q-tab-panel>        
+            <br><br>
+            In älteren Versionen wurde bei den km - Auswertungen immer der aktuelle Mitgliederstatus herangezogen.<br>
+            Dies führt dazu, daß durch Änderung des Mitgliederstatus alte Fahrten nicht richtig zugeordnet wurden, <br>
+            zb. Änderung von Mitglied zu Ausgetreten,<br>
+            In neueren Versionen wird der jeweils aktuelle Mitgliederstatus in die Fahrten direkt eingetragen<br>
+            Um dies auch für alte, vorhandene Fahrten durchzuführen, führe nachfolgende Funktion aus.<br> 
+            Für Mitglieder wird dazu das Eintrittsdatum bzw. Austrittsdatum mit dem (Ende) Datum der Fahrt verglichen<br>
+            Ansonsten wird Gast als Status eingetragen.<br>
+            <q-btn @click="addStatusToEntries">
+                Mitgliederstatus in alle Fahrten eintragen
+            </q-btn>            
+        </q-tab-panel> 
+
 
     </q-tab-panels>
 

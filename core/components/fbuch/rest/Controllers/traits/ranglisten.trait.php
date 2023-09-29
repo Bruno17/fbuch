@@ -4,15 +4,16 @@ trait RanglistenTrait {
     public function getGroupOptions(){
         return
         [
-            'alle'=>['label'=>'Alle Mitglieder','query'=>'AND n3.member_status = "Mitglied" '],
-            'SM'=>['label'=>'Männer','query'=>'AND [[+year]]-year(n3.birthdate)>18 AND n3.gender = "männlich" AND n3.member_status = "Mitglied"'],
-            'SF'=>['label'=>'Frauen','query'=>'AND [[+year]]-year(n3.birthdate)>18 AND n3.gender = "weiblich" AND n3.member_status = "Mitglied"'],
-            'JM'=>['label'=>'Junioren','query'=>'AND [[+year]]-year(n3.birthdate)<=18 AND [[+year]]-year(n3.birthdate)>=15 AND n3.gender = "männlich" AND n3.member_status = "Mitglied"'],
-            'JF'=>['label'=>'Juniorinnen','query'=>'AND [[+year]]-year(n3.birthdate)<=18 AND [[+year]]-year(n3.birthdate)>=15 AND n3.gender = "weiblich" AND n3.member_status = "Mitglied"'],
-            'Jung'=>['label'=>'Jungen','query'=>'AND [[+year]]-year(n3.birthdate)<=14 AND n3.gender = "männlich" AND n3.member_status = "Mitglied"'],
-            'Maed'=>['label'=>'Mädchen','query'=>'AND [[+year]]-year(n3.birthdate)<=14 AND n3.gender = "weiblich" AND n3.member_status = "Mitglied"'],
-            'Gast'=>['label'=>'Gast','query'=>'AND n3.member_status = Gast'],
-            'VHS'=>['label'=>'VHS','query'=>'AND n3.member_status = VHS']
+            'alle'=>['label'=>'Alle Mitglieder','query'=>'AND f8.member_status = "Mitglied" '],
+            'SM'=>['label'=>'Männer','query'=>'AND [[+year]]-year(n3.birthdate)>18 AND n3.gender = "männlich" AND f8.member_status = "Mitglied"'],
+            'SF'=>['label'=>'Frauen','query'=>'AND [[+year]]-year(n3.birthdate)>18 AND n3.gender = "weiblich" AND f8.member_status = "Mitglied"'],
+            'JM'=>['label'=>'Junioren','query'=>'AND [[+year]]-year(n3.birthdate)<=18 AND [[+year]]-year(n3.birthdate)>=15 AND n3.gender = "männlich" AND f8.member_status = "Mitglied"'],
+            'JF'=>['label'=>'Juniorinnen','query'=>'AND [[+year]]-year(n3.birthdate)<=18 AND [[+year]]-year(n3.birthdate)>=15 AND n3.gender = "weiblich" AND f8.member_status = "Mitglied"'],
+            'Jung'=>['label'=>'Jungen','query'=>'AND [[+year]]-year(n3.birthdate)<=14 AND n3.gender = "männlich" AND f8.member_status = "Mitglied"'],
+            'Maed'=>['label'=>'Mädchen','query'=>'AND [[+year]]-year(n3.birthdate)<=14 AND n3.gender = "weiblich" AND f8.member_status = "Mitglied"'],
+            'Gast'=>['label'=>'Gast','query'=>'AND f8.member_status = "Gast"'],
+            'Gasteintrag'=>['label'=>'Gasteintrag','query'=>'AND f8.member_status = "Gasteintrag"'],
+            'VHS'=>['label'=>'VHS','query'=>'AND f8.member_status = "VHS"']
         ];        
     } 
     
@@ -20,8 +21,8 @@ trait RanglistenTrait {
         $start = $this->getProperty('start_date');
         $end = $this->getProperty('end_date');
 
-        $query .= ' AND date_end >="' . $start . ' 00:00:00" ';
-        $query .= ' AND date_end <="' . $end . ' 23:59:59" ';
+        $query .= " AND if (date_end > '', date_end >= '$start 00:00:00', date >= '$start 00:00:00') ";
+        $query .= " AND if (date_end > '', date_end <= '$end 23:59:59', date <= '$end 23:59:59') ";
         
         return $query;
     }
@@ -40,15 +41,22 @@ trait RanglistenTrait {
 
     public function prepareSelect(){
         $returntype = $this->getProperty('returntype');
+        $group = $this->getProperty('group');
         switch ($returntype){
             case 'member_fahrten':
                 $query = 'select f4.id as id ';
             break;
             default:
-                $query = 'select n3.id as id, n3.name as Nachname,n3.firstname as Vorname,sum(f4.km) as km,count(n3.name) as Fahrten ';
-                if ($this->modx->hasPermission('fbuch_view_birthdate')){
-                    $query .= ', year(n3.birthdate) as Jahrgang ';    
+                if ($group == 'Gasteintrag'){
+                    $query = 'select f8.guestname as id, f8.guestname as Nachname ,sum(f4.km) as km,count(f8.guestname)as Fahrten ';
+                } else {
+                    $query = 'select n3.id as id, n3.name as Nachname,n3.firstname as Vorname,sum(f4.km) as km,count(n3.name) as Fahrten ';
+                    if ($this->modx->hasPermission('fbuch_view_birthdate')){
+                        $query .= ', year(n3.birthdate) as Jahrgang ';    
+                    }                    
                 }
+
+
             break;
         }
         $query .= 'from modx_fbuch_fahrt_names f8,';
@@ -57,8 +65,9 @@ trait RanglistenTrait {
 
     public function addJoins($query){
         $returntype = $this->getProperty('returntype');
+        $group = $this->getProperty('group');
         $query .= 'modx_fbuch_fahrten f4,';
-        if ($returntype != 'member_fahrten'){
+        if ($group != 'Gasteintrag'){
             $query .= 'modx_mv_members n3,';
         } 
         $query .='
@@ -71,15 +80,26 @@ trait RanglistenTrait {
     public function addWhere($query){
         $returntype = $this->getProperty('returntype');
         $member_id = $this->getProperty('member_id');
+        $group = $this->getProperty('group');
 
         $query .= 'WHERE f8.fahrt_id=f4.id ';
         if ($returntype == 'member_fahrten'){
-            $query .= ' AND f8.member_id=' . $member_id . ' ';
+            if ($group == 'Gasteintrag'){
+                $query .= ' AND f8.guestname="' . $member_id . '" '; 
+            } else {
+                $query .= ' AND f8.member_id=' . $member_id . ' ';    
+            }
+            
         } else {
-            $query .= '
-            AND f8.member_id=n3.id 
-            AND n3.name != ""
-            ';
+            if ($group == 'Gasteintrag'){
+
+            } else {
+                $query .= '
+                AND f8.member_id=n3.id 
+                AND n3.name != ""
+                ';                  
+            }
+ 
         }        
         $query .= '
         AND b1.id=f4.boot_id
@@ -91,7 +111,7 @@ trait RanglistenTrait {
     public function addGroupQuery($query){
         $returntype = $this->getProperty('returntype');
         if ($returntype == 'member_fahrten'){
-            return $query;
+            //return $query;
         }  
         $start = $this->getProperty('start_date');
         $end = $this->getProperty('end_date');
@@ -108,13 +128,22 @@ trait RanglistenTrait {
     
     public function addGroupBy($query){
         $returntype = $this->getProperty('returntype');
+        $group = $this->getProperty('group');
         if ($returntype == 'member_fahrten'){
             return $query;
-        }          
-        $query .= ' 
-          group by n3.name,n3.firstname
-          order by km desc        
-        ';
+        } 
+        if ($group == 'Gasteintrag'){
+            $query .= ' 
+            group by f8.guestname
+          ';
+        } else {
+            $query .= ' 
+            group by n3.name,n3.firstname
+          ';            
+        }
+
+        $query .= ' order by km desc ';
+
         return $query;
     }
 
@@ -144,7 +173,7 @@ trait RanglistenTrait {
                 $r['Rang'] = $i;
                 $list[] = $r;
                 if (isset($r['km'])){
-                    $this->km_sum += $r['km'];    
+                    $this->km_sum += (float) $r['km'];    
                 }
             }
         }

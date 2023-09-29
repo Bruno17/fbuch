@@ -216,6 +216,10 @@ class MyControllerFahrten extends BaseController {
             return;
         }
 
+        if (!empty($member_id) && $member = $this->modx->getObject('mvMember',$member_id)){
+            $member_status = $member->get('member_status');
+        }        
+
         if ($member_id != 0 && $fahrtnam = $this->modx->getObject('fbuchFahrtNames', array('fahrt_id' => $this->object->get('id'), 'member_id' => $member_id))) {
             unset($existing[$fahrtnam->get('member_id')]);
         } elseif ($member_id == 0 && $guestname != '' && $fahrtnam = $this->modx->getObject('fbuchFahrtNames', array('fahrt_id' => $this->object->get('id'), 'guestname' => $guestname))) {
@@ -223,6 +227,7 @@ class MyControllerFahrten extends BaseController {
         } elseif ($member_id > 0) {
             $fahrtnam = $this->modx->newObject('fbuchFahrtNames');
             $fahrtnam->set('member_id', $member_id);
+            $fahrtnam->set('member_status',$member_status);
             if (!empty($datenames_id)) {
                 $fahrtnam->set('datenames_id', $datenames_id);
             }
@@ -232,6 +237,7 @@ class MyControllerFahrten extends BaseController {
         } elseif ($guestname != '') {
             $fahrtnam = $this->modx->newObject('fbuchFahrtNames');
             $fahrtnam->set('guestname', $guestname);
+            $fahrtnam->set('member_status','Gasteintrag');
             if (!empty($datenames_id)) {
                 $fahrtnam->set('datenames_id', $datenames_id);
             }
@@ -310,9 +316,15 @@ class MyControllerFahrten extends BaseController {
                 $member_id = $this->modx->getOption('value',$name,0);
                 $guestname = $this->modx->getOption('guestname',$name,0);
                 $datenames_id = $this->modx->getOption('datenames_id',$name,0);
+                $member_status = '';
+                if (!empty($member_id) && $member = $this->modx->getObject('mvMember',$member_id)){
+                    $member_status = $member->get('member_status');
+                }
+
                 if ($member_id != 0 && $fahrtnam = $this->modx->getObject('fbuchFahrtNames', array('fahrt_id' => $this->object->get('id'), 'member_id' => $member_id))) {
                         $fahrtnam->set('cox', $this->modx->getOption('cox',$name,0));
                         $fahrtnam->set('obmann', $this->modx->getOption('obmann',$name,0));
+                        //$fahrtnam->set('member_status',$member_status);
                         $fahrtnam->save();
                 } elseif ($member_id == 0 && $guestname != '' && $fahrtnam = $this->modx->getObject('fbuchFahrtNames', array('fahrt_id' => $this->object->get('id'), 'guestname' => $guestname))) {
                     $fahrtnam->set('cox', $this->modx->getOption('cox',$name,0));
@@ -325,6 +337,7 @@ class MyControllerFahrten extends BaseController {
                         $fahrtnam->set('cox', $this->modx->getOption('cox',$name,0));
                         $fahrtnam->set('obmann', $this->modx->getOption('obmann',$name,0));
                         $fahrtnam->set('datenames_id', $datenames_id);
+                        $fahrtnam->set('member_status',$member_status);
                         $fahrtnam->save();                        
                     }
                     else if (!empty($guestname) && $fahrtnam = $this->modx->newObject('fbuchFahrtNames')) {
@@ -334,6 +347,7 @@ class MyControllerFahrten extends BaseController {
                         $fahrtnam->set('cox', $this->modx->getOption('cox',$name,0));
                         $fahrtnam->set('obmann', $this->modx->getOption('obmann',$name,0));
                         $fahrtnam->set('datenames_id', $datenames_id);
+                        $fahrtnam->set('member_status','Gasteintrag');
                         $fahrtnam->save();                        
                     }                    
                 }
@@ -424,6 +438,7 @@ class MyControllerFahrten extends BaseController {
                     }        
                 break;
                 case 'member_fahrten':
+                    $group = $this->getProperty('group');
                     $fahrten = $this->getRangliste();
                     $fahrt_ids = [];
                     if (is_array($fahrten)){

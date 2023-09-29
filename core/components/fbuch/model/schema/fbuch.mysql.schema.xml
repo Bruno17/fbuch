@@ -133,6 +133,7 @@
         <field key="nameid_old" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="fahrtid_old" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="datenames_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="member_status" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
         <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
         <aggregate alias="Fahrt" class="fbuchFahrt" local="fahrt_id" foreign="id" cardinality="one" owner="foreign" />
