@@ -87,6 +87,8 @@ export default {
     </template>
     <template v-slot:option="scope">
     <q-item v-bind="scope.itemProps">
+      <q-item-section v-if="scope.opt.optcolor" side :style="'background-color:#'+scope.opt.optcolor+';margin:-5px 8px -5px -8px;padding-right: 9px;'">
+      </q-item-section>     
       <q-item-section v-if="scope.opt.colorstyle" avatar>
       <q-avatar :color="scope.opt.colorstyle" />
       </q-item-section>

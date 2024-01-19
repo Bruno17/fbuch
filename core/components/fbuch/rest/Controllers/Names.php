@@ -4,7 +4,7 @@ include 'BaseController.php';
 
 class MyControllerNames extends BaseController {
     public $classKey = 'mvMember';
-    public $defaultSortField = 'name';
+    public $defaultSortField = 'mvMember.name';
     public $defaultSortDirection = 'ASC';
 
     public function beforeDelete() {
@@ -87,10 +87,11 @@ class MyControllerNames extends BaseController {
     }
 
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
+        $this->getDefaultCompetencyLevel();
         $statefilter = $this->getProperty('statefilter');
         $statefilter = empty($statefilter) ? 'can_be_invited' : $statefilter;
 
-        $joins = '[{"alias":"State"}]';
+        $joins = '[{"alias":"State"},{"alias":"CompetencyLevel"}]';
         $this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);  
         
         $where = ['deleted' => 0];
@@ -116,9 +117,9 @@ class MyControllerNames extends BaseController {
 
         $c->select(array(
             'mvMember.id',
-            'firstname',
-            'name',
-            'member_status'));
+            'mvMember.firstname',
+            'mvMember.name',
+            'mvMember.member_status'));
 
         //$c->prepare();echo $c->toSql();
         return $c;
@@ -132,6 +133,12 @@ class MyControllerNames extends BaseController {
         switch ($returntype) {
             case 'options':
                 $output['label'] = $object->get('name') . ' ' . $object->get('firstname');
+                if (!empty($output['CompetencyLevel_color'])){
+                    $output['optcolor'] = $output['CompetencyLevel_color'];
+                } elseif (!empty($this->CompetencyLevel_color)){
+                    $output['optcolor'] = $this->CompetencyLevel_color;    
+                }
+
                 if ($object->get('member_status') != 'Mitglied') {
                     $output['label'] .= ' (' . $object->get('member_status') . ')';
                 }

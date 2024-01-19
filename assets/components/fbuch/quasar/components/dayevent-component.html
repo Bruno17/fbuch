@@ -107,10 +107,13 @@
                             Anmeldungen von {{name.RegisteredbyMember_firstname}} {{name.RegisteredbyMember_name}}:
                         </q-item>
                         <q-item tag="label" v-ripple class="q-px-sm">
-                            <q-item-section v-if="name.Fahrt_id < 1 || name.Fahrt_deleted==1" side class="q-pa-none">
+                            <q-item-section side :style="'background-color:#'+name.CompetencyLevel_color+';margin:-8px 0px -8px -8px;padding-right: 9px;'">
+                       
+                            </q-item-section>                               
+                            <q-item-section v-if="name.Fahrt_id < 1 || name.Fahrt_deleted==1" side style="margin-right:-8px;" class="q-pa-none">
                                 <q-checkbox @update:model-value="onNameCheckbox(name)" v-model="name.selected" />
                             </q-item-section>
-                            <q-item-section side>
+                            <q-item-section side style="margin-left:8px;">
                                 {{name.idx}}
                             </q-item-section>
                             <q-item-section>

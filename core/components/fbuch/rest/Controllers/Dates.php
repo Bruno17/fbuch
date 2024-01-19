@@ -262,7 +262,7 @@ class MyControllerDates extends BaseController {
        } else {
            return []; 
        }
-
+       $this->getDefaultCompetencyLevel();
 
         $returntype = $this->getProperty('returntype');
     
@@ -273,7 +273,12 @@ class MyControllerDates extends BaseController {
         $properties['classname'] = 'fbuchDateNames';
         $properties['specialfields'] = 'min(IFNULL(Fahrt.deleted, 0))as Fahrt_deleted';
         $properties['where'] = '{"date_id":"' . $id . '"}';
-        $properties['joins'] = '[{"alias":"Member","selectfields":"' . $memberfields . '"},{"alias":"RegisteredbyMember","selectfields":"' . $memberfields . '"},{"alias":"Fahrtname","selectfields":"id,fahrt_id"},{"alias":"Fahrt","classname":"fbuchFahrt","selectfields":"id","on":"Fahrt.id=Fahrtname.fahrt_id"}]';
+        $properties['joins'] = '[
+            {"alias":"Member","selectfields":"' . $memberfields . '"},
+            {"alias":"RegisteredbyMember","selectfields":"' . $memberfields . '"},
+            {"alias":"Fahrtname","selectfields":"id,fahrt_id"},
+            {"alias":"CompetencyLevel","classname":"fbuchCompetencyLevel","on":"CompetencyLevel.id=Member.competency_level_id"},
+            {"alias":"Fahrt","classname":"fbuchFahrt","selectfields":"id","on":"Fahrt.id=Fahrtname.fahrt_id"}]';
         $properties['sortConfig'] = '[{"sortby":"Fahrt_deleted","sortdir":"DESC"},{"sortby":"Fahrtname.fahrt_id"},{"sortby":"registeredby_member"},{"sortby":"createdon"}]';
         $properties['groupby'] = 'id';
         $properties['debug'] = 0;
@@ -323,6 +328,11 @@ class MyControllerDates extends BaseController {
                     $row['createdon_formatted'] = date_format($date,'d.m.Y H:i');    
                 }
                 $row['can_remove'] = $registeredby == $member_id || $this->modx->hasPermission('fbuch_remove_datenames');
+                if (!empty($row['CompetencyLevel_color'])){
+                    
+                } elseif (!empty($this->CompetencyLevel_color)){
+                    $row['CompetencyLevel_color'] = $this->CompetencyLevel_color;    
+                } 
                 $names[] = $row;
                 $idx ++;
             }

@@ -2,17 +2,17 @@
   <mj-body background-color="#dddddd">
     <mj-section background-color="#dddddd">
       <mj-column background-color="#ffffff">
-        <mj-text align="center" font-family="Helvetica" font-size="15px">
+        <mj-text align="left" font-family="Helvetica" font-size="15px">
           Hallo [[+firstname]] [[+name]],<br /><br />
           [[+status:is=`invited`:then=`Du bist eingeladen zur Teilnahme an folgendem Termin:`:else=``]]
           [[+status:is=`accepted`:then=`Du hast zugesagt zu folgendem Termin:`:else=``]]
           [[+status:is=`canceled`:then=`Du hast für folgenden Termin abgesagt:`:else=``]]
         </mj-text>
-        <mj-text align="center" line-height="130%" font-size="16px" font-family="Helvetica" font-weight="bold" background-color="#eeeeee" color="#000000">
+        <mj-text align="left" line-height="130%" font-size="16px" font-family="Helvetica" font-weight="bold" background-color="#eeeeee" color="#000000">
           [[+title]]<br />
           [[+date:strtotime:date=`%a, %d.%m.%Y`]] [[+start_time]]
         </mj-text>
-        <mj-text align="center" font-family="Helvetica" font-size="15px">
+        <mj-text align="left" font-family="Helvetica" font-size="15px">
           [[+status:is=`invited`:then=`Wir bedanken uns für Deine Zu- oder Absage.`:else=``]]
           [[+status:is=`accepted`:then=`Falls Du doch verhindert sein solltest, denke bitte daran rechtzeitig abzusagen!`:else=``]]
           [[+status:is=`canceled`:then=`Falls Du doch teilnehmen möchtest, kannst Du jederzeit noch zusagen.`:else=``]]
@@ -24,13 +24,13 @@
 
         </mj-text>
 
-        <mj-text line-height="130%" align="center" font-family="Helvetica" font-size="15px">
+        <mj-text line-height="130%" align="left" font-family="Helvetica" font-size="15px">
           Bitte klicke auf nachfolgenden Link um Dich oder weitere Personen an- oder abzumelden oder um eine Nachricht zu hinterlassen.
         </mj-text>
         <mj-button font-family="Helvetica" font-weight="bold" background-color="#1976d2" color="white" href="[[~[[fbuchGetResourceIdByUri? &uri=`termine/anmelden.html`]]? &iid=`[[+iid]]`&code=`[[+code]]`&scheme=`full`]]">
           An-/Abmelden
         </mj-button>
-        <mj-text color="#888888" align="center" font-family="Helvetica" font-size="15px">
+        <mj-text color="#888888" align="left" font-family="Helvetica" font-size="15px">
           Rudergesellschaft Marktheidenfeld e.V.<br />
           Georg-Mayr-Str. 25<br />
           www.rgmarktheidenfeld.de

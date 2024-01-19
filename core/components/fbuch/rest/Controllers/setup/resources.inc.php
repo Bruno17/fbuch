@@ -98,7 +98,34 @@ $update_resources = [
      'template_name'=>'fbuch Quasar 2',
      'published'=>1,
      'resource_groups'=>['fbuch']
-    ],    
+    ],
+    ['pagetitle'=>'Kalenderansicht',
+     'alias'=>'kalenderansicht',
+     'context_key' => 'fbuch',
+     'uri' => 'termine/kalenderansicht.html',
+     'parent_uri'=>'termine',
+     'template_name'=>'fbuch Quasar 2',
+     'published'=>1,
+     'resource_groups'=>['fbuch'],
+     'content'=>'[[$fbuch_kalenderansicht]]',
+     'tvs'=>[
+        ['name'=>'scripts','value'=>'[[$fbuch_kalenderansicht_scripts]]'],
+        ['name'=>'headscripts','value'=>'[[$fbuch_kalenderansicht_headscripts]]']
+     ]
+    ],
+    ['pagetitle'=>'Ranglisten',
+     'alias'=>'ranglisten',
+     'context_key' => 'fbuch',
+     'uri' => 'auswertungen/ranglisten.html',
+     'parent_uri'=>'auswertungen/',
+     'template_name'=>'fbuch Quasar 2',
+     'published'=>1,
+     'resource_groups'=>['fbuch'],
+     'content'=>'',
+     'tvs'=>[
+        ['name'=>'scripts','value'=>'[[fbuchGetAssetsFiles? &folder=`quasar/components/fahrtenbuch` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]  ']
+     ]
+    ],                
     ['pagetitle'=>'Meine Einladungslisten Einträge',
      'alias'=>'meine-einladungslisten-eintraege',
      'context_key' => 'fbuch',
@@ -112,6 +139,19 @@ $update_resources = [
      'resource_groups'=>['fbuch'],
      'tvs'=>[['name'=>'scripts','value'=>'']]
     ],
+    ['pagetitle'=>'Kompetenzstufen',
+     'alias'=>'kompetenzstufen',
+     'context_key' => 'fbuch',
+     'uri' => 'listen/kompetenzstufen.html',
+     'uri_override' => 0,
+     'parent_uri'=>'listen/',
+     'template_name'=>'fbuch Quasar 2',
+     'content'=>'',
+     'published'=>1,
+     'hidemenu'=>0,
+     'resource_groups'=>['fbuch'],
+     'tvs'=>[['name'=>'scripts','value'=>'']]
+    ],      
     ['pagetitle'=>'Einladungslisten',
      'alias'=>'einladungslisten',
      'context_key' => 'fbuch',

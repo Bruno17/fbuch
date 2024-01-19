@@ -106,11 +106,19 @@ class MyControllerFahrten extends BaseController {
                 $row['guestname'] = $this->modx->getOption('guestname',$name,0);
                 $row['guestemail'] = $this->modx->getOption('guestemail',$name,0);
                 $row['member_status'] = !empty($row['guestname']) ? 'Gasteintrag' : $row['member_status'];
+                foreach ($name as $key=>$value){
+                    if (substr($key,0,10) == 'Competency'){
+                        $row[$key] = $value; 
+                    }
+                }                
                 $rows[] = $row;
                 if ($row['obmann'] == '1') {
                     $objectArray['member_id'] = (int) $row['id'];
                     $objectArray['guestname'] = $this->modx->getOption('guestname',$name,'');
                 }
+
+
+
             }
         }
         $objectArray['names'] = $rows; 
@@ -501,6 +509,7 @@ class MyControllerFahrten extends BaseController {
     }
 
     public function addNames($object){
+        $this->getDefaultCompetencyLevel();
         $id = $object->get('id');
         $nutzergruppe_id = (int) $object->get('Nutzergruppe_id');
         $memberfields = 'name,firstname,member_status';
@@ -508,7 +517,10 @@ class MyControllerFahrten extends BaseController {
         $properties = [];
         $properties['classname'] = 'fbuchFahrtNames';
         $properties['where'] = '{"fahrt_id":"' . $id . '"}';
-        $properties['joins'] = '[{"alias":"Member","selectfields":"'. $memberfields .'"},{"alias":"NgMember","classname":"fbuchBootsNutzergruppenMembers","on":"NgMember.member_id=Member.id and NgMember.group_id=' . $nutzergruppe_id .'"}]';
+        $properties['joins'] = '
+        [{"alias":"Member","selectfields":"'. $memberfields .'"},
+        {"alias":"CompetencyLevel","classname":"fbuchCompetencyLevel","on":"CompetencyLevel.id=Member.competency_level_id"},
+        {"alias":"NgMember","classname":"fbuchBootsNutzergruppenMembers","on":"NgMember.member_id=Member.id and NgMember.group_id=' . $nutzergruppe_id .'"}]';
         $properties['sortConfig'] = '[{"sortby":"cox","sortdir":"ASC"},{"sortby":"pos"}]';
         $properties['debug'] = '0';
         $names = [];
@@ -521,6 +533,12 @@ class MyControllerFahrten extends BaseController {
                 $row['selected'] = false;
                 $row['idx'] = $idx;
                 $row['age'] = $this->modx->hasPermission('fbuch_view_birthday') ? $this->calculateAge($row['Member_birthdate'],$object->get('date')) : 0;
+                if (!empty($row['CompetencyLevel_color'])){
+                    
+                } elseif (!empty($this->CompetencyLevel_color)){
+                    $row['CompetencyLevel_color'] = $this->CompetencyLevel_color;    
+                }                
+                
                 $names[] = $row;
                 $idx ++;
             }

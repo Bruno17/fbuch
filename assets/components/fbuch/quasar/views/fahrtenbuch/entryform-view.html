@@ -174,6 +174,9 @@
                                 </template>                                
                                 <template v-for="(name,index) in entry.names">
                                     <q-item>
+                                        <q-item-section side :style="'background-color:#'+name.CompetencyLevel_color+';margin:-8px 10px -7px -16px;padding-right: 9px;'">
+                       
+                                        </q-item-section>                                           
                                         <q-item-section v-if="name.member_status == 'Mitglied'">
                                             {{name.firstname}} {{name.name}}
                                         </q-item-section>

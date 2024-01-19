@@ -1,0 +1,57 @@
+[
+    {
+        "name":"Anfängerinnen und Anfänger",
+        "level":"A",
+        "color":"a5d6a7",
+        "color_name":"green-3",
+        "description":"",
+        "technical_requirements":"Keine.",
+        "safety_requirements":"",
+        "technical_goals":"Koordination des Bewegungsablaufs (Bewegungstempo und Bewegungsreihenfolge Oberkörper,Beine,Arme)\nSaubere Blattführung erlernen (Symmetrie, Blattwinkel, Länge, Eintauchtiefe, Höhe über Wasser, Auf-, Abdrehen)\nOberkörperhaltung, Becken stabilisieren.",
+        "permissions":"Anfänger und Anfängerinnen dürfen nur in Booten rudern, für die sie für die aktuelle Rudereinheit vom jeweiligen Übungsleiter eingeteilt wurden. Selbständiges herausnehmen von Booten ohne Einteilung durch einen Übungsleiter ist nicht erlaubt."        
+    },
+    {
+        "name":"Fortgeschrittene Anfängerinnen und Anfänger",
+        "level":"B",
+        "color":"4caf50",
+        "color_name":"green",
+        "description":"",
+        "technical_requirements":"Korrekter Bewegungsablauf im Durchzug und Freilauf bei niedrigen Schlagzahlen.\nSichere Blattführung bei niedrigen Schlagzahlen.(Symmetrie, Winkel, Eintauchtiefe, Länge, Höhe über Wasser)\nStabile Sitzposition",
+        "safety_requirements":"",
+        "technical_goals":"",
+        "permissions":"Wie Stufe A oder zusammen in einem Boot mit einem entsprechend ausgebildeten Bootsobmann."        
+    },
+    {
+        "name":"Fortgeschrittene",
+        "level":"C",
+        "color":"ffd600",
+        "color_name":"yellow-14",
+        "description":"",
+        "technical_requirements":"Korrekter, rhytmischer Bewegungsablauf im Durchzug und Freilauf auch bei etwas höheren Schlagzahlen (unter SZ 30).\nSichere Blattführung auch bei etwas höheren Schlagzahlen.(Symmetrie, Winkel, Eintauchtiefe, Länge, Höhe über Wasser)\nSauberes Setzen und Ausheben\nFließende Umkehrbewegungen auch bei etwas höheren Schlagzahlen.\nStabile Sitzposition in allen Lagen\nFähigkeit, Gigboot auszubalancieren\nErste Erfahrungen im Einer.",
+        "safety_requirements":"Teilnahme an Sicherheitsbelehrung zb. im Rahmen eines Ruderwochendes.",
+        "technical_goals":"",
+        "permissions":"Als Obmann im gesteuerten Breitensportboot mit Steuermann oder als Mitruderer im Rennsportboot mit einem entsprechend ausgebildeten Bootsobmann."        
+    },
+    {
+        "name":"Könnerinnen und Könner",
+        "level":"D",
+        "color":"f44336",
+        "color_name":"red",
+        "description":"",
+        "technical_requirements":"Korrekter, rhytmischer Bewegungsablauf im Durchzug und Freilauf auch bei hohen Schlagzahlen(Über SZ 30).\nSichere Blattführung auch bei hohen Schlagzahlen.(Symmetrie, Winkel, Eintauchtiefe, Länge, Höhe über Wasser)\nSauberes Setzen und Ausheben ohne Wasserfahne\nFließende Umkehrbewegungen auch bei hohen Schlagzahlen.\nStabile Sitzposition in allen Lagen.\nFähigkeit, Rennboot auszubalancieren bei ruhigen und hohen Schlagzahlen\nSicheres Rudern im Einer, Blätter frei vom Wasser.\nEntwickeltes Gefühl für gleichmäßigen Bootslauf bei allen Schlagzahlen\nFähigkeit, den Bewegungsablauf des Ruderns Anderen zu vermitteln.\nKorrekte Bewegungsausführung im Riemenboot.\nEntsprechende Beweglichkeit um sich durch regelmäßiges Umdrehen einen Überblick über eventuelle Gefahren und Hindernisse verschaffen zu können.",
+        "safety_requirements":"Wie Stufe C",
+        "technical_goals":"",
+        "permissions":"Als Obmann oder Mitruderer in allen Bootsklassen.\nAusgenommen sind Boote, welche nur nach besonderer Absprache gerudert werden dürfen."        
+    },
+    {
+        "name":"Experten und Expertinnen",
+        "level":"E",
+        "color":"b71c1c",
+        "color_name":"red-10",
+        "description":"",
+        "technical_requirements":"Wie Stufe D\nAlle Fertigkeiten sowohl im Skull- als auch in allen Riemenbootsklassen.\nSicheres, stabiles Rudern in allen Skull- und Riemenbootsklassen bei allen Schlagzahlen (bis und über SZ 40).\nSichere Rennstarts und alle Skills, welche zur Ausübung des Ruderns als Rennsport nötig sind.\n",
+        "safety_requirements":"",
+        "technical_goals":"",
+        "permissions":"Wie Stufe D"        
+    }                                                    
+]

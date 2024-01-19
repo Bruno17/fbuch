@@ -78,6 +78,8 @@ $xpdo_meta_map['mvMember']= array (
     'otp' => '',
     'otp_createdon' => NULL,
     'otp_sendedon' => NULL,
+    'competency_level_id' => 0,
+    'safety_instructions_date' => NULL,
   ),
   'fieldMeta' => 
   array (
@@ -618,6 +620,21 @@ $xpdo_meta_map['mvMember']= array (
       'phptype' => 'datetime',
       'null' => true,
     ),
+    'competency_level_id' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'safety_instructions_date' => 
+    array (
+      'dbtype' => 'datetime',
+      'phptype' => 'datetime',
+      'null' => true,
+    ),
   ),
   'composites' => 
   array (
@@ -685,6 +702,14 @@ $xpdo_meta_map['mvMember']= array (
       'class' => 'mvMemberState',
       'foreign' => 'state',
       'local' => 'member_status',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'CompetencyLevel' => 
+    array (
+      'class' => 'fbuchCompetencyLevel',
+      'foreign' => 'id',
+      'local' => 'competency_level_id',
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),

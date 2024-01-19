@@ -1,0 +1,44 @@
+<div class="q-mx-lg">
+<component is="style">
+    h2 {
+        font-size:32px;
+    }
+    h3 {
+        font-size:24px;
+        line-height:24px;
+    }
+    h5 {
+        font-size:20px;
+    }
+
+</component>
+
+<h2 class="q-mt-sm q-mb-lg text-weight-bold" >Unsere Kompetenzstufen</h2>
+
+<template v-for="level in levels">
+    <h3 class="q-mt-md q-mb-none text-weight-bold" >{{level.name}}({{level.level}})</h3>
+    <font :color="'#'+level.color">
+        &#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;          
+    </font>    
+    <template v-if="level.technical_requirements != ''">
+        <h5 class="q-mt-sm q-mb-xs text-weight-bold" >Rudertechnische Vorraussetzungen</h5>
+        <p v-html="nl2br(level.technical_requirements)"></p>
+
+    </template>
+    <template v-if="level.safety_requirements != ''">
+        <h5 class="q-mt-sm q-mb-xs text-weight-bold" >Sicherheitstechnische Vorraussetzungen</h5>
+        <p v-html="nl2br(level.safety_requirements)"></p>
+    </template>
+    <template v-if="level.technical_goals != ''">
+        <h5 class="q-mt-sm q-mb-xs text-weight-bold" >Sicherheitstechnische Vorraussetzungen</h5>
+        <p v-html="nl2br(level.technical_goals)"></p>
+    </template>
+    <template v-if="level.permissions != ''">
+        <h5 class="q-mt-sm q-mb-xs text-weight-bold" style="font-size:20px;">Welche Boote</h5>
+        <p v-html="nl2br(level.permissions)"></p>
+    </template>
+
+    <hr>
+
+</template>
+</div>

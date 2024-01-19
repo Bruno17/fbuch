@@ -28,6 +28,16 @@ class BaseController extends modRestController {
     public function getCurrentFbuchMember() {
         return $this->modx->fbuch->getCurrentFbuchMember();
     }
+
+    public function getDefaultCompetencyLevel() {
+        $object = $this->modx->getObject('fbuchCompetencyLevel',['level'=>'A']);
+        if ($object) {
+            $this->CompetencyLevel_color = $object->get('color');
+            $this->CompetencyLevel_color_name = $object->get('color_name');
+        }        
+        return $object;
+        
+    }
     
     public function getNameEmail($object) {
         $email = '';

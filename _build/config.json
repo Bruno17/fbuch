@@ -3,13 +3,13 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"2.2.5-beta",
+  "version":"2.2.8-beta",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",
       "after":[
-        "tables.resolver.php",
-        "resources.resolver.php"
+        "resources.resolver.php",
+        "tables.resolver.php"
       ]
     }
   },
@@ -73,7 +73,7 @@
         "action":"index",
         "parent":"Vereinsverwaltung",
         "namespace":"migx",
-        "params":"&configs=mv_mitglieder:fbuch||mv_roles:fbuch||mv_gruppen:fbuch||mv_families:fbuch||mv_beitragstypen:fbuch||mv_member_states:fbuch||mv_dooraccesscodes:fbuch",
+        "params":"&configs=mv_mitglieder:fbuch||mv_roles:fbuch||mv_gruppen:fbuch||mv_families:fbuch||mv_beitragstypen:fbuch||mv_member_states:fbuch||mv_dooraccesscodes:fbuch||fbuch_competency_levels:fbuch",
         "menuIndex":1
       },
       {
@@ -3926,7 +3926,12 @@
           "name":"input_options_memberstates",
           "file":"input_options_memberstates.chunk.html",
           "category":"mv"
-        }
+        },
+        {
+          "name":"input_options_competency_levels",
+          "file":"input_options_competency_levels.chunk.html",
+          "category":"mv"
+        }        
       ],
       "templates":[
         {

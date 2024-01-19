@@ -1,16 +1,16 @@
 {
-  "id":176,
-  "name":"fbuch_bootsnutzergruppen",
+  "id":207,
+  "name":"fbuch_competency_levels",
   "formtabs":[
     {
-      "MIGX_id":258,
+      "MIGX_id":307,
       "caption":"Allgemein",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":1130,
-          "field":"name",
-          "caption":"Nutzungsstufe Bezeichnung",
+          "MIGX_id":1344,
+          "field":"level",
+          "caption":"Kompetenzstufe",
           "description":"",
           "description_is_code":"0",
           "inputTV":"",
@@ -27,19 +27,90 @@
           "pos":1
         },
         {
-          "MIGX_id":1131,
-          "field":"color_name",
-          "caption":"color_name",
-          "pos":2
-        },
-        {
-          "MIGX_id":1132,
-          "field":"color",
-          "caption":"color",
+          "MIGX_id":1337,
+          "field":"name",
+          "caption":"Bezeichnung",
           "description":"",
           "description_is_code":"0",
           "inputTV":"",
-          "inputTVtype":"colorpicker",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":2
+        },
+        {
+          "MIGX_id":1338,
+          "field":"color",
+          "caption":"color",
+          "pos":3
+        },
+        {
+          "MIGX_id":1339,
+          "field":"color_name",
+          "caption":"color_name",
+          "pos":4
+        }
+      ],
+      "pos":1
+    },
+    {
+      "MIGX_id":308,
+      "caption":"Beschreibungen",
+      "print_before_tabs":"0",
+      "fields":[
+        {
+          "MIGX_id":1340,
+          "field":"technical_requirements",
+          "caption":"Rudertechnische Vorrausetzungen",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"textarea",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":1
+        },
+        {
+          "MIGX_id":1341,
+          "field":"safety_requirements",
+          "caption":"Sicherheitstechnische Vorrausetzungen",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"textarea",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":2
+        },
+        {
+          "MIGX_id":1342,
+          "field":"technical_goals",
+          "caption":"Rudertechnische Ziele",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"textarea",
           "validation":"",
           "configs":"",
           "restrictive_condition":"",
@@ -52,9 +123,9 @@
           "pos":3
         },
         {
-          "MIGX_id":1133,
-          "field":"description",
-          "caption":"Beschreibung",
+          "MIGX_id":1343,
+          "field":"permissions",
+          "caption":"Bootsberechtigungen",
           "description":"",
           "description_is_code":"0",
           "inputTV":"",
@@ -71,47 +142,20 @@
           "pos":4
         }
       ],
-      "pos":1
-    },
-    {
-      "MIGX_id":259,
-      "caption":"Personen zuweisen",
-      "print_before_tabs":"0",
-      "fields":[
-        {
-          "MIGX_id":1134,
-          "field":"members",
-          "caption":"Personen zuweisen",
-          "description":"",
-          "description_is_code":"0",
-          "inputTV":"",
-          "inputTVtype":"migxdb",
-          "validation":"",
-          "configs":"fbuch_nutzergruppenmembers:fbuch",
-          "restrictive_condition":"",
-          "display":"",
-          "sourceFrom":"config",
-          "sources":"",
-          "inputOptionValues":"",
-          "default":"",
-          "useDefaultIfEmpty":"0",
-          "pos":1
-        }
-      ],
       "pos":2
     }
   ],
-  "contextmenus":"",
+  "contextmenus":"update||remove",
   "actionbuttons":"addItem",
-  "columnbuttons":"update||duplicate||remove",
+  "columnbuttons":"",
   "filters":"",
   "extended":{
-    "migx_add":"Nutzungsstufe erstellen",
+    "migx_add":"",
     "disable_add_item":"",
     "add_items_directly":"",
     "formcaption":"",
     "update_win_title":"",
-    "win_id":"fbuch_bootsnutzergruppen",
+    "win_id":"fbuch_competency_levels",
     "maxRecords":"",
     "addNewItemAt":"bottom",
     "media_source_id":"",
@@ -125,7 +169,7 @@
     "extrahandlers":"",
     "filtersperrow":4,
     "packageName":"fbuch",
-    "classname":"fbuchBootsNutzergruppe",
+    "classname":"fbuchCompetencyLevel",
     "task":"",
     "getlistsort":"",
     "getlistsortdir":"",
@@ -143,8 +187,8 @@
     "joins":"",
     "hooksnippets":"",
     "cmpmaincaption":"",
-    "cmptabcaption":"Bootsnutzungsstufen",
-    "cmptabdescription":"Bootsnutzungsstufen verwalten",
+    "cmptabcaption":"Kompetenzstufen",
+    "cmptabdescription":"Hier kannst Du die Kompetenzstufen der Mitglieder erstellen und verwalten",
     "cmptabcontroller":"",
     "winbuttons":"",
     "onsubmitsuccess":"",
@@ -166,42 +210,22 @@
   "fieldpermissions":"",
   "columns":[
     {
-      "MIGX_id":1,
-      "header":"ID",
+      "MIGX_id":2,
       "dataIndex":"id",
-      "width":10,
-      "sortable":"false",
-      "show_in_grid":1,
-      "customrenderer":"",
-      "renderer":"",
-      "clickaction":"",
-      "selectorconfig":"",
-      "renderchunktpl":"",
-      "renderoptions":"",
-      "editor":""
+      "header":"id"
     },
     {
-      "MIGX_id":2,
-      "header":"Bezeichnung",
-      "dataIndex":"name",
-      "width":50,
-      "sortable":"false",
-      "show_in_grid":1,
-      "customrenderer":"",
-      "renderer":"this.renderRowActions",
-      "clickaction":"",
-      "selectorconfig":"",
-      "renderchunktpl":"",
-      "renderoptions":"",
-      "editor":""
+      "MIGX_id":6,
+      "dataIndex":"level",
+      "header":"level"
     },
     {
       "MIGX_id":4,
-      "dataIndex":"color_name",
-      "header":"color_name"
+      "dataIndex":"name",
+      "header":"name"
     },
     {
-      "MIGX_id":5,
+      "MIGX_id":3,
       "header":"color",
       "dataIndex":"color",
       "width":"",
@@ -217,9 +241,9 @@
     }
   ],
   "createdby":1,
-  "createdon":"2017-04-08 11:40:02",
+  "createdon":"2024-01-16 21:40:47",
   "editedby":1,
-  "editedon":"2024-01-17 13:18:46",
+  "editedon":"2024-01-17 13:27:50",
   "deleted":0,
   "deletedon":null,
   "deletedby":0,

@@ -304,7 +304,20 @@
         <field key="colorstyle" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="linkto_bootsgattung_name" dbtype="varchar" phptype="string" precision="255" null="false" default="" />   
         <field key="linkto_boot_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
-    </object> 
+    </object>
+
+    <object class="fbuchCompetencyLevel" table="fbuch_competency_levels" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <field key="level" dbtype="varchar" phptype="string" precision="10" null="false" default="" index="index" />
+        <field key="color" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
+        <field key="color_name" dbtype="varchar" phptype="string" precision="255" null="false" default="" />        
+        <field key="description" dbtype="text" phptype="string" null="false" default="" />
+        <field key="technical_requirements" dbtype="text" phptype="string" null="false" default="" />
+        <field key="safety_requirements" dbtype="text" phptype="string" null="false" default="" />
+        <field key="technical_goals" dbtype="text" phptype="string" null="false" default="" />
+        <field key="permissions" dbtype="text" phptype="string" null="false" default="" />
+        <aggregate alias="Members" class="mvMember" foreign="competency_level_id" local="id" cardinality="many" owner="local" />                
+    </object>     
 
     <object class="mvMemberState" table="mv_member_states" extends="xPDOSimpleObject">
         <field key="state" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
@@ -384,8 +397,10 @@
         <field key="riot_user_id" dbtype="text" phptype="string" null="false" default="" />
 		<field key="otp" dbtype="varchar" precision="150" phptype="string" null="false" default=""/>
         <field key="otp_createdon" dbtype="datetime" phptype="datetime" null="true" />   
-        <field key="otp_sendedon" dbtype="datetime" phptype="datetime" null="true" />       
-
+        <field key="otp_sendedon" dbtype="datetime" phptype="datetime" null="true" />   
+        <field key="competency_level_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />            
+        <field key="safety_instructions_date" dbtype="datetime" phptype="datetime" null="true" />  
+        
         <composite alias="Fahrten" class="fbuchFahrtNames" local="id" foreign="member_id" cardinality="many" owner="local" />
         <composite alias="Mailinglists" class="fbuchMailinglistNames" local="id" foreign="member_id" cardinality="many" owner="local" />
         
@@ -393,7 +408,8 @@
         <composite alias="RoleLinks" class="mvMemberRoleLink" local="id" foreign="member_id" cardinality="many" owner="local" />
         <aggregate alias="Family" class="mvFamily" local="family_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="User" class="modUser" foreign="id" local="modx_user_id" cardinality="one" owner="foreign" /> 
-        <aggregate alias="State" class="mvMemberState" foreign="state" local="member_status" cardinality="one" owner="foreign" />         
+        <aggregate alias="State" class="mvMemberState" foreign="state" local="member_status" cardinality="one" owner="foreign" />  
+        <aggregate alias="CompetencyLevel" class="fbuchCompetencyLevel" foreign="id" local="competency_level_id" cardinality="one" owner="foreign" />                
     
         <aggregate alias="DoorAccesscode" class="mvDoorAccesscode" local="id" foreign="member_id" cardinality="one" owner="local" />
         <composite alias="Nutzergruppen" class="fbuchBootsNutzergruppenMembers" local="id" foreign="member_id" cardinality="many" owner="local" />
