@@ -38,6 +38,14 @@ $usergroups = [
         ]
     ],
     [
+        'policy'=>'mv_member_admin',
+        'user_group'=>'mv_member_admin'
+    ],
+    [
+        'policy'=>'mv_competency_editor',
+        'user_group'=>'mv_competency_editor'
+    ],         
+    [
         'policy'=>'Administrator',
         'user_group'=>'Administrator',
         'resource_groups'=>[

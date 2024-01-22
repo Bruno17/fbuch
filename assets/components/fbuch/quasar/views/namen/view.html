@@ -1,0 +1,64 @@
+<component is="style">
+  .competency-color {
+    width: 10px;
+    height: 32px;
+    display: inline-block;
+    margin-bottom: -12px;      
+  }
+ 
+</component>
+
+<div class="q-px-md q-py-lg row">
+  <div class="col-12">
+    <q-table :rows="names" :filter="filter" row-key="id" :columns="columns" :visible-columns="visible_columns"
+      :pagination="initial_pagination" flat bordered dense>
+
+      <template v-slot:top>
+        <q-btn v-if="useHasPermission('fbuch_create_names')" color="primary" label="Eintrag erstellen" href="/listen/namen/#/member-create" />
+        <q-space />
+        <q-input borderless dense debounce="300" color="primary" v-model="filter" placeholder="Suche">
+          <template v-slot:append>
+            <q-icon name="search" />
+          </template>
+        </q-input>
+      </template>      
+
+      <template v-slot:body="props">
+        <q-tr :props="props">
+          <q-td key="CompetencyLevel_level" :props="props">
+            <div class="competency-color" :style="'background-color:#'+props.row.CompetencyLevel_color">
+            </div> 
+            {{ props.row.CompetencyLevel_level }}
+          </q-td>
+          <q-td key="name" :props="props">
+            {{ props.row.name }}
+          </q-td>
+          <q-td key="firstname" :props="props">
+            {{ props.row.firstname }}
+          </q-td>
+          <q-td key="riot_user_id" :props="props">
+            {{ props.row.riot_user_id }}
+          </q-td>
+          <q-td key="Fahrten" :props="props">
+            {{ props.row.Fahrten }}
+          </q-td>
+          <q-td key="Jahrgang" :props="props">
+            {{ Quasar.date.formatDate(props.row.birthdate,'YYYY') }}
+          </q-td>
+          <q-td key="Aktionen" :props="props">
+            <q-btn color="grey-7" round flat icon="more_horiz">
+              <q-menu auto-close anchor="center left" self="top right">
+                <q-list bordered separator>
+                  <q-item v-if="useHasPermission('fbuch_edit_names')" clickable :href="'/listen/namen/#/member-update/'+props.row.id">
+                    <q-item-section >Eintrag bearbeiten</q-item-section>
+                  </q-item>
+                </q-list>
+              </q-menu>
+            </q-btn>
+          </q-td>
+        </q-tr>
+      </template>
+    </q-table>
+  </div>
+</div>
+

@@ -24,7 +24,7 @@ export default {
         axios.get(ajaxUrl, { params: data })
         .then(function (response) {
             let options = [];
-            if (props.first_option && props.first_option.label && props.first_option.value){
+            if (props.first_option && props.first_option.label){
               options.push(props.first_option);
               options.push(...response.data.results);      
             } else {

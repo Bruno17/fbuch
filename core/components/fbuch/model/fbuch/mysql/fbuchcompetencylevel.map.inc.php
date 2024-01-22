@@ -97,8 +97,8 @@ $xpdo_meta_map['fbuchCompetencyLevel']= array (
     'Members' => 
     array (
       'class' => 'mvMember',
-      'foreign' => 'competency_level_id',
-      'local' => 'id',
+      'foreign' => 'competency_level',
+      'local' => 'level',
       'cardinality' => 'many',
       'owner' => 'local',
     ),

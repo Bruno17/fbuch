@@ -35,11 +35,27 @@ class MyControllerNames extends BaseController {
         'id',
         'firstname',
         'name',
-        'member_status'];
+        'member_status',
+        'competency_level',
+        'riot_user_id',
+        'gender' 
+        ];
         $objectArray = [];
         foreach ($allowed_fields as $field){
             $objectArray[$field] = $this->object->get($field);
         }
+        $email = $this->object->get('email');
+        if (empty($email) || $this->modx->hasPermission('mv_administrate_members')){
+            $objectArray['email'] = $email;
+        }
+        $phone = $this->object->get('phone');
+        if (empty($phone) || $this->modx->hasPermission('mv_administrate_members')){
+            $objectArray['phone'] = $phone;
+        } 
+        $birthdate = $this->object->get('birthdate');
+        if ($this->modx->hasPermission('mv_administrate_members')){
+            $objectArray['birthdate'] = $birthdate;
+        }                           
         if ($state = $this->object->getOne('State')){
             $stateArray = $state->toArray();
             foreach ($stateArray as $key => $value){
@@ -53,7 +69,8 @@ class MyControllerNames extends BaseController {
     public function beforePut() {
 
         if ($this->modx->hasPermission('fbuch_edit_names')) {
-
+            $this->object->set('editedby', $this->modx->user->get('id'));
+            $this->object->set('editedon', strftime('%Y-%m-%d %H:%M:%S')); 
         } else {
             throw new Exception('Unauthorized', 401);
         }
@@ -64,6 +81,14 @@ class MyControllerNames extends BaseController {
     public function beforePost() {
 
         if ($this->modx->hasPermission('fbuch_create_names')) {
+            $this->object->set('createdby', $this->modx->user->get('id'));
+            $this->object->set('createdon', strftime('%Y-%m-%d %H:%M:%S')); 
+            $name = $this->object->get('name');
+            $firstname = $this->object->get('firstname');
+            if ($existing = $this->modx->getObject('mvMember',['name'=>$name,'firstname'=>$firstname])){
+                return 'name_exists';    
+            }
+
 
         } else {
             throw new Exception('Unauthorized', 401);
@@ -72,6 +97,14 @@ class MyControllerNames extends BaseController {
 
         return !$this->hasErrors();
     }
+
+    public function afterPost(array &$objectArray) {
+        $this->object->afterSave($this->modx->fbuch);
+    }
+
+    public function afterPut(array &$objectArray) {
+        $this->object->afterSave($this->modx->fbuch);
+    }    
 
     public function verifyAuthentication() {
 
@@ -115,11 +148,19 @@ class MyControllerNames extends BaseController {
 
         //$c->query['columns'] = array(); //reset default $c->select
 
-        $c->select(array(
+        $columns = [
+            'mvMember.riot_user_id',
             'mvMember.id',
             'mvMember.firstname',
             'mvMember.name',
-            'mvMember.member_status'));
+            'mvMember.member_status'            
+        ];
+
+        if ($this->modx->hasPermission('fbuch_view_birthdate')){
+            $columns[] = 'birthdate';
+        }
+
+        $c->select($columns);
 
         //$c->prepare();echo $c->toSql();
         return $c;
@@ -144,6 +185,13 @@ class MyControllerNames extends BaseController {
                 }
                 $output['value'] = $object->get('id');
                 break;
+            default:
+            if (!empty($output['CompetencyLevel_color'])){
+
+            } elseif (!empty($this->CompetencyLevel_color)){
+                $output['CompetencyLevel_color'] = $this->CompetencyLevel_color;    
+            }            
+            break;
         }
 
         return $output;

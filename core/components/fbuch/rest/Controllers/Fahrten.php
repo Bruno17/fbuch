@@ -519,7 +519,7 @@ class MyControllerFahrten extends BaseController {
         $properties['where'] = '{"fahrt_id":"' . $id . '"}';
         $properties['joins'] = '
         [{"alias":"Member","selectfields":"'. $memberfields .'"},
-        {"alias":"CompetencyLevel","classname":"fbuchCompetencyLevel","on":"CompetencyLevel.id=Member.competency_level_id"},
+        {"alias":"CompetencyLevel","classname":"fbuchCompetencyLevel","on":"CompetencyLevel.level=Member.competency_level"},
         {"alias":"NgMember","classname":"fbuchBootsNutzergruppenMembers","on":"NgMember.member_id=Member.id and NgMember.group_id=' . $nutzergruppe_id .'"}]';
         $properties['sortConfig'] = '[{"sortby":"cox","sortdir":"ASC"},{"sortby":"pos"}]';
         $properties['debug'] = '0';

@@ -13,7 +13,8 @@ $permissions = [
         'fbuch_guest'=>'',        
         'fbuch_user'=>'',
         'fbuch_instructor'=>'1',
-        'fbuch_clubhome'=>'1'                
+        'fbuch_clubhome'=>'1',
+        'mv_member_admin'=>'1'            
     ],
     ['name'=>'fbuch_create_termin',
         'description'=>'Berechtigung, Fahrtenbuch - Termine zu erstellen',
@@ -43,13 +44,6 @@ $permissions = [
         'fbuch_instructor'=>'1',
         'fbuch_clubhome'=>''
     ],    
-    ['name'=>'fbuch_edit_names',
-        'description'=>'Berechtigung Namen zu bearbeiten',
-        'fbuch_guest'=>'',  
-        'fbuch_user'=>'',
-        'fbuch_instructor'=>'1',
-        'fbuch_clubhome'=>''
-    ],
     ['name'=>'fbuch_edit_old_entries',
         'description'=>'Berechtigung abgeschlossene Fahrten vom Vortag und Älter zu bearbeiten',
         'fbuch_guest'=>'',
@@ -64,13 +58,6 @@ $permissions = [
         'fbuch_instructor'=>'1',
         'fbuch_clubhome'=>''
     ],
-    ['name'=>'fbuch_view_birthdate',
-        'description'=>'User can view Birthdate and Age in fbuch',
-        'fbuch_guest'=>'',
-        'fbuch_user'=>'',
-        'fbuch_instructor'=>'',
-        'fbuch_clubhome'=>''
-    ],
     ['name'=>'fbuch_view_fahrten',
         'description'=>'Zugriff auf Fahrten im Fahrtenbuch',
         'fbuch_guest'=>'',
@@ -83,7 +70,9 @@ $permissions = [
         'fbuch_guest'=>'',
         'fbuch_user'=>'1',
         'fbuch_instructor'=>'1',
-        'fbuch_clubhome'=>'1'
+        'fbuch_clubhome'=>'1',
+        'mv_member_admin'=>'1',
+        'mv_competency_editor'=>'1'
     ],
     ['name'=>'fbuch_view_datenames',
         'description'=>'Berechtigung Anmeldungen zu Terminen zu sehen',
@@ -119,7 +108,51 @@ $permissions = [
         'fbuch_user'=>'1',
         'fbuch_instructor'=>'1',
         'fbuch_clubhome'=>'1'
+    ],
+    ['name'=>'fbuch_view_birthdate',
+        'description'=>'User can view Birthdate and Age in fbuch',
+        'fbuch_guest'=>'',
+        'fbuch_user'=>'',
+        'fbuch_instructor'=>'1',
+        'fbuch_clubhome'=>'',
+        'mv_member_admin'=>'1',
+        'mv_competency_editor'=>'1'
+    ],    
+    ['name'=>'fbuch_create_names',
+        'description'=>'Basisberechtigung neue Mitglieder als Gast anzulegen',
+        'fbuch_guest'=>'',  
+        'fbuch_user'=>'',
+        'fbuch_instructor'=>'1',
+        'fbuch_clubhome'=>'1',
+        'mv_member_admin'=>'1',
+        'mv_competency_editor'=>'1'
+    ],    
+    ['name'=>'fbuch_edit_names',
+        'description'=>'Basisberechtigung, Mitgliederdaten bearbeiten zu dürfen',
+        'fbuch_guest'=>'',  
+        'fbuch_user'=>'',
+        'fbuch_instructor'=>'1',
+        'fbuch_clubhome'=>'',
+        'mv_member_admin'=>'1',
+        'mv_competency_editor'=>'1'        
+    ],    
+    ['name'=>'mv_administrate_members',
+        'description'=>'Berechtigung, alle Mitgliederdaten bearbeiten zu dürfen',
+        'fbuch_guest'=>'0',
+        'fbuch_user'=>'0',
+        'fbuch_instructor'=>'0',
+        'fbuch_clubhome'=>'0',
+        'mv_member_admin'=>'1',
+        'mv_competency_editor'=>'0'
+    ],
+    ['name'=>'mv_edit_membercompetencies',
+        'description'=>'Berechtigung, Kompetenzstufen der Mitglieder und damit zusammenhängede Daten zu ändern',
+        'fbuch_guest'=>'0',
+        'fbuch_user'=>'0',
+        'fbuch_instructor'=>'0',
+        'fbuch_clubhome'=>'0',
+        'mv_member_admin'=>'1',
+        'mv_competency_editor'=>'1'
     ]
-    
 ];
 

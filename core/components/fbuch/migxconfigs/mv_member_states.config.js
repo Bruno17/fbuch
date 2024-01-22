@@ -99,7 +99,26 @@
           "MIGX_id":1336,
           "field":"can_self_register",
           "caption":"can_self_register",
+          "description":"Kann sich selbst \u00fcber die Email Login Funktion als Benutzer anlegen.",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
           "pos":7
+        },
+        {
+          "MIGX_id":1346,
+          "field":"needed_set_permission",
+          "caption":"needed_set_permission",
+          "pos":8
         }
       ],
       "pos":1
@@ -213,7 +232,7 @@
   "createdby":1,
   "createdon":"2023-04-09 19:03:40",
   "editedby":1,
-  "editedon":"2023-08-06 11:28:46",
+  "editedon":"2024-01-20 18:19:46",
   "deleted":0,
   "deletedon":null,
   "deletedby":0,

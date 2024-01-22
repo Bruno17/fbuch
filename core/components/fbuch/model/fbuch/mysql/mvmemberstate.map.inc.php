@@ -17,6 +17,7 @@ $xpdo_meta_map['mvMemberState']= array (
     'can_be_added_to_entry' => 0,
     'can_be_invited' => 0,
     'can_self_register' => 0,
+    'needed_set_permission' => '',
   ),
   'fieldMeta' => 
   array (
@@ -75,6 +76,14 @@ $xpdo_meta_map['mvMemberState']= array (
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
+    ),
+    'needed_set_permission' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '150',
+      'null' => false,
+      'default' => '',
     ),
   ),
 );

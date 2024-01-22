@@ -754,7 +754,7 @@
         },
         {
           "MIGX_id":1276,
-          "field":"competency_level_id",
+          "field":"competency_level",
           "caption":"Kompetenzstufe",
           "description":"Zuordnung der Kompetenzstufe",
           "description_is_code":"0",
@@ -1345,7 +1345,7 @@
   "createdby":1,
   "createdon":"2015-02-25 22:37:51",
   "editedby":1,
-  "editedon":"2024-01-19 20:01:35",
+  "editedon":"2024-01-20 14:23:39",
   "deleted":0,
   "deletedon":null,
   "deletedby":0,

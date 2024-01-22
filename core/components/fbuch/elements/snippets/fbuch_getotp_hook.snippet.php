@@ -15,7 +15,7 @@ if ($member = $modx->getObject('mvMember',['email'=>$email])){
     if ($otp_sendedon != null && !empty($otp) &&  $dateDifference < 10){
         //otp innerhalb der letzten 10 Minuten bereits angefordert
         
-        $modx->setPlaceholder('my.successMessage','Auf diese Adresse wurde kürzlich bereits ein Login Link gesendet.');
+        $modx->setPlaceholder('my.successMessage','Auf diese Adresse wurde kürzlich bereits ein Login Link gesendet. Warte mindestens 10 Minuten bis zum nächsten Versuch.');
 
         return true;
     }

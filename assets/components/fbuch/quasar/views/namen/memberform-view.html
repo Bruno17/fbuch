@@ -1,0 +1,78 @@
+<div class="q-pa-md q-mb-lg full-width" style="min-height: 400px;">
+    <div class="text-h4 text-center"> {{ entry.firstname }} {{ entry.name }} </div>
+
+    <q-form @submit="onSubmit" @reset="onReset" ref="eventform">
+        <div class="q-col-gutter-md q-mb-sm row">
+
+            <div class="col-12 q-my-lg" v-if="routeValue.name=='memberform_update' && useHasPermission('mv_administrate_members')==false">
+                <q-card class="bg-info text-white">
+                    <q-card-section>
+                        Du hast keine Berechtigung kritische Mitgliederdaten zu bearbeiten.<br>
+                        Falls es Mitgliederfelder gibt, die Du dennoch bearbeiten bzw. befüllen darfst, werden diese nachfolgend entsprechend dargestellt.<br>
+                        Du kannst für sonstige Datenänderungswünsche gerne eine entsprechende Nachricht über das Kontaktformular senden.<br>
+                    </q-card-section>
+                  </q-card>
+            </div>
+
+            <q-input :readonly="(routeValue.name=='memberform_create' || useHasPermission('mv_administrate_members'))==false" 
+                class="col-12 col-md-4" outlined v-model="entry.firstname" label="Vorname"
+                :rules="[val => (!submitclicked || (typeof val != 'undefined' && val != '') )  || 'Feld muss ausgefüllt werden!']" />
+
+            <q-input :readonly="(routeValue.name=='memberform_create' || useHasPermission('mv_administrate_members'))==false"
+                class="col-12 col-md-4" outlined v-model="entry.name" label="Nachname"
+                :rules="[val => (!submitclicked || (typeof val != 'undefined' && val != '') )  || 'Feld muss ausgefüllt werden!']" />
+
+            <q-select :readonly="(routeValue.name=='memberform_create' || useHasPermission('mv_administrate_members'))==false"
+                class="col-12 col-md-4" v-model="entry.gender" :options="['weiblich','männlich']" outlined
+                label="Geschlecht"
+                :rules="[val => (!submitclicked || (typeof val != 'undefined' && val != '') )  || 'Feld muss ausgefüllt werden!']" />
+
+            <datepicker v-if="routeValue.name=='memberform_create' || useHasPermission('mv_administrate_members')" 
+                label="Geburtsdatum" class="col-12 col-md-4" v-model="entry.birthdate"
+                hint="wird benötigt für die Altersklassenzuordnung in den Auswertungen">
+            </datepicker>
+
+            <q-input v-if="entry.email=='' || routeValue.name=='memberform_create' || useHasPermission('mv_administrate_members')"
+                class="col-12 col-md-4" outlined v-model="entry.email" label="Email"
+                hint="wird benötigt für Termineinladungen und sonstige Infos" />
+
+            <q-input v-if="entry.riot_user_id=='' || routeValue.name=='memberform_create' || useHasPermission('mv_administrate_members')"
+                class="col-12 col-md-4" outlined v-model="entry.riot_user_id" label="Element ID"
+                hint="Element Benutzer ID, Beispiel: @name:matrix.org" />
+
+            <q-input v-if="entry.phone=='' || routeValue.name=='memberform_create' || useHasPermission('mv_administrate_members')"
+                class="col-12 col-md-4" outlined v-model="entry.phone" label="Telefon" />
+
+            <api_select 
+                v-if="routeValue.name=='memberform_create' || useHasPermission('mv_administrate_members')"
+                ref="stateSelect" class="col-12 col-md-4" v-model="entry.member_status" label="Mitgliederstatus"
+                :first_option="{'label':'---','value':''}"
+                :controller="'MemberStates?limit=100000&returntype=options&check_set_permission=1'" :emit-value="true"
+                :hide-bottom-space="true" behavior="default"
+                :rules="[val => (!submitclicked || (typeof val != 'undefined' && val != '') )  || 'Feld muss ausgefüllt werden!']">
+
+            </api_select>
+
+            <datepicker v-if="useHasPermission('mv_edit_membercompetencies')" label="letzte Sicherheitsunterweisung"
+                class="col-12 col-md-4" v-model="entry.safety_instructions_date"
+                hint="Datum der letzten Sicherheitsunterweisung">
+            </datepicker>
+
+            <api_select v-if="useHasPermission('mv_edit_membercompetencies')" ref="competencySelect"
+                class="col-12 col-md-4" v-model="entry.competency_level" label="Kompetenzstufe"
+                :first_option="{'label':'---','value':''}"
+                :controller="'CompetencyLevels?limit=100000&returntype=options'" :emit-value="true"
+                :hide-bottom-space="true" behavior="default">
+
+            </api_select>
+
+
+        </div>
+
+        <div class="col-12">
+            <q-btn label="Speichern" type="submit" @click="onSubmitClick" color="primary" />
+            <q-btn label="Abbrechen" href="/listen/namen/#" class="q-ml-sm" />
+        </div>
+    </q-form>
+
+</div>

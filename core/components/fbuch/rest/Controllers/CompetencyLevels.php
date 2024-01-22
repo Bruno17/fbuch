@@ -32,7 +32,7 @@ class MyControllerCompetencyLevels extends BaseController {
         switch ($returntype) {
             case 'options':
                 $output['label'] = $object->get('name'). ' (' . $object->get('level') . ')';
-                $output['value'] = $object->get('id');
+                $output['value'] = $object->get('level');
                 break;
         }
 

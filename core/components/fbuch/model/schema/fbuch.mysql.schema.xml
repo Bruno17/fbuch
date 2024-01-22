@@ -316,7 +316,7 @@
         <field key="safety_requirements" dbtype="text" phptype="string" null="false" default="" />
         <field key="technical_goals" dbtype="text" phptype="string" null="false" default="" />
         <field key="permissions" dbtype="text" phptype="string" null="false" default="" />
-        <aggregate alias="Members" class="mvMember" foreign="competency_level_id" local="id" cardinality="many" owner="local" />                
+        <aggregate alias="Members" class="mvMember" foreign="competency_level" local="level" cardinality="many" owner="local" />                
     </object>     
 
     <object class="mvMemberState" table="mv_member_states" extends="xPDOSimpleObject">
@@ -327,6 +327,7 @@
         <field key="can_be_added_to_entry" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="can_be_invited" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="can_self_register" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="needed_set_permission" dbtype="varchar" phptype="string" precision="150" null="false" default="" />
     </object>           
     
     <object class="mvMember" table="mv_members" extends="xPDOSimpleObject">
@@ -398,7 +399,7 @@
 		<field key="otp" dbtype="varchar" precision="150" phptype="string" null="false" default=""/>
         <field key="otp_createdon" dbtype="datetime" phptype="datetime" null="true" />   
         <field key="otp_sendedon" dbtype="datetime" phptype="datetime" null="true" />   
-        <field key="competency_level_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />            
+        <field key="competency_level" dbtype="varchar" precision="10" phptype="string" null="false" default="" index="index" />                      
         <field key="safety_instructions_date" dbtype="datetime" phptype="datetime" null="true" />  
         
         <composite alias="Fahrten" class="fbuchFahrtNames" local="id" foreign="member_id" cardinality="many" owner="local" />
@@ -409,7 +410,7 @@
         <aggregate alias="Family" class="mvFamily" local="family_id" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="User" class="modUser" foreign="id" local="modx_user_id" cardinality="one" owner="foreign" /> 
         <aggregate alias="State" class="mvMemberState" foreign="state" local="member_status" cardinality="one" owner="foreign" />  
-        <aggregate alias="CompetencyLevel" class="fbuchCompetencyLevel" foreign="id" local="competency_level_id" cardinality="one" owner="foreign" />                
+        <aggregate alias="CompetencyLevel" class="fbuchCompetencyLevel" foreign="level" local="competency_level" cardinality="one" owner="foreign" />                
     
         <aggregate alias="DoorAccesscode" class="mvDoorAccesscode" local="id" foreign="member_id" cardinality="one" owner="local" />
         <composite alias="Nutzergruppen" class="fbuchBootsNutzergruppenMembers" local="id" foreign="member_id" cardinality="many" owner="local" />

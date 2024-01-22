@@ -277,7 +277,7 @@ class MyControllerDates extends BaseController {
             {"alias":"Member","selectfields":"' . $memberfields . '"},
             {"alias":"RegisteredbyMember","selectfields":"' . $memberfields . '"},
             {"alias":"Fahrtname","selectfields":"id,fahrt_id"},
-            {"alias":"CompetencyLevel","classname":"fbuchCompetencyLevel","on":"CompetencyLevel.id=Member.competency_level_id"},
+            {"alias":"CompetencyLevel","classname":"fbuchCompetencyLevel","on":"CompetencyLevel.level=Member.competency_level"},
             {"alias":"Fahrt","classname":"fbuchFahrt","selectfields":"id","on":"Fahrt.id=Fahrtname.fahrt_id"}]';
         $properties['sortConfig'] = '[{"sortby":"Fahrt_deleted","sortdir":"DESC"},{"sortby":"Fahrtname.fahrt_id"},{"sortby":"registeredby_member"},{"sortby":"createdon"}]';
         $properties['groupby'] = 'id';
