@@ -8,6 +8,8 @@ export default {
     setup() {
 
         const { onMounted, ref } = Vue;
+        const { useQuasar } = Quasar;
+        const $q = useQuasar();            
         const tab = ref('acls');
 
         onMounted(() => {
@@ -29,7 +31,16 @@ export default {
             const ajaxUrl = modx_options.rest_url + 'setup/PrefillTable';
             axios.post(ajaxUrl,{'classname':classname})
             .then(function (response) {
- 
+                const success = response.data.success;
+                let message = response.data.message;
+                message = message == 'table has allready items' ? 'Die Tabelle hat bereits Inhalt. Leere die Tabelle, bevor Du sie mit initialem Inhalt befüllst.' : message;
+                if (!success){
+                  $q.dialog({
+                    title: 'Warnung!',
+                    message: message
+                  })
+                  return;              
+                }     
             })
             .catch(function (error) {
                 console.log(error);

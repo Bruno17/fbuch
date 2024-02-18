@@ -18,11 +18,12 @@ export default {
             { name: 'CompetencyLevel_level', label: 'Kompetenzstufe', field: 'CompetencyLevel_level', sortable: true, align:'left' },
             { name: 'name', label: 'Nachname', field: 'name', sortable: true, align:'left' },
             { name: 'firstname', label: 'Vorname', field: 'firstname', sortable: true, align:'left' },
+            { name: 'member_status', label: 'Status', field: 'member_status', sortable: true, align:'left' },
             { name: 'riot_user_id', label: 'Element ID', field: 'riot_user_id', sortable: true, align:'left' },
             { name: 'Jahrgang', label: 'Jahrgang', field: 'Jahrgang', sortable: true, align:'left'  },
             { name: 'Aktionen', label: 'Aktionen', field: 'Aktionen', sortable: false }
         ]
-        const visible_columns = ref(['CompetencyLevel_level','name','firstname','riot_user_id','Aktionen']);
+        const visible_columns = ref(['CompetencyLevel_level','name','firstname','member_status','riot_user_id','Aktionen']);
 
         const initial_pagination = {
             rowsPerPage: 200
@@ -44,7 +45,7 @@ export default {
             axios.get(ajaxUrl,{params:data})
             .then(function (response) {
                 names.value = response.data.results;
-                visible_columns.value = ['CompetencyLevel_level','name','firstname','riot_user_id'];
+                visible_columns.value = ['CompetencyLevel_level','name','firstname','member_status','riot_user_id'];
                 if (useHasPermission('fbuch_view_birthdate')){
                     visible_columns.value.push('Jahrgang');
                 }

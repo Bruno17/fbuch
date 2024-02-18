@@ -102,7 +102,7 @@ class MyControllerBoote extends BaseController {
         $gattung_id = $this->getProperty('gattung_id',false);
         $returntype = $this->getProperty('returntype');
 
-        $joins = '[{"alias":"Bootsgattung"}]';
+        $joins = '[{"alias":"Bootsgattung"},{"alias":"Nutzergruppe"}]';
 
         $this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);
 
@@ -139,6 +139,7 @@ class MyControllerBoote extends BaseController {
             case 'options':
                 $output['label'] = $object->get('name') . ' (' . $object->get('Bootsgattung_shortname') . ')';
                 $output['value'] = $object->get('id');
+                $output['optcolor'] = $object->get('Nutzergruppe_color');
                 break;
             case 'bootsgattungen':
                 $output['label'] = $object->get('Bootsgattung_longname');

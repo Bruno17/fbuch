@@ -90,7 +90,7 @@
                             <q-card-section v-if="boot.gesperrt == 0" class="bg-primary text-white">
                                 {{ boot.gewichtsklasse }} <br>
                                 Gruppe: <strong>{{ boot.Nutzergruppe_name}}</strong> <br>
-                                {{ boot.Nutzergruppe_description}} <br>
+                                <p v-html="nl2br(boot.Nutzergruppe_description)"></p>
                               </q-card-section> 
                               <q-card-section v-if="boot.gesperrt == 0" :style="'background-color:#' + boot.Nutzergruppe_color">
                                 

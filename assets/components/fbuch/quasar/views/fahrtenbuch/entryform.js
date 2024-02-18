@@ -57,6 +57,10 @@ export default {
       selectionState.value.formattedDate = Quasar.date.formatDate(entry.value.date, 'DD.MM.YYYY');
     })
 
+    function nl2br(text){
+      return text.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1 <br/> $2');
+  }    
+
     function onSelectGattung(value) {
       if (bootsgattungSelect.value){
         bootsgattungSelect.value.loadNames({ 'gattung_name': value });
@@ -384,6 +388,7 @@ export default {
       addGuest,
       addMyself,
       selectMyself,
+      nl2br,
       bootSelect,
       personSelect,
       selectionState,

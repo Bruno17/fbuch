@@ -10,6 +10,11 @@ class MyControllerSetupPrefillTable extends BaseController {
         $properties = $this->getProperties();
         $objectArray = [];
         $classname = $this->getProperty('classname');
+
+        if ($this->modx->getCollection($classname)){
+            return $this->failure('table has allready items');    
+        }
+        
         $result = $this->prefillTable($classname);
 
         return $this->success('',$objectArray);

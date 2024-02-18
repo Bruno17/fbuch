@@ -2,9 +2,9 @@
 
 include 'BaseController.php';
 
-class MyControllerCompetencyLevels extends BaseController {
-    public $classKey = 'fbuchCompetencyLevel';
-    public $defaultSortField = 'level';
+class MyControllerBootsnutzergruppen extends BaseController {
+    public $classKey = 'fbuchBootsNutzergruppe';
+    public $defaultSortField = 'id';
     public $defaultSortDirection = 'ASC';
 
     public function beforeDelete() {
@@ -31,8 +31,8 @@ class MyControllerCompetencyLevels extends BaseController {
         $returntype = $this->getProperty('returntype');
         switch ($returntype) {
             case 'options':
-                $output['label'] = $object->get('name'). ' (' . $object->get('level') . ')';
-                $output['value'] = $object->get('level');
+                $output['label'] = $object->get('name');
+                $output['value'] = $object->get('id');
                 break;
         }
 

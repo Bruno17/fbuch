@@ -12,10 +12,12 @@ export default {
         const mm_expanded = ref(false);
         const state = ref({});
         const levels = ref([]);
+        const bootsnutzergruppen = ref([]);
 
         onMounted(() => {
             useLoadPermissions();
             loadCompetencyLevels();
+            loadBootsnutzergruppen();
         })
 
         function nl2br(text){
@@ -35,10 +37,24 @@ export default {
             });            
         }
 
+        function loadBootsnutzergruppen(){
+            var data = {};
+            var ajaxUrl = modx_options.rest_url + 'Bootsnutzergruppen';
+ 
+            axios.get(ajaxUrl,{params:data})
+            .then(function (response) {
+                bootsnutzergruppen.value = response.data.results;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+        }        
+
         return {
             mm_expanded,
             state,
             levels,
+            bootsnutzergruppen,
             nl2br,
             useHasPermission 
         }

@@ -15,6 +15,9 @@
 
 <h2 class="q-mt-sm q-mb-lg text-weight-bold" >Unsere Kompetenzstufen</h2>
 
+Nachfolgend aufgeführte Kompetenzeinstufung der Mitglieder definieren wer unter welchen Umständen welche Boote benutzen darf. Eine Einstufung in die nächsthöhere Stufe erfolgt nicht automatisch, sondern nach Beantragung durch die Vostandschaft oder durch einen berechtigten Übungsleiter. Die jeweilige aktuelle Einstufung der einzelnen Mitglieder ist im Fahrtenbuch ersichtlich.
+Die Vorstandschaft behält sich vor, Mitglieder herabzustufen, zb. nach längerer Ruderpause oder wenn die körperlichen Vorraussetzungen zb. aus gesundheitlichen Gründen nicht mehr gegeben sind. 
+
 <template v-for="level in levels">
     <h3 class="q-mt-md q-mb-none text-weight-bold" >{{level.name}}({{level.level}})</h3>
     <font :color="'#'+level.color">
@@ -36,6 +39,23 @@
     <template v-if="level.permissions != ''">
         <h5 class="q-mt-sm q-mb-xs text-weight-bold" style="font-size:20px;">Welche Boote</h5>
         <p v-html="nl2br(level.permissions)"></p>
+    </template>
+
+    <hr>
+
+</template>
+
+<h2 class="q-mt-sm q-mb-lg text-weight-bold" >Die Bootsklassifizierungen</h2>
+
+<template v-for="group in bootsnutzergruppen">
+    <h3 class="q-mt-md q-mb-none text-weight-bold" >{{group.name}}</h3>
+    <font :color="'#'+group.color">
+        &#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;          
+    </font>    
+    <template v-if="group.description != ''">
+        <h5 class="q-mt-sm q-mb-xs text-weight-bold" >Berechtigungen</h5>
+        <p v-html="nl2br(group.description)"></p>
+
     </template>
 
     <hr>

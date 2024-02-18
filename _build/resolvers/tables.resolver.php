@@ -2,6 +2,9 @@
 
 $modx = &$object->xpdo;
 $modx->log(modX::LOG_LEVEL_INFO, 'create/upgrade tables');
+$modx->log(modX::LOG_LEVEL_INFO, 'Tabellen bitte manuell per MIGX erstellen/upgraden');
+return true;
+
 if ($object->xpdo) {
 
     $packageName = 'fbuch';
