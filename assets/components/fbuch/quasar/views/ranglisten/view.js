@@ -1,8 +1,8 @@
 import { useLoadPermissions,useHasPermission } from "../../composables/helpers.js";
 import valuesetter from '../../components/valuesetter.js';
 import api_select from '../../components/api_select.js';
-import timeinput from '../../components/timeinput.js';
-import datepicker from '../../components/datepicker.js';
+import monthrange_select from '../../components/monthrange_select.js';
+import datepicker from '../../components/datepicker_simple.js';
 import fahrten_listview from '../../components/ranglisten/fahrten_listview.js';
 
 export default {
@@ -11,7 +11,7 @@ export default {
         valuesetter: valuesetter,
         api_select: api_select,
         datepicker: datepicker,
-        timeinput: timeinput,
+        monthrange_select: monthrange_select,
         fahrten_listview: fahrten_listview   
     },
     setup() {
@@ -50,10 +50,7 @@ export default {
             state.value.end_date = Quasar.date.formatDate(newDate, 'YYYY-12-31');
             state.value.group = 'alle';
             state.value.gattung = 'Ruderboot';
-        }
-
-        function onSelectEnddate(){
-            loadRangliste();
+            state.value.monthrange = { "value": 12, "label": "1 Jahr" }
         }
 
         function onSelectGroup(){
@@ -61,10 +58,16 @@ export default {
         }
 
         function onSelectStartdate(){
+            const monthrange = state.value.monthrange.value;
+            let end_date = Quasar.date.addToDate(state.value.start_date,{month:monthrange});
+            end_date = Quasar.date.subtractFromDate(end_date,{day:1});
+            state.value.end_date = Quasar.date.formatDate(end_date,'YYYY-MM-DD');
+            /*
             const days_total = Quasar.date.getDateDiff(state.value.end_date, state.value.start_date , 'days'); 
             if (days_total < 0) {
                 state.value.end_date = state.value.start_date;    
             }
+            */
             loadRangliste();
         }
 
@@ -102,7 +105,6 @@ export default {
             state,
             useHasPermission,
             onSelectStartdate,
-            onSelectEnddate,
             onSelectGroup, 
             showFahrten,           
             rangliste,

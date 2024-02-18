@@ -1,14 +1,13 @@
 <div class="q-pa-md row q-col-gutter-sm">
 
-  <datepicker label="Datum ab" class="col-md-3 col-sm-3 col-xs-12" v-model="state.start_date" :event="state"
-    :state="state" startfield="start_date" endfield="end_date" timestartfield="start_time" timeendfield="end_time"
-    which="xxx" @update:modelValue="onSelectStartdate">
+  <datepicker label="Datum ab" class="col-md-3 col-sm-3 col-xs-12" v-model="state.start_date"  
+   @update:modelValue="onSelectStartdate">
   </datepicker>
 
-  <datepicker label="Datum bis" class="col-md-3 col-sm-3 col-xs-12" v-model="state.end_date" :event="state"
-    :state="state" startfield="start_date" endfield="end_date" timestartfield="start_time" timeendfield="end_time"
-    which="end" @update:modelValue="onSelectEnddate">
-  </datepicker>
+  <monthrange_select label="Zeitraum" class="col-md-3 col-sm-3 col-xs-12" v-model="state.monthrange"
+   @update:modelValue="onSelectStartdate"
+  >
+  </monthrange_select>  
 
   <api_select ref="groupSelect" class="col-md-3 col-sm-3 col-xs-12" v-model="state.group" label="Gruppe"
     controller="Ranglisten?returntype=group_options" @update:model-value="onSelectGroup" :emit-value="true"
