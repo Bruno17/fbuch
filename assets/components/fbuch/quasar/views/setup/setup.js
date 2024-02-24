@@ -76,9 +76,7 @@ export default {
             const limit = 1000;
             let again = true;
             let prevrest = 0;
-            console.log(limit);
             await getTotal(ajaxUrl);
-            console.log('nowPost');
             
             do {
                 await axios.post(ajaxUrl,{'limit':limit})
@@ -100,7 +98,6 @@ export default {
         async function getTotal(ajaxUrl){
             await axios.post(ajaxUrl,{'returntype':'total'})
             .then(function (response) {
-                console.log('getTotal');
                 total.value = response.data.object.total;
             })
             .catch(function (error) {
