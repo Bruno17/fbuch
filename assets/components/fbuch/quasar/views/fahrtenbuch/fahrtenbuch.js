@@ -11,7 +11,7 @@ export default {
     setup() {
 
         const { onMounted, ref } = Vue;
-        const { useQuasar } = Quasar;
+        const { useQuasar,LocalStorage,SessionStorage } = Quasar;
         const $q = useQuasar();          
         const selectedDate = ref(getDateFromRoute())
         const formattedDate = Quasar.date.formatDate(selectedDate.value, 'dd, DD.MM.YYYY');
@@ -22,6 +22,7 @@ export default {
         const loadedEvents = ref([]);
         const mm_expanded = ref(false);
         const gattungnames = ref([]);
+        const showall_dates = ref(SessionStorage.getItem('showall_dates') || false);
 
         onMounted(() => {
             useLoadPermissions();
@@ -291,6 +292,8 @@ export default {
 
         function loadEvents(data) {
             data.which_page = 'rowinglogbook';
+            data.showall_dates = showall_dates.value;
+
             const ajaxUrl = modx_options.rest_url + 'Dates';
 
             return axios.get(ajaxUrl, { params: data })
@@ -326,7 +329,10 @@ export default {
             Vue.$router.push(prepareRoute(newDate));
         }
 
-
+        function onChangeDatetypes(){
+            SessionStorage.set('showall_dates', showall_dates.value)            
+            loadEventsToday();
+        }
 
         return {
             selectedDate,
@@ -338,6 +344,7 @@ export default {
             urlDate,
             mm_expanded,
             gattungnames,
+            showall_dates,
             loadAll,
             loadEventsToday,
             moveMembers,
@@ -346,7 +353,8 @@ export default {
             onNext,
             onPrev,
             onToday,
-            useHasPermission
+            useHasPermission,
+            onChangeDatetypes
         }
     },
 

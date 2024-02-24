@@ -148,6 +148,7 @@ class MyControllerDates extends BaseController {
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
         $returntype = $this->getProperty('returntype');
         $which_page = $this->getProperty('which_page');
+        $showall_dates = $this->getProperty('showall_dates');
 
         $joins = '[{"alias":"Type"}]';
         
@@ -182,7 +183,11 @@ class MyControllerDates extends BaseController {
 
         switch ($which_page){
             case 'rowinglogbook':
-            $c->where(['Type.show_at_rowinglogbook_page' => 1]);
+            if ($showall_dates == 'true'){
+
+            }   else {
+                $c->where(['Type.show_at_rowinglogbook_page' => 1]);                
+            } 
             break;
         }
 

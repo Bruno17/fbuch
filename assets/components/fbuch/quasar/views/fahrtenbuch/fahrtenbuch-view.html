@@ -5,6 +5,15 @@
     <q-btn outline label="< Früher" @click="onPrev"></q-btn>
     <q-btn outline label="Heute" @click="onToday"></q-btn>
     <q-btn outline label="Später >" @click="onNext"></q-btn>
+    <q-select
+    outlined
+    v-model="showall_dates"
+    :options="[{label:'Nur Fahrtenbuchtermine',value:false},{label:'Alle Termine anzeigen',value:true}]"
+    label="Terminarten anzeigen"
+    @update:model-value="onChangeDatetypes"
+    emit-value
+    map-options
+  ></q-select>    
 </div>
 
 <div class="text-h4 text-center"> {{ formattedDate }} </div>
