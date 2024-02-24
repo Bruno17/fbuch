@@ -11,6 +11,8 @@ export default {
         const { useQuasar } = Quasar;
         const $q = useQuasar();            
         const tab = ref('acls');
+        const total = ref(0);
+        const rest = ref(0);
 
         onMounted(() => {
             useLoadPermissions();
@@ -69,28 +71,52 @@ export default {
             }); 
         } 
 
-        function addStatusToEntries(){
+        async function addStatusToEntries(){
             const ajaxUrl = modx_options.rest_url + 'setup/AddStatusToEntries';
-            axios.post(ajaxUrl)
+            const limit = 1000;
+            let again = true;
+            let prevrest = 0;
+            console.log(limit);
+            await getTotal(ajaxUrl);
+            console.log('nowPost');
+            
+            do {
+                await axios.post(ajaxUrl,{'limit':limit})
+                .then(function (response) {
+                    rest.value = response.data.object.total;
+                    if (prevrest == rest.value){
+                        again = false;
+                    }
+                    prevrest = rest.value;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });     
+              }
+              while (rest.value > 0);            
+
+        } 
+        
+        async function getTotal(ajaxUrl){
+            await axios.post(ajaxUrl,{'returntype':'total'})
             .then(function (response) {
-  
+                console.log('getTotal');
+                total.value = response.data.object.total;
             })
             .catch(function (error) {
                 console.log(error);
-            }); 
-        }         
-        
-
-        
-        
-
+            });  
+        }
+ 
         return {
             tab,
             setupAcls,
             prefill,
             setupResources,
             fixFinishedEntries,
-            addStatusToEntries
+            addStatusToEntries,
+            total,
+            rest
         }
     },
 

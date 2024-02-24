@@ -47,7 +47,12 @@
             Ansonsten wird Gast als Status eingetragen.<br>
             <q-btn @click="addStatusToEntries">
                 Mitgliederstatus in alle Fahrten eintragen
-            </q-btn>            
+            </q-btn>  
+            <br>
+            <template v-if="total>0">
+            Datensätze gesamt: {{total}}<br>
+            Zu verarbeiten: {{rest}}
+            </template>          
         </q-tab-panel> 
 
 
