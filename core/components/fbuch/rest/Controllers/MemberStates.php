@@ -41,20 +41,17 @@ class MyControllerMemberStates extends BaseController {
     } 
     
     public function collection($list = array(),$total = false,$status = null) {
-        $check_set_permission = $this->getProperty('check_set_permission');
+        //check_set_permission
+        //option_for_web_memberform
+        $option_for_web_memberform = $this->getProperty('option_for_web_memberform');
         $newlist = $list;
-        if (!empty($check_set_permission) && count($list)>0){
+        if (!empty($option_for_web_memberform) && count($list)>0){
             $newlist = [];
             foreach ($list as $item){
-               $permission = $this->modx->getOption('needed_set_permission',$item,'');
-               if (!empty($permission)){
-                  if ($this->modx->hasPermission($permission)){
-                      $newlist[] = $item;    
-                  }
-               } else {
-                  $newlist[] = $item; 
+               $show_option = $this->modx->getOption('option_for_web_memberform',$item,'');
+               if (!empty($show_option)){
+                   $newlist[] = $item;    
                }
-
             }
         }
         return parent::collection($newlist,$total,$status); 

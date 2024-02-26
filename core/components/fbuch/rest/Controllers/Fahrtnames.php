@@ -58,7 +58,18 @@ class MyControllerFahrtNames extends BaseController {
             return $this->failure($beforePost === false ? $this->errorMessage : $beforePost);
         }
 
+        $objectArray = [];
+
         switch ($action) {
+            case 'setMemberState':
+                $id = $this->getProperty('id');
+                $member_status = $this->getProperty('member_status');
+                if (!empty($id) && $object = $this->modx->getObject($this->classKey,$id)){
+                    $object->set('member_status',$member_status);
+                    $object->save();
+                    $objectArray = $object->toArray();
+                }
+                break;
             case 'moveNames':
                 if (is_array($names)){
                     foreach ($names as $name){
@@ -97,7 +108,7 @@ class MyControllerFahrtNames extends BaseController {
                     break;                                     
         }
 
-        $objectArray = [];
+
         $this->afterPost($objectArray);
         return $this->success('',$objectArray);
     }    

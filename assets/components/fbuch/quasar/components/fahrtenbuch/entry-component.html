@@ -89,7 +89,7 @@
     <q-card-section class="q-pa-none">
         <q-list separator>
             <template v-for="name in entry.names">
-                <q-item tag="label" class="q-px-sm" v-ripple>
+                <q-item :tag="section !='finished' ? 'label' : ''" class="q-px-sm" v-ripple>
                     <q-item-section side :style="'background-color:#'+name.CompetencyLevel_color+';margin:-8px 0px -8px -8px;padding-right: 9px;'">
                        
                     </q-item-section>                    
@@ -100,13 +100,13 @@
                         {{name.idx}}
                     </q-item-section>
                     <q-item-section>
-                        <q-item-label v-if="name.guestname=='' && name.Member_member_status=='Mitglied' ">
+                        <q-item-label v-if="name.guestname=='' && name.member_status=='Mitglied' ">
                             {{name.Member_firstname}} {{name.Member_name}}
                             <template v-if="useHasPermission('fbuch_view_birthdate')"><br>({{name.age}})</template>
                         </q-item-label>
-                        <q-item-label v-if="name.guestname=='' && name.Member_member_status!=='Mitglied' ">
+                        <q-item-label v-if="name.guestname=='' && name.member_status!=='Mitglied' ">
                             {{name.Member_firstname}} {{name.Member_name}} <br>
-                            ({{name.Member_member_status}}) <template v-if="useHasPermission('fbuch_view_birthdate')">
+                            ({{name.member_status}}) <template v-if="useHasPermission('fbuch_view_birthdate')">
                                 ({{name.age}})</template>
                         </q-item-label>
                         <q-item-label v-if="name.guestname!==''">
@@ -125,6 +125,7 @@
                                 style="width: 18px;" />
                         </q-avatar>
                     </q-item-section>
+                        
                     <q-item-section v-if="entry.locked==0 && section != 'finished'" side top class="q-pa-none" style="padding-left:0;">
                         <q-btn color="primary" text-color="white" round icon="navigate_next">
                             <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
@@ -156,6 +157,29 @@
                             </q-menu>
                         </q-btn>
                     </q-item-section>
+
+                    <q-item-section v-if="useHasPermission('mv_administrate_members') && section == 'finished'" side top class="q-pa-none" style="padding-left:0;">
+                        <q-btn color="primary" text-color="white" round icon="navigate_next">
+                            <q-menu v-model="name.finished_menu" anchor="bottom right" self="top right" :offset="[0, 5]">
+                                <q-list dense bordered separator>
+                                 
+                                    <q-item>
+                                        <q-item-section>
+                                            <api_select 
+                                            v-model="name.member_status" label="Mitgliederstatus"
+                                            :controller="'MemberStates?limit=100000&returntype=options&option_for_entryname=1'" :emit-value="true"
+                                            :hide-bottom-space="true" behavior="default"
+                                            @update:model-value="setMemberState(name)"
+                                           >
+                                           </api_select>     
+                                        </q-item-section>
+                                    
+                                    </q-item>
+                                </q-list>
+                            </q-menu>
+                        </q-btn>
+                    </q-item-section>                    
+
                 </q-item>
             </template>
         </q-list>

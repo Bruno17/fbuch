@@ -327,7 +327,7 @@
         <field key="can_be_added_to_entry" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="can_be_invited" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="can_self_register" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
-        <field key="needed_set_permission" dbtype="varchar" phptype="string" precision="150" null="false" default="" />
+        <field key="option_for_web_memberform" dbtype="tinyint" phptype="integer" precision="1" null="false" default="0" />
     </object>           
     
     <object class="mvMember" table="mv_members" extends="xPDOSimpleObject">

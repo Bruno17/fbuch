@@ -44,10 +44,10 @@
                 class="col-12 col-md-4" outlined v-model="entry.phone" label="Telefon" />
 
             <api_select 
-                v-if="routeValue.name=='memberform_create' || useHasPermission('mv_administrate_members')"
+                v-if="routeValue.name=='memberform_create'"
                 ref="stateSelect" class="col-12 col-md-4" v-model="entry.member_status" label="Mitgliederstatus"
                 :first_option="{'label':'---','value':''}"
-                :controller="'MemberStates?limit=100000&returntype=options&check_set_permission=1'" :emit-value="true"
+                :controller="'MemberStates?limit=100000&returntype=options&option_for_web_memberform=1'" :emit-value="true"
                 :hide-bottom-space="true" behavior="default"
                 :rules="[val => (!submitclicked || (typeof val != 'undefined' && val != '') )  || 'Feld muss ausgefüllt werden!']">
 

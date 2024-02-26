@@ -14,7 +14,7 @@ class MyControllerSetupAddStatusToEntries extends BaseController {
         set member_status = ""
         ';
         
-        //$result = $this->modx->exec($query);   
+        $result = $this->modx->exec($query);   
         
         $query = '
         update `modx_fbuch_fahrten`  
@@ -59,6 +59,7 @@ class MyControllerSetupAddStatusToEntries extends BaseController {
                     $result['date'] = $fahrt->get('date');
                     $fahrt_date = empty($fahrt_date) ? $result['date'] : $fahrt_date;
                     $fahrt_date = substr($fahrt_date,0,10);
+                    $fahrt_year = substr($fahrt_date,0,4);
 
                     $guestname = $fahrtname->get('guestname');
                     $member_status = 'Unbekannt';
@@ -68,22 +69,39 @@ class MyControllerSetupAddStatusToEntries extends BaseController {
 
                     if ($member = $fahrtname->getOne('Member')){
                         $member_status = $member->get('member_status');
+                        $birthdate = $member->get('birthdate');
                         $result['name'] = $member->get('firstname') . ' ' . $member->get('name');
                         $result['member_id'] = $member->get('id');
                         $eintritt = $member->get('eintritt');
                         $result['eintritt'] = $eintritt = substr($eintritt,0,10);
+                        $result['year_eintritt'] = $year_eintritt = substr($eintritt,0,4);
                         $austritt = $member->get('austritt');
-                        $result['austritt'] = $austritt = substr($austritt,0,10);
+                        $austritt = substr($austritt,0,10);
+                        if (!empty($year_eintritt) && $fahrt_year>=$year_eintritt){
+                            $austritt = empty($austritt) ? $fahrt_year . '-12-31' : $austritt;                            
+                        }
+ 
+                        $result['austritt'] = $austritt;
+                        /*
                         if ($fahrt_date>=$eintritt && $fahrt_date<=$austritt){
                             $member_status = 'Mitglied';
                         }
-                        if ($fahrt_date<$eintritt){
-                            $member_status = 'Gast';
+                        */
+                        if ($fahrt_year>=$year_eintritt && $fahrt_date<=$austritt){
+                            $member_status = 'Mitglied';
                         }
+                        if ($fahrt_year < $year_eintritt){
+                            $member_status = 'Gast';
+                        }                                                
                         if ($member_status == 'Ausgetreten'){
                             //ist eigentlich nicht möglich - weiterhin als Gast in der Auswertung?
                             $member_status = 'Gast';
                         }
+                        if ($member_status == 'Unbekannt' && !empty($birthdate) && empty($eintritt) && empty($austritt)){
+                            //aktueller Status, warum auch immer, unbekannt, Geburtstag eingetragen, kein Eintritts oder Austrittsdatum
+                            //wir gehen einfach mal davon aus, daß diese Personen zum Zeitpunkt der Fahrt Mitglied war
+                            $member_status = 'Mitglied';
+                        }                        
                         
                     }
                     $result['member_status'] = $member_status;

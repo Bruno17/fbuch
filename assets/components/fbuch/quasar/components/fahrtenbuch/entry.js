@@ -1,4 +1,5 @@
 import { useHasPermission } from "../../composables/helpers.js";
+import api_select from '../../components/api_select.js'
 
 export default {
   emits:['nameCheckbox'],
@@ -9,6 +10,10 @@ export default {
     loadAll: Function,
     section: ''
   },
+  components: {
+    api_select: api_select
+  },
+
 
   setup(props,{emit}) {
 
@@ -71,6 +76,25 @@ export default {
             console.log(error);
           });
       }
+    }
+
+    function setMemberState(name){
+      //console.log(name);
+      const id = name.id || false;
+      const ajaxUrl = modx_options.rest_url + 'Fahrtnames/' + id;
+      name['processaction'] = 'setMemberState';
+      if (id) {
+        axios.post(ajaxUrl,name)
+          .then(function (response) {
+            name.finished_menu = false;
+            //props.loadAll();
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }      
+
+      
     }
     
     function lockEntry(entry) {
@@ -148,7 +172,8 @@ export default {
       useHasPermission,
       pullMembers,
       onNameCheckbox,
-      lockEntry
+      lockEntry,
+      setMemberState
     }
   },
   template: '#entry-component'

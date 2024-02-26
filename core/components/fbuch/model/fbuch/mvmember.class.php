@@ -1,11 +1,35 @@
 <?php
 class mvMember extends xPDOSimpleObject {
 
+    public function save($cacheFlag= null){
+        if (!$this->isNew()) {
+            $this->xpdo->oldObject = $this->xpdo->getObject('mvMember',$this->get('id'));
+        }        
+        return parent::save($cacheFlag);
+    }    
+
     public function afterSave($fbuch){
         $modx = &$this->xpdo;
         $object = &$this;
 
         $member_status = $object->get('member_status');
+
+        if ($modx->oldObject){
+            /*
+            bei geändertem Mitgliederstatus
+            wenn der neue Status = 'Mitglied'
+            Mitgliedstatus aller Fahrten des Eintrittsjahres auf 'Mitglied' setzen,
+            falls vorher zb. Gast eingetragen war 
+            (wegen Einordnung bei Kilometerauswertung)
+            */
+            $eintritt = $this->get('eintritt');
+            $year_eintritt = substr($eintritt,0,4);            
+            $old_member_status = $modx->oldObject->get('member_status');    
+            if ($member_status == 'Mitglied' && $old_member_status != $member_status){
+            //we do nothing here! Das ist zu komplex und zu fehleranfällig.
+            //wenn nötig, wird der Mitgliedstatus der Fahrten manuell angepasst. Fertig.    
+            }
+        }        
 
         if ($user = $modx->getObject('modUser',array('id'=>$object->get('modx_user_id')))){
             /*
