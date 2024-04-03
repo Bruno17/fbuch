@@ -1,4 +1,5 @@
 import { useLoadPermissions,useHasPermission } from "../../composables/helpers.js";
+import { useCreateTable,useCopyTable } from "../../composables/tableHelpers.js";
 import valuesetter from '../../components/valuesetter.js';
 import api_select from '../../components/api_select.js';
 import monthrange_select from '../../components/monthrange_select.js';
@@ -33,6 +34,7 @@ export default {
             { name: 'Aktionen', label: 'Aktionen', field: 'Aktionen', sortable: false }
         ]
         const visible_columns = ref(['Rang','Nachname','Vorname','km','Fahrten','Aktionen']);
+        const export_columns = ref(['Rang','Nachname','Vorname','km','Fahrten']);
 
         const initial_pagination = {
             rowsPerPage: 200
@@ -92,11 +94,19 @@ export default {
                 km_sum.value = response.data.km_sum;
                 if (useHasPermission('fbuch_view_birthdate')){
                     visible_columns.value = ['Rang','Nachname','Vorname','km','Fahrten','Jahrgang','Aktionen'];
+                    export_columns.value = ['Rang','Nachname','Vorname','km','Fahrten','Jahrgang'];
                 }                
             })
             .catch(function (error) {
                 console.log(error);
             });            
+        }
+
+
+          
+        function copyData() {
+            var table = useCreateTable(rangliste.value,export_columns.value);
+            useCopyTable(table);
         }
 
 
@@ -106,7 +116,8 @@ export default {
             useHasPermission,
             onSelectStartdate,
             onSelectGroup, 
-            showFahrten,           
+            showFahrten,
+            copyData,           
             rangliste,
             columns,
             visible_columns,

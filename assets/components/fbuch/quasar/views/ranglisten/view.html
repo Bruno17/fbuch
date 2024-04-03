@@ -62,9 +62,19 @@
           </q-td>
         </q-tr>
       </template>
+      <template v-slot:top-right>
+        <q-btn
+          color="primary"
+          icon="content_paste"
+          title="Copy to Clipboard"
+          no-caps
+          @click="copyData"
+        />
+      </template>      
     </q-table>
     Summe: {{km_sum}} km
   </div>
+
 </div>
 
 <fahrten_listview :member="current_member" :state="state"></fahrten_listview>
