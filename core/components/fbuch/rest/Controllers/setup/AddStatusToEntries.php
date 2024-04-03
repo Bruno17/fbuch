@@ -78,6 +78,7 @@ class MyControllerSetupAddStatusToEntries extends BaseController {
                         $austritt = $member->get('austritt');
                         $austritt = substr($austritt,0,10);
                         if (!empty($year_eintritt) && $fahrt_year>=$year_eintritt){
+                            //austritt immer auf Ende des Austrittsjahres setzen.
                             $austritt = empty($austritt) ? $fahrt_year . '-12-31' : $austritt;                            
                         }
  
@@ -87,18 +88,26 @@ class MyControllerSetupAddStatusToEntries extends BaseController {
                             $member_status = 'Mitglied';
                         }
                         */
-                        if ($fahrt_year>=$year_eintritt && $fahrt_date<=$austritt){
+                        if (!empty($year_eintritt) && $fahrt_year>=$year_eintritt && $fahrt_date<=$austritt){
+                            //Jahr der Fahrt später oder gleich dem Eintrittsjahr und
+                            //Datum der Fahrt früher als das Austrittsdatum
                             $member_status = 'Mitglied';
                         }
                         if ($fahrt_year < $year_eintritt){
-                            $member_status = 'Gast';
+                            //Jahr der Fahrt vor dem Jahr des Eintritts
+                            //Fahrt als Gast Fahrt einstufen, wenn momentan Mitglied oder Ausgetreten
+                            //ansonsten aktuellen Mitgliedstatus (zb. VHS) eintragen
+                            if ($member_status == 'Mitglied' || $member_status == 'Ausgetreten'){
+                                $member_status = 'Gast';    
+                            }
                         }                                                
                         if ($member_status == 'Ausgetreten'){
                             //ist eigentlich nicht möglich - weiterhin als Gast in der Auswertung?
                             $member_status = 'Gast';
                         }
                         if ($member_status == 'Unbekannt' && !empty($birthdate) && empty($eintritt) && empty($austritt)){
-                            //aktueller Status, warum auch immer, unbekannt, Geburtstag eingetragen, kein Eintritts oder Austrittsdatum
+                            //aktueller Status, warum auch immer, Unbekannt, Geburtstag eingetragen, kein Eintritts oder Austrittsdatum
+                            //das sind scheinbar oftmals Mitglieder aus einer früheren Mitgliederverwaltung, wo kein Eintrittsdatum eingetragen war 
                             //wir gehen einfach mal davon aus, daß diese Personen zum Zeitpunkt der Fahrt Mitglied war
                             $member_status = 'Mitglied';
                         }                        

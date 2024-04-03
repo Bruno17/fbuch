@@ -513,7 +513,7 @@ class MyControllerFahrten extends BaseController {
         $id = $object->get('id');
         $nutzergruppe_id = (int) $object->get('Nutzergruppe_id');
         $memberfields = 'name,firstname,member_status';
-        $memberfields .= $this->modx->hasPermission('fbuch_view_birthday') ? ',birthdate' : '';
+        $memberfields .= $this->modx->hasPermission('fbuch_view_birthdate') ? ',birthdate' : '';
         $properties = [];
         $properties['classname'] = 'fbuchFahrtNames';
         $properties['where'] = '{"fahrt_id":"' . $id . '"}';
@@ -532,7 +532,7 @@ class MyControllerFahrten extends BaseController {
             foreach ($rows as $row){
                 $row['selected'] = false;
                 $row['idx'] = $idx;
-                $row['age'] = $this->modx->hasPermission('fbuch_view_birthday') ? $this->calculateAge($row['Member_birthdate'],$object->get('date')) : 0;
+                $row['age'] = $this->modx->hasPermission('fbuch_view_birthdate') ? $this->calculateAge($row['Member_birthdate'],$object->get('date')) : 0;
                 if (!empty($row['CompetencyLevel_color'])){
                     
                 } elseif (!empty($this->CompetencyLevel_color)){

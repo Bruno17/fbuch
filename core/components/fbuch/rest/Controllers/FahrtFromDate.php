@@ -61,7 +61,7 @@ class MyControllerFahrtFromDate extends MyControllerFahrten {
         $datenames_id = $this->getProperty('datenames_id',0);
         //$nutzergruppe_id = (int) $object->get('Nutzergruppe_id');
         $memberfields = 'name,firstname,member_status';
-        $memberfields .= $this->modx->hasPermission('fbuch_view_birthday') ? ',birthdate' : '';
+        $memberfields .= $this->modx->hasPermission('fbuch_view_birthdate') ? ',birthdate' : '';
         $properties = [];
         $properties['classname'] = 'fbuchDateNames';
         $properties['where'] = '{"id":"' . $datenames_id . '"}';
@@ -78,7 +78,7 @@ class MyControllerFahrtFromDate extends MyControllerFahrten {
                 $row['obmann'] = 1;
                 $row['selected'] = false;
                 $row['idx'] = $idx;
-                $row['age'] = $this->modx->hasPermission('fbuch_view_birthday') ? $this->calculateAge($row['Member_birthdate'],$object->get('date')) : 0;
+                $row['age'] = $this->modx->hasPermission('fbuch_view_birthdate') ? $this->calculateAge($row['Member_birthdate'],$object->get('date')) : 0;
                 $names[] = $row;
                 $idx ++;
             }
