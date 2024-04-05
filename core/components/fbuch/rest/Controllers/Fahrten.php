@@ -446,7 +446,6 @@ class MyControllerFahrten extends BaseController {
                     }        
                 break;
                 case 'member_fahrten':
-                    $group = $this->getProperty('group');
                     $fahrten = $this->getRangliste();
                     $fahrt_ids = [];
                     if (is_array($fahrten)){

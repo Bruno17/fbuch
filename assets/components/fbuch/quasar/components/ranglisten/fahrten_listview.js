@@ -46,6 +46,7 @@ export default {
             data.end_date = state.end_date + ' 23:59:59';
             data.gattung = state.gattung;
             data.group = state.group;
+            data.querytype = state.querytype;
             data.member_id = member.id;            
             return axios.get(ajaxUrl, { params: data })
                 .then(function (response) {

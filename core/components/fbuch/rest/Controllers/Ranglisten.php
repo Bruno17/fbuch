@@ -25,30 +25,6 @@ class MyControllerRanglisten extends modRestController {
         return true;
     }
 
-    public function getOptionByProperty($name,$options,$default){
-        $property = $this->getProperty($name,$default);
-        $options = json_decode($options,true);
-        if (is_array($options) && isset($options[$property])){
-            $option = $options[$property];
-            return $option;
-        }
-        return '';
-    }
-
-    public function getTimeRangeOptions(){
-        $current_year = date('Y');
-        $year = $this->getProperty('year',$current_year);        
-        $options = '
-            {
-                "ganz":{"label":"Ganzes Jahr","query":" AND year(f4.date)=[[+year]] "},
-                "halb_1":{"label":"Winterhalbjahr (Okt - März [[+year]])","query":" AND ((year(f4.date)=[[+year]]-1 AND month(f4.date)>=10) OR (year(f4.date)=[[+year]] AND month(f4.date)<=3)) "},
-                "halb_2":{"label":"Sommerhalbjahr (Apr - Sept [[+year]])","query":" AND year(f4.date)=[[+year]] AND month(f4.date)>=4 AND month(f4.date)<=9 "}
-            }
-        ';
-        $options = str_replace('[[+year]]',$year,$options);
-        return $options;        
-    }
-
     public function getList() {
         $modx = & $this->modx;
         $returntype = $this->getProperty('returntype'); 
@@ -63,13 +39,6 @@ class MyControllerRanglisten extends modRestController {
                     $list[] = ['value'=>$key,'label'=>$value['label']];
                 }
                 break;            
-            case 'timerange_options':
-                $options_json = $this->getTimeRangeOptions();
-                $options = json_decode($options_json,1);
-                foreach ($options as $key => $value){
-                    $list[] = ['value'=>$key,'label'=>$value['label']];
-                }
-                break;
             default:
                 $list = $this->getRangliste();
             break;

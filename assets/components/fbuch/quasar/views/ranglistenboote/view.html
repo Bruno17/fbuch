@@ -1,0 +1,69 @@
+<div class="q-pa-md row q-col-gutter-sm">
+
+  <datepicker label="Datum ab" class="col-md-3 col-sm-3 col-xs-12" v-model="state.start_date"  
+   @update:modelValue="onSelectStartdate">
+  </datepicker>
+
+  <monthrange_select label="Zeitraum" class="col-md-3 col-sm-3 col-xs-12" v-model="state.monthrange"
+   @update:modelValue="onSelectStartdate"
+  >
+  </monthrange_select>  
+
+  <api_select ref="gattungSelect" class="col-md-3 col-sm-3 col-xs-12" v-model="state.gattung" label="Gerät"
+    controller="Boote?limit=100000&returntype=gattungnames" @update:model-value="onSelectGroup" :emit-value="true"
+    :hide-bottom-space="true" :use-input="false" :hide-selected="false" behavior="default">
+
+  </api_select>
+
+</div>
+
+<div class="q-px-md q-pb-md row">
+  <div class="col-12">
+    <q-table :rows="rangliste" row-key="id" :columns="columns" :visible-columns="visible_columns"
+      :pagination="initial_pagination" flat bordered dense>
+      <template v-slot:body="props">
+        <q-tr :props="props">
+          <q-td key="Rang" :props="props">
+            {{ props.row.Rang }}
+          </q-td>
+          <q-td key="id" :props="props">
+            {{ props.row.id }}
+          </q-td>          
+          <q-td key="Name" :props="props">
+            {{ props.row.Name }}
+          </q-td>
+          <q-td key="km" :props="props">
+            {{ props.row.km }}
+          </q-td>
+          <q-td key="Fahrten" :props="props">
+            {{ props.row.Fahrten }}
+          </q-td>
+          <q-td key="Aktionen" :props="props">
+            <q-btn color="grey-7" round flat icon="more_horiz">
+              <q-menu auto-close anchor="center left" self="top right">
+                <q-list bordered separator>
+                  <q-item clickable>
+                    <q-item-section @click="showFahrten(props.row)">Fahrten anzeigen</q-item-section>
+                  </q-item>
+                </q-list>
+              </q-menu>
+            </q-btn>
+          </q-td>
+        </q-tr>
+      </template>
+      <template v-slot:top-right>
+        <q-btn
+          color="primary"
+          icon="content_paste"
+          title="Copy to Clipboard"
+          no-caps
+          @click="copyData"
+        />
+      </template>      
+    </q-table>
+    Summe: {{km_sum}} km
+  </div>
+
+</div>
+
+<fahrten_listview :member="current_member" :state="state"></fahrten_listview>

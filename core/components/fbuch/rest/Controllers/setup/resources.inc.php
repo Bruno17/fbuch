@@ -125,7 +125,24 @@ $update_resources = [
      'tvs'=>[
         ['name'=>'scripts','value'=>'[[fbuchGetAssetsFiles? &folder=`quasar/components/fahrtenbuch` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]  ']
      ]
-    ],                
+    ],
+    ['pagetitle'=>'Boote',
+     'alias'=>'ranglistenboote',
+     'context_key' => 'fbuch',
+     'uri' => 'auswertungen/boote.html',
+     'uri_override' => 1,
+     'parent_uri'=>'auswertungen/',
+     'template_name'=>'fbuch Quasar 2',
+     'published'=>1,
+     'resource_groups'=>['fbuch'],
+     'content'=>'[[-$fbuch_auswertung_boote]]',
+     'tvs'=>[
+        ['name'=>'scripts','value'=>'
+        [[fbuchGetAssetsFiles? &folder=`quasar/components/fahrtenbuch` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]  
+        [[fbuchGetAssetsFiles? &folder=`quasar/components/ranglisten` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]
+        ']
+     ]
+    ],                        
     ['pagetitle'=>'Meine Einladungslisten Einträge',
      'alias'=>'meine-einladungslisten-eintraege',
      'context_key' => 'fbuch',
@@ -162,7 +179,7 @@ $update_resources = [
      'content'=>'',
      'published'=>1,
      'hidemenu'=>0,
-     'resource_groups'=>['fbuch'],
+     'resource_groups'=>[],
      'tvs'=>[['name'=>'scripts','value'=>'']]
     ],      
     ['pagetitle'=>'Einladungslisten',
