@@ -1861,6 +1861,11 @@ class Fbuch {
                 }
                 $fahrtnam->set('fahrt_id', $object->get('id'));
             }
+            $member_status = '';
+            if (!empty($values['member_id']) && $member = $this->modx->getObject('mvMember',$values['member_id'])){
+                $member_status = $member->get('member_status');
+            }  
+            $fahrtnam->set('member_status',$member_status);          
             $fahrtnam->set('obmann',1);
             $fahrtnam->save();
 
@@ -2132,6 +2137,12 @@ class Fbuch {
                 if ($target_date == $source_date) {
                     switch ($source) {
                         case 'fahrten':
+                            $member_status = '';
+                            if (!empty($member_id) && $member = $modx->getObject('mvMember',$member_id)){
+                                $member_status = $member->get('member_status');
+                            } else if (!empty($guestname)) {
+                                $member_status = 'Gasteintrag';
+                            }                            
                             if ($member_id != 0 && $object = $modx->getObject($classname, array('fahrt_id' => $target_id, 'member_id' => $member_id))) {
                                 //name exists allready in fahrt, do nothing
                             } elseif ($member_id == 0 && !empty($guestname) && $object = $modx->getObject($classname, array('fahrt_id' => $target_id, 'guestname' => $guestname))) {
@@ -2143,12 +2154,19 @@ class Fbuch {
                                     $object->set('cox',0);
                                     $object->set('obmann',0);
                                     $object->set('guestname',$guestname);
-                                    $object->set('guestemail',$guestemail);                                    
+                                    $object->set('guestemail',$guestemail);
+                                    $object->set('member_status',$member_status);                                    
                                     $object->save();
                                 }
                             }
                             break;
                         case 'dates':
+                            $member_status = '';
+                            if (!empty($member_id) && $member = $modx->getObject('mvMember',$member_id)){
+                                $member_status = $member->get('member_status');
+                            } else if (!empty($guestname)) {
+                                $member_status = 'Gasteintrag';
+                            }                              
                             if ($member_id != 0 && $object = $modx->getObject($classname, array('fahrt_id' => $target_id, 'member_id' => $member_id))) {
                                 //name exists allready in fahrt, do nothing
                             } elseif ($member_id == 0 && !empty($guestname) && $object = $modx->getObject($classname, array('fahrt_id' => $target_id, 'guestname' => $guestname))) {
@@ -2162,7 +2180,8 @@ class Fbuch {
                                 $object->set('createdby', $modx->user->get('id'));
                                 $object->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
                                 $object->set('guestname',$guestname);
-                                $object->set('guestemail',$guestemail);                                  
+                                $object->set('guestemail',$guestemail); 
+                                $object->set('member_status',$member_status);                                 
                                 $object->save();
                             }
                             break;
