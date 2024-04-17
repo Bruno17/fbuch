@@ -47,6 +47,50 @@ $update_uris = [
 ];
 
 $update_resources = [
+    ['pagetitle'=>'Fahrtenbuch',
+     'alias'=>'fahrtenbuch',
+     'context_key' => 'fbuch',
+     'uri' => 'fahrtenbuch/',
+     'uri_override' => 0,
+     'isfolder' => 1,
+     'template_name'=>'',
+     'published'=>1,
+     'richtext'=>0,
+     'resource_groups'=>['fbuch']
+    ], 
+    ['pagetitle'=>'Termine/Reservierung',
+     'alias'=>'termine',
+     'context_key' => 'fbuch',
+     'uri' => 'termine',
+     'uri_override' => 1,
+     'isfolder' => 1,
+     'template_name'=>'fbuch Quasar 2',
+     'published'=>1,
+     'hidemenu'=>0,
+     'resource_groups'=>['fbuch','fbuch_guest']
+    ],
+    ['pagetitle'=>'Listen',
+     'alias'=>'listen',
+     'context_key' => 'fbuch',
+     'uri' => 'listen/',
+     'uri_override' => 0,
+     'isfolder' => 1,
+     'template_name'=>'',
+     'published'=>1,
+     'hidemenu'=>0,
+     'resource_groups'=>['fbuch']
+    ], 
+    ['pagetitle'=>'Auswertungen',
+     'alias'=>'auswertungen',
+     'context_key' => 'fbuch',
+     'uri' => 'auswertungen/',
+     'uri_override' => 0,
+     'isfolder' => 1,
+     'template_name'=>'',
+     'published'=>1,
+     'hidemenu'=>0,
+     'resource_groups'=>['fbuch']
+    ],                                   
     ['pagetitle'=>'Login',
      'longtitle'=>'[[$$fbuch_login_pagetitle]]',
      'menutitle'=>'Login/Fragen',
@@ -54,21 +98,13 @@ $update_resources = [
      'context_key' => 'fbuch',
      'uri' => 'login/',
      'uri_override' => 0,
+     'isfolder' => 1,
      'template_name'=>'fbuch Quasar 2',
      'published'=>1,
      'content'=>'[[$fbuch_Login]]',
      'richtext'=>0
     ],    
-    ['pagetitle'=>'Termine/Reservierung',
-     'alias'=>'termine',
-     'context_key' => 'fbuch',
-     'uri' => 'termine',
-     'uri_override' => 1,
-     'template_name'=>'fbuch Quasar 2',
-     'published'=>1,
-     'hidemenu'=>0,
-     'resource_groups'=>['fbuch','fbuch_guest']
-    ],
+
     ['pagetitle'=>'Danke für Deine Anfrage',
      'alias'=>'danke-fuer-deine-anfrage',
      'context_key' => 'fbuch',
@@ -161,6 +197,7 @@ $update_resources = [
      'context_key' => 'fbuch',
      'uri' => 'listen/namen/',
      'uri_override' => 0,
+     'isfolder' => 1,
      'parent_uri'=>'listen/',
      'template_name'=>'fbuch Quasar 2',
      'content'=>'',
@@ -176,12 +213,7 @@ $update_resources = [
      'uri_override' => 0,
      'parent_uri'=>'listen/',
      'template_name'=>'fbuch Quasar 2',
-     'content'=>'
-     <p>Nachfolgend aufgeführte Kompetenzeinstufung der Mitglieder definieren wer unter welchen Umständen welche Boote benutzen darf, bzw. als Obmann oder Obfrau eingesetzt werden kann.</p>
-<p>Hintergrund: Bootsobleute müssen laut Ruderordnung eine entsprechende Befähigung nachweisen können.<br /><br />Mit dieser, hier im Fahrtenbuch, farblich ersichtlichen Einstufung soll dieser Nachweis gegeben sein.</p>
-<p>Der ein oder andere Text in nachfolgenden Definitionen wird sicher noch nachjustiert und verfeinert werden müssen.<br />Dies soll nur eine Richtlinie für die Einstufung sein.</p>
-<p>Eine Einstufung in die nächsthöhere Stufe erfolgt nicht automatisch, sondern nach formloser Beantragung durch die Vostandschaft bzw. einem durch die Vorstandschaft entsprechend befähigten Trainer. Die aktuelle Einstufung der einzelnen Mitglieder ist im Fahrtenbuch durch farbliche Kennzeichnung ersichtlich. Wer glaubt, nicht richtig eingestuft zu sein, einfach bei einem Eurer Übungsleiter melden oder eine Mail/Anruf an die Vorstandschaft und wir schauen uns das an.</p>
-     ',
+     'content'=>'[[*content]]',
      'published'=>1,
      'hidemenu'=>0,
      'resource_groups'=>[],

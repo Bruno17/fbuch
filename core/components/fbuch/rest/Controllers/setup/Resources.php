@@ -49,7 +49,7 @@ class MyControllerSetupResources extends BaseController {
                     $resource = $this->modx->newObject('modResource');
                 }
                 $resource->fromArray($r);
-                if (isset($r['template_name']) && $template=$this->modx->getObject('modTemplate',['templatename'=>$r['template_name']])){
+                if (!empty($r['template_name']) && $template=$this->modx->getObject('modTemplate',['templatename'=>$r['template_name']])){
                     $resource->set('template',$template->get('id'));    
                 } 
                 if (isset($r['parent_uri']) && $parent = $this->modx->getObject('modResource',['uri'=>$r['parent_uri']])){
