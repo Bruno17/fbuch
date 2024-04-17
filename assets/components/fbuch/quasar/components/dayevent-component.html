@@ -16,7 +16,7 @@
                 <q-btn color="white" text-color="black" round icon="navigate_next">
                     <q-menu v-model="state.showmenu" anchor="bottom right" self="top right" :offset="[0, 5]">
                         <q-list dense bordered separator>
-                            <q-item :href="'/termine/#/'+event.id+'/anmeldung'" clickable v-ripple>
+                            <q-item :href="'termine/#/'+event.id+'/anmeldung'" clickable v-ripple>
                                 <q-item-section avatar><q-avatar icon="group_add" /></q-item-section>
                                 <q-item-section>
                                     <q-item-label>Anmelden</q-item-label>
@@ -24,14 +24,14 @@
                                 </q-item-section>
                             </q-item>
 
-                            <q-item :href="'/termine/#/'+event.id+'/kommentare'" clickable v-ripple>
+                            <q-item :href="'termine/#/'+event.id+'/kommentare'" clickable v-ripple>
                                 <q-item-section avatar><q-avatar icon="comments" /></q-item-section>
                                 <q-item-section>
                                     <q-item-label>Benachrichtigungen</q-item-label>
                                     <q-item-label caption>Benachrichtigungen schreiben/lesen</q-item-label>
                                 </q-item-section>
                             </q-item>                            
-                            <q-item :href="'/termine/#/' +event.id+ '/einladungen'" clickable v-ripple>
+                            <q-item :href="'termine/#/' +event.id+ '/einladungen'" clickable v-ripple>
                                 <q-item-section avatar><q-avatar icon="event" /></q-item-section>
                                 <q-item-section>
                                     <q-item-label>Einladungen vornehmen</q-item-label>
@@ -40,7 +40,7 @@
                             </q-item>
 
                             <q-item v-if="useHasPermission('fbuch_edit_termin')"
-                                :href="'/termine/kalenderansicht.html/#/event-update/'+event.id" clickable v-ripple>
+                                :href="'termine/kalenderansicht.html/#/event-update/'+event.id" clickable v-ripple>
                                 <q-item-section avatar><q-avatar icon="edit" /></q-item-section>
                                 <q-item-section>Termin/Wiederholungen bearbeiten</q-item-section>
                             </q-item>
@@ -134,7 +134,7 @@
                                     <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
                                         <q-list dense bordered separator>
                                             <q-item
-                                                :href="'/fahrtenbuch/fahrtenbuch.html/#/entry-createfromdate/'+name.id"
+                                                :href="'fahrtenbuch/fahrtenbuch.html/#/entry-createfromdate/'+name.id"
                                                 clickable v-ripple>
                                                 <q-item-section avatar>
                                                     <q-avatar icon="done" />
