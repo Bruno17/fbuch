@@ -3,8 +3,12 @@
 RewriteEngine On
 RewriteBase /
 
+# Store the current location in an environment variable CWD
+RewriteCond $0§%{REQUEST_URI} ([^§]*)§(.*)\1$
+RewriteRule ^.*$ - [E=CWD:%2]
+
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-s
-RewriteRule ^(.*)$ assets/components/fbuch/rest/index.php?_rest=$1 [QSA,NC,L]
+RewriteRule ^(.*)$ %{ENV:CWD}index.php?_rest=$1&test=%{ENV:CWD} [QSA,NC,L]
 RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^(.*)$ assets/components/fbuch/rest/index.php [QSA,NC,L]
+RewriteRule ^(.*)$ %{ENV:CWD}index.php [QSA,NC,L]
