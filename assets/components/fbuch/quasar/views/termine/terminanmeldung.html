@@ -29,7 +29,7 @@
                                         <q-item-label>Zur Kalender Tagesansicht</q-item-label>
                                     </q-item-section>
                                 </q-item> 
-                                <q-item v-if="useHasPermission('fbuch_edit_termin')" :href="'/termine/kalenderansicht.html/#/event-update/'+entry.id" clickable v-ripple>
+                                <q-item v-if="useHasPermission('fbuch_edit_termin')" :href="'termine/kalenderansicht.html/#/event-update/'+entry.id" clickable v-ripple>
                                     <q-item-section avatar><q-avatar icon="edit" /></q-item-section>
                                     <q-item-section>
                                         <q-item-label>Termin bearbeiten</q-item-label>

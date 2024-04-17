@@ -14,7 +14,7 @@
       :pagination="initial_pagination" flat bordered dense>
 
       <template v-slot:top>
-        <q-btn v-if="useHasPermission('fbuch_create_names')" color="primary" label="Eintrag erstellen" href="/listen/namen/#/member-create" />
+        <q-btn v-if="useHasPermission('fbuch_create_names')" color="primary" label="Eintrag erstellen" href="listen/namen/#/member-create" />
         <q-space />
         <q-input borderless dense debounce="300" color="primary" v-model="filter" placeholder="Suche">
           <template v-slot:append>
@@ -52,7 +52,7 @@
             <q-btn color="grey-7" round flat icon="more_horiz">
               <q-menu auto-close anchor="center left" self="top right">
                 <q-list bordered separator>
-                  <q-item v-if="useHasPermission('fbuch_edit_names')" clickable :href="'/listen/namen/#/member-update/'+props.row.id">
+                  <q-item v-if="useHasPermission('fbuch_edit_names')" clickable :href="'listen/namen/#/member-update/'+props.row.id">
                     <q-item-section >Eintrag bearbeiten</q-item-section>
                   </q-item>
                 </q-list>

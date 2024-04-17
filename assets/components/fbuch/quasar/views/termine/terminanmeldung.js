@@ -43,9 +43,8 @@ export default {
                 .then(function (response) {
                     const object = response.data.object;
                     entry.value = object;
-                    urls.value.fahrtenbuch = '/fahrtenbuch/fahrtenbuch.html/#/' + Quasar.date.formatDate(entry.value.date, 'YYYY/MM/DD')
-                    urls.value.dayevents = '/termine/kalenderansicht.html/#/events/day/' + Quasar.date.formatDate(entry.value.date, 'YYYY/MM/DD')
-                    console.log(urls);
+                    urls.value.fahrtenbuch = 'fahrtenbuch/fahrtenbuch.html/#/' + Quasar.date.formatDate(entry.value.date, 'YYYY/MM/DD')
+                    urls.value.dayevents = 'termine/kalenderansicht.html/#/events/day/' + Quasar.date.formatDate(entry.value.date, 'YYYY/MM/DD')
                     prepareEvent();
                 })
                 .catch(function (error) {

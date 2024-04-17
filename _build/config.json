@@ -3,7 +3,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"2.3.7-beta",
+  "version":"2.3.8-beta",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",

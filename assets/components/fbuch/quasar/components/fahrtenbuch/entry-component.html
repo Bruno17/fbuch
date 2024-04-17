@@ -27,7 +27,7 @@
                 <q-btn color="white" text-color="black" round icon="navigate_next">
                     <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
                         <q-list dense bordered separator>
-                            <q-item v-if="entry.locked==0" :href="'/fahrtenbuch/fahrtenbuch.html/#/entry-update/'+entry.id" clickable v-ripple>
+                            <q-item v-if="entry.locked==0" :href="'fahrtenbuch/fahrtenbuch.html/#/entry-update/'+entry.id" clickable v-ripple>
                                 <q-item-section avatar><q-avatar icon="edit" /></q-item-section>
                                 <q-item-section>
                                     <q-item-label>Eintrag bearbeiten</q-item-label>
@@ -41,7 +41,7 @@
                                     <q-item-label caption>Markierte Personen hier einfügen</q-item-label>
                                 </q-item-section>
                             </q-item>
-                            <q-item target="_blank" :href="'/listen/bootsliste/boots-details/?boot_id='+entry.boot_id" clickable v-ripple>
+                            <q-item target="_blank" :href="'listen/bootsliste/boots-details/?boot_id='+entry.boot_id" clickable v-ripple>
                                 <q-item-section avatar><q-avatar icon="settings" /></q-item-section>
                                 <q-item-section>
                                     <q-item-label>Zur Bootsseite</q-item-label>
