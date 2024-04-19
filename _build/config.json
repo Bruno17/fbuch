@@ -3,7 +3,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"2.3.8-beta",
+  "version":"2.4.0-beta",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",
@@ -16,6 +16,7 @@
   "database":{
     "tables":[
       "fbuchFahrt",
+      "fbuchDestination",
       "fbuchDate",
       "fbuchDateNames",
       "fbuchDateInvited",
@@ -32,6 +33,8 @@
       "fbuchMailinglist",
       "fbuchMailinglistNames",
       "fbuchDateType",
+      "fbuchCompetencyLevel",
+      "mvMemberState",
       "mvMember",
       "mvRole",
       "mvMemberGroup",

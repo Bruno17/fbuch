@@ -21,7 +21,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
                 ]               
             ]
         ]; 
-        
+
         //userGroup
         if ($accessPolicy = $modx->getObject('modAccessPolicy', ['name' => $group['policy']])){
             if ($userGroup = $modx->getObject('modUserGroup', ['name' => $group['user_group']])){

@@ -25,6 +25,7 @@ if ($object->xpdo) {
             $manager = $modx->getManager();
 
             $manager->createObjectContainer('fbuchFahrt');
+            $manager->createObjectContainer('fbuchDestination');
             $manager->createObjectContainer('fbuchDate');
             $manager->createObjectContainer('fbuchDateNames');
             $manager->createObjectContainer('fbuchDateInvited');
@@ -41,6 +42,8 @@ if ($object->xpdo) {
             $manager->createObjectContainer('fbuchMailinglist');
             $manager->createObjectContainer('fbuchMailinglistNames');
             $manager->createObjectContainer('fbuchDateType');
+            $manager->createObjectContainer('fbuchCompetencyLevel');
+            $manager->createObjectContainer('mvMemberState');
             $manager->createObjectContainer('mvMember');
             $manager->createObjectContainer('mvRole');
             $manager->createObjectContainer('mvMemberGroup');
