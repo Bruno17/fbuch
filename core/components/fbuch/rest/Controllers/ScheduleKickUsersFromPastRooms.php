@@ -1,6 +1,6 @@
 <?php
 
-class MyControllerScheduleKickUsersFromPastRooms extends modRestController {
+class MyControllerScheduleKickUsersFromPastRooms extends fbuchRestController {
     
     public $classKey = 'modResource';
  

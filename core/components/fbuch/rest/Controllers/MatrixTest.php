@@ -1,6 +1,6 @@
 <?php
 
-class MyControllerMatrixTest extends modRestController {
+class MyControllerMatrixTest extends fbuchRestController {
     
     public $classKey = 'modResource';
  

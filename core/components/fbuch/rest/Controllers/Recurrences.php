@@ -1,6 +1,6 @@
 <?php
 
-class MyControllerRecurrences extends modRestController {
+class MyControllerRecurrences extends fbuchRestController {
     
     public $defaultLimit = 0;
     public $classKey = 'fbuchDate';

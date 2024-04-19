@@ -1,6 +1,6 @@
 <?php
 
-class BaseController extends modRestController {
+class BaseController extends fbuchRestController {
     
     public $defaultLimit = 0;
     

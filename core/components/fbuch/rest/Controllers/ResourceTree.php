@@ -1,6 +1,6 @@
 <?php
 
-class MyControllerResourceTree extends modRestController {
+class MyControllerResourceTree extends fbuchRestController {
     
     public $classKey = 'modResource';
  

@@ -1,6 +1,7 @@
 <?php
 // Boot up MODX
 $working_context = 'web';
+$isMODX3 = $modx->getVersionData()['version'] >= 3;
 
 require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/config.core.php';
 require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
@@ -33,6 +34,12 @@ $rest = $modx->getService('rest', 'rest.modRestService', '', array(
     'controllerClassPrefix' => 'MyController',
     'xmlRootNode' => 'response',
 ));
+
+if ($isMODX3) {
+    abstract class fbuchRestController extends \MODX\Revolution\Rest\modRestController {}
+} else {
+    abstract class fbuchRestController extends modRestController {}
+}
 
 //print_r($modx->user->toArray());
 

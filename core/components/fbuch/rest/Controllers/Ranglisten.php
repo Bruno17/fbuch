@@ -2,7 +2,7 @@
 
 include 'traits/ranglisten.trait.php'; 
 
-class MyControllerRanglisten extends modRestController {
+class MyControllerRanglisten extends fbuchRestController {
 
     use RanglistenTrait;
     
