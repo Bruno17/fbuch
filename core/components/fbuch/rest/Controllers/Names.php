@@ -37,6 +37,7 @@ class MyControllerNames extends BaseController {
         'name',
         'member_status',
         'competency_level',
+        'safety_instructions_date',
         'riot_user_id',
         'gender' 
         ];
