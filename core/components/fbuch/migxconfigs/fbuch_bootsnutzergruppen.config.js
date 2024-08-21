@@ -1,14 +1,14 @@
 {
-  "id":176,
+  "id":9,
   "name":"fbuch_bootsnutzergruppen",
   "formtabs":[
     {
-      "MIGX_id":258,
+      "MIGX_id":15,
       "caption":"Allgemein",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":1130,
+          "MIGX_id":56,
           "field":"name",
           "caption":"Nutzungsstufe Bezeichnung",
           "description":"",
@@ -27,13 +27,13 @@
           "pos":1
         },
         {
-          "MIGX_id":1131,
+          "MIGX_id":57,
           "field":"color_name",
           "caption":"color_name",
           "pos":2
         },
         {
-          "MIGX_id":1132,
+          "MIGX_id":58,
           "field":"color",
           "caption":"color",
           "description":"",
@@ -52,7 +52,7 @@
           "pos":3
         },
         {
-          "MIGX_id":1133,
+          "MIGX_id":59,
           "field":"description",
           "caption":"Beschreibung",
           "description":"",
@@ -74,12 +74,12 @@
       "pos":1
     },
     {
-      "MIGX_id":259,
+      "MIGX_id":16,
       "caption":"Personen zuweisen",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":1134,
+          "MIGX_id":60,
           "field":"members",
           "caption":"Personen zuweisen",
           "description":"",
@@ -141,7 +141,10 @@
     "has_jointable":"yes",
     "getlistwhere":"",
     "joins":"",
-    "hooksnippets":"",
+    "hooksnippets":{
+      "aftersave":"fbuchFixColorpicker",
+      "aftergetfields":"fbuchFixColorpicker"
+    },
     "cmpmaincaption":"",
     "cmptabcaption":"Bootsnutzungsstufen",
     "cmptabdescription":"Bootsnutzungsstufen verwalten",
@@ -219,7 +222,7 @@
   "createdby":1,
   "createdon":"2017-04-08 11:40:02",
   "editedby":1,
-  "editedon":"2024-01-17 13:18:46",
+  "editedon":"2024-05-07 13:30:11",
   "deleted":0,
   "deletedon":null,
   "deletedby":0,

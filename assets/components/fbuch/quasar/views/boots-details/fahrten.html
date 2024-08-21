@@ -1,0 +1,13 @@
+<div class="q-pa-sm q-gutter-sm row">
+
+    <year_select label="Zeitraum" class="col-md-3 col-sm-3 col-xs-12" v-model="state.year"
+    @update:modelValue="onSelectYear"
+   />
+ 
+</div>
+
+<div class="q-pa-sm q-gutter-y-sm">
+    <template v-for="entry in fahrten">
+        <entry section="finished" :entry="entry" />
+    </template>
+</div>

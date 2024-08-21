@@ -1,0 +1,59 @@
+<div class="q-pa-md q-mb-lg full-width" style="min-height: 400px;">
+    <div class="text-h4 "> {{ boat.name }} - Einstellungen eintragen </div>
+
+    <q-form @submit="onSubmit" @reset="onReset" ref="eventform">
+        <div class="q-col-gutter-md q-mb-md row">
+
+            <datepicker 
+                label="Datum" class="col-12 col-md-4" v-model="entry.createdon"
+                :rules="[val => (!submitclicked || (typeof val != 'undefined' && val != '') )  || 'Feld muss ausgefüllt werden!']"
+                >
+            </datepicker>
+
+            <q-input  
+            class="col-12 col-md-8" outlined v-model="entry.names" label="Team"
+            :rules="[val => (!submitclicked || (typeof val != 'undefined' && val != '') )  || 'Feld muss ausgefüllt werden!']" 
+            hint="Für welches Team gelten die Einstellungen?"
+            />
+
+        </div>
+
+        <div class="q-col-gutter-md q-mb-md row">
+            <q-input class="col-12 col-md-12" outlined autogrow v-model="entry.riggerung" label="Riggerung" 
+            hint="Beschreibung der Riggerung"
+            />    
+        </div> 
+        
+        <template v-for="n in boat.seats">
+            <div class="text-h5"> Platz {{ n }} <span v-if="n==1"> (Bugplatz)</span></div>
+            <div class="q-col-gutter-md q-mb-md row">
+                <q-input class="col-12 col-md-12" outlined autogrow v-model="entry['settings'][n-1]['stemmbrett']" label="Stemmbrett" />    
+            </div>
+            <div class="q-col-gutter-md q-mb-md row">
+                <q-input class="col-12 col-md-6" outlined autogrow v-model="entry['settings'][n-1]['dollenabstand']" label="Dollenabstand" />    
+                <q-input class="col-12 col-md-6" outlined autogrow v-model="entry['settings'][n-1]['innenhebel']" label="Innenhebel" />    
+            </div>            
+            <div class="q-col-gutter-md q-mb-md row">
+                <q-input class="col-12 col-md-4" outlined autogrow v-model="entry['settings'][n-1]['bb_dollenhoehe']" label="Bb Dollenhöhe" />    
+                <q-input class="col-12 col-md-4" outlined autogrow v-model="entry['settings'][n-1]['bb_auslegerloch']" label="Bb Auslegerloch" />    
+                <q-input class="col-12 col-md-4" outlined autogrow v-model="entry['settings'][n-1]['bb_dollenscheiben']" label="Bb Dollenscheiben" />    
+            </div>
+            <div class="q-col-gutter-md q-mb-md row">
+                <q-input class="col-12 col-md-4" outlined autogrow v-model="entry['settings'][n-1]['stb_dollenhoehe']" label="Stb Dollenhöhe" />    
+                <q-input class="col-12 col-md-4" outlined autogrow v-model="entry['settings'][n-1]['stb_auslegerloch']" label="Stb Auslegerloch" />    
+                <q-input class="col-12 col-md-4" outlined autogrow v-model="entry['settings'][n-1]['stb_dollenscheiben']" label="Stb Dollenscheiben" />    
+            </div>
+                                             
+        </template>
+
+        <div class="col-12">
+            <q-btn label="Speichern" type="submit" @click="onSubmitClick" color="primary" />
+            <q-btn label="Abbrechen" :href="return_to" class="q-ml-sm" />
+        </div>
+
+
+
+    </q-form>
+
+</div>
+

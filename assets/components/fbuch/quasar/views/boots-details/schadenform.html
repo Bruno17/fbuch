@@ -1,0 +1,52 @@
+<div class="q-pa-md q-mb-lg full-width" style="min-height: 400px;">
+    <div class="text-h4 "> {{ boat.name }} - Schaden melden </div>
+
+    <q-form @submit="onSubmit" @reset="onReset" ref="eventform">
+        <div class="q-col-gutter-md q-mb-md row">
+
+            <datepicker 
+                label="Datum" class="col-12 col-md-4" v-model="entry.createdon"
+                :rules="[val => (!submitclicked || (typeof val != 'undefined' && val != '') )  || 'Feld muss ausgefüllt werden!']"
+                >
+            </datepicker>
+
+            <q-input  
+            class="col-12 col-md-4" outlined v-model="entry.name" label="Name"
+            :rules="[val => (!submitclicked || (typeof val != 'undefined' && val != '') )  || 'Feld muss ausgefüllt werden!']" 
+            hint="Wer meldet den Schaden?"
+            />
+
+        </div>
+
+        <div class="q-col-gutter-md q-mb-md row">
+            <q-input class="col-12 col-md-8" outlined autogrow v-model="entry.comment" label="Beschreibung des Schadens" />    
+        </div>        
+
+        <div class="q-col-gutter-md q-mb-md row">
+
+        <q-field class="col-md-4 col-sm-4 col-xs-12" outlined color="dark">
+            <q-checkbox v-model="entry.done" label="Schaden behoben" :true-value="1" :false-value="0" />
+        </q-field>        
+
+        </div>
+
+        <div class="q-col-gutter-md q-mb-md row">
+
+            <datepicker 
+                label="behoben am" class="col-12 col-md-4" v-model="entry.doneon"
+                >
+            </datepicker>
+
+            <q-input  
+            class="col-12 col-md-4" outlined v-model="entry.doneby_name" label="behoben von"
+            />
+
+        </div> 
+        
+        <div class="col-12">
+            <q-btn label="Speichern" type="submit" @click="onSubmitClick" color="primary" />
+            <q-btn label="Abbrechen" :href="return_to" class="q-ml-sm" />
+        </div>
+    </q-form>
+
+</div>

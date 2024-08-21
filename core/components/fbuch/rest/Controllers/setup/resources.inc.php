@@ -43,7 +43,19 @@ $update_uris = [
     ['uri'=>'termine/einladungslisten.html',
      'context_key' => 'fbuch',
      'new_uri'=>'listen/einladungslisten.html'
-    ]      
+    ],
+    ['uri'=>'listen/bootsliste/',
+     'context_key' => 'fbuch',
+     'new_uri'=>'listen/bootsliste'
+    ],    
+    ['uri'=>'listen/bootsliste/boots-details/',
+     'context_key' => 'fbuch',
+     'new_uri'=>'listen/bootsliste/boots-details'
+    ],
+    ['uri'=>'listen/namen/',
+    'context_key' => 'fbuch',
+    'new_uri'=>'listen/namen'
+    ]    
 ];
 
 $update_resources = [
@@ -195,8 +207,8 @@ $update_resources = [
     ['pagetitle'=>'Namensliste',
      'alias'=>'namen',
      'context_key' => 'fbuch',
-     'uri' => 'listen/namen/',
-     'uri_override' => 0,
+     'uri' => 'listen/namen',
+     'uri_override' => 1,
      'isfolder' => 1,
      'parent_uri'=>'listen/',
      'template_name'=>'fbuch Quasar 2',
@@ -205,7 +217,35 @@ $update_resources = [
      'hidemenu'=>0,
      'resource_groups'=>['fbuch'],
      'tvs'=>[['name'=>'scripts','value'=>'']]
-    ],         
+    ], 
+    ['pagetitle'=>'Bootsliste',
+     'alias'=>'bootsliste',
+     'context_key' => 'fbuch',
+     'uri' => 'listen/bootsliste',
+     'uri_override' => 1,
+     'isfolder' => 1,     
+     'parent_uri'=>'listen/',
+     'template_name'=>'fbuch Quasar 2',
+     'hidemenu'=>0,
+     'published'=>1,
+     'resource_groups'=>['fbuch'],
+     'tvs'=>[['name'=>'scripts','value'=>'']]
+    ],
+    ['pagetitle'=>'Boots Details',
+     'alias'=>'boots-details',
+     'context_key' => 'fbuch',
+     'uri' => 'listen/bootsliste/boots-details',
+     'uri_override' => 1,
+     'isfolder' => 1,     
+     'parent_uri'=>'listen/bootsliste/',
+     'template_name'=>'fbuch Quasar 2',
+     'hidemenu'=>0,
+     'published'=>1,
+     'resource_groups'=>['fbuch'],
+     'tvs'=>[['name'=>'scripts','value'=>'
+     [[fbuchGetAssetsFiles? &folder=`quasar/components/fahrtenbuch` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]  
+     ']]
+    ],                          
     ['pagetitle'=>'Kompetenzstufen',
      'alias'=>'kompetenzstufen',
      'context_key' => 'fbuch',
@@ -214,7 +254,6 @@ $update_resources = [
      'parent_uri'=>'listen/',
      'template_name'=>'fbuch Quasar 2',
      'content'=>'[[*content]]',
-     'published'=>1,
      'hidemenu'=>0,
      'resource_groups'=>[],
      'tvs'=>[['name'=>'scripts','value'=>'']]

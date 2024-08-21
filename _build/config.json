@@ -3,7 +3,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"2.4.0-beta",
+  "version":"2.5.0-beta",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",
@@ -154,6 +154,10 @@
         }
       ],
       "snippets":[
+        {
+          "name":"fbuchFixColorpicker",
+          "file":"fbuchfixcolorpicker.snippet.php"
+        },        
         {
           "name":"setlocale",
           "file":"setlocale.snippet.php"

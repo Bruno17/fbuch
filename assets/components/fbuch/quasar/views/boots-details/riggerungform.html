@@ -1,0 +1,43 @@
+<div class="q-pa-md q-mb-lg full-width" style="min-height: 400px;">
+    <div class="text-h4 "> {{ boat.name }} - Umriggerung eintragen </div>
+
+    <q-form @submit="onSubmit" @reset="onReset" ref="eventform">
+        <div class="q-col-gutter-md q-mb-md row">
+
+            <datepicker 
+                label="Datum" class="col-12 col-md-4" v-model="entry.createdon"
+                :rules="[val => (!submitclicked || (typeof val != 'undefined' && val != '') )  || 'Feld muss ausgefüllt werden!']"
+                >
+            </datepicker>
+
+            <q-input  
+            class="col-12 col-md-4" outlined v-model="entry.name" label="Name"
+            :rules="[val => (!submitclicked || (typeof val != 'undefined' && val != '') )  || 'Feld muss ausgefüllt werden!']" 
+            hint="Wer hat das Boot umgeriggert?"
+            />
+
+        </div>
+
+        <div class="q-col-gutter-md q-mb-md row">
+            <q-select class="col-md-4 col-sm-4 col-xs-12" label="Neue Riggerung" 
+            :options="gattung_options" 
+            emit-value
+            map-options
+            v-model="entry.gattung_id" outlined @update:model-value="updateValue" 
+            hint="Falls eine mögliche Riggerung fehlt, bitte über das Kontaktformular melden und Riggerung unter Bemerkung eintragen!"
+            >
+            </q-select>
+        </div> 
+        
+        <div class="q-col-gutter-md q-mb-md row">
+            <q-input class="col-12 col-md-8" outlined autogrow v-model="entry.comment" label="Grund der Umriggerung/Bemerkung" />    
+        </div>          
+
+        <div class="col-12">
+            <q-btn label="Speichern" type="submit" @click="onSubmitClick" color="primary" />
+            <q-btn label="Abbrechen" :href="return_to" class="q-ml-sm" />
+        </div>
+
+    </q-form>
+
+</div>

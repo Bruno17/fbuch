@@ -1,0 +1,70 @@
+<div class="q-pa-sm q-gutter-sm row">
+
+<q-btn class="" label="Einstellungen eintragen" color="primary"
+:href="'listen/bootsliste/boots-details/#/einstellung-create/'+id"></q-btn>
+
+</div>
+
+<div class="q-pa-sm q-gutter-y-sm">
+    <template v-for="entry in entries">
+ 
+
+        <q-card bordered flat class="full-width">
+            <q-card-section class="bg-primary text-white">
+                <div class="row items-center no-wrap">
+                    <div class="col">
+                        <div class="text-h6">{{entry.Boot_name}}</div>
+                        <div class="text-subtitle2">{{entry.name}}</div>
+                        <div class="text-subtitle2">{{ entry.formattedDate }}</div>
+                        <div class="text-subtitle2">Team: {{ entry.names }}</div>
+                        <div class="text-subtitle2">Riggerung: {{ entry.riggerung }}</div>
+
+
+                    </div>
+                    <div class="col-auto">
+                        <q-btn color="white" text-color="black" round icon="navigate_next">
+                            <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
+                                <q-list dense bordered separator>
+                                    <q-item :href="'listen/bootsliste/boots-details/#/einstellung-update/'+entry.id" clickable v-ripple>
+                                        <q-item-section avatar><q-avatar icon="edit" /></q-item-section>
+                                        <q-item-section>
+                                            <q-item-label>Eintrag bearbeiten</q-item-label>
+                                        </q-item-section>
+                                    </q-item>
+                                 </q-list>
+                            </q-menu>
+                        </q-btn>
+                    </div>
+                </div>
+            </q-card-section>
+            <q-separator></q-separator>
+            <q-card-section>
+                <template v-for="n in entry.Boot_seats">
+                    <div class="text-h5"> Platz {{ n }} <span v-if="n==1"> (Bugplatz)</span></div>
+                    <div class="q-col-gutter-sm q-mb-sm row">
+                        <q-input class="col-12 col-md-12 " readonly outlined autogrow v-model="entry['settings'][n-1]['stemmbrett']" label="Stemmbrett" />    
+                    </div>
+                    <div class="q-col-gutter-sm q-mb-sm row">
+                        <q-input class="col-12 col-md-6" readonly outlined autogrow v-model="entry['settings'][n-1]['dollenabstand']" label="Dollenabstand" />    
+                        <q-input class="col-12 col-md-6 " readonly outlined autogrow v-model="entry['settings'][n-1]['innenhebel']" label="Innenhebel" />    
+                    </div>            
+                    <div class="q-col-gutter-sm q-mb-sm row">
+                        <q-input class="col-12 col-md-4 " readonly outlined autogrow v-model="entry['settings'][n-1]['bb_dollenhoehe']" label="Bb Dollenhöhe" />    
+                        <q-input class="col-12 col-md-4 " readonly outlined autogrow v-model="entry['settings'][n-1]['bb_auslegerloch']" label="Bb Auslegerloch" />    
+                        <q-input class="col-12 col-md-4 " readonly outlined autogrow v-model="entry['settings'][n-1]['bb_dollenscheiben']" label="Bb Dollenscheiben" />    
+                    </div>
+                    <div class="q-col-gutter-sm q-mb-sm row">
+                        <q-input class="col-12 col-md-4 " readonly outlined autogrow v-model="entry['settings'][n-1]['stb_dollenhoehe']" label="Stb Dollenhöhe" />    
+                        <q-input class="col-12 col-md-4 " readonly outlined autogrow v-model="entry['settings'][n-1]['stb_auslegerloch']" label="Stb Auslegerloch" />    
+                        <q-input class="col-12 col-md-4 " readonly outlined autogrow v-model="entry['settings'][n-1]['stb_dollenscheiben']" label="Stb Dollenscheiben" />    
+                    </div>
+                                                     
+                </template>
+            </q-card-section>
+         
+            <q-separator></q-separator>
+        
+        </q-card>        
+    </template>
+</div>
+

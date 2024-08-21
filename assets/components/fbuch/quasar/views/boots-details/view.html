@@ -1,0 +1,112 @@
+<component is="style">
+    td.th {
+        width: 1px;
+        white-space: wrap;
+        font-weight: bold;        
+    }
+</component>
+
+<div class="q-pa-sm">
+    <div class="q-gutter-sm">
+        <q-card bordered class="my-card bg-grey-1">
+            <q-card-section>
+                <div class="row items-center no-wrap">
+                    <div class="col">
+                        <div class="text-h6">{{ boat.name }}</div>
+                    </div>
+
+
+                </div>
+            </q-card-section>
+
+            <q-separator></q-separator>
+    
+                <q-markup-table separator="cell">
+                    <tbody>
+                        <tr>
+                            <td class="th">
+                                mögliche Riggerungen
+                            </td>
+
+                            <td>
+                                <template v-for="(gattung,index) in boat.gattungen">
+                                    <template v-if="index>0">, </template>{{gattung.shortname}}
+                                </template>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="th">
+                                Gewichtsklasse
+                            </td>
+
+                            <td>
+                                {{boat.gewichtsklasse}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="th">
+                                Freigabe
+                            </td>
+
+                            <td>
+                                {{boat.Nutzergruppe_name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="th">
+                                Riggerung
+                            </td>
+
+                            <td>
+                                {{boat.Bootsgattung_shortname}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </q-markup-table>
+ 
+
+            <q-separator></q-separator>
+
+            <q-card-actions>
+                <q-btn class="" label="Zur Bootsliste"
+                :href="'listen/bootsliste/#/'+boat.Bootsgattung_id"></q-btn>
+            </q-card-actions>
+        </q-card>
+
+        <q-tabs align="left" inline-label no-caps outside-arrows mobile-arrows>
+            <q-route-tab
+              label="Schäden"
+              :to="'/'+boat.id+'/schaeden'"
+              exact
+            />
+            <q-route-tab
+              label="Riggerungen"
+              :to="'/'+boat.id+'/riggerungen'"
+              exact
+            >        
+            </q-route-tab>
+            <q-route-tab
+              label="Einstellungen"
+              :to="'/'+boat.id+'/einstellungen'"
+              exact
+            />  
+    
+            
+            <q-route-tab
+              icon="insert_invitation"
+              label="Fahrten"
+              :to="'/'+boat.id+'/fahrten'"
+              exact
+            >
+            </q-route-tab>                       
+    
+          </q-tabs>
+          <router-view></router-view>        
+
+
+    </div>
+
+
+
+</div>

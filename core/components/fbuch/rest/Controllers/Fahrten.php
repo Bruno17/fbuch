@@ -164,7 +164,7 @@ class MyControllerFahrten extends BaseController {
     
     public function afterPut(array &$objectArray) {
         //remove old, unused name(s)
-        $this->modx->log(modX::LOG_LEVEL_DEBUG, 'afterPut');
+        //$this->modx->log(modX::LOG_LEVEL_DEBUG, 'afterPut');
         $fields = array();
         $fields['member_id'] = $this->getProperty('Member_id');
         $fields['fahrt_id'] = isset($objectArray['id']) ? $objectArray['id'] : 0;

@@ -1,0 +1,49 @@
+<div class="q-pa-sm q-gutter-sm row">
+
+<q-btn class="" label="Umriggerung eintragen" color="primary"
+:href="'listen/bootsliste/boots-details/#/riggerung-create/'+id"></q-btn>
+
+</div>
+
+<div class="q-pa-sm q-gutter-y-sm">
+    <template v-for="entry in entries">
+ 
+
+        <q-card bordered flat class="full-width">
+            <q-card-section class="bg-primary text-white">
+                <div class="row items-center no-wrap">
+                    <div class="col">
+                        <div class="text-h6">{{entry.Boot_name}}</div>
+                        <div class="text-subtitle2">{{entry.Bootsgattung_shortname}}</div>
+                        <div class="text-subtitle2">{{entry.name}}</div>
+                        <div class="text-subtitle2">{{ entry.formattedDate }}</div>
+
+
+                    </div>
+                    <div class="col-auto">
+                        <q-btn color="white" text-color="black" round icon="navigate_next">
+                            <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
+                                <q-list dense bordered separator>
+                                    <q-item :href="'listen/bootsliste/boots-details/#/riggerung-update/'+entry.id" clickable v-ripple>
+                                        <q-item-section avatar><q-avatar icon="edit" /></q-item-section>
+                                        <q-item-section>
+                                            <q-item-label>Eintrag bearbeiten</q-item-label>
+                                        </q-item-section>
+                                    </q-item>
+                                 </q-list>
+                            </q-menu>
+                        </q-btn>
+                    </div>
+                </div>
+            </q-card-section>
+            <q-separator></q-separator>
+            <q-card-section>
+                <pre style="white-space: pre-wrap; word-wrap: break-word;font-family: inherit;">{{ entry.comment }}</pre>
+            </q-card-section>
+         
+            <q-separator></q-separator>
+        
+        </q-card>        
+    </template>
+</div>
+

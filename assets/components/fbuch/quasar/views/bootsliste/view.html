@@ -1,0 +1,55 @@
+<div class="q-pa-md row q-col-gutter-sm">
+<api_select ref="gattungSelect" class="col-md-3 col-sm-3 col-xs-12" 
+v-model="state.bootsgattung" 
+label="Gerät"
+controller="Boote?limit=100000&returntype=bootsgattungen" 
+:first_option="{'label':'Typ wählen!','value':'0'}"
+@update:model-value="onSelectBootsgattung"
+:emit-value="true"
+:hide-bottom-space="true" :use-input="false" :hide-selected="false" behavior="default">
+
+</api_select>
+
+</div>
+
+<div class="q-px-md q-py-lg row">
+    <div class="col-12">
+      <q-table :rows="boatlist" :filter="filter" row-key="id" :columns="columns" :visible-columns="visible_columns"
+        :pagination="initial_pagination" flat bordered dense>
+  
+        <template v-slot:body="props">
+          <q-tr :props="props">
+            <q-td key="CompetencyLevel_level" :props="props">
+              <div class="competency-color" :style="'background-color:#'+props.row.CompetencyLevel_color">
+              </div> 
+              {{ props }}
+            </q-td>
+            <q-td key="name" :props="props">
+              {{ props.row.name }}
+            </q-td>
+            <q-td key="gewichtsklasse" :props="props">
+              {{ props.row.gewichtsklasse }}
+            </q-td>
+            <q-td key="Nutzergruppe_name" :props="props">
+              {{ props.row.Nutzergruppe_name }}
+            </q-td>          
+            <q-td key="Bootsgattung_shortname" :props="props">
+              {{ props.row.Bootsgattung_shortname }}
+            </q-td>
+            <q-td key="Aktionen" :props="props">
+              <q-btn color="grey-7" round flat icon="more_horiz">
+                <q-menu auto-close anchor="center left" self="top right">
+                  <q-list bordered separator>
+                    <q-item v-if="useHasPermission('fbuch_edit_names')" clickable :href="'listen/bootsliste/boots-details/#/'+props.row.id+'/schaeden'">
+                      <q-item-section >Zur Bootsseite</q-item-section>
+                    </q-item>
+                 </q-list>
+                </q-menu>
+              </q-btn>
+            </q-td>
+          </q-tr>
+        </template>
+      </q-table>
+    </div>
+  </div>
+

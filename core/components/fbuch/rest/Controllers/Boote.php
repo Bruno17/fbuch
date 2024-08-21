@@ -41,6 +41,22 @@ class MyControllerBoote extends BaseController {
         return true;
     }
 
+    public function getGattungen(){
+        $gattung_ids = $this->object->get('gattung_ids');
+        $gattungen = [];
+        if (!empty($gattung_ids)){
+            $gattung_ids = str_replace('||',',',$gattung_ids);
+            $ids = explode(',',$gattung_ids);
+            
+            if ($collection = $this->modx->getCollection('fbuchBootsGattung',['id:IN'=>$ids])){
+                foreach ($collection as $gattung){
+                    $gattungen[] = $gattung->toArray();    
+                }
+            }
+        }
+        return $gattungen;        
+    }
+
     public function afterRead(array &$objectArray) {
         $returntype = $this->getProperty('returntype');
  
@@ -89,7 +105,9 @@ class MyControllerBoote extends BaseController {
                     foreach ($item as $field => $value){
                         $objectArray['Nutzergruppe_' . $field] = $value;
                     }
-                }                  
+                }
+                $objectArray['gattungen'] = $this->getGattungen();
+                
                 break;
         }
          
