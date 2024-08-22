@@ -21,9 +21,14 @@ class MyControllerResourceTree extends fbuchRestController {
     }
 
     public function prepareTreeNodes($tree){
+        $resource_id = $this->getProperty('resource_id',null);
+        $parent_ids = $this->modx->getParentIds($resource_id);
+        
         $newnodes = [];
         foreach ($tree as $node) {
             $node['haschildren'] = 0;
+            $node['_current'] = $node['id'] == $resource_id ? true : false;
+            $node['_active_parent'] = in_array($node['id'],$parent_ids) ? true : false;
             if (isset($node['children']) && is_array($node['children'])){
                 $node['children'] = $this->prepareTreeNodes($node['children']);
                 if (count($node['children']) > 0){
@@ -59,7 +64,7 @@ class MyControllerResourceTree extends fbuchRestController {
     
     public function getList() {
         $total = 0;
-
+        
         $scriptProperties['parents'] = '0';
         $scriptProperties['context'] = $this->modx->context->get('key');
         $scriptProperties['checkPermissions'] = 'load';
