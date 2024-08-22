@@ -9,10 +9,19 @@
             :hide-bottom-space="true"
             >
             </q-input> 
-            <q-input class="col-12" v-model="state.password" type="password" name="password" outlined label="[[%login.password]]"
+            <valuesetter @hasmounted="state.isPwd=true" />
+            <q-input class="col-12" v-model="state.password" :type="state.isPwd ? 'password' : 'text'" name="password" outlined label="[[%login.password]]"
             :hide-bottom-space="true"
             >
-            </q-input>             
+            <template v-slot:append>
+                <q-icon
+                  :name="state.isPwd ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="state.isPwd = !state.isPwd"
+                />
+              </template>            
+            </q-input>    
+            
             <input class="loginLoginValue" type="hidden" name="service" value="login" />
             <input class="returnUrl" type="hidden" name="returnUrl" value="[[+request_uri]]" />
             <div class="col-12 row">
