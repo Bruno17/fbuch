@@ -1,0 +1,51 @@
+
+<div class="q-pa-sm q-gutter-sm row">
+
+    <q-btn class="" label="Materialschaden melden" color="primary"
+    :href="'listen/bootsliste/'"></q-btn>
+    
+</div>
+
+<div class="q-pa-sm q-gutter-y-sm">
+    <template v-for="comment in comments">
+ 
+
+        <q-card bordered flat class="full-width">
+            <q-card-section class="bg-primary text-white">
+                <div class="row items-center no-wrap">
+                    <div class="col">
+                        <div class="text-h6">{{comment.Boot_name}}</div>
+                        <div class="text-subtitle2">{{comment.name}}</div>
+                        <div class="text-subtitle2">{{ comment.formattedDate }}</div>
+                        <template v-if="comment.done==1">
+                            <div class="text-subtitle2">behoben von: {{comment.doneby_name}}</div>
+                            <div class="text-subtitle2">behoben am: {{ comment.formattedDoneon }}</div>                            
+                        </template>
+
+                    </div>
+                    <div class="col-auto">
+                        <q-btn color="white" text-color="black" round icon="navigate_next">
+                            <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
+                                <q-list dense bordered separator>
+                                    <q-item :href="'listen/bootsliste/boots-details/#/schaden-update/'+comment.id" clickable v-ripple>
+                                        <q-item-section avatar><q-avatar icon="edit" /></q-item-section>
+                                        <q-item-section>
+                                            <q-item-label>Eintrag bearbeiten</q-item-label>
+                                        </q-item-section>
+                                    </q-item>
+                                 </q-list>
+                            </q-menu>
+                        </q-btn>
+                    </div>
+                </div>
+            </q-card-section>
+            <q-separator></q-separator>
+            <q-card-section>
+                <pre style="white-space: pre-wrap; word-wrap: break-word;font-family: inherit;">{{ comment.comment }}</pre>
+            </q-card-section>
+         
+            <q-separator></q-separator>
+        
+        </q-card>        
+    </template>
+</div>

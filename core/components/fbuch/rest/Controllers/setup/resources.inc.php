@@ -55,7 +55,11 @@ $update_uris = [
     ['uri'=>'listen/namen/',
     'context_key' => 'fbuch',
     'new_uri'=>'listen/namen'
-    ]    
+    ],
+    ['uri'=>'listen/bootsschäden.html',
+    'context_key' => 'fbuch',
+    'new_uri'=>'listen/bootsschaeden'
+    ]       
 ];
 
 $update_resources = [
@@ -237,7 +241,7 @@ $update_resources = [
      'uri' => 'listen/bootsliste/boots-details',
      'uri_override' => 1,
      'isfolder' => 1,     
-     'parent_uri'=>'listen/bootsliste/',
+     'parent_uri'=>'listen/bootsliste',
      'template_name'=>'fbuch Quasar 2',
      'hidemenu'=>0,
      'published'=>1,
@@ -270,7 +274,21 @@ $update_resources = [
      'hidemenu'=>0,
      'resource_groups'=>['fbuch_instructor'],
      'tvs'=>[['name'=>'scripts','value'=>'']]
-    ],                                       
+    ],
+    ['pagetitle'=>'Bootsschäden',
+     'alias'=>'bootsschaeden',
+     'context_key' => 'fbuch',
+     'uri' => 'listen/bootsschaeden',
+     'uri_override' => 1,
+     'isfolder' => 1,     
+     'parent_uri'=>'listen/',
+     'template_name'=>'fbuch Quasar 2',
+     'hidemenu'=>0,
+     'published'=>1,
+     'content'=>'',
+     'resource_groups'=>['fbuch'],
+     'tvs'=>[['name'=>'scripts','value'=>'']]
+    ],                                           
     ['pagetitle'=>'LoginByCode',
      'alias'=>'anmelden',
      'context_key' => 'fbuch',
