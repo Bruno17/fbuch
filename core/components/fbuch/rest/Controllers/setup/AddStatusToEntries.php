@@ -62,12 +62,15 @@ class MyControllerSetupAddStatusToEntries extends BaseController {
                     $fahrt_year = substr($fahrt_date,0,4);
 
                     $guestname = $fahrtname->get('guestname');
+                    //Zuerst setzen wir den status auf 'Unbekannt'
                     $member_status = 'Unbekannt';
                     if (!empty($guestname)){
+                        //Falls in guestname was eingetragen war, setzen wir auf 'Gasteintrag'
                         $member_status = 'Gasteintrag';
                     }
 
                     if ($member = $fahrtname->getOne('Member')){
+                        //Eintrag in Mitgliederdatenbank gefunden. Wir setzen zunächst auf den aktuellen Status.
                         $member_status = $member->get('member_status');
                         $birthdate = $member->get('birthdate');
                         $result['name'] = $member->get('firstname') . ' ' . $member->get('name');
@@ -105,6 +108,11 @@ class MyControllerSetupAddStatusToEntries extends BaseController {
                             //ist eigentlich nicht möglich - weiterhin als Gast in der Auswertung?
                             $member_status = 'Gast';
                         }
+                        if ($member_status == 'Gast' && $fahrt_date<=$austritt && empty($eintritt)){
+                            //bis hierhin Status 'Gast' ermittelt, jedoch mit Austrittsdatum nach der Fahrt
+                            //müsste Mitglied gewesen sein
+                            $member_status = 'Mitglied';
+                        }                        
                         if ($member_status == 'Unbekannt' && !empty($birthdate) && empty($eintritt) && empty($austritt)){
                             //aktueller Status, warum auch immer, Unbekannt, Geburtstag eingetragen, kein Eintritts oder Austrittsdatum
                             //das sind scheinbar oftmals Mitglieder aus einer früheren Mitgliederverwaltung, wo kein Eintrittsdatum eingetragen war 
