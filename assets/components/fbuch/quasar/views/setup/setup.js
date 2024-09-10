@@ -60,6 +60,28 @@ export default {
             }); 
         } 
 
+        function insertUsedElementsSnippet(){
+            const ajaxUrl = modx_options.rest_url + 'setup/InsertUsedElementsSnippet';
+            axios.post(ajaxUrl)
+            .then(function (response) {
+  
+            })
+            .catch(function (error) {
+                console.log(error);
+            });             
+        }
+
+        function findOrphans(){
+            const ajaxUrl = modx_options.rest_url + 'setup/FindOrphans';
+            axios.post(ajaxUrl)
+            .then(function (response) {
+  
+            })
+            .catch(function (error) {
+                console.log(error);
+            }); 
+        }         
+
         function fixFinishedEntries(){
             const ajaxUrl = modx_options.rest_url + 'setup/FixFinishedEntries';
             axios.post(ajaxUrl)
@@ -112,6 +134,8 @@ export default {
             setupResources,
             fixFinishedEntries,
             addStatusToEntries,
+            findOrphans,
+            insertUsedElementsSnippet,
             total,
             rest
         }

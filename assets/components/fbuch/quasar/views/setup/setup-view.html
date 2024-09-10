@@ -6,6 +6,7 @@
             <q-tab name="table_prefills" label="Initiale Tabellendaten" />
             <q-tab name="resources" label="Seiten" />
             <q-tab name="special" label="Spezialfunktionen" />
+            <q-tab name="orphans" label="Unbenutzte Elemente" />
         </q-tabs>
     </div>
     <q-tab-panels v-model="tab">
@@ -54,6 +55,16 @@
             Zu verarbeiten: {{rest}}
             </template>          
         </q-tab-panel> 
+        <q-tab-panel name="orphans">
+            <q-btn @click="findOrphans">
+                Unbenutzte Elemente suchen
+            </q-btn>
+            <q-btn @click="insertUsedElementsSnippet">
+                Snippet fbuch_is_element_used in alle Elemente einbauen
+            </q-btn>
+
+                       
+        </q-tab-panel>        
 
 
     </q-tab-panels>
