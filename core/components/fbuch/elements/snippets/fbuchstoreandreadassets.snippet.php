@@ -1,4 +1,6 @@
 <?php
+$modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuchStoreAndReadAssets']);
+$modx->runSnippet('fbuch_is_element_used' , ['type' => 'chunks','name' => 'fbuchStoreAndReadAssets']);
 $url = $modx->getOption('url',$scriptProperties,'');
 $filename = $modx->getOption('filename',$scriptProperties,'');
 $path = $modx->getOption('assets_path') . 'stored_assets/';

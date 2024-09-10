@@ -18,10 +18,12 @@ class MyControllerSetupInsertUsedElementsSnippet extends BaseController {
         $this->config = json_decode($this->getConfig(),true);
         $this->found=[]; 
 
-        $snippets = $this->insertToElements('snippets');
+        $this->insertToElements('snippets');
+        //$this->removeFromElements('snippets');
  
-        $chunks = $this->insertToElements('chunks');
-        //$this->makeTree(); 
+        $this->insertToElements('chunks');
+        
+        print_r($this->found);
 
         return $this->success('',$objectArray);
         
@@ -36,7 +38,7 @@ class MyControllerSetupInsertUsedElementsSnippet extends BaseController {
         }
 
         return false;
-    }  
+    } 
     
     public function insertToElements($type){
         if (!isset($this->found[$type])){
@@ -59,6 +61,63 @@ class MyControllerSetupInsertUsedElementsSnippet extends BaseController {
 
     public function insertToElement($element,$type){
 
+        if ($element['name'] == 'fbuch_is_element_used'){
+            return;
+        }
+
+        switch ($type) {
+            case 'chunks':
+                $word = '[[fbuch_is_element_used? &type=`chunks` &name=`' . $element['name'] . '`]]';
+                break;
+            case 'snippets':
+                $word = '$modx->runSnippet("fbuch_is_element_used" , ["type" => "snippets","name" => "' . $element['name'] . '"]);';
+                $word = str_replace('"',"'",$word);        
+                break;
+        }
+        
+        $folder = $this->fbuchCorePath . 'elements/' . $type . '/';
+        $file = $element['file'];
+        if ($content = file_get_contents($folder.$file)){
+            $result = $this->findMe($word,$content);
+                if ($result !== true){
+                    switch ($type) {
+                        case 'chunks':
+                                $content = $word . $content;  
+                                file_put_contents($folder.$file,$content);                                 
+                            break;
+                        case 'snippets':
+                                $content = str_replace('<?php','<?php ' . $word,$content);
+                                file_put_contents($folder.$file,$content);
+                            break;
+                    }                    
+                                       
+                }
+                
+            
+        }                  
+    }    
+    
+    public function removeFromElements($type){
+        if (!isset($this->found[$type])){
+            $this->found[$type] == []; 
+        }
+
+        $elements = $this->config['package']['elements'][$type];
+        if (is_array($elements)) {
+            foreach ($elements as $element){
+                $element_name = $element['name'];
+                if (!isset($this->found[$type][$element_name])){
+                    $this->found[$type][$element_name] = []; 
+                }                
+
+                $this->RemoveFromElement($element,$type);
+            }
+            
+        }
+    }
+
+    public function removeFromElement($element,$type){
+
         switch ($type) {
             case 'chunks':
                 $word = '[[fbuch_is_element_used? &type=`chunks` &name=`' . $element['name'] . '`]]';
@@ -72,12 +131,22 @@ class MyControllerSetupInsertUsedElementsSnippet extends BaseController {
         $folder = $this->fbuchCorePath . 'elements/' . $type . '/';
         $file = $element['file'];
         if ($content = file_get_contents($folder.$file)){
-            if ($result = $this->findMe($word,$content)){
-                if ($result !== true){
+            $result = $this->findMe($word,$content);
+                if ($result === true){
+                    switch ($type) {
+                        case 'chunks':
+                                $content = str_replace($word,'',$content); 
+                                file_put_contents($folder.$file,$content);  
+                            break;
+                        case 'snippets':
+                                $content = str_replace('<?php ' . $word,'<?php',$content);
+                                file_put_contents($folder.$file,$content);
+                            break;
+                    }                    
                                        
                 }
                 
-            }
+            
         }                  
     }
 

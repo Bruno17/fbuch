@@ -1,4 +1,4 @@
-<?php
+<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuch_rendercolumn_ngm_checkbox']);
 $group_id = $modx->getOption('object_id', $_REQUEST, 0);
 $req_configs = $modx->getOption('reqConfigs', $_REQUEST, 0);
 $member_id = $modx->getOption('member_id', $scriptProperties, 0);

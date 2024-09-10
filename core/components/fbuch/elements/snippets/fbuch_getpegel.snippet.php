@@ -1,4 +1,5 @@
-<?php
+<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuch_getPegel']);
+$modx->runSnippet('fbuch_is_element_used' , ['type' => 'chunks','name' => 'fbuch_getPegel']);
 $show_pegel = $modx->getOption('show_pegel',$scriptProperties,'1');
 $station = $modx->getOption('station',$scriptProperties,'');
 $station_name = $modx->getOption('station_name',$scriptProperties,'');

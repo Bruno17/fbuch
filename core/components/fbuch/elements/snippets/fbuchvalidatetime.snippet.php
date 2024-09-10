@@ -1,4 +1,4 @@
-<?php
+<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuchValidateTime']);
 $input = explode(':',str_replace('.',':',$input));
 $output = '';
 if (!empty($input[0])){

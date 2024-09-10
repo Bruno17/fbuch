@@ -1,4 +1,4 @@
-<?php
+<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'mv_rendercolumn_family_checkbox']);
 $object_id = $modx->getOption('object_id',$_REQUEST,0);
 $req_configs = $modx->getOption('reqConfigs',$_REQUEST,0);
 if ($req_configs == 'mv_families:fbuch'){

@@ -1,4 +1,4 @@
-<?php
+<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'authorize_member']);
 $packageName = 'fbuch';
 $packagepath = $modx->getOption('core_path') . 'components/' . $packageName . '/';
 $modelpath = $packagepath . 'model/';

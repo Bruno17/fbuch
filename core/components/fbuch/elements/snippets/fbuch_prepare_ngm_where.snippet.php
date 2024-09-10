@@ -1,4 +1,4 @@
-<?php
+<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuch_prepare_ngm_where']);
 $group_id = $modx->getOption('object_id', $_REQUEST, '');
 $allowed = $modx->getOption('ngm_allowed', $_REQUEST, '');
 $where = '';

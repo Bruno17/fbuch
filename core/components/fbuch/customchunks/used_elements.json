@@ -1,7 +1,63 @@
 {
+    "snippets": {
+        "fbuchStoreAndReadAssets": {
+            "used": "2024-09-10 15:13"
+        },
+        "fbuch_login_und_redirect": {
+            "used": "2024-09-10 15:05"
+        },
+        "fbuch_getPegel": {
+            "used": "2024-09-10 15:07"
+        },
+        "fbuch_getotp_hook": {
+            "used": "2024-09-10 15:06"
+        },
+        "fbuchGetAssetsFiles": {
+            "used": "2024-09-10 15:12"
+        },
+        "fbuchGetViewDirectory": {
+            "used": "2024-09-10 15:12"
+        },
+        "fbuchLoginByCode": {
+            "used": "2024-09-10 15:07"
+        }
+    },
     "chunks": {
-        "fbuch_Login": {
-            "used": "2024-09-10 11:32"
+        "fbuchStoreAndReadAssets": {
+            "used": "2024-09-10 15:13"
+        },
+        "fbuchLogoutTpl": {
+            "used": "2024-09-10 15:13"
+        },
+        "fbuch_login_und_redirect": {
+            "used": "2024-09-10 15:05"
+        },
+        "fbuch_getPegel": {
+            "used": "2024-09-10 15:07"
+        },
+        "fbuch_emailLogin": {
+            "used": "2024-09-10 15:06"
+        },
+        "fbuchEmailTplKontakt": {
+            "used": "2024-09-10 15:07"
+        },
+        "fbuch_site_logo": {
+            "used": "2024-09-10 15:12"
+        },
+        "fbuchGetAssetsFiles": {
+            "used": "2024-09-10 15:12"
+        },
+        "fbuchGetViewDirectory": {
+            "used": "2024-09-10 15:12"
+        },
+        "fbuch_danke_fuer_deine_anfrage": {
+            "used": "2024-09-10 15:07"
+        },
+        "fbuch_kalenderansicht_headscripts": {
+            "used": "2024-09-10 15:09"
+        },
+        "fbuch_kalenderansicht_scripts": {
+            "used": "2024-09-10 15:09"
         }
     }
 }

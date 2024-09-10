@@ -1,4 +1,4 @@
-<?php
+<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuchSwitchByReqParam']);
 $name = $modx->getOption('name',$scriptProperties,'');
 $default = $modx->getOption('default',$scriptProperties,'');
 $options = $modx->getOption('options',$scriptProperties,'');

@@ -1,4 +1,5 @@
 <?php
+$modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuchLoginByCode']);
 $code = $modx->getOption('code', $_REQUEST, '');
 $iid = (int) $modx->getOption('iid', $_REQUEST, '');
 $mid = (int) $modx->getOption('mid', $_REQUEST, '');

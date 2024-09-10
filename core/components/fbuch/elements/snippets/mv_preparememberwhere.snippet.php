@@ -1,4 +1,4 @@
-<?php
+<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'mv_prepareMemberWhere']);
 $filter_id = $modx->getOption('filtermailmember', $_REQUEST, '');
 $member_id = $modx->getOption('member_id', $_REQUEST, '');
 $singlemail = $modx->getOption('singlemail', $_REQUEST, '');

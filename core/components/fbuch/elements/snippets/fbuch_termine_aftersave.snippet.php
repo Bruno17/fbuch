@@ -1,4 +1,4 @@
-<?php
+<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuch_termine_aftersave']);
 $object = & $modx->getOption('object',$scriptProperties);
 $docopy = $object->get(copy_names_to_mailinglist);
 if ($docopy && $names = $object->getMany('Invited')){

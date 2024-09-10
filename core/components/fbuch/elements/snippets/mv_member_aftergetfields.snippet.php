@@ -1,4 +1,4 @@
-<?php
+<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'mv_member_aftergetfields']);
 $object = &$modx->getOption('object', $scriptProperties, null);
 $properties = $modx->getOption('scriptProperties', $scriptProperties, array());
 $record = $object->get('record_fields');

@@ -1,4 +1,4 @@
-<?php
+<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuchFixColorpicker']);
 $object = &$scriptProperties['object'];
 $record_fields = $object->get('record_fields');
 

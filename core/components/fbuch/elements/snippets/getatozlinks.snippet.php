@@ -1,4 +1,4 @@
-<?php
+<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'getAtoZLinks']);
 $chars = 'A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z';
 $chars = explode(',',$chars);
 $currentchar = $modx->getOption('char',$_REQUEST,'A');
