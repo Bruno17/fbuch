@@ -18,10 +18,11 @@ class MyControllerSetupInsertUsedElementsSnippet extends BaseController {
         $this->config = json_decode($this->getConfig(),true);
         $this->found=[]; 
 
-        $this->insertToElements('snippets');
-        //$this->removeFromElements('snippets');
+        //$this->insertToElements('snippets');
+        $this->removeFromElements('snippets');
  
-        $this->insertToElements('chunks');
+        //$this->insertToElements('chunks');
+        $this->removeFromElements('chunks');
         
         print_r($this->found);
 
