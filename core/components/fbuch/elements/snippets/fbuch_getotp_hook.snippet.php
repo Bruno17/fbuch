@@ -1,5 +1,5 @@
 <?php
-$modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuch_getotp_hook']);
+
 $fbuchCorePath = realpath($modx->getOption('fbuch.core_path', null, $modx->getOption('core_path') . 'components/fbuch')) . '/';
 $modx->getService('fbuch', 'Fbuch', $fbuchCorePath . 'model/fbuch/');
 

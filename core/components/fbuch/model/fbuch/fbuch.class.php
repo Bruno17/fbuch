@@ -128,7 +128,7 @@ class Fbuch {
                 if (!$this->modx->hasPermission($permission)) {
                     if (!empty($object_id) && $object = $this->modx->getObject($classname, $object_id)) {
                         $finished = $object->get('finished');
-                        $now = new DateTime(null, new DateTimeZone('Europe/Berlin'));
+                        $now = $this->getNow();
                         $today = date_format($now,'Y-m-d');
                         $date = $object->get('date_end');
                         $finishedon = $object->get('finishedon');
@@ -1388,6 +1388,7 @@ class Fbuch {
 
     public function checkDateMailinglistNames($date_id) {
         $modx = &$this->modx;
+        $now = $this->getNow();
         if (!empty($date_id) && $object = $modx->getObject('fbuchDate', array('id' => $date_id))) {
             $mailinglist_id = $object->get('mailinglist_id');
 

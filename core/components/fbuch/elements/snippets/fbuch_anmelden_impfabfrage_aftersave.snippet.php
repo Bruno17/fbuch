@@ -1,4 +1,4 @@
-<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuch_anmelden_impfabfrage_aftersave']);
+<?php 
 $corona_geimpft = $modx->getOption('corona_geimpft',$_POST,'');
 $action = $modx->getOption('action',$scriptProperties,'');
 $index = $modx->getOption('index',$scriptProperties,'');

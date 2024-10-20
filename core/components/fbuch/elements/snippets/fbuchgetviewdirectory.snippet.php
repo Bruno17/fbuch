@@ -1,6 +1,4 @@
 <?php
-$modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuchGetViewDirectory']);
-$modx->runSnippet('fbuch_is_element_used' , ['type' => 'chunks','name' => 'fbuchGetViewDirectory']);
 $alias = $modx->resource->get('alias');
 $path = 'quasar/views/' . $alias;
 $defaultpath = 'quasar/views/default';

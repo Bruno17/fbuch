@@ -1,63 +1,353 @@
 {
     "snippets": {
         "fbuchStoreAndReadAssets": {
-            "used": "2024-09-10 15:40"
+            "used": "2024-09-15 14:14"
         },
-        "fbuch_login_und_redirect": {
-            "used": "2024-09-10 15:05"
-        },
-        "fbuch_getPegel": {
-            "used": "2024-09-10 15:07"
-        },
-        "fbuch_getotp_hook": {
-            "used": "2024-09-10 15:06"
+        "setlocale": {
+            "used": "2024-09-15 13:03"
         },
         "fbuchGetAssetsFiles": {
-            "used": "2024-09-10 15:12"
+            "used": "2024-09-15 13:32"
         },
         "fbuchGetViewDirectory": {
-            "used": "2024-09-10 15:12"
+            "used": "2024-09-15 13:32"
+        },
+        "fbuch_getPegel": {
+            "used": "2024-09-15 14:14"
+        },
+        "mv_member_aftergetfields": {
+            "used": "2024-09-12 18:22"
+        },
+        "mv_rendercolumn_family_checkbox": {
+            "used": "2024-09-12 18:22"
+        },
+        "mv_rendercolumn_payer_checkbox": {
+            "used": "2024-09-12 18:22"
         },
         "fbuchLoginByCode": {
-            "used": "2024-09-10 15:07"
+            "used": "2024-09-15 13:32"
+        },
+        "fbuchUpdate": {
+            "used": "2024-09-15 13:04"
+        },
+        "fbuch_login_und_redirect": {
+            "used": "2024-09-15 11:10"
+        },
+        "fbuchGetColor": {
+            "used": "2024-09-12 07:45"
+        },
+        "fbuch_stripwhitespaces": {
+            "used": "2024-09-15 09:23"
+        },
+        "fbuchGetResourceIdByUri": {
+            "used": "2024-09-15 09:23"
+        },
+        "fbuchGetChunk": {
+            "used": "2024-09-15 09:23"
+        },
+        "fbuch_rendercolumn_bootnutzer_checkbox": {
+            "used": "2024-09-12 07:43"
+        },
+        "fbuch_getotp_hook": {
+            "used": "2024-09-15 07:25"
+        },
+        "fbuch_prepare_allowed_where": {
+            "used": "2024-09-12 07:43"
+        },
+        "fbuchFixColorpicker": {
+            "used": "2024-09-12 07:43"
+        },
+        "fbuch_rendercolumn_ngm_checkbox": {
+            "used": "2024-09-12 07:43"
+        },
+        "fbuch_prepare_ngm_where": {
+            "used": "2024-09-12 07:43"
+        },
+        "fbuch_termine_aftersave": {
+            "used": "2024-09-12 07:44"
+        },
+        "mv_getcombo_family_id": {
+            "used": "2024-09-12 18:22"
+        },
+        "mv_member_aftersave": {
+            "used": "2024-09-12 17:49"
+        },
+        "mv_dooraccesscode_beforesave": {
+            "used": "2024-09-12 07:46"
+        },
+        "fbuchSetGridPlaceholders": {
+            "used": "2024-09-15 13:04"
+        },
+        "fbuchValidateTime": {
+            "used": "2024-09-15 13:04"
+        },
+        "fbuchGetFormValues": {
+            "used": "2024-09-15 13:04"
+        },
+        "mv_prepareMemberWhere": {
+            "used": "2024-09-13 16:13"
+        },
+        "check_sendmails": {
+            "used": "2024-09-12 17:05"
+        },
+        "mv_berechne_alter": {
+            "used": "2024-09-15 09:29"
+        },
+        "now": {
+            "used": "2024-09-15 09:28"
+        },
+        "mv_berechne_beitrag": {
+            "used": "2024-09-15 09:29"
+        },
+        "mv_get_sepa": {
+            "used": "2024-09-15 09:29"
+        },
+        "mv_serienmails_aftersave": {
+            "used": "2024-09-12 17:07"
         }
     },
     "chunks": {
-        "fbuchStoreAndReadAssets": {
-            "used": "2024-09-10 15:40"
-        },
         "fbuchLogoutTpl": {
-            "used": "2024-09-10 15:34"
+            "used": "2024-09-15 14:14"
+        },
+        "input_options_memberstates": {
+            "used": "2024-09-12 18:22"
+        },
+        "input_options_beitragstyp": {
+            "used": "2024-09-12 18:22"
+        },
+        "input_options_roles": {
+            "used": "2024-09-12 18:22"
+        },
+        "input_options_competency_levels": {
+            "used": "2024-09-12 18:22"
+        },
+        "fbuch_ajax_autoduplicate_dates": {
+            "used": "2024-09-15 03:00"
         },
         "fbuch_login_und_redirect": {
-            "used": "2024-09-10 15:05"
+            "used": "2024-09-15 11:10"
         },
-        "fbuch_getPegel": {
-            "used": "2024-09-10 15:07"
+        "input_options_gattung_id": {
+            "used": "2024-09-12 07:43"
         },
-        "fbuch_emailLogin": {
-            "used": "2024-09-10 15:06"
+        "input_options_gattung_ids": {
+            "used": "2024-09-12 07:43"
         },
-        "fbuchEmailTplKontakt": {
-            "used": "2024-09-10 15:07"
+        "input_options_bootsnutzergruppen": {
+            "used": "2024-09-12 07:43"
         },
-        "fbuch_site_logo": {
-            "used": "2024-09-10 15:12"
+        "fbuch_Login": {
+            "used": "2024-09-15 09:23"
         },
-        "fbuchGetAssetsFiles": {
-            "used": "2024-09-10 15:12"
+        "fbuchMitgliederMessageQuasar": {
+            "used": "2024-09-15 09:23"
         },
-        "fbuchGetViewDirectory": {
-            "used": "2024-09-10 15:12"
+        "fbuchLoginTpl": {
+            "used": "2024-09-15 09:23"
         },
-        "fbuch_danke_fuer_deine_anfrage": {
-            "used": "2024-09-10 15:07"
+        "fbuchPegel": {
+            "used": "2024-09-15 09:23"
+        },
+        "fbuch_mailinglist_inputoptions": {
+            "used": "2024-09-12 07:43"
+        },
+        "input_options_mailfilter": {
+            "used": "2024-09-12 07:44"
+        },
+        "input_options_gattungname": {
+            "used": "2024-09-12 07:44"
+        },
+        "input_options_boot_id": {
+            "used": "2024-09-12 07:44"
+        },
+        "input_options_group": {
+            "used": "2024-09-12 07:46"
+        },
+        "fbuch_ajax_collectMatrixMessages": {
+            "used": "2024-09-15 09:30"
+        },
+        "fbuch_Ergometer_Fahrtenliste": {
+            "used": "2024-09-15 09:27"
+        },
+        "fbuchFahrten": {
+            "used": "2024-09-15 12:39"
+        },
+        "fbuchErgofahrtenButtons": {
+            "used": "2024-09-15 12:39"
+        },
+        "fbuchErgofahrtenHead": {
+            "used": "2024-09-15 12:39"
+        },
+        "fbuchAppErgometer_fahrtenliste": {
+            "used": "2024-09-15 09:27"
+        },
+        "fbuchErgofahrtenRow": {
+            "used": "2024-09-15 12:39"
+        },
+        "fbuch_ajax_updateFahrt": {
+            "used": "2024-09-15 12:39"
+        },
+        "fbuchErgofahrtenForm": {
+            "used": "2024-09-15 12:39"
+        },
+        "fbuch_ajax_getErgoFahrten": {
+            "used": "2024-09-15 12:39"
         },
         "fbuch_kalenderansicht_headscripts": {
-            "used": "2024-09-10 15:09"
+            "used": "2024-09-14 10:58"
         },
         "fbuch_kalenderansicht_scripts": {
-            "used": "2024-09-10 15:09"
+            "used": "2024-09-14 10:58"
+        },
+        "fbuch_listen_zubehoer": {
+            "used": "2024-09-12 08:09"
+        },
+        "mv_mail_document_tpl": {
+            "used": "2024-09-12 17:09"
+        },
+        "mv_mail_documents_wrapper": {
+            "used": "2024-09-12 17:09"
+        },
+        "mv_Geburtstagsliste_sortiert_nach_Geburtstag": {
+            "used": "2024-09-15 09:28"
+        },
+        "mv_tpl_geburtstagsliste_month": {
+            "used": "2024-09-15 09:28"
+        },
+        "mv_tpl_geburtstagsliste": {
+            "used": "2024-09-15 09:28"
+        },
+        "mv_Adressen_der_Jugendlichen": {
+            "used": "2024-09-12 14:16"
+        },
+        "mv_Beitragseinzug_content": {
+            "used": "2024-09-15 09:29"
+        },
+        "mv_beitragseinzug": {
+            "used": "2024-09-15 09:29"
+        },
+        "mv_tpl_beitragseinzug": {
+            "used": "2024-09-15 09:29"
+        },
+        "mv_detailsmodal": {
+            "used": "2024-09-15 09:29"
+        },
+        "scriptdetailModal": {
+            "used": "2024-09-15 09:29"
+        },
+        "mv_Mitglieder_Beitragstypen": {
+            "used": "2024-09-12 14:16"
+        },
+        "mv_tpl_mitgliederbeitragstypen": {
+            "used": "2024-09-12 14:16"
+        },
+        "mv_Download_Sepa_Export": {
+            "used": "2024-09-12 14:16"
+        },
+        "mv_sepa": {
+            "used": "2024-09-15 09:29"
+        },
+        "mv_tpl_xml_lastschrift_transactions": {
+            "used": "2024-09-15 09:29"
+        },
+        "mv_tpl_xml_lastschrift_transaction_groups": {
+            "used": "2024-09-15 09:29"
+        },
+        "mv_Ueberweiserliste_content": {
+            "used": "2024-09-12 14:16"
+        },
+        "mv_ueberweiserliste": {
+            "used": "2024-09-12 14:16"
+        },
+        "mv_tpl_ueberweiserliste": {
+            "used": "2024-09-12 14:16"
+        },
+        "mv_Sepa_Anzeige": {
+            "used": "2024-09-15 09:29"
+        },
+        "mv_Geburtstagsliste": {
+            "used": "2024-09-12 22:06"
+        },
+        "mv_Bestandserhebung_blsv": {
+            "used": "2024-09-12 14:17"
+        },
+        "mv_tpl_Bestandserhebung": {
+            "used": "2024-09-12 14:17"
+        },
+        "mv_Ungueltige_Email_Adressen": {
+            "used": "2024-09-12 14:17"
+        },
+        "mv_mitgliedernotizen": {
+            "used": "2024-09-12 14:17"
+        },
+        "mv_eintrittsdatum": {
+            "used": "2024-09-12 14:17"
+        },
+        "mv_tpl_eintrittsdatum": {
+            "used": "2024-09-12 14:17"
+        },
+        "mv_Ausgetreten": {
+            "used": "2024-09-12 14:17"
+        },
+        "mv_tpl_austrittsdatum": {
+            "used": "2024-09-12 14:17"
+        },
+        "mv_Adressliste_Nach_Adresse": {
+            "used": "2024-09-12 14:17"
+        },
+        "mv_tpl_adressliste2": {
+            "used": "2024-09-12 14:17"
+        },
+        "mv_Adressliste_nach_Namen": {
+            "used": "2024-09-12 22:06"
+        },
+        "mv_tpl_adressliste": {
+            "used": "2024-09-12 22:06"
+        },
+        "mv_Adressliste_mitglieder_ohne_email": {
+            "used": "2024-09-12 14:17"
+        },
+        "fbuch_Mail_Downloads": {
+            "used": "2024-09-14 08:52"
+        },
+        "mv_maildownload_page": {
+            "used": "2024-09-14 08:52"
+        },
+        "mv_maildownload_document": {
+            "used": "2024-09-14 08:52"
+        },
+        "mv_maildownload_documents_wrapper": {
+            "used": "2024-09-14 08:52"
+        },
+        "fbuchDateNamen": {
+            "used": "2024-09-14 17:20"
+        },
+        "fbuch_Passwort_vergessen": {
+            "used": "2024-09-14 14:01"
+        },
+        "fbuch_lgnForgotPassTpl": {
+            "used": "2024-09-14 14:01"
+        },
+        "fbuch_Passwort_aendern": {
+            "used": "2024-09-14 20:50"
+        }
+    },
+    "templates": {
+        "fbuch Quasar 2": {
+            "used": "2024-09-15 13:32"
+        },
+        "fahrtenbuch": {
+            "used": "2024-09-15 09:27"
+        },
+        "mv_base_template": {
+            "used": "2024-09-15 09:29"
+        },
+        "mv_sepa": {
+            "used": "2024-09-15 09:29"
+        },
+        "fbuch_empty": {
+            "used": "2024-09-15 12:39"
         }
     }
 }

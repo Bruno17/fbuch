@@ -1,4 +1,4 @@
-<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuchFormatDate']);
+<?php 
 $start_date = $modx->getOption('start_date',$scriptProperties,'');
 $start_time = $modx->getOption('start_time',$scriptProperties,'');
 $end_date = $modx->getOption('end_date',$scriptProperties,'');

@@ -1,4 +1,4 @@
-<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'mv_serienmails_aftersave']);
+<?php 
 $object = & $modx->getOption('object',$scriptProperties,null);
 
 if ($object){

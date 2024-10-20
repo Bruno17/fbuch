@@ -124,7 +124,7 @@ class MyControllerSetupInsertUsedElementsSnippet extends BaseController {
                 $word = '[[fbuch_is_element_used? &type=`chunks` &name=`' . $element['name'] . '`]]';
                 break;
             case 'snippets':
-                $word = '$modx->runSnippet("fbuch_is_element_used" , ["type" => "chunks","name" => "' . $element['name'] . '"]);';
+                $word = '$modx->runSnippet("fbuch_is_element_used" , ["type" => "snippets","name" => "' . $element['name'] . '"]);';
                 $word = str_replace('"',"'",$word);        
                 break;
         }
@@ -140,7 +140,7 @@ class MyControllerSetupInsertUsedElementsSnippet extends BaseController {
                                 file_put_contents($folder.$file,$content);  
                             break;
                         case 'snippets':
-                                $content = str_replace('<?php ' . $word,'<?php',$content);
+                                $content = str_replace($word,'',$content);
                                 file_put_contents($folder.$file,$content);
                             break;
                     }                    

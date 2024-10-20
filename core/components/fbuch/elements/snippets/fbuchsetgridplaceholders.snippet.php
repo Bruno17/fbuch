@@ -1,4 +1,4 @@
-<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuchSetGridPlaceholders']);
+<?php 
 $mode = $modx->getOption('mode', $scriptProperties, 'offset_ltf');
 $total = explode(',', $modx->getOption('total', $scriptProperties, 0));
 $limit = $modx->getOption('limit', $scriptProperties, 0);

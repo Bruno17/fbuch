@@ -1,4 +1,4 @@
-<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'mv_dooraccesscode_beforesave']);
+<?php 
 $properties = $modx->getOption('scriptProperties',$scriptProperties);
 $data = $modx->getOption('data',$properties);
 

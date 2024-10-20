@@ -1,4 +1,4 @@
-<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuchGetColor']);
+<?php 
 $colors = [
 'red' => '#f44336',
 'pink' => '#e91e63',

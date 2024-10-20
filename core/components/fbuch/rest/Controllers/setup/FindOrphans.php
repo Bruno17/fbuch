@@ -16,18 +16,29 @@ class MyControllerSetupFindOrphans extends BaseController {
         $this->fbuchBuildPath = dirname(__FILE__,7) . '/_build/';
 
         $this->config = json_decode($this->getConfig(),true);
-        $this->found=[]; 
+        $this->found=[];
+        $this->used_elements = $this->getUsedElements();
+        $this->elements_found_in_level = [];
+    
+        $this->level = 1;
+        
+        if ($this->level > 1){
+            $this->readOrphans();
+            //print_r($this->elements_found_in_level);
+        }
 
-        $snippets = $this->findElements('snippets');
- 
-        $chunks = $this->findElements('chunks');
-        //$this->makeTree(); 
+        $this->findElements('snippets');
+        $this->findElements('chunks');
 
-        print_r($this->found);
+        $content = json_encode($this->found,JSON_PRETTY_PRINT);
+
+        $this->writeOrphans($content);
 
         return $this->success('',$objectArray);
         
     }
+
+
 
     public function findMe($word, $content) {
         $len = strlen($word);
@@ -36,14 +47,16 @@ class MyControllerSetupFindOrphans extends BaseController {
         if ($pos !== false) {
             $char = substr($content,$pos+$len,1);
             
-            if (IntlChar::isalnum($char)){
-                return substr($content,$pos-2,$len+7); 
+            if (IntlChar::isalnum($char) || $char=='_'){
+                $content = substr($content,$pos+1);
+                return $this->findMe($word,$content); 
             }
 
             if ($pos>0){
                 $char = substr($content,$pos-1,1);
-                if (IntlChar::isalnum($char)){
-                    return 'xx_' . substr($content,$pos-1,$len+5); 
+                if (IntlChar::isalnum($char) || $char=='_'){
+                    $content = substr($content,$pos+1);
+                    return $this->findMe($word,$content); 
                 }                
             }
              
@@ -52,6 +65,19 @@ class MyControllerSetupFindOrphans extends BaseController {
 
         return false;
     }  
+
+    public function addFound($toSearch,$type,$used_in){
+        $level = $this->level;
+        if (!isset($this->found[$toSearch['type']][$toSearch['name']]['used_in'][$type])){
+            $this->found[$toSearch['type']][$toSearch['name']]['used_in'][$type] = [];    
+        } 
+        if (!isset($this->found[$toSearch['type']][$toSearch['name']]['used_in'][$type][$level])){
+            $this->found[$toSearch['type']][$toSearch['name']]['used_in'][$type][$level] = [];    
+        }                                          
+        if (!in_array($used_in,$this->found[$toSearch['type']][$toSearch['name']]['used_in'][$type][$level])){
+            $this->found[$toSearch['type']][$toSearch['name']]['used_in'][$type][$level][] = $used_in; 
+        }   
+    }    
     
     public function findElements($type){
         if (!isset($this->found[$type])){
@@ -64,18 +90,34 @@ class MyControllerSetupFindOrphans extends BaseController {
                 $element_name = $element['name'];
                 if (!isset($this->found[$type][$element_name])){
                     $this->found[$type][$element_name] = []; 
-                }                
+                }
+                if (!isset($this->found[$type][$element_name]['used_in'])){
+                    $this->found[$type][$element_name]['used_in'] = [];    
+                }
+                if (isset($this->used_elements[$type][$element_name]['used'])){
+                    $this->found[$type][$element_name]['used'] = $this->used_elements[$type][$element_name]['used'];    
+                }                                                
 
                 $toSearch = ['name' => $element['name'],'type'=>$type];
 
-                $this->searchInElements($toSearch,'templates');
- 
-                $this->searchInResources($toSearch,$this->found['resources']); 
-                $folder = $this->fbuchCorePath . 'migxconfigs';
-                $this->searchInFolder($toSearch,$folder);
-                $folder = $this->fbuchCorePath . 'model/fbuch';
-                $this->searchInFolder($toSearch,$folder);                
-  
+                if ($this->level == 1){
+                    $this->searchInElements($toSearch,'templates');
+    
+                    $this->searchInResources($toSearch,$this->found['resources']); 
+                    $folder = $this->fbuchCorePath . 'migxconfigs';
+                    $this->searchInFolder($toSearch,$folder);
+                    $folder = $this->fbuchCorePath . 'model/fbuch';
+                    $this->searchInFolder($toSearch,$folder);                
+                    $folder = $this->fbuchCorePath . 'rest/Controllers';
+                    $this->searchInFolder($toSearch,$folder);
+                    $folder = $this->fbuchAssetsPath . 'quasar';
+                    $this->searchInFolder($toSearch,$folder,true);                    
+                } else {
+                    $this->searchInElements($toSearch,'chunks');
+                    $this->searchInElements($toSearch,'snippets');                      
+                }
+
+                        
             }
             
         }
@@ -83,10 +125,10 @@ class MyControllerSetupFindOrphans extends BaseController {
 
     public function makeTree(){
         foreach ($this->found as $name => $found) {
-            $found_in = $found['found_in'];
-            if (count($found_in)>0){
-                foreach ($found_in as $word => $value){
-                    $this->found[$name]['found_in'][$word]['found_in']=$this->found[$word]['found_in'];      
+            $used_in = $found['used_in'];
+            if (count($used_in)>0){
+                foreach ($used_in as $word => $value){
+                    $this->found[$name]['used_in'][$word]['used_in']=$this->found[$word]['used_in'];      
                 }
             }
         }  
@@ -100,59 +142,88 @@ class MyControllerSetupFindOrphans extends BaseController {
         
         if (is_array($elements)) {
             foreach ($elements as $element){
+                $used_in = $element['name'];
+                if ($this->level > 1){
+                    if (!in_array($used_in,$this->elements_found_in_level[$type])){
+                        continue;        
+                    }                
+                }
                 $file = $element['file'];
                 if ($content = file_get_contents($folder.$file)){
                     if ($result = $this->findMe($word,$content)){
-                        if ($result === true){
-                            $found_in = $type . ':' . $element['name'];
-                            if (!in_array($found_in,$this->found[$toSearch['type']][$toSearch['name']])){
-                                $this->found[$toSearch['type']][$toSearch['name']][] = $found_in; 
-                            }                            
-                        }
                         
+                        if ($result === true){
+                            $this->addFound($toSearch,$type,$used_in);
+                        }
                     }
                 }
             }
         }                          
     }
 
+
+
     public function searchInResources($toSearch){
         
         $word = $toSearch['name'];
         if ($resources = $this->modx->getCollection('modResource',['deleted'=>0])) {
             foreach ($resources as $resource){
-                $pagetitle = $resource->get('pagetitle');
+                $used_in = $resource->get('id') . ' (' . $resource->get('pagetitle') . ')';
                 if ($content = $resource->get('content')){
                     if ($result = $this->findMe($word,$content)){
+                        $type = 'resources';
                         if ($result === true){
-                            $found_in = 'resources:' . $pagetitle;
-                            if (!in_array($found_in,$this->found[$toSearch['type']][$toSearch['name']])){
-                                $this->found[$toSearch['type']][$toSearch['name']][] = $found_in; 
-                            }    
+                            $this->addFound($toSearch,$type,$used_in); 
                         }
-                        
+                       
                     }
                 }
+                if ($content = $resource->get('pagetitle')){
+                    if ($result = $this->findMe($word,$content)){
+                        $type = 'resources';
+                        if ($result === true){
+                            $this->addFound($toSearch,$type,$used_in); 
+                        }
+                       
+                    }
+                }                
+                if ($content = $resource->getTVValue('scripts')){
+                    if ($result = $this->findMe($word,$content)){
+                        $type = 'resources';
+                        if ($result === true){
+                            $this->addFound($toSearch,$type,$used_in); 
+                        }
+                       
+                    }
+                } 
+                if ($content = $resource->getTVValue('headscripts')){
+                    if ($result = $this->findMe($word,$content)){
+                        $type = 'resources';
+                        if ($result === true){
+                            $this->addFound($toSearch,$type,$used_in); 
+                        }
+                       
+                    }
+                }                               
             }
         }                          
     }    
 
-    public function searchInFolder($toSearch,$folder){
+    public function searchInFolder($toSearch,$folder,$recursive=false){
         $word = $toSearch['name'];
         $this->files=[];
-        $this->dirWalk($folder);
+        $this->dirWalk($folder,null,$recursive);
         foreach ($this->files as $file => $folder){
             $filepath = $folder . '/' . $file;
             $content = file_get_contents($filepath);
             
             if ($result = $this->findMe($word,$content)){
+                $used_in = $filepath;
+                $type = 'files';
                 if ($result === true){
-                    $found_in = 'files:' . $filepath;
-                    if (!in_array($found_in,$this->found[$toSearch['type']][$toSearch['name']])){
-                        $this->found[$toSearch['type']][$toSearch['name']][] = $found_in; 
-                    }   
+                    $this->addFound($toSearch,$type,$used_in);   
                 }
-                
+               
             }            
         }       
     }
@@ -161,6 +232,68 @@ class MyControllerSetupFindOrphans extends BaseController {
     public function getConfig(){
         return file_get_contents($this->fbuchBuildPath.'config.json');        
     }
+
+    public function getUsedElements(){
+        $result_folder = $this->fbuchCorePath . 'customchunks/';
+        $result_file = $result_folder . 'used_elements.json';
+        $used_elements = [];
+        
+        if (file_exists($result_file)){
+            $old_content = json_decode(file_get_contents($result_file),true);   
+            if (is_array($old_content)){
+                $used_elements = $old_content;        
+            }
+        }
+        return $used_elements;      
+    } 
+
+    public function readOrphans(){
+        $result_folder = $this->fbuchCorePath . 'customchunks/';
+        $result_file = $result_folder . 'orphans.json';
+        $orphans = [];
+
+        $this->chunks_found_in = [];
+        $this->snippets_found_in = [];
+        
+        $level = $this->level-1;
+        
+        if (file_exists($result_file)){
+            $old_content = json_decode(file_get_contents($result_file),true);   
+            if (is_array($old_content)){
+                $this->found = $orphans = $old_content;
+                if (is_array($orphans['snippets'])){
+                    foreach ($orphans['snippets'] as $name => $value){
+                        if (is_array($value['used_in'])){
+                            foreach ($value['used_in'] as $type => $type_value){
+                                if (is_array($type_value[$level]) && count($type_value[$level])){
+                                    $this->elements_found_in_level['snippets'][$name] = $name; 
+                                }
+                            }
+                        }
+                    }                    
+                }
+                if (is_array($orphans['chunks'])){
+                    foreach ($orphans['chunks'] as $name => $value){
+                        if (is_array($value['used_in'])){
+                            foreach ($value['used_in'] as $type => $type_value){
+                                if (is_array($type_value[$level]) && count($type_value[$level])){
+                                    $this->elements_found_in_level['chunks'][$name] = $name;    
+                                }
+                            }
+                        }
+                    }                    
+                }                
+            }
+        }
+        return $orphans;      
+    } 
+
+    public function writeOrphans($content){
+        $result_folder = $this->fbuchCorePath . 'customchunks/';
+        $result_file = $result_folder . 'orphans.json';
+        file_put_contents($result_file,$content); 
+    }     
+    
 
         /**
          * Recursively search directories for certain file types

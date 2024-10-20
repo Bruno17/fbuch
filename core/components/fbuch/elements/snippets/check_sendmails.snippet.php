@@ -1,4 +1,4 @@
-<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'check_sendmails']);
+<?php 
 $revers = $modx->getOption('revers', $scriptProperties, '');
 $tempparams = $modx->fromJson($modx->getOption('tempParams', $_REQUEST, ''));
 $sendmails = $modx->getOption('sendmails', $tempparams, '');

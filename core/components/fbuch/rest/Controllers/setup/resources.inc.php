@@ -187,7 +187,7 @@ $update_resources = [
      'template_name'=>'fbuch Quasar 2',
      'published'=>1,
      'resource_groups'=>['fbuch'],
-     'content'=>'[[-$fbuch_auswertung_boote]]',
+     'content'=>'',
      'tvs'=>[
         ['name'=>'scripts','value'=>'
         [[fbuchGetAssetsFiles? &folder=`quasar/components/fahrtenbuch` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]  

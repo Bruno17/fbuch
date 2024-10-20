@@ -1,4 +1,4 @@
-<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuch_anmeldungen_impfabfrage_exportrow']);
+<?php 
 $scriptProperties['exportFields']['genesen'] = 'genesen';
 $scriptProperties['exportFields']['geimpft'] = 'geimpft';
 

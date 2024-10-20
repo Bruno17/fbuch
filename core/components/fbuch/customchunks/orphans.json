@@ -1,0 +1,1403 @@
+{
+    "snippets": {
+        "fbuch_is_element_used": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/assets\/components\/fbuch\/quasar\/views\/setup\/setup-view.html"
+                    ]
+                }
+            }
+        },
+        "fbuchFixColorpicker": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_bootsnutzergruppen.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 07:43"
+        },
+        "setlocale": {
+            "used_in": {
+                "templates": {
+                    "1": [
+                        "fahrtenbuch"
+                    ]
+                },
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/fbuch.class.php"
+                    ]
+                }
+            },
+            "used": "2024-09-15 13:03"
+        },
+        "fbuch_stripwhitespaces": {
+            "used_in": [],
+            "used": "2024-09-15 09:23"
+        },
+        "getAtoZLinks": {
+            "used_in": []
+        },
+        "now": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/fbuch.class.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Fahrten.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/assets\/components\/fbuch\/quasar\/components\/kalenderansicht\/recurringevents.js",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/assets\/components\/fbuch\/quasar\/views\/fahrtenbuch\/fahrtenbuch.js"
+                    ]
+                }
+            },
+            "used": "2024-09-15 09:28"
+        },
+        "today": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/fbuch.class.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/assets\/components\/fbuch\/quasar\/components\/kalenderansicht\/recurringevents.js",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/assets\/components\/fbuch\/quasar\/views\/fahrtenbuch\/fahrtenbuch.js",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/assets\/components\/fbuch\/quasar\/views\/kalenderansicht\/monthcalendar.js"
+                    ]
+                }
+            }
+        },
+        "hasPermission": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/fbuch.class.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Bootcomments.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Boote.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Bootriggerungen.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Bootsettings.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Datecomments.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Dateinvited.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Datenames.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Dates.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Ergotrack.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Fahrten.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/FahrtFromDate.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Fahrtnames.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Mailinglistnames.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Mailinglists.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/ModUser.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Names.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Permissions.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Recurrences.php"
+                    ]
+                }
+            }
+        },
+        "fbuch_anmelden_impfabfrage_aftersave": {
+            "used_in": []
+        },
+        "fbuchJsonToPlaceholders": {
+            "used_in": []
+        },
+        "fbuchGetChunk": {
+            "used_in": [],
+            "used": "2024-09-15 09:23"
+        },
+        "fbuchGetColor": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_datetypes.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 07:45"
+        },
+        "fbuch_customchunks_aftergetfields": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_customchunks.config.js"
+                    ]
+                }
+            }
+        },
+        "fbuchSetGridPlaceholders": {
+            "used_in": [],
+            "used": "2024-09-15 13:04"
+        },
+        "fbuchUpdate": {
+            "used_in": [],
+            "used": "2024-09-15 13:04"
+        },
+        "fbuchGetFormValues": {
+            "used_in": [],
+            "used": "2024-09-15 13:04"
+        },
+        "fbuchValidateTime": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/fbuch.class.php"
+                    ]
+                }
+            },
+            "used": "2024-09-15 13:04"
+        },
+        "fbuchSetDatePlaceholders": {
+            "used_in": []
+        },
+        "fbuchGetGridOffset": {
+            "used_in": []
+        },
+        "fbuchQuery": {
+            "used_in": []
+        },
+        "fbuchSwitchByReqParam": {
+            "used_in": []
+        },
+        "setYearPlaceholder": {
+            "used_in": []
+        },
+        "fbuch_strtotime": {
+            "used_in": []
+        },
+        "fbuchLoopWeekDays": {
+            "used_in": []
+        },
+        "fbuchBuildTeam": {
+            "used_in": []
+        },
+        "fbuchGetNameEmail": {
+            "used_in": []
+        },
+        "fbuch_rendercolumn_bootnutzer_checkbox": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_bootnames.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 07:43"
+        },
+        "fbuch_prepare_allowed_where": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_bootnames.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 07:43"
+        },
+        "fbuchBerechneDurchschnitt": {
+            "used_in": []
+        },
+        "fbuch_termine_aftersave": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_termine.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 07:44"
+        },
+        "fbuch_getPegel": {
+            "used_in": [],
+            "used": "2024-09-15 14:14"
+        },
+        "fbuchFormatDate": {
+            "used_in": []
+        },
+        "fbuch_prepare_ngm_where": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_nutzergruppenmembers.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 07:43"
+        },
+        "fbuch_rendercolumn_ngm_checkbox": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_nutzergruppenmembers.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 07:43"
+        },
+        "fbuchSendInviteMail": {
+            "used_in": []
+        },
+        "fbuch_getotp_hook": {
+            "used_in": [],
+            "used": "2024-09-15 07:25"
+        },
+        "fbuch_login_und_redirect": {
+            "used_in": {
+                "resources": {
+                    "1": [
+                        "52 (Login und Redirect)"
+                    ]
+                }
+            },
+            "used": "2024-09-15 11:10"
+        },
+        "fbuch_mailinglistnames_aftersave": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_mailinglistnames.config.js"
+                    ]
+                }
+            }
+        },
+        "fbuch_anmeldungen_impfabfrage_exportrow": {
+            "used_in": []
+        },
+        "mv_member_aftersave": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/mv_mitglieder.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 17:49"
+        },
+        "mv_member_aftergetfields": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/mv_mitglieder.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 18:22"
+        },
+        "check_sendmails": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/mv_serienmails.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 17:05"
+        },
+        "mv_prepareMemberWhere": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/mv_serienmailmembers.config.js",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/fbuch.class.php"
+                    ]
+                }
+            },
+            "used": "2024-09-13 16:13"
+        },
+        "add_mediasourcepath": {
+            "used_in": []
+        },
+        "mv_rendercolumn_family_checkbox": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/mv_member_familymembers.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 18:22"
+        },
+        "mv_rendercolumn_payer_checkbox": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/mv_member_familymembers.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 18:22"
+        },
+        "mv_getcombo_family_id": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/mv_member_familymembers.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 18:22"
+        },
+        "mv_berechne_alter": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/fbuch.class.php"
+                    ]
+                }
+            },
+            "used": "2024-09-15 09:29"
+        },
+        "mv_serienmails_aftersave": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/mv_serienmails.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 17:07"
+        },
+        "mv_berechne_beitrag": {
+            "used_in": [],
+            "used": "2024-09-15 09:29"
+        },
+        "mv_get_sepa": {
+            "used_in": [],
+            "used": "2024-09-15 09:29"
+        },
+        "authorize_member": {
+            "used_in": []
+        },
+        "mv_datenerfassung_report_newvalues": {
+            "used_in": []
+        },
+        "mv_dooraccesscode_beforesave": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/mv_dooraccesscodes.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 07:46"
+        },
+        "fbuchGetAssetsFiles": {
+            "used_in": {
+                "templates": {
+                    "1": [
+                        "fbuch Quasar 2"
+                    ]
+                },
+                "resources": {
+                    "1": [
+                        "45 (Ranglisten)",
+                        "46 (Boote)",
+                        "54 (Boots Details)"
+                    ]
+                },
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/assets\/components\/fbuch\/quasar\/views\/fahrtenbuch\/entryform-view.html"
+                    ]
+                }
+            },
+            "used": "2024-09-15 13:32"
+        },
+        "fbuchLoginByCode": {
+            "used_in": [],
+            "used": "2024-09-15 13:32"
+        },
+        "fbuchStoreAndReadAssets": {
+            "used_in": {
+                "templates": {
+                    "1": [
+                        "fbuch Quasar 2"
+                    ]
+                }
+            },
+            "used": "2024-09-15 14:14"
+        },
+        "fbuchGetResourceIdByUri": {
+            "used_in": [],
+            "used": "2024-09-15 09:23"
+        },
+        "fbuchGetViewDirectory": {
+            "used_in": {
+                "templates": {
+                    "1": [
+                        "fbuch Quasar 2"
+                    ]
+                }
+            },
+            "used": "2024-09-15 13:32"
+        }
+    },
+    "chunks": {
+        "fbuch_Ergotrack": {
+            "used_in": []
+        },
+        "fbuch_login_und_redirect": {
+            "used_in": {
+                "resources": {
+                    "1": [
+                        "52 (Login und Redirect)"
+                    ]
+                }
+            },
+            "used": "2024-09-15 11:10"
+        },
+        "fbuch_emailLogin": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/fbuch.class.php"
+                    ]
+                }
+            }
+        },
+        "fbuch_Login": {
+            "used_in": {
+                "resources": {
+                    "1": [
+                        "40 (Login)"
+                    ]
+                }
+            },
+            "used": "2024-09-15 09:23"
+        },
+        "fbuch_Passwort_vergessen": {
+            "used_in": [],
+            "used": "2024-09-14 14:01"
+        },
+        "fbuch_Passwort_aendern": {
+            "used_in": [],
+            "used": "2024-09-14 20:50"
+        },
+        "fbuch_danke_fuer_deine_anfrage": {
+            "used_in": {
+                "resources": {
+                    "1": [
+                        "41 (Danke f\u00fcr Deine Anfrage)"
+                    ]
+                }
+            }
+        },
+        "fbuch_Rudern_und_Gruppentraining": {
+            "used_in": []
+        },
+        "fbuch_Ergometer_Fahrtenliste": {
+            "used_in": [],
+            "used": "2024-09-15 09:27"
+        },
+        "fbuch_Rudern_Fahrtenliste": {
+            "used_in": []
+        },
+        "fbuch_Fuhrpark": {
+            "used_in": []
+        },
+        "fbuch_Termine_und_Reservierungen": {
+            "used_in": []
+        },
+        "fbuch_Teilnehmeruebersicht": {
+            "used_in": []
+        },
+        "fbuch_Personen_anmelden": {
+            "used_in": []
+        },
+        "fbuch_kalenderansicht": {
+            "used_in": {
+                "resources": {
+                    "1": [
+                        "44 (Kalenderansicht)"
+                    ]
+                }
+            }
+        },
+        "fbuch_Namensliste": {
+            "used_in": []
+        },
+        "fbuch_Bootsliste": {
+            "used_in": []
+        },
+        "fbuch_Boots Details": {
+            "used_in": []
+        },
+        "fbuch_Schaden_Mangel_bearbeiten": {
+            "used_in": []
+        },
+        "fbuch_Bootseinstellung_bearbeiten": {
+            "used_in": []
+        },
+        "fbuch_Bootsschaeden": {
+            "used_in": []
+        },
+        "fbuch_Ranglisten": {
+            "used_in": []
+        },
+        "fbuch_auswertung_boote": {
+            "used_in": []
+        },
+        "fbuch_ajax_getFahrten": {
+            "used_in": []
+        },
+        "fbuch_ajax_getFahrtNamen": {
+            "used_in": []
+        },
+        "fbuch_ajax_getNamen": {
+            "used_in": []
+        },
+        "fbuch_ajax_getTermine": {
+            "used_in": []
+        },
+        "fbuch_ajax_getFahrtenDragdrop": {
+            "used_in": []
+        },
+        "fbuch_ajax_getFahrtenTeamrowing": {
+            "used_in": []
+        },
+        "fbuch_ajax_updateFahrt": {
+            "used_in": [],
+            "used": "2024-09-15 12:39"
+        },
+        "fbuch_ajax_updateTeam": {
+            "used_in": []
+        },
+        "fbuch_ajax_getErgoFahrten": {
+            "used_in": [],
+            "used": "2024-09-15 12:39"
+        },
+        "fbuch_ajax_matrixorg_test": {
+            "used_in": []
+        },
+        "fbuch_ajax_autoduplicate_dates": {
+            "used_in": [],
+            "used": "2024-09-15 03:00"
+        },
+        "fbuch_ajax_collectMatrixMessages": {
+            "used_in": [],
+            "used": "2024-09-15 09:30"
+        },
+        "fbuch_ajax_importInvites": {
+            "used_in": []
+        },
+        "fbuch_ajax_importmembers": {
+            "used_in": []
+        },
+        "fbuch_listen_zubehoer": {
+            "used_in": [],
+            "used": "2024-09-12 08:09"
+        },
+        "fbuch_Mail_Downloads": {
+            "used_in": [],
+            "used": "2024-09-14 08:52"
+        },
+        "fbuch_riggerung_eintragen": {
+            "used_in": []
+        },
+        "mv_Adressliste_mitglieder_ohne_email": {
+            "used_in": [],
+            "used": "2024-09-12 14:17"
+        },
+        "fbuchFahrten": {
+            "used_in": [],
+            "used": "2024-09-15 12:39"
+        },
+        "fbuchButtonBeiElementRegistrieren": {
+            "used_in": []
+        },
+        "fbuchMitgliederMessage_1_heading": {
+            "used_in": []
+        },
+        "fbuchMitgliederMessage_2_einleitung": {
+            "used_in": []
+        },
+        "fbuchMitgliederMessage_4_schluss": {
+            "used_in": []
+        },
+        "fbuchMitgliederMessage_3_body": {
+            "used_in": []
+        },
+        "fbuchFahrtenRow": {
+            "used_in": []
+        },
+        "fbuchAppErgotrack": {
+            "used_in": []
+        },
+        "fbuch_kalenderansicht_scripts": {
+            "used_in": {
+                "resources": {
+                    "1": [
+                        "44 (Kalenderansicht)"
+                    ]
+                }
+            },
+            "used": "2024-09-14 10:58"
+        },
+        "fbuch_kalenderansicht_headscripts": {
+            "used_in": {
+                "resources": {
+                    "1": [
+                        "44 (Kalenderansicht)"
+                    ]
+                }
+            },
+            "used": "2024-09-14 10:58"
+        },
+        "fbuch_invite_subject_prefix": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/fbuch.class.php"
+                    ]
+                }
+            }
+        },
+        "fbuch_login_pagetitle": {
+            "used_in": []
+        },
+        "fbuch_site_logo": {
+            "used_in": {
+                "templates": {
+                    "1": [
+                        "fahrtenbuch",
+                        "fbuch Quasar",
+                        "fbuch Quasar 2",
+                        "mv_base_template"
+                    ]
+                }
+            }
+        },
+        "fbuch_contact_subject_options_json": {
+            "used_in": []
+        },
+        "fbuch_contact_email": {
+            "used_in": []
+        },
+        "fbuchFahrtenForm": {
+            "used_in": []
+        },
+        "fbuchFahrtNamen": {
+            "used_in": []
+        },
+        "fbuchFahrtnamRow": {
+            "used_in": []
+        },
+        "fbuchTeamForm": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/fbuch.class.php"
+                    ]
+                }
+            }
+        },
+        "fbuchFahrtenHead": {
+            "used_in": []
+        },
+        "fbuchErgofahrtenHead": {
+            "used_in": [],
+            "used": "2024-09-15 12:39"
+        },
+        "fbuchErgofahrtenRow": {
+            "used_in": [],
+            "used": "2024-09-15 12:39"
+        },
+        "fbuchFahrtenButtons": {
+            "used_in": []
+        },
+        "fbuchErgofahrtenButtons": {
+            "used_in": [],
+            "used": "2024-09-15 12:39"
+        },
+        "fbuchErgofahrtenForm": {
+            "used_in": [],
+            "used": "2024-09-15 12:39"
+        },
+        "fbuchFahrten_v1": {
+            "used_in": []
+        },
+        "fbuchTermine": {
+            "used_in": []
+        },
+        "fbuchTermineButtons": {
+            "used_in": []
+        },
+        "fbuchTermineForm": {
+            "used_in": []
+        },
+        "fbuchTermineRow": {
+            "used_in": []
+        },
+        "fbuchYearOption": {
+            "used_in": []
+        },
+        "fbuchErgotermineForm": {
+            "used_in": []
+        },
+        "fbuchErgoterminReservierungForm": {
+            "used_in": []
+        },
+        "fbuchErgoterminNamen": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/fbuch.class.php"
+                    ]
+                }
+            }
+        },
+        "fbuchErgoterminNamenRow": {
+            "used_in": []
+        },
+        "fbuchNeuFahrtNamen": {
+            "used_in": []
+        },
+        "fbuchDateNamen": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/fbuch.class.php"
+                    ]
+                }
+            },
+            "used": "2024-09-14 17:20"
+        },
+        "fbuchDateNamenRow": {
+            "used_in": []
+        },
+        "fbuchEmailTplKontakt": {
+            "used_in": []
+        },
+        "fbuch_lgnForgotPassEmail": {
+            "used_in": []
+        },
+        "fbuch_lgnForgotPassTpl": {
+            "used_in": [],
+            "used": "2024-09-14 14:01"
+        },
+        "fbuchErgoterminRemoveReservierungForm": {
+            "used_in": []
+        },
+        "fbuchTerminInviteForm": {
+            "used_in": []
+        },
+        "fbuchMailInviteForm": {
+            "used_in": []
+        },
+        "fbuch_invite_mail_tpl": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/fbuch.class.php"
+                    ]
+                }
+            }
+        },
+        "fbuchMyInvitesRow": {
+            "used_in": []
+        },
+        "fbuchMyInvites": {
+            "used_in": []
+        },
+        "fbuchFahrtenFormBootOption": {
+            "used_in": []
+        },
+        "fbuchLogoutTpl": {
+            "used_in": [],
+            "used": "2024-09-15 14:14"
+        },
+        "fbuchLoginTpl": {
+            "used_in": [],
+            "used": "2024-09-15 09:23"
+        },
+        "fbuchFahrtenFormBootinfo": {
+            "used_in": []
+        },
+        "fbuchMitgliederMessage": {
+            "used_in": []
+        },
+        "fbuchMitgliederMessageQuasar": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/assets\/components\/fbuch\/quasar\/views\/fahrtenbuch\/fahrtenbuch-view.html"
+                    ]
+                }
+            },
+            "used": "2024-09-15 09:23"
+        },
+        "fbuch_mailinglist_inputoptions": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_termine.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 07:43"
+        },
+        "fbuchComponentNameselect": {
+            "used_in": []
+        },
+        "fbuchComponentDatepicker": {
+            "used_in": []
+        },
+        "fbuchAppFuhrpark": {
+            "used_in": []
+        },
+        "fbuchPegel": {
+            "used_in": [],
+            "used": "2024-09-15 09:23"
+        },
+        "fbuchAppRudern_und_gruppentraining": {
+            "used_in": []
+        },
+        "fbuchAppErgometer_fahrtenliste": {
+            "used_in": [],
+            "used": "2024-09-15 09:27"
+        },
+        "tplAtoZLink": {
+            "used_in": []
+        },
+        "fbuchAppRudern_fahrtenliste": {
+            "used_in": []
+        },
+        "fbuchAppTermine_und_reservierungen": {
+            "used_in": []
+        },
+        "fbuchAppPersonen_anmelden": {
+            "used_in": []
+        },
+        "fbuchAppNamensliste": {
+            "used_in": []
+        },
+        "fbuchAppSchaden_mangel_bearbeiten": {
+            "used_in": []
+        },
+        "fbuchAppBootseinstellung_bearbeiten": {
+            "used_in": []
+        },
+        "fbuchAppRiggerung_eintragen": {
+            "used_in": []
+        },
+        "fbuchPegelWrapper": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/assets\/components\/fbuch\/quasar\/views\/fahrtenbuch\/fahrtenbuch-view.html"
+                    ]
+                }
+            }
+        },
+        "fbuch_benutzerpasswort_mail": {
+            "used_in": []
+        },
+        "fbuchMitgliederMessage_0_show": {
+            "used_in": []
+        },
+        "fbuchButtonBeiElementRegistrieren_show": {
+            "used_in": []
+        },
+        "fbuchBoote": {
+            "used_in": []
+        },
+        "fbuchBooteRow": {
+            "used_in": []
+        },
+        "FbuchBootsgattungRow": {
+            "used_in": []
+        },
+        "fbuchBooteHead": {
+            "used_in": []
+        },
+        "fbuchBooteButtons": {
+            "used_in": []
+        },
+        "fbuchBoot": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_boote.config.js",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_fahrtnamen.config.js",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/fbuch.class.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/fbuchboot.class.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/metadata.mysql.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Boote.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Bootriggerungen.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Fahrten.php",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/FahrtFromDate.php"
+                    ]
+                }
+            }
+        },
+        "fbuchBootSettingFormTpl": {
+            "used_in": []
+        },
+        "fbuchBootCommentRow": {
+            "used_in": []
+        },
+        "fbuchBootSettingRow": {
+            "used_in": []
+        },
+        "fbuchBootSeatSettingRow": {
+            "used_in": []
+        },
+        "fbuchBootRiggerungRow": {
+            "used_in": []
+        },
+        "FbuchRiggerungEintragenForm": {
+            "used_in": []
+        },
+        "fbuchAnmeldenDatesRow": {
+            "used_in": []
+        },
+        "fbuchAnmeldenDateNamesRow": {
+            "used_in": []
+        },
+        "fbuchAnmeldenDatesRowForm": {
+            "used_in": []
+        },
+        "fbuchAnmeldenDatesRowComment": {
+            "used_in": []
+        },
+        "fbuchPersonenAnmeldenDatesRow": {
+            "used_in": []
+        },
+        "fbuchPersonenAnmeldenDatesRowForm": {
+            "used_in": []
+        },
+        "fbuchPersonenAnmeldenDateNamesRow": {
+            "used_in": []
+        },
+        "fbuch_anmelden_impfabfrage": {
+            "used_in": []
+        },
+        "fbuch_anmelden_impfabfrage_form": {
+            "used_in": []
+        },
+        "fbuch_personanmelden_impfabfrage_form": {
+            "used_in": []
+        },
+        "fbuchErgotermineHead": {
+            "used_in": []
+        },
+        "fbuchErgotermine": {
+            "used_in": []
+        },
+        "fbuchErgotermineButtons": {
+            "used_in": []
+        },
+        "fbuchErgotermineRow": {
+            "used_in": []
+        },
+        "fbuchRuderterminNamen": {
+            "used_in": []
+        },
+        "fbuchRuderterminInvitedRow": {
+            "used_in": []
+        },
+        "fbuchRuderterminCommentsRow": {
+            "used_in": []
+        },
+        "fbuchRuderterminInvitedNamesRow": {
+            "used_in": []
+        },
+        "fbuchTerminDayRow": {
+            "used_in": []
+        },
+        "fbuchTermineDay": {
+            "used_in": []
+        },
+        "fbuchErgotermineDropdownButtons": {
+            "used_in": []
+        },
+        "fbuchFahrtenDragdrop": {
+            "used_in": []
+        },
+        "fbuchFahrtenDragdropRow": {
+            "used_in": []
+        },
+        "fbuchFahrtenDragdropDatesRow": {
+            "used_in": []
+        },
+        "fbuchFahrtenDragdropDateNamesRow": {
+            "used_in": []
+        },
+        "fbuchFahrtenDragdropFahrtNamesRow": {
+            "used_in": []
+        },
+        "fbuchClosedFahrtenDragdropRow": {
+            "used_in": []
+        },
+        "fbuchFahrtenDragdropFahrtNamesAlter": {
+            "used_in": []
+        },
+        "fbuchFahrtenTeamrowing": {
+            "used_in": []
+        },
+        "fbuchNamen": {
+            "used_in": []
+        },
+        "fbuchNamenRow": {
+            "used_in": []
+        },
+        "fbuchNamenButtons": {
+            "used_in": []
+        },
+        "fbuchNamenHead": {
+            "used_in": []
+        },
+        "fbuchNamenForm": {
+            "used_in": []
+        },
+        "fbuchNamenFormUpdate": {
+            "used_in": []
+        },
+        "fbuchNamenFormCreate": {
+            "used_in": []
+        },
+        "input_options_group": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/mv_roles.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 07:46"
+        },
+        "input_options_roles": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/mv_member_familymembers.config.js",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/mv_mitglieder.config.js",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/mv_serienmailmembers.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 18:22"
+        },
+        "mv_mail_tpl": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/mvmail.class.php"
+                    ]
+                }
+            }
+        },
+        "mv_mail_documents_wrapper": {
+            "used_in": [],
+            "used": "2024-09-12 17:09"
+        },
+        "mv_maildownload_page": {
+            "used_in": [],
+            "used": "2024-09-14 08:52"
+        },
+        "mv_maildownload_document": {
+            "used_in": [],
+            "used": "2024-09-14 08:52"
+        },
+        "mv_maildownload_documents_wrapper": {
+            "used_in": [],
+            "used": "2024-09-14 08:52"
+        },
+        "mv_mail_document_tpl": {
+            "used_in": [],
+            "used": "2024-09-12 17:09"
+        },
+        "input_options_beitragstyp": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/mv_member_familymembers.config.js",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/mv_mitglieder.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 18:22"
+        },
+        "mv_datenerfassung_email": {
+            "used_in": []
+        },
+        "mv_mitgliederDatenFormular": {
+            "used_in": []
+        },
+        "mv_mitgliederDatenFormular_familymember": {
+            "used_in": []
+        },
+        "mv_mitgliederDatenFormular2": {
+            "used_in": []
+        },
+        "mv_mitgliederLoginFormular": {
+            "used_in": []
+        },
+        "mv_datenerfassung_emailTpl": {
+            "used_in": []
+        },
+        "input_options_members": {
+            "used_in": []
+        },
+        "input_options_nutzergruppen": {
+            "used_in": []
+        },
+        "mv_tpl_geburtstagsliste": {
+            "used_in": [],
+            "used": "2024-09-15 09:28"
+        },
+        "mv_tpl_adressliste": {
+            "used_in": [],
+            "used": "2024-09-12 22:06"
+        },
+        "mv_tpl_geburtstagsliste_month": {
+            "used_in": [],
+            "used": "2024-09-15 09:28"
+        },
+        "mv_tpl_mitgliederbeitragstypen": {
+            "used_in": [],
+            "used": "2024-09-12 14:16"
+        },
+        "mv_tpl_beitragseinzug": {
+            "used_in": [],
+            "used": "2024-09-15 09:29"
+        },
+        "mv_tpl_ueberweiserliste": {
+            "used_in": [],
+            "used": "2024-09-12 14:16"
+        },
+        "mv_tpl_xml_lastschrift_transaction_groups": {
+            "used_in": [],
+            "used": "2024-09-15 09:29"
+        },
+        "mv_tpl_xml_lastschrift_transactions": {
+            "used_in": [],
+            "used": "2024-09-15 09:29"
+        },
+        "mv_beitragseinzug": {
+            "used_in": [],
+            "used": "2024-09-15 09:29"
+        },
+        "mv_sepa": {
+            "used_in": [],
+            "used": "2024-09-15 09:29"
+        },
+        "mv_ueberweiserliste": {
+            "used_in": [],
+            "used": "2024-09-12 14:16"
+        },
+        "mv_tpl_details": {
+            "used_in": []
+        },
+        "scriptdetailModal": {
+            "used_in": [],
+            "used": "2024-09-15 09:29"
+        },
+        "mv_detailsmodal": {
+            "used_in": [],
+            "used": "2024-09-15 09:29"
+        },
+        "mv_tpl_details_familymember": {
+            "used_in": []
+        },
+        "mv_tpl_eintrittsdatum": {
+            "used_in": [],
+            "used": "2024-09-12 14:17"
+        },
+        "mv_tpl_austrittsdatum": {
+            "used_in": [],
+            "used": "2024-09-12 14:17"
+        },
+        "mv_tpl_adressliste2": {
+            "used_in": [],
+            "used": "2024-09-12 14:17"
+        },
+        "mv_tpl_Bestandserhebung": {
+            "used_in": [],
+            "used": "2024-09-12 14:17"
+        },
+        "input_options_gattung": {
+            "used_in": []
+        },
+        "input_options_bootsnutzergruppen": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_boote.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 07:43"
+        },
+        "input_options_gattung_id": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_boote.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 07:43"
+        },
+        "input_options_gattung_ids": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_boote.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 07:43"
+        },
+        "input_options_gattungname": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_datetypes.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 07:44"
+        },
+        "input_options_boot_id": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_datetypes.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 07:44"
+        },
+        "input_options_mailfilter": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_mailinglists.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 07:44"
+        },
+        "mv_sepa_bic": {
+            "used_in": []
+        },
+        "mv_sepa_iban": {
+            "used_in": []
+        },
+        "mv_sepa_nm": {
+            "used_in": []
+        },
+        "mv_sepa_ creditor_id": {
+            "used_in": []
+        },
+        "mv_sepa_msgid": {
+            "used_in": []
+        },
+        "mv_sepa_belegtext": {
+            "used_in": []
+        },
+        "mv_sepa_collect_date": {
+            "used_in": []
+        },
+        "mv_sepa_last_collect_date": {
+            "used_in": []
+        },
+        "mv_sepa_beitrags_teilung": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/fbuch.class.php"
+                    ]
+                }
+            }
+        },
+        "mv_Ueberweiserliste_content": {
+            "used_in": [],
+            "used": "2024-09-12 14:16"
+        },
+        "mv_Mitglieder_Beitragstypen": {
+            "used_in": [],
+            "used": "2024-09-12 14:16"
+        },
+        "mv_Geburtstagsliste": {
+            "used_in": [],
+            "used": "2024-09-12 22:06"
+        },
+        "mv_Datenerfassung": {
+            "used_in": []
+        },
+        "mv_Mail_Downloads": {
+            "used_in": []
+        },
+        "mv_Geburtstagsliste_sortiert_nach_Geburtstag": {
+            "used_in": [],
+            "used": "2024-09-15 09:28"
+        },
+        "mv_Adressen_der_Jugendlichen": {
+            "used_in": [],
+            "used": "2024-09-12 14:16"
+        },
+        "mv_Beitragseinzug_content": {
+            "used_in": [],
+            "used": "2024-09-15 09:29"
+        },
+        "mv_Sepa_Anzeige": {
+            "used_in": [],
+            "used": "2024-09-15 09:29"
+        },
+        "mv_Download_Sepa_Export": {
+            "used_in": [],
+            "used": "2024-09-12 14:16"
+        },
+        "mv_Ungueltige_Email_Adressen": {
+            "used_in": [],
+            "used": "2024-09-12 14:17"
+        },
+        "mv_mitgliedernotizen": {
+            "used_in": [],
+            "used": "2024-09-12 14:17"
+        },
+        "mv_eintrittsdatum": {
+            "used_in": [],
+            "used": "2024-09-12 14:17"
+        },
+        "mv_Ausgetreten": {
+            "used_in": [],
+            "used": "2024-09-12 14:17"
+        },
+        "mv_Adressliste_Nach_Adresse": {
+            "used_in": [],
+            "used": "2024-09-12 14:17"
+        },
+        "mv_Adressliste_nach_Namen": {
+            "used_in": [],
+            "used": "2024-09-12 22:06"
+        },
+        "mv_PDF_Datenerfassung": {
+            "used_in": []
+        },
+        "mv_Bestandserhebung_blsv": {
+            "used_in": [],
+            "used": "2024-09-12 14:17"
+        },
+        "input_options_memberstates": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/fbuch_namen.config.js",
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/mv_mitglieder.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 18:22"
+        },
+        "input_options_competency_levels": {
+            "used_in": {
+                "files": {
+                    "1": [
+                        "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/migxconfigs\/mv_mitglieder.config.js"
+                    ]
+                }
+            },
+            "used": "2024-09-12 18:22"
+        }
+    }
+}

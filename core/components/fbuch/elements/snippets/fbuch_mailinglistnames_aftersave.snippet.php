@@ -1,4 +1,4 @@
-<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuch_mailinglistnames_aftersave']);
+<?php 
 $object = & $modx->getOption('object',$scriptProperties,null);
 $properties = $modx->getOption('scriptProperties',$scriptProperties,array());
 $postvalues = $modx->getOption('postvalues',$scriptProperties,array());

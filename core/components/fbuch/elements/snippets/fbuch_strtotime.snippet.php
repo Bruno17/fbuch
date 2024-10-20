@@ -1,2 +1,2 @@
-<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuch_strtotime']);
+<?php 
 return strtotime($input);

@@ -1,4 +1,4 @@
-<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuch_prepare_allowed_where']);
+<?php 
 $boot_id = $modx->getOption('object_id', $_REQUEST, '');
 $allowed = $modx->getOption('bootnames_allowed', $_REQUEST, '');
 $where = '';

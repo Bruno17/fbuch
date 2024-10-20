@@ -1,4 +1,4 @@
-<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'mv_datenerfassung_report_newvalues']);
+<?php 
 $output = array();
 
 $output[] = '<table>';

@@ -1,4 +1,4 @@
-<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuchJsonToPlaceholders']);
+<?php 
 $value = $modx->getOption('value',$scriptProperties,'');
 $prefix = $modx->getOption('prefix',$scriptProperties,'');
 

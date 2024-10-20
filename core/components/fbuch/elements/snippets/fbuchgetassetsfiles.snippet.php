@@ -1,6 +1,4 @@
 <?php
-$modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuchGetAssetsFiles']);
-$modx->runSnippet('fbuch_is_element_used' , ['type' => 'chunks','name' => 'fbuchGetAssetsFiles']);
 $folder = $modx->getOption('folder',$scriptProperties,'');
 $pattern = $modx->getOption('pattern',$scriptProperties,'*.html');
 $wrapper = $modx->getOption('wrapper',$scriptProperties,'[[+output]]');

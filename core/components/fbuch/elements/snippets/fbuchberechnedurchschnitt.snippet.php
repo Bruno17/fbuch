@@ -1,4 +1,4 @@
-<?php $modx->runSnippet('fbuch_is_element_used' , ['type' => 'snippets','name' => 'fbuchBerechneDurchschnitt']);
+<?php 
 $values = explode(',', $input);
 $sum = 0;
 $output = 0;
