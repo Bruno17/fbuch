@@ -287,9 +287,9 @@ class MyControllerDates extends BaseController {
         $properties['sortConfig'] = '[{"sortby":"Fahrt_deleted","sortdir":"DESC"},{"sortby":"Fahrtname.fahrt_id"},{"sortby":"registeredby_member"},{"sortby":"createdon"}]';
         $properties['groupby'] = 'id';
         $properties['debug'] = 0;
+        $member_id = 99999999999; 
         switch ($returntype) {
             case 'selfregistered_names':    
-                $member_id = 99999999999; 
                 if ($member = $this->getCurrentFbuchMember()){
                     $member_id = $member->get('id');
                 }                

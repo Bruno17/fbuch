@@ -20,7 +20,7 @@ class MyControllerSetupFindOrphans extends BaseController {
         $this->used_elements = $this->getUsedElements();
         $this->elements_found_in_level = [];
     
-        $this->level = 1;
+        $this->level = 4;
         
         if ($this->level > 1){
             $this->readOrphans();
@@ -30,9 +30,7 @@ class MyControllerSetupFindOrphans extends BaseController {
         $this->findElements('snippets');
         $this->findElements('chunks');
 
-        $content = json_encode($this->found,JSON_PRETTY_PRINT);
-
-        $this->writeOrphans($content);
+        $this->writeOrphans();
 
         return $this->success('',$objectArray);
         
@@ -88,6 +86,9 @@ class MyControllerSetupFindOrphans extends BaseController {
         if (is_array($elements)) {
             foreach ($elements as $element){
                 $element_name = $element['name'];
+                if ($element_name == 'mv_tpl_details'){
+                    echo $element_name;
+                }
                 if (!isset($this->found[$type][$element_name])){
                     $this->found[$type][$element_name] = []; 
                 }
@@ -249,7 +250,7 @@ class MyControllerSetupFindOrphans extends BaseController {
 
     public function readOrphans(){
         $result_folder = $this->fbuchCorePath . 'customchunks/';
-        $result_file = $result_folder . 'orphans.json';
+        $result_file = $result_folder . 'used_and_unused_elements.json';
         $orphans = [];
 
         $this->chunks_found_in = [];
@@ -288,9 +289,33 @@ class MyControllerSetupFindOrphans extends BaseController {
         return $orphans;      
     } 
 
-    public function writeOrphans($content){
+    public function extractUnusedElements($orphans,$type){
+        
+        if (is_array($this->found[$type])){
+            if (!isset($orphans[$type])){
+                $orphans[$type] = [];
+            }
+            foreach ($this->found[$type] as $name => $value){
+                if (empty($value['used_in']) && empty($value['used'])){
+                    $orphans[$type][] = $name;
+                }
+            }
+        }
+        return $orphans;
+    }
+
+    public function writeOrphans(){       
         $result_folder = $this->fbuchCorePath . 'customchunks/';
-        $result_file = $result_folder . 'orphans.json';
+        $orphans = [];
+        $orphans = $this->extractUnusedElements($orphans,'snippets');
+        $orphans = $this->extractUnusedElements($orphans,'chunks');
+ 
+        $content = json_encode($orphans,JSON_PRETTY_PRINT);
+        $result_file = $result_folder . 'unused_elements.json';
+        file_put_contents($result_file,$content);
+
+        $content = json_encode($this->found,JSON_PRETTY_PRINT);
+         $result_file = $result_folder . 'used_and_unused_elements.json';
         file_put_contents($result_file,$content); 
     }     
     

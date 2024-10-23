@@ -38,6 +38,7 @@ export default {
     const currentMember = ref({});
     const showpersonstab = ref(true);
     const showbootsgattungselect = ref(false);
+    const warnung = ref(false);
 
     onMounted(() => {
       useLoadPermissions();
@@ -397,7 +398,8 @@ export default {
       inputs,
       currentMember,
       showpersonstab,
-      showbootsgattungselect
+      showbootsgattungselect,
+      warnung
     }
   },
   template: '#entryform-view'

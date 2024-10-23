@@ -6,6 +6,17 @@
                     "1": [
                         "C:\\laragon\\www\\dev\\Extras\\fbuch\/assets\/components\/fbuch\/quasar\/views\/setup\/setup-view.html"
                     ]
+                },
+                "snippets": {
+                    "2": [
+                        "fbuch_is_element_used"
+                    ],
+                    "3": [
+                        "fbuch_is_element_used"
+                    ],
+                    "4": [
+                        "fbuch_is_element_used"
+                    ]
                 }
             }
         },
@@ -30,12 +41,32 @@
                     "1": [
                         "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/fbuch.class.php"
                     ]
+                },
+                "snippets": {
+                    "2": [
+                        "setlocale"
+                    ],
+                    "3": [
+                        "setlocale"
+                    ],
+                    "4": [
+                        "setlocale"
+                    ]
                 }
             },
             "used": "2024-09-15 13:03"
         },
         "fbuch_stripwhitespaces": {
-            "used_in": [],
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuchMitgliederMessageQuasar"
+                    ],
+                    "3": [
+                        "fbuchMitgliederMessageQuasar"
+                    ]
+                }
+            },
             "used": "2024-09-15 09:23"
         },
         "getAtoZLinks": {
@@ -49,6 +80,11 @@
                         "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Fahrten.php",
                         "C:\\laragon\\www\\dev\\Extras\\fbuch\/assets\/components\/fbuch\/quasar\/components\/kalenderansicht\/recurringevents.js",
                         "C:\\laragon\\www\\dev\\Extras\\fbuch\/assets\/components\/fbuch\/quasar\/views\/fahrtenbuch\/fahrtenbuch.js"
+                    ]
+                },
+                "chunks": {
+                    "3": [
+                        "fbuchMyInvites"
                     ]
                 }
             },
@@ -90,6 +126,29 @@
                         "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Permissions.php",
                         "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Recurrences.php"
                     ]
+                },
+                "snippets": {
+                    "2": [
+                        "hasPermission"
+                    ],
+                    "3": [
+                        "hasPermission"
+                    ],
+                    "4": [
+                        "hasPermission"
+                    ]
+                },
+                "chunks": {
+                    "3": [
+                        "fbuchRuderterminInvitedRow",
+                        "fbuchFahrtenDragdropDatesRow",
+                        "fbuchClosedFahrtenDragdropRow"
+                    ],
+                    "4": [
+                        "fbuchRuderterminInvitedNamesRow",
+                        "fbuchFahrtenDragdropFahrtNamesRow",
+                        "fbuchClosedFahrtenDragdropRow"
+                    ]
                 }
             }
         },
@@ -100,7 +159,16 @@
             "used_in": []
         },
         "fbuchGetChunk": {
-            "used_in": [],
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuch_Login"
+                    ],
+                    "3": [
+                        "fbuchMyInvites"
+                    ]
+                }
+            },
             "used": "2024-09-15 09:23"
         },
         "fbuchGetColor": {
@@ -192,7 +260,16 @@
             "used": "2024-09-12 07:43"
         },
         "fbuchBerechneDurchschnitt": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "3": [
+                        "fbuchClosedFahrtenDragdropRow"
+                    ],
+                    "4": [
+                        "fbuchClosedFahrtenDragdropRow"
+                    ]
+                }
+            }
         },
         "fbuch_termine_aftersave": {
             "used_in": {
@@ -205,11 +282,26 @@
             "used": "2024-09-12 07:44"
         },
         "fbuch_getPegel": {
-            "used_in": [],
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuchPegelWrapper"
+                    ]
+                }
+            },
             "used": "2024-09-15 14:14"
         },
         "fbuchFormatDate": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "3": [
+                        "fbuchClosedFahrtenDragdropRow"
+                    ],
+                    "4": [
+                        "fbuchClosedFahrtenDragdropRow"
+                    ]
+                }
+            }
         },
         "fbuch_prepare_ngm_where": {
             "used_in": {
@@ -235,7 +327,13 @@
             "used_in": []
         },
         "fbuch_getotp_hook": {
-            "used_in": [],
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuch_Login"
+                    ]
+                }
+            },
             "used": "2024-09-15 07:25"
         },
         "fbuch_login_und_redirect": {
@@ -243,6 +341,17 @@
                 "resources": {
                     "1": [
                         "52 (Login und Redirect)"
+                    ]
+                },
+                "chunks": {
+                    "2": [
+                        "fbuch_login_und_redirect"
+                    ],
+                    "3": [
+                        "fbuch_login_und_redirect"
+                    ],
+                    "4": [
+                        "fbuch_login_und_redirect"
                     ]
                 }
             },
@@ -340,6 +449,12 @@
                     "1": [
                         "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/model\/fbuch\/fbuch.class.php"
                     ]
+                },
+                "chunks": {
+                    "4": [
+                        "fbuchFahrtenDragdropFahrtNamesRow",
+                        "fbuchFahrtenDragdropFahrtNamesAlter"
+                    ]
                 }
             },
             "used": "2024-09-15 09:29"
@@ -410,12 +525,25 @@
                     "1": [
                         "fbuch Quasar 2"
                     ]
+                },
+                "chunks": {
+                    "2": [
+                        "fbuch_kalenderansicht_scripts",
+                        "fbuch_kalenderansicht_headscripts"
+                    ]
                 }
             },
             "used": "2024-09-15 14:14"
         },
         "fbuchGetResourceIdByUri": {
-            "used_in": [],
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuch_Login",
+                        "fbuch_invite_mail_tpl"
+                    ]
+                }
+            },
             "used": "2024-09-15 09:23"
         },
         "fbuchGetViewDirectory": {
@@ -438,6 +566,17 @@
                 "resources": {
                     "1": [
                         "52 (Login und Redirect)"
+                    ]
+                },
+                "chunks": {
+                    "2": [
+                        "fbuch_login_und_redirect"
+                    ],
+                    "3": [
+                        "fbuch_login_und_redirect"
+                    ],
+                    "4": [
+                        "fbuch_login_und_redirect"
                     ]
                 }
             },
@@ -600,19 +739,73 @@
             "used": "2024-09-15 12:39"
         },
         "fbuchButtonBeiElementRegistrieren": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "3": [
+                        "fbuchMyInvites"
+                    ]
+                }
+            }
         },
         "fbuchMitgliederMessage_1_heading": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuchMitgliederMessageQuasar"
+                    ],
+                    "3": [
+                        "fbuchMitgliederMessageQuasar"
+                    ],
+                    "4": [
+                        "fbuchMitgliederMessage"
+                    ]
+                }
+            }
         },
         "fbuchMitgliederMessage_2_einleitung": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuchMitgliederMessageQuasar"
+                    ],
+                    "3": [
+                        "fbuchMitgliederMessageQuasar"
+                    ],
+                    "4": [
+                        "fbuchMitgliederMessage"
+                    ]
+                }
+            }
         },
         "fbuchMitgliederMessage_4_schluss": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuchMitgliederMessageQuasar"
+                    ],
+                    "3": [
+                        "fbuchMitgliederMessageQuasar"
+                    ],
+                    "4": [
+                        "fbuchMitgliederMessage"
+                    ]
+                }
+            }
         },
         "fbuchMitgliederMessage_3_body": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuchMitgliederMessageQuasar"
+                    ],
+                    "3": [
+                        "fbuchMitgliederMessageQuasar"
+                    ],
+                    "4": [
+                        "fbuchMitgliederMessage"
+                    ]
+                }
+            }
         },
         "fbuchFahrtenRow": {
             "used_in": []
@@ -665,19 +858,43 @@
             }
         },
         "fbuch_contact_subject_options_json": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuch_Login"
+                    ]
+                }
+            }
         },
         "fbuch_contact_email": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuch_Login"
+                    ]
+                }
+            }
         },
         "fbuchFahrtenForm": {
             "used_in": []
         },
         "fbuchFahrtNamen": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuchTeamForm"
+                    ]
+                }
+            }
         },
         "fbuchFahrtnamRow": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "3": [
+                        "fbuchFahrtNamen"
+                    ]
+                }
+            }
         },
         "fbuchTeamForm": {
             "used_in": {
@@ -760,10 +977,22 @@
             "used": "2024-09-14 17:20"
         },
         "fbuchDateNamenRow": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuchDateNamen"
+                    ]
+                }
+            }
         },
         "fbuchEmailTplKontakt": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuch_Login"
+                    ]
+                }
+            }
         },
         "fbuch_lgnForgotPassEmail": {
             "used_in": []
@@ -791,33 +1020,68 @@
             }
         },
         "fbuchMyInvitesRow": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "3": [
+                        "fbuchMyInvites"
+                    ]
+                }
+            }
         },
         "fbuchMyInvites": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuch_Login"
+                    ]
+                }
+            }
         },
         "fbuchFahrtenFormBootOption": {
             "used_in": []
         },
         "fbuchLogoutTpl": {
-            "used_in": [],
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuch_Login"
+                    ]
+                }
+            },
             "used": "2024-09-15 14:14"
         },
         "fbuchLoginTpl": {
-            "used_in": [],
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuch_Login"
+                    ]
+                }
+            },
             "used": "2024-09-15 09:23"
         },
         "fbuchFahrtenFormBootinfo": {
             "used_in": []
         },
         "fbuchMitgliederMessage": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "3": [
+                        "fbuchMyInvites"
+                    ]
+                }
+            }
         },
         "fbuchMitgliederMessageQuasar": {
             "used_in": {
                 "files": {
                     "1": [
                         "C:\\laragon\\www\\dev\\Extras\\fbuch\/assets\/components\/fbuch\/quasar\/views\/fahrtenbuch\/fahrtenbuch-view.html"
+                    ]
+                },
+                "chunks": {
+                    "2": [
+                        "fbuch_Login"
                     ]
                 }
             },
@@ -843,7 +1107,18 @@
             "used_in": []
         },
         "fbuchPegel": {
-            "used_in": [],
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuchPegelWrapper"
+                    ]
+                },
+                "snippets": {
+                    "3": [
+                        "fbuch_getPegel"
+                    ]
+                }
+            },
             "used": "2024-09-15 09:23"
         },
         "fbuchAppRudern_und_gruppentraining": {
@@ -890,10 +1165,28 @@
             "used_in": []
         },
         "fbuchMitgliederMessage_0_show": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuchMitgliederMessageQuasar"
+                    ],
+                    "3": [
+                        "fbuchMitgliederMessageQuasar"
+                    ],
+                    "4": [
+                        "fbuchMitgliederMessage"
+                    ]
+                }
+            }
         },
         "fbuchButtonBeiElementRegistrieren_show": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "4": [
+                        "fbuchButtonBeiElementRegistrieren"
+                    ]
+                }
+            }
         },
         "fbuchBoote": {
             "used_in": []
@@ -924,6 +1217,11 @@
                         "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/Fahrten.php",
                         "C:\\laragon\\www\\dev\\Extras\\fbuch\/core\/components\/fbuch\/rest\/Controllers\/FahrtFromDate.php"
                     ]
+                },
+                "chunks": {
+                    "2": [
+                        "input_options_boot_id"
+                    ]
                 }
             }
         },
@@ -931,16 +1229,52 @@
             "used_in": []
         },
         "fbuchBootCommentRow": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuchBoot"
+                    ],
+                    "3": [
+                        "fbuchBoot"
+                    ]
+                }
+            }
         },
         "fbuchBootSettingRow": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuchBoot"
+                    ],
+                    "3": [
+                        "fbuchBoot"
+                    ]
+                }
+            }
         },
         "fbuchBootSeatSettingRow": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "3": [
+                        "fbuchBootSettingRow"
+                    ],
+                    "4": [
+                        "fbuchBootSettingRow"
+                    ]
+                }
+            }
         },
         "fbuchBootRiggerungRow": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuchBoot"
+                    ],
+                    "3": [
+                        "fbuchBoot"
+                    ]
+                }
+            }
         },
         "FbuchRiggerungEintragenForm": {
             "used_in": []
@@ -949,13 +1283,25 @@
             "used_in": []
         },
         "fbuchAnmeldenDateNamesRow": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuchErgoterminNamen"
+                    ]
+                }
+            }
         },
         "fbuchAnmeldenDatesRowForm": {
             "used_in": []
         },
         "fbuchAnmeldenDatesRowComment": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "3": [
+                        "fbuchRuderterminCommentsRow"
+                    ]
+                }
+            }
         },
         "fbuchPersonenAnmeldenDatesRow": {
             "used_in": []
@@ -991,13 +1337,31 @@
             "used_in": []
         },
         "fbuchRuderterminInvitedRow": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuchErgoterminNamen"
+                    ]
+                }
+            }
         },
         "fbuchRuderterminCommentsRow": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuchErgoterminNamen"
+                    ]
+                }
+            }
         },
         "fbuchRuderterminInvitedNamesRow": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "3": [
+                        "fbuchRuderterminInvitedRow"
+                    ]
+                }
+            }
         },
         "fbuchTerminDayRow": {
             "used_in": []
@@ -1015,19 +1379,58 @@
             "used_in": []
         },
         "fbuchFahrtenDragdropDatesRow": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuchErgoterminNamen"
+                    ]
+                }
+            }
         },
         "fbuchFahrtenDragdropDateNamesRow": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "3": [
+                        "fbuchFahrtenDragdropDatesRow"
+                    ]
+                }
+            }
         },
         "fbuchFahrtenDragdropFahrtNamesRow": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "3": [
+                        "fbuchClosedFahrtenDragdropRow"
+                    ],
+                    "4": [
+                        "fbuchClosedFahrtenDragdropRow"
+                    ]
+                }
+            }
         },
         "fbuchClosedFahrtenDragdropRow": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "fbuchBoot"
+                    ],
+                    "3": [
+                        "fbuchBoot"
+                    ]
+                }
+            }
         },
         "fbuchFahrtenDragdropFahrtNamesAlter": {
-            "used_in": []
+            "used_in": {
+                "chunks": {
+                    "3": [
+                        "fbuchClosedFahrtenDragdropRow"
+                    ],
+                    "4": [
+                        "fbuchClosedFahrtenDragdropRow"
+                    ]
+                }
+            }
         },
         "fbuchFahrtenTeamrowing": {
             "used_in": []
@@ -1085,7 +1488,13 @@
             }
         },
         "mv_mail_documents_wrapper": {
-            "used_in": [],
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "mv_mail_tpl"
+                    ]
+                }
+            },
             "used": "2024-09-12 17:09"
         },
         "mv_maildownload_page": {
@@ -1101,7 +1510,13 @@
             "used": "2024-09-14 08:52"
         },
         "mv_mail_document_tpl": {
-            "used_in": [],
+            "used_in": {
+                "chunks": {
+                    "2": [
+                        "mv_mail_tpl"
+                    ]
+                }
+            },
             "used": "2024-09-12 17:09"
         },
         "input_options_beitragstyp": {
@@ -1184,7 +1599,8 @@
             "used": "2024-09-12 14:16"
         },
         "mv_tpl_details": {
-            "used_in": []
+            "used_in": [],
+            "used": "2024-10-14 15:01"
         },
         "scriptdetailModal": {
             "used_in": [],
@@ -1195,7 +1611,8 @@
             "used": "2024-09-15 09:29"
         },
         "mv_tpl_details_familymember": {
-            "used_in": []
+            "used_in": [],
+            "used": "2024-10-17 11:47"
         },
         "mv_tpl_eintrittsdatum": {
             "used_in": [],

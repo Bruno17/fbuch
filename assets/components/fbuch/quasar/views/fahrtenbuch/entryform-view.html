@@ -246,3 +246,19 @@
     </q-form>
     </template>
 </div>
+
+<q-dialog v-model="warnung" persistent transition-show="scale" transition-hide="scale">
+    <q-card class="bg-red text-white" style="width: 300px">
+      <q-card-section>
+        <div class="text-h6">Achtung!</div>
+      </q-card-section>
+
+      <q-card-section class="q-pt-none">
+        Eine weitere Boje wurde Richtung flussauf auf Hafenlohrer Seite im Bereich der Mündung Hafenlohr installiert! Bitte dort erhöhte Vorsicht!
+      </q-card-section>
+
+      <q-card-actions align="right" class="bg-white text-black">
+        <q-btn flat label="OK" v-close-popup />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
