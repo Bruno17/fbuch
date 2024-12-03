@@ -89,10 +89,13 @@
                         <q-card flat bordered >
                             <q-card-section v-if="boot.gesperrt == 0" class="bg-primary text-white">
                                 {{ boot.gewichtsklasse }} <br>
-                                Gruppe: <strong>{{ boot.Nutzergruppe_name}}</strong> <br>
-                                <p v-html="nl2br(boot.Nutzergruppe_description)"></p>
+                                Gruppe: <strong>{{nutzergruppe.name}}</strong> <br>
+                                <p v-html="nl2br(nutzergruppe.description)"></p>
+                                aktuelle Bootsriggerung: {{boot.Bootsgattung_shortname}}<br>
+                                Riggerung in dieser Fahrt: {{gattung.shortname}}<br>
+                                <q-btn @click="state.dialog_riggerung=true;" label="Boot umriggern" class="bg-white text-black"></q-btn>
                               </q-card-section> 
-                              <q-card-section v-if="boot.gesperrt == 0" :style="'background-color:#' + boot.Nutzergruppe_color">
+                              <q-card-section v-if="boot.gesperrt == 0" :style="'background-color:#' + nutzergruppe.color">
                                 
                              </q-card-section>                               
                               <q-card-section v-if="boot.gesperrt == 1" class="bg-negative text-white">
@@ -262,3 +265,11 @@
       </q-card-actions>
     </q-card>
   </q-dialog>
+
+  <riggerungform 
+  v-model="state.dialog_riggerung"
+  :boot="boot"
+  :entry="entry"
+  @onOk="onChangeRiggerung"
+  />
+

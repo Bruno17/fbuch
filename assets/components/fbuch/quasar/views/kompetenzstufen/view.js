@@ -16,7 +16,6 @@ export default {
 
         onMounted(() => {
             useLoadPermissions();
-            loadCompetencyLevels();
             loadBootsnutzergruppen();
         })
 
@@ -37,13 +36,22 @@ export default {
             });            
         }
 
+        function prepareNutzergruppen(group){
+            let groups = {};
+            for (let i in group){
+                 groups[group[i].name] = group[i];
+            }
+            bootsnutzergruppen.value = groups;
+        }        
+
         function loadBootsnutzergruppen(){
             var data = {};
             var ajaxUrl = modx_options.rest_url + 'Bootsnutzergruppen';
  
             axios.get(ajaxUrl,{params:data})
             .then(function (response) {
-                bootsnutzergruppen.value = response.data.results;
+                prepareNutzergruppen(response.data.results);
+                loadCompetencyLevels();
             })
             .catch(function (error) {
                 console.log(error);

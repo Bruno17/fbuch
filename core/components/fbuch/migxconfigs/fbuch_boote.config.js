@@ -1,14 +1,14 @@
 {
-  "id":61,
+  "id":6,
   "name":"fbuch_boote",
   "formtabs":[
     {
-      "MIGX_id":89,
+      "MIGX_id":11,
       "caption":"Boot",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":386,
+          "MIGX_id":32,
           "field":"name",
           "caption":"Name",
           "description":"",
@@ -27,7 +27,7 @@
           "pos":1
         },
         {
-          "MIGX_id":460,
+          "MIGX_id":33,
           "field":"gattung_id",
           "caption":"Aktuelle Riggerung",
           "description":"",
@@ -46,7 +46,7 @@
           "pos":2
         },
         {
-          "MIGX_id":461,
+          "MIGX_id":34,
           "field":"gattung_ids",
           "caption":"M\u00f6gliche Riggerungen",
           "description":"",
@@ -65,7 +65,7 @@
           "pos":3
         },
         {
-          "MIGX_id":469,
+          "MIGX_id":35,
           "field":"type",
           "caption":"Bootstyp",
           "description":"",
@@ -84,7 +84,7 @@
           "pos":4
         },
         {
-          "MIGX_id":388,
+          "MIGX_id":36,
           "field":"seats",
           "caption":"Pl\u00e4tze",
           "description":"",
@@ -103,7 +103,7 @@
           "pos":5
         },
         {
-          "MIGX_id":389,
+          "MIGX_id":37,
           "field":"gewichtsklasse",
           "caption":"Gewichtsklasse",
           "description":"",
@@ -122,7 +122,7 @@
           "pos":6
         },
         {
-          "MIGX_id":390,
+          "MIGX_id":38,
           "field":"nutzergruppe",
           "caption":"Nutzergruppe",
           "description":"",
@@ -141,7 +141,7 @@
           "pos":7
         },
         {
-          "MIGX_id":454,
+          "MIGX_id":39,
           "field":"gesperrt",
           "caption":"Boot sperren",
           "description":"",
@@ -160,7 +160,7 @@
           "pos":8
         },
         {
-          "MIGX_id":462,
+          "MIGX_id":40,
           "field":"manufaction_year",
           "caption":"Baujahr",
           "description":"",
@@ -179,7 +179,7 @@
           "pos":9
         },
         {
-          "MIGX_id":463,
+          "MIGX_id":41,
           "field":"manufacturer",
           "caption":"Hersteller",
           "description":"",
@@ -198,7 +198,7 @@
           "pos":10
         },
         {
-          "MIGX_id":464,
+          "MIGX_id":42,
           "field":"model",
           "caption":"Model",
           "description":"",
@@ -217,7 +217,7 @@
           "pos":11
         },
         {
-          "MIGX_id":465,
+          "MIGX_id":43,
           "field":"owner",
           "caption":"Besitzer",
           "description":"",
@@ -236,7 +236,7 @@
           "pos":12
         },
         {
-          "MIGX_id":466,
+          "MIGX_id":44,
           "field":"purchase_date",
           "caption":"Kaufdatum",
           "description":"Wenn Kaufdatum nicht ermittelt werden kann, Jahr des Kaufes angeben",
@@ -255,7 +255,7 @@
           "pos":13
         },
         {
-          "MIGX_id":467,
+          "MIGX_id":45,
           "field":"purchase_price",
           "caption":"Kaufpreis",
           "description":"",
@@ -274,7 +274,7 @@
           "pos":14
         },
         {
-          "MIGX_id":468,
+          "MIGX_id":46,
           "field":"serial_no",
           "caption":"Serien Nummer",
           "description":"",
@@ -293,7 +293,7 @@
           "pos":15
         },
         {
-          "MIGX_id":407,
+          "MIGX_id":47,
           "field":"versicherungs_nummer",
           "caption":"Versicherungsnummer",
           "description":"",
@@ -312,7 +312,7 @@
           "pos":16
         },
         {
-          "MIGX_id":408,
+          "MIGX_id":48,
           "field":"versicherungs_summe",
           "caption":"Versicherungssumme",
           "description":"",
@@ -334,12 +334,12 @@
       "pos":1
     },
     {
-      "MIGX_id":90,
+      "MIGX_id":12,
       "caption":"Erlaubte Benutzer",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":470,
+          "MIGX_id":49,
           "field":"allowednutzer",
           "caption":"Benutzer Namen, welche Erlaubnis haben, dieses Boot zu benutzen",
           "description":"",
@@ -359,6 +359,33 @@
         }
       ],
       "pos":2
+    },
+    {
+      "MIGX_id":66,
+      "caption":"Gattung-Nutzergruppen",
+      "print_before_tabs":"0",
+      "fields":[
+        {
+          "MIGX_id":272,
+          "field":"gattung_nutzergruppen",
+          "caption":"Gattung-Nutzergruppen",
+          "description":"Wenn sich die Nutzergruppe abh\u00e4ngig von der Riggerung bzw. Bootsgattung \u00e4ndern soll.",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"migx",
+          "validation":"",
+          "configs":"fbuch_gattung_nutzergruppen:fbuch",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":1
+        }
+      ],
+      "pos":3
     }
   ],
   "contextmenus":"update||recall_remove_delete",
@@ -449,7 +476,10 @@
     "check_resid_TV":"",
     "join_alias":"",
     "has_jointable":"yes",
+    "getlistselectfields":"",
+    "getlistspecialfields":"",
     "getlistwhere":"",
+    "getlistgroupby":"",
     "joins":[
       {
         "alias":"Bootsgattung"
@@ -576,12 +606,12 @@
   "createdby":1,
   "createdon":"2016-09-10 13:32:23",
   "editedby":1,
-  "editedon":"2021-07-10 09:25:34",
+  "editedon":"2024-11-27 08:10:31",
   "deleted":0,
-  "deletedon":"-1-11-30 00:00:00",
+  "deletedon":null,
   "deletedby":0,
   "published":1,
-  "publishedon":"-1-11-30 00:00:00",
+  "publishedon":null,
   "publishedby":0,
   "category":""
 }

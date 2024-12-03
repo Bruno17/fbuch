@@ -2,6 +2,7 @@ import api_select from '../../components/api_select.js'
 import timeinput from '../../components/timeinput.js'
 import datepicker from '../../components/datepicker.js'
 import valuesetter from '../../components/valuesetter.js'
+import riggerungform from '../../components/fahrtenbuch/riggerungform.js'
 import { useLoadPermissions, useLoadCurrentMember, useHasPermission } from "../../composables/helpers.js";
 
 export default {
@@ -13,7 +14,8 @@ export default {
     api_select: api_select,
     datepicker: datepicker,
     timeinput: timeinput,
-    valuesetter: valuesetter
+    valuesetter: valuesetter,
+    riggerungform:riggerungform
   },
 
   setup(props) {
@@ -26,6 +28,8 @@ export default {
     let id = params.id || 'new';
     const entry = ref({});
     const boot = ref({ 'id': 0 });
+    const nutzergruppe = ref({});
+    const gattung = ref({});
     const newguest = ref({});
     const state = ref({});
     const bootSelect = ref();
@@ -41,6 +45,7 @@ export default {
     const warnung = ref(false);
 
     onMounted(() => {
+      state.value.firstload = true;
       useLoadPermissions();
       useLoadCurrentMember().then(function (data) {
         currentMember.value = data.object;
@@ -52,6 +57,7 @@ export default {
       state.value.minutes_total = state.value.minutes_total || 0;
       state.value.duration_valid = state.value.duration_valid || true;
       
+      
     })
 
     watch(() => entry.value.date, (value) => {
@@ -59,6 +65,9 @@ export default {
     })
 
     function nl2br(text){
+      if (text === undefined){
+        return
+      }
       return text.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1 <br/> $2');
   }    
 
@@ -71,6 +80,7 @@ export default {
       }  
       entry.value.boot_id = 0;
       selectionState.value.bootsgattung = 0;
+      boot.value = {};
     }
 
     function onSelectBoot(value) {
@@ -81,12 +91,16 @@ export default {
       if (bootsgattungSelect.value){
         bootsgattungSelect.value.loadNames({ 'gattung_name': value.Bootsgattung_name });  
       }
+      if (!state.value.firstload){
+        entry.value.gattung_id = 0;
+      } 
       loadBoot(entry.value.boot_id);
     }
 
     function onSelectBootsgattung(value) {
       bootSelect.value.loadNames({ 'gattung_id': value });
       entry.value.boot_id = 0;
+      boot.value = {};
     }
 
     function addGuest() {
@@ -203,17 +217,59 @@ export default {
       }
 
       let data = {};
+      data.fahrt_gattung_id = entry.value.gattung_id;
       let ajaxUrl = modx_options.rest_url + 'Boote/' + id;
 
       axios.get(ajaxUrl, { params: data })
         .then(function (response) {
           const object = response.data.object;
           boot.value = object;
+          loadNutzergruppe();
+          loadGattung();
+          
+          state.value.firstload = false;
           //onSelectBoot({ 'value': object.boot_id, 'Bootsgattung_name': object.Gattung_name, 'Bootsgattung_id': object.Gattung_id });
         })
         .catch(function (error) {
           console.log(error);
         });
+    }
+
+
+
+    function loadNutzergruppe(){
+      let data = {};
+      let id = boot.value.fahrt_nutzergruppe;
+      let ajaxUrl = modx_options.rest_url + 'Bootsnutzergruppen/' + id; 
+      axios.get(ajaxUrl, { params: data })
+      .then(function (response) {
+        const object = response.data.object;
+        nutzergruppe.value = object;
+        entry.value.nutzergruppe_id = id;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });               
+    }
+
+    function loadGattung(){
+      let data = {};
+      let id = boot.value.fahrt_gattung_id;  
+      if (routeValue.name == 'entryform_update'){
+        if (state.value.firstload && entry.value.gattung_id > 0){
+          id = entry.value.gattung_id;  
+        }
+      }
+      let ajaxUrl = modx_options.rest_url + 'Bootsgattungen/' + id;  
+      axios.get(ajaxUrl, { params: data })
+      .then(function (response) {
+        const object = response.data.object;
+        gattung.value = object;
+        entry.value.gattung_id = id;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });              
     }
 
     function onCancelClick() {
@@ -366,6 +422,11 @@ export default {
         });
     }
 
+    function onChangeRiggerung(form){
+      entry.value.gattung_id = form.value.gattung_id.value;
+      loadBoot(boot.value.id);
+    }
+
     function onReset() {
       //Vue.$router.go(-1);
     }
@@ -373,6 +434,8 @@ export default {
     return {
       entry,
       boot,
+      nutzergruppe,
+      gattung,
       state,
       tab,
       newguest,
@@ -383,6 +446,7 @@ export default {
       onSubmit,
       onSubmitClick,
       onCancelClick,
+      onChangeRiggerung,
       removePerson,
       setObmann,
       setCox,

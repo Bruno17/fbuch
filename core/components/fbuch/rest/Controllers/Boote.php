@@ -59,6 +59,7 @@ class MyControllerBoote extends BaseController {
 
     public function afterRead(array &$objectArray) {
         $returntype = $this->getProperty('returntype');
+        $fahrt_gattung_id = $this->getProperty('fahrt_gattung_id');
  
 
         switch ($returntype){
@@ -94,25 +95,55 @@ class MyControllerBoote extends BaseController {
                
                 break;
             default:
+                $objectArray['fahrt_gattung_id'] = $objectArray['gattung_id'];
+                $objectArray['fahrt_nutzergruppe'] = $objectArray['nutzergruppe'];
                 if ($gattung = $this->object->getOne('Bootsgattung')){
                     $item = $gattung->toArray();
                     foreach ($item as $field => $value){
                         $objectArray['Bootsgattung_' . $field] = $value;
                     }
                 }
-                if ($gruppe = $this->object->getOne('Nutzergruppe')){
+                $gruppe = $this->object->getOne('Nutzergruppe');
+                if (!empty($fahrt_gattung_id)){
+                    $objectArray['fahrt_nutzergruppe'] = $objectArray['nutzergruppe'];
+                    $objectArray['fahrt_gattung_id'] = $fahrt_gattung_id;
+                    $nutzergruppe = $this->getNutzergruppeByGattung($fahrt_gattung_id); 
+                    if(!empty($nutzergruppe) && $object = $this->modx->getObject('fbuchBootsNutzergruppe',['id'=>$nutzergruppe])){
+                        $gruppe = $object; 
+                        $objectArray['fahrt_nutzergruppe'] = $nutzergruppe;   
+                    }   
+                }
+
+                if ($gruppe){
                     $item = $gruppe->toArray();
                     foreach ($item as $field => $value){
                         $objectArray['Nutzergruppe_' . $field] = $value;
                     }
                 }
+
+
                 $objectArray['gattungen'] = $this->getGattungen();
                 
                 break;
         }
          
         return !$this->hasErrors();
-    }     
+    } 
+    
+    public function getNutzergruppeByGattung($gattung_id){
+        $nutzergruppe = 0;
+        $gattung_nutzergruppen = $this->object->get('gattung_nutzergruppen');
+        $gattung_nutzergruppen = json_decode($gattung_nutzergruppen,true);
+        if (is_array($gattung_nutzergruppen)){
+            foreach ($gattung_nutzergruppen as $gruppe){
+                if(!empty($gruppe['gattung_id']) && !empty($gruppe['nutzergruppe']) && $gruppe['gattung_id'] == $gattung_id){
+                    $nutzergruppe = $gruppe['nutzergruppe'];
+                }
+            }
+        }        
+
+        return $nutzergruppe;
+    }
 
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
 

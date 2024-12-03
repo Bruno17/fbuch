@@ -50,11 +50,28 @@ class MyControllerBootriggerungen extends BaseController {
         $gattung_id = $this->object->get('gattung_id');
         if ($boot = $this->modx->getObject('fbuchBoot',$boot_id)) {
             $boot->set('gattung_id',$gattung_id);
+            $nutzergruppe = $this->getNutzergruppeByGattung($boot, $gattung_id);
+            $boot->set('nutzergruppe',$nutzergruppe);
             $boot->save();
         }
 
         return;
-    }        
+    } 
+    
+    public function getNutzergruppeByGattung($boot_object, $gattung_id){
+        $nutzergruppe = 0;
+        $gattung_nutzergruppen = $boot_object->get('gattung_nutzergruppen');
+        $gattung_nutzergruppen = json_decode($gattung_nutzergruppen,true);
+        if (is_array($gattung_nutzergruppen)){
+            foreach ($gattung_nutzergruppen as $gruppe){
+                if(!empty($gruppe['gattung_id']) && !empty($gruppe['nutzergruppe']) && $gruppe['gattung_id'] == $gattung_id){
+                    $nutzergruppe = $gruppe['nutzergruppe'];
+                }
+            }
+        }        
+
+        return $nutzergruppe;
+    }    
     
     public function verifyAuthentication() {
         if (!$this->modx->hasPermission('fbuch_view_fahrten')){

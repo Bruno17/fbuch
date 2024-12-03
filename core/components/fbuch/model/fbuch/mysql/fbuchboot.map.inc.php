@@ -13,6 +13,7 @@ $xpdo_meta_map['fbuchBoot']= array (
     'name' => '',
     'gattung' => '',
     'gattung_id' => 0,
+    'gattung_nutzergruppen' => '',
     'gattung_ids' => '',
     'owner' => '',
     'serial_no' => '',
@@ -71,6 +72,13 @@ $xpdo_meta_map['fbuchBoot']= array (
       'null' => false,
       'default' => 0,
       'index' => 'index',
+    ),
+    'gattung_nutzergruppen' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
     ),
     'gattung_ids' => 
     array (

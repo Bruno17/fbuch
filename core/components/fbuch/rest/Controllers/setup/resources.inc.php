@@ -257,10 +257,11 @@ $update_resources = [
      'uri_override' => 0,
      'parent_uri'=>'listen/',
      'template_name'=>'fbuch Quasar 2',
-     'content'=>'[[*content]]',
      'hidemenu'=>0,
      'resource_groups'=>[],
-     'tvs'=>[['name'=>'scripts','value'=>'']]
+     'tvs'=>[['name'=>'scripts','value'=>''],
+     ['name'=>'headscripts','value'=>'<style> h2 { font-size:32px; } h3 { font-size:24px; line-height:24px; } h5 { font-size:20px; } </style>']
+     ]
     ],      
     ['pagetitle'=>'Einladungslisten',
      'alias'=>'einladungslisten',

@@ -457,7 +457,7 @@ class MyControllerFahrten extends BaseController {
                     $sortConfig = ['date'=>'ASC','start_time'=>'ASC'];    
                 break;                                               
         } 
-        
+
         
                 
         $joins = '[{"alias":"Boot"},
@@ -566,6 +566,28 @@ class MyControllerFahrten extends BaseController {
         $objectArray['average_error'] = $error;
         $objectArray['date'] = substr($object->get('date'),0,10);
         $objectArray['date_end'] = substr($object->get('date_end'),0,10);
+
+        $fahrt_gattung_id = $object->get('gattung_id');
+        $boot_gattung_id = $object->get('Gattung_id');
+        if (!empty($fahrt_gattung_id) && $fahrt_gattung_id != $boot_gattung_id){
+            if ($gattung = $this->modx->getObject('fbuchBootsGattung',['id'=>$fahrt_gattung_id])){
+                $gattung_array = $gattung->toArray();
+                foreach($gattung_array as $key=>$value){
+                    $objectArray['Gattung_' . $key] = $value;
+                }
+            }
+        }
+
+        $fahrt_nutzergruppe_id = $object->get('nutzergruppe_id');
+        $boot_nutzergruppe_id = $object->get('Nutzergruppe_id');
+        if (!empty($fahrt_nutzergruppe_id) && $fahrt_nutzergruppe_id != $boot_nutzergruppe_id){
+            if ($nutzergruppe = $this->modx->getObject('fbuchBootsNutzergruppe',['id'=>$fahrt_nutzergruppe_id])){
+                $nutzergruppe_array = $nutzergruppe->toArray();
+                foreach($nutzergruppe_array as $key=>$value){
+                    $objectArray['Nutzergruppe_' . $key] = $value;
+                }
+            }
+        }        
         
         return $objectArray; 
     }        

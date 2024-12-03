@@ -4,6 +4,8 @@
         <field key="date" dbtype="datetime" phptype="datetime" null="true" />
         <field key="date_end" dbtype="datetime" phptype="datetime" null="true" />
         <field key="boot_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="gattung_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="nutzergruppe_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="date_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="km" dbtype="decimal" precision="8,1" phptype="float" null="false" default="0" index="index" />
         <field key="destination" dbtype="varchar" phptype="string" precision="190" null="false" default="" />        
@@ -144,6 +146,7 @@
         <field key="name" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
         <field key="gattung" dbtype="varchar" phptype="string" precision="10" null="false" default="" />
         <field key="gattung_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="gattung_nutzergruppen" dbtype="text" phptype="string" null="false" default="" />        
         <field key="gattung_ids" dbtype="varchar" phptype="string" precision="100" null="false" default="" /> 
         <field key="owner" dbtype="varchar" phptype="string" precision="255" null="false" default="" /> 
         <field key="serial_no" dbtype="varchar" phptype="string" precision="255" null="false" default="" />  

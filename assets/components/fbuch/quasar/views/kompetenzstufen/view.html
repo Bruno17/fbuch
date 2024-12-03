@@ -17,30 +17,76 @@
 
 [[*content]]
 
-<template v-for="level in levels">
-    <h3 class="q-mt-md q-mb-none text-weight-bold" >{{level.name}}({{level.level}})</h3>
-    <font :color="'#'+level.color">
-        &#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;&#9632;          
-    </font>    
-    <template v-if="level.technical_requirements != ''">
-        <h5 class="q-mt-sm q-mb-xs text-weight-bold" >Rudertechnische Kenntnisse</h5>
-        <p v-html="nl2br(level.technical_requirements)"></p>
+<q-markup-table class="full-width">
+<template v-for="(level,index) in levels">
+    <tr :style="'background-color:#'+level.color+';'" >
+    <td colspan="3" class="text-weight-bold" 
+    
+    >
+        {{level.name}}({{level.level}})
+    </td>    
+    </tr>
+    <tr>
+    <td class="vertical-top" rowspan="2" style="border-right:1px solid;">
+        Mitglieder, welche über keine oder geringe Ruderkenntnisse verfügen
+        <br>
+        <q-btn outline icon-right="arrow_outward" label="Vorraussetzungen" @click="levels[index].dialog = true" />
+    </td>  
+    <td colspan="2" class="text-weight-bold text-center" style="border-bottom:1px solid;">Bootsklassifizierungen</td>
+    </tr>
+    <tr>
+    <td v-for="permission in level.permissions" class="text-weight-bold text-center" :style="'background-color:#'+bootsnutzergruppen[permission.Bootsklassifizierung].color+';'" style="border-right:1px solid;">{{permission.Bootsklassifizierung}}</td>
+    </tr>
+    <tr>
+        <td class="text-weight-bold" style="border-top:1px solid;border-right:1px solid;">Bootsnutzung als Obmann / -frau:</td>
+        <td v-for="permission in level.permissions" class="text-center" style="border-top:1px solid;border-right:1px solid;">
+            <q-icon v-if="permission.als_obmann.permission==0" name="block" size="sm" color="red" />
+            <q-icon v-if="permission.als_obmann.permission==1" name="check" size="sm" color="green" />
+        </td>
+    </tr>
+    <tr>
+        <td class="text-weight-bold" style="border-top:1px solid;border-right:1px solid;">Mitrudern:</td>
+        <td v-for="permission in level.permissions" class="text-center" style="border-top:1px solid;border-right:1px solid;">
+        <template v-if="permission.mitrudern.permission==0 || permission.mitrudern.permission==1"> 
+            <q-icon v-if="permission.mitrudern.permission==0" name="block" size="sm" color="red" />
+            <q-icon v-if="permission.mitrudern.permission==1" name="check" size="sm" color="green" />
+        </template>
+        <template v-else>
+            {{permission.mitrudern.permission}}    
+        </template>        
+        </td>
+    </tr>    
+</template>
+</q-markup-table>
 
-    </template>
-    <template v-if="level.safety_requirements != ''">
-        <h5 class="q-mt-sm q-mb-xs text-weight-bold" >Sicherheitstechnische Vorraussetzungen</h5>
-        <p v-html="nl2br(level.safety_requirements)"></p>
-    </template>
-    <template v-if="level.technical_goals != ''">
-        <h5 class="q-mt-sm q-mb-xs text-weight-bold" >Rudertechnische Ziele</h5>
-        <p v-html="nl2br(level.technical_goals)"></p>
-    </template>
-    <template v-if="level.permissions != ''">
-        <h5 class="q-mt-sm q-mb-xs text-weight-bold" style="font-size:20px;">Welche Boote</h5>
-        <p v-html="nl2br(level.permissions)"></p>
-    </template>
+<template v-for="(level,index) in levels">
 
-    <hr>
+    <q-dialog v-model="levels[index].dialog">
+        <q-card>
+          <q-card-section>
+            <div class="text-h6">{{level.name}}({{level.level}})</div>
+          </q-card-section>
+  
+          <q-card-section class="q-pt-none">
+            <template v-if="level.technical_requirements != ''">
+                <h5 class="col-12 q-mt-sm q-mb-xs text-weight-bold" >Rudertechnische Kenntnisse</h5>
+                <p v-html="nl2br(level.technical_requirements)"></p>
+            </template>
+            <template v-if="level.safety_requirements != ''">
+                <h5 class="col-12 q-mt-sm q-mb-xs text-weight-bold" >Sicherheitstechnische Vorraussetzungen</h5>
+                <p v-html="nl2br(level.safety_requirements)"></p>
+            </template>
+            <template v-if="level.technical_goals != ''">
+                <h5 class="col-12 q-mt-sm q-mb-xs text-weight-bold" >Rudertechnische Ziele</h5>
+                <p v-html="nl2br(level.technical_goals)"></p>
+            </template>
+          </q-card-section>
+  
+          <q-card-actions align="right">
+            <q-btn flat label="OK" color="primary" v-close-popup />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>    
 
 </template>
 

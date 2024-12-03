@@ -1,0 +1,54 @@
+<q-dialog @before-show="onBeforeShow" transition-show="scale" transition-hide="scale">
+    <q-card style="width: 300px">
+      <q-card-section>
+        <div class="text-h6">Boot umriggern</div>
+      </q-card-section>
+
+      <q-card-section class="q-pt-none">
+        <q-select class="col-12" label="Neue Riggerung" 
+        ref="gattungselect"
+        :options="gattung_options" 
+        emit-valuex
+        map-optionsx
+        v-model="form.gattung_id" outlined @update:model-value="updateValue" 
+        hint="Falls eine mögliche Riggerung fehlt, bitte über das Kontaktformular melden und Riggerung unter Kommentar eintragen!"
+        >
+        </q-select>
+      </q-card-section>
+
+      <q-card-section class="">
+        <q-list>
+            <!--
+              Rendering a <label> tag (notice tag="label")
+              so QRadios will respond to clicks on QItems to
+              change Toggle state.
+            -->
+      
+            <q-item tag="label" v-ripple>
+              <q-item-section avatar>
+                <q-radio v-model="form.permanent" val="0" color="primary" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>nur für diese Fahrt</q-item-label>
+                <q-item-label caption>Boot wird nach der Fahrt wieder zurückgebaut </q-item-label>
+              </q-item-section>
+            </q-item>
+      
+            <q-item tag="label" v-ripple>
+              <q-item-section avatar>
+                <q-radio v-model="form.permanent" val="1" color="primary" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>permanent</q-item-label>
+                <q-item-label caption>Boot bleibt nach der Fahrt umgebaut </q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+      </q-card-section>      
+
+      <q-card-actions align="right" class="bg-white text-black">
+        <q-btn flat label="Abbrechen" v-close-popup />
+        <q-btn flat label="OK" @click="onSubmit" v-close-popup />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
