@@ -23,11 +23,7 @@ export default {
       const gattung_options = ref([]); 
       const form = ref({});
       const gattungselect = ref(null);
-      const year = params.year || Quasar.date.formatDate(new Date(), 'YYYY');
-      const month = params.month || Quasar.date.formatDate(new Date(), 'MM');
-      const day = params.day || Quasar.date.formatDate(new Date(), 'DD');
-      const date = year + '-' + month + '-' +day;      
-     
+    
       onMounted(() => {
         useLoadPermissions();
         //loadEvents();
@@ -52,34 +48,9 @@ export default {
       }
 
       function onSubmit(){
-          if (form.value.permanent == "1"){
-              save();
-          } else {
-            emit('onOk',form);               
-          }
-  
+             emit('onOk',form);               
       }
 
-      function save() {
-        let data = {};
-        data.boot_id = props.boot.id;
-        data.createdon = date;
-        data.gattung_id = form.value.gattung_id.value;
-        data.name = 'Fahrt:' + props.entry.id;
-
-          const ajaxUrl = modx_options.rest_url + 'Bootriggerungen';
-          axios.post(ajaxUrl, data)
-            .then(function (response) {
-              const success = response.data.success;
-              emit('onOk',form); 
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
- 
-      }       
-
- 
 
       return {
         useHasPermission,

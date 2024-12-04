@@ -43,6 +43,11 @@ export default {
     const showpersonstab = ref(true);
     const showbootsgattungselect = ref(false);
     const warnung = ref(false);
+    const form_riggerung = ref({});
+    const year = params.year || Quasar.date.formatDate(new Date(), 'YYYY');
+    const month = params.month || Quasar.date.formatDate(new Date(), 'MM');
+    const day = params.day || Quasar.date.formatDate(new Date(), 'DD');
+    const date = year + '-' + month + '-' +day;      
 
     onMounted(() => {
       state.value.firstload = true;
@@ -335,6 +340,9 @@ export default {
         axios.post(ajaxUrl, entry.value)
           .then(function (response) {
             //Vue.$router.push('/events/day/' + Quasar.date.formatDate(event.date, 'YYYY/MM/DD'));
+            if (form_riggerung.value.permanent == "1"){
+              saveRiggerung(response.data.object.id);
+            }            
             Vue.$router.push('/' + Quasar.date.formatDate(entry.value.date, 'YYYY/MM/DD'));
           })
           .catch(function (error) {
@@ -354,6 +362,11 @@ export default {
               })
               return;              
             }
+            //console.log(form_riggerung.value);
+            if (form_riggerung.value.permanent == "1"){
+                saveRiggerung(response.data.object.id);
+            }
+
             //event.value = response.data.object;
             //Vue.$router.push('/events/day/' + Quasar.date.formatDate(event.value.date, 'YYYY/MM/DD')); 
             Vue.$router.push('/' + Quasar.date.formatDate(entry.value.date, 'YYYY/MM/DD'));
@@ -412,8 +425,6 @@ export default {
             })
           }
 
-
-
           //boot.value = object;
           //onSelectBoot({ 'value': object.boot_id, 'Bootsgattung_name': object.Gattung_name, 'Bootsgattung_id': object.Gattung_id });
         })
@@ -425,7 +436,27 @@ export default {
     function onChangeRiggerung(form){
       entry.value.gattung_id = form.value.gattung_id.value;
       loadBoot(boot.value.id);
+      form_riggerung.value = form.value;
     }
+
+    function saveRiggerung(id) {
+      let data = {};
+      data.boot_id = boot.value.id;
+      data.createdon = date;
+      data.gattung_id = form_riggerung.value.gattung_id.value;
+      data.name = 'Fahrt:' + id;
+
+        const ajaxUrl = modx_options.rest_url + 'Bootriggerungen';
+        axios.post(ajaxUrl, data)
+          .then(function (response) {
+            const success = response.data.success;
+            emit('onOk',form); 
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+    }     
 
     function onReset() {
       //Vue.$router.go(-1);
