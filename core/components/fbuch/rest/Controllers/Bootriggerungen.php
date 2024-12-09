@@ -51,7 +51,9 @@ class MyControllerBootriggerungen extends BaseController {
         if ($boot = $this->modx->getObject('fbuchBoot',$boot_id)) {
             $boot->set('gattung_id',$gattung_id);
             $nutzergruppe = $this->getNutzergruppeByGattung($boot, $gattung_id);
-            $boot->set('nutzergruppe',$nutzergruppe);
+            if(!empty($nutzergruppe)){
+                $boot->set('nutzergruppe',$nutzergruppe);    
+            }
             $boot->save();
         }
 
