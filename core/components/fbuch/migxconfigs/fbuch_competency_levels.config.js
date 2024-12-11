@@ -1,14 +1,14 @@
 {
-  "id":207,
+  "id":10,
   "name":"fbuch_competency_levels",
   "formtabs":[
     {
-      "MIGX_id":307,
+      "MIGX_id":17,
       "caption":"Allgemein",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":1344,
+          "MIGX_id":61,
           "field":"level",
           "caption":"Kompetenzstufe",
           "description":"",
@@ -27,7 +27,7 @@
           "pos":1
         },
         {
-          "MIGX_id":1337,
+          "MIGX_id":62,
           "field":"name",
           "caption":"Bezeichnung",
           "description":"",
@@ -46,13 +46,13 @@
           "pos":2
         },
         {
-          "MIGX_id":1338,
+          "MIGX_id":63,
           "field":"color",
           "caption":"color",
           "pos":3
         },
         {
-          "MIGX_id":1339,
+          "MIGX_id":64,
           "field":"color_name",
           "caption":"color_name",
           "pos":4
@@ -61,14 +61,14 @@
       "pos":1
     },
     {
-      "MIGX_id":308,
+      "MIGX_id":18,
       "caption":"Beschreibungen",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":1340,
-          "field":"technical_requirements",
-          "caption":"Rudertechnische Vorrausetzungen",
+          "MIGX_id":275,
+          "field":"description",
+          "caption":"Kurzbeschreibung",
           "description":"",
           "description_is_code":"0",
           "inputTV":"",
@@ -85,9 +85,9 @@
           "pos":1
         },
         {
-          "MIGX_id":1341,
-          "field":"safety_requirements",
-          "caption":"Sicherheitstechnische Vorrausetzungen",
+          "MIGX_id":65,
+          "field":"technical_requirements",
+          "caption":"Rudertechnische Vorrausetzungen",
           "description":"",
           "description_is_code":"0",
           "inputTV":"",
@@ -104,9 +104,9 @@
           "pos":2
         },
         {
-          "MIGX_id":1342,
-          "field":"technical_goals",
-          "caption":"Rudertechnische Ziele",
+          "MIGX_id":66,
+          "field":"safety_requirements",
+          "caption":"Sicherheitstechnische Vorrausetzungen",
           "description":"",
           "description_is_code":"0",
           "inputTV":"",
@@ -123,7 +123,26 @@
           "pos":3
         },
         {
-          "MIGX_id":1343,
+          "MIGX_id":67,
+          "field":"technical_goals",
+          "caption":"Rudertechnische Ziele",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"textarea",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":4
+        },
+        {
+          "MIGX_id":68,
           "field":"permissions",
           "caption":"Bootsberechtigungen",
           "description":"",
@@ -139,7 +158,7 @@
           "inputOptionValues":"",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":4
+          "pos":5
         }
       ],
       "pos":2
@@ -183,7 +202,10 @@
     "check_resid_TV":"",
     "join_alias":"",
     "has_jointable":"yes",
+    "getlistselectfields":"",
+    "getlistspecialfields":"",
     "getlistwhere":"",
+    "getlistgroupby":"",
     "joins":"",
     "hooksnippets":"",
     "cmpmaincaption":"",
@@ -243,7 +265,7 @@
   "createdby":1,
   "createdon":"2024-01-16 21:40:47",
   "editedby":1,
-  "editedon":"2024-01-17 13:27:50",
+  "editedon":"2024-12-10 22:03:44",
   "deleted":0,
   "deletedon":null,
   "deletedby":0,
