@@ -1,14 +1,33 @@
 [
-    {       
+    {
         "name": "Anf\u00e4ngerinnen und Anf\u00e4nger",
         "level": "A",
         "color": "e0e0e0",
         "color_name": "grey-4",
-        "description": "",
-        "technical_requirements": "Keine.",
+        "description": "Mitglieder, welche \u00fcber keine oder geringe rudertechnische Kenntnisse verf\u00fcgen.",
+        "technical_requirements": "",
         "safety_requirements": "",
-        "technical_goals": "Koordination des Bewegungsablaufs (Bewegungstempo und Bewegungsreihenfolge Oberk\u00f6rper,Beine,Arme)\nSaubere Blattf\u00fchrung erlernen (Symmetrie, Blattwinkel, L\u00e4nge, Eintauchtiefe, H\u00f6he \u00fcber Wasser, Auf-, Abdrehen)\nOberk\u00f6rperhaltung, Becken stabilisieren.",
-        "permissions": "Anf\u00e4nger und Anf\u00e4ngerinnen d\u00fcrfen nur in Booten rudern, f\u00fcr die sie f\u00fcr die aktuelle Rudereinheit vom jeweiligen \u00dcbungsleiter eingeteilt wurden. Selbst\u00e4ndiges herausnehmen von Booten ohne Einteilung durch einen \u00dcbungsleiter ist nicht erlaubt."
+        "technical_goals": "",
+        "permissions": [
+            {
+                "Bootsklassifizierung": "Gelb",
+                "als_obmann": {
+                    "permission": 0
+                },
+                "mitrudern": {
+                    "permission": "mit Experte(E)"
+                }
+            },
+            {
+                "Bootsklassifizierung": "Rot",
+                "als_obmann": {
+                    "permission": 0
+                },
+                "mitrudern": {
+                    "permission": "mit Experte(E)"
+                }
+            }
+        ]
     },
     {
         "name": "Fortgeschrittene Anf\u00e4ngerinnen und Anf\u00e4nger",
@@ -16,10 +35,29 @@
         "color": "81c784",
         "color_name": "green-4",
         "description": "",
-        "technical_requirements": "Korrekter Bewegungsablauf im Durchzug und Freilauf bei ruhigen Schlagzahlen.\nSichere Blattf\u00fchrung bei ruhigen Schlagzahlen.(Symmetrie, Winkel, Eintauchtiefe, L\u00e4nge, H\u00f6he \u00fcber Wasser).\nStabile Oberk\u00f6rperhaltung.",
+        "technical_requirements": "\u2212 Koordination des Bewegungsablaufs  \n(Bewegungstempo und Bewegungsreihenfolge Oberk\u00f6rper -> Beine -> Arme) \n\u2212 Saubere und Sichere Blattf\u00fchrung \n(Symmetrie, Blattwinkel, L\u00e4nge, Eintauchtiefe, H\u00f6he \u00fcber Wasser) \n\u2212 Stabile Sitzposition, K\u00f6rperspannung  \n(Oberk\u00f6rperhaltung, Becken stabilisieren) ",
         "safety_requirements": "",
-        "technical_goals": "Die rudertechnischen Ziele entsprechen den rudertechnischen Kentnissen der n\u00e4chsth\u00f6heren Stufe (C).",
-        "permissions": "Wie Stufe A oder zusammen in einem Boot mit einem entsprechend ausgebildeten Bootsobmann."
+        "technical_goals": "",
+        "permissions": [
+            {
+                "Bootsklassifizierung": "Gelb",
+                "als_obmann": {
+                    "permission": 0
+                },
+                "mitrudern": {
+                    "permission": "mit K\u00f6nner(D) oder Experte(E)"
+                }
+            },
+            {
+                "Bootsklassifizierung": "Rot",
+                "als_obmann": {
+                    "permission": 0
+                },
+                "mitrudern": {
+                    "permission": "mit K\u00f6nner(D) oder Experte(E)"
+                }
+            }
+        ]
     },
     {
         "name": "Fortgeschrittene",
@@ -27,10 +65,29 @@
         "color": "ffca28",
         "color_name": "amber-5",
         "description": "",
-        "technical_requirements": "Korrekter, rhytmischer und fl\u00fcssiger Bewegungsablauf im Durchzug und Freilauf.\nSichere Blattf\u00fchrung auch bei etwas h\u00f6heren Schlagzahlen.(Symmetrie, Winkel, Eintauchtiefe, L\u00e4nge, H\u00f6he \u00fcber Wasser)\nSauberes Setzen und Ausheben.\nFlie\u00dfende Umkehrbewegungen auch bei etwas h\u00f6heren Schlagzahlen.\nStabile Oberk\u00f6rperhaltung in allen Positonen.\nF\u00e4higkeit, gerade im Boot zu sitzen, um zumindest ein Gigboot stellen zu k\u00f6nnen.\nSicheres Steuern eines Gigboots als Steuermann.\nEvtl. erste Erfahrungen im Einer.",
+        "technical_requirements": "\u2212 Korrekter, Rhythmischer Bewegungsablauf im Durchzug und Freilauf \n(bei normaler Schlagzahl) \n\u2212 Sichere Blattf\u00fchrung  \n(bei normaler Schlagzahl \/ Symmetrie, Winkel, Eintauchtiefe, L\u00e4nge, H\u00f6he \u00fcber Wasser) \n\u2212 Sauberes Setzen und Ausheben \n(Aushebeln -> Abdrehen \/ Aufdrehen -> Setzen \/ aus den Unterarmen Hebeln) \n\u2212 Flie\u00dfende Umkehrbewegungen \n(bei normaler Schlagzahl) \n\u2212 Stabile Sitzposition in allen Lagen \n\u2212 F\u00e4higkeit, Gigboot auszubalancieren \n\u2212 Sicheres An- und Ablegen \n\u2212 Sicheres steuern als Steuermann ",
         "safety_requirements": "Teilnahme an einer RGM Sicherheitsbelehrung zb. im Rahmen eines Ruderwochendes.",
-        "technical_goals": "Die rudertechnischen Ziele entsprechen den rudertechnischen Kentnissen der n\u00e4chsth\u00f6heren Stufe (D).",
-        "permissions": "Als Obmann im gesteuerten Breitensportboot mit Steuermann oder als Mitruderer im Rennsportboot mit einem entsprechend ausgebildeten Bootsobmann."
+        "technical_goals": "",
+        "permissions": [
+            {
+                "Bootsklassifizierung": "Gelb",
+                "als_obmann": {
+                    "permission": 0
+                },
+                "mitrudern": {
+                    "permission": 1
+                }
+            },
+            {
+                "Bootsklassifizierung": "Rot",
+                "als_obmann": {
+                    "permission": 0
+                },
+                "mitrudern": {
+                    "permission": 1
+                }
+            }
+        ]
     },
     {
         "name": "K\u00f6nnerinnen und K\u00f6nner",
@@ -38,10 +95,29 @@
         "color": "ef5350",
         "color_name": "red-5",
         "description": "",
-        "technical_requirements": "Korrekter, rhytmischer  und fl\u00fcsssiger Bewegungsablauf im Durchzug und Freilauf auch bei h\u00f6heren Schlagzahlen im Mannschaftsboot.\nSichere Blattf\u00fchrung auch bei h\u00f6heren Schlagzahlen.(Symmetrie, Winkel, Eintauchtiefe, L\u00e4nge, H\u00f6he \u00fcber Wasser)\nSauberes Setzen und Ausheben, m\u00f6glichst ohne Wasserfahne.\nFlie\u00dfende Umkehrbewegungen auch bei hohen Schlagzahlen.\nStabile Sitzposition in allen Lagen.\nF\u00e4higkeit, Rennboot auszubalancieren bei ruhigen und hohen Schlagzahlen.\nSicheres Rudern im Einer oder zumindest im Rennboot.\nEntwickeltes Gef\u00fchl f\u00fcr gleichm\u00e4\u00dfigen Bootslauf, auch bei h\u00f6heren Schlagzahlen.\nF\u00e4higkeit, den Bewegungsablauf des Ruderns Anderen zu vermitteln.\nSicheres Steuern eines Rennboots ohne Steuermann, mit und ohne Fu\u00dfsteuer.\nEvtl. korrekte Bewegungsausf\u00fchrung im Riemenboot.\nEntsprechende Beweglichkeit um sich durch regelm\u00e4\u00dfiges Umdrehen einen \u00dcberblick \u00fcber eventuelle Gefahren und Hindernisse verschaffen zu k\u00f6nnen.",
-        "safety_requirements": "Wie Stufe C",
-        "technical_goals": "Die rudertechnischen Ziele entsprechen den rudertechnischen Kentnissen der n\u00e4chsth\u00f6heren Stufe (E).",
-        "permissions": "Als Obmann oder Mitruderer in allen Bootsklassen.\nAusgenommen sind Boote, welche nur nach besonderer Absprache gerudert werden d\u00fcrfen."
+        "technical_requirements": "\u2212 Korrekter, Rhythmischer Bewegungsablauf im Durchzug und Freilauf \n(bei h\u00f6herer Schlagzahl) \n\u2212 Sichere Blattf\u00fchrung \n(bei h\u00f6herer Schlagzahl \/ Symmetrie, Winkel, Eintauchtiefe, L\u00e4nge, H\u00f6he \u00fcber Wasser) \n\u2212 Sauberes Setzen und Ausheben ohne Wasserfahne \n(Aushebeln -> Abdrehen \/ Aufdrehen -> Setzen \/ aus den Unterarmen Hebeln) \n\u2212 Notwendige Beweglichkeit \n(z.B. durch regelm\u00e4\u00dfiges Umdrehen einen \u00dcberblick \u00fcber evtl. Gefahren und Hindernisse erlan\ngen) \n\u2212 Flie\u00dfende Umkehrbewegung \n(bei h\u00f6herer Schlagzahl) \n\u2212 F\u00e4higkeit, Rennboot auszubalancieren \n\u2212 Gef\u00fchl f\u00fcr gleichm\u00e4\u00dfigen Bootslauf  \n\u2212 Gesammelte Erfahrung in der jeweiligen Bootsklassifizierung im Training \n(Bsp. Einer rudern im Training vor alleiniger Ausfahrt ge\u00fcbt) \n\u2212 Sicheres Steuern (Fu\u00dfsteuer \/ \u00fcberziehen) ",
+        "safety_requirements": "Teilnahme an einer RGM Sicherheitsbelehrung zb. im Rahmen eines Ruderwochendes.",
+        "technical_goals": "",
+        "permissions": [
+            {
+                "Bootsklassifizierung": "Gelb",
+                "als_obmann": {
+                    "permission": 1
+                },
+                "mitrudern": {
+                    "permission": 1
+                }
+            },
+            {
+                "Bootsklassifizierung": "Rot",
+                "als_obmann": {
+                    "permission": 0
+                },
+                "mitrudern": {
+                    "permission": 1
+                }
+            }
+        ]
     },
     {
         "name": "Expertinnen und Experten",
@@ -49,20 +125,58 @@
         "color": "f48fb1",
         "color_name": "pink-3",
         "description": "",
-        "technical_requirements": "Wie Stufe D\nAlle Fertigkeiten sowohl im Skull- als auch in allen Riemenbootsklassen.\nSicheres, stabiles Rudern in allen Skull- und Riemenbootsklassen bei allen Schlagzahlen.\nSichere Rennstarts und alle Skills, welche zur Aus\u00fcbung des Ruderns als Rennsport n\u00f6tig sind.\n",
-        "safety_requirements": "",
+        "technical_requirements": "Wie K\u00f6nner, zus\u00e4tzlich:\n\u2212 F\u00e4higkeit anderen Personen das Rudern beizubringen \n\u2212 Idealerweise \u00dcbungsleiterausbildung und \/ oder Rennerfahrung \n",
+        "safety_requirements": "Teilnahme an einer RGM Sicherheitsbelehrung zb. im Rahmen eines Ruderwochendes.",
         "technical_goals": "",
-        "permissions": "Wie Stufe D"
+        "permissions": [
+            {
+                "Bootsklassifizierung": "Gelb",
+                "als_obmann": {
+                    "permission": 1
+                },
+                "mitrudern": {
+                    "permission": 1
+                }
+            },
+            {
+                "Bootsklassifizierung": "Rot",
+                "als_obmann": {
+                    "permission": 1
+                },
+                "mitrudern": {
+                    "permission": 1
+                }
+            }
+        ]
     },
     {
         "name": "Jugendlicher",
         "level": "J",
         "color": "bcaaa4",
         "color_name": "brown-3",
-        "description": "",
+        "description": "Mitglieder, welche das 17. Lebensjahr nicht vollendet haben",
         "technical_requirements": "",
         "safety_requirements": "",
         "technical_goals": "",
-        "permissions": ""
+        "permissions": [
+            {
+                "Bootsklassifizierung": "Gelb",
+                "als_obmann": {
+                    "permission": 0
+                },
+                "mitrudern": {
+                    "permission": "mit Experte(E)"
+                }
+            },
+            {
+                "Bootsklassifizierung": "Rot",
+                "als_obmann": {
+                    "permission": 0
+                },
+                "mitrudern": {
+                    "permission": "mit Experte(E)"
+                }
+            }
+        ]
     }
 ]

@@ -30,7 +30,9 @@
     <td class="vertical-top" rowspan="2" style="border-right:1px solid;">
         {{level.description}}
         <br>
-        <q-btn outline icon-right="arrow_outward" label="Vorraussetzungen" @click="levels[index].dialog = true" />
+        <q-btn 
+        v-if="level.technical_requirements!='' || level.safety_requirements !='' || level.technical_goals != '' "
+        outline icon-right="arrow_outward" label="Vorraussetzungen" @click="levels[index].dialog = true" />
     </td>  
     <td colspan="2" class="text-weight-bold text-center" style="border-bottom:1px solid;">Bootsklassifizierungen</td>
     </tr>
