@@ -1,5 +1,6 @@
 [
     {
+        "_jsonfields":["permissions"],
         "name": "Anf\u00e4ngerinnen und Anf\u00e4nger",
         "level": "A",
         "color": "e0e0e0",
@@ -30,6 +31,7 @@
         ]
     },
     {
+        "_jsonfields":["permissions"],
         "name": "Fortgeschrittene Anf\u00e4ngerinnen und Anf\u00e4nger",
         "level": "B",
         "color": "81c784",
@@ -60,6 +62,7 @@
         ]
     },
     {
+        "_jsonfields":["permissions"],
         "name": "Fortgeschrittene",
         "level": "C",
         "color": "ffca28",
@@ -72,7 +75,7 @@
             {
                 "Bootsklassifizierung": "Gelb",
                 "als_obmann": {
-                    "permission": 0
+                    "permission": 1
                 },
                 "mitrudern": {
                     "permission": 1
@@ -90,6 +93,7 @@
         ]
     },
     {
+        "_jsonfields":["permissions"],
         "name": "K\u00f6nnerinnen und K\u00f6nner",
         "level": "D",
         "color": "ef5350",
@@ -111,7 +115,7 @@
             {
                 "Bootsklassifizierung": "Rot",
                 "als_obmann": {
-                    "permission": 0
+                    "permission": 1
                 },
                 "mitrudern": {
                     "permission": 1
@@ -120,6 +124,7 @@
         ]
     },
     {
+        "_jsonfields":["permissions"],
         "name": "Expertinnen und Experten",
         "level": "E",
         "color": "f48fb1",
@@ -150,6 +155,7 @@
         ]
     },
     {
+        "_jsonfields":["permissions"],
         "name": "Jugendlicher",
         "level": "J",
         "color": "bcaaa4",

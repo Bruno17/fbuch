@@ -24,6 +24,7 @@ class MyControllerSetupPrefillTable extends BaseController {
         $contents = $this->getPrefills($classname);
         $items = json_decode($contents,true);
         $keyfield = 'id';
+        $jsonfields = false;
         if (!is_array($items)){
             return false;
         }
@@ -31,15 +32,22 @@ class MyControllerSetupPrefillTable extends BaseController {
             if (isset($item['_key'])){
                 $keyfield = $item['_key'];    
             }
+            if (isset($item['_jsonfields'])){
+                $jsonfields = $item['_jsonfields'];    
+            }            
             
             if ($object = $this->modx->getObject($classname,[$keyfield => $item[$keyfield]])){
-                $object->fromArray($item);
-                $object->save();                
+
             } else {
                 $object = $this->modx->newObject($classname);
-                $object->fromArray($item);
-                $object->save();
             }
+            $object->fromArray($item);
+            if ($jsonfields){
+                foreach ($jsonfields as $field){
+                    $object->set($field,json_encode($object->get($field)));
+                }
+            }
+            $object->save();            
         }
     }
 

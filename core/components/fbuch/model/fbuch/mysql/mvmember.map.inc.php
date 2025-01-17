@@ -79,6 +79,8 @@ $xpdo_meta_map['mvMember']= array (
     'otp_createdon' => NULL,
     'otp_sendedon' => NULL,
     'competency_level' => '',
+    'competency_level_editedby' => 0,
+    'competency_level_editedon' => NULL,
     'safety_instructions_date' => NULL,
   ),
   'fieldMeta' => 
@@ -628,6 +630,20 @@ $xpdo_meta_map['mvMember']= array (
       'null' => false,
       'default' => '',
       'index' => 'index',
+    ),
+    'competency_level_editedby' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'competency_level_editedon' => 
+    array (
+      'dbtype' => 'datetime',
+      'phptype' => 'datetime',
+      'null' => true,
     ),
     'safety_instructions_date' => 
     array (

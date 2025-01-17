@@ -72,6 +72,7 @@ class MyControllerNames extends BaseController {
         if ($this->modx->hasPermission('fbuch_edit_names')) {
             $this->object->set('editedby', $this->modx->user->get('id'));
             $this->object->set('editedon', strftime('%Y-%m-%d %H:%M:%S')); 
+            $this->checkCompetencyLevel();
         } else {
             throw new Exception('Unauthorized', 401);
         }
@@ -89,7 +90,7 @@ class MyControllerNames extends BaseController {
             if ($existing = $this->modx->getObject('mvMember',['name'=>$name,'firstname'=>$firstname])){
                 return 'name_exists';    
             }
-
+            $this->checkCompetencyLevel();
 
         } else {
             throw new Exception('Unauthorized', 401);
@@ -97,6 +98,19 @@ class MyControllerNames extends BaseController {
 
 
         return !$this->hasErrors();
+    }
+
+    public function checkCompetencyLevel(){
+        $id = $this->object->get('id');
+        $old_level == '';
+        $new_level = $this->object->get('competency_level');
+        if ($id > 0 && $object = $this->modx->getObject('mvMember',$id)){
+            $old_level = $object->get('competency_level');
+        }
+        if ($new_level != $old_level){
+            $this->object->set('competency_level_editedby', $this->modx->user->get('id'));
+            $this->object->set('competency_level_editedon', strftime('%Y-%m-%d %H:%M:%S'));             
+        }
     }
 
     public function afterPost(array &$objectArray) {

@@ -403,6 +403,8 @@
         <field key="otp_createdon" dbtype="datetime" phptype="datetime" null="true" />   
         <field key="otp_sendedon" dbtype="datetime" phptype="datetime" null="true" />   
         <field key="competency_level" dbtype="varchar" precision="10" phptype="string" null="false" default="" index="index" />                      
+		<field key="competency_level_editedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+		<field key="competency_level_editedon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="safety_instructions_date" dbtype="datetime" phptype="datetime" null="true" />  
         
         <composite alias="Fahrten" class="fbuchFahrtNames" local="id" foreign="member_id" cardinality="many" owner="local" />
