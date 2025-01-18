@@ -99,7 +99,8 @@
                                 
                              </q-card-section>                               
                               <q-card-section v-if="boot.gesperrt == 1" class="bg-negative text-white">
-                                 Das Boot/Gerät ist zur Zeit für die Benutzung gesperrt.  
+                                 Das Boot/Gerät ist zur Zeit für die Benutzung gesperrt. <br> 
+                                 <q-btn @click="boot.gesperrt=0" label="Nutzung erzwingen" class="bg-white text-black"></q-btn>                                 
                               </q-card-section>                                                          
                            </q-card>                            
                         </div>
@@ -243,7 +244,7 @@
             </q-tab-panel>
         </q-tab-panels>
         <div class="col-12">
-            <q-btn label="Speichern" type="submit" @click="onSubmitClick" color="primary" />
+            <q-btn v-if="boot.gesperrt!=1" label="Speichern" type="submit" @click="onSubmitClick" color="primary" />
             <q-btn label="Abbrechen" @click="onCancelClick" class="q-ml-sm" />
         </div>
     </q-form>

@@ -13,7 +13,7 @@ class MyControllerBoote extends BaseController {
 
     public function beforePut() {
 
-        if ($this->modx->hasPermission('fbuch_edit_boot')) {
+        if ($this->modx->hasPermission('fbuch_edit_boat')) {
 
         } else {
             throw new Exception('Unauthorized', 401);
@@ -24,7 +24,7 @@ class MyControllerBoote extends BaseController {
 
     public function beforePost() {
 
-        if ($this->modx->hasPermission('fbuch_create_boot')) {
+        if ($this->modx->hasPermission('fbuch_create_boat')) {
 
         } else {
             throw new Exception('Unauthorized', 401);
@@ -189,6 +189,9 @@ class MyControllerBoote extends BaseController {
                 $output['label'] = $object->get('name') . ' (' . $object->get('Bootsgattung_shortname') . ')';
                 $output['value'] = $object->get('id');
                 $output['optcolor'] = $object->get('Nutzergruppe_color');
+                if ($output['gesperrt']==1){
+                    $output['description'] = 'gesperrt!';
+                }
                 break;
             case 'bootsgattungen':
                 $output['label'] = $object->get('Bootsgattung_longname');

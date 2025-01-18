@@ -13,6 +13,7 @@
                 <div class="row items-center no-wrap">
                     <div class="col">
                         <div class="text-h6">{{ boat.name }}</div>
+                        <q-badge v-if="boat.gesperrt==1" color="red" align="middle">gesperrt!</q-badge>
                     </div>
 
 
@@ -69,8 +70,12 @@
             <q-separator></q-separator>
 
             <q-card-actions>
-                <q-btn class="" label="Zur Bootsliste"
+                <q-btn label="Zur Bootsliste"
                 :href="'listen/bootsliste/#/'+boat.Bootsgattung_id"></q-btn>
+                <q-btn v-if="boat.gesperrt==0 && useHasPermission('fbuch_lock_boat')" color="red" label="Boot sperren"
+                @click="lockBoat" ></q-btn>
+                <q-btn v-if="boat.gesperrt==1 && useHasPermission('fbuch_lock_boat')" color="green" label="Boot freigeben"
+                @click="unlockBoat" ></q-btn>                                  
             </q-card-actions>
         </q-card>
 

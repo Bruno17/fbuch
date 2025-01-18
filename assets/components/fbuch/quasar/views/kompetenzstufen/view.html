@@ -13,11 +13,28 @@
 
 </component>
 
-<h2 class="q-mt-sm q-mb-lg text-weight-bold" >Unsere Kompetenzstufen</h2>
+<h2 class="q-mt-sm q-mb-sm text-weight-bold" >Unsere Kompetenzstufen</h2>
 
-[[*content]]
+<q-btn outline icon-right="arrow_outward" label="Info" @click="state.show_content = true" />
 
-<q-markup-table class="full-width">
+<q-dialog v-model="state.show_content">
+    <q-card>
+      <q-card-section>
+        <div class="text-h6">Kompetenstufen</div>
+      </q-card-section>
+
+      <q-card-section class="q-pt-none" >
+        [[*content]]
+      </q-card-section>
+
+      <q-card-actions align="right">
+        <q-btn flat label="OK" color="primary" v-close-popup />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>   
+
+
+<q-markup-table class="full-width q-mt-sm">
 <template v-for="(level,index) in levels">
     <tr :style="'background-color:#'+level.color+';'" >
     <td colspan="3" class="text-weight-bold" 

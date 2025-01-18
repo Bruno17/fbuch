@@ -17,8 +17,8 @@ export default {
         const columns = [
             { name: 'id',field: 'id'},
             { name: 'name', label: 'Name', field: 'name', sortable: true, align:'left' },
+            { name: 'Nutzergruppe_name', label: 'Klassifizierung', field: 'Nutzergruppe_name', sortable: true, align:'left' },            
             { name: 'gewichtsklasse', label: 'Gewichtsklasse', field: 'gewichtsklasse', sortable: true, align:'left' },
-            { name: 'Nutzergruppe_name', label: 'Freigabe', field: 'Nutzergruppe_name', sortable: true, align:'left' },
             { name: 'Bootsgattung_shortname', label: 'Gattung', field: 'Bootsgattung_shortname', sortable: true, align:'left' },           
             { name: 'Aktionen', label: 'Aktionen', field: 'Aktionen', sortable: false }
         ]

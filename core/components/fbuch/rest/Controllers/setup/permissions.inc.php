@@ -153,6 +153,24 @@ $permissions = [
         'fbuch_clubhome'=>'0',
         'mv_member_admin'=>'1',
         'mv_competency_editor'=>'1'
+    ],
+    ['name'=>'fbuch_lock_boat',
+        'description'=>'Berechtigung, Boote zu sperren und freizugeben',
+        'fbuch_guest'=>'0',
+        'fbuch_user'=>'0',
+        'fbuch_instructor'=>'1',
+        'fbuch_clubhome'=>'0',
+        'mv_member_admin'=>'0',
+        'mv_competency_editor'=>'0'
+    ],
+    ['name'=>'fbuch_edit_boat',
+        'description'=>'Berechtigung, Boote zu sperren und freizugeben',
+        'fbuch_guest'=>'0',
+        'fbuch_user'=>'0',
+        'fbuch_instructor'=>'1',
+        'fbuch_clubhome'=>'0',
+        'mv_member_admin'=>'0',
+        'mv_competency_editor'=>'0'
     ]
 ];
 

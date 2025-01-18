@@ -32,11 +32,33 @@ export default {
             });            
         }
 
+        function lockBoat(){
+            setBoatData({gesperrt:1});
+        }
+        function unlockBoat(){
+            setBoatData({gesperrt:0});
+        }        
+
+        function setBoatData(data){
+            var ajaxUrl = modx_options.rest_url + 'Boote/' + id;
+ 
+            axios.put(ajaxUrl,data)
+            .then(function (response) {
+                //boat.value = response.data.object;
+                loadBoatData();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+        }        
+
 
         return {
             state,
             boat,
-            useHasPermission 
+            useHasPermission,
+            lockBoat,
+            unlockBoat 
         }
     },
 
