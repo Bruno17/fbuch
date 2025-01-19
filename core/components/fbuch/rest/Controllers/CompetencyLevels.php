@@ -35,11 +35,6 @@ class MyControllerCompetencyLevels extends BaseController {
                 $output['value'] = $object->get('level');
                 break;
                 default:
-                $output['permissions'] = 
-                [
-                    ['Bootsklassifizierung'=>'Gelb','als_obmann'=>['permission'=>0],'mitrudern'=>['permission'=>1]],
-                    ['Bootsklassifizierung'=>'Rot','als_obmann'=>['permission'=>0],'mitrudern'=>['permission'=>'mit Experte(E)']]
-                ];
                 $permissions = $object->get('permissions');
                 $output['permissions'] = json_decode($permissions,true);
                 break;

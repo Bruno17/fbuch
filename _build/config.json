@@ -414,6 +414,10 @@
       ],
       "chunks":[
         {
+          "name":"fbuch_bootsschaden_mail_tpl",
+          "file":"fbuch_bootsschaden_mail_tpl.chunk.html"
+        },
+        {
           "name":"fbuch_Ergotrack",
           "file":"fbuch_ergotrack.chunk.html",
           "category":"fbuch_content_chunks"

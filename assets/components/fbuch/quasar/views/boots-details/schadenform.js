@@ -31,7 +31,8 @@ export default {
     const month = params.month || Quasar.date.formatDate(new Date(), 'MM');
     const day = params.day || Quasar.date.formatDate(new Date(), 'DD');
     const date = year + '-' + month + '-' +day;
-    const return_to = SessionStorage.getItem('last_href') || false;    
+    const return_to = ref();
+    return_to.value = SessionStorage.getItem('last_href') || false ;    
 
     onMounted(() => {
       entry.value.done = 0;
@@ -39,10 +40,12 @@ export default {
       entry.value.createdon = date;
       useLoadPermissions();
       loadComment();
+      console.log(routeValue);
     })
 
     function loadComment(){
       if (id == 'new') {
+        entry.value.notify = 1;
         loadBoatData();
         return;
       }
@@ -53,6 +56,10 @@ export default {
       .then(function (response) {
           entry.value = response.data.object;
           bootid = entry.value.boot_id;
+          if (!return_to.value){
+            return_to.value = 'listen/bootsliste/boots-details/#/'+bootid+'/schaeden';
+          }
+          entry.value.notify = 0;
           loadBoatData();
       })
       .catch(function (error) {
@@ -99,7 +106,7 @@ export default {
               })
               return;              
             }            
-            window.location.href = return_to;
+            window.location.href = return_to.value;
           })
           .catch(function (error) {
             console.log(error);
@@ -120,7 +127,7 @@ export default {
             }
             //event.value = response.data.object;
             //Vue.$router.push('/events/day/' + Quasar.date.formatDate(event.value.date, 'YYYY/MM/DD')); 
-            window.location.href = return_to;
+            window.location.href = return_to.value;
           })
           .catch(function (error) {
             console.log(error);

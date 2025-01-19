@@ -101,6 +101,13 @@
         "caption": "",
         "inputTVtype": "textarea"
     },
+    "custom_fbuch_email_bootsschaden": {
+        "deleted": "0",
+        "group": "Mails",
+        "tab": "Bootsschaden",
+        "caption": "Mail Adresse Meldung Bootsschaden",
+        "inputTVtype": ""
+    },    
     "custom_fbuch_lgnForgotPassEmail": {
         "deleted": "0",
         "group": "Benutzer",
@@ -128,13 +135,6 @@
         "tab": "Mail",
         "caption": "",
         "inputTVtype": ""
-    },
-    "custom_mv_mail_tpl": {
-        "deleted": "0",
-        "group": "Mails",
-        "tab": "Serienmails",
-        "caption": "",
-        "inputTVtype": "textarea"
     },
     "custom_mv_mitgliederDatenFormular": {
         "deleted": "0",

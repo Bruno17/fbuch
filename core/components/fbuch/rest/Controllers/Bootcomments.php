@@ -36,6 +36,40 @@ class MyControllerBootcomments extends BaseController {
 
         return !$this->hasErrors();
     }
+
+    public function afterPost(array &$objectArray) {
+        $this->object->set('is_new',1);
+        $this->afterSave();
+    }
+    
+    public function afterPut(array &$objectArray) {
+        $this->object->set('is_new',0);
+        $this->afterSave();
+    }        
+
+    public function afterSave(){
+        $this->notify();
+    }
+
+    public function notify(){
+        $notify = $this->getProperty('notify');        
+        $email = $this->modx->getChunk($this->modx->fbuch->getChunkName('fbuch_email_bootsschaden'));
+        $tpl = $this->modx->fbuch->getChunkName('fbuch_bootsschaden_mail_tpl');        
+        if (!empty($notify) && !empty($email)){
+            $item = $this->object->toArray();
+            if ($object = $this->modx->getObject('fbuchBoot',$item['boot_id'])){
+                $item['Boot_name'] = $object->get('name');
+            }
+
+            $properties = [
+                'email' => $email,
+                'tpl' => $tpl,
+                'subject' => '[Fahrtenbuch] Bootsschaden erstellt oder bearbeitet',
+                'schaden' => json_encode($this->object->toArray())
+            ];
+            $this->modx->fbuch->sendMail(array_merge($item,$properties));
+        }
+    }
     
     public function verifyAuthentication() {
         if (!$this->modx->hasPermission('fbuch_view_fahrten')){

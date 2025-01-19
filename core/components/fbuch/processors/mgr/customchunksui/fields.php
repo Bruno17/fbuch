@@ -40,6 +40,8 @@ foreach ($currentgroup as $row){
         $record[$row['field']] = $chunk->get('snippet');
     } elseif ($chunk = $modx->getObject('modChunk',array('name'=>$original_name))){
         $record[$row['field']] = $chunk->getContent();
+    } else {
+        $record[$row['field']] = '';    
     }
 }
 

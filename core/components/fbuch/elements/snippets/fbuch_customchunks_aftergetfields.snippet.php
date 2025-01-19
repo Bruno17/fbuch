@@ -1,4 +1,4 @@
-<?php 
+<?php
 $object = &$modx->getOption('object', $scriptProperties, null);
 $properties = $modx->getOption('scriptProperties', $scriptProperties, array());
 $record = $object->get('record_fields');
