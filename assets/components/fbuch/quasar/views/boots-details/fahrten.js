@@ -62,6 +62,7 @@ export default {
             const ajaxUrl = modx_options.rest_url + 'Fahrten/';
             const data = {};
             data.returntype = 'member_fahrten';
+            data.dir = 'DESC';
             data.start_date = state.value.start_date + ' 00:00:00';
             data.end_date = state.value.end_date + ' 23:59:59';
             data.gattung = state.value.gattung;

@@ -394,11 +394,13 @@ class MyControllerFahrten extends BaseController {
         
         $returntype = $this->getProperty('returntype');
         $show_in_offen = (int) $this->getProperty('show_in_offen',0);
+        $dir = $this->getProperty('dir','ASC');
         $where = [];
         $where['deleted'] = 0;
         $datewhere = [];
         $sortConfig = [];
         $finishedwhere = [];
+
 
         if ($show_in_offen == 1) {
             $where['Gattung.show_in_offen'] = '1';
@@ -454,7 +456,7 @@ class MyControllerFahrten extends BaseController {
                         }
                     }
                     $where['id:IN'] = $fahrt_ids;
-                    $sortConfig = ['date'=>'ASC','start_time'=>'ASC'];    
+                    $sortConfig = ['date'=>$dir,'start_time'=>$dir];    
                 break;                                               
         } 
 
