@@ -390,7 +390,13 @@ export default {
       const id = boot.value.id;
       let data = {};
       data.returntype = 'availability';
-      data.entry = entry.value;
+      data.entry = {
+        id:entry.value.id,
+        date:entry.value.date,
+        date_end:entry.value.date_end,
+        start_time:entry.value.start_time,
+        end_time:entry.value.end_time
+      } ;
       let ajaxUrl = modx_options.rest_url + 'Boote/' + id;
 
       axios.get(ajaxUrl, { params: data })

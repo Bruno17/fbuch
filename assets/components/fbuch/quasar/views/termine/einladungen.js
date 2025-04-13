@@ -32,7 +32,10 @@ export default {
         function resetState() {
             state.value = {};
             state.value.persons = [];
-            mailvalues.value = {};
+            mailvalues.value = {
+                skip_accepted:true,
+                skip_canceled:true
+            };
         }
 
         function onSelectPerson(value) {

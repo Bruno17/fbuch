@@ -1,5 +1,4 @@
 <?php
-
 $code = $modx->getOption('code', $_REQUEST, '');
 $iid = (int) $modx->getOption('iid', $_REQUEST, '');
 $mid = (int) $modx->getOption('mid', $_REQUEST, '');

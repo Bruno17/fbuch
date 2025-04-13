@@ -1,14 +1,14 @@
 {
-  "id":80,
+  "id":16,
   "name":"fbuch_datetypes",
   "formtabs":[
     {
-      "MIGX_id":110,
+      "MIGX_id":22,
       "caption":"Allgemein",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":475,
+          "MIGX_id":73,
           "field":"name",
           "caption":"Name",
           "description":"",
@@ -37,7 +37,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":476,
+          "MIGX_id":74,
           "field":"show_at_rowinglogbook_page",
           "caption":"Terminart auf Rudern und Gruppentraining - Seite anzeigen",
           "description":"",
@@ -66,7 +66,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":477,
+          "MIGX_id":75,
           "field":"element_invite",
           "caption":"Einladung per Element",
           "description":"",
@@ -85,7 +85,7 @@
           "pos":3
         },
         {
-          "MIGX_id":478,
+          "MIGX_id":76,
           "field":"allow_foreign_guests",
           "caption":"fremde G\u00e4ste erlauben ",
           "description":"Erlaubt das Anmelden von Personen, welche nicht in der Fahrtenbuch Namensliste angelegt wurden.",
@@ -104,7 +104,7 @@
           "pos":4
         },
         {
-          "MIGX_id":222,
+          "MIGX_id":77,
           "field":"colorstyle",
           "caption":"Farbe im Kalender",
           "description":"",
@@ -120,21 +120,18 @@
           "inputOptionValues":"Farbe w\u00e4hlen==||red||pink||purple||deep-purple||indigo||blue||light-blue||cyan||teal||green||light-green||lime||ellow||amber||orange||deep-orange||brown||grey||blue-grey",
           "default":"",
           "useDefaultIfEmpty":"0",
-          "pos":5          
+          "pos":5
         }
       ],
       "pos":1
     },
     {
-      "MIGX_id":111,
+      "MIGX_id":23,
       "caption":"Extra",
       "print_before_tabs":"0",
-      "pos":2,
-      "MIGXtype":"formtab",
-      "MIGXtyperender":"<h3>formtab<\/h3>",
       "fields":[
         {
-          "MIGX_id":479,
+          "MIGX_id":78,
           "field":"registrationpage_text",
           "caption":"Spezialtext oder Extraformular auf Zu\/Absagen Seite",
           "description":"",
@@ -163,7 +160,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":480,
+          "MIGX_id":79,
           "field":"registration_hooksnippet",
           "caption":"Spezial Hooksnippet, wird nach zu\/absagen ausgef\u00fchrt",
           "description":"",
@@ -192,7 +189,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":481,
+          "MIGX_id":80,
           "field":"person_tpl_extratext",
           "caption":"Extratext oder Formularfelder pro hinzuzuf\u00fcgender Person",
           "description":"",
@@ -221,7 +218,7 @@
           "MIGXlayoutcaption":""
         },
         {
-          "MIGX_id":482,
+          "MIGX_id":81,
           "field":"exportrow_hooksnippet",
           "caption":"exportrow_hooksnippet",
           "pos":4,
@@ -235,16 +232,74 @@
           "MIGXcolumncaption":"",
           "MIGXlayoutstyle":"",
           "MIGXlayoutcaption":""
+        },
+        {
+          "MIGX_id":276,
+          "field":"special_mail_chunk",
+          "caption":"Spezieller Mail Chunk",
+          "description":"Chunkname angeben, wenn f\u00fcr diesen Termintyp ein spezieller Einladungs Mailtext verwendet werden soll.",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":5
+        },
+        {
+          "MIGX_id":277,
+          "field":"special_mail_subject_chunk",
+          "caption":"Spezieller Mail Betreffs Chunk",
+          "description":"Chunkname angeben, wenn f\u00fcr diesen Termintyp ein spezieller Einladungs Mail Betreff verwendet werden soll.",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":6
+        },
+        {
+          "MIGX_id":278,
+          "field":"nameslist_permission",
+          "caption":"Berechtigung, Zusagen und Absagen zu sehen",
+          "description":"",
+          "description_is_code":"0",
+          "inputTV":"",
+          "inputTVtype":"",
+          "validation":"",
+          "configs":"",
+          "restrictive_condition":"",
+          "display":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"",
+          "default":"",
+          "useDefaultIfEmpty":"0",
+          "pos":7
         }
-      ]
+      ],
+      "pos":2
     },
     {
-      "MIGX_id":152,
+      "MIGX_id":24,
       "caption":"Verkn\u00fcpfungen mit Boot\/Ger\u00e4t\/Raum\/Kategorien",
       "print_before_tabs":"0",
       "fields":[
         {
-          "MIGX_id":664,
+          "MIGX_id":82,
           "field":"",
           "caption":"tab_beschreibung",
           "description":"f\u00fcr die Erstellung von Eintr\u00e4gen aus Personen in Terminen.<br>\nEs braucht\/soll nur eines der beiden Felder ausgew\u00e4hlt werden.\n",
@@ -263,7 +318,7 @@
           "pos":1
         },
         {
-          "MIGX_id":662,
+          "MIGX_id":83,
           "field":"linkto_bootsgattung_name",
           "caption":"Verkn\u00fcpfte Bootskategorie",
           "description":"",
@@ -282,7 +337,7 @@
           "pos":2
         },
         {
-          "MIGX_id":663,
+          "MIGX_id":84,
           "field":"linkto_boot_id",
           "caption":"Verkn\u00fcpfung zu speziellem Boot\/Ger\u00e4t\/Raum",
           "description":"",
@@ -342,7 +397,10 @@
     "check_resid_TV":"",
     "join_alias":"",
     "has_jointable":"yes",
+    "getlistselectfields":"",
+    "getlistspecialfields":"",
     "getlistwhere":"",
+    "getlistgroupby":"",
     "joins":"",
     "hooksnippets":"",
     "cmpmaincaption":"",
@@ -426,13 +484,13 @@
       "selectorconfig":"",
       "renderchunktpl":"<div style=\"background-color:[[+colorstyle:fbuchGetColor]];width:20px;height:20px;\"><\/div>",
       "renderoptions":"",
-      "editor":""      
+      "editor":""
     }
   ],
   "createdby":1,
   "createdon":"2020-10-14 09:38:13",
   "editedby":1,
-  "editedon":"2023-02-25 14:08:43",
+  "editedon":"2025-04-12 19:03:35",
   "deleted":0,
   "deletedon":null,
   "deletedby":0,

@@ -100,11 +100,15 @@ class MyControllerDateInvited extends BaseController {
                 case 'invite':
                     if (!empty($date_id) && !empty($to)){
                         $comment = $this->getProperty('comment');
+                        $skip_accepted = $this->getProperty('skip_accepted');
+                        $skip_canceled = $this->getProperty('skip_canceled');
                         if ($to == 'all'){
                             $action = 'mail_invites';
                             $properties = [
                                 'date_id' => $date_id,
-                                'comment' => $comment
+                                'comment' => $comment,
+                                'skip_accepted' => $skip_accepted,
+                                'skip_canceled' => $skip_canceled
                             ];
         
                             if ($date_o = $this->modx->getObject('fbuchDate', $properties['date_id'])) {
@@ -136,13 +140,32 @@ class MyControllerDateInvited extends BaseController {
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
         $date_id = (int) $this->getProperty('date_id',false);
         $canceled = (int) $this->getProperty('canceled',false);
-        $added = (int) $this->getProperty('added',false);
-        $removed = (int) $this->getProperty('removed',false);
+        $added = $this->getProperty('added',false);
+        $added = is_bool($added) ? $added : (int) $added;
+        $removed = $this->getProperty('removed',false);
+        $removed = is_bool($removed) ? $removed : (int) $removed;
         $joins = '[{"alias":"Member","selectfields":"id,name,firstname,member_status"},
         {"alias":"Datename","classname":"fbuchDateNames","on":"Datename.member_id=fbuchDateInvited.member_id and Datename.date_id=fbuchDateInvited.date_id"}
         ]';
 
-        $this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);         
+        $this->modx->migx->prepareJoins($this->classKey, json_decode($joins,1) , $c);  
+        //wenn keine Berechtigung, die Namen aufzulisten, hole zumindest den Datensatz vom eigeloggten Mitglied. 
+        if ($member = $this->getCurrentFbuchMember()){
+            $member_id = $member->get('id');
+        }    
+        $permission = '';  
+        if ($date_o = $this->modx->getObject('fbuchDate',['id'=>$date_id])) {
+            if ($type_o = $date_o->getOne('Type')) {
+                $permission = $type_o->get('nameslist_permission'); 
+            } 
+        }  
+        if (!empty($permission)){
+            if ($this->modx->hasPermission($permission)){
+    
+            } else {
+                $c->where(['member_id' => $member_id]);
+            }               
+        } 
 
         if ($date_id){
             $c->where(['fbuchDateInvited.date_id' => $date_id]);

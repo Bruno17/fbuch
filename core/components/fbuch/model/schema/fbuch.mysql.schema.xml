@@ -297,6 +297,8 @@
     <object class="fbuchDateType" table="fbuch_date_types" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="description" dbtype="text" phptype="string" null="false" default="" /> 
+        <field key="special_mail_chunk" dbtype="text" phptype="string" null="false" default="" /> 
+        <field key="special_mail_subject_chunk" dbtype="text" phptype="string" null="false" default="" /> 
         <field key="registrationpage_text" dbtype="text" phptype="string" null="false" default="" />
         <field key="person_tpl_extratext" dbtype="text" phptype="string" null="false" default="" />
         <field key="registration_hooksnippet" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
@@ -307,6 +309,7 @@
         <field key="colorstyle" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="linkto_bootsgattung_name" dbtype="varchar" phptype="string" precision="255" null="false" default="" />   
         <field key="linkto_boot_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="nameslist_permission" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
     </object>
 
     <object class="fbuchCompetencyLevel" table="fbuch_competency_levels" extends="xPDOSimpleObject">

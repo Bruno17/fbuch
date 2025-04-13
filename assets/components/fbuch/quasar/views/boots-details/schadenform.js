@@ -40,7 +40,6 @@ export default {
       entry.value.createdon = date;
       useLoadPermissions();
       loadComment();
-      console.log(routeValue);
     })
 
     function loadComment(){

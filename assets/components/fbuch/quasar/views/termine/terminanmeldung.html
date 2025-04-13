@@ -44,9 +44,8 @@
 
         <q-separator></q-separator>
 
-        <q-card-section>
-            <pre
-                style="white-space: pre-wrap; word-wrap: break-word;font-family: inherit;">{{ entry.description }}</pre>
+        <q-card-section v-html="entry.description_with_br">
+        
         </q-card-section>
         <q-separator></q-separator>
         <q-card-section>
@@ -61,38 +60,11 @@
             </template>
         </q-card-section>
     </q-card>
-    <q-tabs align="left" inline-label no-caps outside-arrows mobile-arrows>
-        <q-route-tab
-          icon="group_add"
-          label="Anmeldung"
-          :to="'/'+entry.id+'/anmeldung'"
-          exact
-        />
-        <q-route-tab
-          icon="chat_bubble_outline"
-          label="Nachrichten"
-          :to="'/'+entry.id+'/kommentare'"
-          exact
-        >        
-        <q-badge color="red" floating>{{messageCount}}</q-badge>
-        </q-route-tab>
-        <q-route-tab
-          icon="insert_invitation"
-          label="Einladungen"
-          :to="'/'+entry.id+'/einladungen'"
-          exact
-        />  
 
-        
-        <q-route-tab
-          icon="insert_invitation"
-          label="Einladungsliste"
-          :to="'/'+entry.id+'/einladungsliste'"
-          exact
-        >
-        </q-route-tab>                       
-
-      </q-tabs>
+    [[fbuchGetAssetsFiles?
+    &folder=`quasar/views/termine/terminanmeldung_dynamic_parts`
+    ]]
       <router-view></router-view>
+      
     </div>
 

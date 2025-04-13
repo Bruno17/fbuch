@@ -168,6 +168,10 @@
                 </div>
                 <q-separator></q-separator>
                 <q-input type="textarea" class="col-12" outlined v-model="mailvalues.comment" label="Nachricht" />
+                <br>
+                <q-checkbox v-model="mailvalues.skip_accepted" val="1" label="Personen, die zugesagt haben, ausschließen"  />
+                <br>
+                <q-checkbox v-model="mailvalues.skip_canceled" val="1" label="Personen, die abgesagt haben, ausschließen"  />
             </q-card-section>
 
         <q-card-actions vertical align="right">

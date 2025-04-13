@@ -978,10 +978,27 @@ class Fbuch {
     }
 
     public function scheduleInviteMail($properties) {
-        $reference = 'web/schedule/sendinvitemail';
-        $this->createSchedulerTask('fbuch', array('snippet' => $reference));
-        $this->createSchedulerTaskRun($reference, 'fbuch', $properties);
+        $skip = $this->modx->getOption('fbuch.skip_scheduler',null,0);
+        if (!empty($skip)){
+            $this->sendUnscheduledInviteMail($properties);    
+        } else {
+            $reference = 'web/schedule/sendinvitemail';
+            $this->createSchedulerTask('fbuch', array('snippet' => $reference));
+            $this->createSchedulerTaskRun($reference, 'fbuch', $properties);            
+        }
     }
+
+    public function sendUnscheduledInviteMail($properties){
+        $invite_id = $this->modx->getOption('invite_id',$properties); 
+        $comment = $this->modx->getOption('comment',$properties); 
+        $comment_name = $this->modx->getOption('comment_name',$properties); 
+        $add_datecomment = $this->modx->getOption('add_datecomment',$properties); 
+        $add_datecomment = empty($add_datecomment) || $add_datecomment == 'false' ? false : true;
+        $subj_prefix = $this->modx->getOption('subject_prefix',$properties); 
+
+        $success = $this->sendInviteMail($invite_id, $comment, $comment_name, $add_datecomment, $subj_prefix);        
+    }
+
 
     public function scheduleInvites($action,$properties = []){
         $modx = &$this->modx;
@@ -989,6 +1006,8 @@ class Fbuch {
         $date_id = $modx->getOption('date_id',$properties,0);
         $comment = $modx->getOption('comment',$properties,'');
         $member_id = $modx->getOption('member_id',$properties,0);
+        $skip_accepted = (int) $modx->getOption('skip_accepted',$properties,0);
+        $skip_canceled = (int) $modx->getOption('skip_canceled',$properties,0);
 
         $current_member = $this->getCurrentFbuchMember();
         $name_id = $current_member->get('id');
@@ -1008,15 +1027,23 @@ class Fbuch {
         if ($collection = $modx->getCollection($classname, $c)) {
             
             foreach ($collection as $object) {
-
+                $canceled = $object->get('canceled');
                 $removedby = $object->get('removedby');
+                $invite_id = $object->get('id');
+                $member_id = $object->get('member_id');
+                $date_id = $object->get('date_id');                  
                 if ($removedby > 0){
                     continue;
                 }
 
-                $invite_id = $object->get('id');
-                $member_id = $object->get('member_id');
-                $date_id = $object->get('date_id');                              
+                if (!empty($skip_canceled) && !empty($canceled)){
+                    continue;
+                }
+
+                if (!empty($skip_accepted) && $datename_o = $modx->getObject('fbuchDateNames', ['date_id' => $date_id, 'member_id' => $member_id])){
+                    continue;
+                }                
+                            
                 if ($action == 'mail_invites' || $action == 'mail_invite') {
 
                     $iproperties = [
@@ -2344,7 +2371,11 @@ class Fbuch {
         $modx->runSnippet('setlocale');
         $name_o = $object->getOne('Member');
         $date_o = $object->getOne('Date');
+        $datetype_o = $date_o->getOne('Type');        
         $email = $name_o->get('email');
+        $tpl = $datetype_o->get('special_mail_chunk');
+        $subject_tpl = $datetype_o->get('special_mail_subject_chunk');
+        
 
         $member_id = 0;//Todo: try to get and set currently logged in mv_Member here? 
         if ($add_datecomment && !empty($comment)) {
@@ -2354,6 +2385,7 @@ class Fbuch {
         if (!empty($email) && $object && $name_o && $date_o) {
             $properties = array_merge($name_o->toArray(), $date_o->toArray(), $object->toArray());
             $properties['Comment_name'] = $comment_name;
+            $properties['subj_prefix'] = $subj_prefix;
             $properties['status'] = 'invited';
             if (!empty($properties['canceled'])) {
                 $properties['status'] = 'canceled';
@@ -2366,8 +2398,8 @@ class Fbuch {
             $properties['comment'] = $comment;
             $properties['iid'] = $object->get('id');
             $properties['email'] = $email;
-            $properties['tpl'] = $this->getChunkName('fbuch_invite_mail_tpl');
-            $properties['subject'] = $subj_prefix . ': ' . $date_o->get('title') . ' ' . strftime('%a, %d.%m.%Y ', strtotime($date_o->get('date'))) . $date_o->get('start_time');
+            $properties['tpl'] = !empty($tpl) ? $tpl : $this->getChunkName('fbuch_invite_mail_tpl');
+            $properties['subject'] = !empty($subject_tpl) ? $this->modx->getChunk($subject_tpl,$properties) : $subj_prefix . ': ' . $date_o->get('title') . ' ' . strftime('%a, %d.%m.%Y ', strtotime($date_o->get('date'))) . $date_o->get('start_time');
             $properties['code'] = md5($properties['date_id'] . $properties['email'] . $properties['iid']);
             //print_r($properties);die();
             //$values = $hook->getValues();
@@ -2532,7 +2564,7 @@ class Fbuch {
                     $success = $this->modx->getOption('success',$response);
                     if ($success){
                         $route = empty($route) ? 'anmeldung' : $route;
-                        $modx->sendRedirect('/termine/#/' . $date_id . '/' . $route);  
+                        $modx->sendRedirect($this->modx->getOption('base_url') . 'termine/#/' . $date_id . '/' . $route);  
                     }
                     $message = $this->modx->getOption('message',$response);
                     return $message;                    

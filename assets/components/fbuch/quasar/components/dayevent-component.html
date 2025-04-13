@@ -79,8 +79,8 @@
 
     <q-separator></q-separator>
 
-    <q-card-section>
-        <pre style="white-space: pre-wrap; word-wrap: break-word;font-family: inherit;">{{ event.description }}</pre>
+    <q-card-section v-html="event.description_with_br">
+ 
     </q-card-section>
     <q-separator></q-separator>
 

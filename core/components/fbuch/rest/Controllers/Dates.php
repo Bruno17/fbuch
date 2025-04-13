@@ -237,6 +237,9 @@ class MyControllerDates extends BaseController {
         if (is_array($names)){ 
             foreach ($names as $name){
                 $row = [];
+                $row['createdon'] = $this->modx->getOption('createdon',$name,'');
+                $date = date_create($row['createdon']);
+                $row['createdon_formatted'] = date_format($date,'d.m.Y H:i');                   
                 $row['can_remove'] = $this->modx->getOption('can_remove',$name,'');
                 $row['hidemenu'] = !$row['can_remove'];
                 $row['datename_id'] = $this->modx->getOption('id',$name,'');
@@ -257,19 +260,33 @@ class MyControllerDates extends BaseController {
                 }
             }
         }
-        $objectArray['names'] = $rows;         
+        $objectArray['names'] = $rows;  
+        $objectArray['description_with_br'] = nl2br($this->modx->getOption('description',$objectArray,0));       
         return !$this->hasErrors();
     } 
     
     public function addNames($object){
-       if ($this->modx->hasPermission('fbuch_view_datenames')){
+
+       //wenn keine Berechtigung, die Namen aufzulisten, hole zumindest den Datensatz vom eigeloggten Mitglied. 
+       $returntype = $this->getProperty('returntype');
+       $permission = '';  
+       if ($type_o = $object->getOne('Type')) {
+           $permission = $type_o->get('nameslist_permission'); 
+       }  
+       
+       $permission = !empty($permission) ? $permission : 'fbuch_view_datenames';
+
+       if ($this->modx->hasPermission($permission)){
   
        } else {
-           return []; 
+           //return [];
+           $returntype = 'self'; 
        }
        $this->getDefaultCompetencyLevel();
-
-        $returntype = $this->getProperty('returntype');
+       $member_id = 99999999999; 
+       if ($member = $this->getCurrentFbuchMember()){
+           $member_id = $member->get('id');
+       }           
     
         $id = $object->get('id');
         $names = [];
@@ -287,12 +304,9 @@ class MyControllerDates extends BaseController {
         $properties['sortConfig'] = '[{"sortby":"Fahrt_deleted","sortdir":"DESC"},{"sortby":"Fahrtname.fahrt_id"},{"sortby":"registeredby_member"},{"sortby":"createdon"}]';
         $properties['groupby'] = 'id';
         $properties['debug'] = 0;
-        $member_id = 99999999999; 
+        
         switch ($returntype) {
             case 'selfregistered_names':    
-                if ($member = $this->getCurrentFbuchMember()){
-                    $member_id = $member->get('id');
-                }                
                 $properties['where'] = '{"registeredby_member":"' . $member_id . '","date_id":"' . $id . '"}';
                 $c = $this->modx->migx->prepareQuery($this->modx,$properties);
                 $selfrows = $this->modx->migx->getCollection($c);
@@ -301,6 +315,11 @@ class MyControllerDates extends BaseController {
                 $otherrows = $this->modx->migx->getCollection($c);
                 $rows = array_merge($selfrows,$otherrows);
                 break;
+            case 'self':
+                $properties['where'] = '{"member_id":"' . $member_id . '","date_id":"' . $id . '"}';
+                $c = $this->modx->migx->prepareQuery($this->modx,$properties);
+                $rows = $this->modx->migx->getCollection($c);                
+                break;    
             default:
                 $c = $this->modx->migx->prepareQuery($this->modx,$properties);
                 $rows = $this->modx->migx->getCollection($c);
@@ -353,6 +372,7 @@ class MyControllerDates extends BaseController {
         $names = $this->addNames($object);
         $date['names'] = $names;
         $date['counted_names'] = count($names);
+        $date['description_with_br'] = nl2br($this->modx->getOption('description',$date,0));
         return $date;
     } 
        

@@ -37,9 +37,8 @@
                             {{ computedEvent.event.title }}
 
                         </div>
-                        <q-tooltip v-if="computedEvent.event && computedEvent.event.title">
-                            <pre style="white-space: pre-wrap; word-wrap: break-word;font-family: inherit;">{{ computedEvent.event.title  }} {{ computedEvent.event.start_time}} 
-{{ computedEvent.event.description }}</pre>
+                        <q-tooltip hide-delay="1000" v-html="computedEvent.event.title + ' ' + computedEvent.event.start_time + '<br>' + computedEvent.event.description" v-if="computedEvent.event && computedEvent.event.title">
+
                         </q-tooltip>
                     </div>
                 </template>

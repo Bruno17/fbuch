@@ -12,6 +12,8 @@ $xpdo_meta_map['fbuchDateType']= array (
   array (
     'name' => '',
     'description' => '',
+    'special_mail_chunk' => '',
+    'special_mail_subject_chunk' => '',
     'registrationpage_text' => '',
     'person_tpl_extratext' => '',
     'registration_hooksnippet' => '',
@@ -22,6 +24,7 @@ $xpdo_meta_map['fbuchDateType']= array (
     'colorstyle' => '',
     'linkto_bootsgattung_name' => '',
     'linkto_boot_id' => 0,
+    'nameslist_permission' => '',
   ),
   'fieldMeta' => 
   array (
@@ -34,6 +37,20 @@ $xpdo_meta_map['fbuchDateType']= array (
       'default' => '',
     ),
     'description' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'special_mail_chunk' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'special_mail_subject_chunk' => 
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
@@ -118,6 +135,14 @@ $xpdo_meta_map['fbuchDateType']= array (
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
+    ),
+    'nameslist_permission' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
     ),
   ),
 );

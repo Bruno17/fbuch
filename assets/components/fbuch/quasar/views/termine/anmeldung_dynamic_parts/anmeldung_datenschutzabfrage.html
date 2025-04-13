@@ -1,0 +1,49 @@
+<template v-if="entry.Type_registrationpage_text=='datenschutzabfrage'">
+    <div class="col-lg-4 col-md-6 col-xs-12 q-gutter-md ">
+        <template v-if="currentUser.State_can_be_invited == 1">
+            <q-btn @click="addMyself" color="positive" label="Zustimmen"></q-btn>
+            <q-btn @click="RemoveMyself" color="negative" label="Ablehnen"></q-btn>
+        </template>
+
+    </div>
+
+
+
+        <template v-for="(name,index) in entry.names">
+            <template v-if="currentUser.Member_id == name.id">
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                <q-card flat bordered class="q-mb-md">
+                    <q-card-section class="bg-primary text-white">
+                        <div class="text-h6">Zugestimmt</div>
+                    </q-card-section>
+                    <q-list bordered separator>
+                        <q-item>
+                            {{name.firstname}} {{name.name}}<br>
+                            Du hast zugestimmt. Vielen Dank!
+                        </q-item>
+                    </q-list>
+                </q-card>
+            </div>
+            </template>
+        </template>
+        
+        <template v-for="(name,index) in abmeldungen">
+            <template v-if="currentUser.Member_id == name.Member_id">
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                <q-card flat bordered class="q-mb-md">
+                    <q-card-section class="bg-primary text-white">
+                        <div class="text-h6">Zustimmung abgelehnt</div>
+                    </q-card-section>
+                    <q-list bordered separator>
+                        <q-item>
+                            {{name.Member_firstname}} {{name.Member_name}}<br>
+                            Du hast die Zustimmung abgelehnt. Das ist schade!
+                        </q-item>
+                    </q-list>
+                </q-card>
+            </div>
+            </template>
+        </template>
+
+
+</template>
