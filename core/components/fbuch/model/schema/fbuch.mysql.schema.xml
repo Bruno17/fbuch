@@ -519,14 +519,25 @@
     
     <object class="mvDoorAccesscode" table="mv_door_accesscodes" extends="xPDOSimpleObject">
     	<field key="code" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
+        <field key="time_setting" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
+        <field key="blocked" dbtype="int" precision="1" phptype="integer" null="false" default="0" />
+        <field key="comment" dbtype="text" phptype="string" null="false" default="" />        
+
+        <aggregate alias="CodeMember" class="mvDoorAccesscodeMember" local="code" foreign="code" cardinality="many" owner="local" /> 
+
+    </object> 
+    
+    <object class="mvDoorAccesscodeMember" table="mv_door_accesscodes_members" extends="xPDOSimpleObject">
+    	<field key="code" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="other_person" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
         <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
 		<field key="assignedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />	
     	<field key="assignedon" dbtype="datetime" phptype="datetime" null="true" />
-        <field key="blocked" dbtype="int" precision="1" phptype="integer" null="false" default="0" />        
+        <field key="comment" dbtype="text" phptype="string" null="false" default="" />        
                 
         <aggregate alias="Member" class="mvMember" local="member_id" foreign="id" cardinality="one" owner="foreign" /> 
+        <aggregate alias="Code" class="mvDoorAccesscode" local="code" foreign="code" cardinality="one" owner="foreign" />         
 
-    </object>     
+    </object>        
       
 </model>

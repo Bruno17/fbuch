@@ -1,0 +1,69 @@
+<div class="q-pa-md q-mb-lg full-width" style="min-height: 400px;">
+    <div class="text-h4 text-left q-mb-sm">
+        <template v-if="routeValue.name != 'codeform_add'">Zugangscode bearbeiten ({{ entry.code }})</template> 
+        <template v-if="routeValue.name == 'codeform_add'">Weitere Person zuweisen ({{ entry.code }})</template> 
+    </div>
+
+    <q-form @submit="onSubmit" @reset="onReset" ref="eventform">
+        <div class="q-col-gutter-md q-mb-sm row">
+
+            <api_select ref="personSelect" class="col-12 col-md-4"
+            :disable="!state.enable_personSelect && useHasPermission('fbuch_allpermissions')==false"
+            v-model="entry.member_id" @update:model-value="onSelectPerson" :emit-value="false"
+            label="Person wählen" controller="Names?limit=100000&returntype=options&statefilter=can_be_added_to_entry"
+            behavior="default"
+            >
+            </api_select>            
+
+            <q-input 
+                :disable="!state.enable_other_person && useHasPermission('fbuch_allpermissions')==false"
+                @update:model-value="state.enable_save_button=true"
+                class="col-12 col-md-4" outlined v-model="entry.other_person" label="Fremdperson"
+                hint="nur ausfüllen, wenn Person nicht aus der Mitgliederliste auswählbar!" />
+
+            <datepicker label="Zugewiesen am"
+                class="col-12 col-md-4" v-model="entry.assignedon">
+            </datepicker>
+
+            <q-input 
+            @update:model-value="state.enable_save_button=true" type="textarea"
+            class="col-12 col-md-12" outlined v-model="entry.comment" label="Kommentar" />  
+            
+         
+
+        </div>
+
+        <div class="text-h5 text-left q-my-sm">Codespezifische Daten</div>
+
+        <div class="q-col-gutter-md q-mb-sm row">
+            <q-field class="col-12 col-md-4" outlined color="dark">
+                <q-checkbox @update:model-value="state.enable_save_button=true" v-model="entry.Code_time_setting" label="Zeit einstellbar" :true-value="1" :false-value="0" />
+            </q-field>  
+            <q-field class="col-12 col-md-4" outlined color="dark">
+                <q-checkbox @update:model-value="state.enable_save_button=true" v-model="entry.Code_blocked" label="deaktiviert" :true-value="1" :false-value="0" />
+            </q-field> 
+
+        </div>
+        
+        <div class="col-12 q-mb-xl">
+            <template v-if="entry.members.length==0">
+                Dieser Code ist noch keiner Person zugewiesen<br>
+            </template>            
+            <template v-if="entry.members.length>0">
+                Dieser Code ist zugewiesen an:<br>
+                <template v-for="(member,index) in entry.members">
+                {{member.name}} ({{member.member_status}})<br>
+                </template>
+            </template>
+        </div>        
+
+        <div class="col-12">
+            <q-btn label="Speichern" :disable="!state.enable_save_button" type="submit" @click="onSubmitClick" color="primary" />
+            <q-btn label="Abbrechen" href="listen/doorcodes/#" class="q-ml-sm" />
+        </div>
+
+        
+
+    </q-form>
+
+</div>

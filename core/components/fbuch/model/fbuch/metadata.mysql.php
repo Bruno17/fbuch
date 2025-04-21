@@ -36,5 +36,6 @@ $xpdo_meta_map = array (
     30 => 'mvMailLogRecipient',
     31 => 'mvMimeType',
     32 => 'mvDoorAccesscode',
+    33 => 'mvDoorAccesscodeMember',
   ),
 );

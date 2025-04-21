@@ -1,0 +1,82 @@
+<component is="style">
+  .competency-color {
+    width: 15px;
+    height: 40px;
+    display: inline-block;
+    margin-bottom: -16px;
+    margin-top: -11px;      
+  }
+ 
+</component>
+
+<div class="q-px-md q-py-lg row">
+   <div class="col-12">
+    <q-table :rows="names" :filter="filter" row-key="id" :columns="columns" :visible-columns="visible_columns"
+      :pagination="initial_pagination" flat bordered dense>
+
+      <template v-slot:top>
+        <q-btn v-if="useHasPermission('fbuch_create_doorcodes')" color="primary" label="Neue Codes erstellen" @click="createCodes" />
+        <q-space />
+        <q-input borderless dense debounce="300" color="primary" v-model="filter" placeholder="Suche">
+          <template v-slot:append>
+            <q-icon name="search" />
+          </template>
+        </q-input>
+        <q-btn
+          color="primary"
+          icon="content_paste"
+          title="Copy to Clipboard"
+          no-caps
+          @click="copyData"
+        />        
+      </template>      
+
+      <template v-slot:body="props">
+        <q-tr :class="props.row.bg" :props="props">
+          <q-td rowspan="2" key="Code_blocked" style="padding-left:5px;padding-right:0px;"  :props="props" auto-width>
+            <div class="competency-color" :style="'background-color:'+props.row.blocked_color">
+            </div> 
+          </q-td>            
+          <q-td rowspan="2" key="Code_time_setting" style="padding-left:2px;padding-right:5px;" :props="props" auto-width>
+            <div class="competency-color" :style="'background-color:'+props.row.timesetting_color">
+            </div> 
+          </q-td>          
+          <q-td key="code" :props="props">
+            {{ props.row.code }}
+          </q-td>
+          <q-td key="Member_name" :props="props">
+            {{ props.row.Member_name }}
+          </q-td>
+          <q-td key="Member_firstname" :props="props">
+            {{ props.row.Member_firstname }}
+          </q-td>
+          <q-td key="Member_member_status" :props="props">
+            {{ props.row.Member_member_status }}
+          </q-td>          
+          <q-td key="Aktionen" :props="props">
+            <q-btn color="grey-7" round flat icon="more_horiz">
+              <q-menu auto-close anchor="center left" self="top right">
+                <q-list bordered separator>
+                  <q-item v-if="useHasPermission('fbuch_manage_doorcodes')" clickable :href="'listen/doorcodes/#/codemember-update/'+props.row.id">
+                    <q-item-section >Eintrag bearbeiten</q-item-section>
+                  </q-item>
+                  <template v-if="props.row.other_person!='' || props.row.member_id>0 ">
+                  <q-item v-if="useHasPermission('fbuch_manage_doorcodes')" clickable :href="'listen/doorcodes/#/codemember-add/'+props.row.id">
+                    <q-item-section >Weitere Person zuweisen</q-item-section>
+                  </q-item> 
+                  </template>                 
+                </q-list>
+              </q-menu>
+            </q-btn>
+          </q-td>
+        </q-tr>
+        <q-tr :class="props.row.bg" :props="props">
+          <q-td colspan="100%">
+            <div class="text-left"> {{ props.row.comment }}</div>
+          </q-td>
+        </q-tr>        
+      </template>
+    </q-table>
+  </div>
+</div>
+

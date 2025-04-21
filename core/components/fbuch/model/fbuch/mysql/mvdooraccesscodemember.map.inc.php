@@ -1,8 +1,8 @@
 <?php
-$xpdo_meta_map['mvDoorAccesscode']= array (
+$xpdo_meta_map['mvDoorAccesscodeMember']= array (
   'package' => 'fbuch',
   'version' => '1.1',
-  'table' => 'mv_door_accesscodes',
+  'table' => 'mv_door_accesscodes_members',
   'extends' => 'xPDOSimpleObject',
   'tableMeta' => 
   array (
@@ -11,8 +11,10 @@ $xpdo_meta_map['mvDoorAccesscode']= array (
   'fields' => 
   array (
     'code' => '',
-    'time_setting' => 0,
-    'blocked' => 0,
+    'other_person' => '',
+    'member_id' => 0,
+    'assignedby' => 0,
+    'assignedon' => NULL,
     'comment' => '',
   ),
   'fieldMeta' => 
@@ -25,21 +27,36 @@ $xpdo_meta_map['mvDoorAccesscode']= array (
       'null' => false,
       'default' => '',
     ),
-    'time_setting' => 
+    'other_person' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '100',
+      'null' => false,
+      'default' => '',
+    ),
+    'member_id' => 
     array (
       'dbtype' => 'int',
-      'precision' => '1',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'assignedby' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
     ),
-    'blocked' => 
+    'assignedon' => 
     array (
-      'dbtype' => 'int',
-      'precision' => '1',
-      'phptype' => 'integer',
-      'null' => false,
-      'default' => 0,
+      'dbtype' => 'datetime',
+      'phptype' => 'datetime',
+      'null' => true,
     ),
     'comment' => 
     array (
@@ -51,13 +68,21 @@ $xpdo_meta_map['mvDoorAccesscode']= array (
   ),
   'aggregates' => 
   array (
-    'CodeMember' => 
+    'Member' => 
     array (
-      'class' => 'mvDoorAccesscodeMember',
+      'class' => 'mvMember',
+      'local' => 'member_id',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'Code' => 
+    array (
+      'class' => 'mvDoorAccesscode',
       'local' => 'code',
       'foreign' => 'code',
-      'cardinality' => 'many',
-      'owner' => 'local',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
     ),
   ),
 );
