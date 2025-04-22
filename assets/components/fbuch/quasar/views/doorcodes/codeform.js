@@ -86,7 +86,7 @@ export default {
           if(haystack[i] == needle) return true;
       }
       return false;
-  }    
+    }    
 
     function checkExistingMemberCodes(member_id){
       let data = {};
@@ -118,6 +118,9 @@ export default {
           }).onOk(data => {
              if(inArray('add_code',data)){
                state.value.enable_save_button=true;
+               if (entry.value.other_person!=''){
+                   entry.value.comment = entry.value.comment + '-> war in Fremdperson eingetragen als: ' + entry.value.other_person;  
+               }
                entry.value.other_person='';
                state.value.enable_other_person = false;
              } else {
@@ -129,6 +132,9 @@ export default {
             //console.log('I am triggered on both OK and Cancel')            
           })            
         } else {
+          if (entry.value.other_person!=''){
+            entry.value.comment = entry.value.comment + '-> war in Fremdperson eingetragen als: ' + entry.value.other_person;  
+          }          
           entry.value.other_person='';
           state.value.enable_other_person = false;
           state.value.enable_save_button=true;           

@@ -22,17 +22,17 @@
       <template v-slot:top>
         <q-btn v-if="useHasPermission('fbuch_create_doorcodes')" color="primary" label="Neue Codes erstellen" @click="createCodes" />
         <q-space />
-        <q-input borderless dense debounce="300" @update:model-value="(value) =>storeFilter(value)" color="primary" v-model="filter" placeholder="Suche">
+        <q-input clearable borderless dense debounce="300" @update:model-value="(value) =>storeFilter(value)" color="primary" v-model="filter" placeholder="Suche">
           <template v-slot:append>
             <q-icon name="search" />
           </template>
         </q-input>
         <q-btn
           color="primary"
-          icon="content_paste"
-          title="Copy to Clipboard"
+          icon="archive"
+          title="CSV Export"
           no-caps
-          @click="copyData"
+          @click="exportCsv"
         />        
       </template>      
 

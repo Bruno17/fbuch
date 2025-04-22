@@ -12,7 +12,7 @@ export default {
     setup() {
 
         const { onMounted, ref } = Vue;
-        const { useQuasar,LocalStorage,SessionStorage } = Quasar;
+        const { exportFile,useQuasar,LocalStorage,SessionStorage } = Quasar;
         const $q = useQuasar();          
         const state = ref({});
         const names = ref([]);
@@ -190,6 +190,25 @@ export default {
             var table = useCreateTable(export_codes.value,export_columns.value);
             useCopyTable(table);
         }
+
+        function exportCsv () {
+            const content = 
+            export_codes.value.map(row => export_columns.value.map(col => row[col]).join(',')).join('\r\n\r\n');
+    
+            const status = exportFile(
+              'RGM_TuerCodes.csv',
+              content,
+              'text/csv'
+            );
+    
+            if (status !== true) {
+              $q.notify({
+                message: 'Browser denied file download...',
+                color: 'negative',
+                icon: 'warning'
+              })
+            }
+          }        
         
         function storeFilter(value){
              SessionStorage.set('doorcodes_filter', value);            
@@ -208,6 +227,7 @@ export default {
             onSelectGroup,
             createCodes,
             copyData,
+            exportCsv,
             storeFilter,
             storePagination, 
             customSort,

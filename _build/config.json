@@ -3,7 +3,7 @@
   "lowCaseName":"fbuch",
   "description":"",
   "author":"",
-  "version":"2.7.2-beta",
+  "version":"2.7.3-beta",
   "build":{
     "resolver":{
       "resolversDir":"resolvers",
@@ -76,7 +76,7 @@
         "action":"index",
         "parent":"Vereinsverwaltung",
         "namespace":"migx",
-        "params":"&configs=mv_mitglieder:fbuch||mv_roles:fbuch||mv_gruppen:fbuch||mv_families:fbuch||mv_beitragstypen:fbuch||mv_member_states:fbuch||mv_dooraccesscodes:fbuch||fbuch_competency_levels:fbuch",
+        "params":"&configs=mv_mitglieder:fbuch||mv_roles:fbuch||mv_gruppen:fbuch||mv_families:fbuch||mv_beitragstypen:fbuch||mv_member_states:fbuch||fbuch_competency_levels:fbuch",
         "menuIndex":1
       },
       {
