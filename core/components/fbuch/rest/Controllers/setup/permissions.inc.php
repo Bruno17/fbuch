@@ -179,7 +179,8 @@ $permissions = [
         'fbuch_instructor'=>'0',
         'fbuch_clubhome'=>'0',
         'mv_member_admin'=>'1',
-        'mv_competency_editor'=>'0'
+        'mv_competency_editor'=>'0',
+        'fbuch_doorcode_manager'=>'1'
     ],
     ['name'=>'fbuch_create_doorcodes',
         'description'=>'Berechtigung, neue Eingangstür Zugangscodes zu generieren',
@@ -188,7 +189,8 @@ $permissions = [
         'fbuch_instructor'=>'0',
         'fbuch_clubhome'=>'0',
         'mv_member_admin'=>'1',
-        'mv_competency_editor'=>'0'
+        'mv_competency_editor'=>'0',
+        'fbuch_doorcode_manager'=>'1'
     ],
     ['name'=>'fbuch_manage_doorcodes',
         'description'=>'Berechtigung, Mitgliedern und anderen Personen Eingangstür Zugangscodes zuzuweisen',
@@ -197,7 +199,8 @@ $permissions = [
         'fbuch_instructor'=>'0',
         'fbuch_clubhome'=>'0',
         'mv_member_admin'=>'1',
-        'mv_competency_editor'=>'0'
+        'mv_competency_editor'=>'0',
+        'fbuch_doorcode_manager'=>'1'
     ]          
 ];
 
