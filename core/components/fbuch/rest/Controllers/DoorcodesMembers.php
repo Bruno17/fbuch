@@ -117,9 +117,16 @@ class MyControllerDoorcodesMembers extends BaseController {
 
     protected function prepareListQueryBeforeCount(xPDOQuery $c) {
         $member_id = $this->getProperty('member_id');
+        $sortby = $this->getProperty('sortby');
 
         if (!empty($member_id)){
             $c->where(['member_id'=>$member_id]);
+        }
+
+        if ($sortby=='Member_name'){
+            $c->sortby('other_person','ASC');  
+            $c->sortby('Member.name','ASC');
+            $c->sortby('Member.firstname','ASC');
         }
   
         $joins = '[{"alias":"Member","selectfields":"name,firstname,member_status"},{"alias":"Code"}]';
@@ -131,6 +138,7 @@ class MyControllerDoorcodesMembers extends BaseController {
     protected function prepareListObject(xPDOObject $object) {
 
         $output = $object->toArray('', false, true);
+        $output['Member_name'] = $output['Member_name'] . ' ' . $output['Member_firstname'];
         if (!empty($output['other_person'])){
             $output['Member_name'] = $output['other_person'];
             $output['Member_member_status'] = 'Vereinsfremd';

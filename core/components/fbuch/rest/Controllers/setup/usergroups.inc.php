@@ -38,6 +38,15 @@ $usergroups = [
         ]
     ],
     [
+        'policy'=>'fbuch_doorcode_manager',
+        'user_group'=>'fbuch_doorcode_manager',
+        'resource_groups'=>[
+            [
+                'name'=>'fbuch_doorcode_manager'
+            ]
+        ]
+    ],        
+    [
         'policy'=>'mv_member_admin',
         'user_group'=>'mv_member_admin'
     ],

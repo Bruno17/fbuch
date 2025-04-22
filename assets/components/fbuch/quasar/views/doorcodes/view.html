@@ -12,12 +12,17 @@
 <div class="q-px-md q-py-lg row">
    <div class="col-12">
     <q-table :rows="names" :filter="filter" row-key="id" :columns="columns" :visible-columns="visible_columns"
-      :pagination="initial_pagination" flat bordered dense>
+      :pagination="initial_pagination" 
+      @update:pagination="(value) =>storePagination(value)"
+      flat bordered dense
+      binary-state-sort
+      :sort-method="customSort"
+      >
 
       <template v-slot:top>
         <q-btn v-if="useHasPermission('fbuch_create_doorcodes')" color="primary" label="Neue Codes erstellen" @click="createCodes" />
         <q-space />
-        <q-input borderless dense debounce="300" color="primary" v-model="filter" placeholder="Suche">
+        <q-input borderless dense debounce="300" @update:model-value="(value) =>storeFilter(value)" color="primary" v-model="filter" placeholder="Suche">
           <template v-slot:append>
             <q-icon name="search" />
           </template>
@@ -46,9 +51,6 @@
           </q-td>
           <q-td key="Member_name" :props="props">
             {{ props.row.Member_name }}
-          </q-td>
-          <q-td key="Member_firstname" :props="props">
-            {{ props.row.Member_firstname }}
           </q-td>
           <q-td key="Member_member_status" :props="props">
             {{ props.row.Member_member_status }}
