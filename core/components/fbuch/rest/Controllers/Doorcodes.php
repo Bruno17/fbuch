@@ -26,7 +26,7 @@ class MyControllerDoorcodes extends BaseController {
 
     public function beforePost() {
 
-        if ($this->modx->hasPermission('fbuch_manage_doorcodes')) {
+        if ($this->modx->hasPermission('fbuch_create_doorcodes')) {
 
         } else {
             throw new Exception('Unauthorized', 401);
