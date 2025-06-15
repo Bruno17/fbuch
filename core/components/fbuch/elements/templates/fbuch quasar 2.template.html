@@ -209,6 +209,13 @@
     <script src="[[!+pinia.js]]"></script>
 
     [[!fbuchStoreAndReadAssets? 
+    &url=`https://cdnjs.cloudflare.com/ajax/libs/collect.js/4.36.1/collect.min.js`
+    &filename=`collect.js`
+    &ph=`collect.js`
+    ]]
+    <script src="[[!+collect.js]]"></script>    
+
+    [[!fbuchStoreAndReadAssets? 
     &url=`https://cdn.jsdelivr.net/npm/qr-creator/dist/qr-creator.min.js`
     &filename=`qr-creator.js`
     &ph=`qr-creator.js`
@@ -223,6 +230,12 @@
           resource_uri:'[[*uri]]',
           user_id:'[[!+modx.user.id]]',
           rest_url:'[[++fbuch.assets_url:default=`/assets/components/fbuch/`]]rest/'
+          [[!migxLoopCollection? 
+          &classname=`mvMember`
+          &where=`{"modx_user_id":"[[!+modx.user.id]]","modx_user_id:>":"0"}`
+          &tpl=`@CODE:,current_member_id:'{{+id}}'`
+          &limit=`1`
+          ]]
         };
     
     </script>  

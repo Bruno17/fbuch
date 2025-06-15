@@ -66,7 +66,8 @@ export default {
             columns,
             visible_columns,
             initial_pagination,
-            Quasar
+            Quasar,
+            modx_options
         }
     },
 

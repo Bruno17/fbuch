@@ -1,7 +1,8 @@
 export default {
     props:{
       controller:'',
-      first_option:{}
+      first_option:{},
+      callback_onload:false
     }, 
  
      setup(props) {
@@ -34,6 +35,9 @@ export default {
                options.push(...response.data.results);      
              } else {
                options = response.data.results;
+               if (props.callback_onload){
+                 options = props.callback_onload(options); 
+               }
              }
              names_options.value = options;
              filtered_options.value = options;

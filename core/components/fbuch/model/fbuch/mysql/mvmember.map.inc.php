@@ -737,5 +737,13 @@ $xpdo_meta_map['mvMember']= array (
       'cardinality' => 'one',
       'owner' => 'local',
     ),
+    'Skills' => 
+    array (
+      'class' => 'mvMemberSkill',
+      'foreign' => 'member_id',
+      'local' => 'id',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
   ),
 );

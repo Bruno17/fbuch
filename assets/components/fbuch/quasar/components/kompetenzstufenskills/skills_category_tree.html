@@ -1,0 +1,313 @@
+<q-card bordered flat class="full-width">
+  <q-card-section class="bg-primary text-white">
+    <div class="row items-center no-wrap">
+      <div class="col">
+
+      </div>
+      <div v-if="editable" class="col-auto">
+        <q-btn color="white" text-color="black" round icon="navigate_next">
+          <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
+            <q-list dense bordered separator>
+              <q-item @click="state.dialog_category=true;form={id:0}" clickable v-ripple>
+                <q-item-section avatar><q-avatar icon="add" /></q-item-section>
+                <q-item-section>
+                  <q-item-label>Überkategorie erstellen</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-btn>
+      </div>
+    </div>
+  </q-card-section>
+  <q-separator></q-separator>
+  <q-card-section>
+    <q-list bordered separator>
+      <template v-for="item in resourcetree">
+
+        <q-item style="padding-right:0;padding-top:0;padding-bottom:0">
+          <q-item-section>{{ item.name }}</q-item-section>
+          <q-item-section v-if="editable" side top class="q-pa-none" style="padding-left:0;">
+            <q-btn color="primary" text-color="white" round icon="navigate_next" style="margin:5px;">
+              <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
+                <q-list dense bordered separator>
+                  <q-item @click="editCategory(item.id)" clickable v-ripple>
+                    <q-item-section avatar><q-avatar text-color="black" icon="edit" /></q-item-section>
+                    <q-item-section>bearbeiten</q-item-section>
+                  </q-item>
+                  <q-item @click="state.dialog_category=true;form={id:0,parent:item.id}" clickable v-ripple>
+                    <q-item-section avatar><q-avatar text-color="black" icon="add" /></q-item-section>
+                    <q-item-section>Unterkategorie erstellen</q-item-section>
+                  </q-item>
+                  <q-item @click="deleteCategory(item)" clickable v-ripple>
+                    <q-item-section avatar><q-avatar text-color="red" icon="remove" /></q-item-section>
+                    <q-item-section>entfernen</q-item-section>
+                  </q-item>
+                </q-list>
+              </q-menu>
+            </q-btn>
+          </q-item-section>
+          <q-item-section v-if="moveable" side top class="q-pa-none" style="padding-left:0;">
+            <q-btn v-if="item._first==0" size="15px" @click="moveCategory(item.id,'up')" square padding="none" icon="arrow_drop_up"></q-btn>
+            <q-btn v-if="item._first==1" size="15px" square padding="none" icon=""></q-btn>            
+            <q-btn v-if="item._last==0" size="15px" @click="moveCategory(item.id,'down')" square padding="none" icon="arrow_drop_down"></q-btn>
+            <q-btn v-if="item._last==1" size="15px" square padding="none" icon=""></q-btn>            
+          </q-item-section>
+          <q-item-section v-if="moveable" side top class="q-pa-none" style="padding-left:0;">
+            <q-btn text-color="black" size="15px" square padding="none" icon=""></q-btn>
+            <q-btn text-color="black" size="15px" square padding="none" icon=""></q-btn>
+          </q-item-section>             
+       
+        </q-item>
+        <template v-if="item.haschildren==1">
+          <template v-for="child in item.children">
+            <q-item style="padding-right:0;padding-top:0;padding-bottom:0" :inset-level="0.4">
+              <q-item-section>{{ child.name }}</q-item-section>
+
+              <q-item-section v-if="editable" side top class="q-pa-none" style="padding-left:0;">
+                <q-btn color="primary" text-color="white" round icon="navigate_next" style="margin:5px;">
+                  <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
+                    <q-list dense bordered separator>
+                      <q-item @click="editCategory(child.id)" clickable v-ripple>
+                        <q-item-section avatar><q-avatar text-color="black" icon="edit" /></q-item-section>
+                        <q-item-section>bearbeiten</q-item-section>
+                      </q-item>
+                      <q-item @click="state.dialog_skill=true;form={id:0,category_id:child.id};competency_levels=[];"
+                        clickable v-ripple>
+                        <q-item-section avatar><q-avatar text-color="black" icon="add" /></q-item-section>
+                        <q-item-section>Skill erstellen</q-item-section>
+                      </q-item>
+                      <q-item @click="deleteCategory(child)" clickable v-ripple>
+                        <q-item-section avatar><q-avatar text-color="red" icon="remove" /></q-item-section>
+                        <q-item-section>entfernen</q-item-section>
+                      </q-item>
+                    </q-list>
+                  </q-menu>
+                </q-btn>
+              </q-item-section>
+              <q-item-section v-if="moveable" side top class="q-pa-none" style="padding-left:0;">
+                <q-btn v-if="child._first==0" size="15px" @click="moveCategory(child.id,'up')" square padding="none" icon="arrow_drop_up"></q-btn>
+                <q-btn v-if="child._first==1" size="15px" square padding="none" icon=""></q-btn>            
+                <q-btn v-if="child._last==0" size="15px" @click="moveCategory(child.id,'down')" square padding="none" icon="arrow_drop_down"></q-btn>
+                <q-btn v-if="child._last==1" size="15px" square padding="none" icon=""></q-btn>                   
+              </q-item-section>
+          <q-item-section v-if="moveable" side top class="q-pa-none" style="padding-left:0;">
+            <q-btn v-if="item._first==0" text-color="black" size="15px" @click="moveCategory(child.id,'category',item._prev)" square padding="none" icon="arrow_drop_up"></q-btn>
+            <q-btn v-if="item._first==1" text-color="black" size="15px" square padding="none" icon=""></q-btn>
+            <q-btn v-if="item._last==0" text-color="black" size="15px" @click="moveCategory(child.id,'category',item._next)" square padding="none" icon="arrow_drop_down"></q-btn>
+            <q-btn v-if="item._last==1" text-color="black" size="15px" square padding="none" icon=""></q-btn>            
+          </q-item-section>                 
+            </q-item>
+
+            <template v-if="child.hasskills==1">
+              <template v-for="skill in child.skills">
+                <q-item style="padding-right:0;padding-top:0;padding-bottom:0" :inset-level="0.8">
+                  <template v-if="member">
+                  <q-item-section  avatar>
+                    <q-btn-dropdown
+                      split
+                      :icon="skill.MemberSkill_grade==1 ? 'sentiment_very_satisfied' : skill.MemberSkill_grade==3 ? 'sentiment_neutral' : skill.MemberSkill_grade==6 ? 'sentiment_very_dissatisfied' : 'check_box_outline_blank'"
+                      label=""
+                      @click="onMainClick"
+                    >
+                      <q-list dense bordered separator>
+                        <q-item clickable v-close-popup @click="skill.MemberSkill_grade='0';updateSkillGrade(skill.id,'0')">
+                          <q-item-section avatar>
+                            <q-avatar size="60px" icon="check_box_outline_blank" />
+                          </q-item-section>
+                          <q-item-section>
+                              unbewertet
+                          </q-item-section>
+                        </q-item>
+
+                        <q-item clickable v-close-popup @click="skill.MemberSkill_grade=6;updateSkillGrade(skill.id,6)">
+                          <q-item-section avatar>
+                            <q-avatar size="60px" icon="sentiment_very_dissatisfied" />
+                          </q-item-section>
+                          <q-item-section>
+                              verbesserungsfähig
+                          </q-item-section>
+                        </q-item>
+
+                        <q-item clickable v-close-popup @click="skill.MemberSkill_grade=3;updateSkillGrade(skill.id,3)">
+                          <q-item-section avatar>
+                            <q-avatar size="60px" icon="sentiment_neutral" />
+                          </q-item-section>
+                          <q-item-section>
+                              akzeptabel
+                          </q-item-section>
+                        </q-item>
+                        <q-item clickable v-close-popup @click="skill.MemberSkill_grade=1;updateSkillGrade(skill.id,1)">
+                          <q-item-section avatar>
+                            <q-avatar size="60px" icon="sentiment_very_satisfied" />
+                          </q-item-section>
+                          <q-item-section>
+                              perfekt
+                          </q-item-section>
+                        </q-item>                        
+                      </q-list>
+                    </q-btn-dropdown>                      
+                  </q-item-section>
+                  <q-item-section avatar>
+                    <q-btn icon="comment"
+                      @click="state.dialog_note=true;form={note:skill.MemberSkill_note,skill_id:skill.id}"
+                    >
+
+                    </q-btn>
+                  </q-item-section>
+                  </template>
+                  <q-item-section v-else avatar>
+                    <q-avatar text-color="black" size="60px" icon="check_box_outline_blank" />
+                  </q-item-section>
+
+                  <q-item-section>{{ skill.name }} ({{skill.levels}})</q-item-section>
+
+                  <q-item-section v-if="editable" side top class="q-pa-none" style="padding-left:0;">
+                    <q-btn color="primary" text-color="white" round icon="navigate_next" style="margin:5px;">
+                      <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
+                        <q-list dense bordered separator>
+                          <q-item @click="editSkill(skill.id)" clickable v-ripple>
+                            <q-item-section avatar><q-avatar text-color="black" icon="edit" /></q-item-section>
+                            <q-item-section>bearbeiten</q-item-section>
+                          </q-item>
+                          <q-item @click="deleteSkill(skill.id)" clickable v-ripple>
+                            <q-item-section avatar><q-avatar text-color="red" icon="remove" /></q-item-section>
+                            <q-item-section>entfernen</q-item-section>
+                          </q-item>
+                        </q-list>
+                      </q-menu>
+                    </q-btn>
+                  </q-item-section>
+                  <q-item-section v-if="moveable" side top class="q-pa-none" style="padding-left:0;">
+                    <q-btn v-if="skill._first==0" size="15px" @click="moveSkill(skill.id,'up')" square padding="none" icon="arrow_drop_up"></q-btn>
+                    <q-btn v-if="skill._first==1" size="15px" square padding="none" icon=""></q-btn>
+                    <q-btn v-if="skill._last==0" size="15px" @click="moveSkill(skill.id,'down')" square padding="none" icon="arrow_drop_down"></q-btn>
+                    <q-btn v-if="skill._last==1" size="15px" square padding="none" icon=""></q-btn>
+                  </q-item-section>
+                  <q-item-section v-if="moveable" side top class="q-pa-none" style="padding-left:0;">
+                    <q-btn v-if="child._first==0" text-color="black" size="15px" @click="moveSkill(skill.id,'category',child._prev)" square padding="none" icon="arrow_drop_up"></q-btn>
+                    <q-btn v-if="child._first==1" text-color="black" size="15px" square padding="none" icon=""></q-btn>
+                    <q-btn v-if="child._last==0" text-color="black" size="15px" @click="moveSkill(skill.id,'category',child._next)" square padding="none" icon="arrow_drop_down"></q-btn>
+                    <q-btn v-if="child._last==1" text-color="black" size="15px" square padding="none" icon=""></q-btn>                                                                                                
+                  </q-item-section>
+
+                </q-item>
+              <template v-for="grade in skill.grades">
+                <q-item style="padding-right:0;padding-top:0;padding-bottom:0" :inset-level="1.2">
+                  <q-item-section side style="width:150px;">
+                    <q-item-label>{{ grade.CreatorMember_firstname }} {{grade.CreatorMember_name}}</q-item-label>
+                    <q-item-label>{{ formatDate(grade.createdon) }}</q-item-label>
+                  </q-item-section> 
+                  <q-item-section avatar>
+                    <q-avatar v-if="grade.grade==1" size="60px" text-color="black" icon="sentiment_very_satisfied" />
+                    <q-avatar v-else-if="grade.grade==3" size="60px" text-color="black" icon="sentiment_neutral" />
+                    <q-avatar v-else-if="grade.grade==6" size="60px" text-color="black" icon="sentiment_very_dissatisfied" />
+                    <q-avatar v-else text-color="black" size="60px" icon="check_box_outline_blank" />
+                  </q-item-section> 
+                  <q-item-section >
+                    {{ grade.note }}
+                  </q-item-section>                   
+                </q-item>  
+              </template>
+
+              </template>
+
+
+            </template>
+
+
+
+          </template>
+        </template>
+
+      </template>
+    </q-list>
+  </q-card-section>
+
+  <q-separator></q-separator>
+
+</q-card>
+
+
+<q-dialog v-model="state.dialog_category" persistent transition-show="scale" transition-hide="scale">
+  <q-card style="width: 300px">
+    <q-card-section>
+      <div v-if="form.id>0" class="text-h6">Skillkategorie bearbeiten</div>
+      <div v-else class="text-h6">Skillkategorie erstellen</div>
+    </q-card-section>
+
+    <q-card-section class="q-pt-none">
+      <q-input class="col-12" outlined v-model="form.name" label="Kategorie" />
+    </q-card-section>
+
+    <q-card-actions align="right" class="bg-white text-black">
+      <q-btn flat label="Abbrechen" v-close-popup />
+      <q-btn flat label="OK" @click="updateCategory" v-close-popup />
+    </q-card-actions>
+  </q-card>
+</q-dialog>
+
+<q-dialog v-model="state.dialog_skill" persistent transition-show="scale" transition-hide="scale">
+  <q-card style="width: 600px">
+    <q-card-section>
+      <div v-if="form.id>0" class="text-h6">Skill bearbeiten</div>
+      <div v-else class="text-h6">Skill erstellen</div>
+    </q-card-section>
+
+    <q-card-section class="q-pt-none">
+      <q-input class="col-12" outlined v-model="form.name" label="Skill" />
+    </q-card-section>
+    <q-card-section class="q-pt-md">
+      <api_select ref="competencySelect" class="col-12" v-model="competency_levels" label="Kompetenzstufenzuordnungen"
+        :first_option="{'label':'---','value':''}" :controller="'CompetencyLevels?limit=100000&returntype=options'"
+        :emit-value="true" :hide-bottom-space="true" behavior="default"
+        :callback_onload="onloadCompetencyLevels"
+        >
+      </api_select>
+    </q-card-section>
+    <q-card-section class="q-pt-none">
+      <q-input class="col-12" outlined v-model="competency_levels" label="Kompetenzstufenzuordnungen" hint="für manuell Eingabe (zb. copy/paste)" />
+    </q-card-section>
+    
+    <q-card-section>
+  <groupselect
+    outlined
+    dense
+    multiple
+    use-chips
+    :emit-value="true"
+    label="Food"
+    v-model="form.selected"
+    :options="leveloptions"
+    behavior="default"
+  />      
+    </q-card-section>
+
+  {{form.selected}}    
+    
+
+    <q-card-actions align="right" class="bg-white text-black">
+      <q-btn flat label="Abbrechen" v-close-popup />
+      <q-btn flat label="OK" @click="updateSkill" v-close-popup />
+    </q-card-actions>
+  </q-card>
+
+</q-dialog>
+
+<q-dialog v-model="state.dialog_note" persistent transition-show="scale" transition-hide="scale">
+  <q-card style="width: 600px">
+    <q-card-section>
+      <div v-if="form.id>0" class="text-h6">Bemerkung bearbeiten</div>
+      <div v-else class="text-h6">Bemerkung erstellen</div>
+    </q-card-section>
+
+    <q-card-section class="q-pt-none">
+      <q-input class="col-12" clearable outlined v-model="form.note" label="Bemerkung" />
+    </q-card-section>
+
+    <q-card-actions align="right" class="bg-white text-black">
+      <q-btn flat label="Abbrechen" v-close-popup />
+      <q-btn flat label="OK" @click="updateSkillGrade(form.skill_id)" v-close-popup />
+    </q-card-actions>
+  </q-card>
+</q-dialog>

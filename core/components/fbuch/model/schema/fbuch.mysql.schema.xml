@@ -323,7 +323,41 @@
         <field key="technical_goals" dbtype="text" phptype="string" null="false" default="" />
         <field key="permissions" dbtype="text" phptype="string" null="false" default="" />
         <aggregate alias="Members" class="mvMember" foreign="competency_level" local="level" cardinality="many" owner="local" />                
-    </object>     
+    </object>
+    <object class="fbuchCompetencyLevelSkillsCategory" table="fbuch_competency_level_skills_categories" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <field key="description" dbtype="text" phptype="string" null="false" default="" />
+        <field key="parent" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="pos" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" /> 
+        <field key="is_skills_category" dbtype="int" precision="1" phptype="integer" null="false" default="0" index="index" /> 
+        <aggregate alias="Parent" class="fbuchCompetencyLevelSkillsCategory" foreign="id" local="parent" cardinality="one" owner="foreign" /> 
+        <aggregate alias="Skills" class="fbuchCompetencyLevelSkill" foreign="category_id" local="id" cardinality="many" owner="local" />                                 
+    </object>         
+    <object class="fbuchCompetencyLevelSkill" table="fbuch_competency_level_skills" extends="xPDOSimpleObject">
+        <field key="name" dbtype="varchar" phptype="string" precision="255" null="false" default="" index="index" />
+        <field key="levels" dbtype="varchar" phptype="string" precision="255" null="false" default="" />
+        <field key="description" dbtype="text" phptype="string" null="false" default="" />
+        <field key="type" dbtype="varchar" phptype="string" precision="100" null="false" default="" index="index" />
+        <field key="category_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="pos" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" /> 
+        <composite alias="Members" class="mvMemberSkill" foreign="skill_id" local="id" cardinality="many" owner="local" />
+        <aggregate alias="Category" class="fbuchCompetencyLevelSkillsCategory" foreign="id" local="category_id" cardinality="one" owner="foreign" />                            
+    </object> 
+    
+    <object class="mvMemberSkill" table="mv_member_skills" extends="xPDOSimpleObject">
+        <field key="note" dbtype="text" phptype="string" null="false" default="" />
+        <field key="member_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
+        <field key="skill_id" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" /> 
+        <field key="grade" dbtype="int" precision="1" phptype="integer" null="false" default="0" /> 
+		<field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />	
+    	<field key="createdon" dbtype="datetime" phptype="datetime" null="true" /> 
+        <aggregate alias="Member" class="mvMember" foreign="id" local="member_id" cardinality="one" owner="foreign" />  
+        <aggregate alias="CreatorMember" class="mvMember" foreign="modx_user_id" local="createdby" cardinality="one" owner="foreign" /> 
+        <aggregate alias="CreatorProfile" class="modUserProfile" foreign="internalKey" local="createdby" cardinality="one" owner="foreign" />                                                               
+        <aggregate alias="Skill" class="fbuchCompetencyLevelSkill" foreign="id" local="skill_id" cardinality="one" owner="foreign" />  
+    </object>  
+    
+    
 
     <object class="mvMemberState" table="mv_member_states" extends="xPDOSimpleObject">
         <field key="state" dbtype="varchar" phptype="string" precision="100" null="false" default="" />
@@ -422,6 +456,7 @@
     
         <aggregate alias="DoorAccesscode" class="mvDoorAccesscode" local="id" foreign="member_id" cardinality="one" owner="local" />
         <composite alias="Nutzergruppen" class="fbuchBootsNutzergruppenMembers" local="id" foreign="member_id" cardinality="many" owner="local" />
+        <aggregate alias="Skills" class="mvMemberSkill" foreign="member_id" local="id" cardinality="many" owner="local" />  
     </object>
     
     <object class="mvRole" table="mv_roles" extends="xPDOSimpleObject">

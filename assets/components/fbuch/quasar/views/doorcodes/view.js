@@ -140,7 +140,7 @@ export default {
 
         function saveCodes() {
             let data = {};
-            data.amount = 10;
+            data.amount = 1;
             data.processaction = 'createCodes';
             const ajaxUrl = modx_options.rest_url + 'Doorcodes/';
             axios.post(ajaxUrl, data)
@@ -173,7 +173,7 @@ export default {
         function createCodes(){
             $q.dialog({
                 title: 'Neue Codes erstellen',
-                message: 'Hiermit werden 10 neue Codes erstellt',
+                message: 'Hiermit wird 1 neuer Code erstellt',
                 cancel: true,
                 persistent: true
               }).onOk(data => {
@@ -193,7 +193,7 @@ export default {
 
         function exportCsv () {
             const content = 
-            export_codes.value.map(row => export_columns.value.map(col => row[col]).join(',')).join('\r\n\r\n');
+            export_codes.value.map(row => export_columns.value.map(col => row[col]).join(',')).join('\r\n');
     
             const status = exportFile(
               'RGM_TuerCodes.csv',
@@ -211,6 +211,7 @@ export default {
           }        
         
         function storeFilter(value){
+             value = value==null ? '' : value;
              SessionStorage.set('doorcodes_filter', value);            
         }
 

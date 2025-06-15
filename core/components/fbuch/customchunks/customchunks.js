@@ -205,5 +205,12 @@
         "tab": "Vereinsdaten",
         "caption": "",
         "inputTVtype": ""
+    },
+    "custom_fbuch_skill_grades": {
+        "deleted": "0",
+        "group": "Kompetenzstufen",
+        "tab": "Optionen",
+        "caption": "",
+        "inputTVtype": "textarea"
     }
 }

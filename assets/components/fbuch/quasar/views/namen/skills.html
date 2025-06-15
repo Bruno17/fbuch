@@ -1,0 +1,22 @@
+<div class="q-mx-lg">
+    
+ <component is="style">
+    h2 {
+        font-size:32px;
+    }
+    h3 {
+        font-size:24px;
+        line-height:24px;
+    }
+    h5 {
+        font-size:20px;
+    }
+
+</component>   
+
+
+<h2 class="q-mt-sm q-mb-sm text-weight-bold" >Kompetenzstufenskills {{entry.firstname}} {{entry.name}}</h2>
+
+        <skillscategorytree v-if="useHasPermission('mv_edit_membercompetencies')||modx_options.current_member_id==entry.id" :editable="false" :member="entry" :moveable="false" ref="skillscategorytree"/> 
+        <template v-else>Du hast nicht die Berechtigung die Skills dieser Person zu bearbeiten</template>
+</div>

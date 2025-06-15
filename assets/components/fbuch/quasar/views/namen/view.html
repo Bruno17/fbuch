@@ -55,6 +55,9 @@
                   <q-item v-if="useHasPermission('fbuch_edit_names')" clickable :href="'listen/namen/#/member-update/'+props.row.id">
                     <q-item-section >Eintrag bearbeiten</q-item-section>
                   </q-item>
+                  <q-item v-if="useHasPermission('mv_edit_membercompetencies')||modx_options.current_member_id==props.row.id" clickable :href="'listen/namen/#/skills/'+props.row.id">
+                    <q-item-section >Kompetenzstufenskills bearbeiten</q-item-section>
+                  </q-item>                  
                 </q-list>
               </q-menu>
             </q-btn>

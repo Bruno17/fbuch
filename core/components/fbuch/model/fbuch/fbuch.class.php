@@ -1925,6 +1925,8 @@ class Fbuch {
         $enddate = strftime('%Y-%m-%d 23:59:59', $end);
         $endtime = strftime('%H:%M', $end);
 
+        //date_default_timezone_set('Europe/Berlin');
+
         $unixstart = strtotime(strftime('%Y-%m-%d ' . $starttime . ':00', $start));
         $unixend = strtotime(strftime('%Y-%m-%d ' . $endtime . ':00', $end));
 
@@ -1943,6 +1945,7 @@ class Fbuch {
 
         $c->prepare();
         $this->error = $c->toSql();
+        //echo $this->error;
 
         if ($object = $modx->getObject($classname, $c)) {
             $this->errorstart = strftime('%d.%m.%Y ' . $object->get('start_time'), strtotime($object->get('date')));
@@ -1961,6 +1964,7 @@ class Fbuch {
 
         $c->prepare();
         $this->error = $c->toSql();
+        //echo $this->error;
 
         if ($object = $modx->getObject($classname, $c)) {
             $this->errorstart = strftime('%d.%m.%Y ' . $object->get('start_time'), strtotime($object->get('date')));
@@ -1979,6 +1983,7 @@ class Fbuch {
 
         $c->prepare();
         $this->error = $c->toSql();
+        //echo $this->error;
 
         if ($object = $modx->getObject($classname, $c)) {
             $this->errorstart = strftime('%d.%m.%Y ' . $object->get('start_time'), strtotime($object->get('date')));

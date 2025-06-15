@@ -10,7 +10,7 @@
             <api_select ref="personSelect" class="col-12 col-md-4"
             :disable="!state.enable_personSelect && useHasPermission('fbuch_allpermissions')==false"
             v-model="entry.member_id" @update:model-value="onSelectPerson" :emit-value="false"
-            label="Person wählen" controller="Names?limit=100000&returntype=options&statefilter=can_be_added_to_entry"
+            label="Person wählen" controller="Names?limit=100000&returntype=options&statefilter=none"
             behavior="default"
             >
             </api_select>            
