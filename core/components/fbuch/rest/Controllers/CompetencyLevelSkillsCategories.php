@@ -94,11 +94,19 @@ class MyControllerCompetencyLevelSkillsCategories extends BaseController {
                 if (empty($node['CreatorMember_id'])){
                     $node['CreatorMember_firstname'] = $node['CreatorProfile_fullname'];
                 }
+                $node['icon'] = $this->getGradeIcon($node['grade']);
                 $nodes[] = $node;
             }
         }
 
         return $nodes;        
+    }
+
+    public function getGradeIcon($grade){
+        $grade = empty($grade) ? '0' : $grade;
+        $gradeicons = $this->getProperty('gradeicons',[]);
+        return is_array($gradeicons) && isset($gradeicons[$grade]) ? $gradeicons[$grade] : '';        
+
     }
 
     public function addSkills($category){
@@ -134,6 +142,7 @@ class MyControllerCompetencyLevelSkillsCategories extends BaseController {
                 $node['_first'] = $idx==1 ? 1 : 0;
                 $node['_last'] = $idx==$count ? 1 : 0;
                 $node['_idx'] = $idx; 
+                $node['MemberSkill_icon'] = $this->getGradeIcon($node['MemberSkill_grade']);
                 if (!empty($member_id) && $grades=$this->addSkillGrades($object->get('id'))){
                     $node['hasgrades'] = 1;
                     $node['grades'] = $grades;
@@ -284,6 +293,19 @@ class MyControllerCompetencyLevelSkillsCategories extends BaseController {
     }     
     
     public function getList() {
+        $this->modx->fbuch->getChunkName('fbuch_skill_grades');
+        $this->modx->getChunk($this->modx->fbuch->getChunkName('fbuch_skill_grades'));
+        $skillgrades_json = $this->modx->getChunk($this->modx->fbuch->getChunkName('fbuch_skill_grades'));
+        $skillgrades = json_decode($skillgrades_json,1);
+        $this->setProperty('skillgrades',$skillgrades);
+        $gradeicons = []; 
+        if (is_array($skillgrades) && is_array($skillgrades['grades'])){
+            foreach($skillgrades['grades'] as $grade_item){
+                $gradeicons[$grade_item['value']] = $grade_item['icon']; 
+            }
+        } 
+        $this->setProperty('gradeicons',$gradeicons);       
+
         $total = 0;
 
         $list = $this->getNodes(0);

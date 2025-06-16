@@ -21,14 +21,18 @@ export default {
     const state = ref({});
     const form = ref({});
     const levels = ref([]);
+    const skillgrades = ref([]);
     const leveloptions = ref([]);
     const competency_levels = ref([]);
+    const competency_levels2 = ref([]);
+    const competency_levels_string = ref('');
     const bootsnutzergruppen = ref([]); 
     form.value.selected=['B:2:3','B:1:3'];
 
     onMounted(() => {
         loadTree();
         loadCompetencyLevelOptions();
+        loadSkillGrades();
     })
 
     function formatDate(date){
@@ -65,30 +69,34 @@ export default {
             console.log(error);
         }); 
     } 
+
+    function loadSkillGrades(){
+        const data = {};
+        const ajaxUrl = modx_options.rest_url + 'SkillGrades';
+        axios.get(ajaxUrl,{params:data})
+        .then(function (response) {
+           skillgrades.value = response.data.results.grades || [];
+        })
+        .catch(function (error) {
+            console.log(error);
+        }); 
+    }     
     
         function onloadCompetencyLevels(options){
             let new_options = [];
+            let option = {};
             for (let i = 0;i < options.length;i++){
-                let option = {};
-                let option2 = {};
-                let option3 = {};
-                let option4 = {};                
-                option.group = options[i].name + '- wünschenswert';
-                option.label = 'akzeptabel';
-                option.value = options[i].level + ':2:3'; 
-                new_options.push(option);
-                option2.group = options[i].name + '- wünschenswert';
-                option2.label = 'perfekt';
-                option2.value = options[i].level + ':2:1'; 
-                new_options.push(option2);                
-                option3.group = options[i].name + '- erforderlich';
-                option3.label = 'akzeptabel';
-                option3.value = options[i].level + ':1:3'; 
-                new_options.push(option3);
-                option4.group = options[i].name + '- erforderlich';
-                option4.label = 'perfekt';
-                option4.value = options[i].level + ':1:1'; 
-                new_options.push(option4);                                   
+                for (let ii = 0;ii < options[i].importances.length;ii++){
+                    for (let gi = 0;gi < options[i].grades.length;gi++){
+                        if (options[i].grades[gi].selectable=='1'){
+                            option = {};
+                            option.group = options[i].name + ' (' + options[i].level +')' + ' - ' + options[i].importances[ii].label + ' (' + options[i].importances[ii].value +')' ;
+                            option.label = options[i].grades[gi].label + ' (' + options[i].grades[gi].value +')';
+                            option.value = options[i].level + ':' + options[i].importances[ii].value + ':' + options[i].grades[gi].value; 
+                            new_options.push(option);                            
+                        }
+                    }                    
+                }
             }
             return new_options;
         }    
@@ -114,11 +122,11 @@ export default {
             var ajaxUrl = modx_options.rest_url + 'CompetencyLevelSkills/' +id;
             axios.get(ajaxUrl,{params:data})
             .then(function (response) {
-                var selected = ["B:2:3","B:1:3"];
-                response.data.object.selected = selected;
                 form.value = response.data.object;
                 let levels = form.value.levels.split(',');
+                competency_levels_string.value = form.value.levels; 
                 competency_levels.value = levels[0]=='' ? [] : levels;
+                competency_levels2.value = competency_levels.value;
                 state.value.dialog_skill = true;
             })
             .catch(function (error) {
@@ -302,6 +310,19 @@ export default {
                 console.log(error);
             });            
         } 
+
+        function onUpdateCompetencyLevels(value){
+            console.log('onUpdateCompetencyLevels',value);
+            competency_levels.value=value;
+            competency_levels_string.value=value.join(',');
+        }
+
+        function onPasteCompetencyLevel(value){
+            console.log('onPasteCompetencyLevel',value); 
+            competency_levels.value=value.split(','); 
+            competency_levels2.value=value.split(','); 
+
+        }
         
 
 
@@ -311,8 +332,10 @@ export default {
         moveCategory,
         moveSkill,
         leveloptions,
+        skillgrades,
         loadTree,
         onloadCompetencyLevels,
+        onPasteCompetencyLevel,
             state,
             form,
             levels,
@@ -326,6 +349,9 @@ export default {
             updateSkillGrade,
             formatDate,
             competency_levels,
+            competency_levels2,
+            competency_levels_string,
+            onUpdateCompetencyLevels,
             props
     }
   },

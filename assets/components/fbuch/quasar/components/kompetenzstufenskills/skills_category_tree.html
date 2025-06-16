@@ -106,45 +106,21 @@
                   <q-item-section  avatar>
                     <q-btn-dropdown
                       split
-                      :icon="skill.MemberSkill_grade==1 ? 'sentiment_very_satisfied' : skill.MemberSkill_grade==3 ? 'sentiment_neutral' : skill.MemberSkill_grade==6 ? 'sentiment_very_dissatisfied' : 'check_box_outline_blank'"
-                      label=""
+                      :icon="skill.MemberSkill_icon"
+                      :label=""
                       @click="onMainClick"
                     >
                       <q-list dense bordered separator>
-                        <q-item clickable v-close-popup @click="skill.MemberSkill_grade='0';updateSkillGrade(skill.id,'0')">
+                        <template v-for="skillgrade in skillgrades">
+                        <q-item clickable v-close-popup @click="skill.MemberSkill_grade=skillgrade.value;updateSkillGrade(skill.id,skillgrade.value)">
                           <q-item-section avatar>
-                            <q-avatar size="60px" icon="check_box_outline_blank" />
+                            <q-avatar size="60px" :icon="skillgrade.icon" />
                           </q-item-section>
                           <q-item-section>
-                              unbewertet
+                              {{skillgrade.label}}
                           </q-item-section>
                         </q-item>
-
-                        <q-item clickable v-close-popup @click="skill.MemberSkill_grade=6;updateSkillGrade(skill.id,6)">
-                          <q-item-section avatar>
-                            <q-avatar size="60px" icon="sentiment_very_dissatisfied" />
-                          </q-item-section>
-                          <q-item-section>
-                              verbesserungsfähig
-                          </q-item-section>
-                        </q-item>
-
-                        <q-item clickable v-close-popup @click="skill.MemberSkill_grade=3;updateSkillGrade(skill.id,3)">
-                          <q-item-section avatar>
-                            <q-avatar size="60px" icon="sentiment_neutral" />
-                          </q-item-section>
-                          <q-item-section>
-                              akzeptabel
-                          </q-item-section>
-                        </q-item>
-                        <q-item clickable v-close-popup @click="skill.MemberSkill_grade=1;updateSkillGrade(skill.id,1)">
-                          <q-item-section avatar>
-                            <q-avatar size="60px" icon="sentiment_very_satisfied" />
-                          </q-item-section>
-                          <q-item-section>
-                              perfekt
-                          </q-item-section>
-                        </q-item>                        
+                        </template>
                       </q-list>
                     </q-btn-dropdown>                      
                   </q-item-section>
@@ -199,10 +175,7 @@
                     <q-item-label>{{ formatDate(grade.createdon) }}</q-item-label>
                   </q-item-section> 
                   <q-item-section avatar>
-                    <q-avatar v-if="grade.grade==1" size="60px" text-color="black" icon="sentiment_very_satisfied" />
-                    <q-avatar v-else-if="grade.grade==3" size="60px" text-color="black" icon="sentiment_neutral" />
-                    <q-avatar v-else-if="grade.grade==6" size="60px" text-color="black" icon="sentiment_very_dissatisfied" />
-                    <q-avatar v-else text-color="black" size="60px" icon="check_box_outline_blank" />
+                    <q-avatar size="60px" text-color="black" :icon="grade.icon" />
                   </q-item-section> 
                   <q-item-section >
                     {{ grade.note }}
@@ -257,36 +230,34 @@
     <q-card-section class="q-pt-none">
       <q-input class="col-12" outlined v-model="form.name" label="Skill" />
     </q-card-section>
-    <q-card-section class="q-pt-md">
-      <api_select ref="competencySelect" class="col-12" v-model="competency_levels" label="Kompetenzstufenzuordnungen"
-        :first_option="{'label':'---','value':''}" :controller="'CompetencyLevels?limit=100000&returntype=options'"
-        :emit-value="true" :hide-bottom-space="true" behavior="default"
-        :callback_onload="onloadCompetencyLevels"
-        >
-      </api_select>
+    <q-card-section>
+      <groupselect
+        outlined
+        dense
+        multiple
+        use-chips
+        :emit-value="true"
+        label="Kompetenzstufenzuordnungen"
+        v-model="competency_levels2"
+        :options="leveloptions"
+        behavior="default"
+        @onFiltered="onUpdateCompetencyLevels"
+      /> 
+
     </q-card-section>
     <q-card-section class="q-pt-none">
-      <q-input class="col-12" outlined v-model="competency_levels" label="Kompetenzstufenzuordnungen" hint="für manuell Eingabe (zb. copy/paste)" />
+      <q-input class="col-12" 
+      outlined 
+      v-model="competency_levels_string" 
+      label="Kompetenzstufenzuordnungen" 
+      hint="nur für manuelle Eingabe! (copy/paste) - nach fehlerfreier Eingabe erst speichern!" 
+      @update:model-value="onPasteCompetencyLevel"
+      />
     </q-card-section>
     
-    <q-card-section>
-  <groupselect
-    outlined
-    dense
-    multiple
-    use-chips
-    :emit-value="true"
-    label="Food"
-    v-model="form.selected"
-    :options="leveloptions"
-    behavior="default"
-  />      
-    </q-card-section>
 
-  {{form.selected}}    
-    
 
-    <q-card-actions align="right" class="bg-white text-black">
+  <q-card-actions align="right" class="bg-white text-black">
       <q-btn flat label="Abbrechen" v-close-popup />
       <q-btn flat label="OK" @click="updateSkill" v-close-popup />
     </q-card-actions>

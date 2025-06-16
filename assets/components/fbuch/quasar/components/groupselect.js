@@ -1,6 +1,7 @@
 //import { computed, onMounted, useAttrs } from "vue";
 
 export default {
+    emits:['onFiltered'],
     props:{
       controller:'',
       first_option:{},
@@ -15,7 +16,7 @@ export default {
         collect(props.options).unique("group").pluck("group")
         );
 
-        console.log(props.options);
+        
 
         const items = computed(() => {
         const options = collect();
@@ -34,7 +35,13 @@ export default {
 
         const attrs = useAttrs();
 
-        function handleItemUniqueByGroup(items){
+        function getGroupByValue(value){
+            const item = collect(props.options).where("value", value).first() || false;
+            return item ? item.group : '';
+        }
+
+        function handleItemUniqueByGroup(items,dontemit){
+            console.log('handleItemUniqueByGroup',items);
             if (!attrs.hasOwnProperty("multiple") || attrs.multiple === false) {
                 return;
             }
@@ -43,14 +50,25 @@ export default {
             const last = collection.last()||{};
 
             const filtered = collection.filter((item, key) => {
-                console.log('last',last);
-                console.log('item',item);
-
+                if (item == last){
+                    return true;
+                }
+                const last_group = getGroupByValue(last);
+                const item_group = getGroupByValue(item);
+                if (last_group==item_group){
+                    return false;
+                }
                 return true;
             }).toArray();
-            
             model.value = filtered;
-            context.emit('update:modelValue', model.value); 
+            if (dontemit){
+
+            } else {
+              context.emit('update:modelValue', filtered); 
+              context.emit('onFiltered', filtered);                 
+            }
+ 
+            
 
             return;
 
@@ -70,15 +88,13 @@ export default {
 
       watch(() => props.modelValue, (value) => {
           //console.log('watch',value);
-          //model.value=value;
-          //context.emit('update:modelValue', model.value);       
+          model.value=value;
+          //context.emit('update:modelValue', model.value); 
+          handleItemUniqueByGroup(model.value,true);      
       })        
 
         onMounted(() => {
-            console.log('mounted',props.modelValue);
-        //handleItemUniqueByGroup(model.value);
           model.value=props.modelValue;
-          //model.value=[{value:'A:1:1',label:'test'}];
           context.emit('update:modelValue', model.value); 
         });
    
