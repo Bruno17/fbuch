@@ -49,6 +49,26 @@ export default {
             }); 
         }
 
+        function prefill2(controller){
+            const ajaxUrl = modx_options.rest_url + 'setup/' + controller;
+            axios.post(ajaxUrl)
+            .then(function (response) {
+                const success = response.data.success;
+                let message = response.data.message;
+                message = message == 'table has allready items' ? 'Die Tabelle hat bereits Inhalt. Leere die Tabelle, bevor Du sie mit initialem Inhalt befüllst.' : message;
+                if (!success){
+                  $q.dialog({
+                    title: 'Warnung!',
+                    message: message
+                  })
+                  return;              
+                }     
+            })
+            .catch(function (error) {
+                console.log(error);
+            }); 
+        }        
+
         function setupResources(){
             const ajaxUrl = modx_options.rest_url + 'setup/Resources';
             axios.post(ajaxUrl)
@@ -131,6 +151,7 @@ export default {
             tab,
             setupAcls,
             prefill,
+            prefill2,
             setupResources,
             fixFinishedEntries,
             addStatusToEntries,

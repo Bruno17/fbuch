@@ -10,6 +10,10 @@
     h5 {
         font-size:20px;
     }
+    h6 {
+        font-size:16px;
+    }
+
 
 </component>
 
@@ -48,7 +52,7 @@
         {{level.description}}
         <br>
         <q-btn 
-        v-if="level.technical_requirements!='' || level.safety_requirements !='' || level.technical_goals != '' "
+        v-if="level.skills && Object.keys(level.skills)[0] "
         outline icon-right="arrow_outward" label="Vorraussetzungen" @click="levels[index].dialog = true" />
     </td>  
     <td colspan="2" class="text-weight-bold text-center" style="border-bottom:1px solid;">Bootsklassifizierungen</td>
@@ -81,23 +85,29 @@
 <template v-for="(level,index) in levels">
 
     <q-dialog v-model="levels[index].dialog">
-        <q-card>
+        <q-card style="width: 800px;">
           <q-card-section>
             <div class="text-h6">{{level.name}}({{level.level}})</div>
           </q-card-section>
   
           <q-card-section class="q-pt-none">
-            <template v-if="level.technical_requirements != ''">
-                <h5 class="col-12 q-mt-sm q-mb-xs text-weight-bold" >Rudertechnische Kenntnisse</h5>
-                <p v-html="nl2br(level.technical_requirements)"></p>
-            </template>
-            <template v-if="level.safety_requirements != ''">
-                <h5 class="col-12 q-mt-sm q-mb-xs text-weight-bold" >Sicherheitstechnische Vorraussetzungen</h5>
-                <p v-html="nl2br(level.safety_requirements)"></p>
-            </template>
-            <template v-if="level.technical_goals != ''">
-                <h5 class="col-12 q-mt-sm q-mb-xs text-weight-bold" >Rudertechnische Ziele</h5>
-                <p v-html="nl2br(level.technical_goals)"></p>
+            <template v-for="skillcategory in level.skills">
+              <h5 class="col-12 q-mt-sm q-mb-xs text-weight-bold" >{{skillcategory.category}}</h5> 
+              <template v-for="skillcategory_node in skillcategory.nodes">
+                <h6 class="col-12 q-mt-sm q-mb-xs text-weight-bold" >{{skillcategory_node.label}}</h6> 
+                <template v-for="skillcategory_subcategory in skillcategory_node.nodes">
+                {{skillcategory_subcategory.category}}
+                <ul>
+                    <li v-for="skill in skillcategory_subcategory.nodes">
+                        {{skill.name}} 
+                        <template v-if="skill.grade_label">
+                        <br> 
+                        -&gt; {{skill.grade_label}}    
+                        </template>
+                    </li>
+                </ul>
+                </template>
+              </template> 
             </template>
           </q-card-section>
   

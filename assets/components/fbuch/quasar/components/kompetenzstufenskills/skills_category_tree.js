@@ -87,15 +87,24 @@ export default {
             let option = {};
             for (let i = 0;i < options.length;i++){
                 for (let ii = 0;ii < options[i].importances.length;ii++){
+                    option = {};
+                    option.group = options[i].name + ' (' + options[i].level +')' ;
+                    option.label = options[i].importances[ii].label;
+                    option.value = options[i].level + ':' + options[i].importances[ii].value; 
+                    new_options.push(option); 
+
+                    /*
+                    new_options = [];
                     for (let gi = 0;gi < options[i].grades.length;gi++){
-                        if (options[i].grades[gi].selectable=='1'){
+                       if (options[i].grades[gi].selectable=='1'){
                             option = {};
                             option.group = options[i].name + ' (' + options[i].level +')' + ' - ' + options[i].importances[ii].label + ' (' + options[i].importances[ii].value +')' ;
-                            option.label = options[i].grades[gi].label + ' (' + options[i].grades[gi].value +')';
+                            option.label = options[i].grades[gi].label + ' (' + options[i].grades[gi].value +') ' + options[i].importances[ii].label;
                             option.value = options[i].level + ':' + options[i].importances[ii].value + ':' + options[i].grades[gi].value; 
                             new_options.push(option);                            
                         }
-                    }                    
+                    } 
+                    */                       
                 }
             }
             return new_options;
@@ -117,7 +126,16 @@ export default {
             });                
         }
         
-      function editSkill(id){
+      function editSkill(id,category_id){
+            if (id=='new'){
+                form.value={id:0,category_id:category_id};
+                competency_levels.value=[];
+                competency_levels2.value=[];
+                competency_levels_string.value='';
+                state.value.dialog_skill=true; 
+                return;               
+            }
+
             var data = {};
             var ajaxUrl = modx_options.rest_url + 'CompetencyLevelSkills/' +id;
             axios.get(ajaxUrl,{params:data})
@@ -220,7 +238,21 @@ export default {
                 console.log(error);
             }); 
             
-        }        
+        } 
+        
+        function removeSkillGrade(id){
+            var ajaxUrl = modx_options.rest_url + 'MemberSkills/' +id;
+ 
+            axios.delete(ajaxUrl)
+            .then(function (response) {
+                //prepareNutzergruppen(response.data.results);
+                //loadCompetencyLevels();
+                loadTree();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
+        }         
         
         function deleteSkill(id){
             var ajaxUrl = modx_options.rest_url + 'CompetencyLevelSkills/' +id;
@@ -336,6 +368,7 @@ export default {
         loadTree,
         onloadCompetencyLevels,
         onPasteCompetencyLevel,
+        removeSkillGrade,
             state,
             form,
             levels,

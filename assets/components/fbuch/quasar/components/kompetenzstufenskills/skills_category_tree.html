@@ -4,7 +4,7 @@
       <div class="col">
 
       </div>
-      <div v-if="editable" class="col-auto">
+      <div v-if="useHasPermission('mv_edit_membercompetencies') && editable" class="col-auto">
         <q-btn color="white" text-color="black" round icon="navigate_next">
           <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
             <q-list dense bordered separator>
@@ -27,7 +27,7 @@
 
         <q-item style="padding-right:0;padding-top:0;padding-bottom:0">
           <q-item-section>{{ item.name }}</q-item-section>
-          <q-item-section v-if="editable" side top class="q-pa-none" style="padding-left:0;">
+          <q-item-section v-if="useHasPermission('mv_edit_membercompetencies') && editable" side top class="q-pa-none" style="padding-left:0;">
             <q-btn color="primary" text-color="white" round icon="navigate_next" style="margin:5px;">
               <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
                 <q-list dense bordered separator>
@@ -47,13 +47,13 @@
               </q-menu>
             </q-btn>
           </q-item-section>
-          <q-item-section v-if="moveable" side top class="q-pa-none" style="padding-left:0;">
+          <q-item-section v-if="useHasPermission('mv_edit_membercompetencies') && moveable" side top class="q-pa-none" style="padding-left:0;">
             <q-btn v-if="item._first==0" size="15px" @click="moveCategory(item.id,'up')" square padding="none" icon="arrow_drop_up"></q-btn>
             <q-btn v-if="item._first==1" size="15px" square padding="none" icon=""></q-btn>            
             <q-btn v-if="item._last==0" size="15px" @click="moveCategory(item.id,'down')" square padding="none" icon="arrow_drop_down"></q-btn>
             <q-btn v-if="item._last==1" size="15px" square padding="none" icon=""></q-btn>            
           </q-item-section>
-          <q-item-section v-if="moveable" side top class="q-pa-none" style="padding-left:0;">
+          <q-item-section v-if="useHasPermission('mv_edit_membercompetencies') && moveable" side top class="q-pa-none" style="padding-left:0;">
             <q-btn text-color="black" size="15px" square padding="none" icon=""></q-btn>
             <q-btn text-color="black" size="15px" square padding="none" icon=""></q-btn>
           </q-item-section>             
@@ -64,7 +64,7 @@
             <q-item style="padding-right:0;padding-top:0;padding-bottom:0" :inset-level="0.4">
               <q-item-section>{{ child.name }}</q-item-section>
 
-              <q-item-section v-if="editable" side top class="q-pa-none" style="padding-left:0;">
+              <q-item-section v-if="useHasPermission('mv_edit_membercompetencies') && editable" side top class="q-pa-none" style="padding-left:0;">
                 <q-btn color="primary" text-color="white" round icon="navigate_next" style="margin:5px;">
                   <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
                     <q-list dense bordered separator>
@@ -72,7 +72,7 @@
                         <q-item-section avatar><q-avatar text-color="black" icon="edit" /></q-item-section>
                         <q-item-section>bearbeiten</q-item-section>
                       </q-item>
-                      <q-item @click="state.dialog_skill=true;form={id:0,category_id:child.id};competency_levels=[];"
+                      <q-item @click="editSkill('new',child.id)"
                         clickable v-ripple>
                         <q-item-section avatar><q-avatar text-color="black" icon="add" /></q-item-section>
                         <q-item-section>Skill erstellen</q-item-section>
@@ -85,13 +85,13 @@
                   </q-menu>
                 </q-btn>
               </q-item-section>
-              <q-item-section v-if="moveable" side top class="q-pa-none" style="padding-left:0;">
+              <q-item-section v-if="useHasPermission('mv_edit_membercompetencies') && moveable" side top class="q-pa-none" style="padding-left:0;">
                 <q-btn v-if="child._first==0" size="15px" @click="moveCategory(child.id,'up')" square padding="none" icon="arrow_drop_up"></q-btn>
                 <q-btn v-if="child._first==1" size="15px" square padding="none" icon=""></q-btn>            
                 <q-btn v-if="child._last==0" size="15px" @click="moveCategory(child.id,'down')" square padding="none" icon="arrow_drop_down"></q-btn>
                 <q-btn v-if="child._last==1" size="15px" square padding="none" icon=""></q-btn>                   
               </q-item-section>
-          <q-item-section v-if="moveable" side top class="q-pa-none" style="padding-left:0;">
+          <q-item-section v-if="useHasPermission('mv_edit_membercompetencies') && moveable" side top class="q-pa-none" style="padding-left:0;">
             <q-btn v-if="item._first==0" text-color="black" size="15px" @click="moveCategory(child.id,'category',item._prev)" square padding="none" icon="arrow_drop_up"></q-btn>
             <q-btn v-if="item._first==1" text-color="black" size="15px" square padding="none" icon=""></q-btn>
             <q-btn v-if="item._last==0" text-color="black" size="15px" @click="moveCategory(child.id,'category',item._next)" square padding="none" icon="arrow_drop_down"></q-btn>
@@ -120,12 +120,22 @@
                               {{skillgrade.label}}
                           </q-item-section>
                         </q-item>
-                        </template>
+                      </template>
+                        <q-item clickable v-close-popup @click="skill.MemberSkill_grade=9;updateSkillGrade(skill.id,9)">
+                          <q-item-section avatar>
+                            <q-avatar size="60px" icon="task" />
+                          </q-item-section>
+                          <q-item-section>
+                              aktuelle Aufgabe
+                          </q-item-section>
+                        </q-item>                        
+                        
                       </q-list>
                     </q-btn-dropdown>                      
                   </q-item-section>
                   <q-item-section avatar>
                     <q-btn icon="comment"
+                      padding="6px"
                       @click="state.dialog_note=true;form={note:skill.MemberSkill_note,skill_id:skill.id}"
                     >
 
@@ -138,7 +148,7 @@
 
                   <q-item-section>{{ skill.name }} ({{skill.levels}})</q-item-section>
 
-                  <q-item-section v-if="editable" side top class="q-pa-none" style="padding-left:0;">
+                  <q-item-section v-if="useHasPermission('mv_edit_membercompetencies') && editable" side top class="q-pa-none" style="padding-left:0;">
                     <q-btn color="primary" text-color="white" round icon="navigate_next" style="margin:5px;">
                       <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
                         <q-list dense bordered separator>
@@ -154,13 +164,13 @@
                       </q-menu>
                     </q-btn>
                   </q-item-section>
-                  <q-item-section v-if="moveable" side top class="q-pa-none" style="padding-left:0;">
+                  <q-item-section v-if="useHasPermission('mv_edit_membercompetencies') && moveable" side top class="q-pa-none" style="padding-left:0;">
                     <q-btn v-if="skill._first==0" size="15px" @click="moveSkill(skill.id,'up')" square padding="none" icon="arrow_drop_up"></q-btn>
                     <q-btn v-if="skill._first==1" size="15px" square padding="none" icon=""></q-btn>
                     <q-btn v-if="skill._last==0" size="15px" @click="moveSkill(skill.id,'down')" square padding="none" icon="arrow_drop_down"></q-btn>
                     <q-btn v-if="skill._last==1" size="15px" square padding="none" icon=""></q-btn>
                   </q-item-section>
-                  <q-item-section v-if="moveable" side top class="q-pa-none" style="padding-left:0;">
+                  <q-item-section v-if="useHasPermission('mv_edit_membercompetencies') && moveable" side top class="q-pa-none" style="padding-left:0;">
                     <q-btn v-if="child._first==0" text-color="black" size="15px" @click="moveSkill(skill.id,'category',child._prev)" square padding="none" icon="arrow_drop_up"></q-btn>
                     <q-btn v-if="child._first==1" text-color="black" size="15px" square padding="none" icon=""></q-btn>
                     <q-btn v-if="child._last==0" text-color="black" size="15px" @click="moveSkill(skill.id,'category',child._next)" square padding="none" icon="arrow_drop_down"></q-btn>
@@ -169,17 +179,28 @@
 
                 </q-item>
               <template v-for="grade in skill.grades">
-                <q-item style="padding-right:0;padding-top:0;padding-bottom:0" :inset-level="1.2">
+                <q-item style="padding-right:5px;padding-top:0;padding-bottom:0" :inset-level="1.2">
                   <q-item-section side style="width:150px;">
                     <q-item-label>{{ grade.CreatorMember_firstname }} {{grade.CreatorMember_name}}</q-item-label>
                     <q-item-label>{{ formatDate(grade.createdon) }}</q-item-label>
                   </q-item-section> 
                   <q-item-section avatar>
-                    <q-avatar size="60px" text-color="black" :icon="grade.icon" />
+                    <q-avatar v-if="grade.grade==9" size="60px" text-color="black" icon="task" />
+                    <q-avatar v-else size="60px" text-color="black" :icon="grade.icon" />
                   </q-item-section> 
-                  <q-item-section >
-                    {{ grade.note }}
+                  <q-item-section v-if="grade.grade==9" >
+                    aktuelle Aufgabe
                   </q-item-section>                   
+                  <q-item-section v-else >
+                    {{ grade.note }}
+                  </q-item-section> 
+                  <q-item-section side >
+                    <q-btn icon="delete"
+                      text-color="red" icon="delete"
+                      padding="6px"
+                      @click="removeSkillGrade(grade.id)"
+                    >
+                  </q-item-section>                                       
                 </q-item>  
               </template>
 
