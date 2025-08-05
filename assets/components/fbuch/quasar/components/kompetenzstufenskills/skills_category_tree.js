@@ -26,6 +26,7 @@ export default {
     const competency_levels = ref([]);
     const competency_levels2 = ref([]);
     const competency_levels_string = ref('');
+    const competency_levels_filter = ref('');
     const bootsnutzergruppen = ref([]); 
     form.value.selected=['B:2:3','B:1:3'];
 
@@ -48,6 +49,7 @@ export default {
         const member = props.member || {};
         data.member_id = member.id;
         data.resource_id = modx_options.resource_id;
+        data.filter = competency_levels_filter.value;
         const ajaxUrl = modx_options.rest_url + 'CompetencyLevelSkillsCategories';
         axios.get(ajaxUrl,{params:data})
         .then(function (response) {
@@ -343,6 +345,11 @@ export default {
             });            
         } 
 
+
+        function onFilterCompetencyLevels(value){
+            loadTree();
+        }
+
         function onUpdateCompetencyLevels(value){
             console.log('onUpdateCompetencyLevels',value);
             competency_levels.value=value;
@@ -385,6 +392,8 @@ export default {
             competency_levels2,
             competency_levels_string,
             onUpdateCompetencyLevels,
+            onFilterCompetencyLevels,
+            competency_levels_filter,
             props
     }
   },

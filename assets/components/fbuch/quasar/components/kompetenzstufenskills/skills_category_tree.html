@@ -1,11 +1,24 @@
 <q-card bordered flat class="full-width">
   <q-card-section class="bg-primary text-white">
     <div class="row items-center no-wrap">
-      <div class="col">
-
+      <div class="col-shrink" style=" width: 300px;" >
+      <groupselect
+        bg-color="white"
+        outlined
+        clearable
+        dense
+        :emit-value="true"
+        label="Kompetenzstufenzuordnungen filtern"
+        v-model="competency_levels_filter"
+        :options="leveloptions"
+        behavior="default"
+        @update:modelValue="onFilterCompetencyLevels"
+      /> 
       </div>
-      <div v-if="useHasPermission('mv_edit_membercompetencies') && editable" class="col-auto">
-        <q-btn color="white" text-color="black" round icon="navigate_next">
+      <div class="col">
+      </div>      
+      <div  class="col-auto">
+        <q-btn v-if="useHasPermission('mv_edit_membercompeencies') && editable" color="white" text-color="black" round icon="navigate_next">
           <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
             <q-list dense bordered separator>
               <q-item @click="state.dialog_category=true;form={id:0}" clickable v-ripple>

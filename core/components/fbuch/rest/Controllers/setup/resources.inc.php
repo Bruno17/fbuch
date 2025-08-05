@@ -220,7 +220,7 @@ $update_resources = [
      'published'=>1,
      'hidemenu'=>0,
      'resource_groups'=>['fbuch'],
-     'tvs'=>[['name'=>'scripts','value'=>'']]
+     'tvs'=>[['name'=>'scripts','value'=>'[[fbuchGetAssetsFiles? &folder=`quasar/components/kompetenzstufenskills` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]']]
     ], 
     ['pagetitle'=>'Bootsliste',
      'alias'=>'bootsliste',
@@ -262,7 +262,20 @@ $update_resources = [
      'tvs'=>[['name'=>'scripts','value'=>''],
      ['name'=>'headscripts','value'=>'<style> h2 { font-size:32px; } h3 { font-size:24px; line-height:24px; } h5 { font-size:20px; } </style>']
      ]
-    ],      
+    ],
+    ['pagetitle'=>'Kompetensstufen Skills',
+     'alias'=>'kompetenzstufenskills',
+     'context_key' => 'fbuch',
+     'uri' => 'listen/kompetenzstufenskills',
+     'uri_override' => 1,
+     'parent_uri'=>'listen/',
+     'template_name'=>'fbuch Quasar 2',
+     'hidemenu'=>0,
+     'resource_groups'=>[],
+     'tvs'=>[['name'=>'scripts','value'=>''],
+     ['name'=>'headscripts','value'=>'']
+     ]
+    ],             
     ['pagetitle'=>'Einladungslisten',
      'alias'=>'einladungslisten',
      'context_key' => 'fbuch',

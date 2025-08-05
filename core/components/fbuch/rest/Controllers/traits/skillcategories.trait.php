@@ -57,6 +57,7 @@ trait SkillcategoriesTrait {
 
     
     public function addSkills($category){
+        $filter = $this->getProperty('filter','');
         $fbuchMember = $this->getCurrentFbuchMember();
         $member_id = $this->getProperty('member_id',0);
         $user_id = $this->modx->user->get('id');
@@ -64,6 +65,9 @@ trait SkillcategoriesTrait {
         $classKey = 'fbuchCompetencyLevelSkill';
         $c = $this->modx->newQuery($classKey);
         $c->select($this->modx->getSelectColumns($classKey, $classKey, ''));
+        if (!empty($filter)){
+            $c->where(['levels:LIKE'=>'%' . $filter . '%']);
+        }
         if (!empty($member_id) && ($member_id==$fbuchMember->get('id') || $this->modx->hasPermission('mv_edit_membercompetencies'))){
             $joins = [["alias"=>"MemberSkill","classname"=>"mvMemberSkill",
                 "on"=>"MemberSkill.grade!=9 AND MemberSkill.skill_id=fbuchCompetencyLevelSkill.id AND MemberSkill.member_id=$member_id AND MemberSkill.createdby=$user_id"
