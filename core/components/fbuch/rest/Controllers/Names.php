@@ -31,20 +31,30 @@ class MyControllerNames extends BaseController {
     }
 
     public function afterRead(array &$objectArray) {
-        $allowed_fields = [
-        'id',
-        'firstname',
-        'name',
-        'member_status',
-        'competency_level',
-        'safety_instructions_date',
-        'riot_user_id',
-        'gender' 
-        ];
-        $objectArray = [];
-        foreach ($allowed_fields as $field){
-            $objectArray[$field] = $this->object->get($field);
+        if ($fbuchUser = $this->getCurrentFbuchMember()) {
+            $current_memberid = $fbuchUser->get('id');
         }
+
+        if ($this->modx->hasPermission('mv_administrate_members') || $this->object->get('id')==$current_memberid){
+
+        } else {
+            $allowed_fields = [
+                'id',
+                'firstname',
+                'name',
+                'member_status',
+                'competency_level',
+                'safety_instructions_date',
+                'riot_user_id',
+                'gender' 
+                ];
+            $objectArray = [];
+            foreach ($allowed_fields as $field){
+                $objectArray[$field] = $this->object->get($field);
+            }            
+        }
+
+        /*
         $email = $this->object->get('email');
         if (empty($email) || $this->modx->hasPermission('mv_administrate_members')){
             $objectArray['email'] = $email;
@@ -56,13 +66,20 @@ class MyControllerNames extends BaseController {
         $birthdate = $this->object->get('birthdate');
         if ($this->modx->hasPermission('mv_administrate_members')){
             $objectArray['birthdate'] = $birthdate;
-        }                           
+        } 
+        */                          
         if ($state = $this->object->getOne('State')){
             $stateArray = $state->toArray();
             foreach ($stateArray as $key => $value){
                 $objectArray['State_' . $key] = $value;
             } 
         }
+        if ($state = $this->object->getOne('CompetencyLevel')){
+            $stateArray = $state->toArray();
+            foreach ($stateArray as $key => $value){
+                $objectArray['CompetencyLevel_' . $key] = $value;
+            } 
+        }        
 
         return !$this->hasErrors();
     }

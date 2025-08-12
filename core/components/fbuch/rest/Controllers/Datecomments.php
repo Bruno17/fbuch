@@ -45,6 +45,41 @@ class MyControllerDateComments extends BaseController {
         return !$this->hasErrors();
     }
 
+    public function post() {
+        $properties = $this->getProperties();
+        $selection_state = $this->getProperty('selection_state',[]); 
+        $commenttype = $this->modx->getOption('commenttype',$selection_state,false); 
+        $objectArray = [];
+        switch ($commenttype){
+            case 'mail_only':
+                break;
+            default:
+                    /** @var xPDOObject $object */
+                    $this->object = $this->modx->newObject($this->classKey);
+                    $this->object->fromArray($properties);
+                    $beforePost = $this->beforePost();
+                    if ($beforePost !== true && $beforePost !== null) {
+                        return $this->failure($beforePost === false ? $this->errorMessage : $beforePost);
+                    }
+                    if (!$this->object->{$this->postMethod}()) {
+                        $this->setObjectErrors();
+                        if ($this->hasErrors()) {
+                            return $this->failure();
+                        } else {
+                            return $this->failure($this->modx->lexicon('rest.err_class_save',array(
+                                'class_key' => $this->classKey,
+                            )));
+                        }
+
+                    }
+                    $objectArray = $this->object->toArray();
+                break;    
+        }
+
+        $this->afterPost($objectArray);
+        return $this->success('',$objectArray);
+    }
+
     public function afterPost(array &$objectArray) {
         $selection_state = $this->getProperty('selection_state',[]); 
         $commenttype = $this->modx->getOption('commenttype',$selection_state,false); 

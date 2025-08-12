@@ -234,6 +234,7 @@ export default {
 
             axios.post(ajaxUrl,data)
             .then(function (response) {
+                 form.value.note = '';
                  loadTree();
             })
             .catch(function (error) {

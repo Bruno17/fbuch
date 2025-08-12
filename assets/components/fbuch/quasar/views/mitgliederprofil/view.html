@@ -1,0 +1,56 @@
+<div class="q-mx-lg">
+<component is="style">
+    h2 {
+        font-size:32px;
+    }
+    h3 {
+        font-size:24px;
+        line-height:24px;
+    }
+    h5 {
+        font-size:20px;
+    }
+
+</component>
+
+<h2 class="q-mt-sm q-mb-sm text-weight-bold" >[[*pagetitle]]</h2>
+
+<q-markup-table class="q-mb-md">
+    <tbody>
+    <tr><td style="width: 150px;">Vorname:</td><td>{{fbuchuser.firstname}}</td></tr>
+    <tr><td>Name:</td><td>{{fbuchuser.name}}</td></tr>
+    <tr><td>Mitgliederstatus:</td><td>{{fbuchuser.member_status}}</td></tr>
+    <tr><td>Email:</td><td>{{fbuchuser.email}}</td></tr>
+    <tr><td>Element ID:</td><td>{{fbuchuser.riot_user_id}}</td></tr>
+    <tr><td>letzte Sicherheitsunterweisung:</td><td>{{ formatDate(fbuchuser.safety_instructions_date) }}</td></tr>
+    
+    <tr><td>Kompetenzstufe:</td><td>{{fbuchuser.CompetencyLevel_name}} ({{fbuchuser.competency_level}})</td></tr>
+    </tbody>
+</q-markup-table>
+
+    <q-btn-dropdown color="primary" label="Aktionen" 
+    menu-self="top left"
+    menu-anchor="bottom left">
+      <q-list>
+        <q-item clickable v-close-popup :href="'listen/namen/#/skills/'+fbuchuser.id">
+          <q-item-section>
+            <q-item-label>Meine Kompetenz Selbst- und Trainereinschätzung</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <q-item clickable v-close-popup @click="onItemClick">
+          <q-item-section>
+            <q-item-label>Meine Fahrten</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <q-item clickable v-close-popup @click="onItemClick">
+          <q-item-section>
+            <q-item-label>Regattateilnahmen und Siege</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </q-btn-dropdown>
+
+
+</div>

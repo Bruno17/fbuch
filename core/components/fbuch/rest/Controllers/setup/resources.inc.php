@@ -263,7 +263,7 @@ $update_resources = [
      ['name'=>'headscripts','value'=>'<style> h2 { font-size:32px; } h3 { font-size:24px; line-height:24px; } h5 { font-size:20px; } </style>']
      ]
     ],
-    ['pagetitle'=>'Kompetensstufen Skills',
+    ['pagetitle'=>'Kompetenzstufen Skills',
      'alias'=>'kompetenzstufenskills',
      'context_key' => 'fbuch',
      'uri' => 'listen/kompetenzstufenskills',
@@ -289,6 +289,18 @@ $update_resources = [
      'resource_groups'=>['fbuch_instructor'],
      'tvs'=>[['name'=>'scripts','value'=>'']]
     ],
+    ['pagetitle'=>'Mitgliederprofil',
+     'alias'=>'mitgliederprofil',
+     'context_key' => 'fbuch',
+     'uri' => 'listen/namen/mitgliederprofil',
+     'uri_override' => 1,
+     'parent_uri'=>'listen/namen',
+     'template_name'=>'fbuch Quasar 2',
+     'content'=>'',
+     'hidemenu'=>1,
+     'resource_groups'=>['fbuch'],
+     'tvs'=>[['name'=>'scripts','value'=>'']]
+    ],    
     ['pagetitle'=>'Bootsschäden',
      'alias'=>'bootsschaeden',
      'context_key' => 'fbuch',

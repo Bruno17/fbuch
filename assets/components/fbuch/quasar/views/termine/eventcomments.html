@@ -67,6 +67,11 @@
                 </div>
             </template>
             <q-card-section class="q-gutter-sm">
+                <div v-if="selectionState.commenttype=='mail_only'" >
+                    Diese Nachricht geht nur als Mail an die ausgewählten Empfänger. 
+                    Für alle Anderen bleibt diese Nachricht unsichtbar.
+                    <br>
+                </div>                    
                 <div>
                 Die Mail - Funktion bitte nur in dringenden Bedarfsfällen verwenden und nachfolgend wirklich nur die benötigten Empfänger auswählen!
                 </div>
