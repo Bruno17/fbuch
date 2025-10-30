@@ -116,6 +116,10 @@ class QueryHelper {
         $query .= ' order by km desc ';
 
         return $query;
-    }    
+    } 
+    
+    public function addUnused($list,$all_ids){
+        return $list;
+    }
 
 }

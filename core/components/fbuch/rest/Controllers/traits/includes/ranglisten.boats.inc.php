@@ -62,5 +62,35 @@ class QueryHelper {
         $query .= ' order by km desc ';
 
         return $query;
+    } 
+    
+    public function addUnused($list,$all_ids){
+        //print_r($all_ids);
+        $gattung = $this->controller->getProperty('gattung');
+        $gattung_ids = [];
+        if ($gattungen = $this->modx->getCollection('fbuchBootsGattung',['name'=>$gattung])){
+            foreach ($gattungen as $gattung_o){
+                $gattung_ids[] = $gattung_o->get('id');    
+            }
+            
+        }
+
+        $c = $this->modx->newQuery('fbuchBoot');
+        $c->where(['id:NOT IN'=>$all_ids,'gattung_id:IN'=>$gattung_ids,'deleted'=>0]);
+        $c->sortBy('Name');
+        //$c->prepare();echo $c->toSql();
+        if ($collection = $this->modx->getCollection('fbuchBoot',$c)){
+            foreach ($collection as $object){
+                $item = [
+                    'id'=>$object->get('id'),
+                    'Name'=>$object->get('name'),   
+                    'km'=>0,
+                    'Fahrten'=>0     
+                ];
+                $list[] = $item;
+            }
+        }
+
+        return $list;
     }    
 }

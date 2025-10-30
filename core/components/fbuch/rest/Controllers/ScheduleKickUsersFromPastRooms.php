@@ -36,9 +36,9 @@ class MyControllerScheduleKickUsersFromPastRooms extends fbuchRestController {
                 echo '<pre>' . print_r($object->toArray(),1) . '</pre>';
                 $count++;
                 $scriptProperties = array('date_id' => $object->get('id'));
-                $reference = 'web/schedule/kickusersfrompastroom';
-                $modx->fbuch->createSchedulerTask('matrixorgclient', array('snippet' => 'web/schedule/kickusersfrompastroom'));
-                $modx->fbuch->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties,$minutes);
+                $reference = 'web/mocschedule/kickusersfrompastroom';
+                $modx->fbuch->createSchedulerTask('fbuch', array('snippet' => 'web/mocschedule/kickusersfrompastroom'));
+                $modx->fbuch->createSchedulerTaskRun($reference, 'fbuch', $scriptProperties,$minutes);
                 
                 if ($count >= $perminute){
                     $minutes++;

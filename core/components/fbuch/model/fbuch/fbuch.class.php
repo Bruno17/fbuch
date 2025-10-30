@@ -542,9 +542,9 @@ class Fbuch {
                 'name_id' => $member_id
             ];
             //$this->modx->runSnippet('moc_hooks', $scriptProperties);
-            $reference = 'web/schedule/invite';
-            $this->createSchedulerTask('matrixorgclient', array('snippet' => $reference));
-            $this->createSchedulerTaskRun($reference, 'matrixorgclient', $properties);
+            $reference = 'web/mocschedule/invite';
+            $this->createSchedulerTask('fbuch', array('snippet' => $reference));
+            $this->createSchedulerTaskRun($reference, 'fbuch', $properties);
 
             //$this->modx->runSnippet('moc_hooks', $properties);
             
@@ -575,9 +575,9 @@ class Fbuch {
                 'user_id' => $this->modx->user->get('id')
             );        
     
-            $reference = 'web/schedule/sendcomment';
-            $this->createSchedulerTask('matrixorgclient', array('snippet' => $reference));
-            $this->createSchedulerTaskRun($reference, 'matrixorgclient', $properties);            
+            $reference = 'web/mocschedule/sendcomment';
+            $this->createSchedulerTask('fbuch', array('snippet' => $reference));
+            $this->createSchedulerTaskRun($reference, 'fbuch', $properties);            
         }
     }
 
@@ -671,14 +671,14 @@ class Fbuch {
         if (!empty($element_invite)) {
 
             $scriptProperties = array('action' => 'createDateRoom', 'date_id' => $date_o->get('id'));
-            $reference = 'web/schedule/createdateroom';
-            $this->createSchedulerTask('matrixorgclient', array('snippet' => 'web/schedule/createdateroom'));
-            $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties);
+            $reference = 'web/mocschedule/createdateroom';
+            $this->createSchedulerTask('fbuch', array('snippet' => 'web/mocschedule/createdateroom'));
+            $this->createSchedulerTaskRun($reference, 'fbuch', $scriptProperties);
 
             /*
             $scriptProperties = array('action' => 'addRoomToGroup', 'date_id' => $date_o->get('id'));
             $reference = 'web/schedule/addroomtogroup';
-            $this->createSchedulerTask('matrixorgclient', array('snippet' => 'web/schedule/addroomtogroup'));
+            $this->createSchedulerTask('matrixorgclient', array('snippet' => 'addroomtogroup'));
             $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties);
             */
             //$this->modx->runSnippet('moc_hooks', $scriptProperties);
@@ -701,9 +701,9 @@ class Fbuch {
                 $count++;
                 //echo '<pre>' . print_r($object->toArray(),1) . '</pre>';
                 $scriptProperties = array('date_id' => $object->get('id'));
-                $reference = 'web/schedule/checkcomingorpastspace';
-                $this->createSchedulerTask('matrixorgclient', array('snippet' => 'web/schedule/checkcomingorpastspace'));
-                $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties, $minutes);  
+                $reference = 'web/mocschedule/checkcomingorpastspace';
+                $this->createSchedulerTask('fbuch', array('snippet' => 'web/mocschedule/checkcomingorpastspace'));
+                $this->createSchedulerTaskRun($reference, 'fbuch', $scriptProperties, $minutes);  
                 if ($count >= $perminute){
                     $minutes++;
                     $count=0;
@@ -721,9 +721,9 @@ class Fbuch {
                 $count++;
                 //echo '<pre>' . print_r($object->toArray(),1) . '</pre>';
                 $scriptProperties = array('date_id' => $object->get('id'));
-                $reference = 'web/schedule/checkcomingorpastspace';
-                $this->createSchedulerTask('matrixorgclient', array('snippet' => 'web/schedule/checkcomingorpastspace'));
-                $this->createSchedulerTaskRun($reference, 'matrixorgclient', $scriptProperties, $minutes);  
+                $reference = 'web/mocschedule/checkcomingorpastspace';
+                $this->createSchedulerTask('fbuch', array('snippet' => 'web/mocschedule/checkcomingorpastspace'));
+                $this->createSchedulerTaskRun($reference, 'fbuch', $scriptProperties, $minutes);  
                 if ($count >= $perminute){
                     $minutes++;
                     $count=0;
@@ -876,7 +876,7 @@ class Fbuch {
 
     public function createSchedulerTaskRun($reference, $namespace, $properties = array(),$minutes=1) {
         $modx = &$this->modx;
-
+        $minutes = '0';
         // Load the Scheduler service class
         $path = $modx->getOption('scheduler.core_path', null, $modx->getOption('core_path') . 'components/scheduler/');
         $scheduler = $modx->getService('scheduler', 'Scheduler', $path . 'model/scheduler/');

@@ -1202,7 +1202,7 @@
       "aftersave":"mv_member_aftersave",
       "aftergetfields":"mv_member_aftergetfields"
     },
-    "cmpmaincaption":"Mitgliederverwaltung",
+    "cmpmaincaption":"Mitgliederverwaltung - ehemalige Mitglieder bitte nicht l\u00f6schen!",
     "cmptabcaption":"Mitglieder",
     "cmptabdescription":"Mitegliederverwaltung",
     "cmptabcontroller":"",
@@ -1329,7 +1329,7 @@
   "createdby":1,
   "createdon":"2015-02-25 22:37:51",
   "editedby":1,
-  "editedon":"2025-01-17 13:37:00",
+  "editedon":"2025-10-30 08:16:06",
   "deleted":0,
   "deletedon":null,
   "deletedby":0,

@@ -61,6 +61,7 @@ trait RanglistenTrait {
         $modx = & $this->modx;
         $gattung = $this->getProperty('gattung');
         $querytype = $this->getProperty('querytype','members');
+        $returntype = $this->getProperty('returntype');
 
         include ('includes/ranglisten.' . $querytype . '.inc.php');
         $helper = new QueryHelper($this);
@@ -79,8 +80,10 @@ trait RanglistenTrait {
 
         $results = $modx->query($query);
         $list = [];
+        $all_ids = [];
         if ($results) {
             $i = 0;
+            
             while ($r = $results->fetch(PDO::FETCH_ASSOC)) {
                 $i++;
                 $r['Rang'] = $i;
@@ -88,8 +91,14 @@ trait RanglistenTrait {
                 if (isset($r['km'])){
                     $this->km_sum += (float) $r['km'];    
                 }
+                $all_ids[] = $r['id'];
             }
+            
         }
+        if (empty($returntype)){
+            $list = $helper->addUnused($list,$all_ids);    
+        }
+        
         return $list;
     }    
 

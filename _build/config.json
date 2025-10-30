@@ -137,6 +137,10 @@
           "rank":0
         },
         {
+          "name":"moc",
+          "rank":0
+        },        
+        {
           "name":"mv_export",
           "rank":0
         },
@@ -410,7 +414,32 @@
         {
           "name":"fbuchGetViewDirectory",
           "file":"fbuchgetviewdirectory.snippet.php"
-        }             
+        },
+        {
+          "name":"moc_hooks",
+          "file":"moc_hooks.snippet.php",
+          "category":"moc"
+        },
+        {
+          "name":"moc_getNotifications",
+          "file":"moc_getnotifications.snippet.php",
+          "category":"moc"
+        },
+        {
+          "name":"moc_test",
+          "file":"moc_test.snippet.php",
+          "category":"moc"
+        },
+        {
+          "name":"moc_collectComments",
+          "file":"moc_collectcomments.snippet.php",
+          "category":"moc"
+        },
+        {
+          "name":"moc_sendtest",
+          "file":"moc_sendtest.snippet.php",
+          "category":"moc"
+        }                     
       ],
       "chunks":[
         {

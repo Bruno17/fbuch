@@ -43,6 +43,8 @@ $xpdo_meta_map['fbuchBoot']= array (
     'editedon' => NULL,
     'deleted' => 0,
     'deletedon' => NULL,
+    'deactivated' => 0,
+    'deactivatedon' => NULL,
     'deletedby' => 0,
   ),
   'fieldMeta' => 
@@ -305,6 +307,21 @@ $xpdo_meta_map['fbuchBoot']= array (
       'default' => 0,
     ),
     'deletedon' => 
+    array (
+      'dbtype' => 'datetime',
+      'phptype' => 'datetime',
+      'null' => true,
+    ),
+    'deactivated' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+    ),
+    'deactivatedon' => 
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
