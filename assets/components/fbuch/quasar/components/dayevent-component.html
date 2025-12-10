@@ -103,9 +103,6 @@
                         <q-item v-if="name.new_fahrt_id">
                             In Fahrten übernommen:
                         </q-item>
-                        <q-item v-if="name.Fahrt_id < 1 && name.new_registeredby">
-                            Anmeldungen von {{name.RegisteredbyMember_firstname}} {{name.RegisteredbyMember_name}}:
-                        </q-item>
                         <q-item tag="label" v-ripple class="q-px-sm">
                             <q-item-section side :style="'background-color:#'+name.CompetencyLevel_color+';margin:-8px 0px -8px -8px;padding-right: 9px;'">
                        
@@ -117,6 +114,9 @@
                                 {{name.idx}}
                             </q-item-section>
                             <q-item-section>
+                                <q-item-label v-if="name.RegisteredbyMember_name">
+                                    Anmeldung von {{name.RegisteredbyMember_firstname}} {{name.RegisteredbyMember_name}}:
+                                </q-item-label>                                
                                 <q-item-label>{{name.createdon_formatted}}</q-item-label>
                                 <q-item-label v-if="name.guestname=='' && name.Member_member_status=='Mitglied' ">
                                     {{name.Member_firstname}} {{name.Member_name}}

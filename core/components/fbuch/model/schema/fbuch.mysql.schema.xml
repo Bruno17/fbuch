@@ -179,8 +179,6 @@
         <field key="editedon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="deleted" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="deletedon" dbtype="datetime" phptype="datetime" null="true" />
-        <field key="deactivated" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
-        <field key="deactivatedon" dbtype="datetime" phptype="datetime" null="true" />        
         <field key="deletedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <aggregate alias="Fahrten" class="fbuchFahrt" local="id" foreign="boot_id" cardinality="many" owner="local" />
         <aggregate alias="Gattung" class="fbuchBootsGattung" local="gattung" foreign="link_key" cardinality="one" owner="local" />

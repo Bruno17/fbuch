@@ -250,6 +250,7 @@ class MyControllerDates extends BaseController {
                 $row['member_status'] = $this->modx->getOption('Member_member_status',$name,'');
                 $row['label'] = $row['name'] . ' ' . $row['firstname'];
                 $row['cox'] = $this->modx->getOption('cox',$name,0);
+                $row['idx'] = $this->modx->getOption('idx',$name,0);
                 $row['obmann'] = $this->modx->getOption('obmann',$name,0);
                 $row['guestname'] = $this->modx->getOption('guestname',$name,0);
                 $row['guestemail'] = $this->modx->getOption('guestemail',$name,0);
@@ -301,12 +302,18 @@ class MyControllerDates extends BaseController {
             {"alias":"Fahrtname","selectfields":"id,fahrt_id"},
             {"alias":"CompetencyLevel","classname":"fbuchCompetencyLevel","on":"CompetencyLevel.level=Member.competency_level"},
             {"alias":"Fahrt","classname":"fbuchFahrt","selectfields":"id","on":"Fahrt.id=Fahrtname.fahrt_id"}]';
-        $properties['sortConfig'] = '[{"sortby":"Fahrt_deleted","sortdir":"DESC"},{"sortby":"Fahrtname.fahrt_id"},{"sortby":"registeredby_member"},{"sortby":"createdon"}]';
+        //$properties['sortConfig'] = '[{"sortby":"Fahrt_deleted","sortdir":"DESC"},{"sortby":"Fahrtname.fahrt_id"},{"sortby":"registeredby_member"},{"sortby":"createdon"}]';
+        $properties['sortConfig'] = '[{"sortby":"Fahrt_deleted","sortdir":"DESC"},{"sortby":"Fahrtname.fahrt_id"},{"sortby":"createdon"}]';
         $properties['groupby'] = 'id';
         $properties['debug'] = 0;
         
         switch ($returntype) {
             case 'selfregistered_names':    
+                $properties['where'] = '{"date_id":"' . $id . '"}';
+                $c = $this->modx->migx->prepareQuery($this->modx,$properties);
+                $rows = $this->modx->migx->getCollection($c);
+                break;            
+            case 'selfregistered_namesx':    
                 $properties['where'] = '{"registeredby_member":"' . $member_id . '","date_id":"' . $id . '"}';
                 $c = $this->modx->migx->prepareQuery($this->modx,$properties);
                 $selfrows = $this->modx->migx->getCollection($c);

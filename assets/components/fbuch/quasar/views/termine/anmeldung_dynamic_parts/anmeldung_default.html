@@ -1,5 +1,14 @@
 <template v-if="entry.Type_registrationpage_text==''">
 <div class="col-lg-4 col-md-6 col-xs-12 q-gutter-md ">
+<div>{{entry.names.length}} Anmeldungen
+    <template v-if="entry.max_reservations>0"> von max. {{entry.max_reservations}}
+        <template v-if="entry.names.length>=entry.max_reservations">
+            <br>Weitere Anmeldungen gehen auf Warteliste
+            <br>rot hinterlegte Einträge sind aktuell auf Warteliste
+        </template>          
+    </template>
+</div>
+  
 <template v-if="currentUser.State_can_be_invited == 1">
     <q-btn @click="addMyself" color="positive" label="Selbst zusagen"></q-btn>
     <q-btn @click="RemoveMyself" color="negative" label="absagen"></q-btn>
@@ -56,7 +65,8 @@
 
 <q-card flat bordered class="q-mb-md">
     <q-card-section class="bg-primary text-white">
-        <div class="text-h6">Anmeldungen</div>
+        <div class="text-h6">{{entry.names.length}} Anmeldungen </div>
+        
       </q-card-section>                                
         <q-list bordered separator>
             <template v-if="entry.names && entry.names.length == 0">
@@ -67,15 +77,19 @@
                 </q-item>
             </template>
             <template v-for="(name,index) in entry.names">
-                <q-item>
+                <q-item :class="entry.max_reservations>0 && name.idx>entry.max_reservations ? 'bg-red-2' : ''">
+                    <q-item-section side style="margin-left:8px;">
+                        {{name.idx}}
+                    </q-item-section>                    
                     <q-item-section v-if="name.member_status == 'Mitglied'">
                         <q-item-label>{{name.firstname}} {{name.name}}</q-item-label>
                         <q-item-label>{{name.createdon_formatted}}</q-item-label>
                     </q-item-section>
                     <q-item-section v-if="name.member_status != 'Mitglied'">
-                        <template v-if="name.member_status != 'Gasteintrag'">{{name.firstname}} {{name.name}}</template>
-                        <template v-if="name.member_status == 'Gasteintrag'">{{name.guestname}}</template>
-                        <br>({{name.member_status}})
+                        <template v-if="name.member_status != 'Gasteintrag'"><q-item-label>{{name.firstname}} {{name.name}}</q-item-label></template>
+                        <template v-if="name.member_status == 'Gasteintrag'"><q-item-label>{{name.guestname}}</q-item-label></template>
+                        <q-item-label>({{name.member_status}})</q-item-label>
+                        <q-item-label>{{name.createdon_formatted}}</q-item-label>
                     </q-item-section>
                     <q-item-section v-if="name.cox==1" side class="q-pa-none" style="padding-left:0;">
                         <q-avatar>
