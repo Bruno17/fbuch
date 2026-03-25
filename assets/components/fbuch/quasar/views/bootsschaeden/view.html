@@ -3,6 +3,14 @@
 
     <q-btn class="" label="Materialschaden melden" color="primary"
     :href="'listen/bootsliste/'"></q-btn>
+    <q-space />
+    <q-btn
+        color="primary"
+        icon="archive"
+        title="CSV Export"
+        no-caps
+        @click="exportCsv"
+    />            
     
 </div>
 

@@ -8,10 +8,12 @@ export default {
     },
     setup() {
 
-        const { useQuasar,LocalStorage,SessionStorage } = Quasar; 
+        const { exportFile,useQuasar,LocalStorage,SessionStorage } = Quasar; 
         const { onMounted, ref } = Vue;
         const comments = ref([]);
         const state = ref({});
+        const export_items = ref([]);
+        const export_columns = ref(['formattedDate','Boot_name','comment','name']);
 
         onMounted(() => {
             SessionStorage.set('last_href', window.location.href);
@@ -21,10 +23,12 @@ export default {
 
         function prepareComments(comments) {
             const preparedEvents = [];
+            export_items.value = [];
             comments.forEach((comment, id) => {
                 comment['formattedDate'] = Quasar.date.formatDate(comment.createdon, 'DD.MM.YYYY');
                 comment['formattedDoneon'] = Quasar.date.formatDate(comment.doneon, 'DD.MM.YYYY');
                 preparedEvents.push(comment);
+                export_items.value.push(comment);
             })
             return preparedEvents;
         }        
@@ -47,9 +51,29 @@ export default {
             });            
         }
 
+        function exportCsv () {
+            
+            const content = 
+            export_items.value.map(row => export_columns.value.map(col => '"'+row[col]+'"').join(',')).join('\r\n');
+            const status = exportFile(
+              'Bootsschaeden.csv',
+              content,
+              'text/csv'
+            );
+    
+            if (status !== true) {
+              $q.notify({
+                message: 'Browser denied file download...',
+                color: 'negative',
+                icon: 'warning'
+              })
+            }
+          }             
+
         return {
             comments,
             state,
+            exportCsv,
             useHasPermission 
         }
     },
