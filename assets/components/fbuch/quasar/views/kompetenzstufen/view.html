@@ -49,8 +49,7 @@
     </tr>
     <tr>
     <td class="vertical-top" rowspan="2" style="border-right:1px solid;">
-        {{level.description}}
-        <br>
+        <p v-html="nl2br(level.description)"></p>        
         <q-btn 
         v-if="level.skills && Object.keys(level.skills)[0] "
         outline icon-right="arrow_outward" label="Vorraussetzungen" @click="levels[index].dialog = true" />

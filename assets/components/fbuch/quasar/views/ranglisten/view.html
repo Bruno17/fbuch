@@ -1,3 +1,13 @@
+<component is="style">
+  .competency-color {
+    width: 10px;
+    height: 32px;
+    display: inline-block;
+    margin-bottom: -12px;      
+  }
+ 
+</component>
+
 <div class="q-pa-md row q-col-gutter-sm">
 
   <datepicker label="Datum ab" class="col-md-3 col-sm-3 col-xs-12" v-model="state.start_date"  
@@ -28,6 +38,11 @@
       :pagination="initial_pagination" flat bordered dense>
       <template v-slot:body="props">
         <q-tr :props="props">
+          <q-td key="competency_level" :props="props">
+            <div class="competency-color" :style="'background-color:#'+props.row.color">
+            </div> 
+            {{ props.row.competency_level }}
+          </q-td>          
           <q-td key="Rang" :props="props">
             {{ props.row.Rang }}
           </q-td>

@@ -25,6 +25,7 @@ export default {
         const current_member = ref({});
         const columns = [
             { name: 'id',field: 'id'},
+            { name: 'competency_level', label: '', field: 'competency_level', sortable: true, style:'width: 10px;' },
             { name: 'Rang', label: 'Rang', field: 'Rang', sortable: true, style:'width: 20px;' },
             { name: 'Nachname', label: 'Nachname', field: 'Nachname', sortable: true },
             { name: 'Vorname', label: 'Vorname', field: 'Vorname', sortable: true },
@@ -33,7 +34,7 @@ export default {
             { name: 'Jahrgang', label: 'Jahrgang', field: 'Jahrgang', sortable: false },
             { name: 'Aktionen', label: 'Aktionen', field: 'Aktionen', sortable: false }
         ]
-        const visible_columns = ref(['Rang','Nachname','Vorname','km','Fahrten','Aktionen']);
+        const visible_columns = ref(['competency_level','Rang','Nachname','Vorname','km','Fahrten','Aktionen']);
         const export_columns = ref(['Rang','Nachname','Vorname','km','Fahrten']);
 
         const initial_pagination = {
@@ -93,7 +94,7 @@ export default {
                 rangliste.value = response.data.results;
                 km_sum.value = response.data.km_sum;
                 if (useHasPermission('fbuch_view_birthdate')){
-                    visible_columns.value = ['Rang','Nachname','Vorname','km','Fahrten','Jahrgang','Aktionen'];
+                    visible_columns.value = ['competency_level','Rang','Nachname','Vorname','km','Fahrten','Jahrgang','Aktionen'];
                     export_columns.value = ['Rang','Nachname','Vorname','km','Fahrten','Jahrgang'];
                 }                
             })

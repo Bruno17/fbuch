@@ -23,7 +23,7 @@ class QueryHelper {
                 if ($group == 'Gasteintrag'){
                     $query = 'select f8.guestname as id, f8.guestname as Nachname ,sum(f4.km) as km,count(f8.guestname)as Fahrten ';
                 } else {
-                    $query = 'select n3.id as id, n3.name as Nachname,n3.firstname as Vorname,sum(f4.km) as km,count(n3.name) as Fahrten ';
+                    $query = 'select n3.id as id, n3.name as Nachname,n3.firstname as Vorname,n3.competency_level,c.color,sum(f4.km) as km,count(n3.name) as Fahrten ';
                     if ($this->modx->hasPermission('fbuch_view_birthdate')){
                         $query .= ', year(n3.birthdate) as Jahrgang ';    
                     }                    
@@ -39,11 +39,14 @@ class QueryHelper {
         $group = $this->getProperty('group');
         $query .= 'modx_fbuch_fahrten f4,';
         if ($group != 'Gasteintrag'){
-            $query .= 'modx_mv_members n3,';
+            $query .= '
+            modx_mv_members n3 
+            left join modx_fbuch_competency_levels c on c.level=n3.competency_level,';
         } 
         $query .='
         modx_fbuch_boote b1
-        left join modx_fbuch_bootsgattungen g on b1.gattung_id=g.id        
+        left join modx_fbuch_bootsgattungen g on b1.gattung_id=g.id 
+         
         ';
         return $query;
     } 
