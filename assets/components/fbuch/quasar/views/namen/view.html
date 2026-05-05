@@ -57,7 +57,10 @@
                   </q-item>
                   <q-item v-if="useHasPermission('mv_edit_membercompetencies')||modx_options.current_member_id==props.row.id" clickable :href="'listen/namen/#/skills/'+props.row.id">
                     <q-item-section >Kompetenzstufenskills bearbeiten</q-item-section>
-                  </q-item>                  
+                  </q-item>
+                  <q-item clickable>
+                    <q-item-section @click="showFahrten(props.row)">Fahrten anzeigen</q-item-section>
+                  </q-item>                                    
                 </q-list>
               </q-menu>
             </q-btn>
@@ -67,4 +70,6 @@
     </q-table>
   </div>
 </div>
+
+<fahrten_listview :member="current_member" :state="state"></fahrten_listview>
 

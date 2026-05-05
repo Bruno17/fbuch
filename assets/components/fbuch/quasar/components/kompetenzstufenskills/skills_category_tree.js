@@ -23,6 +23,8 @@ export default {
     const levels = ref([]);
     const skillgrades = ref([]);
     const leveloptions = ref([]);
+    const leveloptionvalues = ref([]);
+    const current_leveloptionvalue = ref({});
     const competency_levels = ref([]);
     const competency_levels2 = ref([]);
     const competency_levels_string = ref('');
@@ -87,6 +89,7 @@ export default {
         function onloadCompetencyLevels(options){
             let new_options = [];
             let option = {};
+            leveloptionvalues.value = {};
             for (let i = 0;i < options.length;i++){
                 for (let ii = 0;ii < options[i].importances.length;ii++){
                     option = {};
@@ -94,6 +97,7 @@ export default {
                     option.label = options[i].importances[ii].label;
                     option.value = options[i].level + ':' + options[i].importances[ii].value; 
                     new_options.push(option); 
+                    leveloptionvalues.value[option.value] = {name:option.group,importance:options[i].importances[ii].label}
 
                     /*
                     new_options = [];
@@ -348,6 +352,8 @@ export default {
 
 
         function onFilterCompetencyLevels(value){
+            console.log(leveloptionvalues.value);
+            current_leveloptionvalue.value = leveloptionvalues.value[value] || {};
             loadTree();
         }
 
@@ -361,8 +367,8 @@ export default {
             console.log('onPasteCompetencyLevel',value); 
             competency_levels.value=value.split(','); 
             competency_levels2.value=value.split(','); 
-
         }
+        
         
 
 
@@ -395,6 +401,7 @@ export default {
             onUpdateCompetencyLevels,
             onFilterCompetencyLevels,
             competency_levels_filter,
+            current_leveloptionvalue,
             props
     }
   },

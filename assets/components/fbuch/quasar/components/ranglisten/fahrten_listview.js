@@ -1,5 +1,7 @@
 import entry from '../../components/fahrtenbuch/entry.js';
 import { useLoadPermissions,useHasPermission } from "../../composables/helpers.js";
+import monthrange_select from '../../components/monthrange_select.js';
+import datepicker from '../../components/datepicker_simple.js';
 
 export default {
 
@@ -8,7 +10,9 @@ export default {
         member: {}
     },
     components: {
-        entry: entry
+        entry: entry,
+        datepicker: datepicker,
+        monthrange_select: monthrange_select     
     },
 
     setup(props) {
@@ -16,11 +20,33 @@ export default {
         const {onMounted, ref, watch } = Vue;
         const state = props.state;
         const member = props.member;
-        const fahrten = ref({});
+        const fahrten = ref([]);
 
         onMounted(() => {
             useLoadPermissions();
+            initFilterselects();
         }) 
+
+        function initFilterselects(){
+            const newDate = new Date(); 
+            state.start_date = Quasar.date.formatDate(newDate, 'YYYY-01-01');
+            state.end_date = Quasar.date.formatDate(newDate, 'YYYY-12-31');
+            state.monthrange = { "value": 12, "label": "1 Jahr" }
+        } 
+        
+        function onSelectStartdate(){
+            const monthrange = state.monthrange.value;
+            let end_date = Quasar.date.addToDate(state.start_date,{month:monthrange});
+            end_date = Quasar.date.subtractFromDate(end_date,{day:1});
+            state.end_date = Quasar.date.formatDate(end_date,'YYYY-MM-DD');
+            /*
+            const days_total = Quasar.date.getDateDiff(state.value.end_date, state.value.start_date , 'days'); 
+            if (days_total < 0) {
+                state.value.end_date = state.value.start_date;    
+            }
+            */
+            loadFahrten();
+        }        
 
         function prepareEvents(events) {
             const preparedEvents = [];
@@ -64,7 +90,8 @@ export default {
             member,
             fahrten,
             loadFahrten,
-            useHasPermission
+            useHasPermission,
+            onSelectStartdate
         }
     },
     template: '#fahrten_listview'

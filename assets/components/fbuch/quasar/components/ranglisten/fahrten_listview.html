@@ -16,6 +16,19 @@ maximized
   </q-header>
 
   <q-page-container >
+    <div v-if="state.showfilter" class="q-pa-md row q-col-gutter-sm">
+
+      <datepicker label="Datum ab" class="col-md-3 col-sm-3 col-xs-12" v-model="state.start_date"  
+      @update:modelValue="onSelectStartdate">
+      </datepicker>
+
+      <monthrange_select label="Zeitraum" class="col-md-3 col-sm-3 col-xs-12" v-model="state.monthrange"
+      @update:modelValue="onSelectStartdate"
+      >
+      </monthrange_select>  
+
+    </div>  
+
     <div class="q-pa-sm q-gutter-y-sm">
     <template v-for="entry in fahrten">
         <entry section="finished" :entry="entry" />

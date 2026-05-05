@@ -35,7 +35,7 @@ export default {
         <q-expansion-item v-model="item._active_parent" group="somegroup" :label="item.menutitle" >
           <q-list bordered separator>
             <template v-for="child in item.children">
-              <q-item :active="child._current" clickable v-ripple tag="a" :href="child.link" :inset-level="0.2">
+              <q-item :active="child._current" clickable v-ripple tag="a" v-bind="child.attributes" :href="child.link" :inset-level="0.2">
                 <q-item-section>{{ child.menutitle }}</q-item-section>
               </q-item>
             </template>

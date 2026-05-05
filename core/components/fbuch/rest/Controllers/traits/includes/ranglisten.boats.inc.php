@@ -51,7 +51,13 @@ class QueryHelper {
     
     public function addGroupQuery($query){
         return $query;
-    }  
+    } 
+    
+    public function addGattungQuery($query){
+        $gattung = $this->getProperty('gattung');
+        $query .= ' AND g.name = "' . $gattung . '" ';  
+        return $query;      
+    }    
     
     public function addGroupBy($query){
         $returntype = $this->getProperty('returntype');

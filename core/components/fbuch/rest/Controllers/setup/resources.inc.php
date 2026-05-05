@@ -220,7 +220,11 @@ $update_resources = [
      'published'=>1,
      'hidemenu'=>0,
      'resource_groups'=>['fbuch'],
-     'tvs'=>[['name'=>'scripts','value'=>'[[fbuchGetAssetsFiles? &folder=`quasar/components/kompetenzstufenskills` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]']]
+     'tvs'=>[['name'=>'scripts','value'=>'
+     [[fbuchGetAssetsFiles? &folder=`quasar/components/kompetenzstufenskills` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]
+     [[fbuchGetAssetsFiles? &folder=`quasar/components/ranglisten` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]
+     [[fbuchGetAssetsFiles? &folder=`quasar/components/fahrtenbuch` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]] 
+     ']]
     ], 
     ['pagetitle'=>'Bootsliste',
      'alias'=>'bootsliste',

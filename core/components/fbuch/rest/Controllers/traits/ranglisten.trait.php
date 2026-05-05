@@ -59,7 +59,6 @@ trait RanglistenTrait {
     
     public function getRangliste(){
         $modx = & $this->modx;
-        $gattung = $this->getProperty('gattung');
         $querytype = $this->getProperty('querytype','members');
         $returntype = $this->getProperty('returntype');
 
@@ -72,8 +71,9 @@ trait RanglistenTrait {
 
         $query = $this->addTimeRangeQuery($query);
         $query = $helper->addGroupQuery($query);
+        $query = $helper->addGattungQuery($query);
 
-        $query .= ' AND g.name = "' . $gattung . '" ';
+        
         $query = $helper->addGroupBy($query);
 
         $query  = $this->replacePlaceholders($query);

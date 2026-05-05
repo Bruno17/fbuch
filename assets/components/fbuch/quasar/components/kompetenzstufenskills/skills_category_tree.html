@@ -1,6 +1,21 @@
 <q-card bordered flat class="full-width">
   <q-card-section class="bg-primary text-white">
+<div  class="row items-center no-wrap">
+      <div v-if="!competency_levels_filter" class="col-12">
+      Aktuell werden alle Kompetenzstufenskills angezeigt.<br>    
+      Um zb. nur die erforderlichen Skills für eine bestimmte Kompetenzstufe zu sehen, nutze nachfolgende Filtermöglichkeit.
+      <br> <br>     
+      </div> 
+      <div v-if="current_leveloptionvalue.name" class="col">
+       Aktuell werden alle Kompetenzstufenskills 
+       <strong>{{current_leveloptionvalue.importance}} für {{current_leveloptionvalue.name}}</strong> angezeigt
+       <br> <br>
+      </div>           
+</div> 
+
     <div class="row items-center no-wrap">
+
+
       <div class="col-shrink" style=" width: 300px;" >
       <groupselect
         bg-color="white"
@@ -16,9 +31,10 @@
       /> 
       </div>
       <div class="col">
+
       </div>      
       <div  class="col-auto">
-        <q-btn v-if="useHasPermission('mv_edit_membercompeencies') && editable" color="white" text-color="black" round icon="navigate_next">
+        <q-btn v-if="useHasPermission('mv_edit_membercompetencies') && editable" color="white" text-color="black" round icon="navigate_next">
           <q-menu auto-close anchor="bottom right" self="top right" :offset="[0, 5]">
             <q-list dense bordered separator>
               <q-item @click="state.dialog_category=true;form={id:0}" clickable v-ripple>
@@ -32,6 +48,13 @@
         </q-btn>
       </div>
     </div>
+<div v-if="!editable" class="row items-center no-wrap">
+      <div class="col-12">
+        <br>
+      Arbeite die für Dich relevanten Skills der Reihe nach durch und wähle Deine eigene Einschätzung für jedes Skill.<br>
+      Du kannst auch markieren, woran Du momentan arbeitest und einen Kommentar zu jeder Bewertung dazu schreiben.
+      </div>  
+</div>        
   </q-card-section>
   <q-separator></q-separator>
   <q-card-section>

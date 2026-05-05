@@ -1,18 +1,21 @@
 import { useLoadPermissions,useHasPermission } from "../../composables/helpers.js";
 import valuesetter from '../../components/valuesetter.js';
 import api_select from '../../components/api_select.js';
+import fahrten_listview from '../../components/ranglisten/fahrten_listview.js';
 
 export default {
 
     components: {
         valuesetter: valuesetter,
-        api_select: api_select
+        api_select: api_select,
+        fahrten_listview: fahrten_listview
     },
     setup() {
 
         const { onMounted, ref } = Vue;
         const state = ref({});
         const names = ref([]);
+        const current_member = ref({});
         const columns = [
             { name: 'id',field: 'id'},
             { name: 'CompetencyLevel_level', label: 'Kompetenzstufe', field: 'CompetencyLevel_level', sortable: true, align:'left' },
@@ -38,6 +41,15 @@ export default {
             loadNames();    
         }
 
+        function showFahrten(row){
+            current_member.value.id=row.id;
+            current_member.value.Vorname=row.firstname;
+            current_member.value.Nachname=row.name;
+            state.value.showfahrten=true; 
+            state.value.showfilter=true; 
+            state.value.querytype='allemembereintraege';            
+        }        
+
         function loadNames(){
             var data = {};
             var ajaxUrl = modx_options.rest_url + 'Names';
@@ -61,7 +73,9 @@ export default {
             filter: ref(''),
             state,
             useHasPermission,
-            onSelectGroup, 
+            onSelectGroup,
+            showFahrten, 
+            current_member,
             names,
             columns,
             visible_columns,
