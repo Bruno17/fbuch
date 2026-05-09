@@ -38,8 +38,8 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable v-close-popup @click="onItemClick">
-          <q-item-section>
+        <q-item clickable v-close-popup @click="showFahrten(fbuchuser)">
+          <q-item-section >
             <q-item-label>Meine Fahrten</q-item-label>
           </q-item-section>
         </q-item>
@@ -54,3 +54,5 @@
 
 
 </div>
+
+<fahrten_listview :member="current_member" :state="state"></fahrten_listview>

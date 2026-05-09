@@ -1,21 +1,33 @@
 import { useLoadPermissions,useHasPermission } from "../../composables/helpers.js";
+import fahrten_listview from '../../components/ranglisten/fahrten_listview.js';
 //import skillscategorytree from '../../components/kompetenzstufenskills/skills_category_tree.js';
 
 export default {
 
     components: {
         //skillscategorytree: skillscategorytree
+        fahrten_listview: fahrten_listview
     },
     setup() {
 
         const { onMounted, ref } = Vue;
         const state = ref({});
         const fbuchuser = ref({});
+        const current_member = ref({});
  
         onMounted(() => {
             useLoadPermissions();
             loadCurrentFbuchUser();
         })
+
+        function showFahrten(row){
+            current_member.value.id = row.id;
+            current_member.value.Vorname=row.firstname;
+            current_member.value.Nachname=row.name;
+            state.value.showfahrten=true; 
+            state.value.showfilter=true; 
+            state.value.querytype='allemembereintraege';            
+        }                
 
         function loadCurrentFbuchUser(){
             var data = {};
@@ -44,8 +56,10 @@ export default {
         return {
             state,
             fbuchuser,
+            current_member,
             useHasPermission,
-            formatDate
+            formatDate,
+            showFahrten
         }
     },
 

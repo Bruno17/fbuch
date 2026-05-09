@@ -303,7 +303,10 @@ $update_resources = [
      'content'=>'',
      'hidemenu'=>1,
      'resource_groups'=>['fbuch'],
-     'tvs'=>[['name'=>'scripts','value'=>'']]
+     'tvs'=>[['name'=>'scripts','value'=>'
+     [[fbuchGetAssetsFiles? &folder=`quasar/components/ranglisten` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]
+     [[fbuchGetAssetsFiles? &folder=`quasar/components/fahrtenbuch` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]] 
+     ']]
     ],    
     ['pagetitle'=>'Bootsschäden',
      'alias'=>'bootsschaeden',
