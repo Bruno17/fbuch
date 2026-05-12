@@ -27,7 +27,12 @@ const routes = [
     path: '/entry-createfromdate/:datenames_id',
     name:'entry_createfromdate',
     component: entryform
-  },    
+  },
+  {
+    path: '/entry-createfromevent/:event_id/:gattungname',
+    name:'entry_createfromevent',
+    component: entryform
+  },          
   {
     path: '/entry-update/:id',
     name:'entryform_update',

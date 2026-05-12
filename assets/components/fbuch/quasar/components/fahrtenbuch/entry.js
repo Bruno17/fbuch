@@ -2,7 +2,7 @@ import { useHasPermission } from "../../composables/helpers.js";
 import api_select from '../../components/api_select.js'
 
 export default {
-  emits:['nameCheckbox'],
+  emits:['nameCheckbox','onSelectEntry'],
   props: {
     view: '',
     entry: {},
@@ -46,7 +46,23 @@ export default {
             console.log(error);
           });
       }
-    }    
+    } 
+    
+    function unlinkFromDate(entry) {
+      const id = entry.id || false;
+      const ajaxUrl = modx_options.rest_url + 'Fahrten/' + id;
+      let properties = {};
+      properties['date_id'] = 0;
+      if (id) {
+        axios.put(ajaxUrl,properties)
+          .then(function (response) {
+            props.loadAll();
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    }     
 
     function setObmann(properties) {
       const id = properties.id || false;
@@ -162,6 +178,10 @@ export default {
         emit('nameCheckbox',name,'fahrt');
     }
 
+    function onSelectEntry(entry){
+        emit('onSelectEntry',entry);  
+    }
+
     return {
       expanded: ref(false),
       modx,
@@ -173,7 +193,9 @@ export default {
       pullMembers,
       onNameCheckbox,
       lockEntry,
-      setMemberState
+      setMemberState,
+      unlinkFromDate,
+      onSelectEntry
     }
   },
   template: '#entry-component'

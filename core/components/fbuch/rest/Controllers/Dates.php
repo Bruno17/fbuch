@@ -38,29 +38,43 @@ class MyControllerDates extends BaseController {
     }
 
     public function put() {
+        $processaction = $this->getProperty('processaction');
+        $entries = $this->getProperty('entries'); 
         $deleted = (int) $this->getProperty('deleted');
-        if ($deleted == 1) {
-            $id = $this->getProperty($this->primaryKeyField,false);
-            if (empty($id)) {
-                return $this->failure($this->modx->lexicon('rest.err_field_ns',array(
-                    'field' => $this->primaryKeyField,
-                )));
-            }
-            $c = $this->getPrimaryKeyCriteria($id);
-            $old_deleted = 0;
-            if ($object = $this->modx->getObject($this->classKey,$c)) {
-                $old_deleted = (int) $object->get('deleted');
-            }
-            if ($deleted == 1 && $old_deleted == 0){
-                if ($this->modx->hasPermission('fbuch_delete_termin') || $object->get('createdby') == $this->modx->user->get('id')) {
-                    $this->setProperty('deletedby', $this->modx->user->get('id'));
-                    $this->setProperty('deletedon', strftime('%Y-%m-%d %H:%M:%S'));   
-                } else {
-                    $this->unsetProperty('deleted');
-                }
-            }
-        }       
-        parent::put();
+        $objectArray = [];
+
+       switch ($processaction){
+            case 'linkentries':
+                $this->linkEntries($entries);
+                return $this->success('',$objectArray);
+                break;
+            default:
+                if ($deleted == 1) {
+                    $id = $this->getProperty($this->primaryKeyField,false);
+                    if (empty($id)) {
+                        return $this->failure($this->modx->lexicon('rest.err_field_ns',array(
+                            'field' => $this->primaryKeyField,
+                        )));
+                    }
+                    $c = $this->getPrimaryKeyCriteria($id);
+                    $old_deleted = 0;
+                    if ($object = $this->modx->getObject($this->classKey,$c)) {
+                        $old_deleted = (int) $object->get('deleted');
+                    }
+                    if ($deleted == 1 && $old_deleted == 0){
+                        if ($this->modx->hasPermission('fbuch_delete_termin') || $object->get('createdby') == $this->modx->user->get('id')) {
+                            $this->setProperty('deletedby', $this->modx->user->get('id'));
+                            $this->setProperty('deletedon', strftime('%Y-%m-%d %H:%M:%S'));   
+                        } else {
+                            $this->unsetProperty('deleted');
+                        }
+                    }
+                }       
+                parent::put(); 
+                break;
+        }
+
+ 
     }    
 
     public function beforeDelete() {
@@ -128,7 +142,18 @@ class MyControllerDates extends BaseController {
             $this->modx->fbuch->afterCreateDate($object);  
         }
     }
-    
+
+    public function linkEntries($entries){
+        $id = $this->getProperty($this->primaryKeyField,false);    
+        if ($id && count($entries)>0){
+            foreach ($entries as $date_id){
+                if ($object = $this->modx->getObject('fbuchFahrt',['id'=>$date_id])){
+                    $object->set('date_id',$id);
+                    $object->save();
+                }
+            }
+        }
+    }
     
     public function beforePost() {
         if ($this->modx->hasPermission('fbuch_create_termin')) {

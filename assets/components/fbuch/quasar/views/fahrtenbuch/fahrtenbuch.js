@@ -23,6 +23,7 @@ export default {
         const mm_expanded = ref(false);
         const gattungnames = ref([]);
         const showall_dates = ref(SessionStorage.getItem('showall_dates') || false);
+        const entry_selected = ref(false);
 
         onMounted(() => {
             useLoadPermissions();
@@ -107,6 +108,7 @@ export default {
                 } else {
                     event['formattedEndDate'] = Quasar.date.formatDate(event.date_end, 'dd DD.MM.YYYY ' + event.end_time);
                 }
+                event.selected = false;
                 preparedEvents.push(event);
             })
             return preparedEvents;
@@ -193,6 +195,36 @@ export default {
             return names;
         }
 
+        function getSelectedEntries(){
+            let entries = [];
+            open.value.forEach((entry,id) => {
+                    if (entry.selected) {
+                        entries.push(entry.id);
+                    }
+                })
+            sheduled.value.forEach((entry,id) => {
+                    if (entry.selected) {
+                        entries.push(entry.id);
+                    }
+                })
+            return entries;            
+        }
+
+        function onLinkSelectedEntries(event_id){
+            const entries = getSelectedEntries();
+            const ajaxUrl = modx_options.rest_url + 'Dates/' + event_id;
+            const event = { entries:entries,processaction:'linkentries' };
+            axios.put(ajaxUrl, event)
+                .then(function (response) {
+                    loadSheduled();
+                    loadOpen();
+                    entry_selected.value=false;
+                })
+                .catch(function (error) {
+                console.log(error);
+                });
+        }
+
         function onNameCheckbox(name,from){
             let excludeFahrt = 0;
             let excludeEvent = 0;
@@ -205,6 +237,10 @@ export default {
 
             uncheckEventsNames(excludeEvent);
             uncheckFahrtenNames(excludeFahrt);
+        }
+
+        function onSelectEntry(entry){
+            entry_selected.value=true;
         }
 
         function uncheckEventsNames(exclude){
@@ -345,16 +381,19 @@ export default {
             mm_expanded,
             gattungnames,
             showall_dates,
+            entry_selected,
             loadAll,
             loadEventsToday,
             moveMembers,
             getSelectedEventNames,
             onNameCheckbox,
+            onLinkSelectedEntries,
             onNext,
             onPrev,
             onToday,
             useHasPermission,
-            onChangeDatetypes
+            onChangeDatetypes,
+            onSelectEntry
         }
     },
 

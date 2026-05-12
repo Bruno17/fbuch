@@ -40,6 +40,11 @@ $xpdo_meta_map['fbuchFahrt']= array (
     'deleted' => 0,
     'deletedon' => NULL,
     'deletedby' => 0,
+    'race_place' => 0,
+    'race_start_time' => '',
+    'race_time' => '',
+    'race_description' => '',
+    'race_final' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -282,6 +287,47 @@ $xpdo_meta_map['fbuchFahrt']= array (
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
+    ),
+    'race_place' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'race_start_time' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '20',
+      'null' => false,
+      'default' => '',
+    ),
+    'race_time' => 
+    array (
+      'dbtype' => 'varchar',
+      'phptype' => 'string',
+      'precision' => '20',
+      'null' => false,
+      'default' => '',
+    ),
+    'race_description' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'race_final' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '1',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
     ),
   ),
   'composites' => 

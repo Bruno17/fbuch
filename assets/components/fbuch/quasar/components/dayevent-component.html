@@ -39,6 +39,14 @@
                                 </q-item-section>
                             </q-item>
 
+                            <q-item v-if="entry_selected"  @click="linkSelectedEntries(event.id)" clickable v-ripple>
+                                <q-item-section avatar><q-avatar icon="done" /></q-item-section>
+                                <q-item-section>
+                                    <q-item-label>Markierte Einträge hier zuordnen</q-item-label>
+                                    <q-item-label caption>zb. Rennen zu Regatten</q-item-label>
+                                </q-item-section>
+                            </q-item>                            
+
                             <q-item v-if="useHasPermission('fbuch_edit_termin')"
                                 :href="'termine/kalenderansicht.html/#/event-update/'+event.id" clickable v-ripple>
                                 <q-item-section avatar><q-avatar icon="edit" /></q-item-section>
@@ -80,7 +88,6 @@
     <q-separator></q-separator>
 
     <q-card-section v-html="event.description_with_br">
- 
     </q-card-section>
     <q-separator></q-separator>
 

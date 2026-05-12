@@ -22,6 +22,9 @@
                         Fehlende Altersangaben: {{entry.average_error.missingValues}}
                     </template>
                 </div>
+                <div v-if="entry.date_id > 0" class="text-subtitle2">
+                    {{entry.Date_title}}
+                </div>                 
             </div>
             <div class="col-auto">
                 <q-btn color="white" text-color="black" round icon="navigate_next">
@@ -51,11 +54,16 @@
                             <q-item v-if="entry.locked==0 && section != 'finished'" @click="confirmDeleteEntry(entry)" clickable v-ripple>
                                 <q-item-section avatar><q-avatar text-color="red" icon="delete" /></q-item-section>
                                 <q-item-section>Eintrag löschen</q-item-section>
-                            </q-item>
+                            </q-item>                            
+                            <q-item v-if="entry.date_id > 0" @click="unlinkFromDate(entry)"  clickable v-ripple>
+                                <q-item-section avatar><q-avatar text-color="red" icon="remove" /></q-item-section>
+                                <q-item-section>Terminzuordnung entfernen</q-item-section>
+                            </q-item>     
                             <q-item v-if="entry.locked==0" @click="lockEntry(entry)"  clickable v-ripple>
                                 <q-item-section avatar><q-avatar icon="lock" /></q-item-section>
                                 <q-item-section>Für Bearbeitung sperren</q-item-section>
-                            </q-item> 
+                            </q-item>
+                         
                             <q-item v-if="entry.locked==1" @click="lockEntry(entry)"  clickable v-ripple>
                                 <q-item-section avatar><q-avatar icon="lock-open" /></q-item-section>
                                 <q-item-section>Für Bearbeitung freigeben</q-item-section>
@@ -68,19 +76,39 @@
         </div>
     </q-card-section>
     <q-card-section class="q-pa-sm" :style="'background-color:#' + entry.Nutzergruppe_color">
-                                
-    </q-card-section>       
-
+    </q-card-section> 
     <template v-if="entry.destination != ''">
         <q-separator></q-separator>
         <q-card-section>
             {{ entry.destination }}
         </q-card-section>
+    </template>    
+    
+    <template v-if="section != 'finished'">
+        <q-separator></q-separator>
+        <q-card-section class="q-px-sm q-py-none">
+            <q-checkbox label="Eintrag markieren" @update:model-value="onSelectEntry(entry)"  v-model="entry.selected" />  
+        </q-card-section>        
     </template>
+
+    <template v-if="entry.race_place > 0 || entry.race_time != '' || entry.race_start_time != '' || entry.race_description != ''">
+        <q-separator></q-separator>
+        <q-card-section class="q-pa-sm">
+            <div v-if="entry.race_start_time != ''">Startzeit: {{entry.race_start_time}}</div> 
+            <div v-if="entry.race_place > 0">Platzierung: {{entry.race_place}}</div> 
+            <div v-if="entry.race_time != ''">Rennzeit: {{entry.race_time}}</div>  
+            <div v-if="entry.race_final > 0">Endlauf: Ja</div>  
+            <div v-if="entry.race_description != ''">{{entry.race_description}}</div>             
+        </q-card-section>
+   
+    </template>
+     
+ 
+
 
     <template v-if="entry.note != ''">
         <q-separator></q-separator>
-        <q-card-section>
+        <q-card-section class="q-px-sm q-py-none" >
             <pre style="white-space: pre-wrap; word-wrap: break-word;font-family: inherit;">{{ entry.note }}</pre>
         </q-card-section>
     </template>

@@ -48,7 +48,16 @@
             <q-separator></q-separator>
             <q-card-section class="q-pa-sm q-gutter-y-sm">
                 <template v-for="event in loadedEvents">
-                    <dayevent :event="event" @nameCheckbox="onNameCheckbox" @updateEvent="loadEventsToday" view="fahrtenbuch"></dayevent>
+                    <dayevent 
+                    :gattungnames="gattungnames" 
+                    :event="event" 
+                    @linkSelectedEntries="onLinkSelectedEntries" 
+                    @nameCheckbox="onNameCheckbox" 
+                    @updateEvent="loadEventsToday" 
+                    view="fahrtenbuch"
+                    :entry_selected="entry_selected"
+                    >
+                    </dayevent>
                 </template>
             </q-card-section>
 
@@ -78,7 +87,7 @@
             <q-separator></q-separator>
             <q-card-section class="q-pa-sm q-gutter-y-sm">
                 <template v-for="entry in open">
-                    <entry :entry="entry" @nameCheckbox="onNameCheckbox" :moveMembers="moveMembers" :loadAll="loadAll" />
+                    <entry :entry="entry" @onSelectEntry="onSelectEntry" @nameCheckbox="onNameCheckbox" :moveMembers="moveMembers" :loadAll="loadAll" />
                 </template>
             </q-card-section>
         </q-card>
@@ -89,7 +98,7 @@
             <q-separator></q-separator>
             <q-card-section class="q-pa-sm q-gutter-y-sm">
                 <template v-for="entry in sheduled">
-                    <entry :entry="entry" @nameCheckbox="onNameCheckbox" :moveMembers="moveMembers" :loadAll="loadAll" />
+                    <entry :entry="entry" @onSelectEntry="onSelectEntry" @nameCheckbox="onNameCheckbox" :moveMembers="moveMembers" :loadAll="loadAll" />
                 </template>
             </q-card-section>
         </q-card>
@@ -102,7 +111,13 @@
             <q-separator></q-separator>
             <q-card-section class="q-pa-sm q-gutter-y-sm">
                 <template v-for="entry in finished">
-                    <entry section="finished" :entry="entry" :moveMembers="moveMembers" :loadAll="loadAll" />
+                    <entry 
+                    section="finished" 
+                    :entry="entry" 
+                    :moveMembers="moveMembers" 
+                    :loadAll="loadAll"
+                    
+                    />
                 </template>
             </q-card-section>
         </q-card>

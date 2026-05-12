@@ -589,6 +589,16 @@ class MyControllerFahrten extends BaseController {
                     $objectArray['Nutzergruppe_' . $key] = $value;
                 }
             }
+        }  
+        
+        $date_id = $object->get('date_id');
+        if (!empty($date_id)){
+            if ($date_o = $this->modx->getObject('fbuchDate',['id'=>$date_id])){
+                $date_array = $date_o->toArray();
+                foreach($date_array as $key=>$value){
+                    $objectArray['Date_' . $key] = $value;
+                }
+            }
         }        
         
         return $objectArray; 
