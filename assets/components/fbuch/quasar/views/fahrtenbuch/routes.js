@@ -29,11 +29,6 @@ const routes = [
     component: entryform
   },
   {
-    path: '/entry-createfromevent/:event_id/:gattungname',
-    name:'entry_createfromevent',
-    component: entryform
-  },          
-  {
     path: '/entry-update/:id',
     name:'entryform_update',
     component: entryform

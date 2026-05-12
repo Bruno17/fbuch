@@ -192,11 +192,6 @@ export default {
         ajaxUrl = modx_options.rest_url + 'FahrtFromDate/' + id;
         data.datenames_id = params.datenames_id;
       }
-      if (routeValue.name == 'entry_createfromevent') {
-        ajaxUrl = modx_options.rest_url + 'FahrtFromDate/' + id;
-        data.date_id = params.event_id;
-        data.gattungname = params.gattungname;
-      }      
       if (routeValue.name == 'entryform_create_gattung') {
         data.gattungname = params.gattungname;
       }     

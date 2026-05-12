@@ -22,26 +22,13 @@ export default {
       const formattedDate = props.formattedDate || Quasar.date.formatDate(date, 'dd DD. MMMM YYYY');
       const loadedEvents = ref([]);
       const propsEvents = ref(props.events);
-      const gattungnames = ref([]);
       //const propsEvents = computed(()=>props.events);
       
 
       onMounted(() => {
         loadDayEvents();
-        loadGattungnames();
         //getPermissions();
       })
-
-        function loadGattungnames() {
-            const ajaxUrl = modx_options.rest_url + 'Boote?limit=100000&returntype=gattungnames';
-            return axios.get(ajaxUrl)
-                .then(function (response) {
-                    gattungnames.value = response.data.results;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }      
 
       function prepareEvents(events){
         const preparedEvents = [];
@@ -93,7 +80,6 @@ export default {
       return {
         formattedDate, 
         loadedEvents,
-        gattungnames, 
         reloadEvents }
     },
     template: `
@@ -108,7 +94,6 @@ export default {
           <dayevent 
           class="full-height"
           :event="event"
-          :gattungnames="gattungnames"
           @updateEvent="reloadEvents"
           :view="view"
           ></dayevent>

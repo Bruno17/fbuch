@@ -49,7 +49,6 @@
             <q-card-section class="q-pa-sm q-gutter-y-sm">
                 <template v-for="event in loadedEvents">
                     <dayevent 
-                    :gattungnames="gattungnames" 
                     :event="event" 
                     @linkSelectedEntries="onLinkSelectedEntries" 
                     @nameCheckbox="onNameCheckbox" 

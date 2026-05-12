@@ -5,7 +5,6 @@ export default {
   props: {
     view: '',
     event: {},
-    gattungnames: [],
     entry_selected:false
   },
 
