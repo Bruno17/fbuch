@@ -78,6 +78,12 @@
                                 <q-item-section>Termin löschen</q-item-section>
                             </q-item>
 
+                            <q-item v-if="view == 'terminlisten'"
+                                @click="showFahrten(event)" clickable v-ripple>
+                                <q-item-section avatar><q-avatar icon="view_list" /></q-item-section>
+                                <q-item-section>Zugeordnete Fahrten anzeigen</q-item-section>
+                            </q-item>                            
+
                         </q-list>
                     </q-menu>
                 </q-btn>
@@ -114,7 +120,7 @@
                             <q-item-section side :style="'background-color:#'+name.CompetencyLevel_color+';margin:-8px 0px -8px -8px;padding-right: 9px;'">
                        
                             </q-item-section>                               
-                            <q-item-section v-if="name.Fahrt_id < 1 || name.Fahrt_deleted==1" side style="margin-right:-8px;" class="q-pa-none">
+                            <q-item-section v-if="view == 'fahrtenbuch' && name.Fahrt_id < 1 || name.Fahrt_deleted==1" side style="margin-right:-8px;" class="q-pa-none">
                                 <q-checkbox @update:model-value="onNameCheckbox(name)" v-model="name.selected" />
                             </q-item-section>
                             <q-item-section side style="margin-left:8px;">

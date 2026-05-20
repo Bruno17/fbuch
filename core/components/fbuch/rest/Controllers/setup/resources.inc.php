@@ -165,6 +165,23 @@ $update_resources = [
         ['name'=>'headscripts','value'=>'[[$fbuch_kalenderansicht_headscripts]]']
      ]
     ],
+    ['pagetitle'=>'Regatten',
+     'alias'=>'regatten',
+     'context_key' => 'fbuch',
+     'uri' => 'termine/regatten.html',
+     'parent_uri'=>'termine',
+     'template_name'=>'fbuch Quasar 2',
+     'tvs'=>[
+        ['name'=>'scripts','value'=>'
+            <script>
+            modx_options.datetype="Regatta"
+            </script>
+            [[fbuchGetAssetsFiles? &folder=`quasar/components/ranglisten` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]
+            [[fbuchGetAssetsFiles? &folder=`quasar/components/fahrtenbuch` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]         
+        '],
+        ['name'=>'view','value'=>'terminlisten']
+     ]
+    ],    
     ['pagetitle'=>'Ranglisten',
      'alias'=>'ranglisten',
      'context_key' => 'fbuch',
@@ -175,7 +192,9 @@ $update_resources = [
      'resource_groups'=>['fbuch'],
      'content'=>'',
      'tvs'=>[
-        ['name'=>'scripts','value'=>'[[fbuchGetAssetsFiles? &folder=`quasar/components/fahrtenbuch` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]  ']
+        ['name'=>'scripts','value'=>'
+            [[fbuchGetAssetsFiles? &folder=`quasar/components/fahrtenbuch` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]      
+        ']
      ]
     ],
     ['pagetitle'=>'Boote',

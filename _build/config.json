@@ -1601,7 +1601,13 @@
           "name": "scripts",
           "type": "textarea",
           "templates": ["fbuch Quasar 2","fahrtenbuch"]
-        }        
+        },
+        {
+          "caption": "view",
+          "name": "view",
+          "type": "text",
+          "templates": ["fbuch Quasar 2","fahrtenbuch"]
+        }           
       ],      
       "plugins":[
         {

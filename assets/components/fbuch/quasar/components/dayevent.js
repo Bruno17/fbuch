@@ -1,7 +1,7 @@
 import { useHasPermission } from "../composables/helpers.js";
 
 export default {
-  emits: ['updateEvent', 'nameCheckbox', 'linkSelectedEntries'],
+  emits: ['updateEvent', 'nameCheckbox', 'linkSelectedEntries','showFahrten'],
   props: {
     view: '',
     event: {},
@@ -107,6 +107,11 @@ export default {
       emit('nameCheckbox', name, 'date');
     }
 
+    function showFahrten(event) {
+      state.value.showmenu = false;
+      emit('showFahrten', event);
+    }    
+
     return {
       expanded: ref(false),
       modx,
@@ -117,7 +122,8 @@ export default {
       useHasPermission,
       confirmRemoveName,
       onNameCheckbox,
-      linkSelectedEntries
+      linkSelectedEntries,
+      showFahrten
     }
   },
   template: '#dayevent-component'

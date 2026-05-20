@@ -67,13 +67,14 @@ export default {
             fahrten.value = [];
             const ajaxUrl = modx_options.rest_url + 'Fahrten/';
             const data = {};
-            data.returntype = 'member_fahrten';
+            data.returntype = state.returntype || 'member_fahrten';
             data.dir = 'DESC';
             data.start_date = state.start_date + ' 00:00:00';
             data.end_date = state.end_date + ' 23:59:59';
             data.gattung = state.gattung;
             data.group = state.group;
             data.querytype = state.querytype;
+            data.date_id = state.date_id;
             data.member_id = member.id;            
             return axios.get(ajaxUrl, { params: data })
                 .then(function (response) {

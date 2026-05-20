@@ -457,7 +457,12 @@ class MyControllerFahrten extends BaseController {
                     }
                     $where['id:IN'] = $fahrt_ids;
                     $sortConfig = ['date'=>$dir,'start_time'=>$dir];    
-                break;                                               
+                break; 
+                case 'date_fahrten':
+                    $date_id = $this->getProperty('date_id');
+                    $where['date_id'] = $date_id;
+                    $sortConfig = ['date'=>$dir,'start_time'=>$dir];    
+                break;                                                                
         } 
 
         

@@ -1,0 +1,27 @@
+
+<div class="q-pa-sm q-gutter-sm row">
+
+    <year_select label="Zeitraum" class="col-md-3 col-sm-3 col-xs-12" v-model="state.year"
+    @update:modelValue="onSelectYear"
+   />
+ 
+</div>
+
+<div class="q-pa-sm row">
+                <template v-for="event in events">
+                    <div class="col-12 q-pb-sm">
+                    <dayevent  
+                    :event="event" 
+                    @linkSelectedEntries="onLinkSelectedEntries" 
+                    @nameCheckbox="onNameCheckbox" 
+                    @updateEvent="loadEvents" 
+                    @showFahrten="showFahrten"
+                    view="terminlisten"
+                    :entry_selected="entry_selected"
+                    >
+                    </dayevent>
+                    </div>
+                </template>    
+</div>
+
+<fahrten_listview :member="{}" :state="state"></fahrten_listview>

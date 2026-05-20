@@ -1,6 +1,8 @@
 <?php
 $alias = $modx->resource->get('alias');
-$path = 'quasar/views/' . $alias;
+$view = $modx->resource->getTVValue('view');
+$view = !empty($view) ? $view : $alias;
+$path = 'quasar/views/' . $view;
 $defaultpath = 'quasar/views/default';
 
 $assets_path = $modx->getOption('fbuch.assets_path',null,$modx->getOption('assets_path').'components/fbuch/');

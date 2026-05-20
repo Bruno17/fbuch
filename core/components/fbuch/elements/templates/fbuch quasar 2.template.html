@@ -223,10 +223,11 @@
     <script src="[[!+qr-creator.js]]"></script>    
 
     <script>
-        const modx_options = {
+        let modx_options = {
           site_url:'[[!++site_url]]',
           assets_url:'[[++assets_url]]',
           resource_id:'[[*id]]',
+          resource_alias:'[[*alias]]',
           resource_uri:'[[*uri]]',
           user_id:'[[!+modx.user.id]]',
           rest_url:'[[++fbuch.assets_url:default=`/assets/components/fbuch/`]]rest/'
