@@ -17,7 +17,7 @@ export default {
 
         const { onMounted, ref } = Vue;
         const state = ref({});
-        const events = ref([]);
+        const summaries = ref([]);
  
         onMounted(() => {
             const newDate = new Date(); 
@@ -27,21 +27,6 @@ export default {
             loadEvents();
         })
 
-        function prepareEvents(events) {
-            const preparedEvents = [];
-            events.forEach((event, id) => {
-                event['formattedDate'] = Quasar.date.formatDate(event.date, 'dd DD.MM.YYYY ' + event.start_time + ' - ');
-                if (Quasar.date.isSameDate(event.date, event.date_end, 'days')) {
-                    event['formattedDate'] += event.end_time;
-                    event['formattedEndDate'] = '';
-                } else {
-                    event['formattedEndDate'] = Quasar.date.formatDate(event.date_end, 'dd DD.MM.YYYY ' + event.end_time);
-                }
-                preparedEvents.push(event);
-            })
-            return preparedEvents;
-        } 
-
         function loadEvents(){
 
             const data = {};
@@ -49,11 +34,11 @@ export default {
             data.end = state.value.year + '/12/31 23:59:59';
             data.types = modx_options.datetype;
 
-            const ajaxUrl = modx_options.rest_url + 'Dates';
+            const ajaxUrl = modx_options.rest_url + 'RegattaRankings';
 
             axios.get(ajaxUrl,{params:data})
             .then(function (response) {
-            events.value = prepareEvents(response.data.results);
+            summaries.value = response.data.results;    
             })
             .catch(function (error) {
                 console.log(error);
@@ -64,9 +49,9 @@ export default {
             loadEvents();            
         }
 
-        function showFahrten(event){
-            state.value.date_id=event.id;
-            state.value.returntype='date_fahrten';
+        function showFahrten(fahrt_ids){
+            state.value.fahrt_ids=fahrt_ids;
+            state.value.returntype='fahrt_ids';
             //current_member.value.Vorname=row.firstname;
             //current_member.value.Nachname=row.name;
             state.value.showfahrten=true; 
@@ -80,7 +65,7 @@ export default {
             onSelectYear,
             loadEvents,
             showFahrten,
-            events 
+            summaries
         }
     },
 

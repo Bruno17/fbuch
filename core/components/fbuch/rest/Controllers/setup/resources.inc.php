@@ -213,7 +213,21 @@ $update_resources = [
         [[fbuchGetAssetsFiles? &folder=`quasar/components/ranglisten` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]
         ']
      ]
-    ],                        
+    ],
+    ['pagetitle'=>'Regatta Platzierungen',
+     'alias'=>'regattaplatzierungen',
+     'context_key' => 'fbuch',
+     'uri' => 'auswertungen/regattaplatzierungen.html',
+     'parent_uri'=>'auswertungen/',
+     'template_name'=>'fbuch Quasar 2',
+     'tvs'=>[
+        ['name'=>'scripts','value'=>'            
+            <script>
+            modx_options.datetype="Regatta"
+            </script>'
+        ]
+     ]
+    ],                               
     ['pagetitle'=>'Meine Einladungslisten Einträge',
      'alias'=>'meine-einladungslisten-eintraege',
      'context_key' => 'fbuch',

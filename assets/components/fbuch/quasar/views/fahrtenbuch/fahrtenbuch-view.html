@@ -86,7 +86,13 @@
             <q-separator></q-separator>
             <q-card-section class="q-pa-sm q-gutter-y-sm">
                 <template v-for="entry in open">
-                    <entry :entry="entry" @onSelectEntry="onSelectEntry" @nameCheckbox="onNameCheckbox" :moveMembers="moveMembers" :loadAll="loadAll" />
+                    <entry 
+                    :entry="entry" 
+                    view="fahrtenbuch"
+                    @onSelectEntry="onSelectEntry" 
+                    @nameCheckbox="onNameCheckbox" 
+                    :moveMembers="moveMembers" 
+                    :loadAll="loadAll" />
                 </template>
             </q-card-section>
         </q-card>
@@ -97,7 +103,13 @@
             <q-separator></q-separator>
             <q-card-section class="q-pa-sm q-gutter-y-sm">
                 <template v-for="entry in sheduled">
-                    <entry :entry="entry" @onSelectEntry="onSelectEntry" @nameCheckbox="onNameCheckbox" :moveMembers="moveMembers" :loadAll="loadAll" />
+                    <entry 
+                    :entry="entry" 
+                    view="fahrtenbuch" 
+                    @onSelectEntry="onSelectEntry" 
+                    @nameCheckbox="onNameCheckbox" 
+                    :moveMembers="moveMembers" 
+                    :loadAll="loadAll" />
                 </template>
             </q-card-section>
         </q-card>
@@ -111,6 +123,8 @@
             <q-card-section class="q-pa-sm q-gutter-y-sm">
                 <template v-for="entry in finished">
                     <entry 
+                    view="fahrtenbuch"
+                    @onSelectEntry="onSelectEntry"
                     section="finished" 
                     :entry="entry" 
                     :moveMembers="moveMembers" 

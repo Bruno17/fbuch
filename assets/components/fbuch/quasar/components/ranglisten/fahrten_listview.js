@@ -75,7 +75,8 @@ export default {
             data.group = state.group;
             data.querytype = state.querytype;
             data.date_id = state.date_id;
-            data.member_id = member.id;            
+            data.member_id = member.id;
+            data.fahrt_ids = state.fahrt_ids;            
             return axios.get(ajaxUrl, { params: data })
                 .then(function (response) {
                     const result = response.data.results;

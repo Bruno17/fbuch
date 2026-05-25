@@ -207,6 +207,11 @@ export default {
                         entries.push(entry.id);
                     }
                 })
+            finished.value.forEach((entry,id) => {
+                    if (entry.selected) {
+                        entries.push(entry.id);
+                    }
+                })                
             return entries;            
         }
 
@@ -218,6 +223,7 @@ export default {
                 .then(function (response) {
                     loadSheduled();
                     loadOpen();
+                    loadFinished();
                     entry_selected.value=false;
                 })
                 .catch(function (error) {

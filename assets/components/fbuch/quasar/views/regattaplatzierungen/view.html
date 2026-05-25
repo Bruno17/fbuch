@@ -1,0 +1,91 @@
+
+<div class="q-pa-sm q-gutter-sm row">
+
+    <year_select label="Zeitraum" class="col-md-3 col-sm-3 col-xs-12" v-model="state.year"
+    @update:modelValue="onSelectYear"
+   />
+
+</div>
+
+<div class="q-pa-sm row" v-for="(val, place, index) in summaries" :key="index">
+
+    <q-list class="col-md-6 col-sm-12 col-xs-12" bordered separator dense>
+      <q-item class="bg-primary text-white" @click="showFahrten(val.races)" clickable v-ripple>
+        <q-item-section class="bg-primary text-white" side>
+            <strong>Platz {{place}}: </strong>       
+        </q-item-section>
+        <q-item-section>
+            {{val.count}} Rennen          
+        </q-item-section> 
+        <q-item-section class="bg-primary text-white" side>
+          <q-icon name="keyboard_arrow_right" />
+        </q-item-section>               
+      </q-item>
+      <q-item style="padding-left:30px;">
+        <q-item-section>
+            <strong>Mitglieder: </strong>       
+        </q-item-section>
+       </q-item > 
+       <template v-for="(member, index) in val.members" :key="index">
+        <q-item style="padding-left:30px;"  @click="showFahrten(member.races)" clickable v-ripple>
+            <q-item-section side class="text-black">
+                <strong>{{member.name}}: </strong>       
+            </q-item-section>
+            <q-item-section>
+                {{member.count}} Rennen        
+            </q-item-section> 
+            <q-item-section side>
+            <q-icon name="keyboard_arrow_right" />
+            </q-item-section>                   
+        </q-item>
+        <q-item style="padding-left:60px;" v-for="(regatta, index) in member.regattas" :key="index" @click="showFahrten(regatta.races)" clickable v-ripple>
+            <q-item-section side>
+                <strong>{{regatta.title}}: </strong>       
+            </q-item-section>
+            <q-item-section>
+                {{regatta.count}} Rennen        
+            </q-item-section>
+            <q-item-section side>
+            <q-icon name="keyboard_arrow_right" />
+            </q-item-section>                     
+        </q-item> 
+       </template> 
+      <template v-if="val.guests.length != 0">  
+      <q-item style="padding-left:30px;">
+        <q-item-section>
+            <strong>Vereinsfremde Mitruderer: </strong>       
+        </q-item-section>
+       </q-item > 
+       <template v-for="(member, index) in val.guests" :key="index">
+        <q-item style="padding-left:30px;"  @click="showFahrten(member.races)" clickable v-ripple>
+            <q-item-section side class="text-black">
+                <strong>{{member.name}}: </strong>       
+            </q-item-section>
+            <q-item-section>
+                {{member.count}} Rennen        
+            </q-item-section> 
+            <q-item-section side>
+            <q-icon name="keyboard_arrow_right" />
+            </q-item-section>                    
+        </q-item>
+        <q-item style="padding-left:60px;" v-for="(regatta, index) in member.regattas" :key="index" @click="showFahrten(regatta.races)" clickable v-ripple>
+            <q-item-section side>
+                <strong>{{regatta.title}}: </strong>       
+            </q-item-section>
+            <q-item-section>
+                {{regatta.count}} Rennen        
+            </q-item-section> 
+            <q-item-section side>
+            <q-icon name="keyboard_arrow_right" />
+            </q-item-section>                    
+        </q-item> 
+       </template>  
+       </template>                        
+    </q-list>  
+</div>
+    
+  
+
+<fahrten_listview :member="{}" :state="state"></fahrten_listview>
+
+

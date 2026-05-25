@@ -84,7 +84,7 @@
         </q-card-section>
     </template>    
     
-    <template v-if="section != 'finished'">
+    <template v-if="view == 'fahrtenbuch'">
         <q-separator></q-separator>
         <q-card-section class="q-px-sm q-py-none">
             <q-checkbox label="Eintrag markieren" @update:model-value="onSelectEntry(entry)"  v-model="entry.selected" />  
