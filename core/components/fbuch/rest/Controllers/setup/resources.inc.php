@@ -221,10 +221,12 @@ $update_resources = [
      'parent_uri'=>'auswertungen/',
      'template_name'=>'fbuch Quasar 2',
      'tvs'=>[
-        ['name'=>'scripts','value'=>'            
-            <script>
-            modx_options.datetype="Regatta"
-            </script>'
+        ['name'=>'scripts','value'=>'
+<script>
+    modx_options.datetype="Regatta"
+</script>
+[[fbuchGetAssetsFiles? &folder=`quasar/components/ranglisten` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]
+[[fbuchGetAssetsFiles? &folder=`quasar/components/fahrtenbuch` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]'
         ]
      ]
     ],                               

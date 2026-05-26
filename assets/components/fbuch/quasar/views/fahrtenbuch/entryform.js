@@ -103,7 +103,7 @@ export default {
     }
 
     function onSelectBootsgattung(value) {
-      bootSelect.value.loadNames({ 'gattung_id': value });
+      bootSelect.value.loadNames({ 'gattung_ids': value });
       entry.value.boot_id = 0;
       boot.value = {};
     }

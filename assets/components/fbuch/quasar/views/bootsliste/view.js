@@ -44,7 +44,7 @@ export default {
         }        
 
         function loadBoatList(){
-            var data = {'gattung_id':state.value.bootsgattung};
+            var data = {'gattung_ids':state.value.bootsgattung};
 
             var ajaxUrl = modx_options.rest_url + 'Boote/' ;
  

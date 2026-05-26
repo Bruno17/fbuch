@@ -150,6 +150,7 @@ class MyControllerBoote extends BaseController {
         $gattung_name = $this->getProperty('gattung_name',false);
         $gattung_id = $this->getProperty('gattung_id',false);
         $returntype = $this->getProperty('returntype');
+        $gattung_ids = $this->getProperty('gattung_ids',false);
 
         $joins = '[{"alias":"Bootsgattung"},{"alias":"Nutzergruppe"}]';
 
@@ -162,6 +163,11 @@ class MyControllerBoote extends BaseController {
         if ($gattung_id){
             $c->where(['gattung_id' => $gattung_id]);
         } 
+        if ($gattung_ids){
+            $c->where(["(gattung_id='{$gattung_ids}' OR CONCAT('||',gattung_ids,'||') LIKE '%||".$gattung_ids."||%')"]);
+            //$c->prepare();
+            //echo $c->toSql();
+        }         
         switch ($returntype) {
             case 'gattungnames':
                 $c->groupby('Bootsgattung.name');
