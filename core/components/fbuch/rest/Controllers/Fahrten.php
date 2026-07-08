@@ -519,9 +519,17 @@ class MyControllerFahrten extends BaseController {
         return $average;
     }
 
+    public function isNameInDate($member_id,$date_id){
+        if ($object = $this->modx->getObject('fbuchDateNames',['date_id'=>$date_id,'member_id'=>$member_id])){
+            return true;
+        }
+        return false;
+    }
+
     public function addNames($object){
         $this->getDefaultCompetencyLevel();
         $id = $object->get('id');
+        $date_id = $object->get('date_id');
         $nutzergruppe_id = (int) $object->get('Nutzergruppe_id');
         $memberfields = 'name,firstname,member_status';
         $memberfields .= $this->modx->hasPermission('fbuch_view_birthdate') ? ',birthdate' : '';
@@ -548,8 +556,11 @@ class MyControllerFahrten extends BaseController {
                     
                 } elseif (!empty($this->CompetencyLevel_color)){
                     $row['CompetencyLevel_color'] = $this->CompetencyLevel_color;    
-                }                
-                
+                }  
+                if (!empty($date_id)){
+                    $row['isNameInDate'] = $this->isNameInDate($row['member_id'],$date_id);    
+                }
+              
                 $names[] = $row;
                 $idx ++;
             }

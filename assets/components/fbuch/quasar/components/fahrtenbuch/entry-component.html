@@ -125,7 +125,7 @@
                         <q-checkbox @update:model-value="onNameCheckbox(name)"  v-model="name.selected" />
                     </q-item-section>
                     <q-item-section side style="margin-left:8px;">
-                        {{name.idx}}
+                        {{name.idx}} <template v-if="entry.date_id>0 && !name.isNameInDate"> -</template>
                     </q-item-section>
                     <q-item-section>
                         <q-item-label v-if="name.guestname=='' && name.member_status=='Mitglied' ">
