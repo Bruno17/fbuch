@@ -200,6 +200,7 @@ export default {
         .then(function (response) {
           const object = response.data.object;
           entry.value = object;
+          entry.value.ascopy = 0;
 
           if (routeValue.name == 'entryform_create_gattung') {
             selectionState.value.gattungname = object.Gattung_name;
@@ -335,7 +336,7 @@ export default {
 
     function save() {
 
-      if (id == 'new') {
+      if (id == 'new' || entry.value.ascopy == 1) {
         const ajaxUrl = modx_options.rest_url + 'Fahrten';
         axios.post(ajaxUrl, entry.value)
           .then(function (response) {
@@ -389,9 +390,10 @@ export default {
     function checkAvailability() {
       const id = boot.value.id;
       let data = {};
+      const entry_id = entry.value.ascopy == 1 ? 'new' : entry.value.id;
       data.returntype = 'availability';
       data.entry = {
-        id:entry.value.id,
+        id:entry_id,
         date:entry.value.date,
         date_end:entry.value.date_end,
         start_time:entry.value.start_time,

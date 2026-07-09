@@ -82,6 +82,11 @@
                         <q-input class="col-4" outlined readonly v-model="state.hours" label="Stunden" mask="######" />
 
                         <q-input class="col-4" outlined readonly v-model="state.minutes" label="Minuten" />
+
+                        <q-field class="col-md-12 col-sm-6 col-xs-12" outlined color="dark">
+                            <q-checkbox v-model="entry.ascopy" label="Eintrag als Kopie speichern" :true-value="1" :false-value="0" />
+                        </q-field>
+
                     </div>
 
 
