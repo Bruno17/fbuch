@@ -1,12 +1,14 @@
 import dayevent from '../../components/dayevent.js';
 import entry from '../../components/fahrtenbuch/entry.js';
 import { useLoadPermissions,useHasPermission } from "../../composables/helpers.js";
+import fahrten_listview from '../../components/ranglisten/fahrten_listview.js';
 
 export default {
 
     components: {
         dayevent: dayevent,
-        entry: entry
+        entry: entry,
+        fahrten_listview: fahrten_listview
     },
     setup() {
 
@@ -24,6 +26,8 @@ export default {
         const gattungnames = ref([]);
         const showall_dates = ref(SessionStorage.getItem('showall_dates') || false);
         const entry_selected = ref(false);
+        const current_member = ref({});
+        const state = ref({});
 
         onMounted(() => {
             useLoadPermissions();
@@ -376,6 +380,16 @@ export default {
             loadEventsToday();
         }
 
+        function showMemberFahrten(name_id){
+            //console.log(name_id);
+            current_member.value.id=name_id;
+            current_member.value.Vorname='';
+            current_member.value.Nachname='';
+            state.value.showfahrten=true; 
+            state.value.showfilter=true; 
+            state.value.querytype='allemembereintraege';   
+        }
+
         return {
             selectedDate,
             formattedDate,
@@ -388,6 +402,8 @@ export default {
             gattungnames,
             showall_dates,
             entry_selected,
+            current_member,
+            state,
             loadAll,
             loadEventsToday,
             moveMembers,
@@ -399,7 +415,8 @@ export default {
             onToday,
             useHasPermission,
             onChangeDatetypes,
-            onSelectEntry
+            onSelectEntry,
+            showMemberFahrten
         }
     },
 

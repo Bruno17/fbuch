@@ -47,7 +47,7 @@ export default {
             current_member.value.Nachname=row.name;
             state.value.showfahrten=true; 
             state.value.showfilter=true; 
-            state.value.querytype='allemembereintraege';            
+            state.value.querytype='allemembereintraege';   
         }        
 
         function loadNames(){

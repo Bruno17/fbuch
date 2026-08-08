@@ -75,8 +75,13 @@ class MyControllerRegattaRankings extends BaseController {
                 
                 foreach ($names as $name){
                     $member_status = $name['member_status'] == 'Mitglied' ? 'members' : 'guests'; 
-                    $member_name = !empty($name['guestname']) ? $name['guestname'] : $name['Member_firstname'] . ' ' . $name['Member_name'];
-                    $member_id = $name['member_id']; 
+                    $member_name =  $name['Member_firstname'] . ' ' . $name['Member_name'];
+                    $member_id = $name['member_id'];                     
+                    if (!empty($name['guestname']) ) {
+                        $member_name = $name['guestname'];   
+                        $member_id = $name['guestname'];    
+                    }
+    
                     if (!array_key_exists($member_id,$this->summaries[$place][$member_status])){
                         $this->summaries[$place][$member_status][$member_id] = [
                             'count' => 0,

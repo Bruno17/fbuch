@@ -149,7 +149,11 @@ $update_resources = [
      'parent_uri'=>'fahrtenbuch/',
      'template_name'=>'fbuch Quasar 2',
      'published'=>1,
-     'resource_groups'=>['fbuch']
+     'resource_groups'=>['fbuch'],
+     'tvs'=>[
+        ['name'=>'scripts','value'=>'
+            [[fbuchGetAssetsFiles? &folder=`quasar/components/ranglisten` &wrapper=`<script type="x-template" id="[[+filename]]">[[+output]]</script>`]]
+        ']     
     ],
     ['pagetitle'=>'Kalenderansicht',
      'alias'=>'kalenderansicht',

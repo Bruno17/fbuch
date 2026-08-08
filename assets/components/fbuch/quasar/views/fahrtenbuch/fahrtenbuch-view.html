@@ -53,6 +53,7 @@
                     @linkSelectedEntries="onLinkSelectedEntries" 
                     @nameCheckbox="onNameCheckbox" 
                     @updateEvent="loadEventsToday" 
+                    @showMemberFahrten="showMemberFahrten"
                     view="fahrtenbuch"
                     :entry_selected="entry_selected"
                     >
@@ -137,3 +138,5 @@
     </div>
 </div>
 </div>
+
+<fahrten_listview :member="current_member" :state="state"></fahrten_listview>
